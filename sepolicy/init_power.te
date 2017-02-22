@@ -1,0 +1,18 @@
+type init_power, domain;
+type init_power_exec, exec_type, file_type;
+
+init_daemon_domain(init_power)
+
+allow init_power shell_exec:file rx_file_perms;
+allow init_power toolbox_exec:file rx_file_perms;
+
+allow init_power sysfs_thermal:dir search;
+allow init_power sysfs_thermal:file w_file_perms;
+allow init_power sysfs_devices_system_cpu:file w_file_perms;
+allow init_power sysfs_soc:file r_file_perms;
+allow init_power sysfs_soc:dir search;
+
+
+userdebug_or_eng(`
+permissive init_power;
+')

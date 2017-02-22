@@ -1,0 +1,8 @@
+type adsprpcd, domain;
+type adsprpcd_exec, exec_type, file_type;
+
+init_daemon_domain(adsprpcd)
+
+userdebug_or_eng(`
+permissive adsprpcd;
+')

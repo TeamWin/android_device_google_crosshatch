@@ -1,0 +1,8 @@
+type subsystem_ramdump, domain;
+type subsystem_ramdump_exec, exec_type, file_type;
+
+init_daemon_domain(subsystem_ramdump);
+
+userdebug_or_eng(`
+permissive subsystem_ramdump;
+')

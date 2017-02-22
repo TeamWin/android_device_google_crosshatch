@@ -1,0 +1,22 @@
+type sysfs_graphics, sysfs_type, fs_type;
+type sysfs_camera, sysfs_type, fs_type;
+type sysfs_soc, sysfs_type, fs_type;
+type sysfs_rmtfs, sysfs_type, fs_type;
+type sysfs_net, sysfs_type, fs_type;
+type sysfs_fingerprint, sysfs_type, fs_type;
+
+type qmuxd_socket, file_type;
+type netmgrd_socket, file_type;
+type thermal_socket, file_type;
+type perfd_socket, file_type;
+
+type firmware_file, fs_type, contextmount_type;
+
+type location_data_file, file_type, data_file_type;
+
+type persist_file, file_type;
+type persist_data_file, file_type;
+type persist_display_file, file_type;
+type persist_sensors_file, file_type;
+
+type netmgr_data_file, file_type, data_file_type;

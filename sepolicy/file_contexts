@@ -1,0 +1,110 @@
+# dev nodes
+/dev/diag                                       u:object_r:diag_device:s0
+/dev/kgsl-3d0                                   u:object_r:gpu_device:s0
+/dev/rtc0                                       u:object_r:rtc_device:s0
+/dev/smd.*                                      u:object_r:smd_device:s0
+# TODO: does ttyMSM0 need to be more specific
+/dev/ttyMSM0                                    u:object_r:tty_device:s0
+/dev/ipa                                        u:object_r:ipa_dev:s0
+/dev/wwan_ioctl                                 u:object_r:ipa_dev:s0
+/dev/ipaNatTable                                u:object_r:ipa_dev:s0
+/dev/rmnet_ctrl.*                               u:object_r:rmnet_device:s0
+/dev/at_.*                                      u:object_r:at_device:s0
+/dev/video([0-9])+                              u:object_r:video_device:s0
+/dev/media([0-9])+                              u:object_r:video_device:s0
+/dev/v4l-subdev.*                               u:object_r:video_device:s0
+/dev/qseecom                                    u:object_r:tee_device:s0
+/dev/qsee_ipc_irq_spss                          u:object_r:qsee_ipc_irq_spss_device:s0
+/dev/seemplog                                   u:object_r:seemplog_device:s0
+/dev/spcom                                      u:object_r:spcom_device:s0
+/dev/jpeg[0-9]*                                 u:object_r:video_device:s0
+/dev/adsprpc-smd                                u:object_r:qdsp_device:s0
+/dev/sdsprpc-smd                                u:object_r:dsp_device:s0
+/dev/wcd-dsp-glink                              u:object_r:audio_device:s0
+/dev/msm_.*                                     u:object_r:audio_device:s0
+/dev/avtimer                                    u:object_r:avtimer_device:s0
+/dev/subsys_.*                                  u:object_r:ssr_device:s0
+/dev/ramdump_.*                                 u:object_r:ramdump_device:s0
+/dev/hbtp_input                                 u:object_r:hbtp_device:s0
+/dev/hbtp_vm                                    u:object_r:hbtp_device:s0
+/dev/sg[0-9]+                                   u:object_r:sg_device:s0
+/dev/sensors                                    u:object_r:sensors_device:s0
+
+# dev socket nodes
+/dev/socket/qmux_audio(/.*)?                    u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_bluetooth(/.*)?                u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_gps(/.*)?                      u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_radio(/.*)?                    u:object_r:qmuxd_socket:s0
+/dev/socket/thermal-send-client                 u:object_r:thermal_socket:s0
+/dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
+/dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
+/dev/socket/perfd                               u:object_r:perfd_socket:s0
+/dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
+
+# dev block nodes
+/dev/block/sdd[0-9]+                            u:object_r:sdd_block_device:s0
+# files in sysfs
+/sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
+/sys/devices/soc/c900000.qcom,mdss_mdp/c900000.qcom,mdss_mdp:qcom,mdss_fb_primary/leds(/.*)? u:object_r:sysfs_leds:s0
+/sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-03/800f000.qcom,spmi:qcom,pmi8998@3:qcom,leds@d000/leds(/.*)? u:object_r:sysfs_leds:s0
+/sys/devices/soc/0\.qcom,rmtfs_sharedmem(/.*)?                      u:object_r:sysfs_rmtfs:s0
+/sys/devices/soc/soc:fp_fpc1020(/.*)?                               u:object_r:sysfs_fingerprint:s0
+/sys/devices/virtual/thermal(/.*)?                                  u:object_r:sysfs_thermal:s0
+/sys/module/msm_thermal(/.*)?                                       u:object_r:sysfs_thermal:s0
+/sys/devices/virtual/graphics/fb([0-2])+/idle_time                  u:object_r:sysfs_graphics:s0
+/sys/devices/virtual/net(/.*)?                                      u:object_r:sysfs_net:s0
+/sys/devices/soc/8c0000\.qcom,msm-cam(/.*)?                         u:object_r:sysfs_camera:s0
+/sys/devices/soc0(/.*)?                                             u:object_r:sysfs_soc:s0
+/sys/devices/soc/caa0000\.qcom,jpeg(/.*)?                           u:object_r:sysfs_camera:s0
+/sys/devices/soc/caa4000\.qcom,fd(/.*)?                             u:object_r:sysfs_camera:s0
+
+# files in /system
+/system/bin/init\.power\.sh            u:object_r:init_power_exec:s0
+/system/bin/init\.radio\.sh            u:object_r:init_radio_exec:s0
+/system/bin/location-mq-s              u:object_r:location_exec:s0
+/system/bin/lowi-server                u:object_r:location_exec:s0
+/system/bin/ramdump                    u:object_r:ramdump_exec:s0
+
+# files in /vendor
+/vendor/bin/perfd               u:object_r:perfd_exec:s0
+/vendor/bin/thermal-engine      u:object_r:thermal-engine_exec:s0
+/vendor/bin/sensors.qcom        u:object_r:sensors_exec:s0
+/vendor/bin/ssr_setup           u:object_r:ssr_setup_exec:s0
+/vendor/bin/ssr_diag            u:object_r:ssr_diag_exec:s0
+/vendor/bin/pm-service          u:object_r:per_mgr_exec:s0
+/vendor/bin/pm-proxy            u:object_r:per_proxy_exec:s0
+/vendor/bin/qseecomd            u:object_r:tee_exec:s0
+/vendor/bin/time_daemon         u:object_r:time_daemon_exec:s0
+/vendor/bin/subsystem_ramdump   u:object_r:subsystem_ramdump_exec:s0
+/vendor/bin/adsprpcd            u:object_r:adsprpcd_exec:s0
+/vendor/bin/irsc_util           u:object_r:irsc_util_exec:s0
+/vendor/bin/rmt_storage         u:object_r:rmt_storage_exec:s0
+/vendor/bin/tftp_server         u:object_r:rfs_access_exec:s0
+/vendor/bin/cnss-daemon         u:object_r:wcnss_service_exec:s0
+/vendor/bin/cnss_diag           u:object_r:wcnss_service_exec:s0
+/vendor/bin/netmgrd             u:object_r:netmgrd_exec:s0
+/vendor/bin/port-bridge         u:object_r:port-bridge_exec:s0
+/vendor/bin/qti                 u:object_r:qti_exec:s0
+/vendor/bin/wcnss_filter        u:object_r:wcnss_filter_exec:s0
+/vendor/bin/loc_launcher        u:object_r:location_exec:s0
+/vendor/bin/lowi-server         u:object_r:location_exec:s0
+/vendor/bin/pd-mapper           u:object_r:pd_mapper_exec:s0
+
+# data files
+/data/time(/.*)?                       u:object_r:time_data_file:s0
+/data/misc/radio(/.*)?                 u:object_r:radio_data_file:s0
+/data/misc/netmgr(/.*)?                u:object_r:netmgr_data_file:s0
+/data/misc/location(/.*)?              u:object_r:location_data_file:s0
+
+# /
+/tombstones             u:object_r:rootfs:s0
+/dsp                    u:object_r:rootfs:s0
+
+# files in firmware
+/firmware(/.*)?         u:object_r:firmware_file:s0
+
+# /persist
+/persist(/.*)?            u:object_r:persist_file:s0
+/persist/data(/.*)?       u:object_r:persist_data_file:s0
+/persist/display(/.*)?    u:object_r:persist_display_file:s0
+/persist/sensors(/.*)?    u:object_r:persist_sensors_file:s0

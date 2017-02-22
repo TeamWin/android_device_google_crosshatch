@@ -27,7 +27,7 @@ PRODUCT_RESTRICT_VENDOR_FILES := true
 
 $(call inherit-product, device/google/crosshatch/utils.mk)
 $(call inherit-product, device/google/crosshatch/device-crosshatch.mk)
-$(call inherit-product-if-exists, vendor/google_devices/crosshatch/device-vendor-crosshatch.mk)
+$(call inherit-product-if-exists, vendor/google_devices/crosshatch/device-vendor.mk)
 
 PRODUCT_PACKAGES += \
     Launcher3

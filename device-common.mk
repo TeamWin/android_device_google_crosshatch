@@ -25,6 +25,11 @@ endif
 PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_SHIPPING_API_LEVEL := 24
 
+QCPATH := vendor/google_devices/crosshatch/proprietary
+SRC_MEDIA_HAL_DIR := hardware/qcom/media/msm8998
+SRC_DISPLAY_HAL_DIR := hardware/qcom/display/msm8998
+SRC_CAMERA_HAL_DIR := hardware/qcom/camera/msm8998
+
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
@@ -57,6 +62,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cp_system_other_odex=1
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.oem_unlock_supported=1 \
+    ro.adb.secure=0 \
 
 # Use the A/B updater.
 AB_OTA_UPDATER := true

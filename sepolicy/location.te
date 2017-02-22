@@ -1,0 +1,26 @@
+type location, domain;
+type location_exec, exec_type, file_type;
+
+init_daemon_domain(location)
+
+# STOPSHIP b/28340421
+# Temporarily grant this permission and log its use.
+allow location self:capability { net_admin };
+auditallow location self:capability { net_admin };
+
+allow location location_exec:file execute_no_trans;
+
+allow location self:capability { setgid setuid };
+
+allow location proc_net:file r_file_perms;
+allow location location_data_file:file w_file_perms;
+
+allow location self:netlink_route_socket create_socket_perms_no_ioctl;
+allow location self:udp_socket create_socket_perms;
+
+# files in /sys
+r_dir_file(location, sysfs_type)
+
+userdebug_or_eng(`
+permissive location;
+')

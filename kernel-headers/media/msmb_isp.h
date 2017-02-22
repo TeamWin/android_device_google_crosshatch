@@ -19,22 +19,27 @@
 #ifndef __UAPI_MSMB_ISP__
 #define __UAPI_MSMB_ISP__
 #include <linux/videodev2.h>
-#define MAX_PLANES_PER_STREAM 3
+#include <media/msmb_camera.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define MAX_PLANES_PER_STREAM 3
 #define MAX_NUM_STREAM 7
+#define ISP_VERSION_48 48
 #define ISP_VERSION_47 47
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define ISP_VERSION_46 46
 #define ISP_VERSION_44 44
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define ISP_VERSION_40 40
 #define ISP_VERSION_32 32
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define ISP_NATIVE_BUF_BIT (0x10000 << 0)
 #define ISP0_BIT (0x10000 << 1)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define ISP1_BIT (0x10000 << 2)
 #define ISP_META_CHANNEL_BIT (0x10000 << 3)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define ISP_SCRATCH_BUF_BIT (0x10000 << 4)
 #define ISP_OFFLINE_STATS_BIT (0x10000 << 5)
+#define ISP_SVHDR_IN_BIT (0x10000 << 6)
+#define ISP_SVHDR_OUT_BIT (0x10000 << 7)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define ISP_STATS_STREAM_BIT 0x80000000
 struct msm_vfe_cfg_cmd_list;
@@ -282,98 +287,133 @@ struct msm_vfe_fetch_eng_start {
   uint32_t frame_id;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
+enum msm_vfe_fetch_eng_pass {
+  OFFLINE_FIRST_PASS,
+  OFFLINE_SECOND_PASS,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  OFFLINE_MAX_PASS,
+};
+struct msm_vfe_fetch_eng_multi_pass_start {
+  uint32_t session_id;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint32_t stream_id;
+  uint32_t buf_idx;
+  uint8_t offline_mode;
+  uint32_t fd;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint32_t buf_addr;
+  uint32_t frame_id;
+  uint32_t output_buf_idx;
+  uint32_t input_buf_offset;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  enum msm_vfe_fetch_eng_pass offline_pass;
+  uint32_t output_stream_id;
+};
 struct msm_vfe_axi_plane_cfg {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t output_width;
   uint32_t output_height;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t output_stride;
   uint32_t output_scan_lines;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t output_plane_format;
   uint32_t plane_addr_offset;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint8_t csid_src;
   uint8_t rdi_cid;
-};
-enum msm_stream_memory_input_t {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-  MEMORY_INPUT_DISABLED,
-  MEMORY_INPUT_ENABLED
+};
+enum msm_stream_rdi_input_type {
+  MSM_CAMERA_RDI_MIN,
+  MSM_CAMERA_RDI_PDAF,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  MSM_CAMERA_RDI_MAX,
 };
 struct msm_vfe_axi_stream_request_cmd {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t session_id;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t stream_id;
   uint32_t vt_enable;
   uint32_t output_format;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   enum msm_vfe_axi_stream_src stream_src;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   struct msm_vfe_axi_plane_cfg plane_cfg[MAX_PLANES_PER_STREAM];
   uint32_t burst_count;
   uint32_t hfr_mode;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint8_t frame_base;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t init_frame_drop;
   enum msm_vfe_frame_skip_pattern frame_skip_pattern;
   uint8_t buf_divert;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t axi_stream_handle;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t controllable_output;
   uint32_t burst_len;
-  enum msm_stream_memory_input_t memory_input;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  enum msm_stream_rdi_input_type rdi_input_type;
 };
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct msm_vfe_axi_stream_release_cmd {
   uint32_t stream_handle;
 };
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 enum msm_vfe_axi_stream_cmd {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   STOP_STREAM,
   START_STREAM,
   STOP_IMMEDIATELY,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct msm_vfe_axi_stream_cfg_cmd {
   uint8_t num_streams;
   uint32_t stream_handle[VFE_AXI_SRC_MAX];
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   enum msm_vfe_axi_stream_cmd cmd;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint8_t sync_frame_id_src;
 };
 enum msm_vfe_axi_stream_update_type {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   ENABLE_STREAM_BUF_DIVERT,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   DISABLE_STREAM_BUF_DIVERT,
   UPDATE_STREAM_FRAMEDROP_PATTERN,
   UPDATE_STREAM_STATS_FRAMEDROP_PATTERN,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   UPDATE_STREAM_AXI_CONFIG,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   UPDATE_STREAM_REQUEST_FRAMES,
   UPDATE_STREAM_ADD_BUFQ,
   UPDATE_STREAM_REMOVE_BUFQ,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   UPDATE_STREAM_SW_FRAME_DROP,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  UPDATE_STREAM_REQUEST_FRAMES_VER2,
+  UPDATE_STREAM_OFFLINE_AXI_CONFIG,
 };
+#define UPDATE_STREAM_REQUEST_FRAMES_VER2 UPDATE_STREAM_REQUEST_FRAMES_VER2
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 enum msm_vfe_iommu_type {
   IOMMU_ATTACH,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   IOMMU_DETACH,
 };
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 enum msm_vfe_buff_queue_id {
   VFE_BUF_QUEUE_DEFAULT,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   VFE_BUF_QUEUE_SHARED,
   VFE_BUF_QUEUE_MAX,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct msm_vfe_axi_stream_cfg_update_info {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t stream_handle;
   uint32_t output_format;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t user_stream_id;
   uint32_t frame_id;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   enum msm_vfe_frame_skip_pattern skip_pattern;
   struct msm_vfe_axi_plane_cfg plane_cfg[MAX_PLANES_PER_STREAM];
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   struct msm_isp_sw_framskip sw_skip_info;
+};
+struct msm_vfe_axi_stream_cfg_update_info_req_frm {
+  uint32_t stream_handle;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint32_t user_stream_id;
+  uint32_t frame_id;
+  uint32_t buf_index;
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct msm_vfe_axi_halt_cmd {
@@ -394,152 +434,167 @@ struct msm_vfe_axi_restart_cmd {
 struct msm_vfe_axi_stream_update_cmd {
   uint32_t num_streams;
   enum msm_vfe_axi_stream_update_type update_type;
-  struct msm_vfe_axi_stream_cfg_update_info update_info[MSM_ISP_STATS_MAX];
+  union {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+    struct msm_vfe_axi_stream_cfg_update_info update_info[MSM_ISP_STATS_MAX];
+    struct msm_vfe_axi_stream_cfg_update_info_req_frm req_frm_ver2;
+  };
 };
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct msm_vfe_smmu_attach_cmd {
   uint32_t security_mode;
   uint32_t iommu_attach_mode;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct msm_vfe_stats_stream_request_cmd {
   uint32_t session_id;
   uint32_t stream_id;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   enum msm_isp_stats_type stats_type;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t composite_flag;
   uint32_t framedrop_pattern;
   uint32_t init_frame_drop;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t irq_subsample_pattern;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t buffer_offset;
   uint32_t stream_handle;
 };
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct msm_vfe_stats_stream_release_cmd {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t stream_handle;
 };
 struct msm_vfe_stats_stream_cfg_cmd {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint8_t num_streams;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t stream_handle[MSM_ISP_STATS_MAX];
   uint8_t enable;
   uint32_t stats_burst_len;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 enum msm_vfe_reg_cfg_type {
   VFE_WRITE,
   VFE_WRITE_MB,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   VFE_READ,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   VFE_CFG_MASK,
   VFE_WRITE_DMI_16BIT,
   VFE_WRITE_DMI_32BIT,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   VFE_WRITE_DMI_64BIT,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   VFE_READ_DMI_16BIT,
   VFE_READ_DMI_32BIT,
   VFE_READ_DMI_64BIT,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   GET_MAX_CLK_RATE,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   GET_CLK_RATES,
   GET_ISP_ID,
   VFE_HW_UPDATE_LOCK,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   VFE_HW_UPDATE_UNLOCK,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   SET_WM_UB_SIZE,
   SET_UB_POLICY,
 };
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct msm_vfe_cfg_cmd2 {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint16_t num_cfg;
   uint16_t cmd_len;
   void * cfg_data;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   void * cfg_cmd;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct msm_vfe_cfg_cmd_list {
   struct msm_vfe_cfg_cmd2 cfg_cmd;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   struct msm_vfe_cfg_cmd_list * next;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t next_size;
 };
 struct msm_vfe_reg_rw_info {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t reg_offset;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t cmd_data_offset;
   uint32_t len;
 };
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct msm_vfe_reg_mask_info {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t reg_offset;
   uint32_t mask;
   uint32_t val;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct msm_vfe_reg_dmi_info {
   uint32_t hi_tbl_offset;
   uint32_t lo_tbl_offset;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t len;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct msm_vfe_reg_cfg_cmd {
   union {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
     struct msm_vfe_reg_rw_info rw_info;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
     struct msm_vfe_reg_mask_info mask_info;
     struct msm_vfe_reg_dmi_info dmi_info;
   } u;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   enum msm_vfe_reg_cfg_type cmd_type;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 enum vfe_sd_type {
   VFE_SD_0 = 0,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   VFE_SD_1,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   VFE_SD_COMMON,
   VFE_SD_MAX,
 };
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MS_NUM_SLAVE_MAX 1
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 enum msm_vfe_dual_hw_type {
   DUAL_NONE = 0,
   DUAL_HW_VFE_SPLIT = 1,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   DUAL_HW_MASTER_SLAVE = 2,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 enum msm_vfe_dual_hw_ms_type {
   MS_TYPE_NONE,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   MS_TYPE_MASTER,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   MS_TYPE_SLAVE,
 };
 struct msm_isp_set_dual_hw_ms_cmd {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint8_t num_src;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   enum msm_vfe_dual_hw_ms_type dual_hw_ms_type;
   enum msm_vfe_input_src primary_intf;
   enum msm_vfe_input_src input_src[VFE_SRC_MAX];
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t sof_delta_threshold;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 enum msm_isp_buf_type {
   ISP_PRIVATE_BUF,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   ISP_SHARE_BUF,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   MAX_ISP_BUF_TYPE,
 };
 struct msm_isp_unmap_buf_req {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t fd;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct msm_isp_buf_request {
   uint32_t session_id;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t stream_id;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint8_t num_buf;
   uint32_t handle;
   enum msm_isp_buf_type buf_type;
+};
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct msm_isp_buf_request_ver2 {
+  uint32_t session_id;
+  uint32_t stream_id;
+  uint8_t num_buf;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint32_t handle;
+  enum msm_isp_buf_type buf_type;
+  enum smmu_attach_mode security_mode;
+  uint32_t reserved[4];
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct msm_isp_qbuf_plane {
@@ -688,152 +743,209 @@ struct msm_isp_stats_event {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
   uint32_t stats_mask;
   uint8_t stats_buf_idxs[MSM_ISP_STATS_MAX];
+  uint8_t pd_stats_idx;
 };
-struct msm_isp_stream_ack {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct msm_isp_stream_ack {
   uint32_t session_id;
   uint32_t stream_id;
   uint32_t handle;
-};
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
 enum msm_vfe_error_type {
   ISP_ERROR_NONE,
   ISP_ERROR_CAMIF,
-  ISP_ERROR_BUS_OVERFLOW,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  ISP_ERROR_BUS_OVERFLOW,
   ISP_ERROR_RETURN_EMPTY_BUFFER,
   ISP_ERROR_FRAME_ID_MISMATCH,
   ISP_ERROR_MAX,
-};
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
 struct msm_isp_error_info {
   enum msm_vfe_error_type err_type;
   uint32_t session_id;
-  uint32_t stream_id;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint32_t stream_id;
   uint32_t stream_id_mask;
 };
 struct msm_isp_ms_delta_info {
-  uint8_t num_delta_info;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint8_t num_delta_info;
   uint32_t delta[MS_NUM_SLAVE_MAX];
 };
 struct msm_isp_output_info {
-  uint8_t regs_not_updated;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint8_t regs_not_updated;
   uint16_t output_err_mask;
   uint8_t stream_framedrop_mask;
   uint16_t stats_framedrop_mask;
-};
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
 struct msm_isp_sof_info {
   uint8_t regs_not_updated;
   uint16_t reg_update_fail_mask;
-  uint32_t stream_get_buf_fail_mask;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint32_t stream_get_buf_fail_mask;
   uint16_t stats_get_buf_fail_mask;
   struct msm_isp_ms_delta_info ms_delta_info;
   uint16_t axi_updating_mask;
-  uint32_t reg_update_fail_mask_ext;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint32_t reg_update_fail_mask_ext;
 };
 #define AXI_UPDATING_MASK 1
 #define REG_UPDATE_FAIL_MASK_EXT 1
-struct msm_isp_event_data {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct msm_isp_event_data {
   struct timeval timestamp;
   struct timeval mono_timestamp;
   uint32_t frame_id;
-  union {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  union {
     struct msm_isp_stats_event stats;
     struct msm_isp_buf_event buf_done;
     struct msm_isp_fetch_eng_event fetch_done;
-    struct msm_isp_error_info error_info;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+    struct msm_isp_error_info error_info;
     struct msm_isp_output_info output_info;
     struct msm_isp_sof_info sof_info;
   } u;
-};
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
 enum msm_vfe_ahb_clk_vote {
   MSM_ISP_CAMERA_AHB_SVS_VOTE = 1,
   MSM_ISP_CAMERA_AHB_TURBO_VOTE = 2,
-  MSM_ISP_CAMERA_AHB_NOMINAL_VOTE = 3,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  MSM_ISP_CAMERA_AHB_NOMINAL_VOTE = 3,
   MSM_ISP_CAMERA_AHB_SUSPEND_VOTE = 4,
 };
 struct msm_isp_ahb_clk_cfg {
-  uint32_t vote;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint32_t vote;
+  uint32_t reserved[2];
+};
+enum msm_vfe_dual_cam_sync_mode {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  MSM_ISP_DUAL_CAM_ASYNC,
+  MSM_ISP_DUAL_CAM_SYNC,
+};
+struct msm_isp_dual_hw_master_slave_sync {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  uint32_t sync_mode;
   uint32_t reserved[2];
 };
 #define V4L2_PIX_FMT_QBGGR8 v4l2_fourcc('Q', 'B', 'G', '8')
-#define V4L2_PIX_FMT_QGBRG8 v4l2_fourcc('Q', 'G', 'B', '8')
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define V4L2_PIX_FMT_QGBRG8 v4l2_fourcc('Q', 'G', 'B', '8')
 #define V4L2_PIX_FMT_QGRBG8 v4l2_fourcc('Q', 'G', 'R', '8')
 #define V4L2_PIX_FMT_QRGGB8 v4l2_fourcc('Q', 'R', 'G', '8')
 #define V4L2_PIX_FMT_QBGGR10 v4l2_fourcc('Q', 'B', 'G', '0')
-#define V4L2_PIX_FMT_QGBRG10 v4l2_fourcc('Q', 'G', 'B', '0')
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define V4L2_PIX_FMT_QGBRG10 v4l2_fourcc('Q', 'G', 'B', '0')
 #define V4L2_PIX_FMT_QGRBG10 v4l2_fourcc('Q', 'G', 'R', '0')
 #define V4L2_PIX_FMT_QRGGB10 v4l2_fourcc('Q', 'R', 'G', '0')
 #define V4L2_PIX_FMT_QBGGR12 v4l2_fourcc('Q', 'B', 'G', '2')
-#define V4L2_PIX_FMT_QGBRG12 v4l2_fourcc('Q', 'G', 'B', '2')
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define V4L2_PIX_FMT_QGBRG12 v4l2_fourcc('Q', 'G', 'B', '2')
 #define V4L2_PIX_FMT_QGRBG12 v4l2_fourcc('Q', 'G', 'R', '2')
 #define V4L2_PIX_FMT_QRGGB12 v4l2_fourcc('Q', 'R', 'G', '2')
 #define V4L2_PIX_FMT_QBGGR14 v4l2_fourcc('Q', 'B', 'G', '4')
-#define V4L2_PIX_FMT_QGBRG14 v4l2_fourcc('Q', 'G', 'B', '4')
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define V4L2_PIX_FMT_QGBRG14 v4l2_fourcc('Q', 'G', 'B', '4')
 #define V4L2_PIX_FMT_QGRBG14 v4l2_fourcc('Q', 'G', 'R', '4')
 #define V4L2_PIX_FMT_QRGGB14 v4l2_fourcc('Q', 'R', 'G', '4')
 #define V4L2_PIX_FMT_P16BGGR10 v4l2_fourcc('P', 'B', 'G', '0')
-#define V4L2_PIX_FMT_P16GBRG10 v4l2_fourcc('P', 'G', 'B', '0')
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define V4L2_PIX_FMT_P16GBRG10 v4l2_fourcc('P', 'G', 'B', '0')
 #define V4L2_PIX_FMT_P16GRBG10 v4l2_fourcc('P', 'G', 'R', '0')
 #define V4L2_PIX_FMT_P16RGGB10 v4l2_fourcc('P', 'R', 'G', '0')
 #define V4L2_PIX_FMT_NV14 v4l2_fourcc('N', 'V', '1', '4')
-#define V4L2_PIX_FMT_NV41 v4l2_fourcc('N', 'V', '4', '1')
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define V4L2_PIX_FMT_NV41 v4l2_fourcc('N', 'V', '4', '1')
 #define V4L2_PIX_FMT_META v4l2_fourcc('Q', 'M', 'E', 'T')
+#define V4L2_PIX_FMT_META10 v4l2_fourcc('Q', 'M', '1', '0')
 #define V4L2_PIX_FMT_SBGGR14 v4l2_fourcc('B', 'G', '1', '4')
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define V4L2_PIX_FMT_SGBRG14 v4l2_fourcc('G', 'B', '1', '4')
 #define V4L2_PIX_FMT_SGRBG14 v4l2_fourcc('B', 'A', '1', '4')
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define V4L2_PIX_FMT_SRGGB14 v4l2_fourcc('R', 'G', '1', '4')
-#define VIDIOC_MSM_VFE_REG_CFG _IOWR('V', BASE_VIDIOC_PRIVATE, struct msm_vfe_cfg_cmd2)
-#define VIDIOC_MSM_ISP_REQUEST_BUF _IOWR('V', BASE_VIDIOC_PRIVATE + 1, struct msm_isp_buf_request)
-#define VIDIOC_MSM_ISP_ENQUEUE_BUF _IOWR('V', BASE_VIDIOC_PRIVATE + 2, struct msm_isp_qbuf_info)
+enum msm_isp_ioctl_cmd_code {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define VIDIOC_MSM_ISP_RELEASE_BUF _IOWR('V', BASE_VIDIOC_PRIVATE + 3, struct msm_isp_buf_request)
-#define VIDIOC_MSM_ISP_REQUEST_STREAM _IOWR('V', BASE_VIDIOC_PRIVATE + 4, struct msm_vfe_axi_stream_request_cmd)
-#define VIDIOC_MSM_ISP_CFG_STREAM _IOWR('V', BASE_VIDIOC_PRIVATE + 5, struct msm_vfe_axi_stream_cfg_cmd)
-#define VIDIOC_MSM_ISP_RELEASE_STREAM _IOWR('V', BASE_VIDIOC_PRIVATE + 6, struct msm_vfe_axi_stream_release_cmd)
+  MSM_VFE_REG_CFG = BASE_VIDIOC_PRIVATE,
+  MSM_ISP_REQUEST_BUF,
+  MSM_ISP_ENQUEUE_BUF,
+  MSM_ISP_RELEASE_BUF,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define VIDIOC_MSM_ISP_INPUT_CFG _IOWR('V', BASE_VIDIOC_PRIVATE + 7, struct msm_vfe_input_cfg)
-#define VIDIOC_MSM_ISP_SET_SRC_STATE _IOWR('V', BASE_VIDIOC_PRIVATE + 8, struct msm_vfe_axi_src_state)
-#define VIDIOC_MSM_ISP_REQUEST_STATS_STREAM _IOWR('V', BASE_VIDIOC_PRIVATE + 9, struct msm_vfe_stats_stream_request_cmd)
-#define VIDIOC_MSM_ISP_CFG_STATS_STREAM _IOWR('V', BASE_VIDIOC_PRIVATE + 10, struct msm_vfe_stats_stream_cfg_cmd)
+  MSM_ISP_REQUEST_STREAM,
+  MSM_ISP_CFG_STREAM,
+  MSM_ISP_RELEASE_STREAM,
+  MSM_ISP_INPUT_CFG,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define VIDIOC_MSM_ISP_RELEASE_STATS_STREAM _IOWR('V', BASE_VIDIOC_PRIVATE + 11, struct msm_vfe_stats_stream_release_cmd)
-#define VIDIOC_MSM_ISP_REG_UPDATE_CMD _IOWR('V', BASE_VIDIOC_PRIVATE + 12, enum msm_vfe_input_src)
-#define VIDIOC_MSM_ISP_UPDATE_STREAM _IOWR('V', BASE_VIDIOC_PRIVATE + 13, struct msm_vfe_axi_stream_update_cmd)
-#define VIDIOC_MSM_VFE_REG_LIST_CFG _IOWR('V', BASE_VIDIOC_PRIVATE + 14, struct msm_vfe_cfg_cmd_list)
+  MSM_ISP_SET_SRC_STATE,
+  MSM_ISP_REQUEST_STATS_STREAM,
+  MSM_ISP_CFG_STATS_STREAM,
+  MSM_ISP_RELEASE_STATS_STREAM,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define VIDIOC_MSM_ISP_SMMU_ATTACH _IOWR('V', BASE_VIDIOC_PRIVATE + 15, struct msm_vfe_smmu_attach_cmd)
-#define VIDIOC_MSM_ISP_UPDATE_STATS_STREAM _IOWR('V', BASE_VIDIOC_PRIVATE + 16, struct msm_vfe_axi_stream_update_cmd)
-#define VIDIOC_MSM_ISP_AXI_HALT _IOWR('V', BASE_VIDIOC_PRIVATE + 17, struct msm_vfe_axi_halt_cmd)
-#define VIDIOC_MSM_ISP_AXI_RESET _IOWR('V', BASE_VIDIOC_PRIVATE + 18, struct msm_vfe_axi_reset_cmd)
+  MSM_ISP_REG_UPDATE_CMD,
+  MSM_ISP_UPDATE_STREAM,
+  MSM_VFE_REG_LIST_CFG,
+  MSM_ISP_SMMU_ATTACH,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define VIDIOC_MSM_ISP_AXI_RESTART _IOWR('V', BASE_VIDIOC_PRIVATE + 19, struct msm_vfe_axi_restart_cmd)
-#define VIDIOC_MSM_ISP_FETCH_ENG_START _IOWR('V', BASE_VIDIOC_PRIVATE + 20, struct msm_vfe_fetch_eng_start)
-#define VIDIOC_MSM_ISP_DEQUEUE_BUF _IOWR('V', BASE_VIDIOC_PRIVATE + 21, struct msm_isp_qbuf_info)
-#define VIDIOC_MSM_ISP_SET_DUAL_HW_MASTER_SLAVE _IOWR('V', BASE_VIDIOC_PRIVATE + 22, struct msm_isp_set_dual_hw_ms_cmd)
+  MSM_ISP_UPDATE_STATS_STREAM,
+  MSM_ISP_AXI_HALT,
+  MSM_ISP_AXI_RESET,
+  MSM_ISP_AXI_RESTART,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define VIDIOC_MSM_ISP_MAP_BUF_START_FE _IOWR('V', BASE_VIDIOC_PRIVATE + 23, struct msm_vfe_fetch_eng_start)
-#define VIDIOC_MSM_ISP_UNMAP_BUF _IOWR('V', BASE_VIDIOC_PRIVATE + 24, struct msm_isp_unmap_buf_req)
-#define VIDIOC_MSM_ISP_AHB_CLK_CFG _IOWR('V', BASE_VIDIOC_PRIVATE + 25, struct msm_isp_ahb_clk_cfg)
+  MSM_ISP_FETCH_ENG_START,
+  MSM_ISP_DEQUEUE_BUF,
+  MSM_ISP_SET_DUAL_HW_MASTER_SLAVE,
+  MSM_ISP_MAP_BUF_START_FE,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  MSM_ISP_UNMAP_BUF,
+  MSM_ISP_AHB_CLK_CFG,
+  MSM_ISP_DUAL_HW_MASTER_SLAVE_SYNC,
+  MSM_ISP_FETCH_ENG_MULTI_PASS_START,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+  MSM_ISP_MAP_BUF_START_MULTI_PASS_FE,
+  MSM_ISP_REQUEST_BUF_VER2,
+};
+#define VIDIOC_MSM_VFE_REG_CFG _IOWR('V', MSM_VFE_REG_CFG, struct msm_vfe_cfg_cmd2)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define VIDIOC_MSM_ISP_REQUEST_BUF _IOWR('V', MSM_ISP_REQUEST_BUF, struct msm_isp_buf_request)
+#define VIDIOC_MSM_ISP_ENQUEUE_BUF _IOWR('V', MSM_ISP_ENQUEUE_BUF, struct msm_isp_qbuf_info)
+#define VIDIOC_MSM_ISP_RELEASE_BUF _IOWR('V', MSM_ISP_RELEASE_BUF, struct msm_isp_buf_request)
+#define VIDIOC_MSM_ISP_REQUEST_STREAM _IOWR('V', MSM_ISP_REQUEST_STREAM, struct msm_vfe_axi_stream_request_cmd)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define VIDIOC_MSM_ISP_CFG_STREAM _IOWR('V', MSM_ISP_CFG_STREAM, struct msm_vfe_axi_stream_cfg_cmd)
+#define VIDIOC_MSM_ISP_RELEASE_STREAM _IOWR('V', MSM_ISP_RELEASE_STREAM, struct msm_vfe_axi_stream_release_cmd)
+#define VIDIOC_MSM_ISP_INPUT_CFG _IOWR('V', MSM_ISP_INPUT_CFG, struct msm_vfe_input_cfg)
+#define VIDIOC_MSM_ISP_SET_SRC_STATE _IOWR('V', MSM_ISP_SET_SRC_STATE, struct msm_vfe_axi_src_state)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define VIDIOC_MSM_ISP_REQUEST_STATS_STREAM _IOWR('V', MSM_ISP_REQUEST_STATS_STREAM, struct msm_vfe_stats_stream_request_cmd)
+#define VIDIOC_MSM_ISP_CFG_STATS_STREAM _IOWR('V', MSM_ISP_CFG_STATS_STREAM, struct msm_vfe_stats_stream_cfg_cmd)
+#define VIDIOC_MSM_ISP_RELEASE_STATS_STREAM _IOWR('V', MSM_ISP_RELEASE_STATS_STREAM, struct msm_vfe_stats_stream_release_cmd)
+#define VIDIOC_MSM_ISP_REG_UPDATE_CMD _IOWR('V', MSM_ISP_REG_UPDATE_CMD, enum msm_vfe_input_src)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define VIDIOC_MSM_ISP_UPDATE_STREAM _IOWR('V', MSM_ISP_UPDATE_STREAM, struct msm_vfe_axi_stream_update_cmd)
+#define VIDIOC_MSM_VFE_REG_LIST_CFG _IOWR('V', MSM_VFE_REG_LIST_CFG, struct msm_vfe_cfg_cmd_list)
+#define VIDIOC_MSM_ISP_SMMU_ATTACH _IOWR('V', MSM_ISP_SMMU_ATTACH, struct msm_vfe_smmu_attach_cmd)
+#define VIDIOC_MSM_ISP_UPDATE_STATS_STREAM _IOWR('V', MSM_ISP_UPDATE_STATS_STREAM, struct msm_vfe_axi_stream_update_cmd)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define VIDIOC_MSM_ISP_AXI_HALT _IOWR('V', MSM_ISP_AXI_HALT, struct msm_vfe_axi_halt_cmd)
+#define VIDIOC_MSM_ISP_AXI_RESET _IOWR('V', MSM_ISP_AXI_RESET, struct msm_vfe_axi_reset_cmd)
+#define VIDIOC_MSM_ISP_AXI_RESTART _IOWR('V', MSM_ISP_AXI_RESTART, struct msm_vfe_axi_restart_cmd)
+#define VIDIOC_MSM_ISP_FETCH_ENG_START _IOWR('V', MSM_ISP_FETCH_ENG_START, struct msm_vfe_fetch_eng_start)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define VIDIOC_MSM_ISP_DEQUEUE_BUF _IOWR('V', MSM_ISP_DEQUEUE_BUF, struct msm_isp_qbuf_info)
+#define VIDIOC_MSM_ISP_SET_DUAL_HW_MASTER_SLAVE _IOWR('V', MSM_ISP_SET_DUAL_HW_MASTER_SLAVE, struct msm_isp_set_dual_hw_ms_cmd)
+#define VIDIOC_MSM_ISP_MAP_BUF_START_FE _IOWR('V', MSM_ISP_MAP_BUF_START_FE, struct msm_vfe_fetch_eng_start)
+#define VIDIOC_MSM_ISP_UNMAP_BUF _IOWR('V', MSM_ISP_UNMAP_BUF, struct msm_isp_unmap_buf_req)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define VIDIOC_MSM_ISP_AHB_CLK_CFG _IOWR('V', MSM_ISP_AHB_CLK_CFG, struct msm_isp_ahb_clk_cfg)
+#define VIDIOC_MSM_ISP_DUAL_HW_MASTER_SLAVE_SYNC _IOWR('V', MSM_ISP_DUAL_HW_MASTER_SLAVE_SYNC, struct msm_isp_dual_hw_master_slave_sync)
+#define VIDIOC_MSM_ISP_FETCH_ENG_MULTI_PASS_START _IOWR('V', MSM_ISP_FETCH_ENG_MULTI_PASS_START, struct msm_vfe_fetch_eng_multi_pass_start)
+#define VIDIOC_MSM_ISP_MAP_BUF_START_MULTI_PASS_FE _IOWR('V', MSM_ISP_MAP_BUF_START_MULTI_PASS_FE, struct msm_vfe_fetch_eng_multi_pass_start)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define VIDIOC_MSM_ISP_REQUEST_BUF_VER2 _IOWR('V', MSM_ISP_REQUEST_BUF_VER2, struct msm_isp_buf_request_ver2)
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 

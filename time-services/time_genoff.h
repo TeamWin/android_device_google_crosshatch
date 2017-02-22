@@ -54,6 +54,7 @@ typedef enum time_bases {
 	ATS_MODEM,
 	ATS_MFLO,
 	ATS_TOD_MODEM,
+	ATS_WLAN,
 	ATS_INVALID
 } time_bases_type;
 

@@ -1,0 +1,16 @@
+type rmt_storage, domain;
+type rmt_storage_exec, exec_type, file_type;
+
+init_daemon_domain(rmt_storage)
+
+wakelock_use(rmt_storage)
+
+allow rmt_storage self:capability setgid;
+
+allow rmt_storage uio_device:chr_file rw_file_perms;
+allow rmt_storage sysfs_uio:dir r_dir_perms;
+allow rmt_storage sysfs_rmtfs:file r_file_perms;
+
+userdebug_or_eng(`
+permissive rmt_storage;
+')

@@ -1,0 +1,8 @@
+type port-bridge, domain;
+type port-bridge_exec, exec_type, file_type;
+
+init_daemon_domain(port-bridge)
+
+userdebug_or_eng(`
+permissive port-bridge;
+')

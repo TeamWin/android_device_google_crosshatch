@@ -1,0 +1,16 @@
+type diag_device, dev_type, mlstrustedobject;
+type smd_device, dev_type;
+type ipa_dev, dev_type;
+type rmnet_device, dev_type;
+type at_device, dev_type;
+type qsee_ipc_irq_spss_device, dev_type;
+type seemplog_device, dev_type;
+type spcom_device, dev_type;
+type qdsp_device, dev_type, mlstrustedobject;
+type dsp_device, dev_type;
+type avtimer_device, dev_type;
+type ssr_device, dev_type;
+type ramdump_device, dev_type;
+type hbtp_device, dev_type;
+type sg_device, dev_type;
+type sdd_block_device, dev_type;

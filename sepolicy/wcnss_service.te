@@ -1,0 +1,13 @@
+type wcnss_service, domain;
+type wcnss_service_exec, exec_type, file_type;
+
+init_daemon_domain(wcnss_service)
+net_domain(wcnss_service)
+
+allow wcnss_service self:socket create_socket_perms;
+allowxperm wcnss_service self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
+allow wcnss_service self:netlink_socket read;
+
+userdebug_or_eng(`
+permissive wcnss_service;
+')

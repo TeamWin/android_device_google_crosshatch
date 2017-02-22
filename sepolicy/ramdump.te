@@ -1,0 +1,7 @@
+type ramdump_exec, exec_type, file_type;
+
+userdebug_or_eng(`
+type ramdump, domain;
+init_daemon_domain(ramdump)
+permissive ramdump;
+')

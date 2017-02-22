@@ -1,0 +1,12 @@
+type qti, domain;
+type qti_exec, exec_type, file_type;
+
+init_daemon_domain(qti)
+net_domain(qti)
+
+allow qti self:socket { ioctl read };
+allowxperm qti self:socket ioctl IPC_ROUTER_IOCTL_BIND_CONTROL_PORT;
+
+userdebug_or_eng(`
+permissive qti;
+')

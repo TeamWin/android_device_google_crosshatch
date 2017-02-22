@@ -1,0 +1,17 @@
+type time_daemon, domain;
+type time_daemon_exec, exec_type, file_type;
+
+init_daemon_domain(time_daemon)
+
+type time_data_file, file_type, data_file_type;
+
+allow time_daemon self:socket create_socket_perms;
+allowxperm time_daemon self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
+
+allow time_daemon rtc_device:chr_file r_file_perms;
+
+allow time_daemon self:capability { setuid setgid };
+
+userdebug_or_eng(`
+permissive time_daemon;
+')

@@ -1,0 +1,13 @@
+# /system/bin/init.radio.sh
+type init_radio, domain;
+type init_radio_exec, exec_type, file_type;
+
+init_daemon_domain(init_radio)
+
+allow init_radio toolbox_exec:file rx_file_perms;
+allow init_radio radio_data_file:dir create_dir_perms;
+allow init_radio radio_data_file:file create_file_perms;
+
+userdebug_or_eng(`
+permissive init_radio;
+')

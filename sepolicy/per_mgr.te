@@ -1,0 +1,20 @@
+# Policy for pm-service and pm-proxy
+type per_mgr, domain;
+type per_mgr_exec, exec_type, file_type;
+
+init_daemon_domain(per_mgr);
+
+add_service(per_mgr, per_mgr_service)
+
+binder_use(per_mgr)
+binder_call(per_mgr, per_proxy)
+
+allow per_mgr self:socket create_socket_perms;
+allowxperm per_mgr self:socket ioctl msm_sock_ipc_ioctls;
+allow per_mgr ssr_device:chr_file { open read };
+
+r_dir_file(per_mgr, sysfs)
+
+userdebug_or_eng(`
+permissive per_mgr;
+')
