@@ -23,7 +23,7 @@ PRODUCT_DEVICE := crosshatch
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on crosshatch
 PRODUCT_MANUFACTURER := Google
-PRODUCT_RESTRICT_VENDOR_FILES := true
+PRODUCT_RESTRICT_VENDOR_FILES := all
 
 $(call inherit-product, device/google/crosshatch/utils.mk)
 $(call inherit-product, device/google/crosshatch/device-crosshatch.mk)

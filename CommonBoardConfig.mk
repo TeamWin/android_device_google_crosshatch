@@ -28,24 +28,54 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a9
 
--include vendor/google_devices/crosshatch/BoardConfigVendor.mk
-
-
-ifeq ($(BOARD_KERNEL_CMDLINE),)
 BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200,n8 earlycon=msm_serial_dm,0xc1b0000
 BOARD_KERNEL_CMDLINE += androidboot.hardware=$(TARGET_BOOTLOADER_BOARD_NAME) androidboot.console=ttyMSM0
-BOARD_KERNEL_CMDLINE += user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3
+BOARD_KERNEL_CMDLINE += user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive service_locator.enable=1
-BOARD_KERNEL_CMDLINE += swiotlb=2048 androidboot.configfs=true
+BOARD_KERNEL_CMDLINE += swiotlb=2048
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/etc/firmware
 BOARD_KERNEL_CMDLINE += no_console_suspend=1
-BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=a800000.dwc3 ehci-hcd.park=3
-endif
+
+BOARD_KERNEL_BASE        := 0x00000000
+BOARD_KERNEL_PAGESIZE    := 4096
+BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
+BOARD_RAMDISK_OFFSET     := 0x02000000
+
+TARGET_BOARD_KERNEL_HEADERS := device/google/crosshatch/kernel-headers
+
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_KERNEL := false
+TARGET_NO_RECOVERY := true
+TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
+BOARD_USES_RECOVERY_AS_BOOT := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
+ENABLE_CPUSETS := true
+
+TARGET_COPY_OUT_VENDOR := vendor
+
+BOARD_HAL_STATIC_LIBRARIES := libdumpstate.$(TARGET_BOOTLOADER_BOARD_NAME)
+
+# Install odex files into the other system image
+BOARD_USES_SYSTEM_OTHER_ODEX := true
+
+BOARD_ROOT_EXTRA_FOLDERS := persist firmware
+
+BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy
+
+BOARD_SECCOMP_POLICY = device/google/crosshatch/seccomp
 
 QCOM_BOARD_PLATFORMS += msm8998
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/google/crosshatch/bluetooth
+
+# Camera
+TARGET_USES_AOSP := true
+BOARD_QTI_CAMERA_32BIT_ONLY := true
+CAMERA_DAEMON_NOT_PRESENT := true
+TARGET_USES_ION := true
+TARGET_USES_PAINTBOX := true
 
 # GPS
 TARGET_NO_RPC := true
@@ -67,58 +97,11 @@ WIFI_DRIVER_FW_PATH_P2P := "p2p"
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 
-BOARD_KERNEL_BASE        := 0x00000000
-BOARD_KERNEL_PAGESIZE    := 4096
-BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
-BOARD_RAMDISK_OFFSET     := 0x02000000
+# Audio
+BOARD_USES_ALSA_AUDIO := true
+USE_XML_AUDIO_POLICY_CONF := 1
+AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
+AUDIO_FEATURE_ENABLED_SND_MONITOR := true
+BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_USES_UNCOMPRESSED_KERNEL := false
-
-BOARD_KERNEL_PAGESIZE := 4096
-BOARD_FLASH_BLOCK_SIZE := 131072
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_PARTITION_SIZE := 3221225472
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
-BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
-TARGET_USERIMAGES_USE_EXT4 := true
-
-TARGET_COPY_OUT_VENDOR := vendor
-
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
-MAX_EGL_CACHE_SIZE := 2048*1024
-
-TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
-MAX_VIRTUAL_DISPLAY_DIMENSION := 4096
-
-BOARD_USES_GENERIC_AUDIO := true
-BOARD_QTI_CAMERA_32BIT_ONLY := true
-TARGET_NO_RPC := true
-
-
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-TARGET_KERNEL_APPEND_DTB := true
-
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_KERNEL := false
-TARGET_NO_RECOVERY := true
-TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
-BOARD_USES_RECOVERY_AS_BOOT := true
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-BOARD_ROOT_EXTRA_FOLDERS := persist firmware
-BOARD_USES_SYSTEM_OTHER_ODEX := true
-
-TARGET_BOARD_KERNEL_HEADERS := device/google/crosshatch/kernel-headers
-
-TARGET_USES_HWC2 := true
-
-BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy
-
-BOARD_EGL_CFG := device/google/crosshatch/egl.cfg
-
-
+-include vendor/google_devices/crosshatch/BoardConfigVendor.mk
