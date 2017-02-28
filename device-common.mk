@@ -42,6 +42,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.hardware.usb.rc:root/init.$(PRODUCT_HARDWARE).usb.rc \
     $(LOCAL_PATH)/ueventd.hardware.rc:root/ueventd.$(PRODUCT_HARDWARE).rc \
     $(LOCAL_PATH)/init.radio.sh:system/bin/init.radio.sh \
+    $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl \
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_COPY_FILES += \
