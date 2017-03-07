@@ -48,6 +48,7 @@ on fs
 on post-fs
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
+    setprop persist.sys.srr.restart_level="modem slpi adsp"
 
     # Since bootloader does not have a UI turn screen ON
     write /sys/class/leds/lcd-backlight/brightness 255
