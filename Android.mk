@@ -17,6 +17,5 @@
 LOCAL_PATH := $(call my-dir)
 
 ifneq ($(filter crosshatch, $(TARGET_DEVICE)),)
-  include $(LOCAL_PATH)/generate_extra_images.mk
   include $(call first-makefiles-under, $(LOCAL_PATH))
 endif

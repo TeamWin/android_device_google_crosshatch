@@ -1,3 +1,5 @@
+LOCAL_PATH := $(call my-dir)
+
 #----------------------------------------------------------------------
 # Generate persist image (persist.img)
 #----------------------------------------------------------------------
@@ -8,16 +10,13 @@ INTERNAL_PERSISTIMAGE_FILES := \
 
 INSTALLED_PERSISTIMAGE_TARGET := $(PRODUCT_OUT)/persist.img
 
-define build-persistimage-target
-    $(call pretty,"Target persist fs image: $(INSTALLED_PERSISTIMAGE_TARGET)")
-    @mkdir -p $(TARGET_OUT_PERSIST)
-    $(hide) $(MKEXTUSERIMG) -s $(TARGET_OUT_PERSIST) $@ ext4 persist $(BOARD_PERSISTIMAGE_PARTITION_SIZE)
-    $(hide) chmod a+r $@
-    $(hide) $(call assert-max-image-size,$@,$(BOARD_PERSISTIMAGE_PARTITION_SIZE))
-endef
-
+$(INSTALLED_PERSISTIMAGE_TARGET): PRIVATE_TOOL_PATH:=$(dir $(MAKE_EXT4FS))
 $(INSTALLED_PERSISTIMAGE_TARGET): $(MKEXTUSERIMG) $(MAKE_EXT4FS) $(INTERNAL_PERSISTIMAGE_FILES)
-	$(build-persistimage-target)
+	$(call pretty,"Target persist fs image: $(INSTALLED_PERSISTIMAGE_TARGET)")
+	@mkdir -p $(TARGET_OUT_PERSIST)
+	$(hide) PATH=$(PATH):$(HOST_OUT_EXECUTABLES) $(MKEXTUSERIMG) -s $(TARGET_OUT_PERSIST) $@ ext4 persist $(BOARD_PERSISTIMAGE_PARTITION_SIZE)
+	$(hide) chmod a+r $@
+	$(hide) $(call assert-max-image-size,$@,$(BOARD_PERSISTIMAGE_PARTITION_SIZE))
 
 ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_PERSISTIMAGE_TARGET)
 ALL_MODULES.$(LOCAL_MODULE).INSTALLED += $(INSTALLED_PERSISTIMAGE_TARGET)
