@@ -192,11 +192,6 @@ PRODUCT_PACKAGES += \
   android.hardware.bluetooth@1.0-impl    \
   android.hardware.bluetooth@1.0-service
 
-ifeq ($(ENABLE_TREBLE), true)
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-service
-endif
-
 PRODUCT_PACKAGES += \
     libmm-omxcore \
     libOmxCore \
