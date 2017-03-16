@@ -25,3 +25,4 @@ include device/google/crosshatch/device-common.mk
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=560 \
 
+DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/crosshatch/overlay

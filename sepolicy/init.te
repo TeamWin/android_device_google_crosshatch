@@ -1,7 +1,0 @@
-allow init self:capability sys_module;
-allow init system_file:system module_load;
-
-allow init configfs:file w_file_perms;
-allow init tty_device:chr_file rw_file_perms;
-
-allow init persist_file:dir mounton;

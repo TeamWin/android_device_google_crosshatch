@@ -196,7 +196,7 @@
     <ctl name="MultiMedia1 Mixer USB_AUDIO_TX" value="0" />
     <ctl name="MultiMedia5 Mixer USB_AUDIO_TX" value="0" />
     <ctl name="MultiMedia8 Mixer USB_AUDIO_TX" value="0" />
-    <ctl name="USB_AUDIO_RX Channels" value="One" />
+    <ctl name="USB_AUDIO_RX Channels" value="Two" />
     <ctl name="USB_AUDIO_RX SampleRate" value="KHZ_48" />
     <ctl name="USB_AUDIO_RX Format" value="S16_LE" />
     <ctl name="USB_AUDIO_TX Channels" value="One" />
@@ -641,6 +641,10 @@
         <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia1" value="1" />
     </path>
 
+    <path name="deep-buffer-playback usb-headset">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia1" value="1" />
+    </path>
+
     <path name="deep-buffer-playback speaker-and-usb-headphones">
         <path name="deep-buffer-playback usb-headphones" />
         <path name="deep-buffer-playback speaker" />
@@ -690,6 +694,10 @@
     </path>
 
     <path name="low-latency-playback usb-headphones">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia5" value="1" />
+    </path>
+
+    <path name="low-latency-playback usb-headset">
         <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
@@ -745,6 +753,10 @@
         <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia8" value="1" />
     </path>
 
+    <path name="audio-ull-playback usb-headset">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia8" value="1" />
+    </path>
+
     <path name="audio-ull-playback speaker-and-usb-headphones">
         <path name="audio-ull-playback usb-headphones" />
         <path name="audio-ull-playback speaker" />
@@ -793,6 +805,10 @@
     </path>
 
     <path name="compress-offload-playback usb-headphones">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia4" value="1" />
+    </path>
+
+    <path name="compress-offload-playback usb-headset">
         <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia4" value="1" />
     </path>
 
@@ -927,6 +943,11 @@
 
     <path name="voicemmode1-call usb-headphones">
         <ctl name="USB_AUDIO_RX_Voice Mixer VoiceMMode1" value="1" />
+        <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1" />
+    </path>
+
+    <path name="voicemmode1-call usb-headset">
+        <ctl name="USB_AUDIO_RX_Voice Mixer VoiceMMode1" value="1" />
         <ctl name="VoiceMMode1_Tx Mixer USB_AUDIO_TX_MMode1" value="1" />
     </path>
 
@@ -966,6 +987,11 @@
     </path>
 
     <path name="voicemmode2-call usb-headphones">
+        <ctl name="USB_AUDIO_RX_Voice Mixer VoiceMMode2" value="1" />
+        <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1" />
+    </path>
+
+    <path name="voicemmode2-call usb-headset">
         <ctl name="USB_AUDIO_RX_Voice Mixer VoiceMMode2" value="1" />
         <ctl name="VoiceMMode2_Tx Mixer USB_AUDIO_TX_MMode2" value="1" />
     </path>
@@ -1513,6 +1539,9 @@
     </path>
 
     <path name="usb-headphones">
+    </path>
+
+    <path name="usb-headset">
     </path>
 
     <path name="afe-proxy">

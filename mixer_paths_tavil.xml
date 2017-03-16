@@ -196,7 +196,7 @@
     <ctl name="MultiMedia1 Mixer USB_AUDIO_TX" value="0" />
     <ctl name="MultiMedia5 Mixer USB_AUDIO_TX" value="0" />
     <ctl name="MultiMedia8 Mixer USB_AUDIO_TX" value="0" />
-    <ctl name="USB_AUDIO_RX Channels" value="One" />
+    <ctl name="USB_AUDIO_RX Channels" value="Two" />
     <ctl name="USB_AUDIO_RX SampleRate" value="KHZ_48" />
     <ctl name="USB_AUDIO_RX Format" value="S16_LE" />
     <ctl name="USB_AUDIO_TX Channels" value="One" />
@@ -461,6 +461,7 @@
 
     <!-- Voice external ec. reference -->
     <ctl name="VOC_EXT_EC MUX" value="NONE" />
+    <ctl name="Stereo EchoRef Ctrl" value="right channel" />
     <ctl name="AIF3_CAP Mixer SLIM TX1" value="0" />
     <ctl name="AIF3_CAP Mixer SLIM TX2" value="0" />
     <!-- Voice external ec. reference end -->
@@ -659,6 +660,10 @@
         <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia1" value="1" />
     </path>
 
+    <path name="deep-buffer-playback usb-headset">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia1" value="1" />
+    </path>
+
     <path name="deep-buffer-playback speaker-and-usb-headphones">
         <path name="deep-buffer-playback usb-headphones" />
         <path name="deep-buffer-playback speaker" />
@@ -708,6 +713,10 @@
     </path>
 
     <path name="low-latency-playback usb-headphones">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia5" value="1" />
+    </path>
+
+    <path name="low-latency-playback usb-headset">
         <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
@@ -763,6 +772,10 @@
         <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia8" value="1" />
     </path>
 
+    <path name="audio-ull-playback usb-headset">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia8" value="1" />
+    </path>
+
     <path name="audio-ull-playback speaker-and-usb-headphones">
         <path name="audio-ull-playback usb-headphones" />
         <path name="audio-ull-playback speaker" />
@@ -811,6 +824,10 @@
     </path>
 
     <path name="compress-offload-playback usb-headphones">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia4" value="1" />
+    </path>
+
+    <path name="compress-offload-playback usb-headset">
         <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia4" value="1" />
     </path>
 
@@ -914,6 +931,7 @@
     </path>
 
     <path name="voicemmode1-call speaker">
+        <ctl name="VOC_EXT_EC MUX" value="QUAT_MI2S_TX" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer VoiceMMode1" value="1" />
         <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1" />
     </path>
@@ -945,6 +963,11 @@
 
     <path name="voicemmode1-call usb-headphones">
         <ctl name="USB_AUDIO_RX_Voice Mixer VoiceMMode1" value="1" />
+        <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1" />
+    </path>
+
+    <path name="voicemmode1-call usb-headset">
+        <ctl name="USB_AUDIO_RX_Voice Mixer VoiceMMode1" value="1" />
         <ctl name="VoiceMMode1_Tx Mixer USB_AUDIO_TX_MMode1" value="1" />
     </path>
 
@@ -954,6 +977,7 @@
     </path>
 
     <path name="voicemmode2-call speaker">
+        <ctl name="VOC_EXT_EC MUX" value="QUAT_MI2S_TX" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer VoiceMMode2" value="1" />
         <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1" />
     </path>
@@ -984,6 +1008,11 @@
     </path>
 
     <path name="voicemmode2-call usb-headphones">
+        <ctl name="USB_AUDIO_RX_Voice Mixer VoiceMMode2" value="1" />
+        <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1" />
+    </path>
+
+    <path name="voicemmode2-call usb-headset">
         <ctl name="USB_AUDIO_RX_Voice Mixer VoiceMMode2" value="1" />
         <ctl name="VoiceMMode2_Tx Mixer USB_AUDIO_TX_MMode2" value="1" />
     </path>
@@ -1130,6 +1159,25 @@
         <ctl name="ADC MUX7" value="DMIC" />
         <ctl name="DMIC MUX7" value="DMIC1" />
         <ctl name="IIR0 INP0 MUX" value="DEC5" />
+        <ctl name="SLIM_0_TX Channels" value="Three" />
+    </path>
+
+    <!-- Triple MIC case -->
+    <!-- Ch1: 2nd mic DEC6/TX6, Ch2: 1st_mic DEC7/TX7, Ch3: 3rd mic DEC5/TX5-->
+    <path name="triple-mic-camcorder">
+        <ctl name="AIF1_CAP Mixer SLIM TX6" value="1" />
+        <ctl name="AIF1_CAP Mixer SLIM TX7" value="1" />
+        <ctl name="AIF1_CAP Mixer SLIM TX5" value="1" />
+        <ctl name="CDC_IF TX6 MUX" value="DEC6" />
+        <ctl name="ADC MUX6" value="DMIC" />
+        <ctl name="DMIC MUX6" value="DMIC3" />
+        <ctl name="CDC_IF TX7 MUX" value="DEC7" />
+        <ctl name="ADC MUX7" value="DMIC" />
+        <ctl name="DMIC MUX7" value="DMIC1" />
+        <ctl name="CDC_IF TX5 MUX" value="DEC5" />
+        <ctl name="ADC MUX5" value="DMIC" />
+        <ctl name="DMIC MUX5" value="DMIC2" />
+        <ctl name="IIR0 INP0 MUX" value="DEC6" />
         <ctl name="SLIM_0_TX Channels" value="Three" />
     </path>
 
@@ -1292,10 +1340,12 @@
         <ctl name="DEC7 Volume" value="88" />
     </path>
 
-    <!-- SPKR_PHONE_MIC 3nd D:4 dB -->
+    <!-- SPKR_PHONE_MIC 3rd:DEC5 16dB, 2nd:DEC6 16dB, 1st:DEC7 16dB,-->
     <path name="speaker-mic">
-        <path name="dmic3" />
-        <ctl name="DEC5 Volume" value="88" />
+        <path name="triple-mic" />
+        <ctl name="DEC5 Volume" value="100" />
+        <ctl name="DEC6 Volume" value="100" />
+        <ctl name="DEC7 Volume" value="100" />
     </path>
 
     <!-- TX Main-mic D:4 dB -->
@@ -1316,10 +1366,12 @@
         <ctl name="DEC7 Volume" value="86" />
     </path>
 
-    <!-- CAMCORDER MIC 2nd D:4 dB -->
+    <!-- CAMCORDER MIC 2nd:DEC6 4dB, 1st:DEC7 4dB, 3rd:DEC5 4dB -->
     <path name="camcorder-mic">
-        <path name="dmic4" />
+        <path name="triple-mic-camcorder" />
         <ctl name="DEC6 Volume" value="88" />
+        <ctl name="DEC7 Volume" value="88" />
+        <ctl name="DEC5 Volume" value="88" />
     </path>
 
     <!-- TX Dual-mic 1st MIC D:4 dB, 2nd MIC:4 dB -->
@@ -1531,6 +1583,9 @@
     </path>
 
     <path name="usb-headphones">
+    </path>
+
+    <path name="usb-headset">
     </path>
 
     <path name="afe-proxy">
