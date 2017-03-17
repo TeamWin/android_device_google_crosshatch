@@ -33,6 +33,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     messaging
 
+# yes, we take everything from wahoo for crosshatch by default
 LOCAL_PATH := device/google/wahoo
 
 SRC_MEDIA_HAL_DIR := hardware/qcom/media/msm8998
@@ -47,7 +48,7 @@ $(call inherit-product, hardware/qcom/msm8998/msm8998.mk)
 $(call inherit-product, device/google/wahoo/utils.mk)
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/google/wahoo-kernel/Image.lz4-dtb
+    LOCAL_KERNEL := device/google/crosshatch-kernel/Image.gz-dtb
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -179,7 +180,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.oem_unlock_supported=1
+    ro.oem_unlock_supported=1       \
+    persist.sys.usb.config=adb      \
+    ro.adb.secure=0 \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=1 \
@@ -333,7 +336,7 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    libaudio-resampler
+    libaudio-resampler \
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
@@ -366,9 +369,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mixer_paths.xml:system/etc/mixer_paths.xml \
     $(LOCAL_PATH)/mixer_paths_tasha.xml:system/etc/mixer_paths_tasha.xml \
-    $(LOCAL_PATH)/mixer_paths_tavil.xml:system/etc/mixer_paths_tavil.xml \
-    $(LOCAL_PATH)/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/audio_platform_info_tavil.xml:system/etc/audio_platform_info_tavil.xml \
+    device/google/crosshatch/audio_platform_info.xml:system/etc/audio_platform_info.xml \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
@@ -378,28 +379,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml \
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.snd_card.open.retries=50
+    audio.snd_card.open.retries=5
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/lowi.conf:system/etc/lowi.conf
 
-# Fingerprint HIDL implementation
-PRODUCT_PACKAGES += \
-    fingerprint.fpc \
-    android.hardware.biometrics.fingerprint@2.1-service
-
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml
-
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
-
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-# Subsystem ramdump
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.ssr.enable_ramdumps=1
-endif
 
 # Subsystem silent restart
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -411,7 +398,7 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 # Share fstab between devices
 # enables File Based Encryption (FBE)
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/fstab.hardware:root/fstab.$(PRODUCT_HARDWARE)
+    device/google/crosshatch/fstab.hardware:root/fstab.$(PRODUCT_HARDWARE)
 
 # Provide meaningful APN configuration
 PRODUCT_COPY_FILES += \
