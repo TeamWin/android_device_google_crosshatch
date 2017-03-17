@@ -23,7 +23,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio_platform_info_tavil.xml:system/etc/audio_platform_info_tavil.xml
 
-include device/google/wahoo/device.mk
+include device/google/crosshatch/device.mk
 
 # Kernel modules
 PRODUCT_COPY_FILES += \

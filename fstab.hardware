@@ -1,0 +1,9 @@
+# Android fstab file.
+
+#<src>                                        <mnt_point>        <type>      <mnt_flags and options>                               <fs_mgr_flags>
+/dev/block/bootdevice/by-name/system          /                  ext4        ro,barrier=1                                          wait,slotselect
+/dev/block/bootdevice/by-name/vendor          /vendor            ext4        ro,barrier=1                                          wait,slotselect
+/dev/block/bootdevice/by-name/userdata        /data              ext4        noatime,nosuid,nodev,barrier=1,noauto_da_alloc        wait,check,formattable,fileencryption=ice:aes-256-heh
+/dev/block/bootdevice/by-name/misc            /misc              emmc        defaults                                              defaults
+/dev/block/bootdevice/by-name/modem           /firmware          vfat        ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0   wait,slotselect
+/devices/soc/a800000.ssusb/a800000.dwc3*      auto               vfat        defaults                                              voldmanaged=usb:auto
