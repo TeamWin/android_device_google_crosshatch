@@ -108,6 +108,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     getModemLogs(fd);
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
+    DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
     DumpFileToFd(fd, "RPM Stats", "/d/rpm_stats");
     DumpFileToFd(fd, "Power Management Stats", "/d/rpm_master_stats");
     DumpFileToFd(fd, "SMD Log", "/d/ipc_logging/smd/log");
