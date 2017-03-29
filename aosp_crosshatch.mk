@@ -19,8 +19,9 @@ $(call inherit-product, device/google/crosshatch/device-crosshatch.mk)
 $(call inherit-product-if-exists, vendor/google_devices/crosshatch/device-vendor-crosshatch.mk)
 
 PRODUCT_PACKAGES += \
+    Dialer \
     Launcher3 \
-    Dialer
+    WallpaperPicker
 
 PRODUCT_RESTRICT_VENDOR_FILES := all
 PRODUCT_MANUFACTURER := Google
