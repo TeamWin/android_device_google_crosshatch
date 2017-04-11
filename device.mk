@@ -259,8 +259,7 @@ PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-impl
 
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    device/google/wahoo/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
+    device/google/crosshatch/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
 
 PRODUCT_PACKAGES += \
     libmm-omxcore \
