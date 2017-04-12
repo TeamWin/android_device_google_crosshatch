@@ -169,6 +169,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.hardware.nfc.hcef.xml:system/etc/permissions/android.hardware.nfc.hcef.xml \
+    frameworks/native/data/etc/android.hardware.vr.headtracking-0.xml:system/etc/permissions/android.hardware.vr.headtracking.xml \
+    frameworks/native/data/etc/android.hardware.vr.high_performance.xml:system/etc/permissions/android.hardware.vr.high_performance.xml \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.power.sh:system/bin/init.power.sh \
@@ -248,6 +250,12 @@ PRODUCT_PACKAGES +=                         \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl
 
+# Memtrack HAL
+PRODUCT_PACKAGES += \
+    memtrack.msm8998 \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service
+
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
     libbt-vendor \
@@ -260,6 +268,12 @@ PRODUCT_PACKAGES += \
     NfcNci \
     Tag \
     android.hardware.nfc@1.0-impl
+
+# power HAL
+PRODUCT_PACKAGES += \
+    power.$(PRODUCT_HARDWARE) \
+    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
@@ -313,6 +327,10 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl-qti \
     android.hardware.gnss@1.0-service-qti
 
+# VR HAL
+PRODUCT_PACKAGES += \
+    android.hardware.vr@1.0-service.wahoo \
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:system/etc/sec_config
 
@@ -345,7 +363,8 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.broadcastradio@1.0-impl \
-    android.hardware.soundtrigger@2.0-impl
+    android.hardware.soundtrigger@2.0-impl \
+    android.hardware.audio@2.0-service
 
 # Thermal packages
 PRODUCT_PACKAGES += \
