@@ -439,3 +439,5 @@ PRODUCT_PACKAGES += \
     charger_res_images
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
+
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
