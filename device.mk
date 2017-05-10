@@ -163,6 +163,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+    frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:system/etc/permissions/android.hardware.wifi.passpoint.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
@@ -171,13 +173,34 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hcef.xml:system/etc/permissions/android.hardware.nfc.hcef.xml \
     frameworks/native/data/etc/android.hardware.vr.headtracking-0.xml:system/etc/permissions/android.hardware.vr.headtracking.xml \
     frameworks/native/data/etc/android.hardware.vr.high_performance.xml:system/etc/permissions/android.hardware.vr.high_performance.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.power.sh:system/bin/init.power.sh \
 
+# power HAL
+PRODUCT_PACKAGES += \
+    power.$(PRODUCT_HARDWARE) \
+    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
+
+# Audio fluence, ns, aec property, voice volume steps
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qc.sdk.audio.fluencetype=fluencepro \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.speaker=true \
+    persist.audio.fluence.voicecomm=true \
+    persist.audio.fluence.voicerec=false \
+    ro.config.vc_call_vol_steps=7
+
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196610
+    ro.opengles.version=196610 \
+    ro.gfx.driver.0=com.google.pixel.wahoo.gfxdriver
 
 # Enable low power video mode for 4K encode
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -200,6 +223,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.data_ltd_sys_ind=1 \
     persist.radio.is_wps_enabled=true \
     persist.radio.videopause.mode=1 \
+    persist.radio.sib16_support=1 \
+    persist.radio.data_con_rprt=true \
     persist.rcs.supported=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 
@@ -218,12 +243,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
   persist.camera.max.previewfps=60 \
   persist.camera.sensor.hdr=2
 
+# camera TNR controls
+PRODUCT_PROPERTY_OVERRIDES += \
+  persist.camera.tnr.video=1
+
+# Enable full mode face detection by default
+PRODUCT_PROPERTY_OVERRIDES += \
+  persist.camera.facedetect=3
+
+
 # WLAN driver configuration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi_concurrency_cfg.txt:system/etc/wifi/wifi_concurrency_cfg.txt \
     $(LOCAL_PATH)/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
+
+PRODUCT_FULL_TREBLE_OVERRIDE := true
 
 PRODUCT_PACKAGES += \
     hwcomposer.msm8998 \
@@ -234,6 +270,10 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.mapper@2.0-impl \
     libbt-vendor
+
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
 
 # Light HAL
 PRODUCT_PACKAGES += \
@@ -250,6 +290,10 @@ PRODUCT_PACKAGES +=                         \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl
 
+# eSE applet HALs
+PRODUCT_PACKAGES += \
+    esed
+
 # Memtrack HAL
 PRODUCT_PACKAGES += \
     memtrack.msm8998 \
@@ -262,21 +306,26 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl    \
     android.hardware.bluetooth@1.0-service
 
+# DRM HAL
+PRODUCT_PACKAGES += \
+  android.hardware.drm@1.0-impl \
+  android.hardware.drm@1.0-service \
+  android.hardware.drm@1.0-service.widevine
+
 # NFC packages
 PRODUCT_PACKAGES += \
     nfc_nci.$(PRODUCT_HARDWARE) \
     NfcNci \
     Tag \
-    android.hardware.nfc@1.0-impl
+    android.hardware.nfc@1.0-impl \
+    android.hardware.nfc@1.0-service
 
-# power HAL
-PRODUCT_PACKAGES += \
-    power.$(PRODUCT_HARDWARE) \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
+
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.1-service.wahoo
 
 PRODUCT_PACKAGES += \
     libmm-omxcore \
@@ -289,6 +338,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service \
     camera.device@3.2-impl \
     camera.msm8998 \
     libqomx_core \
@@ -297,14 +347,20 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     sensors.$(PRODUCT_HARDWARE) \
-    android.hardware.sensors@1.0-impl
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/sensors/hals.conf:system/etc/sensors/hals.conf
+    $(LOCAL_PATH)/sensors/hals.conf:vendor/etc/sensors/hals.conf
 
 PRODUCT_PACKAGES += \
     fs_config_dirs \
     fs_config_files
+
+# Context hub HAL
+PRODUCT_PACKAGES += \
+    android.hardware.contexthub@1.0-impl.generic \
+    android.hardware.contexthub@1.0-service
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
@@ -313,7 +369,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator HAL
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl
+    android.hardware.vibrator@1.0-service.wahoo
 
 # Thermal packages
 PRODUCT_PACKAGES += \
@@ -324,6 +380,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.conf \
     libgps.utils \
+    libgnss \
+    liblocation_api \
     android.hardware.gnss@1.0-impl-qti \
     android.hardware.gnss@1.0-service-qti
 
@@ -344,20 +402,31 @@ WPA += wpa_supplicant_wcn.conf
 WPA += wpa_supplicant
 PRODUCT_PACKAGES += $(WPA)
 
+# Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
+    android.hardware.wifi.offload@1.0-service \
     wificond \
-    wifilogd
+    wifilogd \
+    libwpa_client
 
 LIB_NL := libnl_2
 PRODUCT_PACKAGES += $(LIB_NL)
+
+# Audio effects
+PRODUCT_PACKAGES += \
+    libvolumelistener \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libqcomvoiceprocessingdescriptors \
+    libqcompostprocbundle
 
 PRODUCT_PACKAGES += \
     audio.primary.msm8998 \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    libaudio-resampler \
+    libaudio-resampler
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
@@ -365,6 +434,10 @@ PRODUCT_PACKAGES += \
     android.hardware.broadcastradio@1.0-impl \
     android.hardware.soundtrigger@2.0-impl \
     android.hardware.audio@2.0-service
+
+# stereo speakers: orientation changes swap L/R channels
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.audio.monitorRotation=true
 
 # Thermal packages
 PRODUCT_PACKAGES += \
@@ -392,6 +465,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mixer_paths.xml:system/etc/mixer_paths.xml \
     $(LOCAL_PATH)/mixer_paths_tasha.xml:system/etc/mixer_paths_tasha.xml \
     device/google/crosshatch/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/mixer_paths_tavil.xml:system/etc/mixer_paths_tavil.xml \
+    $(LOCAL_PATH)/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/audio_platform_info_tavil.xml:system/etc/audio_platform_info_tavil.xml \
+    $(LOCAL_PATH)/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
+    $(LOCAL_PATH)/sound_trigger_mixer_paths_wcd9340.xml:system/etc/sound_trigger_mixer_paths_wcd9340.xml \
+    $(LOCAL_PATH)/graphite_ipc_platform_info.xml:system/etc/graphite_ipc_platform_info.xml \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
@@ -414,18 +493,28 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml
 
+# GPS configuration file
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf
+
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+# Subsystem ramdump
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.ssr.enable_ramdumps=1
+endif
+
 # Subsystem silent restart
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.ssr.restart_level=modem
+    persist.sys.ssr.restart_level=modem,slpi
 
 # setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
-# Share fstab between devices
+# Don't ahare fstab between devices
 # enables File Based Encryption (FBE)
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/fstab.hardware:root/fstab.$(PRODUCT_HARDWARE)
@@ -441,3 +530,40 @@ PRODUCT_PACKAGES += \
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+
+# Dumpstate HAL
+PRODUCT_PACKAGES += \
+    android.hardware.dumpstate@1.0-service.wahoo
+
+# Use daemon to detect folio open/close
+PRODUCT_PACKAGES += \
+    folio_daemon
+
+# Storage: for factory reset protection feature
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.frp.pst=/dev/block/platform/soc/1da4000.ufshc/by-name/frp
+
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0.vndk-sp\
+    android.hardware.graphics.allocator@2.0.vndk-sp\
+    android.hardware.graphics.mapper@2.0.vndk-sp\
+    android.hardware.graphics.common@1.0.vndk-sp\
+    libhwbinder.vndk-sp\
+    libbase.vndk-sp\
+    libcutils.vndk-sp\
+    libhardware.vndk-sp\
+    libhidlbase.vndk-sp\
+    libhidltransport.vndk-sp\
+    libutils.vndk-sp\
+    libc++.vndk-sp\
+    libRS_internal.vndk-sp\
+    libRSDriver.vndk-sp\
+    libRSCpuRef.vndk-sp\
+    libbcinfo.vndk-sp\
+    libblas.vndk-sp\
+    libft2.vndk-sp\
+    libpng.vndk-sp\
+    libcompiler_rt.vndk-sp\
+    libbacktrace.vndk-sp\
+    libunwind.vndk-sp\
+    liblzma.vndk-sp\
