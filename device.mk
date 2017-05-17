@@ -61,10 +61,11 @@ DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
     $(LOCAL_PATH)/init.recovery.hardware.rc:root/init.recovery.$(PRODUCT_HARDWARE).rc \
-    $(LOCAL_PATH)/init.hardware.rc:root/init.$(PRODUCT_HARDWARE).rc \
-    $(LOCAL_PATH)/init.hardware.usb.rc:root/init.$(PRODUCT_HARDWARE).usb.rc \
-    $(LOCAL_PATH)/ueventd.hardware.rc:root/ueventd.$(PRODUCT_HARDWARE).rc \
-    $(LOCAL_PATH)/init.radio.sh:system/bin/init.radio.sh \
+    $(LOCAL_PATH)/init.hardware.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_HARDWARE).rc \
+    $(LOCAL_PATH)/init.hardware.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_HARDWARE).usb.rc \
+    $(LOCAL_PATH)/ueventd.hardware.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
+    $(LOCAL_PATH)/init.radio.sh:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.radio.sh \
+    $(LOCAL_PATH)/init.power.sh:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.power.sh \
     $(LOCAL_PATH)/uinput-fpc.kl:system/usr/keylayout/uinput-fpc.kl \
     $(LOCAL_PATH)/uinput-fpc.idc:system/usr/idc/uinput-fpc.idc \
     $(LOCAL_PATH)/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh \
@@ -73,10 +74,10 @@ PRODUCT_COPY_FILES += \
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/init.hardware.diag.rc.userdebug:root/init.$(PRODUCT_HARDWARE).diag.rc
+      $(LOCAL_PATH)/init.hardware.diag.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_HARDWARE).diag.rc
 else
   PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/init.hardware.diag.rc.user:root/init.$(PRODUCT_HARDWARE).diag.rc
+      $(LOCAL_PATH)/init.hardware.diag.rc.user:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_HARDWARE).diag.rc
 endif
 
 BOARD_KERNEL_PAGESIZE := 4096
@@ -171,9 +172,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hcef.xml:system/etc/permissions/android.hardware.nfc.hcef.xml \
     frameworks/native/data/etc/android.hardware.vr.headtracking-0.xml:system/etc/permissions/android.hardware.vr.headtracking.xml \
     frameworks/native/data/etc/android.hardware.vr.high_performance.xml:system/etc/permissions/android.hardware.vr.high_performance.xml \
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.power.sh:system/bin/init.power.sh \
 
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -428,7 +426,7 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 # Share fstab between devices
 # enables File Based Encryption (FBE)
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/fstab.hardware:root/fstab.$(PRODUCT_HARDWARE)
+    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_HARDWARE)
 
 # Provide meaningful APN configuration
 PRODUCT_COPY_FILES += \
@@ -441,3 +439,7 @@ PRODUCT_PACKAGES += \
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+
+PRODUCT_ENFORCE_RRO_TARGETS := framework-res
+
+
