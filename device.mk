@@ -18,7 +18,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml \
+    device/google/crosshatch/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
 # Enforce privapp-permissions whitelist
@@ -28,21 +28,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     messaging
 
-LOCAL_PATH := device/google/wahoo
-
-SRC_MEDIA_HAL_DIR := hardware/qcom/media/msm8998
-SRC_DISPLAY_HAL_DIR := hardware/qcom/display/msm8998
-SRC_CAMERA_HAL_DIR := hardware/qcom/camera/msm8998
+LOCAL_PATH := device/google/crosshatch
+SRC_MEDIA_HAL_DIR := hardware/qcom/media/sdm845
+SRC_DISPLAY_HAL_DIR := hardware/qcom/display/sdm845
 
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
 # Get kernel-headers
-$(call inherit-product, hardware/qcom/msm8998/msm8998.mk)
+$(call inherit-product, hardware/qcom/sdm845/sdm845.mk)
 
-$(call inherit-product, device/google/wahoo/utils.mk)
+$(call inherit-product, $(LOCAL_PATH)/utils.mk)
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/google/wahoo-kernel/Image.lz4-dtb
+    LOCAL_KERNEL := device/google/crosshatch-kernel/Image.gz-dtb
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -57,7 +55,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
     $(LOCAL_PATH)/init.recovery.hardware.rc:root/init.recovery.$(PRODUCT_HARDWARE).rc \
     $(LOCAL_PATH)/init.hardware.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_HARDWARE).rc \
-    $(LOCAL_PATH)/init.hardware.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.wahoo.usb.rc \
+    $(LOCAL_PATH)/init.hardware.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_HARDWARE).usb.rc \
     $(LOCAL_PATH)/ueventd.hardware.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
     $(LOCAL_PATH)/init.power.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.power.sh \
     $(LOCAL_PATH)/init.radio.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.radio.sh \
@@ -75,8 +73,8 @@ else
       $(LOCAL_PATH)/init.hardware.diag.rc.user:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_HARDWARE).diag.rc
 endif
 
-MSM_VIDC_TARGET_LIST := msm8998 # Get the color format from kernel headers
-MASTER_SIDE_CP_TARGET_LIST := msm8998 # ION specific settings
+MSM_VIDC_TARGET_LIST := sdm845 # Get the color format from kernel headers
+MASTER_SIDE_CP_TARGET_LIST := sdm845 # ION specific settings
 
 # A/B support
 PRODUCT_PACKAGES += \
@@ -85,8 +83,12 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_verifier
 
+# Use Sdcardfs
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.sdcardfs=1
+
 PRODUCT_PACKAGES += \
-    bootctrl.msm8998
+    bootctrl.sdm845
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cp_system_other_odex=1
@@ -109,7 +111,7 @@ AB_OTA_POSTINSTALL_CONFIG += \
 # Enable update engine sideloading by including the static version of the
 # boot_control HAL and its dependencies.
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-    bootctrl.msm8998 \
+    bootctrl.sdm845 \
     libgptutils \
     libz
 
@@ -160,7 +162,7 @@ PRODUCT_COPY_FILES += \
 
 # power HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.1-service.wahoo
+    android.hardware.power@1.1-service.crosshatch
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
@@ -177,11 +179,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196610
-
-# NFC/camera interaction workaround - DO NOT COPY TO NEW DEVICES
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.camera.notify_nfc=1
+    ro.opengles.version=196608
 
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -239,14 +237,14 @@ PRODUCT_COPY_FILES += \
     hardware/qcom/data/ipacfg-mgr/msm8998/ipacm/src/IPACM_cfg.xml:$(TARGET_COPY_OUT_VENDOR)/etc/IPACM_cfg.xml
 
 PRODUCT_PACKAGES += \
-    hwcomposer.msm8998 \
+    hwcomposer.sdm845 \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service \
-    gralloc.msm8998 \
+    gralloc.sdm845 \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.mapper@2.0-impl \
-    libbt-vendor
+    android.hardware.configstore@1.0-service
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -264,7 +262,7 @@ PRODUCT_PACKAGES += \
 
 # Memtrack HAL
 PRODUCT_PACKAGES += \
-    memtrack.msm8998 \
+    memtrack.sdm845 \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service
 
@@ -289,10 +287,10 @@ PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-service
 
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
+    device/google/crosshatch/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
 
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.1-service.wahoo
+    android.hardware.usb@1.1-service.crosshatch
 
 PRODUCT_PACKAGES += \
     libmm-omxcore \
@@ -322,7 +320,7 @@ PRODUCT_COPY_FILES += \
 
 # Default permission grant exceptions
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml
+    device/google/crosshatch/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml
 
 PRODUCT_PACKAGES += \
     fs_config_dirs \
@@ -340,7 +338,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator HAL
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.1-service.wahoo
+    android.hardware.vibrator@1.1-service.crosshatch
 
 # Thermal packages
 PRODUCT_PACKAGES += \
@@ -358,7 +356,7 @@ PRODUCT_PACKAGES += \
 
 # VR HAL
 PRODUCT_PACKAGES += \
-    android.hardware.vr@1.0-service.wahoo \
+    android.hardware.vr@1.0-service.crosshatch \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
@@ -376,7 +374,6 @@ PRODUCT_PACKAGES += $(WPA)
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-    android.hardware.wifi.offload@1.0-service \
     wificond \
     wifilogd \
     libwpa_client
@@ -468,7 +465,7 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint HIDL implementation
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.wahoo
+    android.hardware.biometrics.fingerprint@2.1-service.crosshatch
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
@@ -499,11 +496,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_HARDWARE)
+    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_HARDWARE)
 
 # For SPN display
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/spn-conf.xml:system/etc/spn-conf.xml
+    device/google/crosshatch/spn-conf.xml:system/etc/spn-conf.xml
 
 # Provide meaningful APN configuration
 PRODUCT_COPY_FILES += \
@@ -521,7 +518,7 @@ endif
 
 # Dumpstate HAL
 PRODUCT_PACKAGES += \
-    android.hardware.dumpstate@1.0-service.wahoo
+    android.hardware.dumpstate@1.0-service.crosshatch
 
 # Use daemon to detect folio open/close
 PRODUCT_PACKAGES += \
@@ -529,7 +526,7 @@ PRODUCT_PACKAGES += \
 
 # Storage: for factory reset protection feature
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.frp.pst=/dev/block/platform/soc/1da4000.ufshc/by-name/frp
+    ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0.vndk-sp\
@@ -567,8 +564,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bluetooth.soc=cherokee
 
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/tango_permissions.xml:system/etc/permissions/tango_permissions.xml \
-    device/google/wahoo/libtango_device2.jar:system/framework/libtango_device2.jar
+    device/google/crosshatch/tango_permissions.xml:system/etc/permissions/tango_permissions.xml \
+    device/google/crosshatch/libtango_device2.jar:system/framework/libtango_device2.jar
 
 PRODUCT_PACKAGES += \
     ipacm
@@ -585,3 +582,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/google/wahoo/permissions/com.google.hardware.camera.easel.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.google.hardware.camera.easel.xml
 
+# Generic Keymaster HAL (TODO: should this be the qti one?)
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service

@@ -1,4 +1,3 @@
-ifneq ($(filter muskie walleye taimen, $(TARGET_DEVICE)),)
 LOCAL_PATH := $(call my-dir)
 
 VNDK_SP_LIBRARIES := \
@@ -53,4 +52,3 @@ endef
 
 $(foreach lib,$(VNDK_SP_LIBRARIES),\
     $(eval $(call add-vndk-sp-lib,$(lib))))
-endif # if TARGET_DEVICE is muskie or walleye

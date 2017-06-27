@@ -1,5 +1,5 @@
 #
-# Copyright 2017 The Android Open Source Project
+# Copyright 2015 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,4 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := $(call my-dir)
-
-ifeq ($(USES_DEVICE_GOOGLE_B1C1),true)
-  subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
-  $(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
-endif
+add_lunch_combo aosp_crosshatch-userdebug

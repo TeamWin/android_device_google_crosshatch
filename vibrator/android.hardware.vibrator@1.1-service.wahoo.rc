@@ -1,4 +1,0 @@
-service vibrator-1-1 /vendor/bin/hw/android.hardware.vibrator@1.1-service.wahoo
-    class hal
-    user system
-    group system

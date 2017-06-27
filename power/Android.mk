@@ -21,8 +21,8 @@ LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE_OWNER := qcom
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_MODULE := android.hardware.power@1.1-service.wahoo
-LOCAL_INIT_RC := android.hardware.power@1.1-service.wahoo.rc
+LOCAL_MODULE := android.hardware.power@1.1-service.crosshatch
+LOCAL_INIT_RC := android.hardware.power@1.1-service.crosshatch.rc
 LOCAL_SRC_FILES := service.cpp \
     Power.cpp \
     InteractionHandler.cpp \
@@ -37,7 +37,7 @@ LOCAL_C_INCLUDES := external/libxml2/include \
                     external/icu/icu4c/source/common
 
 # Include target-specific files.
-LOCAL_SRC_FILES += power-8998.c
+LOCAL_SRC_FILES += power-845.c
 
 
 # Enable interaction boost all the time

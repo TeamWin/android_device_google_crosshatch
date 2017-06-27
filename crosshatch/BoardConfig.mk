@@ -1,5 +1,5 @@
 #
-# Copyright 2017 The Android Open Source Project
+# Copyright (C) 2016 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := $(call my-dir)
+TARGET_BOOTLOADER_BOARD_NAME := crosshatch
+DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS := 0x00000056
 
-ifeq ($(USES_DEVICE_GOOGLE_B1C1),true)
-  subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
-  $(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
-endif
+TARGET_NO_BOOTLOADER := $(if $(wildcard device/google/crosshatch/edk2/Android.mk),false,true)
+
+include device/google/crosshatch/BoardConfig-common.mk
+-include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk

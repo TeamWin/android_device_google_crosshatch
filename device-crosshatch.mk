@@ -1,5 +1,5 @@
 #
-# Copyright 2017 The Android Open Source Project
+# Copyright 2016 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,15 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := $(call my-dir)
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := 560dpi
+PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 
-ifeq ($(USES_DEVICE_GOOGLE_B1C1),true)
-  subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
-  $(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
-endif
+PRODUCT_HARDWARE := crosshatch
+
+include device/google/crosshatch/device-common.mk
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=560 \
+
+DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/crosshatch/overlay

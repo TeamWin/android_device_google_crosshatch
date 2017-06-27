@@ -41,29 +41,9 @@ on init
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
-    # disable thermal hotplug for thermal
-    write /sys/module/msm_thermal/core_control/enabled 0
-
-    # bring back all cores
-    write /sys/devices/system/cpu/cpu0/online 1
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/devices/system/cpu/cpu4/online 1
-    write /sys/devices/system/cpu/cpu5/online 1
-    write /sys/devices/system/cpu/cpu6/online 1
-    write /sys/devices/system/cpu/cpu7/online 1
-    # configure governor settings for little cluster
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "schedutil"
-    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/down_rate_limit_us 20000
-
-    # configure governor settings for big cluster
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "schedutil"
-    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us 20000
-
-    start power_sh
+    # STOPSHIP disable thermal and enable cores before governor settings
+    # STOPSHIP governor settings
+    # STOPSHIP start power_sh
 
     # set default schedTune value for foreground/top-app
     write /dev/stune/foreground/schedtune.prefer_idle 1
@@ -123,20 +103,7 @@ on init
     mkdir /dev/socket/pdx/system/vr/pose 0775 system system
     mkdir /dev/socket/pdx/system/vr/sensors 0775 system system
 
-    # Disable retention
-    write /sys/module/lpm_levels/system/pwr/cpu0/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/cpu1/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/cpu2/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/cpu3/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/cpu4/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/cpu5/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/cpu6/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/cpu7/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/pwr-l2-dynret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/pwr-l2-ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/perf-l2-dynret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled N
-    write /sys/module/lpm_levels/parameters/sleep_disabled N
+    # STOPSHIP enable low power modes
 
     # b/37682684 Enable suspend clock reporting
     write /sys/kernel/debug/clk/debug_suspend 1
@@ -193,8 +160,8 @@ on post-fs
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
     write /sys/devices/virtual/graphics/fb0/idle_time 100
 
-    # Wait qseecomd started
-    wait_for_prop sys.listeners.registered true
+    #Wait qseecomd started
+    #STOPSHIP wait_for_prop sys.listeners.registered true
 
 
 on property:sys.listeners.registered=true
@@ -222,7 +189,7 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
     # Wait until the system time is set
-    wait_for_prop sys.time.set true
+    #STOPSHIP wait_for_prop sys.time.set true
 
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
@@ -336,13 +303,13 @@ on zygote-start
 
 on early-boot
     # wait for devices
-    wait_for_prop sys.qcom.devup 1
+    # STOPSHIP wait_for_prop sys.qcom.devup 1
 
     # Start CHRE which need SLPI completed in sys.qcom.devup
     start chre
 
     # wait for insmod_sh to finish all modules
-    wait_for_prop sys.all.modules.ready 1
+    # STOPSHIP wait_for_prop sys.all.modules.ready 1
 
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state

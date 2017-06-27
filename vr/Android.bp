@@ -13,9 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 cc_binary {
-    name: "android.hardware.vr@1.0-service.wahoo",
+    name: "android.hardware.vr@1.0-service.crosshatch",
     relative_install_path: "hw",
-    init_rc: ["android.hardware.vr@1.0-service.wahoo.rc"],
+    init_rc: ["android.hardware.vr@1.0-service.crosshatch.rc"],
     srcs: ["service.cpp", "VrDevice.cpp"],
     cflags: ["-Werror", "-Wall"],
     shared_libs: [

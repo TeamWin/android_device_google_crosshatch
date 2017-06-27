@@ -1,6 +1,5 @@
 subdirs = [
     "vr",
     "vibrator",
-    "wifi_offload",
     "usb",
 ]
