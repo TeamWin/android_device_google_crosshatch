@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "android.hardware.dumpstate@1.0-service.crosshatch"
+#define LOG_TAG "android.hardware.dumpstate@1.0-service.wahoo"
 
 #include <hidl/HidlSupport.h>
 #include <hidl/HidlTransportSupport.h>
@@ -30,6 +30,14 @@ using ::android::sp;
 int main(int /* argc */, char* /* argv */ []) {
   sp<IDumpstateDevice> dumpstate = new DumpstateDevice;
   configureRpcThreadpool(1, true);
-  dumpstate->registerAsService();
+
+  android::status_t status = dumpstate->registerAsService();
+
+  if (status != android::OK)
+  {
+    ALOGE("Could not register DumpstateDevice service (%d).", status);
+    return -1;
+  }
+
   joinRpcThreadpool();
 }

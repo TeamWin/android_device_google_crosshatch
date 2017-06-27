@@ -1,0 +1,7 @@
+# Needed by Settings app's TelephonyMonitorPreferenceController, available only on a subset of
+# userdebug and eng devices
+userdebug_or_eng(`set_prop(system_app, tel_mon_prop)')
+
+# Needed by Settings app's CameraHalHdrplusPreferenceController, available only on a subset of
+# userdebug and eng devices
+userdebug_or_eng(`set_prop(system_app, camera_prop)')

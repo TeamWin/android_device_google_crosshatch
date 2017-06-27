@@ -1,0 +1,16 @@
+type tango_core, domain;
+
+app_domain(tango_core)
+
+allow tango_core persist_file:dir search;
+allow tango_core persist_sensors_file:dir search;
+allow tango_core persist_sensors_file:file { getattr open read };
+allow tango_core qdsp_device:chr_file { ioctl open read };
+allow tango_core vendor_file:file { getattr open read };
+
+allow tango_core app_api_service:service_manager find;
+allow tango_core surfaceflinger_service:service_manager find;
+allow tango_core cameraserver_service:service_manager find;
+
+# Allow access to necessary vendor libraries to execute Hexagon code
+allow tango_core hexagon_halide_file:file { execute read open getattr };
