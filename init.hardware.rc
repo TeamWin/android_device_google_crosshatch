@@ -458,6 +458,13 @@ on property:sys.boot_completed=1
     write /dev/cpuset/application/background/cpus 1
     write /dev/cpuset/application/cpus 1,3
 
+    #STOPSHIP : Bang on the brightness since the HAL isn't working.
+    write /sys/class/backlight/panel0-backlight/brightness 100
+    write /sys/class/backlight/panel0-backlight/brightness 100
+    write /sys/class/backlight/panel0-backlight/brightness 100
+    write /sys/class/backlight/panel0-backlight/brightness 100
+    #/STOPSHIP
+
 on property:init.svc.per_mgr=running
     start per_proxy
 
