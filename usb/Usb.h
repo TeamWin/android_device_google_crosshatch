@@ -25,7 +25,7 @@ using ::android::hardware::usb::V1_0::PortRoleType;
 using ::android::hardware::usb::V1_0::PortDataRole;
 using ::android::hardware::usb::V1_0::PortPowerRole;
 using ::android::hardware::usb::V1_0::Status;
-using ::android::hardware::usb::V1_0::IUsb;
+using ::android::hardware::usb::V1_1::IUsb;
 using ::android::hardware::usb::V1_1::IUsbCallback;
 using ::android::hardware::usb::V1_1::PortMode_1_1;
 using ::android::hardware::usb::V1_1::PortStatus_1_1;
