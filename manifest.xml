@@ -272,7 +272,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-<!-- STOPSHIP to re-add vibrator
     <hal format="hidl">
         <name>android.hardware.vibrator</name>
         <transport>hwbinder</transport>
@@ -282,7 +281,6 @@
             <instance>default</instance>
         </interface>
     </hal>
--->
     <hal format="hidl">
         <name>android.hardware.vr</name>
         <transport>hwbinder</transport>
