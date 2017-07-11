@@ -148,8 +148,8 @@
 /vendor/bin/imsqmidaemon        u:object_r:ims_exec:s0
 /vendor/bin/imsdatadaemon       u:object_r:ims_exec:s0
 /vendor/bin/ims_rtp_daemon      u:object_r:hal_imsrtp_exec:s0
-/vendor/bin/ipacm               u:object_r:ipacm_exec:s0
-/vendor/bin/ipacm-diag          u:object_r:ipacm_exec:s0
+/vendor/bin/ipacm               u:object_r:hal_tetheroffload_default_exec:s0
+/vendor/bin/ipacm-diag          u:object_r:hal_tetheroffload_default_exec:s0
 /vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 # Remove after b/38447389
@@ -229,17 +229,17 @@
 /data/vendor/location(/.*)?            u:object_r:location_data_file:s0
 /data/ramdump(/.*)?                    u:object_r:ramdump_data_file:s0
 /data/nfc(/.*)?                        u:object_r:nfc_data_file:s0
-/data/time(/.*)?                       u:object_r:time_data_file:s0
 /data/vendor/camera(/.*)?              u:object_r:camera_vendor_data_file:s0
 /data/vendor/display(/.*)?             u:object_r:display_vendor_data_file:s0
 /data/vendor/nfc(/.*)?                 u:object_r:nfc_vendor_data_file:s0
 /data/vendor/radio(/.*)?               u:object_r:radio_vendor_data_file:s0
 /data/vendor/wifi(/.*)?                u:object_r:cnss_vendor_data_file:s0
 /data/vendor/ramdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
+/data/vendor/ssrdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
 /data/vendor/modem_dump(/.*)?          u:object_r:modem_dump_file:s0
 /data/vendor/ese(/.*)?                 u:object_r:ese_vendor_data_file:s0
-/data/vendor/ipa(/.*)?                 u:object_r:ipacm_vendor_data_file:s0
-/data/vendor/time(/.*)?                u:object_r:time_vendor_data_file:s0
+/data/vendor/ipa(/.*)?                 u:object_r:ipa_vendor_data_file:s0
+/data/vendor/sensors(/.*)?             u:object_r:sensors_vendor_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0
@@ -253,6 +253,7 @@
 /persist/data(/.*)?       u:object_r:persist_data_file:s0
 /persist/display(/.*)?    u:object_r:persist_display_file:s0
 /persist/drm(/.*)?        u:object_r:persist_drm_file:s0
+/persist/elabel(/.*)?     u:object_r:persist_elabel_file:s0
 /persist/haptics(/.*)?    u:object_r:persist_haptics_file:s0
 /persist/hlos_rfs(/.*)?   u:object_r:persist_rfs_file:s0
 /persist/rfs(/.*)?        u:object_r:persist_rfs_file:s0

@@ -11,7 +11,7 @@ set_prop(netmgrd, net_rmnet_prop)
 unix_socket_connect(netmgrd, netd, netd)
 
 allow netmgrd netmgrd_socket:dir w_dir_perms;
-allow netmgrd netmgrd_socket:sock_file { create setattr };
+allow netmgrd netmgrd_socket:sock_file create_file_perms;
 allow netmgrd self:netlink_xfrm_socket { create_socket_perms_no_ioctl nlmsg_write };
 allow netmgrd self:netlink_generic_socket create_socket_perms_no_ioctl;
 allow netmgrd self:netlink_route_socket nlmsg_write;
@@ -38,6 +38,9 @@ domain_auto_trans(netmgrd, netutils_wrapper_exec, netutils_wrapper)
 
 #Allow diag logging
 allow netmgrd sysfs_timestamp_switch:file { read open };
+userdebug_or_eng(`
+  r_dir_file(netmgrd, sysfs_diag)
+')
 
 #Ignore if device loading for private IOCTL failed
 dontaudit netmgrd kernel:system { module_request };

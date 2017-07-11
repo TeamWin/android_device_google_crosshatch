@@ -15,7 +15,6 @@ allow radio hal_imsrtp_hwservice:hwservice_manager find;
 
 add_service(radio, radio_service)
 allow radio {
-  uce_service
   mediaextractor_service
   mediacodec_service
 }:service_manager find;

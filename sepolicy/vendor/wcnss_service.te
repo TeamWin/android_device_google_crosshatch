@@ -1,4 +1,4 @@
-type wcnss_service, domain, vendor_executes_system_violators;
+type wcnss_service, domain;
 type wcnss_service_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(wcnss_service)
@@ -9,8 +9,8 @@ binder_call(wcnss_service, per_mgr)
 
 allow wcnss_service per_mgr_service:service_manager find;
 
-allow wcnss_service shell_exec:file rx_file_perms;
-allow wcnss_service toolbox_exec:file rx_file_perms;
+allow wcnss_service vendor_shell_exec:file rx_file_perms;
+allow wcnss_service vendor_toolbox_exec:file rx_file_perms;
 
 allow wcnss_service proc_net:file w_file_perms;
 

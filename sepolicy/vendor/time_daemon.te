@@ -21,14 +21,5 @@ allow time_daemon persist_time_file:dir search;
 
 allow time_daemon persist_file:dir search;
 
-allow time_daemon time_vendor_data_file:dir w_dir_perms;
-allow time_daemon time_vendor_data_file:file create_file_perms;
-
-allow time_daemon persist_time_file:dir w_dir_perms;
-allow time_daemon persist_time_file:file create_file_perms;
-
-allow time_daemon time_data_file:dir w_dir_perms;
-allow time_daemon time_data_file:file create_file_perms;
-
 allow time_daemon self:socket create_socket_perms;
 allowxperm time_daemon self:socket ioctl msm_sock_ipc_ioctls;

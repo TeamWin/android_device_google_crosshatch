@@ -1,3 +1,1 @@
-type cne_service,                 service_manager_type;
-type uce_service,                 service_manager_type;
 type imsuce_service,              service_manager_type;

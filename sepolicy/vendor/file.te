@@ -48,14 +48,14 @@ type persist_file, file_type;
 type persist_data_file, file_type;
 type persist_display_file, file_type;
 type persist_drm_file, file_type;
+type persist_elabel_file, file_type;
 type persist_haptics_file, file_type;
 type persist_rfs_file, file_type;
 type persist_sensors_file, file_type;
 type persist_time_file, file_type;
 
-type time_data_file, file_type, data_file_type;
 type netmgr_data_file, file_type, data_file_type;
-type ipacm_vendor_data_file, file_type, data_file_type;
+type ipa_vendor_data_file, file_type, data_file_type;
 
 type camera_vendor_data_file, file_type, data_file_type;
 type display_vendor_data_file, file_type, data_file_type;
@@ -65,7 +65,7 @@ type cnss_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type ramdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type modem_dump_file, file_type, data_file_type;
 type ese_vendor_data_file, file_type, data_file_type;
-type time_vendor_data_file, file_type, data_file_type;
+type sensors_vendor_data_file, file_type, data_file_type;
 
 type vendor_firmware_file, vendor_file_type, file_type;
 

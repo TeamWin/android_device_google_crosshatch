@@ -15,6 +15,11 @@ allow mediaprovider cache_file:dir create_dir_perms;
 allow mediaprovider cache_file:file create_file_perms;
 # /cache is a symlink to /data/cache on some devices. Allow reading the link.
 allow mediaprovider cache_file:lnk_file r_file_perms;
+# mediaprovider searches through /cache looking for orphans
+# Ignore denials to /cache/recovery and /cache/backup.
+dontaudit mediaprovider cache_private_backup_file:dir getattr;
+dontaudit mediaprovider cache_recovery_file:dir getattr;
+
 
 allow mediaprovider app_api_service:service_manager find;
 allow mediaprovider audioserver_service:service_manager find;

@@ -2,6 +2,3 @@ type vnd_ims_radio_hwservice, hwservice_manager_type;
 type vnd_qcrilhook_hwservice, hwservice_manager_type;
 type hal_imsrtp_hwservice, hwservice_manager_type;
 type hal_ipacm_hwservice, hwservice_manager_type;
-#TODO Move the following 2 types public SE policy (b/62574674)
-type hal_cne_hwservice, hwservice_manager_type;
-type hal_imsrcsd_hwservice, hwservice_manager_type;

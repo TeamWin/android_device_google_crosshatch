@@ -1,25 +1,8 @@
-#TODO Move this to sepolicy/private/dataservice_app.te (b/62574674)
-type dataservice_app, domain, coredomain;
-app_domain(dataservice_app)
-net_domain(dataservice_app)
-
 get_prop(dataservice_app, cnd_prop)
-add_service(dataservice_app, cne_service)
-add_service(dataservice_app, uce_service)
-allow dataservice_app { app_api_service system_api_service audioserver_service radio_service } :service_manager find;
 
 r_dir_file(dataservice_app, sysfs_msm_subsys)
-#TODO Move this to sepolicy/private/dataservice_app.te (b/62574674)
-allow dataservice_app hal_imsrcsd_hwservice:hwservice_manager find;
 
-#TODO remove the following 2 if dataservice is moved out of system as part of b/38043081
-allow dataservice_app system_app_data_file:dir create_dir_perms;
-allow dataservice_app system_app_data_file:{ file lnk_file } create_file_perms;
-
-#TODO Move this to sepolicy/private/dataservice_app.te (b/62574674)
-allow dataservice_app hal_cne_hwservice:hwservice_manager find;
 binder_call(dataservice_app, cnd)
-hwbinder_use(dataservice_app)
 
 # imsrcsd to bind with UceShimService.apk
 binder_call(dataservice_app, hal_rcsservice)
