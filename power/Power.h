@@ -49,6 +49,7 @@ struct Power : public IPower {
 
     // Methods from ::android::hardware::power::V1_1::IPower follow.
     Return<void> getSubsystemLowPowerStats(getSubsystemLowPowerStats_cb _hidl_cb) override;
+    Return<void> powerHintAsync(PowerHint hint, int32_t data) override;
 
     // Methods from ::android::hidl::base::V1_0::IBase follow.
 
