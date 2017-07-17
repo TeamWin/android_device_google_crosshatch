@@ -170,6 +170,3 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
-
-# TODO(b/63710701) some vendor files are missing dependencies
-ALLOW_MISSING_DEPENDENCIES := true
