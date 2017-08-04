@@ -5,8 +5,6 @@ VNDK_SP_LIBRARIES := \
     android.hardware.graphics.allocator@2.0\
     android.hardware.graphics.mapper@2.0\
     android.hardware.graphics.common@1.0\
-    libhidlbase\
-    libhidltransport\
     libRS_internal\
     libRSDriver\
     libRSCpuRef\
@@ -29,6 +27,8 @@ VNDK_SP_LIBRARIES += \
     libunwind\
     libunwindstack\
     liblzma\
+    libhidlbase\
+    libhidltransport\
 
 endif
 
