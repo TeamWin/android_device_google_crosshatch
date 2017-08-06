@@ -1,12 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
 VNDK_SP_LIBRARIES := \
-    android.hardware.renderscript@1.0\
-    android.hardware.graphics.allocator@2.0\
-    android.hardware.graphics.mapper@2.0\
-    android.hardware.graphics.common@1.0\
-    libhidlbase\
-    libhidltransport\
     libRS_internal\
     libRSDriver\
     libRSCpuRef\
@@ -19,6 +13,10 @@ VNDK_SP_LIBRARIES := \
 
 ifndef BOARD_VNDK_VERSION
 VNDK_SP_LIBRARIES += \
+    android.hardware.renderscript@1.0\
+    android.hardware.graphics.allocator@2.0\
+    android.hardware.graphics.mapper@2.0\
+    android.hardware.graphics.common@1.0\
     libhwbinder\
     libbase\
     libcutils\
@@ -27,7 +25,10 @@ VNDK_SP_LIBRARIES += \
     libc++\
     libbacktrace\
     libunwind\
+    libunwindstack\
     liblzma\
+    libhidlbase\
+    libhidltransport\
 
 endif
 
