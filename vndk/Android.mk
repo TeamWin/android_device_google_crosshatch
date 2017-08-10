@@ -9,7 +9,6 @@ VNDK_SP_LIBRARIES := \
     libft2\
     libpng\
     libcompiler_rt\
-    libz\
 
 ifndef BOARD_VNDK_VERSION
 VNDK_SP_LIBRARIES += \
@@ -28,6 +27,7 @@ VNDK_SP_LIBRARIES += \
     liblzma\
     libhidlbase\
     libhidltransport\
+    libz\
 
 endif
 
