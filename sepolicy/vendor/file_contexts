@@ -15,7 +15,6 @@
 /dev/video([0-9])+                              u:object_r:video_device:s0
 /dev/media([0-9])+                              u:object_r:video_device:s0
 /dev/v4l-subdev.*                               u:object_r:video_device:s0
-/dev/input(/.*)?                                u:object_r:input_device:s0
 /dev/qseecom                                    u:object_r:tee_device:s0
 /dev/qsee_ipc_irq_spss                          u:object_r:qsee_ipc_irq_spss_device:s0
 /dev/seemplog                                   u:object_r:seemplog_device:s0
