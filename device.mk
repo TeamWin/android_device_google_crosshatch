@@ -34,9 +34,6 @@ SRC_DISPLAY_HAL_DIR := hardware/qcom/display/sdm845
 
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
-# Get kernel-headers
-$(call inherit-product, hardware/qcom/sdm845/sdm845.mk)
-
 $(call inherit-product, $(LOCAL_PATH)/utils.mk)
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
