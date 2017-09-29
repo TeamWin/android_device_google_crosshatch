@@ -17,6 +17,7 @@
 TARGET_BOOTLOADER_BOARD_NAME := crosshatch
 DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS := 0x00000056
 
+PRODUCT_VENDOR_KERNEL_HEADERS := device/google/crosshatch/sdm845/kernel-headers
 TARGET_NO_BOOTLOADER := $(if $(wildcard device/google/crosshatch/edk2/Android.mk),false,true)
 
 include device/google/crosshatch/BoardConfig-common.mk
