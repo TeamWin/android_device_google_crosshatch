@@ -228,6 +228,29 @@ static void DumpTouch(int fd) {
     }
 }
 
+static void DumpF2FS(int fd) {
+    DumpFileToFd(fd, "F2FS", "/sys/kernel/debug/f2fs/status");
+    DumpFileToFd(fd, "F2FS - fragmentation", "/proc/fs/f2fs/dm-3/segment_info");
+}
+
+static void DumpUFS(int fd) {
+    DumpFileToFd(fd, "UFS model", "/sys/block/sda/device/model");
+    DumpFileToFd(fd, "UFS rev", "/sys/block/sda/device/rev");
+    DumpFileToFd(fd, "UFS size", "/sys/block/sda/size");
+    DumpFileToFd(fd, "UFS show_hba", "/sys/kernel/debug/ufshcd0/show_hba");
+    DumpFileToFd(fd, "UFS err_stats", "/sys/kernel/debug/ufshcd0/stats/err_stats");
+    DumpFileToFd(fd, "UFS io_stats", "/sys/kernel/debug/ufshcd0/stats/io_stats");
+    DumpFileToFd(fd, "UFS req_stats", "/sys/kernel/debug/ufshcd0/stats/req_stats");
+
+    std::string bootdev = android::base::GetProperty(UFS_BOOTDEVICE, "");
+    if (!bootdev.empty()) {
+        DumpFileToFd(fd, "UFS Slow IO", "/sys/devices/platform/soc/" + bootdev + "/slowio_cnt");
+
+        std::string ufs_health = "for f in $(find /sys/devices/platform/soc/" + bootdev + "/health -type f); do if [[ -r $f && -f $f ]]; then echo --- $f; cat $f; echo ''; fi; done";
+        RunCommandToFd(fd, "UFS health", {"/vendor/bin/sh", "-c", ufs_health.c_str()});
+    }
+}
+
 // Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
 Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     if (handle == nullptr || handle->numFds < 1) {
@@ -251,17 +274,10 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "SoC serial number", "/sys/devices/soc0/serial_number");
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
-    DumpFileToFd(fd, "UFS model", "/sys/block/sda/device/model");
-    DumpFileToFd(fd, "UFS rev", "/sys/block/sda/device/rev");
-    DumpFileToFd(fd, "UFS size", "/sys/block/sda/size");
 
-    std::string bootdev = android::base::GetProperty(UFS_BOOTDEVICE, "");
-    if (!bootdev.empty()) {
-        std::string ufs_health = "for f in $(find /sys/devices/platform/soc/" + bootdev + "/health -type f); do if [[ -r $f && -f $f ]]; then echo --- $f; cat $f; echo ''; fi; done";
-        RunCommandToFd(fd, "UFS health", {"/vendor/bin/sh", "-c", ufs_health.c_str()});
-    }
-    DumpFileToFd(fd, "F2FS", "/sys/kernel/debug/f2fs/status");
-    DumpFileToFd(fd, "F2FS - fragmentation", "/proc/fs/f2fs/dm-3/segment_info");
+    DumpF2FS(fd);
+    DumpUFS(fd);
+
     DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
     DumpFileToFd(fd, "Sleep Stats", "/sys/power/system_sleep/stats");
     DumpFileToFd(fd, "Power Management Stats", "/sys/power/rpmh_stats/master_stats");
