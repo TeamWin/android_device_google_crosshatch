@@ -560,6 +560,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bluetooth.soc=cherokee
 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=0
+
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/tango_permissions.xml:system/etc/permissions/tango_permissions.xml \
     device/google/crosshatch/libtango_device2.jar:system/framework/libtango_device2.jar
