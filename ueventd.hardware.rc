@@ -111,4 +111,4 @@
 /sys/devices/soc/c1b7000.i2c/i2c-9/9-0008* asr_dual_phase 0660 cameraserver camera
 
 # Storage: for factory reset protection feature
-/dev/block/platform/soc/1da4000.ufshc/by-name/frp       0660   system     system
+/dev/block/platform/soc/1d84000.ufshc/by-name/frp       0660   system     system

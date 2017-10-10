@@ -567,6 +567,10 @@ PRODUCT_COPY_FILES += \
     device/google/crosshatch/tango_permissions.xml:system/etc/permissions/tango_permissions.xml \
     device/google/crosshatch/libtango_device2.jar:system/framework/libtango_device2.jar
 
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/hidl/android.hidl.base@1.0.so-32:system/lib/android.hidl.base@1.0.so \
+    device/google/crosshatch/hidl/android.hidl.base@1.0.so-64:system/lib64/android.hidl.base@1.0.so \
+
 PRODUCT_PACKAGES += \
     ipacm
 
