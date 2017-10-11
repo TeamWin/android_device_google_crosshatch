@@ -109,7 +109,8 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.sdm845 \
     libgptutils \
-    libz
+    libz \
+    libcutils
 
 PRODUCT_PACKAGES += \
     update_engine_sideload
