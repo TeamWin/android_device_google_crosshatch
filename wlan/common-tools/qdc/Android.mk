@@ -17,5 +17,8 @@ LOCAL_SHARED_LIBRARIES := \
     liblog \
     libutils \
     libwifi-system \
+
+LOCAL_WHOLE_STATIC_LIBRARIES := \
     libwificond_ipc
+
 include $(BUILD_EXECUTABLE)
