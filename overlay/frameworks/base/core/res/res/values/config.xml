@@ -327,4 +327,6 @@
     <!-- Enables or disables haptic effect when the text insertion/selection handle is moved
          manually by the user. -->
     <bool name="config_enableHapticTextHandle">true</bool>
+
+    <bool name="config_dual_LTE_capability">false</bool>
 </resources>

@@ -113,6 +113,22 @@ struct sde_drm_scaler_v2 {
   uint32_t uv_sep_lut_idx;
   struct sde_drm_de_v1 de;
 };
+#define SDE_MAX_DS_COUNT 2
+#define SDE_DRM_DESTSCALER_ENABLE 0x1
+#define SDE_DRM_DESTSCALER_SCALE_UPDATE 0x2
+#define SDE_DRM_DESTSCALER_ENHANCER_UPDATE 0x4
+#define SDE_DRM_DESTSCALER_PU_ENABLE 0x8
+struct sde_drm_dest_scaler_cfg {
+  uint32_t flags;
+  uint32_t index;
+  uint32_t lm_width;
+  uint32_t lm_height;
+  uint64_t scaler_cfg;
+};
+struct sde_drm_dest_scaler_data {
+  uint32_t num_dest_scaler;
+  struct sde_drm_dest_scaler_cfg ds_cfg[SDE_MAX_DS_COUNT];
+};
 #define SDE_CSC_MATRIX_COEFF_SIZE 9
 #define SDE_CSC_CLAMP_SIZE 6
 #define SDE_CSC_BIAS_SIZE 3
