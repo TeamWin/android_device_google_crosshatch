@@ -46,7 +46,7 @@
     </pcm_ids>
     <config_params>
         <param key="input_mic_max_count" value="3"/>
-        <param key="snd_card_name" value="msm8998-tavil-snd-card"/>
+        <param key="snd_card_name" value="sdm845-tavil-snd-card"/>
     </config_params>
     <backend_names>
         <device name="SND_DEVICE_OUT_SPEAKER" backend="speaker" interface="QUAT_MI2S_RX"/>
