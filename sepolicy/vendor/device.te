@@ -2,6 +2,7 @@ type ab_block_device, dev_type;
 type at_device, dev_type;
 type avtimer_device, dev_type;
 type bt_device, dev_type;
+type citadel_device, dev_type;
 type diag_device, dev_type, mlstrustedobject;
 type dsp_device, dev_type;
 type easel_device, dev_type;
