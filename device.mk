@@ -547,7 +547,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     citadeld \
     citadel_test \
-    citadel_updater
+    citadel_updater \
+    android.hardware.weaver@1.0-service.citadel
 
 # Use daemon to detect folio open/close
 PRODUCT_PACKAGES += \
