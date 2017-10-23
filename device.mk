@@ -253,10 +253,6 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service
 
-# eSE applet HALs
-PRODUCT_PACKAGES += \
-    esed
-
 # Memtrack HAL
 PRODUCT_PACKAGES += \
     memtrack.sdm845 \

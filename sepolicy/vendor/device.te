@@ -9,7 +9,6 @@ type hbtp_device, dev_type;
 type ipa_dev, dev_type;
 type latency_device, dev_type;
 type modem_block_device, dev_type;
-type pn81a_device, dev_type;
 type qsee_ipc_irq_spss_device, dev_type;
 type qdsp_device, dev_type, mlstrustedobject;
 type ramdump_device, dev_type;
