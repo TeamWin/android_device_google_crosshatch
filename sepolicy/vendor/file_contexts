@@ -34,7 +34,6 @@
 /dev/sensors                                    u:object_r:sensors_device:s0
 /dev/mnh_sm                                     u:object_r:easel_device:s0
 /dev/easelcomm-client                           u:object_r:easel_device:s0
-/dev/pn81a                                      u:object_r:pn81a_device:s0
 
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
@@ -151,13 +150,6 @@
 /vendor/bin/ipacm-diag          u:object_r:hal_tetheroffload_default_exec:s0
 /vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
-# Remove after b/38447389
-/vendor/bin/esed                u:object_r:esed_exec:s0
-# Rename to android.hardware.[XXX] after b/38447431
-/vendor/bin/hw/esed             u:object_r:esed_exec:s0
-/vendor/bin/ese_load            u:object_r:init_ese_exec:s0
-/vendor/bin/ese-replay          u:object_r:esed_exec:s0
-/vendor/bin/ese-ls-provision    u:object_r:esed_exec:s0
 /vendor/bin/hw/android\.hardware\.oemlock@1\.0-service               u:object_r:hal_oemlock_default_exec:s0
 /vendor/bin/oemlock_provision   u:object_r:hal_bootctl_default_exec:s0
 /vendor/bin/oemlock-bridge      u:object_r:hal_bootctl_default_exec:s0
@@ -236,7 +228,6 @@
 /data/vendor/ramdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
 /data/vendor/ssrdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
 /data/vendor/modem_dump(/.*)?          u:object_r:modem_dump_file:s0
-/data/vendor/ese(/.*)?                 u:object_r:ese_vendor_data_file:s0
 /data/vendor/ipa(/.*)?                 u:object_r:ipa_vendor_data_file:s0
 /data/vendor/sensors(/.*)?             u:object_r:sensors_vendor_data_file:s0
 

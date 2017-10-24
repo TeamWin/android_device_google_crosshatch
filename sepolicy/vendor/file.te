@@ -63,7 +63,6 @@ type radio_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type cnss_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type ramdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type modem_dump_file, file_type, data_file_type;
-type ese_vendor_data_file, file_type, data_file_type;
 type sensors_vendor_data_file, file_type, data_file_type;
 
 type vendor_firmware_file, vendor_file_type, file_type;
