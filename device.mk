@@ -60,7 +60,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/uinput-fpc.idc:system/usr/idc/uinput-fpc.idc \
     $(LOCAL_PATH)/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh \
     $(LOCAL_PATH)/init.qcom.ipastart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.ipastart.sh \
-    $(LOCAL_PATH)/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh
+    $(LOCAL_PATH)/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
+    $(LOCAL_PATH)/thermal-engine-blueline.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline.conf \
+    $(LOCAL_PATH)/thermal-engine-blueline-vr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-vr.conf \
+    $(LOCAL_PATH)/thermal-engine-crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch.conf \
+    $(LOCAL_PATH)/thermal-engine-crosshatch-vr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-vr.conf
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_COPY_FILES += \
