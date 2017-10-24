@@ -25,4 +25,8 @@ include device/google/crosshatch/device-common.mk
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=560 \
 
+# b/67718369 temporarily disable privapp-permissions whitelist enforcement
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.control_privapp_permissions=disable
+
 DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/crosshatch/overlay
