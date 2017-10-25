@@ -122,6 +122,9 @@ on init
     # Some user code relies on ro.boot.hardware.revision
     setprop ro.boot.hardware.revision ${ro.revision}
 
+    # Thermal config file per product
+    setprop sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
+
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -413,7 +416,7 @@ service perfd /vendor/bin/perfd
    group root readproc system
    socket perfd seqpacket 0666 root system
 
-service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
+service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg}
    class main
    user root
    group root system
