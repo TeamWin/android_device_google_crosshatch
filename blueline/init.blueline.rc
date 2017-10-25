@@ -15,3 +15,6 @@
 #
 
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.rc
+
+on init
+    setprop ro.sf.lcd_density 420
