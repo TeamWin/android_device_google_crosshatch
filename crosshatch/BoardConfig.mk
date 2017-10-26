@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-TARGET_BOOTLOADER_BOARD_NAME := crosshatch
+TARGET_BOOTLOADER_BOARD_NAME := b1c1
 DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS := 0x00000056
 
 PRODUCT_VENDOR_KERNEL_HEADERS := device/google/crosshatch/sdm845/kernel-headers

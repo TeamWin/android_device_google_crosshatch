@@ -34,16 +34,13 @@ Return<void> VrDevice::init() {
 }
 
 Return<void> VrDevice::setVrMode(bool enabled) {
-    if (enabled) {
-        if (!android::base::SetProperty("sys.qcom.thermalcfg", "/vendor/etc/thermal-engine-vr.conf")) {
-            LOG(ERROR) << "Couldn't set thermal_engine enable property";
-            return Void();
-        }
-    } else {
-        if (!android::base::SetProperty("sys.qcom.thermalcfg", "/vendor/etc/thermal-engine.conf")) {
-            LOG(ERROR) << "Couldn't set thermal_engine disable property";
-            return Void();
-        }
+    std::string hwProp = android::base::GetProperty("ro.hardware", "default");
+    std::string vrMode = enabled ? "-vr" : "";
+    std::string thermalConf = "/vendor/etc/thermal-engine-" + hwProp + vrMode + ".conf";
+
+    if (!android::base::SetProperty("sys.qcom.thermalcfg", thermalConf)) {
+        LOG(ERROR) << "Couldn't set sys.qcom.thermalcfg to " << thermalConf;
+        return Void();
     }
     if (!android::base::SetProperty("ctl.restart", "thermal-engine")) {
         LOG(ERROR) << "Couldn't set thermal_engine restart property";

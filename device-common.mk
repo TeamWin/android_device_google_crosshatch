@@ -16,6 +16,9 @@
 
 LOCAL_PATH := device/google/crosshatch
 
+# define hardware platform
+PRODUCT_PLATFORM := sdm845
+
 # Audio XMLs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mixer_paths_tavil.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil.xml \
@@ -41,7 +44,7 @@ endif
 
 # SM loging file
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/init.logging.rc:root/init.$(PRODUCT_HARDWARE).logging.rc
+    device/google/crosshatch/init.logging.rc:root/init.$(PRODUCT_PLATFORM).logging.rc
 
 # Dumpstate HAL
 PRODUCT_PACKAGES += \

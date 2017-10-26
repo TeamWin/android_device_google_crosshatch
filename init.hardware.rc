@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-import /vendor/etc/init/hw/init.${ro.hardware}.usb.rc
+import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.usb.rc
 
 on charger
     write /sys/devices/system/cpu/cpu2/online 0
@@ -122,11 +122,14 @@ on init
     # Some user code relies on ro.boot.hardware.revision
     setprop ro.boot.hardware.revision ${ro.revision}
 
+    # Thermal config file per product
+    setprop sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
+
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    mount_all /vendor/etc/fstab.${ro.hardware} --early
+    mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --early
 
     mkdir /persist/data 0700 system system
     mkdir /persist/display 0770 system graphics
@@ -154,7 +157,7 @@ on late-fs
     start vendor.gralloc-2-0
 
     # Mount RW partitions which need run fsck
-    mount_all /vendor/etc/fstab.${ro.hardware} --late
+    mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --late
 
     # Start time daemon early so that the system time can be set early
     start time_daemon
@@ -413,7 +416,7 @@ service perfd /vendor/bin/perfd
    group root readproc system
    socket perfd seqpacket 0666 root system
 
-service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
+service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg}
    class main
    user root
    group root system
@@ -448,7 +451,7 @@ service per_proxy /vendor/bin/pm-proxy
 
 on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
-    swapon_all /vendor/etc/fstab.${ro.hardware}
+    swapon_all /vendor/etc/fstab.${ro.boot.hardware.platform}
 
     # Setup final cpuset
     write /dev/cpuset/top-app/cpus 0-7
