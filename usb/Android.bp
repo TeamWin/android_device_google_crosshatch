@@ -17,6 +17,7 @@ cc_binary {
     relative_install_path: "hw",
     init_rc: ["android.hardware.usb@1.1-service.crosshatch.rc"],
     srcs: ["service.cpp", "Usb.cpp"],
+    cflags: ["-Wall", "-Werror"],
     shared_libs: [
         "libbase",
         "libhidlbase",
