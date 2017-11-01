@@ -331,8 +331,6 @@ Status getTypeCPortNamesHelper(std::unordered_map<std::string, bool> *names) {
 
   dp = opendir("/sys/class/typec");
   if (dp != NULL) {
-    int32_t ports = 0;
-    int32_t current = 0;
     struct dirent *ep;
 
     while ((ep = readdir(dp))) {
