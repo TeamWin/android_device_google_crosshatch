@@ -94,5 +94,5 @@ ro.bluetooth.emb_wp_mode=false
 ro.bluetooth.wipower=false
 
 # Property for loading BDA from bdaddress module in kernel
-ro.bt.bdaddr_path=/sys/module/bdaddress/parameters/bdaddress
+ro.bt.bdaddr_path=/proc/device-tree/chosen/cdt/cdb2/bd_address
 sys.usb.ffs.aio_compat=1
