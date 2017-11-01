@@ -181,7 +181,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicecomm=true \
     persist.audio.fluence.voicerec=false \
     ro.config.vc_call_vol_steps=7 \
-    ro.config.media_vol_steps=25
+    ro.config.media_vol_steps=25 \
 
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
