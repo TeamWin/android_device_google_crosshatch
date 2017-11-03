@@ -22,8 +22,4 @@ PRODUCT_HARDWARE := crosshatch
 
 include device/google/crosshatch/device-common.mk
 
-# b/67718369 temporarily disable privapp-permissions whitelist enforcement
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=disable
-
 DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/crosshatch/overlay
