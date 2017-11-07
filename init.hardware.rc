@@ -324,8 +324,13 @@ on early-boot
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state
 
-    # Permission for laser sensor driver
-    chown camera camera /sys/class/wahoo_laser/laser/enable_ps_sensor
+    # Permission for rainbow sensor
+    chown cameraserver camera /sys/devices/platform/soc/894000.i2c/i2c-3/3-0020/rainbow_enable
+    chmod 0660 /sys/devices/platform/soc/894000.i2c/i2c-3/3-0020/rainbow_enable
+    chown cameraserver camera /sys/devices/platform/soc/894000.i2c/i2c-3/3-0020/rainbow_read_byte
+    chmod 0660 /sys/devices/platform/soc/894000.i2c/i2c-3/3-0020/rainbow_read_byte
+    chown cameraserver camera /sys/devices/platform/soc/894000.i2c/i2c-3/3-0020/rainbow_write_byte
+    chmod 0660 /sys/devices/platform/soc/894000.i2c/i2c-3/3-0020/rainbow_write_byte
 
     # Permission for Vibrator
     chown system system /sys/class/leds/vibrator/device/mode
