@@ -33,6 +33,7 @@
 #define WAN_IOCTL_QUERY_DL_FILTER_STATS 8
 #define WAN_IOCTL_ADD_FLT_RULE_EX 9
 #define WAN_IOCTL_QUERY_TETHER_STATS_ALL 10
+#define WAN_IOCTL_NOTIFY_WAN_STATE 11
 #ifndef IFNAMSIZ
 #define IFNAMSIZ 16
 #endif
@@ -82,6 +83,9 @@ struct wan_ioctl_query_dl_filter_stats {
   struct ipa_get_data_stats_resp_msg_v01 stats_resp;
   uint32_t index;
 };
+struct wan_ioctl_notify_wan_state {
+  uint8_t up;
+};
 #define WAN_IOC_ADD_FLT_RULE _IOWR(WAN_IOC_MAGIC, WAN_IOCTL_ADD_FLT_RULE, struct ipa_install_fltr_rule_req_msg_v01 *)
 #define WAN_IOC_ADD_FLT_RULE_INDEX _IOWR(WAN_IOC_MAGIC, WAN_IOCTL_ADD_FLT_INDEX, struct ipa_fltr_installed_notif_req_msg_v01 *)
 #define WAN_IOC_VOTE_FOR_BW_MBPS _IOWR(WAN_IOC_MAGIC, WAN_IOCTL_VOTE_FOR_BW_MBPS, uint32_t *)
@@ -93,5 +97,6 @@ struct wan_ioctl_query_dl_filter_stats {
 #define WAN_IOC_QUERY_DL_FILTER_STATS _IOWR(WAN_IOC_MAGIC, WAN_IOCTL_QUERY_DL_FILTER_STATS, struct wan_ioctl_query_dl_filter_stats *)
 #define WAN_IOC_ADD_FLT_RULE_EX _IOWR(WAN_IOC_MAGIC, WAN_IOCTL_ADD_FLT_RULE_EX, struct ipa_install_fltr_rule_req_ex_msg_v01 *)
 #define WAN_IOC_QUERY_TETHER_STATS_ALL _IOWR(WAN_IOC_MAGIC, WAN_IOCTL_QUERY_TETHER_STATS_ALL, struct wan_ioctl_query_tether_stats_all *)
+#define WAN_IOC_NOTIFY_WAN_STATE _IOWR(WAN_IOC_MAGIC, WAN_IOCTL_NOTIFY_WAN_STATE, struct wan_ioctl_notify_wan_state *)
 #endif
 

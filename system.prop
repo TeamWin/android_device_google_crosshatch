@@ -93,6 +93,6 @@ ro.bluetooth.a4wp=false
 ro.bluetooth.emb_wp_mode=false
 ro.bluetooth.wipower=false
 
-# Property for loading BDA from bdaddress module in kernel
-ro.bt.bdaddr_path=/proc/device-tree/chosen/cdt/cdb2/bd_address
+# Property is used by BT HAL to discover device BT MAC address
+ro.bt.bdaddr_path=/proc/device-tree/chosen/cdt/cdb2/bt_addr
 sys.usb.ffs.aio_compat=1
