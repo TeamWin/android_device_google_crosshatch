@@ -70,6 +70,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/thermal-engine-crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch.conf \
     $(LOCAL_PATH)/thermal-engine-crosshatch-vr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-vr.conf
 
+# Edge Sense initialization script.
+# TODO: b/67205273
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.edge_sense.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.edge_sense.sh
+
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.diag.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_PLATFORM).diag.rc
