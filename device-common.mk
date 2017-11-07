@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+TARGET_USERIMAGES_USE_F2FS := true
+
 LOCAL_PATH := device/google/crosshatch
 
 # define hardware platform
