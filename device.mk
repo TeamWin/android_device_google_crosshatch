@@ -262,7 +262,7 @@ PRODUCT_PACKAGES += \
 
 # Light HAL
 PRODUCT_PACKAGES += \
-    lights.$(PRODUCT_HARDWARE) \
+    lights.$(PRODUCT_PLATFORM) \
     android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service
 
