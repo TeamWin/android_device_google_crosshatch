@@ -279,9 +279,8 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
-    libbt-vendor \
-    android.hardware.bluetooth@1.0-impl    \
-    android.hardware.bluetooth@1.0-service
+    android.hardware.bluetooth@1.0-impl-qti \
+    android.hardware.bluetooth@1.0-service-qti
 
 # DRM HAL
 PRODUCT_PACKAGES += \
