@@ -30,6 +30,8 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a73
 
+TARGET_BOARD_COMMON_PATH := device/google/crosshatch/sdm845
+
 BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200n8 androidboot.console=ttyMSM0 printk.devkmsg=on
 BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
 BOARD_KERNEL_CMDLINE += ehci-hcd.park=3
@@ -129,8 +131,8 @@ BOARD_USES_EASEL := true
 
 # GPS
 TARGET_NO_RPC := true
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
-BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
+#BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
+#BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 
 # RenderScript
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so

@@ -434,7 +434,9 @@ PRODUCT_COPY_FILES += \
 
 # Thermal packages
 PRODUCT_PACKAGES += \
-    thermal.default
+    thermal.default \
+    thermal.sdm845 \
+    vr.sdm845 \
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
