@@ -63,6 +63,7 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/crosshatch/recovery.wipe
 TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 
 BOARD_AVB_ENABLE := true
 
