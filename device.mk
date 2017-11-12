@@ -267,7 +267,7 @@ PRODUCT_PACKAGES += \
 
 # Light HAL
 PRODUCT_PACKAGES += \
-    lights.$(PRODUCT_HARDWARE) \
+    lights.$(PRODUCT_PLATFORM) \
     android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service
 
@@ -279,9 +279,8 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
-    libbt-vendor \
-    android.hardware.bluetooth@1.0-impl    \
-    android.hardware.bluetooth@1.0-service
+    android.hardware.bluetooth@1.0-impl-qti \
+    android.hardware.bluetooth@1.0-service-qti
 
 # DRM HAL
 PRODUCT_PACKAGES += \
@@ -435,7 +434,9 @@ PRODUCT_COPY_FILES += \
 
 # Thermal packages
 PRODUCT_PACKAGES += \
-    thermal.default
+    thermal.default \
+    thermal.sdm845 \
+    vr.sdm845 \
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
@@ -612,3 +613,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
+
+# DRV2624 Haptics Waveform
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/drv2624/drv2624.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/drv2624.bin
