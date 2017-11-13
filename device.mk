@@ -620,5 +620,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/drv2624/drv2624.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/drv2624.bin
 
+PRODUCT_VENDOR_KERNEL_HEADERS := device/google/crosshatch/sdm845/kernel-headers
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.init.subcontexts_enabled=true
