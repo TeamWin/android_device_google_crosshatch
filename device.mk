@@ -619,3 +619,6 @@ PRODUCT_COPY_FILES += \
 # DRV2624 Haptics Waveform
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/drv2624/drv2624.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/drv2624.bin
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.init.subcontexts_enabled=true
