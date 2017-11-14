@@ -243,6 +243,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
   persist.camera.tnr.video=1 \
 
+# camera API1 ZSL control
+PRODUCT_PROPERTY_OVERRIDES += \
+  camera.disable_zsl_mode=true \
+
 # WLAN driver configuration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
