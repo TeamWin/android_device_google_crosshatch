@@ -87,6 +87,8 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/crosshatch/init.crosshatch.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.crosshatch.rc \
     $(LOCAL_PATH)/blueline/init.blueline.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.blueline.rc \
+    $(LOCAL_PATH)/init.recovery.hardware.device.rc:root/init.recovery.crosshatch.rc \
+    $(LOCAL_PATH)/init.recovery.hardware.device.rc:root/init.recovery.blueline.rc \
 
 MSM_VIDC_TARGET_LIST := sdm845 # Get the color format from kernel headers
 MASTER_SIDE_CP_TARGET_LIST := sdm845 # ION specific settings
@@ -617,3 +619,8 @@ PRODUCT_COPY_FILES += \
 # DRV2624 Haptics Waveform
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/drv2624/drv2624.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/drv2624.bin
+
+PRODUCT_VENDOR_KERNEL_HEADERS := device/google/crosshatch/sdm845/kernel-headers
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.init.subcontexts_enabled=true
