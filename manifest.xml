@@ -327,7 +327,7 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>com.qualcomm.qti.qcril.qcrilhook</name>
+        <name>vendor.qti.hardware.radio.qcrilhook</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
