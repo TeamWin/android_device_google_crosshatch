@@ -1,6 +1,4 @@
 userdebug_or_eng(`
-  allow dumpstate modem_dump_file:dir create_dir_perms;
-  allow dumpstate modem_dump_file:file create_file_perms;
   allow dumpstate proc_modules:file r_file_perms;
   allow dumpstate proc_stat:file r_file_perms;
   allow dumpstate persist_file:dir r_dir_perms;
