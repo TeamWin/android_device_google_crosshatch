@@ -1,5 +1,5 @@
-#ifndef _DSPS_H_
-#define _DSPS_H_
+#ifndef _UAPI_DSPS_H_
+#define _UAPI_DSPS_H_
 
 #include <linux/ioctl.h>
 
@@ -13,4 +13,4 @@
 
 #define DSPS_IOCTL_RESET _IO(DSPS_IOCTL_MAGIC, 5)
 
-#endif	/* _DSPS_H_ */
+#endif	/* _UAPI_DSPS_H_ */
