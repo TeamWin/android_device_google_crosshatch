@@ -296,7 +296,7 @@ PRODUCT_PACKAGES += \
 
 # NFC packages
 PRODUCT_PACKAGES += \
-    nfc_nci.$(PRODUCT_HARDWARE) \
+    nfc_nci.$(TARGET_BOARD_PLATFORM) \
     NfcNci \
     Tag \
     android.hardware.nfc@1.0-impl \
@@ -304,6 +304,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
+    device/google/crosshatch/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
 
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.1-service.crosshatch
