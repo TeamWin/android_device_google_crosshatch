@@ -21,8 +21,8 @@ LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE_OWNER := qcom
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_MODULE := android.hardware.power@1.1-service.crosshatch
-LOCAL_INIT_RC := android.hardware.power@1.1-service.crosshatch.rc
+LOCAL_MODULE := android.hardware.power@1.2-service.crosshatch
+LOCAL_INIT_RC := android.hardware.power@1.2-service.crosshatch.rc
 LOCAL_SRC_FILES := service.cpp \
     Power.cpp \
     InteractionHandler.cpp \
@@ -53,6 +53,6 @@ LOCAL_SHARED_LIBRARIES := \
     libhidltransport \
     libhardware \
     libutils \
-    android.hardware.power@1.1 \
+    android.hardware.power@1.2 \
 
 include $(BUILD_EXECUTABLE)
