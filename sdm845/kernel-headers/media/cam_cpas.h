@@ -16,14 +16,16 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _UAPI_DSPS_H_
-#define _UAPI_DSPS_H_
-#include <linux/ioctl.h>
-#define DSPS_IOCTL_MAGIC 'd'
-#define DSPS_IOCTL_ON _IO(DSPS_IOCTL_MAGIC, 1)
-#define DSPS_IOCTL_OFF _IO(DSPS_IOCTL_MAGIC, 2)
-#define DSPS_IOCTL_READ_SLOW_TIMER _IOR(DSPS_IOCTL_MAGIC, 3, unsigned int *)
-#define DSPS_IOCTL_READ_FAST_TIMER _IOR(DSPS_IOCTL_MAGIC, 4, unsigned int *)
-#define DSPS_IOCTL_RESET _IO(DSPS_IOCTL_MAGIC, 5)
+#ifndef __UAPI_CAM_CPAS_H__
+#define __UAPI_CAM_CPAS_H__
+#include "cam_defs.h"
+#define CAM_FAMILY_CAMERA_SS 1
+#define CAM_FAMILY_CPAS_SS 2
+struct cam_cpas_query_cap {
+  uint32_t camera_family;
+  uint32_t reserved;
+  struct cam_hw_version camera_version;
+  struct cam_hw_version cpas_version;
+};
 #endif
 

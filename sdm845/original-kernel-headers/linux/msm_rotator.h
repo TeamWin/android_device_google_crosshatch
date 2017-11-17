@@ -1,5 +1,5 @@
-#ifndef __MSM_ROTATOR_H__
-#define __MSM_ROTATOR_H__
+#ifndef _UAPI__MSM_ROTATOR_H__
+#define _UAPI__MSM_ROTATOR_H__
 
 #include <linux/types.h>
 #include <linux/msm_mdp.h>

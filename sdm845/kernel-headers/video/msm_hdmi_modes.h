@@ -16,8 +16,8 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _MSM_HDMI_MODES_H__
-#define _MSM_HDMI_MODES_H__
+#ifndef _UAPI_MSM_HDMI_MODES_H__
+#define _UAPI_MSM_HDMI_MODES_H__
 #include <linux/types.h>
 #include <linux/errno.h>
 #define MSM_HDMI_RGB_888_24BPP_FORMAT (1 << 0)

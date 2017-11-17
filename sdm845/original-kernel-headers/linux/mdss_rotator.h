@@ -1,5 +1,5 @@
-#ifndef _MDSS_ROTATOR_H_
-#define _MDSS_ROTATOR_H_
+#ifndef _UAPI_MDSS_ROTATOR_H_
+#define _UAPI_MDSS_ROTATOR_H_
 
 #include <linux/msm_mdp_ext.h>
 
@@ -135,10 +135,10 @@ struct mdp_rotation_request {
 	uint32_t	count;
 
 	/* Pointer to a list of rotation request items */
-	struct mdp_rotation_item *list;
+	struct mdp_rotation_item __user	*list;
 
 	/* 32bits reserved value for future usage*/
 	uint32_t	reserved[6];
 };
 
-#endif /* _MDSS_ROTATOR_H_*/
+#endif /*_UAPI_MDSS_ROTATOR_H_*/

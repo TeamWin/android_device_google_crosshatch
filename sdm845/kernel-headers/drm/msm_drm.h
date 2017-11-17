@@ -33,6 +33,30 @@ struct drm_msm_timespec {
   __s64 tv_sec;
   __s64 tv_nsec;
 };
+#define HDR_PRIMARIES_COUNT 3
+#define DRM_MSM_EXT_HDR_METADATA
+struct drm_msm_ext_hdr_metadata {
+  __u32 hdr_state;
+  __u32 eotf;
+  __u32 hdr_supported;
+  __u32 display_primaries_x[HDR_PRIMARIES_COUNT];
+  __u32 display_primaries_y[HDR_PRIMARIES_COUNT];
+  __u32 white_point_x;
+  __u32 white_point_y;
+  __u32 max_luminance;
+  __u32 min_luminance;
+  __u32 max_content_light_level;
+  __u32 max_average_light_level;
+};
+#define DRM_MSM_EXT_HDR_PROPERTIES
+struct drm_msm_ext_hdr_properties {
+  __u8 hdr_metadata_type_one;
+  __u32 hdr_supported;
+  __u32 hdr_eotf;
+  __u32 hdr_max_luminance;
+  __u32 hdr_avg_luminance;
+  __u32 hdr_min_luminance;
+};
 #define MSM_PARAM_GPU_ID 0x01
 #define MSM_PARAM_GMEM_SIZE 0x02
 #define MSM_PARAM_CHIP_ID 0x03
@@ -89,7 +113,7 @@ struct drm_msm_gem_submit_cmd {
   __u32 size;
   __u32 pad;
   __u32 nr_relocs;
-  __u64 relocs;
+  __u64 __user relocs;
 };
 #define MSM_SUBMIT_BO_READ 0x0001
 #define MSM_SUBMIT_BO_WRITE 0x0002
@@ -108,8 +132,8 @@ struct drm_msm_gem_submit {
   __u32 fence;
   __u32 nr_bos;
   __u32 nr_cmds;
-  __u64 bos;
-  __u64 cmds;
+  __u64 __user bos;
+  __u64 __user cmds;
   __s32 fence_fd;
 };
 struct drm_msm_wait_fence {

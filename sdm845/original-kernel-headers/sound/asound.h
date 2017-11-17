@@ -20,8 +20,8 @@
  *
  */
 
-#ifndef __SOUND_ASOUND_H
-#define __SOUND_ASOUND_H
+#ifndef _UAPI__SOUND_ASOUND_H
+#define _UAPI__SOUND_ASOUND_H
 
 #if defined(__KERNEL__) || defined(__linux__)
 #include <linux/types.h>
@@ -29,7 +29,9 @@
 #include <sys/ioctl.h>
 #endif
 
+#ifndef __KERNEL__
 #include <stdlib.h>
+#endif
 
 /*
  *  protocol version
@@ -134,7 +136,7 @@ struct snd_hwdep_dsp_status {
 struct snd_hwdep_dsp_image {
 	unsigned int index;		/* W: DSP index */
 	unsigned char name[64];		/* W: ID (e.g. file name) */
-	unsigned char *image;	/* W: binary image */
+	unsigned char __user *image;	/* W: binary image */
 	size_t length;			/* W: size of image in bytes */
 	unsigned long driver_data;	/* W: driver-specific data */
 };
@@ -178,61 +180,61 @@ enum {
 };
 
 typedef int __bitwise snd_pcm_access_t;
-#define	SNDRV_PCM_ACCESS_MMAP_INTERLEAVED	((snd_pcm_access_t) 0) /* interleaved mmap */
-#define	SNDRV_PCM_ACCESS_MMAP_NONINTERLEAVED	((snd_pcm_access_t) 1) /* noninterleaved mmap */
-#define	SNDRV_PCM_ACCESS_MMAP_COMPLEX		((snd_pcm_access_t) 2) /* complex mmap */
-#define	SNDRV_PCM_ACCESS_RW_INTERLEAVED		((snd_pcm_access_t) 3) /* readi/writei */
-#define	SNDRV_PCM_ACCESS_RW_NONINTERLEAVED	((snd_pcm_access_t) 4) /* readn/writen */
+#define	SNDRV_PCM_ACCESS_MMAP_INTERLEAVED	((__force snd_pcm_access_t) 0) /* interleaved mmap */
+#define	SNDRV_PCM_ACCESS_MMAP_NONINTERLEAVED	((__force snd_pcm_access_t) 1) /* noninterleaved mmap */
+#define	SNDRV_PCM_ACCESS_MMAP_COMPLEX		((__force snd_pcm_access_t) 2) /* complex mmap */
+#define	SNDRV_PCM_ACCESS_RW_INTERLEAVED		((__force snd_pcm_access_t) 3) /* readi/writei */
+#define	SNDRV_PCM_ACCESS_RW_NONINTERLEAVED	((__force snd_pcm_access_t) 4) /* readn/writen */
 #define	SNDRV_PCM_ACCESS_LAST		SNDRV_PCM_ACCESS_RW_NONINTERLEAVED
 
 typedef int __bitwise snd_pcm_format_t;
-#define	SNDRV_PCM_FORMAT_S8	((snd_pcm_format_t) 0)
-#define	SNDRV_PCM_FORMAT_U8	((snd_pcm_format_t) 1)
-#define	SNDRV_PCM_FORMAT_S16_LE	((snd_pcm_format_t) 2)
-#define	SNDRV_PCM_FORMAT_S16_BE	((snd_pcm_format_t) 3)
-#define	SNDRV_PCM_FORMAT_U16_LE	((snd_pcm_format_t) 4)
-#define	SNDRV_PCM_FORMAT_U16_BE	((snd_pcm_format_t) 5)
-#define	SNDRV_PCM_FORMAT_S24_LE	((snd_pcm_format_t) 6) /* low three bytes */
-#define	SNDRV_PCM_FORMAT_S24_BE	((snd_pcm_format_t) 7) /* low three bytes */
-#define	SNDRV_PCM_FORMAT_U24_LE	((snd_pcm_format_t) 8) /* low three bytes */
-#define	SNDRV_PCM_FORMAT_U24_BE	((snd_pcm_format_t) 9) /* low three bytes */
-#define	SNDRV_PCM_FORMAT_S32_LE	((snd_pcm_format_t) 10)
-#define	SNDRV_PCM_FORMAT_S32_BE	((snd_pcm_format_t) 11)
-#define	SNDRV_PCM_FORMAT_U32_LE	((snd_pcm_format_t) 12)
-#define	SNDRV_PCM_FORMAT_U32_BE	((snd_pcm_format_t) 13)
-#define	SNDRV_PCM_FORMAT_FLOAT_LE	((snd_pcm_format_t) 14) /* 4-byte float, IEEE-754 32-bit, range -1.0 to 1.0 */
-#define	SNDRV_PCM_FORMAT_FLOAT_BE	((snd_pcm_format_t) 15) /* 4-byte float, IEEE-754 32-bit, range -1.0 to 1.0 */
-#define	SNDRV_PCM_FORMAT_FLOAT64_LE	((snd_pcm_format_t) 16) /* 8-byte float, IEEE-754 64-bit, range -1.0 to 1.0 */
-#define	SNDRV_PCM_FORMAT_FLOAT64_BE	((snd_pcm_format_t) 17) /* 8-byte float, IEEE-754 64-bit, range -1.0 to 1.0 */
-#define	SNDRV_PCM_FORMAT_IEC958_SUBFRAME_LE ((snd_pcm_format_t) 18) /* IEC-958 subframe, Little Endian */
-#define	SNDRV_PCM_FORMAT_IEC958_SUBFRAME_BE ((snd_pcm_format_t) 19) /* IEC-958 subframe, Big Endian */
-#define	SNDRV_PCM_FORMAT_MU_LAW		((snd_pcm_format_t) 20)
-#define	SNDRV_PCM_FORMAT_A_LAW		((snd_pcm_format_t) 21)
-#define	SNDRV_PCM_FORMAT_IMA_ADPCM	((snd_pcm_format_t) 22)
-#define	SNDRV_PCM_FORMAT_MPEG		((snd_pcm_format_t) 23)
-#define	SNDRV_PCM_FORMAT_GSM		((snd_pcm_format_t) 24)
-#define	SNDRV_PCM_FORMAT_SPECIAL	((snd_pcm_format_t) 31)
-#define	SNDRV_PCM_FORMAT_S24_3LE	((snd_pcm_format_t) 32)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_S24_3BE	((snd_pcm_format_t) 33)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_U24_3LE	((snd_pcm_format_t) 34)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_U24_3BE	((snd_pcm_format_t) 35)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_S20_3LE	((snd_pcm_format_t) 36)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_S20_3BE	((snd_pcm_format_t) 37)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_U20_3LE	((snd_pcm_format_t) 38)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_U20_3BE	((snd_pcm_format_t) 39)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_S18_3LE	((snd_pcm_format_t) 40)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_S18_3BE	((snd_pcm_format_t) 41)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_U18_3LE	((snd_pcm_format_t) 42)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_U18_3BE	((snd_pcm_format_t) 43)	/* in three bytes */
-#define	SNDRV_PCM_FORMAT_G723_24	((snd_pcm_format_t) 44) /* 8 samples in 3 bytes */
-#define	SNDRV_PCM_FORMAT_G723_24_1B	((snd_pcm_format_t) 45) /* 1 sample in 1 byte */
-#define	SNDRV_PCM_FORMAT_G723_40	((snd_pcm_format_t) 46) /* 8 Samples in 5 bytes */
-#define	SNDRV_PCM_FORMAT_G723_40_1B	((snd_pcm_format_t) 47) /* 1 sample in 1 byte */
-#define	SNDRV_PCM_FORMAT_DSD_U8		((snd_pcm_format_t) 48) /* DSD, 1-byte samples DSD (x8) */
-#define	SNDRV_PCM_FORMAT_DSD_U16_LE	((snd_pcm_format_t) 49) /* DSD, 2-byte samples DSD (x16), little endian */
-#define	SNDRV_PCM_FORMAT_DSD_U32_LE	((snd_pcm_format_t) 50) /* DSD, 4-byte samples DSD (x32), little endian */
-#define	SNDRV_PCM_FORMAT_DSD_U16_BE	((snd_pcm_format_t) 51) /* DSD, 2-byte samples DSD (x16), big endian */
-#define	SNDRV_PCM_FORMAT_DSD_U32_BE	((snd_pcm_format_t) 52) /* DSD, 4-byte samples DSD (x32), big endian */
+#define	SNDRV_PCM_FORMAT_S8	((__force snd_pcm_format_t) 0)
+#define	SNDRV_PCM_FORMAT_U8	((__force snd_pcm_format_t) 1)
+#define	SNDRV_PCM_FORMAT_S16_LE	((__force snd_pcm_format_t) 2)
+#define	SNDRV_PCM_FORMAT_S16_BE	((__force snd_pcm_format_t) 3)
+#define	SNDRV_PCM_FORMAT_U16_LE	((__force snd_pcm_format_t) 4)
+#define	SNDRV_PCM_FORMAT_U16_BE	((__force snd_pcm_format_t) 5)
+#define	SNDRV_PCM_FORMAT_S24_LE	((__force snd_pcm_format_t) 6) /* low three bytes */
+#define	SNDRV_PCM_FORMAT_S24_BE	((__force snd_pcm_format_t) 7) /* low three bytes */
+#define	SNDRV_PCM_FORMAT_U24_LE	((__force snd_pcm_format_t) 8) /* low three bytes */
+#define	SNDRV_PCM_FORMAT_U24_BE	((__force snd_pcm_format_t) 9) /* low three bytes */
+#define	SNDRV_PCM_FORMAT_S32_LE	((__force snd_pcm_format_t) 10)
+#define	SNDRV_PCM_FORMAT_S32_BE	((__force snd_pcm_format_t) 11)
+#define	SNDRV_PCM_FORMAT_U32_LE	((__force snd_pcm_format_t) 12)
+#define	SNDRV_PCM_FORMAT_U32_BE	((__force snd_pcm_format_t) 13)
+#define	SNDRV_PCM_FORMAT_FLOAT_LE	((__force snd_pcm_format_t) 14) /* 4-byte float, IEEE-754 32-bit, range -1.0 to 1.0 */
+#define	SNDRV_PCM_FORMAT_FLOAT_BE	((__force snd_pcm_format_t) 15) /* 4-byte float, IEEE-754 32-bit, range -1.0 to 1.0 */
+#define	SNDRV_PCM_FORMAT_FLOAT64_LE	((__force snd_pcm_format_t) 16) /* 8-byte float, IEEE-754 64-bit, range -1.0 to 1.0 */
+#define	SNDRV_PCM_FORMAT_FLOAT64_BE	((__force snd_pcm_format_t) 17) /* 8-byte float, IEEE-754 64-bit, range -1.0 to 1.0 */
+#define	SNDRV_PCM_FORMAT_IEC958_SUBFRAME_LE ((__force snd_pcm_format_t) 18) /* IEC-958 subframe, Little Endian */
+#define	SNDRV_PCM_FORMAT_IEC958_SUBFRAME_BE ((__force snd_pcm_format_t) 19) /* IEC-958 subframe, Big Endian */
+#define	SNDRV_PCM_FORMAT_MU_LAW		((__force snd_pcm_format_t) 20)
+#define	SNDRV_PCM_FORMAT_A_LAW		((__force snd_pcm_format_t) 21)
+#define	SNDRV_PCM_FORMAT_IMA_ADPCM	((__force snd_pcm_format_t) 22)
+#define	SNDRV_PCM_FORMAT_MPEG		((__force snd_pcm_format_t) 23)
+#define	SNDRV_PCM_FORMAT_GSM		((__force snd_pcm_format_t) 24)
+#define	SNDRV_PCM_FORMAT_SPECIAL	((__force snd_pcm_format_t) 31)
+#define	SNDRV_PCM_FORMAT_S24_3LE	((__force snd_pcm_format_t) 32)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_S24_3BE	((__force snd_pcm_format_t) 33)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_U24_3LE	((__force snd_pcm_format_t) 34)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_U24_3BE	((__force snd_pcm_format_t) 35)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_S20_3LE	((__force snd_pcm_format_t) 36)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_S20_3BE	((__force snd_pcm_format_t) 37)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_U20_3LE	((__force snd_pcm_format_t) 38)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_U20_3BE	((__force snd_pcm_format_t) 39)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_S18_3LE	((__force snd_pcm_format_t) 40)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_S18_3BE	((__force snd_pcm_format_t) 41)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_U18_3LE	((__force snd_pcm_format_t) 42)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_U18_3BE	((__force snd_pcm_format_t) 43)	/* in three bytes */
+#define	SNDRV_PCM_FORMAT_G723_24	((__force snd_pcm_format_t) 44) /* 8 samples in 3 bytes */
+#define	SNDRV_PCM_FORMAT_G723_24_1B	((__force snd_pcm_format_t) 45) /* 1 sample in 1 byte */
+#define	SNDRV_PCM_FORMAT_G723_40	((__force snd_pcm_format_t) 46) /* 8 Samples in 5 bytes */
+#define	SNDRV_PCM_FORMAT_G723_40_1B	((__force snd_pcm_format_t) 47) /* 1 sample in 1 byte */
+#define	SNDRV_PCM_FORMAT_DSD_U8		((__force snd_pcm_format_t) 48) /* DSD, 1-byte samples DSD (x8) */
+#define	SNDRV_PCM_FORMAT_DSD_U16_LE	((__force snd_pcm_format_t) 49) /* DSD, 2-byte samples DSD (x16), little endian */
+#define	SNDRV_PCM_FORMAT_DSD_U32_LE	((__force snd_pcm_format_t) 50) /* DSD, 4-byte samples DSD (x32), little endian */
+#define	SNDRV_PCM_FORMAT_DSD_U16_BE	((__force snd_pcm_format_t) 51) /* DSD, 2-byte samples DSD (x16), big endian */
+#define	SNDRV_PCM_FORMAT_DSD_U32_BE	((__force snd_pcm_format_t) 52) /* DSD, 4-byte samples DSD (x32), big endian */
 #define	SNDRV_PCM_FORMAT_LAST		SNDRV_PCM_FORMAT_DSD_U32_BE
 
 #ifdef SNDRV_LITTLE_ENDIAN
@@ -259,7 +261,7 @@ typedef int __bitwise snd_pcm_format_t;
 #endif
 
 typedef int __bitwise snd_pcm_subformat_t;
-#define	SNDRV_PCM_SUBFORMAT_STD		((snd_pcm_subformat_t) 0)
+#define	SNDRV_PCM_SUBFORMAT_STD		((__force snd_pcm_subformat_t) 0)
 #define	SNDRV_PCM_SUBFORMAT_LAST	SNDRV_PCM_SUBFORMAT_STD
 
 #define SNDRV_PCM_INFO_MMAP		0x00000001	/* hardware supports mmap */
@@ -289,15 +291,15 @@ typedef int __bitwise snd_pcm_subformat_t;
 
 
 typedef int __bitwise snd_pcm_state_t;
-#define	SNDRV_PCM_STATE_OPEN		((snd_pcm_state_t) 0) /* stream is open */
-#define	SNDRV_PCM_STATE_SETUP		((snd_pcm_state_t) 1) /* stream has a setup */
-#define	SNDRV_PCM_STATE_PREPARED	((snd_pcm_state_t) 2) /* stream is ready to start */
-#define	SNDRV_PCM_STATE_RUNNING		((snd_pcm_state_t) 3) /* stream is running */
-#define	SNDRV_PCM_STATE_XRUN		((snd_pcm_state_t) 4) /* stream reached an xrun */
-#define	SNDRV_PCM_STATE_DRAINING	((snd_pcm_state_t) 5) /* stream is draining */
-#define	SNDRV_PCM_STATE_PAUSED		((snd_pcm_state_t) 6) /* stream is paused */
-#define	SNDRV_PCM_STATE_SUSPENDED	((snd_pcm_state_t) 7) /* hardware is suspended */
-#define	SNDRV_PCM_STATE_DISCONNECTED	((snd_pcm_state_t) 8) /* hardware is disconnected */
+#define	SNDRV_PCM_STATE_OPEN		((__force snd_pcm_state_t) 0) /* stream is open */
+#define	SNDRV_PCM_STATE_SETUP		((__force snd_pcm_state_t) 1) /* stream has a setup */
+#define	SNDRV_PCM_STATE_PREPARED	((__force snd_pcm_state_t) 2) /* stream is ready to start */
+#define	SNDRV_PCM_STATE_RUNNING		((__force snd_pcm_state_t) 3) /* stream is running */
+#define	SNDRV_PCM_STATE_XRUN		((__force snd_pcm_state_t) 4) /* stream reached an xrun */
+#define	SNDRV_PCM_STATE_DRAINING	((__force snd_pcm_state_t) 5) /* stream is draining */
+#define	SNDRV_PCM_STATE_PAUSED		((__force snd_pcm_state_t) 6) /* stream is paused */
+#define	SNDRV_PCM_STATE_SUSPENDED	((__force snd_pcm_state_t) 7) /* hardware is suspended */
+#define	SNDRV_PCM_STATE_DISCONNECTED	((__force snd_pcm_state_t) 8) /* hardware is disconnected */
 #define	SNDRV_PCM_STATE_LAST		SNDRV_PCM_STATE_DISCONNECTED
 
 enum {
@@ -491,13 +493,13 @@ struct snd_pcm_sync_ptr {
 
 struct snd_xferi {
 	snd_pcm_sframes_t result;
-	void *buf;
+	void __user *buf;
 	snd_pcm_uframes_t frames;
 };
 
 struct snd_xfern {
 	snd_pcm_sframes_t result;
-	void * *bufs;
+	void __user * __user *bufs;
 	snd_pcm_uframes_t frames;
 };
 
@@ -821,23 +823,23 @@ struct snd_ctl_card_info {
 };
 
 typedef int __bitwise snd_ctl_elem_type_t;
-#define	SNDRV_CTL_ELEM_TYPE_NONE	((snd_ctl_elem_type_t) 0) /* invalid */
-#define	SNDRV_CTL_ELEM_TYPE_BOOLEAN	((snd_ctl_elem_type_t) 1) /* boolean type */
-#define	SNDRV_CTL_ELEM_TYPE_INTEGER	((snd_ctl_elem_type_t) 2) /* integer type */
-#define	SNDRV_CTL_ELEM_TYPE_ENUMERATED	((snd_ctl_elem_type_t) 3) /* enumerated type */
-#define	SNDRV_CTL_ELEM_TYPE_BYTES	((snd_ctl_elem_type_t) 4) /* byte array */
-#define	SNDRV_CTL_ELEM_TYPE_IEC958	((snd_ctl_elem_type_t) 5) /* IEC958 (S/PDIF) setup */
-#define	SNDRV_CTL_ELEM_TYPE_INTEGER64	((snd_ctl_elem_type_t) 6) /* 64-bit integer type */
+#define	SNDRV_CTL_ELEM_TYPE_NONE	((__force snd_ctl_elem_type_t) 0) /* invalid */
+#define	SNDRV_CTL_ELEM_TYPE_BOOLEAN	((__force snd_ctl_elem_type_t) 1) /* boolean type */
+#define	SNDRV_CTL_ELEM_TYPE_INTEGER	((__force snd_ctl_elem_type_t) 2) /* integer type */
+#define	SNDRV_CTL_ELEM_TYPE_ENUMERATED	((__force snd_ctl_elem_type_t) 3) /* enumerated type */
+#define	SNDRV_CTL_ELEM_TYPE_BYTES	((__force snd_ctl_elem_type_t) 4) /* byte array */
+#define	SNDRV_CTL_ELEM_TYPE_IEC958	((__force snd_ctl_elem_type_t) 5) /* IEC958 (S/PDIF) setup */
+#define	SNDRV_CTL_ELEM_TYPE_INTEGER64	((__force snd_ctl_elem_type_t) 6) /* 64-bit integer type */
 #define	SNDRV_CTL_ELEM_TYPE_LAST	SNDRV_CTL_ELEM_TYPE_INTEGER64
 
 typedef int __bitwise snd_ctl_elem_iface_t;
-#define	SNDRV_CTL_ELEM_IFACE_CARD	((snd_ctl_elem_iface_t) 0) /* global control */
-#define	SNDRV_CTL_ELEM_IFACE_HWDEP	((snd_ctl_elem_iface_t) 1) /* hardware dependent device */
-#define	SNDRV_CTL_ELEM_IFACE_MIXER	((snd_ctl_elem_iface_t) 2) /* virtual mixer device */
-#define	SNDRV_CTL_ELEM_IFACE_PCM	((snd_ctl_elem_iface_t) 3) /* PCM device */
-#define	SNDRV_CTL_ELEM_IFACE_RAWMIDI	((snd_ctl_elem_iface_t) 4) /* RawMidi device */
-#define	SNDRV_CTL_ELEM_IFACE_TIMER	((snd_ctl_elem_iface_t) 5) /* timer device */
-#define	SNDRV_CTL_ELEM_IFACE_SEQUENCER	((snd_ctl_elem_iface_t) 6) /* sequencer client */
+#define	SNDRV_CTL_ELEM_IFACE_CARD	((__force snd_ctl_elem_iface_t) 0) /* global control */
+#define	SNDRV_CTL_ELEM_IFACE_HWDEP	((__force snd_ctl_elem_iface_t) 1) /* hardware dependent device */
+#define	SNDRV_CTL_ELEM_IFACE_MIXER	((__force snd_ctl_elem_iface_t) 2) /* virtual mixer device */
+#define	SNDRV_CTL_ELEM_IFACE_PCM	((__force snd_ctl_elem_iface_t) 3) /* PCM device */
+#define	SNDRV_CTL_ELEM_IFACE_RAWMIDI	((__force snd_ctl_elem_iface_t) 4) /* RawMidi device */
+#define	SNDRV_CTL_ELEM_IFACE_TIMER	((__force snd_ctl_elem_iface_t) 5) /* timer device */
+#define	SNDRV_CTL_ELEM_IFACE_SEQUENCER	((__force snd_ctl_elem_iface_t) 6) /* sequencer client */
 #define	SNDRV_CTL_ELEM_IFACE_LAST	SNDRV_CTL_ELEM_IFACE_SEQUENCER
 
 #define SNDRV_CTL_ELEM_ACCESS_READ		(1<<0)
@@ -880,7 +882,7 @@ struct snd_ctl_elem_list {
 	unsigned int space;		/* W: count of element IDs to get */
 	unsigned int used;		/* R: count of element IDs set */
 	unsigned int count;		/* R: count of all elements */
-	struct snd_ctl_elem_id *pids; /* R: IDs */
+	struct snd_ctl_elem_id __user *pids; /* R: IDs */
 	unsigned char reserved[50];
 };
 
@@ -1019,4 +1021,4 @@ struct snd_ctl_event {
 #define SNDRV_CTL_NAME_IEC958_PCM_STREAM		"PCM Stream"
 #define SNDRV_CTL_NAME_IEC958(expl,direction,what)	"IEC958 " expl SNDRV_CTL_NAME_##direction SNDRV_CTL_NAME_IEC958_##what
 
-#endif /* __SOUND_ASOUND_H */
+#endif /* _UAPI__SOUND_ASOUND_H */

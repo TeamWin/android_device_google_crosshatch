@@ -81,9 +81,9 @@ struct mdp_input_layer {
   enum mdp_color_space color_space;
   struct mdp_rect src_rect;
   struct mdp_rect dst_rect;
-  void * scale;
+  void __user * scale;
   struct mdp_layer_buffer buffer;
-  void * pp_info;
+  void __user * pp_info;
   int error_code;
   uint32_t reserved[6];
 };
@@ -98,18 +98,18 @@ struct mdp_destination_scaler_data {
   uint32_t dest_scaler_ndx;
   uint32_t lm_width;
   uint32_t lm_height;
-  uint64_t scale;
+  uint64_t __user scale;
 };
 struct mdp_layer_commit_v1 {
   uint32_t flags;
   int release_fence;
   struct mdp_rect left_roi;
   struct mdp_rect right_roi;
-  struct mdp_input_layer * input_layers;
+  struct mdp_input_layer __user * input_layers;
   uint32_t input_layer_cnt;
-  struct mdp_output_layer * output_layer;
+  struct mdp_output_layer __user * output_layer;
   int retire_fence;
-  void * dest_scaler;
+  void __user * dest_scaler;
   uint32_t dest_scaler_cnt;
   uint32_t reserved[MDP_LAYER_COMMIT_V1_PAD];
 };
@@ -132,7 +132,7 @@ struct mdp_async_layer {
   uint32_t reserved[3];
 };
 struct mdp_position_update {
-  struct mdp_async_layer * input_layers;
+  struct mdp_async_layer __user * input_layers;
   uint32_t input_layer_cnt;
 };
 #define MAX_DET_CURVES 3
@@ -205,9 +205,9 @@ struct mdp_scale_data_v2 {
   uint64_t reserved[8];
 };
 struct mdp_scale_luts_info {
-  uint64_t dir_lut;
-  uint64_t cir_lut;
-  uint64_t sep_lut;
+  uint64_t __user dir_lut;
+  uint64_t __user cir_lut;
+  uint64_t __user sep_lut;
   uint32_t dir_lut_size;
   uint32_t cir_lut_size;
   uint32_t sep_lut_size;
@@ -216,7 +216,7 @@ struct mdp_scale_luts_info {
 struct mdp_set_cfg {
   uint64_t flags;
   uint32_t len;
-  uint64_t payload;
+  uint64_t __user payload;
 };
 #endif
 
