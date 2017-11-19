@@ -181,7 +181,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
     DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
-    DumpFileToFd(fd, "RPM Stats", "/d/rpm_stats");
+    DumpFileToFd(fd, "Sleep Stats", "/sys/power/system_sleep/stats");
     DumpFileToFd(fd, "Power Management Stats", "/d/rpm_master_stats");
     DumpFileToFd(fd, "WLAN Power Stats", "/d/wlan0/power_stats");
     DumpFileToFd(fd, "LL-Stats", "/d/wlan0/ll_stats");

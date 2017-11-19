@@ -10,8 +10,8 @@
  * GNU General Public License for more details.
  */
 
-#ifndef _SPCOM_H_
-#define _SPCOM_H_
+#ifndef _UAPI_SPCOM_H_
+#define _UAPI_SPCOM_H_
 
 #include <linux/types.h>	/* uint32_t, bool */
 #ifndef BIT
@@ -75,7 +75,7 @@ enum spcom_poll_events {
 struct spcom_user_command {
 	enum spcom_cmd_id cmd_id;
 	uint32_t arg;
-} __attribute__((packed));
+} __packed;
 
 /* Command structure between User Space and spcom driver, on write() */
 struct spcom_send_command {
@@ -83,13 +83,13 @@ struct spcom_send_command {
 	uint32_t timeout_msec;
 	uint32_t buf_size;
 	char buf[0]; /* Variable buffer size - must be last field */
-} __attribute__((packed));
+} __packed;
 
 /* Command structure between userspace spcomlib and spcom driver, on write() */
 struct spcom_user_create_channel_command {
 	enum spcom_cmd_id cmd_id;
 	char ch_name[SPCOM_CHANNEL_NAME_SIZE];
-} __attribute__((packed));
+} __packed;
 
 /* maximum ION buf for send-modfied-command */
 #define SPCOM_MAX_ION_BUF 4
@@ -113,7 +113,7 @@ struct spcom_user_send_modified_command {
 	uint32_t timeout_msec;
 	uint32_t buf_size;
 	char buf[0]; /* Variable buffer size - must be last field */
-} __attribute__((packed));
+} __packed;
 
 
-#endif /* _SPCOM_H_ */
+#endif /* _UAPI_SPCOM_H_ */

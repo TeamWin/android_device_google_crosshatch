@@ -26,6 +26,9 @@
 #define QMI_IPA_MAX_FILTERS_EX_V01 128
 #define QMI_IPA_MAX_PIPES_V01 20
 #define QMI_IPA_MAX_APN_V01 8
+#define QMI_IPA_MAX_PER_CLIENTS_V01 64
+#define QMI_IPA_MAX_CLIENT_DST_PIPES_V01 8
+#define QMI_IPA_MAX_UL_FIREWALL_RULES_V01 64
 #define IPA_INT_MAX ((int) (~0U >> 1))
 #define IPA_INT_MIN (- IPA_INT_MAX - 1)
 enum ipa_qmi_result_type_v01 {
@@ -283,6 +286,9 @@ struct ipa_fltr_installed_notif_req_msg_v01 {
   uint8_t rule_id_valid;
   uint32_t rule_id_len;
   uint32_t rule_id[QMI_IPA_MAX_FILTERS_V01];
+  uint8_t dst_pipe_id_valid;
+  uint32_t dst_pipe_id_len;
+  uint32_t dst_pipe_id[QMI_IPA_MAX_CLIENT_DST_PIPES_V01];
 };
 struct ipa_fltr_installed_notif_resp_msg_v01 {
   struct ipa_qmi_response_type_v01 resp;
@@ -454,6 +460,65 @@ struct ipa_install_fltr_rule_resp_ex_msg_v01 {
   uint32_t rule_id_len;
   uint32_t rule_id[QMI_IPA_MAX_FILTERS_EX_V01];
 };
+struct ipa_enable_per_client_stats_req_msg_v01 {
+  uint8_t enable_per_client_stats;
+};
+struct ipa_enable_per_client_stats_resp_msg_v01 {
+  struct ipa_qmi_response_type_v01 resp;
+};
+struct ipa_per_client_stats_info_type_v01 {
+  uint32_t client_id;
+  uint32_t src_pipe_id;
+  uint64_t num_ul_ipv4_bytes;
+  uint64_t num_ul_ipv6_bytes;
+  uint64_t num_dl_ipv4_bytes;
+  uint64_t num_dl_ipv6_bytes;
+  uint32_t num_ul_ipv4_pkts;
+  uint32_t num_ul_ipv6_pkts;
+  uint32_t num_dl_ipv4_pkts;
+  uint32_t num_dl_ipv6_pkts;
+};
+struct ipa_get_stats_per_client_req_msg_v01 {
+  uint32_t client_id;
+  uint32_t src_pipe_id;
+  uint8_t reset_stats_valid;
+  uint8_t reset_stats;
+};
+struct ipa_get_stats_per_client_resp_msg_v01 {
+  struct ipa_qmi_response_type_v01 resp;
+  uint8_t per_client_stats_list_valid;
+  uint32_t per_client_stats_list_len;
+  struct ipa_per_client_stats_info_type_v01 per_client_stats_list[QMI_IPA_MAX_PER_CLIENTS_V01];
+};
+struct ipa_ul_firewall_rule_type_v01 {
+  enum ipa_ip_type_enum_v01 ip_type;
+  struct ipa_filter_rule_type_v01 filter_rule;
+};
+struct ipa_configure_ul_firewall_rules_req_msg_v01 {
+  uint32_t firewall_rules_list_len;
+  struct ipa_ul_firewall_rule_type_v01 firewall_rules_list[QMI_IPA_MAX_UL_FIREWALL_RULES_V01];
+  uint32_t mux_id;
+  uint8_t disable_valid;
+  uint8_t disable;
+  uint8_t are_blacklist_filters_valid;
+  uint8_t are_blacklist_filters;
+};
+struct ipa_configure_ul_firewall_rules_resp_msg_v01 {
+  struct ipa_qmi_response_type_v01 resp;
+};
+enum ipa_ul_firewall_status_enum_v01 {
+  IPA_UL_FIREWALL_STATUS_ENUM_MIN_ENUM_VAL_V01 = - 2147483647,
+  QMI_IPA_UL_FIREWALL_STATUS_SUCCESS_V01 = 0,
+  QMI_IPA_UL_FIREWALL_STATUS_FAILURE_V01 = 1,
+  IPA_UL_FIREWALL_STATUS_ENUM_MAX_ENUM_VAL_V01 = 2147483647
+};
+struct ipa_ul_firewall_config_result_type_v01 {
+  enum ipa_ul_firewall_status_enum_v01 is_success;
+  uint32_t mux_id;
+};
+struct ipa_configure_ul_firewall_rules_ind_msg_v01 {
+  struct ipa_ul_firewall_config_result_type_v01 result;
+};
 #define QMI_IPA_INDICATION_REGISTER_REQ_V01 0x0020
 #define QMI_IPA_INDICATION_REGISTER_RESP_V01 0x0020
 #define QMI_IPA_INIT_MODEM_DRIVER_REQ_V01 0x0021
@@ -486,13 +551,20 @@ struct ipa_install_fltr_rule_resp_ex_msg_v01 {
 #define QMI_IPA_INIT_MODEM_DRIVER_CMPLT_RESP_V01 0x0035
 #define QMI_IPA_INSTALL_FILTER_RULE_EX_REQ_V01 0x0037
 #define QMI_IPA_INSTALL_FILTER_RULE_EX_RESP_V01 0x0037
+#define QMI_IPA_ENABLE_PER_CLIENT_STATS_REQ_V01 0x0038
+#define QMI_IPA_ENABLE_PER_CLIENT_STATS_RESP_V01 0x0038
+#define QMI_IPA_GET_STATS_PER_CLIENT_REQ_V01 0x0039
+#define QMI_IPA_GET_STATS_PER_CLIENT_RESP_V01 0x0039
+#define QMI_IPA_INSTALL_UL_FIREWALL_RULES_REQ_V01 0x003A
+#define QMI_IPA_INSTALL_UL_FIREWALL_RULES_RESP_V01 0x003A
+#define QMI_IPA_INSTALL_UL_FIREWALL_RULES_IND_V01 0x003A
 #define QMI_IPA_INIT_MODEM_DRIVER_REQ_MAX_MSG_LEN_V01 134
 #define QMI_IPA_INIT_MODEM_DRIVER_RESP_MAX_MSG_LEN_V01 25
 #define QMI_IPA_INDICATION_REGISTER_REQ_MAX_MSG_LEN_V01 8
 #define QMI_IPA_INDICATION_REGISTER_RESP_MAX_MSG_LEN_V01 7
 #define QMI_IPA_INSTALL_FILTER_RULE_REQ_MAX_MSG_LEN_V01 22369
 #define QMI_IPA_INSTALL_FILTER_RULE_RESP_MAX_MSG_LEN_V01 783
-#define QMI_IPA_FILTER_INSTALLED_NOTIF_REQ_MAX_MSG_LEN_V01 834
+#define QMI_IPA_FILTER_INSTALLED_NOTIF_REQ_MAX_MSG_LEN_V01 870
 #define QMI_IPA_FILTER_INSTALLED_NOTIF_RESP_MAX_MSG_LEN_V01 7
 #define QMI_IPA_MASTER_DRIVER_INIT_COMPLETE_IND_MAX_MSG_LEN_V01 7
 #define QMI_IPA_DATA_USAGE_QUOTA_REACHED_IND_MAX_MSG_LEN_V01 15
@@ -518,5 +590,12 @@ struct ipa_install_fltr_rule_resp_ex_msg_v01 {
 #define QMI_IPA_INIT_MODEM_DRIVER_CMPLT_RESP_MAX_MSG_LEN_V01 7
 #define QMI_IPA_INSTALL_FILTER_RULE_EX_REQ_MAX_MSG_LEN_V01 22685
 #define QMI_IPA_INSTALL_FILTER_RULE_EX_RESP_MAX_MSG_LEN_V01 523
+#define QMI_IPA_ENABLE_PER_CLIENT_STATS_REQ_MAX_MSG_LEN_V01 4
+#define QMI_IPA_ENABLE_PER_CLIENT_STATS_RESP_MAX_MSG_LEN_V01 7
+#define QMI_IPA_GET_STATS_PER_CLIENT_REQ_MAX_MSG_LEN_V01 18
+#define QMI_IPA_GET_STATS_PER_CLIENT_RESP_MAX_MSG_LEN_V01 3595
+#define QMI_IPA_INSTALL_UL_FIREWALL_RULES_REQ_MAX_MSG_LEN_V01 9875
+#define QMI_IPA_INSTALL_UL_FIREWALL_RULES_RESP_MAX_MSG_LEN_V01 7
+#define QMI_IPA_INSTALL_UL_FIREWALL_RULES_IND_MAX_MSG_LEN_V01 11
 #endif
 
