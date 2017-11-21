@@ -69,6 +69,7 @@
 /dev/msm_amrnb_in         0640   system     audio
 /dev/msm_a2dp_in          0660   system     audio
 /dev/msm_ac3              0660   system     audio
+/dev/msm_cirrus_playback  0660   system     audio
 /dev/msm_audio_cal        0660   system     audio
 /dev/msm_hweffects        0660   system     audio
 /dev/msm_rtac             0660   system     audio

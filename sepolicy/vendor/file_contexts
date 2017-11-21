@@ -252,6 +252,7 @@
 /persist/rfs(/.*)?        u:object_r:persist_rfs_file:s0
 /persist/sensors(/.*)?    u:object_r:persist_sensors_file:s0
 /persist/time(/.*)?       u:object_r:persist_time_file:s0
+/persist/audio(/.*)?      u:object_r:persist_audio_file:s0
 
 /metadata                 u:object_r:rootfs:s0
 /metadata/.*              u:object_r:vold_data_file:s0
