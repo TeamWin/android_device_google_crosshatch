@@ -46,8 +46,6 @@ userdebug_or_eng(`
 dontaudit netmgrd kernel:system { module_request };
 
 allow netmgrd proc_net:file rw_file_perms;
-allow netmgrd net_data_file:dir r_dir_perms;
-allow netmgrd net_data_file:file r_file_perms;
 allow netmgrd netmgr_data_file:dir rw_dir_perms;
 allow netmgrd netmgr_data_file:file create_file_perms;
 allow netmgrd system_file:file execute_no_trans;

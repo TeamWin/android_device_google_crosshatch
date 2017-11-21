@@ -354,7 +354,7 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>vendor.qti.qcril.am</name>
+        <name>vendor.qti.hardware.radio.am</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>

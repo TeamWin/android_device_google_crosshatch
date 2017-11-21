@@ -13,10 +13,8 @@ userdebug_or_eng(`
   domain_auto_trans(hal_dumpstate_impl, smlog_dump_exec, smlog_dump)
   allow hal_dumpstate_impl modem_dump_file:dir create_dir_perms;
   allow hal_dumpstate_impl modem_dump_file:file create_file_perms;
-  allow hal_dumpstate_impl radio_data_file:dir r_dir_perms;
   allow hal_dumpstate_impl radio_vendor_data_file:dir r_dir_perms;
   allow hal_dumpstate_impl netmgr_data_file:dir r_dir_perms;
-  allow hal_dumpstate_impl radio_data_file:file r_file_perms;
   allow hal_dumpstate_impl radio_vendor_data_file:file r_file_perms;
   allow hal_dumpstate_impl netmgr_data_file:file r_file_perms;
   allow hal_dumpstate_impl debugfs_ipc:dir r_dir_perms;
