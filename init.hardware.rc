@@ -307,8 +307,6 @@ on zygote-start
     mkdir /data/vendor/location/xtwifi 0770 gps gps
 
     # NFC local data and nfcee xml storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
     mkdir /data/vendor/nfc 0770 nfc nfc
 
 on early-boot
