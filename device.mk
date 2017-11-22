@@ -326,7 +326,8 @@ PRODUCT_PACKAGES += \
     camera.sdm845 \
     libqomx_core \
     libmmjpeg_interface \
-    libmmcamera_interface
+    libmmcamera_interface \
+    libcameradepthcalibrator
 
 PRODUCT_PACKAGES += \
     sensors.$(PRODUCT_HARDWARE) \
