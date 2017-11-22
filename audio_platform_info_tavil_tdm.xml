@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- Copyright (c) 2014, 2016, The Linux Foundation. All rights reserved.   -->
+<!-- Copyright (c) 2014, 2016-2017, The Linux Foundation. All rights reserved. -->
 <!--                                                                        -->
 <!-- Redistribution and use in source and binary forms, with or without     -->
 <!-- modification, are permitted provided that the following conditions are -->
@@ -26,8 +26,11 @@
 <!-- IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                          -->
 <audio_platform_info>
     <acdb_ids>
-        <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="15"/>
-        <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="124"/>
+        <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="513"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_SAFE" acdb_id="513"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="513"/>
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED" acdb_id="513"/>
+        <device name="SND_DEVICE_IN_CAPTURE_VI_FEEDBACK" acdb_id="512"/>
     </acdb_ids>
     <bit_width_configs>
         <device name="SND_DEVICE_OUT_SPEAKER" bit_width="24"/>
@@ -43,31 +46,33 @@
         <usecase name="USECASE_VOICEMMODE1_CALL" type="out" id="2" />
         <usecase name="USECASE_VOICEMMODE2_CALL" type="in" id="19" />
         <usecase name="USECASE_VOICEMMODE2_CALL" type="out" id="19" />
+        <usecase name="USECASE_AUDIO_SPKR_CALIB_TX" type="in" id="41" />
     </pcm_ids>
     <config_params>
         <param key="input_mic_max_count" value="3"/>
-        <param key="snd_card_name" value="msm8998-tasha"/>
+        <param key="snd_card_name" value="sdm845-tavil-tdm-snd-card"/>
     </config_params>
+
+    <gain_db_to_level_mapping>
+        <gain_level_map db="-59" level="5"/>
+        <gain_level_map db="-17.4" level="4"/>
+        <gain_level_map db="-13.8" level="3"/>
+        <gain_level_map db="-10.2" level="2"/>
+        <gain_level_map db="0" level="1"/>
+    </gain_db_to_level_mapping>
+
     <backend_names>
-        <device name="SND_DEVICE_OUT_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
-        <device name="SND_DEVICE_OUT_LINE" backend="headphones" interface="SLIMBUS_6_RX"/>
-        <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" backend="speaker-and-headphones" interface="QUAT_MI2S_RX-and-SLIMBUS_6_RX"/>
-        <device name="SND_DEVICE_OUT_SPEAKER_AND_LINE" backend="speaker-and-headphones" interface="QUAT_MI2S_RX-and-SLIMBUS_6_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_LINE" backend="headphones" interface="SLIMBUS_6_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_TTY_FULL_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_TTY_VCO_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
-        <device name="SND_DEVICE_OUT_SPEAKER" backend="speaker" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="speaker" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_SPEAKER_REVERSE" backend="speaker" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_SPEAKER_SAFE" backend="speaker" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" backend="speaker" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_SPEAKER_HFP" backend="speaker" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_SPEAKER_SAFE_AND_HEADPHONES" backend="speaker-and-headphones" interface="QUAT_MI2S_RX-and-SLIMBUS_6_RX"/>
-        <device name="SND_DEVICE_OUT_HANDSET" backend="handset" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_HANDSET" backend="handset" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_HAC_HANDSET" backend="handset" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_HANDSET_TMUS" backend="handset" interface="QUAT_MI2S_RX"/>
+        <device name="SND_DEVICE_OUT_SPEAKER" backend="speaker" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="speaker" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_REVERSE" backend="speaker" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_SAFE" backend="speaker" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" backend="speaker" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER_HFP" backend="speaker" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_HANDSET" backend="handset" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_VOICE_HANDSET" backend="handset" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_VOICE_HAC_HANDSET" backend="handset" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_VOICE_HANDSET_TMUS" backend="handset" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_IN_CAPTURE_VI_FEEDBACK" backend="vi-feedback" interface="QUAT_TDM_TX_0"/>
     </backend_names>
 </audio_platform_info>
 

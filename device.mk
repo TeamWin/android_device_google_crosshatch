@@ -630,3 +630,23 @@ PRODUCT_VENDOR_KERNEL_HEADERS := device/google/crosshatch/sdm845/kernel-headers
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.init.subcontexts_enabled=true
+
+# Audio ACDB data
+PRODUCT_COPY_FILES += \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Bluetooth_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Bluetooth_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/General_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/General_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Global_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Global_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Handset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Handset_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Hdmi_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Hdmi_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Headset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Headset_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Speaker_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Speaker_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Codec_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Codec_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Bluetooth_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Bluetooth_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/General_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/General_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Global_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Global_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Handset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Handset_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Hdmi_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Hdmi_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Headset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Headset_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Speaker_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Speaker_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/adsp_avs_config.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/adsp_avs_config.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Codec_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Codec_cal.acdb

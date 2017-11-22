@@ -52,6 +52,7 @@ type persist_haptics_file, file_type;
 type persist_rfs_file, file_type;
 type persist_sensors_file, file_type;
 type persist_time_file, file_type;
+type persist_audio_file, file_type;
 
 type netmgr_data_file, file_type, data_file_type;
 type ipa_vendor_data_file, file_type, data_file_type;
