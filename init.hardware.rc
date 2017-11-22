@@ -430,13 +430,13 @@ service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg}
    socket thermal-recv-passive-client stream 0666 system system
 
 on property:persist.sys.ssr.restart_level=*
-    start ssr_setup
+    start vendor.ssr_setup
 
-service ssr_setup /vendor/bin/ssr_setup
+service vendor.ssr_setup /vendor/bin/ssr_setup
     oneshot
     disabled
 
-service ssr_diag /vendor/bin/ssr_diag
+service vendor.ssr_diag /vendor/bin/ssr_diag
     class late_start
     user system
     group system
