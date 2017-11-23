@@ -1,0 +1,68 @@
+#
+# Copyright (C) 2017 The Android Open-Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+on property:sys.boot_completed=1
+    # Enable bus-dcvs
+    write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
+    write /sys/class/devfreq/soc:qcom,cpubw/polling_interval 50
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/mbps_zones "2288 4577 6500 8132 9155 10681"
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/sample_ms 4
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/io_percent 40
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/hist_memory 20
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/hyst_length 10
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/low_power_ceil_mbps 0
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/low_power_io_percent 40
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/low_power_delay 20
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/guard_band_mbps 0
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/up_scale 250
+    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/idle_mbps 1600
+
+    write /sys/class/devfreq/soc:qcom,llccbw/governor "bw_hwmon"
+    write /sys/class/devfreq/soc:qcom,llccbw/polling_interval 50
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/mbps_zones "1720 2929 4943 5931 6881"
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/sample_ms 4
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/io_percent 80
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/hist_memory 20
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/hyst_length 10
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/low_power_ceil_mbps 0
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/low_power_io_percent 80
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/low_power_delay 20
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/guard_band_mbps 0
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/up_scale 250
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/idle_mbps 1600
+
+    write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
+
+    # Enable memlat governor
+    write /sys/class/devfreq/soc:qcom,memlat-cpu0/governor "mem_latency"
+    write /sys/class/devfreq/soc:qcom,memlat-cpu0/polling_interval 10
+    write /sys/class/devfreq/soc:qcom,memlat-cpu0/mem_latency/ratio_ceil 400
+    write /sys/class/devfreq/soc:qcom,memlat-cpu4/governor "mem_latency"
+    write /sys/class/devfreq/soc:qcom,memlat-cpu4/polling_interval 10
+    write /sys/class/devfreq/soc:qcom,memlat-cpu4/mem_latency/ratio_ceil 400
+
+    write /sys/class/devfreq/soc:qcom,l3-cpu0/governor "mem_latency"
+    write /sys/class/devfreq/soc:qcom,l3-cpu0/polling_interval 10
+    write /sys/class/devfreq/soc:qcom,l3-cpu0/mem_latency/ratio_ceil 400
+    write /sys/class/devfreq/soc:qcom,l3-cpu4/governor "mem_latency"
+    write /sys/class/devfreq/soc:qcom,l3-cpu4/polling_interval 10
+    write /sys/class/devfreq/soc:qcom,l3-cpu4/mem_latency/ratio_ceil 400
+
+    # Turn on sleep modes.
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+
+    # Signal perfd that boot has completed
+    setprop sys.post_boot.parsed 1
