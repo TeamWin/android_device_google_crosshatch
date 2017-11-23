@@ -25,6 +25,10 @@ on post-fs-data
 on boot
     chmod 666 /dev/diag
 
+on boot && property:ro.bootmode=usbradio && property:persist.sys.usb.usbradio.config=*
+    setprop sys.usb.config "none"
+    setprop sys.usb.config ${persist.sys.usb.usbradio.config}
+
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag"
     rm /config/usb_gadget/g1/configs/b.1/f1
