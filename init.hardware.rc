@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.power.rc
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.usb.rc
 
 on charger
@@ -24,6 +25,7 @@ on charger
     write /sys/devices/system/cpu/cpu6/online 0
     write /sys/devices/system/cpu/cpu7/online 0
     wait /dev/block/bootdevice
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
 service charger /charger
     class charger
@@ -34,6 +36,9 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
+    # Disable powersaving
+    write /sys/module/lpm_levels/parameters/sleep_disabled 1
+
     # Loading kernel modules in background
     start insmod_sh
 
@@ -41,9 +46,29 @@ on init
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
-    # STOPSHIP disable thermal and enable cores before governor settings
-    # STOPSHIP governor settings
-    # STOPSHIP start power_sh
+    # bring back all cores
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+    # configure governor settings for little cluster
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor schedutil
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/rate_limit_us 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq 1209600
+
+    # configure governor settings for big cluster
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor schedutil
+    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/rate_limit_us 0
+    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq 1574400
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 120
+    # Limit the min frequency to 825MHz
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 825000
 
     # set default schedTune value for foreground/top-app
     write /dev/stune/foreground/schedtune.prefer_idle 1
@@ -109,8 +134,6 @@ on init
     mkdir /dev/socket/pdx/system/vr/display 0775 system system
     mkdir /dev/socket/pdx/system/vr/pose 0775 system system
     mkdir /dev/socket/pdx/system/vr/sensors 0775 system system
-
-    # STOPSHIP enable low power modes
 
     # b/37682684 Enable suspend clock reporting
     write /sys/kernel/debug/clk/debug_suspend 1
@@ -307,8 +330,6 @@ on zygote-start
     mkdir /data/vendor/location/xtwifi 0770 gps gps
 
     # NFC local data and nfcee xml storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
     mkdir /data/vendor/nfc 0770 nfc nfc
 
 on early-boot
@@ -415,7 +436,7 @@ service folio_daemon /system/bin/folio_daemon
     user system
     group system
 
-service perfd /vendor/bin/perfd
+service vendor.perfd /vendor/bin/perfd
    class main
    user root
    group root readproc system
@@ -430,13 +451,13 @@ service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg}
    socket thermal-recv-passive-client stream 0666 system system
 
 on property:persist.sys.ssr.restart_level=*
-    start ssr_setup
+    start vendor.ssr_setup
 
-service ssr_setup /vendor/bin/ssr_setup
+service vendor.ssr_setup /vendor/bin/ssr_setup
     oneshot
     disabled
 
-service ssr_diag /vendor/bin/ssr_diag
+service vendor.ssr_diag /vendor/bin/ssr_diag
     class late_start
     user system
     group system
@@ -453,6 +474,9 @@ service per_proxy /vendor/bin/pm-proxy
     user system
     group system
     disabled
+
+on property:sys.post_boot.parsed=1
+    start vendor.perfd
 
 on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
@@ -651,13 +675,6 @@ service vendor.chre /vendor/bin/chre
     group system
     socket chre seqpacket 0660 root system
     shutdown critical
-
-service power_sh /vendor/bin/init.power.sh
-    class main
-    user root
-    group root system
-    disabled
-    oneshot
 
 service devstart_sh /vendor/bin/init.qcom.devstart.sh
     class main
