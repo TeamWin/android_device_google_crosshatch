@@ -329,4 +329,12 @@
     <bool name="config_enableHapticTextHandle">true</bool>
 
     <bool name="config_dual_LTE_capability">false</bool>
+
+    <!-- Values for USB port setting. in format of bootmode:current function:new function -->
+    <string-array translatable="false" name="config_oemUsbModeOverride">
+        <item>"usbradio:adb:diag,serial_cdev,rmnet_gsi,adb:diag,serial_cdev,rmnet_gsi"</item>
+        <item>"usbradio:mtp,adb:diag,serial_cdev,rmnet_gsi,adb:diag,serial_cdev,rmnet_gsi"</item>
+        <item>"usbradio:mtp:diag,serial_cdev,rmnet_gsi:diag,serial_cdev,rmnet_gsi"</item>
+    </string-array>
+
 </resources>
