@@ -247,6 +247,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
   camera.disable_zsl_mode=true \
 
+# logical camera for dual front sensors
+PRODUCT_PROPERTY_OVERRIDES += \
+  persist.vendor.camera.multicam=1
+
 # WLAN driver configuration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
@@ -326,7 +330,8 @@ PRODUCT_PACKAGES += \
     camera.sdm845 \
     libqomx_core \
     libmmjpeg_interface \
-    libmmcamera_interface
+    libmmcamera_interface \
+    libcameradepthcalibrator
 
 PRODUCT_PACKAGES += \
     sensors.$(PRODUCT_HARDWARE) \
