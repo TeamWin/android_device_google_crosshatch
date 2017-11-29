@@ -1521,6 +1521,10 @@
         <ctl name="MultiMedia1 Mixer USB_AUDIO_TX" value="1" />
     </path>
 
+    <path name="hifi-record usb-headset-mic">
+        <ctl name="MultiMedia1 Mixer USB_AUDIO_TX" value="1" />
+    </path>
+
     <path name="audio-record bt-sco">
         <ctl name="MultiMedia1 Mixer SLIM_7_TX" value="1" />
     </path>
