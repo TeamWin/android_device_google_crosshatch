@@ -221,7 +221,6 @@
 # data files
 /data/vendor/netmgr(/.*)?              u:object_r:netmgr_data_file:s0
 /data/vendor/location(/.*)?            u:object_r:location_data_file:s0
-/data/ramdump(/.*)?                    u:object_r:ramdump_data_file:s0
 /data/nfc(/.*)?                        u:object_r:nfc_data_file:s0
 /data/vendor/camera(/.*)?              u:object_r:camera_vendor_data_file:s0
 /data/vendor/display(/.*)?             u:object_r:display_vendor_data_file:s0
