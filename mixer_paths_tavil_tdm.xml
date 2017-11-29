@@ -2249,6 +2249,8 @@
     </path>
 
     <path name="voice-handset-tmus">
+        <ctl name="QUAT_TDM_RX_0 Channels" value="Two" />
+        <ctl name="Cirrus SP Usecase Config" value="Voice" />
         <path name="handset" />
     </path>
 
