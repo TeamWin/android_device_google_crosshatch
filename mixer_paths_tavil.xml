@@ -2216,6 +2216,7 @@
     </path>
 
     <path name="voice-handset-tmus">
+        <ctl name="Cirrus SP Usecase Config" value="Voice" />
         <path name="handset" />
     </path>
 
