@@ -385,3 +385,6 @@ service cnss_diag_txt /vendor/bin/cnss_diag -s -f -m /data/vendor/wifi/cnss_diag
     group system
     disabled
     oneshot
+
+on property:debug.ramdump.force_crash=true
+    write /proc/sysrq-trigger "c"
