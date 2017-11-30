@@ -40,15 +40,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicerec=false \
     ro.config.vc_call_vol_steps=7
 
-# Enable SM log mechanism by default
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.smlog_switch=1
-endif
-
-# SM loging file
+# Modem loging file
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/init.logging.rc:root/init.$(PRODUCT_PLATFORM).logging.rc
+    device/google/crosshatch/init.logging.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).logging.rc
 
 # Dumpstate HAL
 PRODUCT_PACKAGES += \
