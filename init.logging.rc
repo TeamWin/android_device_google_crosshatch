@@ -1,4 +1,3 @@
-on property:ro.build.type=userdebug
-    write /sys/class/uio/uio1/device/rtel/rtel 1
-    # SM DUMP logging collection
-    mkdir /data/smlog_dump 0777 system system
+on post-fs-data
+    mkdir /data/vendor/modem_dump 0777 system system
+    mkdir /data/vendor/radio/diag_logs/logs 0777 system system

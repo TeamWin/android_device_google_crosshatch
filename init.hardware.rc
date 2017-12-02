@@ -17,6 +17,8 @@
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.power.rc
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.usb.rc
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.diag.rc
+import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.logging.rc
+
 
 on charger
     write /sys/devices/system/cpu/cpu2/online 0
