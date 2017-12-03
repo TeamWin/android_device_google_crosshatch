@@ -655,3 +655,12 @@ PRODUCT_COPY_FILES += \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Speaker_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Speaker_cal.acdb \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/adsp_avs_config.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/adsp_avs_config.acdb \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Codec_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Codec_cal.acdb
+
+# Enable modem logging
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.modem.diag.mdlog=false \
+    persist.sys.modem.diag.mdlog_br_num=5 \
+    ro.radio.log_loc="/data/vendor/modem_dump" \
+    ro.radio.log_prefix="modem_log_"
+endif

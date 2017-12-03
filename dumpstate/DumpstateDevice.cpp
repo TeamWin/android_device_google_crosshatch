@@ -21,10 +21,11 @@
 #include <android-base/properties.h>
 #include <android-base/unique_fd.h>
 #include <cutils/properties.h>
-#include <libgen.h>
 #include <log/log.h>
-#include <stdlib.h>
-#include <string>
+#include <string.h>
+
+#define _SVID_SOURCE
+#include <dirent.h>
 
 #include "DumpstateUtil.h"
 
@@ -34,6 +35,8 @@
 
 #define DIAG_MDLOG_PROPERTY "sys.modem.diag.mdlog"
 #define DIAG_MDLOG_STATUS_PROPERTY "sys.modem.diag.mdlog_on"
+
+#define DIAG_MDLOG_NUMBER_BUGREPORT "persist.sys.modem.diag.mdlog_br_num"
 
 using android::os::dumpstate::CommandOptions;
 using android::os::dumpstate::DumpFileToFd;
@@ -45,6 +48,54 @@ namespace hardware {
 namespace dumpstate {
 namespace V1_0 {
 namespace implementation {
+
+#define DIAG_LOG_PREFIX "diag_log_"
+
+void DumpstateDevice::dumpDiagLogs(int fd, std::string srcDir, std::string destDir) {
+    struct dirent **dirent_list = NULL;
+    int num_entries = scandir(srcDir.c_str(),
+                              &dirent_list,
+                              0,
+                              (int (*)(const struct dirent **, const struct dirent **)) alphasort);
+    if (!dirent_list) {
+        return;
+    } else if (num_entries <= 0) {
+        return;
+    }
+
+    int maxFileNum = android::base::GetIntProperty(DIAG_MDLOG_NUMBER_BUGREPORT, 100);
+    int copiedFiles = 0;
+
+    for (int i = num_entries - 1; i >= 0; i--) {
+        ALOGD("Found %s\n", dirent_list[i]->d_name);
+
+        if (0 != strncmp(dirent_list[i]->d_name, DIAG_LOG_PREFIX, strlen(DIAG_LOG_PREFIX))) {
+            continue;
+        }
+
+        if ((copiedFiles >= maxFileNum) && (maxFileNum != -1)) {
+            ALOGD("Skipped %s\n", dirent_list[i]->d_name);
+            continue;
+        }
+
+        copiedFiles++;
+
+        CommandOptions options = CommandOptions::WithTimeout(120).Build();
+        std::string srcLogFile = srcDir + "/" + dirent_list[i]->d_name;
+        std::string destLogFile = destDir + "/" + dirent_list[i]->d_name;
+
+        std::string copyCmd= "/vendor/bin/cp " + srcLogFile + " " + destLogFile;
+
+        ALOGD("Copying %s to %s\n", srcLogFile.c_str(), destLogFile.c_str());
+        RunCommandToFd(fd, "CP DIAG LOGS", { "/vendor/bin/sh", "-c", copyCmd.c_str() }, options);
+    }
+
+    while (num_entries--) {
+        free(dirent_list[num_entries]);
+    }
+
+    free(dirent_list);
+}
 
 void DumpstateDevice::dumpModem(int fd, int fdModem)
 {
@@ -77,8 +128,6 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
         if (smlogEnabled) {
             RunCommandToFd(fd, "SMLOG DUMP", { "smlog_dump", "-d", "-o", modemLogAllDir.c_str() }, options);
         } else if (diagLogEnabled) {
-            std::string copyCmd= "/vendor/bin/cp -rf " + diagLogDir + " " + modemLogAllDir;
-
             android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
 
             ALOGD("Waiting for diag log to exit\n");
@@ -92,7 +141,7 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
                 sleep(1);
             }
 
-            RunCommandToFd(fd, "CP DIAG LOGS", { "/vendor/bin/sh", "-c", copyCmd.c_str()}, options);
+            dumpDiagLogs(fd, diagLogDir, modemLogAllDir);
 
             android::base::SetProperty(DIAG_MDLOG_PROPERTY, "true");
         }
