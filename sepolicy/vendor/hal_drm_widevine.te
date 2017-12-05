@@ -10,3 +10,5 @@ vndbinder_use(hal_drm_widevine);
 
 allow hal_drm mediacodec:fd use;
 allow hal_drm { appdomain -isolated_app }:fd use;
+
+allow hal_drm_widevine hal_allocator_server:fd use;
