@@ -38,6 +38,8 @@
 
 #define DIAG_MDLOG_NUMBER_BUGREPORT "persist.sys.modem.diag.mdlog_br_num"
 
+#define UFS_BOOTDEVICE "ro.boot.bootdevice"
+
 using android::os::dumpstate::CommandOptions;
 using android::os::dumpstate::DumpFileToFd;
 using android::os::dumpstate::PropertiesHelper;
@@ -229,6 +231,15 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "SoC serial number", "/sys/devices/soc0/serial_number");
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
+    DumpFileToFd(fd, "UFS model", "/sys/block/sda/device/model");
+    DumpFileToFd(fd, "UFS rev", "/sys/block/sda/device/rev");
+    DumpFileToFd(fd, "UFS size", "/sys/block/sda/size");
+
+    std::string bootdev = android::base::GetProperty(UFS_BOOTDEVICE, "");
+    if (!bootdev.empty()) {
+        std::string ufs_health = "for f in $(find /sys/devices/platform/soc/" + bootdev + "/health -type f); do if [[ -r $f && -f $f ]]; then echo --- $f; cat $f; echo ''; fi; done";
+        RunCommandToFd(fd, "UFS health", {"/vendor/bin/sh", "-c", ufs_health.c_str()});
+    }
     DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
     DumpFileToFd(fd, "Sleep Stats", "/sys/power/system_sleep/stats");
     DumpFileToFd(fd, "Power Management Stats", "/d/rpm_master_stats");
