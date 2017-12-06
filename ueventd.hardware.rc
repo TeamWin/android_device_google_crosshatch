@@ -106,10 +106,7 @@
 
 # Easel
 /dev/easelcomm-client     0660   cameraserver camera
-/dev/mnh_sm               0664   cameraserver camera
-
-# TODO (b/37941164): Temporary for easel
-/sys/devices/soc/c1b7000.i2c/i2c-9/9-0008* asr_dual_phase 0660 cameraserver camera
+/dev/mnh_sm               0660   cameraserver camera
 
 # Storage: for factory reset protection feature
 /dev/block/platform/soc/1d84000.ufshc/by-name/frp       0660   system     system
