@@ -182,7 +182,7 @@ struct cam_req_mgr_error_msg {
   uint32_t error_type;
   uint32_t request_id;
   int32_t device_hdl;
-  int32_t reserved;
+  int32_t link_hdl;
   uint64_t resource_size;
 };
 struct cam_req_mgr_frame_msg {

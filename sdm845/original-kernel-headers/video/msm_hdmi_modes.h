@@ -1,5 +1,5 @@
-#ifndef _UAPI_MSM_HDMI_MODES_H__
-#define _UAPI_MSM_HDMI_MODES_H__
+#ifndef _MSM_HDMI_MODES_H__
+#define _MSM_HDMI_MODES_H__
 #include <linux/types.h>
 #include <linux/errno.h>
 
@@ -556,4 +556,4 @@ do {	\
 	*mode = info;						\
 	} while (0)
 
-#endif /* _UAPI_MSM_HDMI_MODES_H__ */
+#endif /* _MSM_HDMI_MODES_H__ */

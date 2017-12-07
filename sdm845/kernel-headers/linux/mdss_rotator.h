@@ -16,8 +16,8 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _UAPI_MDSS_ROTATOR_H_
-#define _UAPI_MDSS_ROTATOR_H_
+#ifndef _MDSS_ROTATOR_H_
+#define _MDSS_ROTATOR_H_
 #include <linux/msm_mdp_ext.h>
 #define MDSS_ROTATOR_IOCTL_MAGIC 'w'
 #define MDSS_ROTATION_OPEN _IOWR(MDSS_ROTATOR_IOCTL_MAGIC, 1, struct mdp_rotation_config *)
@@ -66,7 +66,7 @@ struct mdp_rotation_request {
   uint32_t version;
   uint32_t flags;
   uint32_t count;
-  struct mdp_rotation_item __user * list;
+  struct mdp_rotation_item * list;
   uint32_t reserved[6];
 };
 #endif

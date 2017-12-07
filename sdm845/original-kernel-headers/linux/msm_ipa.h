@@ -1,11 +1,9 @@
-#ifndef _UAPI_MSM_IPA_H_
-#define _UAPI_MSM_IPA_H_
+#ifndef _MSM_IPA_H_
+#define _MSM_IPA_H_
 
-#ifndef __KERNEL__
 #include <stdint.h>
 #include <stddef.h>
 #include <sys/stat.h>
-#endif
 #include <linux/ioctl.h>
 #include <linux/types.h>
 #include <linux/if_ether.h>
@@ -2150,4 +2148,4 @@ enum odu_bridge_mode {
 				ODU_BRIDGE_IOCTL_SET_LLV6_ADDR, \
 				struct in6_addr *)
 
-#endif /* _UAPI_MSM_IPA_H_ */
+#endif /* _MSM_IPA_H_ */

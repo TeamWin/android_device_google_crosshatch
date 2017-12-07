@@ -16,8 +16,8 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _UAPI_LINUX_ION_H
-#define _UAPI_LINUX_ION_H
+#ifndef _LINUX_ION_H
+#define _LINUX_ION_H
 #include <linux/ioctl.h>
 #include <linux/types.h>
 typedef int ion_user_handle_t;

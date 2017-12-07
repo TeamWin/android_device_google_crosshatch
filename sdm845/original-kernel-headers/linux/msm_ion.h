@@ -1,5 +1,5 @@
-#ifndef _UAPI_MSM_ION_H
-#define _UAPI_MSM_ION_H
+#ifndef _MSM_ION_H
+#define _MSM_ION_H
 
 #include "ion.h"
 
@@ -162,14 +162,14 @@ struct ion_flush_data {
 
 struct ion_prefetch_regions {
 	unsigned int vmid;
-	size_t __user *sizes;
+	size_t *sizes;
 	unsigned int nr_sizes;
 };
 
 struct ion_prefetch_data {
 	int heap_id;
 	unsigned long len;
-	struct ion_prefetch_regions __user *regions;
+	struct ion_prefetch_regions *regions;
 	unsigned int nr_regions;
 };
 
