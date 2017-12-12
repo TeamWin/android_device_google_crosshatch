@@ -1,5 +1,0 @@
-subdirs = [
-    "vr",
-    "vibrator",
-    "usb",
-]
