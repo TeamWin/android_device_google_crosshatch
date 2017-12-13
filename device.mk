@@ -308,7 +308,7 @@ PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-service
 
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
+    device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
     device/google/crosshatch/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
 
 PRODUCT_PACKAGES += \
