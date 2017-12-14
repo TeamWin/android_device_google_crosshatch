@@ -24,6 +24,7 @@ type debugfs_usb, debugfs_type, fs_type;
 type debugfs_wlan, debugfs_type, fs_type;
 type debugfs_mdp, debugfs_type, fs_type;
 type debugfs_icnss, debugfs_type, fs_type;
+type debugfs_f2fs, debugfs_type, fs_type;
 
 # /proc
 type proc_wifi_dbg, fs_type;
