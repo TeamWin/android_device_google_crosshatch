@@ -13,6 +13,8 @@ type sysfs_timestamp_switch, sysfs_type, fs_type;
 type sysfs_touch, sysfs_type, fs_type;
 type sysfs_usb_c, sysfs_type, fs_type;
 type sysfs_usb_device, sysfs_type, fs_type;
+# b/70518189 vDSO experiments
+type sysfs_vdso, fs_type, sysfs_type;
 
 type debugfs_clk, debugfs_type, fs_type;
 type debugfs_ion, debugfs_type, fs_type;

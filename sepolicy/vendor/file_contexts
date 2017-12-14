@@ -260,3 +260,6 @@
 
 /metadata                 u:object_r:rootfs:s0
 /metadata/.*              u:object_r:vold_data_file:s0
+
+# b/70518189 vDSO experiments
+/sys/module/vdso/parameters  u:object_r:sysfs_vdso:s0
