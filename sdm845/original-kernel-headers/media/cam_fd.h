@@ -48,7 +48,7 @@ struct cam_fd_soc_clock_bw_request {
  * @prop3 : Property 3 of face
  * @prop4 : Property 4 of face
  *
- * Do not change this layout, this is inline with how HW writes
+ * Do not change this layout, this is __inline__ with how HW writes
  * these values directly when the buffer is programmed to HW
  */
 struct cam_fd_face {
@@ -65,7 +65,7 @@ struct cam_fd_face {
  * @face_count : Number of faces detected
  * @reserved   : Reserved for alignment
  *
- * Do not change this layout, this is inline with how HW writes
+ * Do not change this layout, this is __inline__ with how HW writes
  * these values directly when the buffer is programmed to HW
  */
 struct cam_fd_results {

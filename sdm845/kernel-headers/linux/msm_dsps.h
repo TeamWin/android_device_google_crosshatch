@@ -16,8 +16,8 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _UAPI_DSPS_H_
-#define _UAPI_DSPS_H_
+#ifndef _DSPS_H_
+#define _DSPS_H_
 #include <linux/ioctl.h>
 #define DSPS_IOCTL_MAGIC 'd'
 #define DSPS_IOCTL_ON _IO(DSPS_IOCTL_MAGIC, 1)

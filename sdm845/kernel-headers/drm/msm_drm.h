@@ -113,7 +113,7 @@ struct drm_msm_gem_submit_cmd {
   __u32 size;
   __u32 pad;
   __u32 nr_relocs;
-  __u64 __user relocs;
+  __u64 relocs;
 };
 #define MSM_SUBMIT_BO_READ 0x0001
 #define MSM_SUBMIT_BO_WRITE 0x0002
@@ -132,8 +132,8 @@ struct drm_msm_gem_submit {
   __u32 fence;
   __u32 nr_bos;
   __u32 nr_cmds;
-  __u64 __user bos;
-  __u64 __user cmds;
+  __u64 bos;
+  __u64 cmds;
   __s32 fence_fd;
 };
 struct drm_msm_wait_fence {

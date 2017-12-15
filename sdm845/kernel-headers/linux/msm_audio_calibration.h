@@ -91,6 +91,7 @@ enum {
 #define AFE_FB_SPKR_PROT_EX_VI_CAL_TYPE AFE_FB_SPKR_PROT_EX_VI_CAL_TYPE
 #define AFE_SIDETONE_IIR_CAL_TYPE AFE_SIDETONE_IIR_CAL_TYPE
 #define TOPOLOGY_SPECIFIC_CHANNEL_INFO
+#define MSM_SPKR_PROT_SPV3
 enum {
   VERSION_0_0,
 };
@@ -226,6 +227,10 @@ struct audio_cal_info_spk_prot_cfg {
   int32_t t0[SP_V2_NUM_MAX_SPKRS];
   uint32_t quick_calib_flag;
   uint32_t mode;
+#ifdef MSM_SPKR_PROT_SPV3
+  uint32_t sp_version;
+  int32_t limiter_th[SP_V2_NUM_MAX_SPKRS];
+#endif
 };
 struct audio_cal_info_sp_th_vi_ftm_cfg {
   uint32_t wait_time[SP_V2_NUM_MAX_SPKRS];
