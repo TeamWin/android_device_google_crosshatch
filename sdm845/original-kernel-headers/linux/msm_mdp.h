@@ -1,11 +1,7 @@
-#ifndef _UAPI_MSM_MDP_H_
-#define _UAPI_MSM_MDP_H_
+#ifndef _MSM_MDP_H_
+#define _MSM_MDP_H_
 
-#ifndef __KERNEL__
 #include <stdint.h>
-#else
-#include <linux/types.h>
-#endif
 #include <linux/fb.h>
 
 #define MSMFB_IOCTL_MAGIC 'm'
@@ -630,8 +626,8 @@ struct mdp_igc_lut_data_v1_7 {
 struct mdp_igc_lut_data_payload {
 	uint32_t table_fmt;
 	uint32_t len;
-	uint64_t __user c0_c1_data;
-	uint64_t __user c2_data;
+	uint64_t c0_c1_data;
+	uint64_t c2_data;
 	uint32_t strength;
 };
 
@@ -1033,7 +1029,7 @@ struct mdp_dither_data_v1_7 {
 struct mdp_pa_dither_data {
 	uint64_t data_flags;
 	uint32_t matrix_sz;
-	uint64_t __user matrix_data;
+	uint64_t matrix_data;
 	uint32_t strength;
 	uint32_t offset_en;
 };
@@ -1458,4 +1454,4 @@ struct mdp_pp_feature_version {
 	uint32_t pp_feature;
 	uint32_t version_info;
 };
-#endif /*_UAPI_MSM_MDP_H_*/
+#endif /* _MSM_MDP_H_*/

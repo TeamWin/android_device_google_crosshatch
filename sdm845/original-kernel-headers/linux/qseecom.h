@@ -1,5 +1,5 @@
-#ifndef _UAPI_QSEECOM_H_
-#define _UAPI_QSEECOM_H_
+#ifndef _QSEECOM_H_
+#define _QSEECOM_H_
 
 #include <linux/types.h>
 #include <linux/ioctl.h>
@@ -381,4 +381,4 @@ struct file;
 	_IOWR(QSEECOM_IOC_MAGIC, 42, struct qseecom_ce_info_req)
 
 
-#endif /* _UAPI_QSEECOM_H_ */
+#endif /* _QSEECOM_H_ */

@@ -311,7 +311,7 @@ struct mdp_input_layer {
 	struct mdp_rect		dst_rect;
 
 	/* Scaling parameters. */
-	void __user	*scale;
+	void *scale;
 
 	/* Buffer attached with each layer. Device uses it for commit call. */
 	struct mdp_layer_buffer	buffer;
@@ -320,7 +320,7 @@ struct mdp_input_layer {
 	 * Source side post processing configuration information for each
 	 * layer.
 	 */
-	void __user		*pp_info;
+	void 	*pp_info;
 
 	/*
 	 * This is an output parameter.
@@ -386,7 +386,7 @@ struct mdp_destination_scaler_data {
 	 * disabling the scaler, there is no need to provide the scale.
 	 * A userspace pointer points to struct mdp_scale_data_v2.
 	 */
-	uint64_t	__user scale;
+	uint64_t	scale;
 };
 
 /*
@@ -429,7 +429,7 @@ struct mdp_layer_commit_v1 {
 	struct mdp_rect		right_roi;
 
 	 /* Pointer to a list of input layers for composition. */
-	struct mdp_input_layer __user *input_layers;
+	struct mdp_input_layer *input_layers;
 
 	/* Input layer count present in input list */
 	uint32_t		input_layer_cnt;
@@ -439,7 +439,7 @@ struct mdp_layer_commit_v1 {
 	 * layer as output layer. This is not required for primary
 	 * and external displays
 	 */
-	struct mdp_output_layer __user *output_layer;
+	struct mdp_output_layer *output_layer;
 
 	/*
 	 * This is an output parameter.
@@ -460,7 +460,7 @@ struct mdp_layer_commit_v1 {
 	 * A userspace pointer that points to a list of
 	 * struct mdp_destination_scaler_data.
 	 */
-	void __user		*dest_scaler;
+	void 	*dest_scaler;
 
 	/*
 	 * Represents number of Destination scaler data provied by userspace.
@@ -533,7 +533,7 @@ struct mdp_async_layer {
  */
 struct mdp_position_update {
 	 /* Pointer to a list of async updatable input layers */
-	struct mdp_async_layer __user *input_layers;
+	struct mdp_async_layer *input_layers;
 
 	/* Input layer count present in input list */
 	uint32_t input_layer_cnt;
@@ -670,9 +670,9 @@ struct mdp_scale_data_v2 {
  * @sep_lut_size: Size of separable coefficients table
  */
 struct mdp_scale_luts_info {
-	uint64_t __user dir_lut;
-	uint64_t __user cir_lut;
-	uint64_t __user sep_lut;
+	uint64_t dir_lut;
+	uint64_t cir_lut;
+	uint64_t sep_lut;
 	uint32_t dir_lut_size;
 	uint32_t cir_lut_size;
 	uint32_t sep_lut_size;
@@ -683,6 +683,6 @@ struct mdp_scale_luts_info {
 struct mdp_set_cfg {
 	uint64_t flags;
 	uint32_t len;
-	uint64_t __user payload;
+	uint64_t payload;
 };
 #endif

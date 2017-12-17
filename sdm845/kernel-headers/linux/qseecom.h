@@ -16,8 +16,8 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _UAPI_QSEECOM_H_
-#define _UAPI_QSEECOM_H_
+#ifndef _QSEECOM_H_
+#define _QSEECOM_H_
 #include <linux/types.h>
 #include <linux/ioctl.h>
 #define MAX_ION_FD 4

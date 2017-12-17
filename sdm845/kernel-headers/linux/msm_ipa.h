@@ -16,8 +16,8 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _UAPI_MSM_IPA_H_
-#define _UAPI_MSM_IPA_H_
+#ifndef _MSM_IPA_H_
+#define _MSM_IPA_H_
 #include <stdint.h>
 #include <stddef.h>
 #include <sys/stat.h>

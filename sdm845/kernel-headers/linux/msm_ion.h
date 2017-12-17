@@ -16,8 +16,8 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _UAPI_MSM_ION_H
-#define _UAPI_MSM_ION_H
+#ifndef _MSM_ION_H
+#define _MSM_ION_H
 #include "ion.h"
 #define ION_BIT(nr) (1UL << (nr))
 enum msm_ion_heap_types {
@@ -112,13 +112,13 @@ struct ion_flush_data {
 };
 struct ion_prefetch_regions {
   unsigned int vmid;
-  size_t __user * sizes;
+  size_t * sizes;
   unsigned int nr_sizes;
 };
 struct ion_prefetch_data {
   int heap_id;
   unsigned long len;
-  struct ion_prefetch_regions __user * regions;
+  struct ion_prefetch_regions * regions;
   unsigned int nr_regions;
 };
 #define ION_IOC_MSM_MAGIC 'M'

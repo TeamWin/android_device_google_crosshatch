@@ -16,8 +16,8 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _UAPI_MSM_RMNET_H_
-#define _UAPI_MSM_RMNET_H_
+#ifndef _MSM_RMNET_H_
+#define _MSM_RMNET_H_
 #define RMNET_MODE_NONE (0x00)
 #define RMNET_MODE_LLP_ETH (0x01)
 #define RMNET_MODE_LLP_IP (0x02)
