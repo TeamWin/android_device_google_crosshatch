@@ -50,9 +50,13 @@
 #define V4L_EVENT_CAM_REQ_MGR_MAX 2
 #define CAM_REQ_MGR_SOF_EVENT_SUCCESS 0
 #define CAM_REQ_MGR_SOF_EVENT_ERROR 1
+#define CAM_REQ_MGR_LINK_ACTIVATE 0
+#define CAM_REQ_MGR_LINK_DEACTIVATE 1
 #define CAM_REQ_MGR_FLUSH_TYPE_ALL 0
 #define CAM_REQ_MGR_FLUSH_TYPE_CANCEL_REQ 1
 #define CAM_REQ_MGR_FLUSH_TYPE_MAX 2
+#define CAM_REQ_MGR_SYNC_MODE_NO_SYNC 0
+#define CAM_REQ_MGR_SYNC_MODE_SYNC 1
 struct cam_req_mgr_event_data {
   int32_t session_hdl;
   int32_t link_hdl;
@@ -87,16 +91,23 @@ struct cam_req_mgr_sched_request {
   int32_t session_hdl;
   int32_t link_hdl;
   int32_t bubble_enable;
-  int32_t reserved;
+  int32_t sync_mode;
   int64_t req_id;
 };
 struct cam_req_mgr_sync_mode {
   int32_t session_hdl;
-  int32_t sync_enable;
+  int32_t sync_mode;
   int32_t num_links;
   int32_t link_hdls[MAX_LINKS_PER_SESSION];
   int32_t master_link_hdl;
   int32_t reserved;
+};
+struct cam_req_mgr_link_control {
+  int32_t ops;
+  int32_t session_hdl;
+  int32_t num_links;
+  int32_t reserved;
+  int32_t link_hdls[MAX_LINKS_PER_SESSION];
 };
 #define CAM_REQ_MGR_CREATE_DEV_NODES (CAM_COMMON_OPCODE_MAX + 1)
 #define CAM_REQ_MGR_CREATE_SESSION (CAM_COMMON_OPCODE_MAX + 2)
@@ -110,6 +121,7 @@ struct cam_req_mgr_sync_mode {
 #define CAM_REQ_MGR_MAP_BUF (CAM_COMMON_OPCODE_MAX + 10)
 #define CAM_REQ_MGR_RELEASE_BUF (CAM_COMMON_OPCODE_MAX + 11)
 #define CAM_REQ_MGR_CACHE_OPS (CAM_COMMON_OPCODE_MAX + 12)
+#define CAM_REQ_MGR_LINK_CONTROL (CAM_COMMON_OPCODE_MAX + 13)
 #define CAM_MEM_FLAG_HW_READ_WRITE (1 << 0)
 #define CAM_MEM_FLAG_HW_READ_ONLY (1 << 1)
 #define CAM_MEM_FLAG_HW_WRITE_ONLY (1 << 2)
