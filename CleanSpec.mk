@@ -45,3 +45,4 @@
 #$(call add-clean-step, rm -rf $(PRODUCT_OUT)/data/*)
 
 $(call add-clean-step, rm -rf $(PRODUCT_OUT))
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor)
