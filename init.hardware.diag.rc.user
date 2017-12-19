@@ -16,3 +16,4 @@
 
 on property:ro.boot.mode=normal
     rm /dev/diag
+    rm /dev/diagtest

@@ -240,6 +240,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
         std::string ufs_health = "for f in $(find /sys/devices/platform/soc/" + bootdev + "/health -type f); do if [[ -r $f && -f $f ]]; then echo --- $f; cat $f; echo ''; fi; done";
         RunCommandToFd(fd, "UFS health", {"/vendor/bin/sh", "-c", ufs_health.c_str()});
     }
+    DumpFileToFd(fd, "F2FS", "/sys/kernel/debug/f2fs/status");
     DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
     DumpFileToFd(fd, "Sleep Stats", "/sys/power/system_sleep/stats");
     DumpFileToFd(fd, "Power Management Stats", "/d/rpm_master_stats");
