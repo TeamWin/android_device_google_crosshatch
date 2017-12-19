@@ -1,5 +1,5 @@
 get_prop(radio, ims_prop)
-userdebug_or_eng(`set_prop(radio, tel_mon_prop)')
+set_prop(radio, tel_mon_prop)
 
 allow radio qmuxd_socket:dir search;
 allow radio qmuxd_socket:sock_file write;
