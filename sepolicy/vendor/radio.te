@@ -12,6 +12,7 @@ hwbinder_use(radio)
 allow radio vnd_ims_radio_hwservice:hwservice_manager find;
 allow radio vnd_qcrilhook_hwservice:hwservice_manager find;
 allow radio hal_imsrtp_hwservice:hwservice_manager find;
+allow radio hal_radioext_hwservice:hwservice_manager find;
 
 add_service(radio, radio_service)
 allow radio {
@@ -25,3 +26,4 @@ r_dir_file(radio, sysfs_msm_subsys)
 allow radio avtimer_device:chr_file r_file_perms;
 
 binder_call(radio, hal_imsrtp)
+binder_call(radio, hal_radioext_default)

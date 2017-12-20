@@ -2,3 +2,4 @@ type vnd_ims_radio_hwservice, hwservice_manager_type;
 type vnd_qcrilhook_hwservice, hwservice_manager_type;
 type hal_imsrtp_hwservice, hwservice_manager_type;
 type hal_ipacm_hwservice, hwservice_manager_type;
+type hal_radioext_hwservice, hwservice_manager_type;
