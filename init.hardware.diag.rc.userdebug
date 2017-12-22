@@ -388,3 +388,14 @@ service cnss_diag_txt /vendor/bin/cnss_diag -s -f -m /data/vendor/wifi/cnss_diag
 
 on property:debug.ramdump.force_crash=true
     write /proc/sysrq-trigger "c"
+
+on property:ro.bluetooth.ftm_enabled=true
+    start ftmd
+
+service ftmd /vendor/bin/ftmdaemon
+    class late_start
+    user root
+    group bluetooth net_bt_admin misc net_bt_stack diag net_bt
+    disabled
+    oneshot
+
