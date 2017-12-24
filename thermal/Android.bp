@@ -1,0 +1,29 @@
+cc_binary {
+  name: "android.hardware.thermal@1.0-service.crosshatch",
+  defaults: [
+    "hidl_defaults",
+  ],
+  owner: "qcom",
+  vendor: true,
+  relative_install_path: "hw",
+  init_rc: [
+    "android.hardware.thermal@1.0-service.crosshatch.rc",
+  ],
+  srcs: [
+    "sensors.cpp",
+    "service.cpp",
+    "Thermal.cpp",
+    "thermal-helper.cpp",
+  ],
+  shared_libs: [
+    "libbase",
+    "libhidlbase",
+    "libhidltransport",
+    "libutils",
+    "android.hardware.thermal@1.0",
+  ],
+  cflags: [
+    "-Wall",
+    "-Werror",
+  ],
+}

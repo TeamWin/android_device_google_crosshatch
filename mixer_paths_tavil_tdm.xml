@@ -186,7 +186,7 @@
     <ctl name="SLIM_4_TX Format" value="UNPACKED" />
     <ctl name="AANC_SLIM_0_RX MUX" value="ZERO" />
     <!-- Cirrus TDM config -->
-    <ctl name="QUAT_TDM_RX_0 Channels" value="Eight" />
+    <ctl name="QUAT_TDM_RX_0 Channels" value="Two" />
     <ctl name="QUAT_TDM_RX_0 Format" value="S32_LE" />
     <ctl name="QUAT_TDM_TX_0 Channels" value="Eight" />
     <ctl name="QUAT_TDM_TX_0 Format" value="S32_LE" />
@@ -1537,7 +1537,7 @@
     </path>
 
     <path name="hifi-record usb-headset-mic">
-        <ctl name="MultiMedia1 Mixer USB_AUDIO_TX" value="1" />
+        <ctl name="MultiMedia2 Mixer USB_AUDIO_TX" value="1" />
     </path>
 
     <path name="audio-record bt-sco">
@@ -2133,6 +2133,7 @@
     <path name="handset">
         <ctl name="Boost Control" value="Off" />
         <ctl name="AMP Enable Switch" value="0" />
+        <ctl name="R Boost Control" value="Off" />
     </path>
 
     <path name="handset-mic">
@@ -2243,13 +2244,11 @@
     </path>
 
     <path name="voice-handset">
-        <ctl name="QUAT_TDM_RX_0 Channels" value="Two" />
         <ctl name="Cirrus SP Usecase Config" value="Voice" />
         <path name="handset" />
     </path>
 
     <path name="voice-handset-tmus">
-        <ctl name="QUAT_TDM_RX_0 Channels" value="Two" />
         <ctl name="Cirrus SP Usecase Config" value="Voice" />
         <path name="handset" />
     </path>
@@ -2264,7 +2263,6 @@
 
     <path name="voice-speaker">
         <path name="speaker-mono" />
-        <ctl name="QUAT_TDM_RX_0 Channels" value="Two" />
         <ctl name="Cirrus SP Usecase Config" value="Voice" />
         <ctl name="R Boost Control" value="Off" />
         <ctl name="R AMP Enable Switch" value="0" />

@@ -189,11 +189,6 @@
     <ctl name="AIF4_VI Mixer SPKR_VI_2" value="0" />
     <ctl name="SLIM_4_TX Format" value="UNPACKED" />
     <ctl name="AANC_SLIM_0_RX MUX" value="ZERO" />
-    <!-- Cirrus Booster Amp Algorithm Enable/Disable -->
-    <ctl name="Cirrus SP" value="Enable" />
-    <ctl name="Cirrus SP FBPort" value="QUAT_MI2S_TX" />
-    <ctl name="Cirrus SP Usecase Config" value="Music" />
-    <!-- Cirrus Booster Amp Algorithm end -->
     <!-- Cirrus Amp Gain -->
     <ctl name="Boost Control" value="On" />
     <ctl name="R Boost Control" value="On" />
@@ -1522,7 +1517,7 @@
     </path>
 
     <path name="hifi-record usb-headset-mic">
-        <ctl name="MultiMedia1 Mixer USB_AUDIO_TX" value="1" />
+        <ctl name="MultiMedia2 Mixer USB_AUDIO_TX" value="1" />
     </path>
 
     <path name="audio-record bt-sco">
@@ -2101,6 +2096,7 @@
     <path name="handset">
         <ctl name="Boost Control" value="Off" />
         <ctl name="AMP Enable Switch" value="0" />
+        <ctl name="R Boost Control" value="Off" />
     </path>
 
     <path name="handset-mic">

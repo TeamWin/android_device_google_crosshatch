@@ -360,12 +360,11 @@ PRODUCT_PACKAGES += \
 
 # Vibrator HAL
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.1-service.crosshatch
+    android.hardware.vibrator@1.1-service.crosshatch \
 
-# Thermal packages
+# Thermal HAL
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@1.0-service
+    android.hardware.thermal@1.0-service.crosshatch \
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
