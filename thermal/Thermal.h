@@ -32,8 +32,9 @@ using ::android::hardware::Return;
 
 class Thermal : public IThermal {
  public:
-    // Disallow copy and assign.
     Thermal() : thermal_helper() {}
+
+    // Disallow copy and assign.
     Thermal(const Thermal&) = delete;
     void operator= (const Thermal&) = delete;
 

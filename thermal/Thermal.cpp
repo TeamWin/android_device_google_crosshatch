@@ -63,9 +63,9 @@ Return<void> Thermal::getTemperatures(getTemperatures_cb _hidl_cb) {
         return setInitFailureAndCallback(_hidl_cb, temperatures);
     }
 
-    ssize_t res = thermal_helper.fillTemperatures(&temperatures);
-    if (res < 0) {
-        return setFailureAndCallback(_hidl_cb, temperatures, strerror(-res));
+    if (!thermal_helper.fillTemperatures(&temperatures)) {
+        return setFailureAndCallback(_hidl_cb, temperatures,
+                "Failed to read thermal sensors.");
     }
 
     for (const auto& t : temperatures) {
@@ -91,9 +91,9 @@ Return<void> Thermal::getCpuUsages(getCpuUsages_cb _hidl_cb) {
         return setInitFailureAndCallback(_hidl_cb, cpu_usages);
     }
 
-    ssize_t res = thermal_helper.fillCpuUsages(&cpu_usages);
-    if (res < 0) {
-        return setFailureAndCallback(_hidl_cb, cpu_usages, strerror(-res));
+    if (!thermal_helper.fillCpuUsages(&cpu_usages)) {
+        return setFailureAndCallback(_hidl_cb, cpu_usages,
+            "Failed to get CPU usages.");
     }
 
     for (const auto& usage : cpu_usages) {
