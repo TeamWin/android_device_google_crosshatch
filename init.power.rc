@@ -67,6 +67,3 @@ on property:sys.boot_completed=1
     # Enable idle state listener
     write /sys/class/drm/card0/device/idle_encoder_mask 1
     write /sys/class/drm/card0/device/idle_timeout_ms 100
-
-    # Signal perfd that boot has completed
-    setprop sys.post_boot.parsed 1
