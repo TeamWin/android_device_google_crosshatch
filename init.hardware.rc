@@ -335,6 +335,9 @@ on zygote-start
     # NFC local data and nfcee xml storage
     mkdir /data/vendor/nfc 0770 nfc nfc
 
+    # Create /data/time folder for time-services
+    mkdir /data/time/ 0700 system system
+
 on early-boot
     # wait for devices
     # STOPSHIP wait_for_prop sys.qcom.devup 1
