@@ -366,6 +366,7 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_SDE_RGBX_1010102_UBWC v4l2_fourcc('Q', 'X', 'B', 'A')
 #define V4L2_PIX_FMT_SDE_Y_CBCR_H2V2_TP10 v4l2_fourcc('T', 'P', '1', '0')
 #define V4L2_PIX_FMT_SDE_Y_CBCR_H2V2_P010 v4l2_fourcc('P', '0', '1', '0')
+#define V4L2_PIX_FMT_SDE_Y_CBCR_H2V2_P010_VENUS v4l2_fourcc('Q', 'P', '1', '0')
 #define V4L2_SDR_FMT_CU8 v4l2_fourcc('C', 'U', '0', '8')
 #define V4L2_SDR_FMT_CU16LE v4l2_fourcc('C', 'U', '1', '6')
 #define V4L2_SDR_FMT_CS8 v4l2_fourcc('C', 'S', '0', '8')
