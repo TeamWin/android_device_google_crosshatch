@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,19 @@
 #ifndef __SENSORS_H__
 #define __SENSORS_H__
 
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
 namespace android {
 namespace hardware {
 namespace thermal {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
 class Sensors {
     public:
      Sensors() = default;
+     ~Sensors() = default;
      Sensors(const Sensors&) = delete;
      void operator=(const Sensors&) = delete;
 
@@ -41,7 +42,7 @@ class Sensors {
      // true.
      bool readSensorFile(
          const std::string& sensor_name, std::string* data,
-         std::string* file_path);
+         std::string* file_path) const;
      size_t getNumSensors() const { return sensor_names_to_path_map_.size(); }
 
     private:
@@ -49,9 +50,10 @@ class Sensors {
 };
 
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_1
 }  // namespace thermal
 }  // namespace hardware
 }  // namespace android
 
-#endif
+#endif  // __SENSORS_H__
+
