@@ -336,7 +336,7 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>com.qualcomm.qti.ims.radio</name>
+        <name>vendor.qti.hardware.radio.ims</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
@@ -354,7 +354,7 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>com.qualcomm.qti.imsrtpservice</name>
+        <name>vendor.qti.imsrtpservice</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
