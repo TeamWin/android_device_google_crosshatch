@@ -33,7 +33,12 @@ class Sensors {
      void operator=(const Sensors&) = delete;
 
      std::string getSensorPath(const std::string& sensor_name);
+     // Returns true if add was successful, false otherwise.
      bool addSensor(const std::string& sensor_name, const std::string& path);
+     // If sensor is not found in the sensor names to path map, this will set
+     // data and file path to empty and return false.  If the sensor is found,
+     // this function will fill in data and file_path accordingly then return
+     // true.
      bool readSensorFile(
          const std::string& sensor_name, std::string* data,
          std::string* file_path);

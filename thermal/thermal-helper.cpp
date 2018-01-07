@@ -15,12 +15,13 @@
  */
 
 #include <algorithm>
-#include <dirent.h>
 #include <iostream>
 #include <regex>
 #include <sstream>
-#include <sys/types.h>
 #include <vector>
+
+#include <dirent.h>
+#include <sys/types.h>
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
@@ -34,6 +35,18 @@ namespace hardware {
 namespace thermal {
 namespace V1_0 {
 namespace implementation {
+
+constexpr char kThermalSensorsRoot[] = "/sys/devices/virtual/thermal";
+constexpr char kCpuOnlineRoot[] = "/sys/devices/system/cpu";
+constexpr char kThermalConfigPrefix[] = "/vendor/etc/thermal-engine-";
+constexpr char kCpuUsageFile[] = "/proc/stat";
+constexpr char kCpuOnlineFileSuffix[] = "online";
+constexpr char kTemperatureFileSuffix[] = "temp";
+constexpr char kSensorTypeFileSuffix[] = "type";
+constexpr char kThermalZoneDirSuffix[] = "thermal_zone";
+constexpr char kSkinSensorName[] = "xo-therm-adc";
+constexpr char kBatterySensorName[] = "battery";
+constexpr float kMultiplier = .001;
 
 // This is a golden set of thermal sensor names and their types.  Used when we
 // read in sensor values.
@@ -221,10 +234,9 @@ float getThresholdFromType(const TemperatureType type,
 void dumpSensorConfigs(const std::vector<SensorConfig>& sensor_config_vec) {
     for (const auto& sensor_config : sensor_config_vec) {
         LOG(DEBUG) << "Sensor name: " << sensor_config.sensor_name
-                   << " with threshold: " << sensor_config.threshold;
-        if (!sensor_config.action.empty()) {
-          LOG(DEBUG) << "Sensor config action: " << sensor_config.action;
-        }
+                   << " with threshold: " << sensor_config.threshold
+                   << sensor_config.action.empty() ? ""
+                   : " sensor config action" + sensor_config.action;
     }
 }
 
@@ -274,7 +286,7 @@ void ThermalHelper::initializeThresholds(
         sensor_configs, kValidThermalSensorNameTypeMap, &vr_thresholds_);
 }
 
-ssize_t ThermalHelper::readTemperature(
+bool ThermalHelper::readTemperature(
         const std::string& sensor_name, Temperature* out) {
     // Read the file.  If the file can't be read temp will be empty string.
     std::string temp;
@@ -282,12 +294,12 @@ ssize_t ThermalHelper::readTemperature(
 
     if (!thermal_sensors.readSensorFile(sensor_name, &temp, &path)) {
         LOG(ERROR) << "readTemperature: sensor not found: " << sensor_name;
-        return -EINVAL;
+        return false;
     }
 
     if (temp.empty() && !path.empty()) {
         LOG(ERROR) << "readTEmperature: failed to open file: " << path;
-        return -EINVAL;
+        return false;
     }
 
     out->type = kValidThermalSensorNameTypeMap.at(sensor_name);
@@ -308,7 +320,7 @@ ssize_t ThermalHelper::readTemperature(
         out->throttlingThreshold, out->shutdownThreshold,
         out->vrThrottlingThreshold);
 
-    return 0;
+    return true;
 }
 
 bool ThermalHelper::initializeSensorMap() {
@@ -348,35 +360,34 @@ bool ThermalHelper::initializeSensorMap() {
             == thermal_sensors.getNumSensors());
 }
 
-ssize_t ThermalHelper::fillTemperatures(hidl_vec<Temperature>* temperatures) {
+bool ThermalHelper::fillTemperatures(hidl_vec<Temperature>* temperatures) {
     if (!temperatures || temperatures->size() < kMaxTempSensors) {
         LOG(ERROR) << "fillTemperatures: incorrect buffer size";
-        return -EINVAL;
+        return false;
     }
     int current_index = 0;
     for (const auto& name_type_pair : kValidThermalSensorNameTypeMap) {
         Temperature temp;
-        ssize_t res = readTemperature(name_type_pair.first, &temp);
-        if (res == 0) {
+        if (readTemperature(name_type_pair.first, &temp)) {
             (*temperatures)[current_index] = temp;
         } else {
             LOG(ERROR) << "Error reading temperature for sensor: "
                        << name_type_pair.first;
-            return res;
+            return false;
         }
         ++current_index;
     }
-    return kValidThermalSensorNameTypeMap.size();
+    return kValidThermalSensorNameTypeMap.size() > 0;
 }
 
-ssize_t ThermalHelper::fillCpuUsages(hidl_vec<CpuUsage>* cpu_usages) {
+bool ThermalHelper::fillCpuUsages(hidl_vec<CpuUsage>* cpu_usages) {
     if (!cpu_usages || cpu_usages->size() < kMaxCpus) {
         LOG(ERROR) << "fillCpuUsages: incorrect buffer size";
-        return -EINVAL;
+        return false;
     }
 
     parseCpuUsagesFileAndAssignUsages(cpu_usages);
-    return 0;
+    return true;
 }
 
 }  // namespace implementation

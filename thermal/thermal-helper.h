@@ -51,17 +51,6 @@ using ::android::hardware::thermal::V1_0::Temperature;
 
 namespace {
 
-constexpr char kThermalSensorsRoot[] = "/sys/devices/virtual/thermal";
-constexpr char kCpuOnlineRoot[] = "/sys/devices/system/cpu";
-constexpr char kThermalConfigPrefix[] = "/vendor/etc/thermal-engine-";
-constexpr char kCpuUsageFile[] = "/proc/stat";
-constexpr char kCpuOnlineFileSuffix[] = "online";
-constexpr char kTemperatureFileSuffix[] = "temp";
-constexpr char kSensorTypeFileSuffix[] = "type";
-constexpr char kThermalZoneDirSuffix[] = "thermal_zone";
-constexpr char kSkinSensorName[] = "xo-therm-adc";
-constexpr char kBatterySensorName[] = "battery";
-constexpr float kMultiplier = .001;
 constexpr unsigned int kMaxCpus = 8;
 // 1 temp sensor for each CPU + 2 GPU, battery, and skin sensor.
 constexpr unsigned int kMaxTempSensors = 12;
@@ -80,8 +69,8 @@ class ThermalHelper {
  public:
     ThermalHelper();
 
-    ssize_t fillTemperatures(hidl_vec<Temperature>* temperatures);
-    ssize_t fillCpuUsages(hidl_vec<CpuUsage>* cpu_usages);
+    bool fillTemperatures(hidl_vec<Temperature>* temperatures);
+    bool fillCpuUsages(hidl_vec<CpuUsage>* cpu_usages);
 
     // Dissallow copy and assign.
     ThermalHelper(const ThermalHelper&) = delete;
@@ -98,7 +87,7 @@ class ThermalHelper {
     bool initializeSensorMap();
 
     // Read the temperature of a single sensor.
-    ssize_t readTemperature(
+    bool readTemperature(
         const std::string& sensor_name, Temperature* out);
 
     Sensors thermal_sensors;

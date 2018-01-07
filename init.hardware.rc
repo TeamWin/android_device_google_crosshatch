@@ -335,6 +335,9 @@ on zygote-start
     # NFC local data and nfcee xml storage
     mkdir /data/vendor/nfc 0770 nfc nfc
 
+    # Create /data/time folder for time-services
+    mkdir /data/time/ 0700 system system
+
 on early-boot
     # wait for devices
     # STOPSHIP wait_for_prop sys.qcom.devup 1
@@ -589,7 +592,7 @@ service imsdatadaemon /vendor/bin/imsdatadaemon
    group system wifi radio inet log
    disabled
 
-on property:sys.ims.QMI_DAEMON_STATUS=1
+on property:vendor.ims.QMI_DAEMON_STATUS=1
    start imsdatadaemon
 
 service ims_rtp_daemon /vendor/bin/ims_rtp_daemon
@@ -598,21 +601,14 @@ service ims_rtp_daemon /vendor/bin/ims_rtp_daemon
    group radio diag inet log
    disabled
 
-service imscmservice /vendor/bin/imscmservice
+service imsrcsservice /vendor/bin/imsrcsd
    class main
    user system
    group radio diag inet log
    disabled
 
-service imsrcsservice /vendor/bin/imsrcsd
-   class hal
-   user system
-   group radio diag inet log
-   disabled
-
-on property:sys.ims.DATA_DAEMON_STATUS=1
+on property:vendor.ims.DATA_DAEMON_STATUS=1
    start ims_rtp_daemon
-   start imscmservice
    start imsrcsservice
 
 service qmuxd /vendor/bin/qmuxd
