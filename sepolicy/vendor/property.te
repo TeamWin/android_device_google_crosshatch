@@ -13,3 +13,4 @@ type thermal_prop, property_type;
 type modem_diag_prop, property_type;
 type tel_mon_prop, property_type;
 type sys_time_prop, property_type;
+type power_prop, property_type;
