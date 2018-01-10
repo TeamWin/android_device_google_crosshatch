@@ -70,11 +70,11 @@ struct cam_ois_opcode {
 struct cam_cmd_ois_info {
   uint16_t slave_addr;
   uint8_t i2c_freq_mode;
+  uint8_t cmd_type;
   uint8_t ois_fw_flag;
   uint8_t is_ois_calib;
   char ois_name[MAX_OIS_NAME_SIZE];
   struct cam_ois_opcode opcode;
-  uint8_t cmd_type;
 } __attribute__((packed));
 struct cam_cmd_probe {
   uint8_t data_type;
