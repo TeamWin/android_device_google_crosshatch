@@ -14,3 +14,8 @@ allow init ab_block_device:lnk_file relabelto;
 allow init boot_block_device:lnk_file relabelto;
 
 dontaudit init kernel:system module_request;
+
+# b/70518189 vDSO experiments
+userdebug_or_eng(`
+allow init sysfs_vdso:file w_file_perms;
+')
