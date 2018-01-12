@@ -25,8 +25,10 @@ PRODUCT_PLATFORM := sdm845
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mixer_paths_tavil.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil.xml \
     $(LOCAL_PATH)/mixer_paths_tavil_tdm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil_tdm.xml \
+    $(LOCAL_PATH)/mixer_paths_tavil_c1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil_c1.xml \
     $(LOCAL_PATH)/audio_platform_info_tavil.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil.xml \
     $(LOCAL_PATH)/audio_platform_info_tavil_tdm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil_tdm.xml \
+    $(LOCAL_PATH)/audio_platform_info_tavil_c1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil_c1.xml \
     $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
 
 include device/google/crosshatch/device.mk
