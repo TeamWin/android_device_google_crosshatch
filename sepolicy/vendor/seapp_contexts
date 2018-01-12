@@ -24,3 +24,6 @@ user=_app seinfo=platform name=com.qualcomm.timeservice domain=timeservice_app t
 
 # Domain for easelservice app
 user=_app seinfo=easel name=com.google.android.imaging.easel.service domain=easelservice_app type=app_data_file levelFrom=user
+
+#Domain for connectivity monitor
+user=radio seinfo=platform name=com.google.android.connectivitymonitor domain=con_monitor_app type=app_data_file levelFrom=all
