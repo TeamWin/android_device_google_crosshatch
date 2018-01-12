@@ -1,9 +1,5 @@
 type google_camera_app, domain, coredomain;
 
-# TODO(b/62041836): system processes should not execute vendor code, except for
-# same-process hals and required libraries.
-typeattribute google_camera_app system_executes_vendor_violators;
-
 app_domain(google_camera_app)
 net_domain(google_camera_app)
 
