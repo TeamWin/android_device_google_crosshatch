@@ -543,6 +543,12 @@ endif
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.0-service.crosshatch
 
+# Citadel
+PRODUCT_PACKAGES += \
+    citadeld \
+    citadel_test \
+    citadel_updater
+
 # Use daemon to detect folio open/close
 PRODUCT_PACKAGES += \
     folio_daemon
