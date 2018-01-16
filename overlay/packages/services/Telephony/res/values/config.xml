@@ -19,4 +19,7 @@
 <resources>
     <!-- Allow handover from telephony calls to another ConnectionService. -->
     <bool name="config_support_handover_from">true</bool>
+
+    <!-- Flag indicating whether the device supports RTT (real-time text) -->
+    <bool name="config_support_rtt">true</bool>
 </resources>
