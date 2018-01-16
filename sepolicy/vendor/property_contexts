@@ -22,3 +22,4 @@ sys.modem.diag.            u:object_r:modem_diag_prop:s0
 persist.radio.enable_tel_mon  u:object_r:tel_mon_prop:s0
 persist.radio.poweranomaly.start u:object_r:tel_mon_prop:s0
 sys.time.set               u:object_r:sys_time_prop:s0
+vendor.powerhal.state      u:object_r:power_prop:s0
