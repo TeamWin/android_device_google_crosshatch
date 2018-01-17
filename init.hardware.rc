@@ -204,6 +204,8 @@ on post-fs
     #Wait qseecomd started
     #STOPSHIP wait_for_prop sys.listeners.registered true
 
+on property:sys.all.modules.ready=1
+    setprop wlan.driver.status "ok"
 
 on property:sys.listeners.registered=true
     # load IPA FWs
