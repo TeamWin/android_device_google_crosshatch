@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 //#define LOG_NDEBUG 0
 
-#define LOG_TAG "PowerInteractionHandler"
+#define LOG_TAG "android.hardware.power@1.2-service.crosshatch-libperfmgr"
 #define ATRACE_TAG (ATRACE_TAG_POWER | ATRACE_TAG_HAL)
 
 #include <fcntl.h>
@@ -28,11 +28,6 @@
 #include <utils/Trace.h>
 
 #include "InteractionHandler.h"
-#include "power-common.h"
-#include "power-helper.h"
-#include "powerhintparser.h"
-#include "hint-data.h"
-#include "utils.h"
 
 #define FB_IDLE_PATH "/sys/class/drm/card0/device/idle_state"
 #define MAX_LENGTH 64
@@ -40,12 +35,13 @@
 #define MSINSEC 1000L
 #define USINMS 1000000L
 
-InteractionHandler::InteractionHandler()
+InteractionHandler::InteractionHandler(std::shared_ptr<HintManager> const & hint_manager)
     : mState(INTERACTION_STATE_UNINITIALIZED),
       mWaitMs(100),
       mMinDurationMs(1400),
       mMaxDurationMs(5650),
-      mDurationMs(0) {
+      mDurationMs(0),
+      mHintManager(hint_manager) {
 }
 
 InteractionHandler::~InteractionHandler() {
@@ -95,22 +91,18 @@ void InteractionHandler::Exit() {
 }
 
 void InteractionHandler::PerfLock() {
-    int *resource_values;
-    int num_resources;
-
-    resource_values = getPowerhint(INTERACTION_HINT_ID, &num_resources);
-    if (resource_values != NULL) {
-        ALOGV("%s: acquiring perf lock", __func__);
-        perform_hint_action(INTERACTION_HINT_ID,
-                            resource_values, num_resources);
-
-        ATRACE_INT("interaction_lock", 1);
+    ALOGV("%s: acquiring perf lock", __func__);
+    if (!mHintManager->DoHint("INTERACTION")) {
+        ALOGE("%s: do hint INTERACTION failed", __func__);
     }
+    ATRACE_INT("interaction_lock", 1);
 }
 
 void InteractionHandler::PerfRel() {
     ALOGV("%s: releasing perf lock", __func__);
-    undo_hint_action(INTERACTION_HINT_ID);
+    if (!mHintManager->EndHint("INTERACTION")) {
+        ALOGE("%s: end hint INTERACTION failed", __func__);
+    }
     ATRACE_INT("interaction_lock", 0);
 }
 
@@ -123,12 +115,6 @@ long long InteractionHandler::CalcTimespecDiffMs(struct timespec start,
 }
 
 void InteractionHandler::Acquire(int32_t duration) {
-    if (is_perf_hint_active(SUSTAINED_PERF_HINT_ID) ||
-        is_perf_hint_active(VR_MODE_HINT_ID)) {
-        ALOGV("%s: ignoring due to other active perf hints", __func__);
-        return;
-    }
-
     ATRACE_CALL();
 
     std::lock_guard<std::mutex> lk(mLock);
@@ -148,7 +134,7 @@ void InteractionHandler::Acquire(int32_t duration) {
 
     struct timespec cur_timespec;
     clock_gettime(CLOCK_MONOTONIC, &cur_timespec);
-    if (finalDuration <= mDurationMs) {
+    if (mState != INTERACTION_STATE_IDLE && finalDuration <= mDurationMs) {
         long long elapsed_time = CalcTimespecDiffMs(mLastTimespec, cur_timespec);
         // don't hint if previous hint's duration covers this hint's duration
         if (elapsed_time <= (mDurationMs - finalDuration)) {

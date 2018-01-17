@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,12 @@
 #ifndef ANDROID_HARDWARE_POWER_V1_2_POWER_H
 #define ANDROID_HARDWARE_POWER_V1_2_POWER_H
 
+#include <atomic>
+
 #include <android/hardware/power/1.2/IPower.h>
 #include <hidl/MQDescriptor.h>
 #include <hidl/Status.h>
-#include <hardware/power.h>
+#include <perfmgr/HintManager.h>
 
 #include "InteractionHandler.h"
 
@@ -37,13 +39,16 @@ using ::android::hardware::Void;
 using ::InteractionHandler;
 using PowerHint_1_0 = ::android::hardware::power::V1_0::PowerHint;
 using PowerHint_1_2 = ::android::hardware::power::V1_2::PowerHint;
+using ::android::perfmgr::HintManager;
+
+constexpr char kPowerHalStateProp[] = "vendor.powerhal.state";
 
 struct Power : public IPower {
     // Methods from ::android::hardware::power::V1_0::IPower follow.
 
     Power();
 
-    Return<void> setInteractive(bool interactive) override;
+    Return<void> setInteractive(bool /* interactive */) override;
     Return<void> powerHint(PowerHint_1_0 hint, int32_t data) override;
     Return<void> setFeature(Feature feature, bool activate) override;
     Return<void> getPlatformLowPowerStats(getPlatformLowPowerStats_cb _hidl_cb) override;
@@ -58,8 +63,13 @@ struct Power : public IPower {
     // Methods from ::android::hidl::base::V1_0::IBase follow.
 
  private:
-    InteractionHandler mInteractionHandler;
     static bool isSupportedGovernor();
+
+    std::shared_ptr<HintManager> mHintManager;
+    InteractionHandler mInteractionHandler;
+    std::atomic<bool> mVRModeOn;
+    std::atomic<bool> mSustainedPerfModeOn;
+    std::atomic<bool> mEncoderModeOn;
 };
 
 }  // namespace implementation

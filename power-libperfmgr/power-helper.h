@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2018, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -33,9 +33,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "hardware/power.h"
-
 
 enum stats_type {
     //Platform Stats
@@ -93,20 +90,8 @@ struct stat_pair {
     size_t num_parameters;
 };
 
-
-void power_init(void);
-void power_hint(power_hint_t hint, void *data);
-void power_set_interactive(int on);
 int extract_platform_stats(uint64_t *list);
 int extract_wlan_stats(uint64_t *list);
-
-int is_perf_hint_active(int hint);
-
-int process_camera_launch_hint(int32_t duration);
-int process_camera_streaming_hint(int32_t duration);
-int process_camera_shot_hint(int32_t duration);
-int process_audio_streaming_hint(int32_t duration);
-int process_audio_low_latency_hint(int32_t data);
 
 #ifdef __cplusplus
 }

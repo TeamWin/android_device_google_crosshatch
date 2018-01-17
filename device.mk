@@ -178,10 +178,10 @@ PRODUCT_COPY_FILES += \
 
 # power HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.1-service.crosshatch
+    android.hardware.power@1.2-service.crosshatch-libperfmgr
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
+    $(LOCAL_PATH)/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
 # Audio fluence, ns, aec property, voice and media volume steps
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -628,6 +628,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/vibrator/cs40l20/cs40l20.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.bin \
     device/google/crosshatch/vibrator/cs40l20/cs40l20.wmfw:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.wmfw
+
+# Disable CameraHAL perfd usage
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.perfd.enable=false
 
 
 PRODUCT_VENDOR_KERNEL_HEADERS := device/google/crosshatch/sdm845/kernel-headers
