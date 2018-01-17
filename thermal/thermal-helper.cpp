@@ -44,7 +44,7 @@ constexpr char kCpuOnlineFileSuffix[] = "online";
 constexpr char kTemperatureFileSuffix[] = "temp";
 constexpr char kSensorTypeFileSuffix[] = "type";
 constexpr char kThermalZoneDirSuffix[] = "thermal_zone";
-constexpr char kSkinSensorName[] = "xo-therm-adc";
+constexpr char kSkinSensorName[] = "quiet-therm-adc";
 constexpr char kBatterySensorName[] = "battery";
 constexpr float kMultiplier = .001;
 
