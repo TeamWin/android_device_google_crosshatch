@@ -513,7 +513,7 @@ endif
 
 # Subsystem silent restart
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.ssr.restart_level=modem,slpi
+    persist.sys.ssr.restart_level=modem,slpi,adsp
 
 # setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
@@ -542,6 +542,12 @@ endif
 # Dumpstate HAL
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.0-service.crosshatch
+
+# Citadel
+PRODUCT_PACKAGES += \
+    citadeld \
+    citadel_test \
+    citadel_updater
 
 # Use daemon to detect folio open/close
 PRODUCT_PACKAGES += \
@@ -591,10 +597,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0
 
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/tango_permissions.xml:system/etc/permissions/tango_permissions.xml \
-    device/google/crosshatch/libtango_device2.jar:system/framework/libtango_device2.jar
-
-PRODUCT_COPY_FILES += \
     device/google/crosshatch/hidl/android.hidl.base@1.0.so-32:system/lib/android.hidl.base@1.0.so \
     device/google/crosshatch/hidl/android.hidl.base@1.0.so-64:system/lib64/android.hidl.base@1.0.so \
 
@@ -611,7 +613,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Easel device feature
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/permissions/com.google.hardware.camera.easel.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.google.hardware.camera.easel.xml
+    device/google/crosshatch/permissions/com.google.hardware.camera.easel_2018.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.google.hardware.camera.easel_2018.xml
 
 # Fingerprint
 PRODUCT_PACKAGES += \
