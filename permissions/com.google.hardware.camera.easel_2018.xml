@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Feature for 2018 Pixels devices with IPU hardware acceleration.
+    Exclusive to 2018 models, do not propagate to other models.
+-->
+<permissions>
+    <feature name="com.google.hardware.camera.easel_2018" />
+</permissions>
