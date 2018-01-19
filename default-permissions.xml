@@ -80,4 +80,11 @@
         <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
     </exception>
 
+    <exception package="com.google.android.settings.intelligence">
+        <!-- Calendar -->
+        <permission name="android.permission.READ_CALENDAR" fixed="true"/>
+        <!-- Location -->
+        <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="true"/>
+    </exception>
+
 </exceptions>
