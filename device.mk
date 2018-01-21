@@ -421,7 +421,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.broadcastradio@1.0-impl \
-    android.hardware.soundtrigger@2.0-impl \
+    android.hardware.soundtrigger@2.1-impl \
     android.hardware.audio@2.0-service
 
 # stereo speakers: orientation changes swap L/R channels
@@ -547,7 +547,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     citadeld \
     citadel_test \
-    citadel_updater
+    citadel_updater \
+    android.hardware.weaver@1.0-service.citadel
 
 # Use daemon to detect folio open/close
 PRODUCT_PACKAGES += \
@@ -671,7 +672,7 @@ PRODUCT_COPY_FILES += \
 # Enable modem logging
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.modem.diag.mdlog=false \
+    persist.sys.modem.diag.mdlog=true \
     persist.sys.modem.diag.mdlog_br_num=5 \
     ro.radio.log_loc="/data/vendor/modem_dump" \
     ro.radio.log_prefix="modem_log_"
