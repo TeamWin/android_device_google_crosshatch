@@ -29,7 +29,8 @@
 #define CAM_CONFIG_DEV (CAM_COMMON_OPCODE_BASE + 0x5)
 #define CAM_RELEASE_DEV (CAM_COMMON_OPCODE_BASE + 0x6)
 #define CAM_SD_SHUTDOWN (CAM_COMMON_OPCODE_BASE + 0x7)
-#define CAM_COMMON_OPCODE_MAX (CAM_COMMON_OPCODE_BASE + 0x8)
+#define CAM_FLUSH_REQ (CAM_COMMON_OPCODE_BASE + 0x8)
+#define CAM_COMMON_OPCODE_MAX (CAM_COMMON_OPCODE_BASE + 0x9)
 #define CAM_EXT_OPCODE_BASE 0x200
 #define CAM_CONFIG_DEV_EXTERNAL (CAM_EXT_OPCODE_BASE + 0x1)
 #define CAM_HANDLE_USER_POINTER 1
@@ -48,6 +49,11 @@
 #define CAM_CMD_BUF_FW 0x8
 #define CAM_CMD_BUF_GENERIC 0x9
 #define CAM_CMD_BUF_LEGACY 0xA
+enum flush_type_t {
+  CAM_FLUSH_TYPE_REQ,
+  CAM_FLUSH_TYPE_ALL,
+  CAM_FLUSH_TYPE_MAX
+};
 struct cam_control {
   uint32_t op_code;
   uint32_t size;
@@ -243,6 +249,14 @@ struct cam_acquire_dev_cmd {
   uint32_t handle_type;
   uint32_t num_resources;
   uint64_t resource_hdl;
+};
+struct cam_flush_dev_cmd {
+  uint64_t version;
+  int32_t session_handle;
+  int32_t dev_handle;
+  uint32_t flush_type;
+  uint32_t reserved;
+  int64_t req_id;
 };
 #endif
 
