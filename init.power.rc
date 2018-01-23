@@ -67,3 +67,16 @@ on property:sys.boot_completed=1
     # Enable idle state listener
     write /sys/class/drm/card0/device/idle_encoder_mask 1
     write /sys/class/drm/card0/device/idle_timeout_ms 100
+
+    # Setup permission for powerHAL
+    chown system system /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/hist_memory
+    chown system system /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/hyst_length
+    chown system system /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/hyst_trigger_count
+
+# Disable console_suspend to get better logging for kernel crashes
+on boot
+    write /sys/module/printk/parameters/console_suspend N
+
+# If UART is on, enable console_suspend on boot_complete to save power
+on property:sys.boot_completed=1 && property:init.svc.console=running
+    write /sys/module/printk/parameters/console_suspend Y
