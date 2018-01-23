@@ -27,6 +27,7 @@ VNDK_SP_LIBRARIES += \
     libunwindstack\
     liblzma\
     libz\
+    libutilscallstack\
 
 endif
 
