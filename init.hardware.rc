@@ -21,6 +21,11 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.logging.rc
 
 
 on charger
+    # Lock to lowest freqency on charger mode
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor powersave
+    # Offline all cores expect cpu0
+    write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/devices/system/cpu/cpu4/online 0
