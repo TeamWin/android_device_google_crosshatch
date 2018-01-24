@@ -394,7 +394,7 @@
         <name>com.quicinc.cne.server</name>
         <transport>hwbinder</transport>
         <impl level="generic"></impl>
-        <version>1.0</version>
+        <version>2.0</version>
         <interface>
             <name>IServer</name>
             <instance>cnd</instance>

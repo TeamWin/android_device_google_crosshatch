@@ -219,19 +219,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.VT_ENABLE=1 \
     persist.radio.VT_HYBRID_ENABLE=1 \
     persist.radio.apm_sim_not_pwdn=1 \
-    persist.radio.custom_ecc=1 \
-    persist.radio.data_ltd_sys_ind=1 \
-    persist.radio.is_wps_enabled=true \
+    persist.vendor.radio.custom_ecc=1 \
+    persist.vendor.radio.data_ltd_sys_ind=1 \
+    persist.vendor.radio.is_wps_enabled=true \
     persist.radio.videopause.mode=1 \
-    persist.radio.sib16_support=1 \
-    persist.radio.data_con_rprt=true \
+    persist.vendor.radio.sib16_support=1 \
+    persist.vendor.radio.data_con_rprt=true \
     persist.rcs.supported=1 \
     rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
 
 # Set snapshot timer to 3 second
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.snapshot_enabled=1 \
-    persist.radio.snapshot_timer=3
+    persist.vendor.radio.snapshot_enabled=1 \
+    persist.vendor.radio.snapshot_timer=3
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.vendor.extension_library=libqti-perfd-client.so
