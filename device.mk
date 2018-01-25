@@ -590,6 +590,7 @@ PRODUCT_PACKAGES += \
     liblzma.vndk-sp\
     libz.vndk-sp\
     libutilscallstack.vndk-sp\
+    libdexfile.vndk-sp\
 
 PRODUCT_ENFORCE_RRO_TARGETS := framework-res
 

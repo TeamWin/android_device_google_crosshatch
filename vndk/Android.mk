@@ -28,6 +28,7 @@ VNDK_SP_LIBRARIES += \
     liblzma\
     libz\
     libutilscallstack\
+    libdexfile\
 
 endif
 
