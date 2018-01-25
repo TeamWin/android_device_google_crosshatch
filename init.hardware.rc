@@ -21,6 +21,11 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.logging.rc
 
 
 on charger
+    # Lock to lowest freqency on charger mode
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor powersave
+    # Offline all cores expect cpu0
+    write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/devices/system/cpu/cpu4/online 0
@@ -251,8 +256,10 @@ on zygote-start
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
+    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
@@ -535,7 +542,8 @@ service ss_ramdump /vendor/bin/subsystem_ramdump
 
 on property:persist.sys.ssr.enable_ramdumps=1
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
-    mkdir /data/vendor/ramdump 761 root system
+    mkdir /data/vendor/ramdump 771 root system
+    mkdir /data/vendor/ssrdump 771 root system
     start ss_ramdump
 
 on property:persist.sys.ssr.enable_ramdumps=0
@@ -566,7 +574,7 @@ service tftp_server /vendor/bin/tftp_server
    group root system
 
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
-    -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 -dd \
+    -O/data/vendor/wifi/wpa/sockets -puse_p2p_group_interface=1 -dd \
     -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
