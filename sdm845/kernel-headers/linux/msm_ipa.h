@@ -436,8 +436,10 @@ enum ipa_hdr_l2_type {
   IPA_HDR_L2_NONE,
   IPA_HDR_L2_ETHERNET_II,
   IPA_HDR_L2_802_3,
+  IPA_HDR_L2_802_1Q,
 };
-#define IPA_HDR_L2_MAX (IPA_HDR_L2_802_3 + 1)
+#define IPA_HDR_L2_MAX (IPA_HDR_L2_802_1Q + 1)
+#define IPA_HDR_L2_802_1Q IPA_HDR_L2_802_1Q
 enum ipa_hdr_proc_type {
   IPA_HDR_PROC_NONE,
   IPA_HDR_PROC_ETHII_TO_ETHII,
