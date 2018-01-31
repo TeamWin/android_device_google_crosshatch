@@ -23,6 +23,8 @@
 #define MAX_ION_FD 4
 #define MAX_APP_NAME_SIZE 64
 #define QSEECOM_HASH_SIZE 32
+#define QSEECOM_TA_ION_ALLOCATE_DELAY 50
+#define QSEECOM_TA_ION_ALLOCATE_MAX_ATTEMP 20
 struct qseecom_register_listener_req {
   uint32_t listener_id;
   int32_t ifd_data_fd;
