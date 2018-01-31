@@ -636,7 +636,6 @@ PRODUCT_COPY_FILES += \
 
 # CS40L20 Haptics Waveform
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/vibrator/cs40l20/cs40l20.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.bin \
     device/google/crosshatch/vibrator/cs40l20/cs40l20.wmfw:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.wmfw
 
 # Disable CameraHAL perfd usage
