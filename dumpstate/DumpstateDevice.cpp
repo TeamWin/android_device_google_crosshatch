@@ -33,6 +33,7 @@
 #define MODEM_LOG_LOC_PROPERTY "ro.radio.log_loc"
 #define MODEM_LOGGING_SWITCH "persist.radio.smlog_switch"
 
+#define DIAG_MDLOG_PERSIST_PROPERTY "persist.sys.modem.diag.mdlog"
 #define DIAG_MDLOG_PROPERTY "sys.modem.diag.mdlog"
 #define DIAG_MDLOG_STATUS_PROPERTY "sys.modem.diag.mdlog_on"
 
@@ -108,12 +109,12 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
     }
 
     if (!PropertiesHelper::IsUserBuild()) {
-        bool smlogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_SWITCH, false) &&
-                !access("/vendor/bin/smlog_dump", X_OK);
-
-        bool diagLogEnabled = android::base::GetBoolProperty(DIAG_MDLOG_PROPERTY, false);
 
         CommandOptions options = CommandOptions::WithTimeout(120).Build();
+
+        RunCommandToFd(fd, "MODEM DIAG SYSTEM PROPERTIES",
+                       { "/vendor/bin/sh", "-c", "getprop | grep sys.modem.diag" }, options);
+
         std::string modemLogAllDir = modemLogDir + "/modem_log";
         std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
         std::vector<std::string> rilAndNetmgrLogs
@@ -122,21 +123,34 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
               "/data/vendor/radio/ril_log_old",
               "/data/vendor/netmgr/netmgr_log",
               "/data/vendor/netmgr/netmgr_log_old",
-              "/data/vendor/radio/power_anomaly_data.txt"
+              "/data/vendor/radio/power_anomaly_data.txt",
+              "/data/vendor/radio/diag_logs/diag_trace.txt",
+              "/data/vendor/radio/diag_logs/diag_trace_old.txt",
             };
 
         std::string modemLogMkDirCmd= "/vendor/bin/mkdir -p " + modemLogAllDir;
         RunCommandToFd(fd, "MKDIR MODEM LOG", { "/vendor/bin/sh", "-c", modemLogMkDirCmd.c_str()}, options);
 
+        bool smlogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_SWITCH, false) &&
+            !access("/vendor/bin/smlog_dump", X_OK);
+
+        bool diagLogEnabled = android::base::GetBoolProperty(DIAG_MDLOG_PERSIST_PROPERTY, false);
+
         if (smlogEnabled) {
             RunCommandToFd(fd, "SMLOG DUMP", { "smlog_dump", "-d", "-o", modemLogAllDir.c_str() }, options);
         } else if (diagLogEnabled) {
-            android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
+            bool diagLogStarted = android::base::GetBoolProperty(DIAG_MDLOG_STATUS_PROPERTY, false);
 
-            ALOGD("Waiting for diag log to exit\n");
+            if (diagLogStarted) {
+                android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
+                ALOGD("Stopping diag_mdlog...\n");
+            } else {
+                ALOGD("diag_mdlog is not running\n");
+            }
+
             for (int i = 0; i < 30; i++) {
                 if (!android::base::GetBoolProperty(DIAG_MDLOG_STATUS_PROPERTY, false)) {
-                    ALOGD("diag log exited\n");
+                    ALOGD("diag_mdlog exited\n");
                     sleep(1);
                     break;
                 }
@@ -146,13 +160,16 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
 
             dumpDiagLogs(fd, diagLogDir, modemLogAllDir);
 
-            android::base::SetProperty(DIAG_MDLOG_PROPERTY, "true");
+            if (diagLogStarted) {
+                ALOGD("Restarting diag_mdlog...\n");
+                android::base::SetProperty(DIAG_MDLOG_PROPERTY, "true");
+            }
         }
 
         for (const auto& logFile : rilAndNetmgrLogs)
         {
             std::string copyCmd= "/vendor/bin/cp " + logFile + " " + modemLogAllDir;
-            RunCommandToFd(fd, "CP MODEM LOG", { "/vendor/bin/sh", "-c", copyCmd.c_str()}, options);
+            RunCommandToFd(fd, "CP MODEM LOG", { "/vendor/bin/sh", "-c", copyCmd.c_str() }, options);
         }
 
         std::string filePrefix = android::base::GetProperty(MODEM_LOG_PREFIX_PROPERTY, "");
