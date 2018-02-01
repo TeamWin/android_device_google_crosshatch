@@ -48,6 +48,10 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
 
+# We need vold early for metadata encryption
+on early-fs
+    start vold
+
 on init
     # QSEE rpmb listener need symlink for bootdevice
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -210,6 +214,10 @@ on fs
     chmod 0770 /persist/hlos_rfs
     restorecon_recursive /persist
 
+    restorecon_recursive /metadata
+    mkdir /metadata/vold
+    chmod 0700 /metadata/vold
+
 on late-fs
     # Start devices by sysfs trigger
     start devstart_sh
@@ -240,6 +248,9 @@ on post-fs
     chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
     write /sys/devices/virtual/graphics/fb0/idle_time 100
+
+    wait_for_prop hwservicemanager.ready true
+    exec - root root -- /system/bin/wait_for_keymaster
 
 on property:vendor.all.modules.ready=1
     setprop wlan.driver.status "ok"
