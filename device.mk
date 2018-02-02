@@ -684,3 +684,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.radio.log_loc="/data/vendor/modem_dump" \
     ro.radio.log_prefix="modem_log_"
 endif
+
+# Preopt SystemUI
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUIGoogle
