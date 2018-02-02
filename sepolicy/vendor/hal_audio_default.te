@@ -12,3 +12,6 @@ userdebug_or_eng(`
 # read-only permission to obtain the calibration data
 r_dir_file(hal_audio_default, persist_audio_file);
 allow hal_audio_default persist_file:dir search;
+
+# For interfacing with PowerHAL
+hal_client_domain(hal_audio_default, hal_power)
