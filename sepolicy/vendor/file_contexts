@@ -174,7 +174,7 @@
 /vendor/bin/hw/android\.hardware\.vibrator@1\.1-service.crosshatch        u:object_r:hal_vibrator_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@3\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
-/vendor/bin/hw/android\.hardware\.gnss@1\.0-service-qti              u:object_r:hal_gnss_qti_exec:s0
+/vendor/bin/hw/android\.hardware\.gnss@1\.1-service-qti              u:object_r:hal_gnss_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.bluetooth@1\.0-service-qti         u:object_r:hal_bluetooth_default_exec:s0
 /vendor/bin/hw/android\.hardware\.weaver@1\.0-service.citadel        u:object_r:hal_weaver_citadel_exec:s0
 /vendor/bin/hw/citadeld                                              u:object_r:citadeld_exec:s0
