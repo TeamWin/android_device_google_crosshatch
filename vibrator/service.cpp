@@ -121,61 +121,48 @@ status_t registerVibratorService() {
     // ostreams below are required
     std::ofstream activate{ACTIVATE_PATH};
     if (!activate) {
-        int error = errno;
-        ALOGE("Failed to open %s (%d): %s", ACTIVATE_PATH, error, strerror(error));
-        return -error;
+        ALOGE("Failed to open %s (%d): %s", ACTIVATE_PATH, errno, strerror(errno));
     }
 
     std::ofstream duration{DURATION_PATH};
     if (!duration) {
-        int error = errno;
-        ALOGE("Failed to open %s (%d): %s", DURATION_PATH, error, strerror(error));
-        return -error;
+        ALOGE("Failed to open %s (%d): %s", DURATION_PATH, errno, strerror(errno));
     }
 
     std::ofstream state{STATE_PATH};
     if (!state) {
-        int error = errno;
-        ALOGE("Failed to open %s (%d): %s", STATE_PATH, error, strerror(error));
-        return -error;
+        ALOGE("Failed to open %s (%d): %s", STATE_PATH, errno, strerror(errno));
     }
 
     state << 1 << std::endl;
     if (!state) {
-        int error = errno;
         ALOGE("Failed to set state (%d): %s", errno, strerror(errno));
-        return -error;
     }
 
     // ostreams below are optional
     std::ofstream rtpinput{RTP_INPUT_PATH};
     if (!rtpinput) {
-        int error = errno;
-        ALOGW("Failed to open %s (%d): %s", RTP_INPUT_PATH, error, strerror(error));
+        ALOGW("Failed to open %s (%d): %s", RTP_INPUT_PATH, errno, strerror(errno));
     }
 
     std::ofstream mode{MODE_PATH};
     if (!mode) {
-        int error = errno;
-        ALOGW("Failed to open %s (%d): %s", MODE_PATH, error, strerror(error));
+        ALOGW("Failed to open %s (%d): %s", MODE_PATH, errno, strerror(errno));
     }
 
     std::ofstream sequencer{SEQUENCER_PATH};
     if (!sequencer) {
-        int error = errno;
-        ALOGW("Failed to open %s (%d): %s", SEQUENCER_PATH, error, strerror(error));
+        ALOGW("Failed to open %s (%d): %s", SEQUENCER_PATH, errno, strerror(errno));
     }
 
     std::ofstream scale{SCALE_PATH};
     if (!scale) {
-        int error = errno;
-        ALOGW("Failed to open %s (%d): %s", SCALE_PATH, error, strerror(error));
+        ALOGW("Failed to open %s (%d): %s", SCALE_PATH, errno, strerror(errno));
     }
 
     std::ofstream ctrlloop{CTRL_LOOP_PATH};
     if (!ctrlloop) {
-        int error = errno;
-        ALOGW("Failed to open %s (%d): %s", CTRL_LOOP_PATH, error, strerror(error));
+        ALOGW("Failed to open %s (%d): %s", CTRL_LOOP_PATH, errno, strerror(errno));
     }
 
     if (!loadCalibrationData()) {
