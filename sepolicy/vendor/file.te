@@ -34,7 +34,6 @@ type proc_wifi_dbg, fs_type;
 type qmuxd_socket, file_type;
 type netmgrd_socket, file_type;
 type thermal_socket, file_type;
-type perfd_socket, file_type;
 
 type ims_socket, file_type;
 type ipacm_socket, file_type;

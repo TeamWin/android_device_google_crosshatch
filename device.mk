@@ -233,9 +233,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.snapshot_enabled=1 \
     persist.vendor.radio.snapshot_timer=3
 
-PRODUCT_PROPERTY_OVERRIDES += \
-  ro.vendor.extension_library=libqti-perfd-client.so
-
 # camera gyro and laser sensor
 PRODUCT_PROPERTY_OVERRIDES += \
   persist.camera.gyro.android=20 \
@@ -638,11 +635,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/vibrator/cs40l20/cs40l20.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.bin \
     device/google/crosshatch/vibrator/cs40l20/cs40l20.wmfw:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.wmfw
-
-# Disable CameraHAL perfd usage
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.perfd.enable=false
-
 
 PRODUCT_VENDOR_KERNEL_HEADERS := device/google/crosshatch/sdm845/kernel-headers
 
