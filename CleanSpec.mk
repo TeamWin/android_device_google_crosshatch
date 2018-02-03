@@ -46,3 +46,4 @@
 
 $(call add-clean-step, rm -rf $(PRODUCT_OUT))
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor)
