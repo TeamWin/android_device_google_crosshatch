@@ -112,6 +112,9 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
 
         CommandOptions options = CommandOptions::WithTimeout(120).Build();
 
+        RunCommandToFd(fd, "MODEM RFS INFO",
+                       { "/vendor/bin/sh", "-c", "find /data/vendor/rfs/mpss/OEMFI/" }, options);
+
         RunCommandToFd(fd, "MODEM DIAG SYSTEM PROPERTIES",
                        { "/vendor/bin/sh", "-c", "getprop | grep sys.modem.diag" }, options);
 

@@ -14,5 +14,7 @@ allow rfs_access firmware_file:file r_file_perms;
 allow rfs_access persist_file:dir search;
 allow rfs_access persist_rfs_file:dir create_dir_perms;
 allow rfs_access persist_rfs_file:file create_file_perms;
+allow rfs_access mpss_rfs_data_file:dir create_dir_perms;
+allow rfs_access mpss_rfs_data_file:file create_file_perms;
 
 allow rfs_access self:socket create_socket_perms_no_ioctl;
