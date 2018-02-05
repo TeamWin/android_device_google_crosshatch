@@ -78,3 +78,6 @@ type sysfs_data, fs_type, sysfs_type;
 type sysfs_diag, fs_type, sysfs_type;
 
 type hexagon_halide_file, vendor_file_type, file_type;
+
+#mpss rfs files
+type mpss_rfs_data_file, data_file_type, file_type;

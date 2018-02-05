@@ -82,9 +82,13 @@ PRODUCT_COPY_FILES += \
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.diag.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).diag.rc
+  PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/init.hardware.mpssrfs.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).mpssrfs.rc
 else
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.diag.rc.user:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).diag.rc
+  PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/init.hardware.mpssrfs.rc.user:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).mpssrfs.rc
 endif
 
 #per device
@@ -377,8 +381,8 @@ PRODUCT_PACKAGES += \
     libgps.utils \
     libgnss \
     liblocation_api \
-    android.hardware.gnss@1.0-impl-qti \
-    android.hardware.gnss@1.0-service-qti
+    android.hardware.gnss@1.1-impl-qti \
+    android.hardware.gnss@1.1-service-qti
 
 # VR HAL
 PRODUCT_PACKAGES += \
@@ -636,7 +640,6 @@ PRODUCT_COPY_FILES += \
 
 # CS40L20 Haptics Waveform
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/vibrator/cs40l20/cs40l20.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.bin \
     device/google/crosshatch/vibrator/cs40l20/cs40l20.wmfw:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.wmfw
 
 # Disable CameraHAL perfd usage
@@ -684,3 +687,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.radio.log_loc="/data/vendor/modem_dump" \
     ro.radio.log_prefix="modem_log_"
 endif
+
+# Preopt SystemUI
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUIGoogle

@@ -16,3 +16,6 @@ userdebug_or_eng(`
   allow hal_camera_default camera_vendor_data_file:dir create_dir_perms;
   allow hal_camera_default camera_vendor_data_file:file create_file_perms;
 ')
+
+# For interfacing with PowerHAL
+hal_client_domain(hal_audio_default, hal_power)
