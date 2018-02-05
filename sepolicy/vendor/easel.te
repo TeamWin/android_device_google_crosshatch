@@ -1,0 +1,19 @@
+# easel service
+type easel, domain;
+type easel_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(easel)
+
+add_service(easel, easel_service)
+
+vndbinder_use(easel)
+
+# access easel dev nodes
+allow easel easel_device:chr_file rw_file_perms;
+allow easel sysfs_easel:file rw_file_perms;
+allow easel sysfs_easel:dir r_dir_perms;
+
+# access easel thermal sysfs
+allow easel sysfs_thermal:dir r_dir_perms;
+allow easel sysfs_thermal:file r_file_perms;
+allow easel sysfs_thermal:lnk_file r_file_perms;
