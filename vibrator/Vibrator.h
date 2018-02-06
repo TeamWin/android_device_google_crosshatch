@@ -29,10 +29,7 @@ namespace implementation {
 
 class Vibrator : public IVibrator {
 public:
-    Vibrator(std::ofstream&& activate, std::ofstream&& duration,
-            std::ofstream&& state, std::ofstream&& rtpinput,
-            std::ofstream&& mode, std::ofstream&& sequencer,
-            std::ofstream&& scale, std::ofstream&& ctrlloop);
+    Vibrator(std::ofstream&& activate, std::ofstream&& duration);
 
     // Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
     using Status = ::android::hardware::vibrator::V1_0::Status;
@@ -50,14 +47,6 @@ private:
     Return<Status> on(uint32_t timeoutMs, bool forceOpenLoop, bool isWaveform);
     std::ofstream mActivate;
     std::ofstream mDuration;
-    std::ofstream mState;
-    std::ofstream mRtpInput;
-    std::ofstream mMode;
-    std::ofstream mSequencer;
-    std::ofstream mScale;
-    std::ofstream mCtrlLoop;
-    int32_t mClickDuration;
-    int32_t mTickDuration;
 };
 }  // namespace implementation
 }  // namespace V1_1
