@@ -557,6 +557,7 @@ PRODUCT_PACKAGES += \
     citadeld \
     citadel_test \
     citadel_updater \
+    android.hardware.oemlock@1.0-service.citadel \
     android.hardware.weaver@1.0-service.citadel
 
 # Use daemon to detect folio open/close

@@ -1,0 +1,9 @@
+type hal_oemlock_citadel, domain;
+type hal_oemlock_citadel_exec, exec_type, vendor_file_type, file_type;
+
+vndbinder_use(hal_oemlock_citadel)
+binder_call(hal_oemlock_citadel, citadeld)
+allow hal_oemlock_citadel citadeld_service:service_manager find;
+
+hal_server_domain(hal_oemlock_citadel, hal_oemlock)
+init_daemon_domain(hal_oemlock_citadel)
