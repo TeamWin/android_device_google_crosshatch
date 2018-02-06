@@ -27,11 +27,16 @@ namespace implementation {
 using ::android::hardware::vr::V1_0::IVr;
 using ::android::hardware::Return;
 
-struct VrDevice : public IVr {
+class VrDevice : public IVr {
+  public:
     VrDevice();
 
     Return<void> init()  override;
     Return<void> setVrMode(bool enabled)  override;
+    Return<void> debug(const hidl_handle& handle, const hidl_vec<hidl_string>&)  override;
+
+  private:
+    bool mVRmode;
 };
 
 }  // namespace implementation

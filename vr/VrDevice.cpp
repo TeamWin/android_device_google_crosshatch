@@ -16,8 +16,11 @@
 
 #define LOG_TAG "VrDevice"
 
+#include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/properties.h>
+#include <android-base/stringprintf.h>
+
 #include "VrDevice.h"
 
 namespace android {
@@ -26,7 +29,7 @@ namespace vr {
 namespace V1_0 {
 namespace implementation {
 
-VrDevice::VrDevice() {}
+VrDevice::VrDevice() : mVRmode(false) {}
 
 Return<void> VrDevice::init() {
     // NOOP
@@ -37,6 +40,7 @@ Return<void> VrDevice::setVrMode(bool enabled) {
     std::string hwProp = android::base::GetProperty("ro.hardware", "default");
     std::string vrMode = enabled ? "-vr" : "";
     std::string thermalConf = "/vendor/etc/thermal-engine-" + hwProp + vrMode + ".conf";
+    mVRmode = enabled;
 
     if (!android::base::SetProperty("sys.qcom.thermalcfg", thermalConf)) {
         LOG(ERROR) << "Couldn't set sys.qcom.thermalcfg to " << thermalConf;
@@ -44,6 +48,19 @@ Return<void> VrDevice::setVrMode(bool enabled) {
     }
     if (!android::base::SetProperty("ctl.restart", "thermal-engine")) {
         LOG(ERROR) << "Couldn't set thermal_engine restart property";
+    }
+    return Void();
+}
+
+Return<void> VrDevice::debug(const hidl_handle& handle, const hidl_vec<hidl_string>&) {
+    if (handle != nullptr && handle->numFds >= 1) {
+        int fd = handle->data[0];
+        std::string buf(android::base::StringPrintf("VRMode: %s\n",
+                                                    (mVRmode ? "true" : "false")));
+        if (!android::base::WriteStringToFd(buf, fd)) {
+            PLOG(ERROR) << "Failed to dump state to fd";
+        }
+        fsync(fd);
     }
     return Void();
 }
