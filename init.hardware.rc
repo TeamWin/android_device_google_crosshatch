@@ -311,10 +311,6 @@ on zygote-start
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
 
-    # Create perfd related dirs
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
-
     chmod 775 /persist/sensors
     chmod 664 /persist/sensors/sensors_settings
     chown system root /persist/sensors/sensors_settings
@@ -453,12 +449,6 @@ service folio_daemon /system/bin/folio_daemon
     class late_start
     user system
     group system
-
-service vendor.perfd /vendor/bin/perfd
-   class main
-   user root
-   group root readproc system
-   socket perfd seqpacket 0666 root system
 
 service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg}
    class main

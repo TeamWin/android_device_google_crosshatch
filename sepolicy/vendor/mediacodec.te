@@ -1,8 +1,3 @@
-# VIDEO_DECODE_PLAYBACK_HINT is for interactive governor in HMP kernels
-# Do not grant the access
-dontaudit mediacodec perfd:unix_stream_socket connectto;
-dontaudit mediacodec perfd_socket:sock_file write;
-
 allow mediacodec sysfs_soc:file r_file_perms;
 allow mediacodec sysfs_soc:dir search;
 

@@ -1,8 +1,5 @@
 r_dir_file(hal_audio_default, sysfs_soc)
 
-dontaudit hal_audio_default perfd:unix_stream_socket connectto;
-dontaudit hal_audio_default perfd_socket:sock_file write;
-
 hal_client_domain(hal_audio_default, hal_power)
 
 userdebug_or_eng(`
