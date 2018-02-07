@@ -237,9 +237,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.snapshot_enabled=1 \
     persist.vendor.radio.snapshot_timer=3
 
-PRODUCT_PROPERTY_OVERRIDES += \
-  ro.vendor.extension_library=libqti-perfd-client.so
-
 # camera gyro and laser sensor
 PRODUCT_PROPERTY_OVERRIDES += \
   persist.camera.gyro.android=20 \
@@ -569,33 +566,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
 PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0.vndk-sp\
-    android.hardware.graphics.allocator@2.0.vndk-sp\
-    android.hardware.graphics.mapper@2.0.vndk-sp\
-    android.hardware.graphics.common@1.0.vndk-sp\
-    libhwbinder.vndk-sp\
-    libbase.vndk-sp\
-    libcutils.vndk-sp\
-    libhardware.vndk-sp\
-    libhidlbase.vndk-sp\
-    libhidltransport.vndk-sp\
-    libutils.vndk-sp\
-    libc++.vndk-sp\
-    libRS_internal.vndk-sp\
-    libRSDriver.vndk-sp\
-    libRSCpuRef.vndk-sp\
-    libbcinfo.vndk-sp\
-    libblas.vndk-sp\
-    libft2.vndk-sp\
-    libpng.vndk-sp\
-    libcompiler_rt.vndk-sp\
-    libbacktrace.vndk-sp\
-    libunwind.vndk-sp\
-    libunwindstack.vndk-sp\
-    liblzma.vndk-sp\
-    libz.vndk-sp\
-    libutilscallstack.vndk-sp\
-    libdexfile.vndk-sp\
+    vndk-sp
 
 PRODUCT_ENFORCE_RRO_TARGETS := framework-res
 
@@ -642,11 +613,6 @@ PRODUCT_COPY_FILES += \
 # CS40L20 Haptics Waveform
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/vibrator/cs40l20/cs40l20.wmfw:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.wmfw
-
-# Disable CameraHAL perfd usage
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.perfd.enable=false
-
 
 PRODUCT_VENDOR_KERNEL_HEADERS := device/google/crosshatch/sdm845/kernel-headers
 
