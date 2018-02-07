@@ -645,6 +645,12 @@ PRODUCT_COPY_FILES += \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-c1-snd-card/adsp_avs_config.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-c1-snd-card/adsp_avs_config.acdb \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-c1-snd-card/Codec_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-c1-snd-card/Codec_cal.acdb
 
+# CS35L36 Speaker Tuning
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/audio/crus_sp_config_b1_rx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_b1_rx.bin \
+    device/google/crosshatch/audio/crus_sp_config_b1_tx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_b1_tx.bin \
+    device/google/crosshatch/audio/crus_sp_config_c1_rx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_rx.bin \
+    device/google/crosshatch/audio/crus_sp_config_c1_tx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_tx.bin
 
 # Enable modem logging
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
