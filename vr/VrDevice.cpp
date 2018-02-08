@@ -46,7 +46,7 @@ Return<void> VrDevice::setVrMode(bool enabled) {
         LOG(ERROR) << "Couldn't set sys.qcom.thermalcfg to " << thermalConf;
         return Void();
     }
-    if (!android::base::SetProperty("ctl.restart", "thermal-engine")) {
+    if (!android::base::SetProperty("ctl.restart", "vendor.thermal-engine")) {
         LOG(ERROR) << "Couldn't set thermal_engine restart property";
     }
     return Void();

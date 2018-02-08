@@ -16,7 +16,7 @@ persist.sys.cnss.          u:object_r:cnss_diag_prop:s0
 sys.listeners.registered   u:object_r:tee_listener_prop:s0
 wc_transport.              u:object_r:wc_prop:s0
 sys.qcom.thermalcfg        u:object_r:thermal_prop:s0
-ctl.thermal-engine         u:object_r:thermal_prop:s0
+ctl.vendor.thermal-engine  u:object_r:thermal_prop:s0
 persist.sys.modem.diag.    u:object_r:modem_diag_prop:s0
 sys.modem.diag.            u:object_r:modem_diag_prop:s0
 persist.radio.enable_tel_mon  u:object_r:tel_mon_prop:s0
