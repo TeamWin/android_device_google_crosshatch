@@ -1,0 +1,10 @@
+Example usage:
+
+$ python3.5 convert_config_string.py txt 510_Crosshatch_Baseline.h crus_sp_config_c1_rx.bin crus_sp_config_c1_tx.bin
+CSPL config string conversion used for android system
+python version:  sys.version_info(major=3, minor=5, micro=3, releaselevel='final', serial=0)
+Current Os name:  posix
+24 bit detected
+wrote file: crus_sp_config_c1_rx.bin
+wrote file: crus_sp_config_c1_tx.bin
+
