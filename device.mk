@@ -530,10 +530,6 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM)
 
-# For SPN display
-PRODUCT_COPY_FILES += \
-    device/google/crosshatch/spn-conf.xml:system/etc/spn-conf.xml
-
 # Provide meaningful APN configuration
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/apns-full-conf.xml:system/etc/apns-conf.xml
