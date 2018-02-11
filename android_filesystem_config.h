@@ -41,8 +41,4 @@ static const struct fs_path_config android_device_files[] = {
 #ifdef NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS
     { 00000, AID_ROOT,      AID_ROOT,      0, "system/etc/fs_config_dirs" },
 #endif
-    { 00750, AID_WIFI,      AID_WIFI,      ((1ULL << CAP_SYS_MODULE) |
-                                            (1ULL << CAP_NET_RAW) |
-                                            (1ULL << CAP_NET_ADMIN)),
-                                              "vendor/bin/hw/android.hardware.wifi@1.0-service"},
 };
