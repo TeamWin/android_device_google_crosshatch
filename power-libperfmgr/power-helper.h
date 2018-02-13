@@ -53,7 +53,6 @@ enum stats_type {
 
 enum subsystem_type {
     SUBSYSTEM_WLAN = 0,
-    SUBSYSTEM_CITADEL,
 
     //Don't add any lines after this line
     SUBSYSTEM_COUNT
@@ -75,14 +74,6 @@ enum wlan_power_params {
 
     //Don't add any lines after this line
     WLAN_POWER_PARAMS_COUNT
-};
-
-enum citadel_sleep_states {
-    CITADEL_STATE_ACTIVE = 0,
-    CITADEL_STATE_DEEP_SLEEP,
-
-    //Don't add any lines after this line
-    CITADEL_STATES_COUNT
 };
 
 
