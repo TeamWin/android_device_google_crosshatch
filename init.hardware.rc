@@ -313,12 +313,13 @@ on zygote-start
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
 
-    chmod 775 /persist/sensors
-    chmod 664 /persist/sensors/sensors_settings
-    chown system root /persist/sensors/sensors_settings
-
-    mkdir /data/misc/sensors
-    chmod 775 /data/misc/sensors
+    # Set up sensors-related directories and permissions
+    chown root system /persist/sensors/registry
+    chmod 775 /persist/sensors/registry
+    chown root system /persist/sensors/registry/config
+    chmod 775 /persist/sensors/registry/config
+    chown root system /persist/sensors/registry/registry
+    chmod 775 /persist/sensors/registry/registry
 
     # Mark the copy complete flag to not completed
     write /data/vendor/radio/copy_complete 0
@@ -544,8 +545,11 @@ on property:persist.sys.ssr.enable_ramdumps=0
 
 service sensors /vendor/bin/sensors.qcom
     class core
-    user root
-    group root
+    user system
+    group system
+    # Grants the ability for this daemon to bind IPC router ports so it can
+    # register QMI services
+    capabilities NET_BIND_SERVICE
 
 service adsprpcd /vendor/bin/adsprpcd
    class main
