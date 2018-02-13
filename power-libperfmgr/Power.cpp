@@ -17,6 +17,8 @@
 #define ATRACE_TAG (ATRACE_TAG_POWER | ATRACE_TAG_HAL)
 #define LOG_TAG "android.hardware.power@1.2-service.crosshatch-libperfmgr"
 
+#include <cinttypes>
+
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/properties.h>
@@ -332,11 +334,11 @@ static int get_citadel_low_power_stats(struct PowerStateSubsystem *subsystem) {
                                             NUGGET_PARAM_GET_LOW_POWER_STATS,
                                             buffer, &buffer);
     if (status != APP_SUCCESS) {
-        ALOGE("Citadel returned error code 0x%x", status);
+        ALOGE("Citadel returned error code 0x%" PRIx32, status);
         return -EIO;
     }
     if (buffer.size() < sizeof(*stats)) {
-        ALOGE("Citadel only returned %lu / %lu bytes",
+        ALOGE("Citadel only returned %zu / %zu bytes",
               buffer.size(), sizeof(*stats));
         return -EIO;
     }
