@@ -176,6 +176,7 @@
 /vendor/bin/hw/citadeld                                              u:object_r:citadeld_exec:s0
 /vendor/bin/hw/init_citadel                                          u:object_r:init_citadel_exec:s0
 /vendor/bin/hw/vendor\.google\.radioext@1\.0-service                 u:object_r:hal_radioext_default_exec:s0
+/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.0-service-paintbox    u:object_r:hal_neuralnetworks_paintbox_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
