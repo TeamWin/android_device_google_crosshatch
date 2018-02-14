@@ -246,6 +246,8 @@
 
 # /persist
 /persist(/.*)?            u:object_r:persist_file:s0
+/persist/audio(/.*)?      u:object_r:persist_audio_file:s0
+/persist/camera(/.*)?     u:object_r:persist_camera_file:s0
 /persist/data(/.*)?       u:object_r:persist_data_file:s0
 /persist/display(/.*)?    u:object_r:persist_display_file:s0
 /persist/drm(/.*)?        u:object_r:persist_drm_file:s0
@@ -255,7 +257,6 @@
 /persist/rfs(/.*)?        u:object_r:persist_rfs_file:s0
 /persist/sensors(/.*)?    u:object_r:persist_sensors_file:s0
 /persist/time(/.*)?       u:object_r:persist_time_file:s0
-/persist/audio(/.*)?      u:object_r:persist_audio_file:s0
 
 /metadata                 u:object_r:rootfs:s0
 /metadata/.*              u:object_r:vold_data_file:s0
