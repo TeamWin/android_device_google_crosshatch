@@ -22,9 +22,7 @@
 #include <android-base/properties.h>
 #include <android-base/strings.h>
 #include <android-base/stringprintf.h>
-#include <application.h>
-#include <app_nugget.h>
-#include <nos/CitadeldProxyClient.h>
+
 #include <utils/Log.h>
 #include <utils/Trace.h>
 
@@ -313,73 +311,22 @@ static int get_wlan_low_power_stats(struct PowerStateSubsystem &subsystem) {
     return 0;
 }
 
-static int get_citadel_low_power_stats(struct PowerStateSubsystem *subsystem) {
-
-    subsystem->name = "citadel";
-
-    ::nos::CitadeldProxyClient citadeldProxy;
-    citadeldProxy.Open();
-    if (!citadeldProxy.IsOpen()) {
-        ALOGE("Failed to open citadeld client");
-        return -ENODEV;
-    }
-
-    // Read stats from Citadel
-    const struct nugget_app_low_power_stats *stats;
-    std::vector<uint8_t> buffer;
-    buffer.reserve(sizeof(*stats));
-    uint32_t status = citadeldProxy.CallApp(APP_ID_NUGGET,
-                                            NUGGET_PARAM_GET_LOW_POWER_STATS,
-                                            buffer, &buffer);
-    if (status != APP_SUCCESS) {
-        ALOGE("Citadel returned error code 0x%x", status);
-        return -EIO;
-    }
-    if (buffer.size() < sizeof(*stats)) {
-        ALOGE("Citadel only returned %lu / %lu bytes",
-              buffer.size(), sizeof(*stats));
-        return -EIO;
-    }
-    stats = reinterpret_cast<const struct nugget_app_low_power_stats *>(buffer.data());
-
-    subsystem->states.resize(CITADEL_STATES_COUNT);
-
-    // Citadel reports its times in usecs, not msecs.
-    // Citadel measures time relative to the last hard reset. I don't know what
-    // the timestamp values in the Power 1.1 HAL are relatve to.
-    struct PowerStateSubsystemSleepState *state;
-
-    state = &subsystem->states[CITADEL_STATE_ACTIVE];
-    state->name = "Active";
-    state->residencyInMsecSinceBoot = stats->time_spent_awake / 1000UL;
-    state->totalTransitions = stats->wake_count;
-    state->lastEntryTimestampMs = stats->time_at_last_wake / 1000UL;
-    state->supportedOnlyInSuspend = false;
-
-    state = &subsystem->states[CITADEL_STATE_DEEP_SLEEP];
-    state->name = "Deep-Sleep";
-    state->residencyInMsecSinceBoot = stats->time_spent_in_deep_sleep / 1000UL;
-    state->totalTransitions = stats->deep_sleep_count;
-    state->lastEntryTimestampMs = stats->time_at_last_deep_sleep / 1000UL;
-    state->supportedOnlyInSuspend = false;
-
-    return 0;
-}
-
 // Methods from ::android::hardware::power::V1_1::IPower follow.
 Return<void> Power::getSubsystemLowPowerStats(getSubsystemLowPowerStats_cb _hidl_cb) {
 
     hidl_vec<PowerStateSubsystem> subsystems;
+    int ret;
+
     subsystems.resize(SUBSYSTEM_COUNT);
 
-    // We have one Subsystem for WLAN
-    (void)get_wlan_low_power_stats(subsystems[SUBSYSTEM_WLAN]);
+    //We currently have only one Subsystem for WLAN
+    ret = get_wlan_low_power_stats(subsystems[SUBSYSTEM_WLAN]);
+    if (ret != 0)
+        goto done;
 
-    // And one Subsystem for Citadel
-    (void)get_citadel_low_power_stats(&subsystems[SUBSYSTEM_CITADEL]);
+    //Add query for other subsystems here
 
-    // Add query for other subsystems here
-
+done:
     _hidl_cb(subsystems, Status::SUCCESS);
     return Void();
 }
