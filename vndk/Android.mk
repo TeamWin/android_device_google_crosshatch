@@ -1,3 +1,6 @@
+# TODO(b/69526027): DEPRECATE USE OF THIS.
+# USE BOARD_VNDK_VERSION:=current instead.
+
 LOCAL_PATH := $(call my-dir)
 
 # b/69526027: This VNDK-SP install routine must be removed. Instead, we must
