@@ -50,6 +50,9 @@ $(foreach lib,$(VNDK_SAMEPROCESS_LIBRARIES),\
     $(if $(filter $(lib),$(VNDK_SP_LIBRARIES)),,\
     $(eval VNDK_SP_LIBRARIES += $(lib))))
 
+# Remove libz from the VNDK-SP list (b/73296261)
+VNDK_SP_LIBRARIES := $(filter-out libz,$(VNDK_SP_LIBRARIES))
+
 $(foreach lib,$(VNDK_SP_LIBRARIES),\
     $(eval $(call define-vndk-sp-lib,$(lib))))
 
