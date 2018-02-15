@@ -5,8 +5,6 @@ type sensors_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(sensors)
 
 allow sensors self:capability {
-    setuid
-    setgid
     net_bind_service
 };
 
@@ -23,4 +21,5 @@ allow sensors sensors_vendor_data_file:file create_file_perms;
 allow sensors system_file:dir r_dir_perms;
 allow sensors sensors_device:chr_file rw_file_perms;
 
+allow sensors sysfs_soc:dir search;
 r_dir_file(sensors, sysfs_msm_subsys)
