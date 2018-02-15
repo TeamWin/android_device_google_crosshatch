@@ -15,11 +15,11 @@ allow sensors persist_sensors_file:dir rw_dir_perms;
 allow sensors persist_sensors_file:file create_file_perms;
 allow sensors persist_file:dir { getattr search };
 
-allow sensors sensors_vendor_data_file:dir create_dir_perms;
-allow sensors sensors_vendor_data_file:file create_file_perms;
-
 allow sensors system_file:dir r_dir_perms;
 allow sensors sensors_device:chr_file rw_file_perms;
+
+# sensor direct mode
+allow sensors qdsp_device:chr_file ioctl;
 
 allow sensors sysfs_soc:dir search;
 r_dir_file(sensors, sysfs_msm_subsys)
