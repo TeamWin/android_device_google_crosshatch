@@ -1,3 +1,6 @@
+# TODO(b/69526027): DEPRECATE USE OF THIS.
+# USE BOARD_VNDK_VERSION:=current instead.
+
 LOCAL_PATH := $(call my-dir)
 
 # b/69526027: This VNDK-SP install routine must be removed. Instead, we must
@@ -49,6 +52,9 @@ endef
 $(foreach lib,$(VNDK_SAMEPROCESS_LIBRARIES),\
     $(if $(filter $(lib),$(VNDK_SP_LIBRARIES)),,\
     $(eval VNDK_SP_LIBRARIES += $(lib))))
+
+# Remove libz from the VNDK-SP list (b/73296261)
+VNDK_SP_LIBRARIES := $(filter-out libz,$(VNDK_SP_LIBRARIES))
 
 $(foreach lib,$(VNDK_SP_LIBRARIES),\
     $(eval $(call define-vndk-sp-lib,$(lib))))

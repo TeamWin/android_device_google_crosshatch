@@ -315,6 +315,9 @@ on zygote-start
     chown root system /persist/sensors/registry/registry
     chmod 775 /persist/sensors/registry/registry
 
+    mkdir /data/vendor/sensors 0770
+    chown system system /data/vendor/sensors
+
     # Mark the copy complete flag to not completed
     write /data/vendor/radio/copy_complete 0
     chown radio radio /data/vendor/radio/copy_complete

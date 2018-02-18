@@ -45,3 +45,8 @@ allow hal_camera sysfs_easel:file rw_file_perms;
 
 # access hexagon
 allow hal_camera qdsp_device:chr_file r_file_perms;
+
+#dual front lens calibration file
+allow hal_camera persist_file:dir search;
+allow hal_camera persist_camera_file:dir search;
+allow hal_camera persist_camera_file:file { getattr open read };
