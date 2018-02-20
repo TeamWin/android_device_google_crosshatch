@@ -5,6 +5,8 @@ type sensors_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(sensors)
 
 allow sensors self:capability {
+    setuid
+    setgid
     net_bind_service
 };
 
