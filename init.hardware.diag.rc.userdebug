@@ -362,24 +362,25 @@ on property:sys.modem.diag.mdlog=false
     start diag_mdlog_stop
 
 on property:persist.sys.cnss.diag_qxdm=true
-    start cnss_diag
+    start vendor.cnss_diag
 
 on property:persist.sys.cnss.diag_qxdm=false
-    stop cnss_diag
+    stop vendor.cnss_diag
 
 on property:persist.sys.cnss.diag_txt=true
-    start cnss_diag_txt
+    start vendor.cnss_diag_txt
 
 on property:persist.sys.cnss.diag_txt=false
-    stop cnss_diag_txt
+    stop vendor.cnss_diag_txt
 
-service cnss_diag /vendor/bin/cnss_diag -q -u -w
+service vendor.cnss_diag /vendor/bin/cnss_diag -q -u -w
     class late_start
     user system
     group system
+    disabled
     oneshot
 
-service cnss_diag_txt /vendor/bin/cnss_diag -s -f -m /data/vendor/wifi/cnss_diag/cnss_diag.conf
+service vendor.cnss_diag_txt /vendor/bin/cnss_diag -s -f -m /data/vendor/wifi/cnss_diag/cnss_diag.conf
     class late_start
     user system
     group system
