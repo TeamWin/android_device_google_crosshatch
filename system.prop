@@ -99,4 +99,3 @@ ro.bluetooth.wipower=false
 
 # Property is used by BT HAL to discover device BT MAC address
 ro.bt.bdaddr_path=/proc/device-tree/chosen/cdt/cdb2/bt_addr
-sys.usb.ffs.aio_compat=1
