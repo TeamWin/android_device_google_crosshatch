@@ -63,6 +63,12 @@ genfscon sysfs /devices/soc/a800000.ssusb/a800000.dwc3/xhci-hcd.0.auto/usb2 u:ob
 genfscon sysfs /devices/soc/800f000.qcom,spmi/spmi-0/spmi0-02/800f000.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec     u:object_r:sysfs_usb_c:s0
 genfscon sysfs /module/diagchar                                         u:object_r:sysfs_diag:s0
 
+genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-000c/a88000.i2c:qcom,smb1355@c:qcom,smb1355-charger@1000/power_supply/          u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-0061/power_supply/                                                              u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/                                                              u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qcom,qpnp-smb2/power_supply/    u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/power_supply/bms/       u:object_r:sysfs_batteryinfo:s0
+
 genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0
 genfscon debugfs /clk/debug_suspend                   u:object_r:debugfs_clk:s0
 genfscon debugfs /wlan0                               u:object_r:debugfs_wlan:s0
