@@ -281,6 +281,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
     DumpFileToFd(fd, "smblib-usb logs", "/d/ipc_logging/smblib/log");
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
+    DumpFileToFd(fd, "WLAN FW Log Symbol Table", "/vendor/firmware/Data.msc");
     DumpTouch(fd);
     RunCommandToFd(fd, "USB Device Descriptors", {"/vendor/bin/sh", "-c", "cd /sys/bus/usb/devices/1-1 && cat product && cat bcdDevice; cat descriptors | od -t x1 -w16 -N96"});
 

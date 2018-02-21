@@ -11,3 +11,7 @@ allow hal_sensors_default qdsp_device:chr_file r_file_perms;
 
 allow hal_sensors_default sensors_vendor_data_file:dir create_dir_perms;
 allow hal_sensors_default sensors_vendor_data_file:file create_file_perms;
+
+# needed by elmyra_raw.cpp
+allow hal_sensors_default chre:unix_stream_socket connectto;
+allow hal_sensors_default chre_socket:sock_file write;
