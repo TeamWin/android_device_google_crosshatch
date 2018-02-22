@@ -551,10 +551,6 @@ PRODUCT_PACKAGES += \
     android.hardware.oemlock@1.0-service.citadel \
     android.hardware.weaver@1.0-service.citadel
 
-# Use daemon to detect folio open/close
-PRODUCT_PACKAGES += \
-    folio_daemon
-
 # Storage: for factory reset protection feature
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.frp.pst=/dev/block/bootdevice/by-name/frp
