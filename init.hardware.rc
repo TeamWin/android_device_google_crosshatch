@@ -446,11 +446,6 @@ service init-radio-sh /vendor/bin/init.radio.sh
     group root radio
     oneshot
 
-service folio_daemon /system/bin/folio_daemon
-    class late_start
-    user system
-    group system
-
 service vendor.thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg}
    class main
    user root
