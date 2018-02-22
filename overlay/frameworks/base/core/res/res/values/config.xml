@@ -337,4 +337,15 @@
         <item>"usbradio:mtp:diag,serial_cdev,rmnet_gsi:diag,serial_cdev,rmnet_gsi"</item>
     </string-array>
 
+    <!-- An array of device capabilities defined by GSMA SGP.22 v2.0, and their corresponding major
+         version. -->
+    <string-array translatable="false" name="config_telephonyEuiccDeviceCapabilities">
+        <item>"gsm,11"</item>
+        <item>"utran,11"</item>
+        <item>"cdma1x,1"</item>
+        <item>"hrpd,3"</item>
+        <item>"ehrpd,12"</item>
+        <item>"eutran,11"</item>
+    </string-array>
+
 </resources>
