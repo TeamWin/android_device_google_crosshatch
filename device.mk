@@ -639,6 +639,14 @@ PRODUCT_COPY_FILES += \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-c1-snd-card/adsp_avs_config.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-c1-snd-card/adsp_avs_config.acdb \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-c1-snd-card/Codec_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-c1-snd-card/Codec_cal.acdb
 
+# Audio ACDB workspace files for QACT
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_COPY_FILES += \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/workspaceFile.qwsp:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/workspaceFile.qwsp \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/workspaceFile.qwsp:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/workspaceFile.qwsp \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-c1-snd-card/workspaceFile.qwsp:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-c1-snd-card/workspaceFile.qwsp
+endif
+
 # CS35L36 Speaker Tuning
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/audio/crus_sp_config_b1_rx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_b1_rx.bin \

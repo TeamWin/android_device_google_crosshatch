@@ -120,7 +120,7 @@
 
     <!-- Maximum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness above this level. -->
-    <integer name="config_screenBrightnessSettingMaximum">223</integer>
+    <integer name="config_screenBrightnessSettingMaximum">255</integer>
 
     <!-- An array describing the screen's backlight values corresponding to the brightness
          values in the config_screenBrightnessNits array.
