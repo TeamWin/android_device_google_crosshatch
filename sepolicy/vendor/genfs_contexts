@@ -57,6 +57,8 @@ genfscon sysfs /devices/platform/soc/a800000.ssusb/a800000.dwc3/xhci-hcd.0.auto/
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec     u:object_r:sysfs_usb_c:s0
 genfscon sysfs /module/diagchar                                         u:object_r:sysfs_diag:s0
 
+genfscon sysfs /devices/platform/soc/894000.i2c/i2c-3/3-0043/leds/vibrator     u:object_r:sysfs_vibrator:s0
+
 genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0
 genfscon debugfs /clk/debug_suspend                   u:object_r:debugfs_clk:s0
 genfscon debugfs /wlan0                               u:object_r:debugfs_wlan:s0
