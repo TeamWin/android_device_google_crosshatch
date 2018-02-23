@@ -165,7 +165,7 @@
 /vendor/bin/init\.power\.sh     u:object_r:init_power_exec:s0
 /vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
 /vendor/bin/ftmdaemon           u:object_r:ftmd_exec:s0
-
+/vendor/bin/hw/qcrild           u:object_r:rild_exec:s0
 
 /vendor/bin/hw/android\.hardware\.drm@1\.0-service.widevine          u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.vibrator@1\.1-service.crosshatch        u:object_r:hal_vibrator_default_exec:s0
