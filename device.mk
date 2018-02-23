@@ -387,6 +387,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.vr@1.0-service.crosshatch \
 
+ENABLE_VENDOR_RIL_SERVICE := true
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
