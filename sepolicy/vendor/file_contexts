@@ -184,6 +184,7 @@
 # same-process HAL files and their dependencies
 #
 /vendor/lib(64)?/hw/gralloc\.sdm845\.so    u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libgrallocutils\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdMetaData\.so         u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqservice\.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdutils\.so            u:object_r:same_process_hal_file:s0
