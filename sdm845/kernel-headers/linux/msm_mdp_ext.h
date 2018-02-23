@@ -24,9 +24,9 @@
 #define MSMFB_ASYNC_POSITION_UPDATE _IOWR(MDP_IOCTL_MAGIC, 129, struct mdp_position_update)
 #define MSMFB_MDP_SET_CFG _IOW(MDP_IOCTL_MAGIC, 130, struct mdp_set_cfg)
 #ifdef __LP64
-#define MDP_LAYER_COMMIT_V1_PAD 3
+#define MDP_LAYER_COMMIT_V1_PAD 2
 #else
-#define MDP_LAYER_COMMIT_V1_PAD 4
+#define MDP_LAYER_COMMIT_V1_PAD 3
 #endif
 #define MDP_LAYER_FLIP_LR 0x1
 #define MDP_LAYER_FLIP_UD 0x2
@@ -91,7 +91,8 @@ struct mdp_output_layer {
   uint32_t flags;
   uint32_t writeback_ndx;
   struct mdp_layer_buffer buffer;
-  uint32_t reserved[6];
+  enum mdp_color_space color_space;
+  uint32_t reserved[5];
 };
 struct mdp_destination_scaler_data {
   uint32_t flags;
@@ -99,6 +100,12 @@ struct mdp_destination_scaler_data {
   uint32_t lm_width;
   uint32_t lm_height;
   uint64_t scale;
+};
+#define MDP_VIDEO_FRC_ENABLE (1 << 0)
+struct mdp_frc_info {
+  uint32_t flags;
+  uint32_t frame_cnt;
+  int64_t timestamp;
 };
 struct mdp_layer_commit_v1 {
   uint32_t flags;
@@ -111,6 +118,7 @@ struct mdp_layer_commit_v1 {
   int retire_fence;
   void * dest_scaler;
   uint32_t dest_scaler_cnt;
+  struct mdp_frc_info * frc_info;
   uint32_t reserved[MDP_LAYER_COMMIT_V1_PAD];
 };
 struct mdp_layer_commit {
