@@ -36,6 +36,8 @@
 /dev/easelcomm-client                           u:object_r:easel_device:s0
 /dev/citadel0                                   u:object_r:citadel_device:s0
 
+/dev/dri/card0                                  u:object_r:graphics_device:s0
+
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
 /dev/socket/qmux_audio(/.*)?                    u:object_r:qmuxd_socket:s0
