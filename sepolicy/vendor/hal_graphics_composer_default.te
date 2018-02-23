@@ -28,6 +28,9 @@ r_dir_file(hal_graphics_composer_default, sysfs_type)
 allow hal_graphics_composer_default display_vendor_data_file:dir create_dir_perms;
 allow hal_graphics_composer_default display_vendor_data_file:file create_file_perms;
 
+# allow composer to register display config
+add_hwservice(hal_graphics_composer_default, hal_display_config_hwservice);
+
 userdebug_or_eng(`
         allow hal_graphics_composer_default debugfs_mdp:dir r_dir_perms;
         allow hal_graphics_composer_default debugfs_mdp:file r_file_perms;
