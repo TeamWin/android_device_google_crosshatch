@@ -8,3 +8,4 @@ android.hardware.tetheroffload.control::IOffloadControl         u:object_r:hal_t
 com.quicinc.cne.api::IApiService                                u:object_r:hal_cne_hwservice:s0
 com.quicinc.cne.server::IServer                                 u:object_r:hal_cne_hwservice:s0
 vendor.google.radioext::IRadioExt                               u:object_r:hal_radioext_hwservice:s0
+vendor.display.config::IDisplayConfig                           u:object_r:hal_display_config_hwservice:s0
