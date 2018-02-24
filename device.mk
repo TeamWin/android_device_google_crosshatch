@@ -434,10 +434,6 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.1-impl \
     android.hardware.audio@2.0-service
 
-# stereo speakers: orientation changes swap L/R channels
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.audio.monitorRotation=true
-
 # Bug 37532694
 PRODUCT_PROPERTY_OVERRIDES += audio.adm.buffering.ms=4
 
