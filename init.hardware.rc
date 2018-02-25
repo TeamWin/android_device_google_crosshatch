@@ -541,7 +541,7 @@ service time_daemon /vendor/bin/time_daemon
 service ss_ramdump /vendor/bin/subsystem_ramdump
     class main
     user root
-    group root system
+    group system
     disabled
 
 on property:persist.sys.ssr.enable_ramdumps=1
@@ -549,6 +549,7 @@ on property:persist.sys.ssr.enable_ramdumps=1
     mkdir /data/vendor/wifidump 771 root system
     mkdir /data/vendor/ramdump 771 root system
     mkdir /data/vendor/ssrdump 771 root system
+    mkdir /data/vendor/ssrlog  771 root system
     start ss_ramdump
 
 on property:persist.sys.ssr.enable_ramdumps=0

@@ -129,6 +129,8 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
               "/data/vendor/radio/power_anomaly_data.txt",
               "/data/vendor/radio/diag_logs/diag_trace.txt",
               "/data/vendor/radio/diag_logs/diag_trace_old.txt",
+              "/data/vendor/ssrlog/ssr_log.txt",
+              "/data/vendor/ssrlog/ssr_log_old.txt",
             };
 
         std::string modemLogMkDirCmd= "/vendor/bin/mkdir -p " + modemLogAllDir;
