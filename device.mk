@@ -387,6 +387,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.vr@1.0-service.crosshatch \
 
+ENABLE_VENDOR_RIL_SERVICE := true
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
@@ -550,10 +552,6 @@ PRODUCT_PACKAGES += \
     citadel_updater \
     android.hardware.oemlock@1.0-service.citadel \
     android.hardware.weaver@1.0-service.citadel
-
-# Use daemon to detect folio open/close
-PRODUCT_PACKAGES += \
-    folio_daemon
 
 # Storage: for factory reset protection feature
 PRODUCT_PROPERTY_OVERRIDES += \

@@ -36,6 +36,8 @@
 /dev/easelcomm-client                           u:object_r:easel_device:s0
 /dev/citadel0                                   u:object_r:citadel_device:s0
 
+/dev/dri/card0                                  u:object_r:graphics_device:s0
+
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
 /dev/socket/qmux_audio(/.*)?                    u:object_r:qmuxd_socket:s0
@@ -56,48 +58,48 @@
 /dev/wlan                                       u:object_r:wlan_device:s0
 
 # dev block nodes
-/dev/block/platform/soc/1da4000\.ufshc/by-name/abl_[ab]        u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/apdp_[ab]       u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/cmnlib64_[ab]   u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/cmnlib_[ab]     u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/dtbo_[ab]       u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/devcfg_[ab]     u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/hosd_[ab]       u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/hyp_[ab]        u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/keymaster_[ab]  u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/lockbooter_[ab] u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/laf_[ab]        u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/msadp_[ab]      u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/pmic_[ab]       u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/rpm_[ab]        u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/storsec_[ab]    u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/trusty_[ab]     u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/tz_[ab]         u:object_r:ab_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/vbmeta_[ab]     u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/abl_[ab]        u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/apdp_[ab]       u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/cmnlib64_[ab]   u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/cmnlib_[ab]     u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/dtbo_[ab]       u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/devcfg_[ab]     u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/hosd_[ab]       u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/hyp_[ab]        u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/keymaster_[ab]  u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/lockbooter_[ab] u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/laf_[ab]        u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/msadp_[ab]      u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/pmic_[ab]       u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/rpm_[ab]        u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/storsec_[ab]    u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/trusty_[ab]     u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/tz_[ab]         u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/vbmeta_[ab]     u:object_r:ab_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/boot_[ab]       u:object_r:boot_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/boot_[ab]       u:object_r:boot_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/metadata        u:object_r:metadata_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/metadata        u:object_r:metadata_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/misc            u:object_r:misc_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/misc            u:object_r:misc_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/frp             u:object_r:frp_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/frp             u:object_r:frp_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/fsc             u:object_r:modem_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/fsg             u:object_r:modem_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/modem_[ab]      u:object_r:modem_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/modemst[12]     u:object_r:modem_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/fsc             u:object_r:modem_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/fsg             u:object_r:modem_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/modem_[ab]      u:object_r:modem_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/modemst[12]     u:object_r:modem_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/ramdump         u:object_r:ramdump_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/ramdump         u:object_r:ramdump_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/ssd             u:object_r:ssd_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/ssd             u:object_r:ssd_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/system_[ab]     u:object_r:system_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/vendor_[ab]     u:object_r:system_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/system_[ab]     u:object_r:system_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/vendor_[ab]     u:object_r:system_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/userdata        u:object_r:userdata_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/userdata        u:object_r:userdata_block_device:s0
 
-/dev/block/platform/soc/1da4000\.ufshc/by-name/xbl_[ab]        u:object_r:xbl_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/xbl_[ab]        u:object_r:xbl_block_device:s0
 
 # Block device holding the GPT, where the A/B attributes are stored.
 /dev/block/sda                                  u:object_r:gpt_block_device:s0
@@ -163,7 +165,7 @@
 /vendor/bin/init\.power\.sh     u:object_r:init_power_exec:s0
 /vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
 /vendor/bin/ftmdaemon           u:object_r:ftmd_exec:s0
-
+/vendor/bin/hw/qcrild           u:object_r:rild_exec:s0
 
 /vendor/bin/hw/android\.hardware\.drm@1\.0-service.widevine          u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.vibrator@1\.1-service.crosshatch        u:object_r:hal_vibrator_default_exec:s0
@@ -181,17 +183,15 @@
 ###############################################
 # same-process HAL files and their dependencies
 #
-/vendor/lib(64)?/hw/gralloc\.msm8998\.so   u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/gralloc\.sdm845\.so    u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libgrallocutils\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdMetaData\.so         u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqservice\.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdutils\.so            u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libadreno_utils\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libgsl\.so                u:object_r:same_process_hal_file:s0
 
-/vendor/lib(64)?/hw/vulkan\.msm8998\.so    u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libEGL_adreno\.so         u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/libGLESv1_CM_adreno\.so   u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/libGLESv2_adreno\.so      u:object_r:same_process_hal_file:s0
 
 /vendor/lib(64)?/libdrmutils\.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libdrm\.so                u:object_r:same_process_hal_file:s0
@@ -209,10 +209,6 @@
 /vendor/lib(64)?/libllvm-qcom\.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/librs_adreno\.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/librs_adreno_sha1\.so      u:object_r:same_process_hal_file:s0
-
-# TODO(b/36895509): remove the following 2 lines once this bug is resolved
-# needed by radio
-/vendor/lib(64)?/libimsmedia_jni\.so        u:object_r:same_process_hal_file:s0
 
 # libGLESv2_adreno depends on this
 /vendor/lib(64)?/libllvm-glnext\.so         u:object_r:same_process_hal_file:s0
