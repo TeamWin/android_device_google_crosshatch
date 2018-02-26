@@ -68,7 +68,6 @@ type cnss_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type ramdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type modem_dump_file, file_type, data_file_type;
 type sensors_vendor_data_file, file_type, data_file_type;
-
 type vendor_firmware_file, vendor_file_type, file_type;
 
 #data sysfs files
@@ -79,5 +78,6 @@ type sysfs_diag, fs_type, sysfs_type;
 
 type hexagon_halide_file, vendor_file_type, file_type;
 
-#mpss rfs files
+#rfs files
 type mpss_rfs_data_file, data_file_type, file_type;
+type rfs_tombstone_data_file, data_file_type, file_type;
