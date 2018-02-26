@@ -23,7 +23,7 @@ genfscon sysfs /devices/platform/soc/17300000.qcom,lpass                        
 genfscon sysfs /devices/platform/soc/188101c.qcom,spss                           u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/5c00000.qcom,ssc                            u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_rotator                   u:object_r:sysfs_msm_subsys:s0
-genfscon sysfs /devices/platform/soc/894000.i2c/i2c-3/3-005a/leds               u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/894000.i2c/i2c-3/3-005a/leds                u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc/5000000.qcom,kgsl-3d0                       u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,kgsl-hyp                           u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,ipa_fws                            u:object_r:sysfs_msm_subsys:s0
@@ -45,6 +45,8 @@ genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-0061/power_supply       
 genfscon sysfs /devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply                                                              u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qcom,qpnp-smb2/power_supply    u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/power_supply/bms       u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-03/c440000.qcom,spmi:qcom,pmi8998@3:qcom,leds                      u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_mdp/backlight/panel0-backlight                                                  u:object_r:sysfs_leds:s0
 genfscon sysfs /bus/msm_subsys                                          u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /module/subsystem_restart                                u:object_r:sysfs_msm_subsys_restart:s0
 genfscon sysfs /kernel/boot_adsp/boot                                   u:object_r:sysfs_msm_subsys:s0
@@ -53,8 +55,8 @@ genfscon sysfs /class/typec                                             u:object
 genfscon sysfs /class/typec/usbc0                                       u:object_r:sysfs_usb_c:s0
 genfscon sysfs /devices/platform/soc/a800000.ssusb/a800000.dwc3/xhci-hcd.0.auto/usb1 u:object_r:sysfs_usb_device:s0
 genfscon sysfs /devices/platform/soc/a800000.ssusb/a800000.dwc3/xhci-hcd.0.auto/usb2 u:object_r:sysfs_usb_device:s0
-
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec     u:object_r:sysfs_usb_c:s0
+
 genfscon sysfs /module/diagchar                                         u:object_r:sysfs_diag:s0
 
 genfscon sysfs /devices/platform/soc/894000.i2c/i2c-3/3-0043/leds/vibrator     u:object_r:sysfs_vibrator:s0
