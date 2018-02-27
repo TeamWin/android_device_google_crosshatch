@@ -54,5 +54,11 @@ allow netmgrd self:capability { net_admin net_raw setgid setpcap setuid };
 
 allow netmgrd vendor_toolbox_exec:file rx_file_perms;
 
+# Allow netmgrd to use netd HAL
+allow netmgrd system_net_netd_hwservice:hwservice_manager find;
+get_prop(netmgrd, hwservicemanager_prop)
+binder_call(netmgrd, netd)
+hwbinder_use(netmgrd)
+
 dontaudit netmgrd kernel:system module_request;
 dontaudit netmgrd self:system module_request;
