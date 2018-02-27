@@ -21,6 +21,9 @@ cc_binary {
         "-Wall",
         "-Werror",
     ],
+    header_libs: [
+        "nos_headers",
+    ],
     shared_libs: [
         "libbase",
         "libhidlbase",
@@ -32,6 +35,8 @@ cc_binary {
         "android.hardware.power@1.1",
         "android.hardware.power@1.2",
         "libperfmgr",
+        "libnos",
+        "libnos_citadeld_proxy",
     ],
     proprietary: true,
 }
