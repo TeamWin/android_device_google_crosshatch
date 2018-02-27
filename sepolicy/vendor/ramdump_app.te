@@ -8,6 +8,7 @@ userdebug_or_eng(`
 
   allow ramdump_app ramdump_vendor_data_file:file create_file_perms;
   allow ramdump_app ramdump_vendor_data_file:dir create_dir_perms;
+  allow ramdump_app wifidump_vendor_data_file:file r_file_perms;
 
   set_prop(ramdump_app, ramdump_prop);
   get_prop(system_app, ssr_prop)

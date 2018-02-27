@@ -495,6 +495,8 @@ service per_proxy /vendor/bin/pm-proxy
     disabled
 
 on property:sys.boot_completed=1
+    # Get the wlan driver/fw version
+    start vendor.wlan_sh
     # Enable UFS powersaving
     # write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 1
     # write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 1
@@ -544,6 +546,7 @@ service ss_ramdump /vendor/bin/subsystem_ramdump
 
 on property:persist.sys.ssr.enable_ramdumps=1
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
+    mkdir /data/vendor/wifidump 771 root system
     mkdir /data/vendor/ramdump 771 root system
     mkdir /data/vendor/ssrdump 771 root system
     start ss_ramdump
@@ -695,6 +698,13 @@ service devstart_sh /vendor/bin/init.qcom.devstart.sh
     class main
     user root
     group root system
+    disabled
+    oneshot
+
+service vendor.wlan_sh /vendor/bin/init.qcom.wlan.sh
+    class main
+    user root
+    group root
     disabled
     oneshot
 

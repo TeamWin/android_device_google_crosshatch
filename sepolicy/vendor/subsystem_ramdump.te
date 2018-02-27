@@ -13,5 +13,12 @@ userdebug_or_eng(`
   allow subsystem_ramdump ramdump_vendor_data_file:dir rw_dir_perms;
   allow subsystem_ramdump ramdump_vendor_data_file:file create_file_perms;
 
+  allow subsystem_ramdump wifidump_vendor_data_file:dir { r_dir_perms remove_name write };
+  allow subsystem_ramdump wifidump_vendor_data_file:file { r_file_perms rename setattr unlink };
+  allow subsystem_ramdump diag_device:chr_file rw_file_perms;
+  allow subsystem_ramdump self:socket create_socket_perms;
+  allowxperm subsystem_ramdump self:socket ioctl msm_sock_ipc_ioctls;
+  allow subsystem_ramdump self:capability { fowner };
+
   set_prop(subsystem_ramdump, ssr_prop);
 ')
