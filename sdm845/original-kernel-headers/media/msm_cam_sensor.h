@@ -88,6 +88,7 @@ enum sensor_sub_module_t {
 	SUB_MODULE_EXT,
 	SUB_MODULE_IR_LED,
 	SUB_MODULE_IR_CUT,
+	SUB_MODULE_LASER_LED,
 	SUB_MODULE_MAX,
 };
 
@@ -301,6 +302,15 @@ struct msm_ir_cut_cfg_data_t {
 	enum msm_ir_cut_cfg_type_t cfg_type;
 };
 
+struct msm_laser_led_cfg_data_t {
+	enum msm_laser_led_cfg_type_t cfg_type;
+	void                   *setting;
+	void                   *debug_reg;
+	uint32_t                      debug_reg_size;
+	uint16_t                      i2c_addr;
+	enum i2c_freq_mode_t          i2c_freq_mode;
+};
+
 struct msm_eeprom_cfg_data {
 	enum eeprom_cfg_type_t cfgtype;
 	uint8_t is_supported;
@@ -345,10 +355,6 @@ enum msm_sensor_cfg_type_t {
 	CFG_WRITE_I2C_ARRAY_ASYNC,
 	CFG_WRITE_I2C_ARRAY_SYNC,
 	CFG_WRITE_I2C_ARRAY_SYNC_BLOCK,
-	/*fw update start*/
-	CFG_FW_UPDATE,
-	CFG_VCM_FW_UPDATE,
-	/*fw update end*/
 };
 
 enum msm_actuator_cfg_type_t {
@@ -375,10 +381,6 @@ enum msm_ois_cfg_type_t {
 	CFG_OIS_POWERUP,
 	CFG_OIS_CONTROL,
 	CFG_OIS_I2C_WRITE_SEQ_TABLE,
-	CFG_OIS_I2C_READ_SEQ_TABLE,
-	CFG_OIS_READ_TIMER,
-	CFG_OIS_READ_TIMER_STOP,
-	CFG_OIS_GET_GYRO,
 };
 
 enum msm_ois_cfg_download_type_t {
@@ -389,7 +391,9 @@ enum msm_ois_cfg_download_type_t {
 enum msm_ois_i2c_operation {
 	MSM_OIS_WRITE = 0,
 	MSM_OIS_POLL,
+	MSM_OIS_READ,
 };
+#define MSM_OIS_READ MSM_OIS_READ
 
 struct reg_settings_ois_t {
 	uint16_t reg_addr;
@@ -489,35 +493,11 @@ struct msm_ois_slave_info {
 	uint32_t i2c_addr;
 	struct msm_ois_opcode opcode;
 };
-
-struct ois_position {
-	uint8_t data0;
-	uint8_t data1;
-	uint8_t data2;
-	uint8_t data3;
-	uint8_t data4;
-	uint8_t data5;
-	uint8_t data6;
-	uint8_t data7;
-};
-
-struct msm_ois_readout {
-	int16_t ois_x_shift;
-	int16_t ois_y_shift;
-	int64_t readout_time;
-};
-struct ois_gyro {
-	uint8_t query_size;
-	struct msm_ois_readout *gyro_data;
-};
-
 struct msm_ois_cfg_data {
 	int cfgtype;
-	struct ois_position pos;
 	union {
 		struct msm_ois_set_info_t set_info;
 		struct msm_camera_i2c_seq_reg_setting *settings;
-		struct ois_gyro gyro;
 	} cfg;
 };
 
@@ -647,6 +627,9 @@ struct sensor_init_cfg_data {
 
 #define VIDIOC_MSM_IR_CUT_CFG \
 	_IOWR('V', BASE_VIDIOC_PRIVATE + 15, struct msm_ir_cut_cfg_data_t)
+
+#define VIDIOC_MSM_LASER_LED_CFG \
+	_IOWR('V', BASE_VIDIOC_PRIVATE + 16, struct msm_laser_led_cfg_data_t)
 
 #endif
 
