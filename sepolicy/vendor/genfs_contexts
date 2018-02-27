@@ -28,12 +28,14 @@ genfscon sysfs /devices/platform/soc/5000000.qcom,kgsl-3d0                      
 genfscon sysfs /devices/platform/soc/soc:qcom,kgsl-hyp                           u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,ipa_fws                            u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/aae0000.qcom,venus                          u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/platform/soc/8300000.qcom,turing                         u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/0.qcom,rmtfs_sharedmem                      u:object_r:sysfs_rmtfs:s0
 genfscon sysfs /devices/platform/soc/soc:fp_fpc1020                              u:object_r:sysfs_fingerprint:s0
 genfscon sysfs /devices/virtual/thermal                                 u:object_r:sysfs_thermal:s0
 genfscon sysfs /devices/virtual/wahoo_laser                             u:object_r:sysfs_laser:s0
 genfscon sysfs /module/msm_thermal                                      u:object_r:sysfs_thermal:s0
 genfscon sysfs /module/tcp_cubic/parameters                             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/virtual/net                                     u:object_r:sysfs_net:s0
 genfscon sysfs /module/diagchar/parameters/timestamp_switch             u:object_r:sysfs_timestamp_switch:s0
 genfscon sysfs /devices/virtual/graphics/fb0                            u:object_r:sysfs_graphics:s0
 genfscon sysfs /devices/virtual/graphics/fb1                            u:object_r:sysfs_graphics:s0
