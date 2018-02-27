@@ -18,4 +18,4 @@ userdebug_or_eng(`
 ')
 
 # For interfacing with PowerHAL
-hal_client_domain(hal_audio_default, hal_power)
+hal_client_domain(hal_camera_default, hal_power)
