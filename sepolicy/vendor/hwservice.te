@@ -4,3 +4,5 @@ type hal_imsrtp_hwservice, hwservice_manager_type;
 type hal_ipacm_hwservice, hwservice_manager_type;
 type hal_radioext_hwservice, hwservice_manager_type;
 type hal_display_config_hwservice, hwservice_manager_type;
+type nxpese_hwservice, hwservice_manager_type;
+type nxpnfc_hwservice, hwservice_manager_type;
