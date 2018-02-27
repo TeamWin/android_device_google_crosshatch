@@ -164,6 +164,18 @@ on fs
     mkdir /persist/rfs 0770 root system
     mkdir /persist/hlos_rfs 0770 root system
     chmod 0770 /persist/rfs
+    chmod 0770 /persist/rfs/shared
+    chmod 0770 /persist/rfs/msm
+    chmod 0770 /persist/rfs/msm/adsp
+    chmod 0770 /persist/rfs/msm/mpss
+    chmod 0770 /persist/rfs/msm/slpi
+    chmod 0770 /persist/rfs/mdm
+    chmod 0770 /persist/rfs/mdm/adsp
+    chmod 0770 /persist/rfs/mdm/mpss
+    chmod 0770 /persist/rfs/mdm/slpi
+    chmod 0770 /persist/rfs/mdm/tn
+    chmod 0770 /persist/rfs/apq
+    chmod 0770 /persist/rfs/apq/gnss
     chmod 0770 /persist/hlos_rfs
     restorecon_recursive /persist
 
@@ -312,6 +324,7 @@ on zygote-start
     chmod 775 /persist/sensors
     chmod 664 /persist/sensors/sensors_settings
     chown system root /persist/sensors/sensors_settings
+    chown root root /persist/sensors/registry/registry/sensors_settings
 
     mkdir /data/misc/sensors
     chmod 775 /data/misc/sensors
@@ -618,6 +631,7 @@ service qmuxd /vendor/bin/qmuxd
 
 service cnd /vendor/bin/cnd
    class main
+   group system
    socket cnd stream 660 root inet
 
 service netmgrd /vendor/bin/netmgrd

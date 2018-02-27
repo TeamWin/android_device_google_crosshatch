@@ -8,7 +8,7 @@ allow rild qmuxd_socket:sock_file create_file_perms;
 allow rild netmgrd_socket:dir search;
 unix_socket_connect(rild, netmgrd, netmgrd)
 
-allow rild vendor_file:file { execute_no_trans lock };
+allow rild vendor_file:file { execute_no_trans lock ioctl };
 
 allow rild per_mgr_service:service_manager find;
 
