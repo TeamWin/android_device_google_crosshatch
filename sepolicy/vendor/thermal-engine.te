@@ -22,9 +22,14 @@ allow thermal-engine audio_device:chr_file rw_file_perms;
 r_dir_file(thermal-engine, sysfs_leds)
 r_dir_file(thermal-engine, sysfs_msm_subsys)
 r_dir_file(thermal-engine, sysfs_uio)
+r_dir_file(thermal-engine, sysfs_batteryinfo)
+
+allow thermal-engine self:netlink_kobject_uevent_socket { create setopt bind read };
 
 allow thermal-engine self:socket create_socket_perms;
 allowxperm thermal-engine self:socket ioctl msm_sock_ipc_ioctls;
 
 # reboot/shutdown for thermal limits exceeded
 set_prop(thermal-engine, powerctl_prop)
+
+allow thermal-engine self:capability2 wake_alarm;
