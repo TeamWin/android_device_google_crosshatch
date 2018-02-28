@@ -160,6 +160,7 @@
 /vendor/bin/imsrcsd             u:object_r:hal_rcsservice_exec:s0
 /vendor/bin/init\.qcom\.devstart\.sh                                 u:object_r:init-qcom-devstart-sh_exec:s0
 /vendor/bin/init\.qcom\.ipastart\.sh                                 u:object_r:init-qcom-ipastart-sh_exec:s0
+/vendor/bin/init\.qcom\.wlan\.sh                                     u:object_r:init-qcom-wlan-sh_exec:s0
 /vendor/bin/init\.insmod\.sh                                         u:object_r:init-insmod-sh_exec:s0
 /vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
 /vendor/bin/init\.power\.sh     u:object_r:init_power_exec:s0
@@ -228,10 +229,12 @@
 /data/vendor/wifi/cnss_diag(/.*)?      u:object_r:cnss_vendor_data_file:s0
 /data/vendor/ramdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
 /data/vendor/ssrdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
+/data/vendor/wifidump(/.*)?            u:object_r:wifidump_vendor_data_file:s0
 /data/vendor/modem_dump(/.*)?          u:object_r:modem_dump_file:s0
 /data/vendor/ipa(/.*)?                 u:object_r:ipa_vendor_data_file:s0
 /data/vendor/sensors(/.*)?             u:object_r:sensors_vendor_data_file:s0
 /data/vendor/rfs/mpss(/.*)?            u:object_r:mpss_rfs_data_file:s0
+/data/vendor/tombstones/rfs(/.*)?      u:object_r:rfs_tombstone_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0

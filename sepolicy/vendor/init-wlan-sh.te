@@ -1,0 +1,14 @@
+type init-qcom-wlan-sh, domain;
+type init-qcom-wlan-sh_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(init-qcom-wlan-sh)
+
+allow init-qcom-wlan-sh vendor_shell_exec:file rx_file_perms;
+allow init-qcom-wlan-sh vendor_toolbox_exec:file rx_file_perms;
+
+# Set the sys.wlan.driver.version and sys.wlan.firmware.version property
+set_prop(init-qcom-wlan-sh, vendor_wifi_version)
+
+# /sys/kernel/wifi/wlan/driver_version and /sys/kernel/wifi/wlan/fw/0/version
+allow init-qcom-wlan-sh sysfs_msm_wlan:dir r_dir_perms;
+allow init-qcom-wlan-sh sysfs_msm_wlan:file r_file_perms;
