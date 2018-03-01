@@ -14,3 +14,5 @@ allow init-insmod-sh self:capability sys_module;
 allow init-insmod-sh system_file:system module_load;
 
 allow init-insmod-sh vendor_file:system module_load;
+
+allow init-insmod-sh kernel:key search;
