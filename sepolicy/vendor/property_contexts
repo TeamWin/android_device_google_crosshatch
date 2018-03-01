@@ -3,6 +3,7 @@ htc.camera.                u:object_r:camera_prop:s0
 persist.vendor.sys.cnd     u:object_r:cnd_prop:s0
 persist.sys.cnd            u:object_r:cnd_prop:s0
 sys.ims.                   u:object_r:ims_prop:s0
+vendor.ims.                u:object_r:ims_prop:s0
 sys.keymaster.loaded       u:object_r:keymaster_prop:s0
 net.r_rmnet_data0          u:object_r:net_rmnet_prop:s0
 persist.net.doxlat         u:object_r:net_radio_prop:s0
@@ -22,8 +23,11 @@ sys.modem.diag.            u:object_r:modem_diag_prop:s0
 persist.radio.enable_tel_mon  u:object_r:tel_mon_prop:s0
 persist.radio.poweranomaly.start u:object_r:tel_mon_prop:s0
 persist.radio.lowpowermonitor.start u:object_r:tel_mon_prop:s0
+persist.vendor.radio.      u:object_r:radio_prop:s0
+ro.vendor.ril.             u:object_r:radio_prop:s0
 sys.time.set               u:object_r:sys_time_prop:s0
 vendor.powerhal.state      u:object_r:power_prop:s0
 vendor.powerhal.audio      u:object_r:power_prop:s0
 sys.wlan.driver.version    u:object_r:vendor_wifi_version:s0
 sys.wlan.firmware.version  u:object_r:vendor_wifi_version:s0
+vendor.peripheral.         u:object_r:per_mgr_state_prop:s0

@@ -15,3 +15,4 @@ type tel_mon_prop, property_type;
 type sys_time_prop, property_type;
 type power_prop, property_type;
 type vendor_wifi_version, property_type;
+type per_mgr_state_prop, property_type;

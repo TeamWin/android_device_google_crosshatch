@@ -12,6 +12,8 @@ hwbinder_use(hal_rcsservice)
 # add IUceSerive Hidl interface
 add_hwservice(hal_rcsservice, hal_imsrcsd_hwservice)
 
+get_prop(hal_rcsservice, ims_prop)
+
 get_prop(hal_rcsservice, hwservicemanager_prop)
 
 # allow hal to read sysfs file
