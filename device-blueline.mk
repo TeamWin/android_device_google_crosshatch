@@ -1,5 +1,5 @@
 #
-# Copyright 2015 The Android Open Source Project
+# Copyright 2016 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,12 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_crosshatch.mk \
-    $(LOCAL_DIR)/aosp_blueline.mk \
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := 560dpi
+PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
+
+PRODUCT_HARDWARE := blueline
+
+include device/google/crosshatch/device-common.mk
+
+DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/blueline/overlay
