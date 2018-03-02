@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-TARGET_BOOTLOADER_BOARD_NAME := b1c1
+TARGET_BOOTLOADER_BOARD_NAME := crosshatch
 DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS := 0x00000056
 
 TARGET_NO_BOOTLOADER := $(if $(wildcard device/google/crosshatch/edk2/Android.mk),false,true)
