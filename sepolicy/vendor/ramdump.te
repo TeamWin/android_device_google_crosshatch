@@ -10,7 +10,10 @@ userdebug_or_eng(`
 
   allow ramdump ramdump_vendor_data_file:dir create_dir_perms;
   allow ramdump ramdump_vendor_data_file:file create_file_perms;
-  allow ramdump proc:file r_file_perms;
+  allow ramdump {
+    proc
+    proc_cmdline
+  }:file r_file_perms;
 
   allow ramdump block_device:dir search;
   allow ramdump misc_block_device:blk_file rw_file_perms;
