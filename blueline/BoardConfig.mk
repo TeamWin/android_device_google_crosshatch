@@ -1,5 +1,5 @@
 #
-# Copyright 2015 The Android Open Source Project
+# Copyright (C) 2016 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_crosshatch.mk \
-    $(LOCAL_DIR)/aosp_blueline.mk \
+TARGET_BOOTLOADER_BOARD_NAME := b1c1
+DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS := 0x00000056
+
+TARGET_NO_BOOTLOADER := $(if $(wildcard device/google/crosshatch/edk2/Android.mk),false,true)
+
+include device/google/crosshatch/BoardConfig-common.mk
+-include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk
