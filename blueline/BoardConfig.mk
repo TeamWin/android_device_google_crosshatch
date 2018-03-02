@@ -17,7 +17,5 @@
 TARGET_BOOTLOADER_BOARD_NAME := blueline
 DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS := 0x00000056
 
-TARGET_NO_BOOTLOADER := $(if $(wildcard device/google/crosshatch/edk2/Android.mk),false,true)
-
 include device/google/crosshatch/BoardConfig-common.mk
 -include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk
