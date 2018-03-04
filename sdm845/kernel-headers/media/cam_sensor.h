@@ -61,6 +61,17 @@ struct cam_cmd_i2c_info {
   uint8_t i2c_freq_mode;
   uint8_t cmd_type;
 } __attribute__((packed));
+struct cam_cmd_get_ois_data {
+  uint32_t reg_addr;
+  uint32_t reg_data;
+  uint64_t query_size_handle;
+  uint64_t query_data_handle;
+} __attribute__((packed));
+struct cam_ois_shift {
+  int16_t ois_shift_x;
+  int16_t ois_shift_y;
+  int64_t time_readout;
+} __attribute__((packed));
 struct cam_ois_opcode {
   uint32_t prog;
   uint32_t coeff;

@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+on init
+    chmod 666 /dev/diag
+
 on post-fs-data
     # Modem logging collection
     mkdir /data/vendor/radio 0777 radio radio
@@ -21,9 +24,6 @@ on post-fs-data
     # WLAN logging collection
     mkdir /data/vendor/wifi 0777 system system
     mkdir /data/vendor/wifi/cnss_diag 0777 system system
-
-on boot
-    chmod 666 /dev/diag
 
 on boot && property:ro.bootmode=usbradio && property:persist.sys.usb.usbradio.config=*
     setprop sys.usb.config "none"

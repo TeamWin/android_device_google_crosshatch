@@ -59,6 +59,7 @@
 
 # dev block nodes
 /dev/block/platform/soc/1d84000\.ufshc/by-name/abl_[ab]        u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/aop_[ab]        u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/apdp_[ab]       u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/cmnlib64_[ab]   u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/cmnlib_[ab]     u:object_r:ab_block_device:s0
@@ -71,11 +72,13 @@
 /dev/block/platform/soc/1d84000\.ufshc/by-name/laf_[ab]        u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/msadp_[ab]      u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/pmic_[ab]       u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/qupfw_[ab]      u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/rpm_[ab]        u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/storsec_[ab]    u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/trusty_[ab]     u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/tz_[ab]         u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/vbmeta_[ab]     u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/xbl_config_[ab] u:object_r:ab_block_device:s0
 
 /dev/block/platform/soc/1d84000\.ufshc/by-name/boot_[ab]       u:object_r:boot_block_device:s0
 

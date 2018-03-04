@@ -73,29 +73,29 @@
         <usecase name="USECASE_AUDIO_PLAYBACK_OFFLOAD" type="out" id="8"/>
         <usecase name="USECASE_VOWLAN_CALL" type="in" id="-1"/>
         <usecase name="USECASE_VOWLAN_CALL" type="out" id="-1"/>
-        <usecase name="USECASE_AUDIO_RECORD_LOW_LATENCY" type="in" id="17" />
-        <usecase name="USECASE_AUDIO_PLAYBACK_ULL" type="out" id="17" />
-        <usecase name="USECASE_VOICEMMODE1_CALL" type="in" id="2" />
-        <usecase name="USECASE_VOICEMMODE1_CALL" type="out" id="2" />
-        <usecase name="USECASE_VOICEMMODE2_CALL" type="in" id="19" />
-        <usecase name="USECASE_VOICEMMODE2_CALL" type="out" id="19" />
-        <usecase name="USECASE_AUDIO_SPKR_CALIB_TX" type="in" id="41" />
-        <usecase name="USECASE_AUDIO_PLAYBACK_AFE_PROXY" type="in" id="-1" />
-        <usecase name="USECASE_AUDIO_PLAYBACK_AFE_PROXY" type="out" id="6" />
-        <usecase name="USECASE_AUDIO_RECORD_AFE_PROXY" type="in" id="7" />
-        <usecase name="USECASE_AUDIO_RECORD_AFE_PROXY" type="out" id="-1" />
-        <usecase name="USECASE_AUDIO_PLAYBACK_MMAP" type="in" id="-1" />
-        <usecase name="USECASE_AUDIO_PLAYBACK_MMAP" type="out" id="33" />
-        <usecase name="USECASE_AUDIO_RECORD_MMAP" type="in" id="33" />
-        <usecase name="USECASE_AUDIO_RECORD_MMAP" type="out" id="-1" />
-        <usecase name="USECASE_AUDIO_PLAYBACK_VOIP" type="in" id="-1" />
-        <usecase name="USECASE_AUDIO_PLAYBACK_VOIP" type="out" id="16" />
+        <usecase name="USECASE_AUDIO_RECORD_LOW_LATENCY" type="in" id="17"/>
+        <usecase name="USECASE_AUDIO_PLAYBACK_ULL" type="out" id="17"/>
+        <usecase name="USECASE_VOICEMMODE1_CALL" type="in" id="2"/>
+        <usecase name="USECASE_VOICEMMODE1_CALL" type="out" id="2"/>
+        <usecase name="USECASE_VOICEMMODE2_CALL" type="in" id="19"/>
+        <usecase name="USECASE_VOICEMMODE2_CALL" type="out" id="19"/>
+        <usecase name="USECASE_AUDIO_SPKR_CALIB_TX" type="in" id="41"/>
+        <usecase name="USECASE_AUDIO_PLAYBACK_AFE_PROXY" type="in" id="-1"/>
+        <usecase name="USECASE_AUDIO_PLAYBACK_AFE_PROXY" type="out" id="6"/>
+        <usecase name="USECASE_AUDIO_RECORD_AFE_PROXY" type="in" id="7"/>
+        <usecase name="USECASE_AUDIO_RECORD_AFE_PROXY" type="out" id="-1"/>
+        <usecase name="USECASE_AUDIO_PLAYBACK_MMAP" type="in" id="-1"/>
+        <usecase name="USECASE_AUDIO_PLAYBACK_MMAP" type="out" id="33"/>
+        <usecase name="USECASE_AUDIO_RECORD_MMAP" type="in" id="33"/>
+        <usecase name="USECASE_AUDIO_RECORD_MMAP" type="out" id="-1"/>
+        <usecase name="USECASE_AUDIO_PLAYBACK_VOIP" type="in" id="-1"/>
+        <usecase name="USECASE_AUDIO_PLAYBACK_VOIP" type="out" id="16"/>
         <usecase name="USECASE_AUDIO_RECORD_VOIP" type="in" id="16"/>
         <usecase name="USECASE_AUDIO_RECORD_VOIP" type="out" id="-1"/>
     </pcm_ids>
     <config_params>
         <param key="input_mic_max_count" value="3"/>
-        <param key="snd_card_name" value="sdm845-tavil-tdm-snd-card"/>
+        <param key="snd_card_name" value="sdm845-tavil-b1-snd-card"/>
     </config_params>
 
     <gain_db_to_level_mapping>
@@ -132,4 +132,3 @@
         <device name="SND_DEVICE_IN_CAPTURE_VI_FEEDBACK" backend="vi-feedback" interface="QUAT_TDM_TX_0"/>
     </backend_names>
 </audio_platform_info>
-

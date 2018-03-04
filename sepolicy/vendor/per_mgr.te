@@ -23,3 +23,5 @@ allow per_mgr ssr_device:chr_file { open read };
 
 r_dir_file(per_mgr, sysfs_msm_subsys)
 r_dir_file(per_mgr, sysfs)
+
+set_prop(per_mgr, per_mgr_state_prop)

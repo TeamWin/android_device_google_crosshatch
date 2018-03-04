@@ -599,9 +599,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/vibrator/drv2624/drv2624.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/drv2624.bin
 
-# CS40L20 Haptics Waveform
+# CS40L20 Haptics Waveform & Firmware
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/vibrator/cs40l20/cs40l20.wmfw:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.wmfw
+    device/google/crosshatch/vibrator/cs40l20/cs40l20.wmfw:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.wmfw \
+    device/google/crosshatch/vibrator/cs40l20/cs40l20.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.bin
 
 PRODUCT_VENDOR_KERNEL_HEADERS := device/google/crosshatch/sdm845/kernel-headers
 
@@ -615,15 +616,15 @@ PRODUCT_COPY_FILES += \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Headset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Headset_cal.acdb \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Speaker_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Speaker_cal.acdb \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/Codec_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/Codec_cal.acdb \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Bluetooth_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Bluetooth_cal.acdb \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/General_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/General_cal.acdb \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Global_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Global_cal.acdb \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Handset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Handset_cal.acdb \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Hdmi_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Hdmi_cal.acdb \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Headset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Headset_cal.acdb \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Speaker_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Speaker_cal.acdb \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/adsp_avs_config.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/adsp_avs_config.acdb \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Codec_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/Codec_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/Bluetooth_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/Bluetooth_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/General_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/General_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/Global_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/Global_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/Handset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/Handset_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/Hdmi_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/Hdmi_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/Headset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/Headset_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/Speaker_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/Speaker_cal.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/adsp_avs_config.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/adsp_avs_config.acdb \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/Codec_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/Codec_cal.acdb \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-c1-snd-card/Bluetooth_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-c1-snd-card/Bluetooth_cal.acdb \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-c1-snd-card/General_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-c1-snd-card/General_cal.acdb \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-c1-snd-card/Global_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-c1-snd-card/Global_cal.acdb \
@@ -638,7 +639,7 @@ PRODUCT_COPY_FILES += \
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_COPY_FILES += \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-snd-card/workspaceFile.qwsp:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-snd-card/workspaceFile.qwsp \
-     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-tdm-snd-card/workspaceFile.qwsp:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-tdm-snd-card/workspaceFile.qwsp \
+     device/google/crosshatch/acdbdata/OEM/sdm845-tavil-b1-snd-card/workspaceFile.qwsp:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-b1-snd-card/workspaceFile.qwsp \
      device/google/crosshatch/acdbdata/OEM/sdm845-tavil-c1-snd-card/workspaceFile.qwsp:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/OEM/sdm845-tavil-c1-snd-card/workspaceFile.qwsp
 endif
 

@@ -17,6 +17,7 @@
 TARGET_BOARD_PLATFORM := sdm845
 TARGET_BOARD_INFO_FILE := device/google/crosshatch/board-info.txt
 USES_DEVICE_GOOGLE_B1C1 := true
+TARGET_NO_BOOTLOADER := true
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -44,7 +45,7 @@ BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
-ifeq ($(filter-out crosshatch_kasan walleye_kasan, muskie_kasan, $(TARGET_PRODUCT)),)
+ifeq ($(filter-out crosshatch_kasan blueline_kasan, $(TARGET_PRODUCT)),)
 BOARD_KERNEL_OFFSET      := 0x80000
 BOARD_KERNEL_TAGS_OFFSET := 0x02500000
 BOARD_RAMDISK_OFFSET     := 0x02700000
