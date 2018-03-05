@@ -46,7 +46,7 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 $(call inherit-product, $(LOCAL_PATH)/utils.mk)
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/google/crosshatch-kernel/Image.gz-dtb
+    LOCAL_KERNEL := device/google/crosshatch-kernel/Image.lz4-dtb
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
