@@ -10,6 +10,9 @@ type sysfs_msm_wlan, sysfs_type, fs_type;
 type sysfs_rmtfs, sysfs_type, fs_type;
 type sysfs_soc, sysfs_type, fs_type;
 type sysfs_scsi_devices_0000, sysfs_type, fs_type;
+type sysfs_scsi_devices_other, sysfs_type, fs_type;
+type sysfs_devices_block, sysfs_type, fs_type;
+type sysfs_system_sleep_stats, sysfs_type, fs_type;
 type sysfs_timestamp_switch, sysfs_type, fs_type;
 type sysfs_touch, sysfs_type, fs_type;
 type sysfs_usb_c, sysfs_type, fs_type;
@@ -31,6 +34,7 @@ type debugfs_wlan, debugfs_type, fs_type;
 type debugfs_mdp, debugfs_type, fs_type;
 type debugfs_icnss, debugfs_type, fs_type;
 type debugfs_f2fs, debugfs_type, fs_type;
+type debugfs_dma_bufinfo, debugfs_type, fs_type;
 
 # /proc
 type proc_wifi_dbg, fs_type;
