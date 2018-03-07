@@ -32,6 +32,7 @@ using namespace android;
 static constexpr char ACTIVATE_PATH[] = "/sys/class/leds/vibrator/activate";
 static constexpr char DURATION_PATH[] = "/sys/class/leds/vibrator/duration";
 static constexpr char STATE_PATH[] = "/sys/class/leds/vibrator/state";
+static constexpr char EFFECT_INDEX_PATH[] = "/sys/class/leds/vibrator/device/cp_trigger_index";
 
 status_t registerVibratorService() {
     // ostreams below are required
@@ -50,12 +51,17 @@ status_t registerVibratorService() {
         ALOGE("Failed to open %s (%d): %s", STATE_PATH, errno, strerror(errno));
     }
 
+    std::ofstream effect{EFFECT_INDEX_PATH};
+    if (!state) {
+        ALOGE("Failed to open %s (%d): %s", EFFECT_INDEX_PATH, errno, strerror(errno));
+    }
+
     state << 1 << std::endl;
     if (!state) {
         ALOGE("Failed to set state (%d): %s", errno, strerror(errno));
     }
 
-    sp<IVibrator> vibrator = new Vibrator(std::move(activate), std::move(duration));
+    sp<IVibrator> vibrator = new Vibrator(std::move(activate), std::move(duration), std::move(effect));
 
     return vibrator->registerAsService();
 }

@@ -39,17 +39,36 @@ namespace implementation {
 using Status = ::android::hardware::vibrator::V1_0::Status;
 using EffectStrength = ::android::hardware::vibrator::V1_0::EffectStrength;
 
-Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration) :
+static constexpr uint32_t WAVEFORM_TICK_EFFECT_INDEX = 2;
+static constexpr uint32_t WAVEFORM_TICK_EFFECT_MS = 15;
+
+static constexpr uint32_t WAVEFORM_CLICK_EFFECT_INDEX = 3;
+static constexpr uint32_t WAVEFORM_CLICK_EFFECT_MS = 11;
+
+static constexpr uint32_t WAVEFORM_HEAVY_CLICK_EFFECT_INDEX = 4;
+static constexpr uint32_t WAVEFORM_HEAVY_CLICK_EFFECT_MS = 15;
+
+static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_INDEX = 7;
+static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = 130;
+
+Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofstream&& effect) :
     mActivate(std::move(activate)),
-    mDuration(std::move(duration))
+    mDuration(std::move(duration)),
+    mEffectIndex(std::move(effect))
 {}
 
-// Methods from ::android::hardware::vibrator::V1_1::IVibrator follow.
-Return<Status> Vibrator::on(uint32_t timeoutMs) {
+Return<Status> Vibrator::on(uint32_t timeoutMs, uint32_t effectIndex) {
+    mEffectIndex << effectIndex << std::endl;
     mDuration << timeoutMs << std::endl;
     mActivate << 1 << std::endl;
 
     return Status::OK;
+}
+
+
+// Methods from ::android::hardware::vibrator::V1_1::IVibrator follow.
+Return<Status> Vibrator::on(uint32_t timeoutMs) {
+    return on(timeoutMs, 0);
 }
 
 Return<Status> Vibrator::off()  {
@@ -69,21 +88,55 @@ Return<Status> Vibrator::setAmplitude(uint8_t) {
     return Status::UNSUPPORTED_OPERATION;
 }
 
-Return<void> Vibrator::perform(V1_0::Effect, EffectStrength, perform_cb _hidl_cb) {
-    _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
-    return Void();
-}
-
-Return<void> Vibrator::perform_1_1(V1_1::Effect_1_1, EffectStrength,
+Return<void> Vibrator::perform(V1_0::Effect effect, EffectStrength strength,
         perform_cb _hidl_cb) {
-    _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
+    return performEffect(static_cast<Effect>(effect), strength, _hidl_cb);
+}
+
+Return<void> Vibrator::perform_1_1(V1_1::Effect_1_1 effect, EffectStrength strength,
+        perform_cb _hidl_cb) {
+    return performEffect(static_cast<Effect>(effect), strength, _hidl_cb);
+}
+
+Return<void> Vibrator::perform_1_2(Effect effect, EffectStrength strength,
+        perform_cb _hidl_cb) {
+    return performEffect(effect, strength, _hidl_cb);
+}
+
+Return<void> Vibrator::performEffect(Effect effect, EffectStrength,
+        perform_cb _hidl_cb) {
+    Status status = Status::OK;
+    uint32_t timeMs;
+    uint32_t effectIndex;
+
+    switch (effect) {
+    case Effect::TICK:
+        effectIndex = WAVEFORM_TICK_EFFECT_INDEX;
+        timeMs = WAVEFORM_TICK_EFFECT_MS;
+        break;
+    case Effect::CLICK:
+        effectIndex = WAVEFORM_CLICK_EFFECT_INDEX;
+        timeMs = WAVEFORM_CLICK_EFFECT_MS;
+        break;
+    case Effect::HEAVY_CLICK:
+        effectIndex = WAVEFORM_HEAVY_CLICK_EFFECT_INDEX;
+        timeMs = WAVEFORM_HEAVY_CLICK_EFFECT_MS;
+        break;
+    case Effect::DOUBLE_CLICK:
+        effectIndex = WAVEFORM_DOUBLE_CLICK_EFFECT_INDEX;
+        timeMs = WAVEFORM_DOUBLE_CLICK_EFFECT_MS;
+        break;
+    default:
+        _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
+        return Void();
+    }
+
+    on(timeMs, effectIndex);
+    _hidl_cb(status, timeMs);
+
     return Void();
 }
 
-Return<void> Vibrator::perform_1_2(Effect, EffectStrength, perform_cb _hidl_cb) {
-    _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
-    return Void();
-}
 
 } // namespace implementation
 }  // namespace V1_2

@@ -402,15 +402,7 @@ on early-boot
     chmod 0660 /sys/devices/platform/soc/ac4a000.qcom,cci/ac4a000.qcom,cci:qcom,rainbow@20/rainbow_write_byte
 
     # Permission for Vibrator
-    chown system system /sys/class/leds/vibrator/device/mode
-    chown system system /sys/class/leds/vibrator/device/od_clamp
-    chown system system /sys/class/leds/vibrator/device/rtp_input
-    chown system system /sys/class/leds/vibrator/device/scale
-    chown system system /sys/class/leds/vibrator/device/set_sequencer
-    chown system system /sys/class/leds/vibrator/device/autocal_result
-    chown system system /sys/class/leds/vibrator/device/ctrl_loop
-    chown system system /sys/class/leds/vibrator/device/ol_lra_period
-    chown system system /sys/class/leds/vibrator/device/autocal
+    chown system system /sys/class/leds/vibrator/device/cp_trigger_index
 
     # Permission for LED driver
     chown system system /sys/class/leds/red/on_off_ms
