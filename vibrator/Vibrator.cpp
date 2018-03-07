@@ -46,11 +46,6 @@ Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration) :
 
 // Methods from ::android::hardware::vibrator::V1_1::IVibrator follow.
 Return<Status> Vibrator::on(uint32_t timeoutMs) {
-
-    // TODO: Remove this workaround once the firmware bug for vibrations
-    // under 10ms is fixed
-    timeoutMs = fmax(timeoutMs, 10);
-
     mDuration << timeoutMs << std::endl;
     mActivate << 1 << std::endl;
 
