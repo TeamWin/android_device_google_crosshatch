@@ -551,6 +551,10 @@ PRODUCT_PACKAGES += \
     android.hardware.oemlock@1.0-service.citadel \
     android.hardware.weaver@1.0-service.citadel
 
+# Citadel debug stuff
+PRODUCT_PACKAGES_DEBUG += \
+    test_citadel
+
 # Storage: for factory reset protection feature
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.frp.pst=/dev/block/bootdevice/by-name/frp
