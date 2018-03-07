@@ -33,7 +33,7 @@
 namespace android {
 namespace hardware {
 namespace vibrator {
-namespace V1_1 {
+namespace V1_2 {
 namespace implementation {
 
 using Status = ::android::hardware::vibrator::V1_0::Status;
@@ -74,19 +74,24 @@ Return<Status> Vibrator::setAmplitude(uint8_t) {
     return Status::UNSUPPORTED_OPERATION;
 }
 
-Return<void> Vibrator::perform(Effect, EffectStrength, perform_cb _hidl_cb) {
+Return<void> Vibrator::perform(V1_0::Effect, EffectStrength, perform_cb _hidl_cb) {
     _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
     return Void();
 }
 
-Return<void> Vibrator::perform_1_1(Effect_1_1, EffectStrength,
+Return<void> Vibrator::perform_1_1(V1_1::Effect_1_1, EffectStrength,
         perform_cb _hidl_cb) {
     _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
     return Void();
 }
 
+Return<void> Vibrator::perform_1_2(Effect, EffectStrength, perform_cb _hidl_cb) {
+    _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
+    return Void();
+}
+
 } // namespace implementation
-}  // namespace V1_1
+}  // namespace V1_2
 }  // namespace vibrator
 }  // namespace hardware
 }  // namespace android
