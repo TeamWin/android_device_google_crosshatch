@@ -2,6 +2,7 @@ persist.camera.            u:object_r:camera_prop:s0
 htc.camera.                u:object_r:camera_prop:s0
 persist.vendor.sys.cnd     u:object_r:cnd_prop:s0
 persist.sys.cnd            u:object_r:cnd_prop:s0
+ro.boot.sota               u:object_r:factory_ota_prop:s0
 sys.ims.                   u:object_r:ims_prop:s0
 vendor.ims.                u:object_r:ims_prop:s0
 persist.vendor.ims.        u:object_r:ims_prop:s0
@@ -88,7 +89,6 @@ persist.rmnet.data.enable  u:object_r:vendor_default_prop:s0
 qcom.bluetooth.soc         u:object_r:vendor_default_prop:s0
 qdcm.diagonal_matrix_mode  u:object_r:vendor_default_prop:s0
 qdcm.only_pcc_for_trans    u:object_r:vendor_default_prop:s0
-ro.boot.factoryota         u:object_r:vendor_default_prop:s0
 ro.build.software.version  u:object_r:vendor_default_prop:s0
 ro.camera.wrapper.hal3TrebleMinorVersion  u:object_r:vendor_default_prop:s0
 ro.fota.oem                u:object_r:vendor_default_prop:s0

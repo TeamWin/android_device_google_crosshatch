@@ -1,5 +1,6 @@
 type camera_prop, property_type;
 type cnd_prop, property_type;
+type factory_ota_prop, property_type;
 type ims_prop, property_type;
 type keymaster_prop, property_type;
 type net_rmnet_prop, property_type;
