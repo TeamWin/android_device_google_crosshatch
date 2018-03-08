@@ -43,7 +43,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.vc_call_vol_steps=7
 
 # Set lmkd options
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.lmk.low=1001 \
     ro.lmk.medium=0 \
     ro.lmk.critical=0 \
