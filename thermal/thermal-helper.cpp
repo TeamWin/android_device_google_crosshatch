@@ -65,6 +65,7 @@ kValidThermalSensorNameTypeMap = {
     {"gpu1-usr", TemperatureType::GPU},
     {kBatterySensorName, TemperatureType::BATTERY},
     {kSkinSensorName, TemperatureType::SKIN},
+    {"usbc-therm-adc", TemperatureType::UNKNOWN},  // USB-C thermistor.
 };
 
 namespace {
