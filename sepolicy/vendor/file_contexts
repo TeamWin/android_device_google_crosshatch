@@ -35,6 +35,7 @@
 /dev/mnh_sm                                     u:object_r:easel_device:s0
 /dev/easelcomm-client                           u:object_r:easel_device:s0
 /dev/citadel0                                   u:object_r:citadel_device:s0
+/dev/pn81a                                      u:object_r:secure_element_device:s0
 
 /dev/dri/card0                                  u:object_r:graphics_device:s0
 

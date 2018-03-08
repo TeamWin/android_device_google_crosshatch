@@ -307,17 +307,18 @@ PRODUCT_PACKAGES += \
   android.hardware.drm@1.0-service \
   android.hardware.drm@1.0-service.widevine
 
-# NFC packages
+# NFC and Secure Element packages
 PRODUCT_PACKAGES += \
-    nfc_nci.sdm845 \
     NfcNci \
     Tag \
-    android.hardware.nfc@1.0-impl \
-    android.hardware.nfc@1.0-service
+    SecureElement \
+    android.hardware.nfc@1.1-service \
+    android.hardware.secure_element@1.0-service
 
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
+    device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
     device/google/crosshatch/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
+    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf \
 
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.1-service.crosshatch

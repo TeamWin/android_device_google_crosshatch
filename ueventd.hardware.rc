@@ -97,6 +97,9 @@
 #nfc permissions
 /dev/nq-nci               0660    nfc         nfc
 
+#eSE device
+/dev/pn81a                0660   secure_element secure_element
+
 # Citadel
 /dev/citadel0             0660    hsm         hsm
 

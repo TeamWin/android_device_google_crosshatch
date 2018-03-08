@@ -190,7 +190,7 @@
     <hal format="hidl">
         <name>android.hardware.nfc</name>
         <transport>hwbinder</transport>
-        <version>1.0</version>
+        <version>1.1</version>
         <interface>
             <name>INfc</name>
             <instance>default</instance>
@@ -252,6 +252,15 @@
         <interface>
             <name>IDevice</name>
             <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.secure_element</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ISecureElement</name>
+            <instance>eSE1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -419,4 +428,23 @@
             <instance>cnd</instance>
         </interface>
     </hal>
+    <hal format="hidl">
+        <name>vendor.nxp.nxpese</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>INxpEse</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.nxp.nxpnfc</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>INxpNfc</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
 </manifest>
