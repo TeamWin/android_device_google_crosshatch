@@ -22,7 +22,7 @@ allow hal_bootctl tmpfs:lnk_file r_file_perms;
 
 # Read the sysfs to lookup what /dev/sgN device
 # corresponds to the XBL partitions.
-allow hal_bootctl sysfs:dir r_dir_perms;
+allow hal_bootctl sysfs_type:dir r_dir_perms;
 
 # Write to the XBL devices.
 allow hal_bootctl xbl_block_device:blk_file rw_file_perms;
