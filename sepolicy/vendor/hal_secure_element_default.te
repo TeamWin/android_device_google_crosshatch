@@ -1,0 +1,5 @@
+hal_client_domain(hal_secure_element_default, hal_nfc)
+
+get_prop(hal_secure_element, vendor_secure_element_prop)
+allow hal_secure_element_default nxpnfc_hwservice:hwservice_manager find;
+add_hwservice(hal_secure_element_default, nxpese_hwservice)
