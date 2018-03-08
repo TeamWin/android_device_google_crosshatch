@@ -368,6 +368,9 @@ on zygote-start
     # NFC local data and nfcee xml storage
     mkdir /data/vendor/nfc 0770 nfc nfc
 
+    # Secure Element directory for loader service functionality
+    mkdir /data/vendor/secure_element 0770 secure_element secure_element
+
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
 
