@@ -176,6 +176,7 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 # Vendor Interface Manifest
 DEVICE_MANIFEST_FILE := device/google/crosshatch/manifest.xml
 DEVICE_MATRIX_FILE := device/google/crosshatch/compatibility_matrix.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE := device/google/crosshatch/framework_manifest.xml
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
