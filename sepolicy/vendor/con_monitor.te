@@ -8,3 +8,4 @@ allow con_monitor_app app_api_service:service_manager find;
 allow con_monitor_app radio_vendor_data_file:dir rw_dir_perms;
 allow con_monitor_app radio_vendor_data_file:file create_file_perms;
 allow con_monitor_app radio_service:service_manager find;
+allow con_monitor_app audioserver_service:service_manager find;
