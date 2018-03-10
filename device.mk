@@ -370,7 +370,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator HAL
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.1-service.crosshatch \
+    android.hardware.vibrator@1.2-service.crosshatch \
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
