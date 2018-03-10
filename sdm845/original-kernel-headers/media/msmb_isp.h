@@ -118,7 +118,7 @@ enum msm_isp_stats_type {
  * @skip_mode: skip pattern, if skip mode is range only then min/max is used
  * @min_frame_id: minimum frame id (valid only if skip_mode = RANGE)
  * @max_frame_id: maximum frame id (valid only if skip_mode = RANGE)
-*/
+ */
 struct msm_isp_sw_framskip {
 	uint32_t stats_type_mask;
 	uint32_t stream_src_mask;
@@ -510,7 +510,8 @@ enum vfe_sd_type {
 };
 
 /* When you change the value below, check for the sof event_data size.
- * V4l2 limits payload to 64 bytes */
+ * V4l2 limits payload to 64 bytes
+ */
 #define MS_NUM_SLAVE_MAX 1
 
 /* Usecases when 2 HW need to be related or synced */
@@ -533,12 +534,14 @@ struct msm_isp_set_dual_hw_ms_cmd {
 	enum msm_vfe_dual_hw_ms_type dual_hw_ms_type;
 	/* Primary intf is mostly associated with preview.
 	 * This primary intf SOF frame_id and timestamp is tracked
-	 * and used to calculate delta */
+	 * and used to calculate delta
+	 */
 	enum msm_vfe_input_src primary_intf;
 	/* input_src array indicates other input INTF that may be Master/Slave.
 	 * For these additional intf, frame_id and timestamp are not saved.
 	 * However, if these are slaves then they will still get their
-	 * frame_id from Master */
+	 * frame_id from Master
+	 */
 	enum msm_vfe_input_src input_src[VFE_SRC_MAX];
 	uint32_t sof_delta_threshold; /* In milliseconds. Sent for Master */
 };
@@ -710,7 +713,8 @@ enum msm_isp_event_idx {
 
 /* The msm_v4l2_event_data structure should match the
  * v4l2_event.u.data field.
- * should not exceed 64 bytes */
+ * should not exceed 64 bytes
+ */
 
 struct msm_isp_buf_event {
 	uint32_t session_id;
