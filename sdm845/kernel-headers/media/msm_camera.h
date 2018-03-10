@@ -27,7 +27,7 @@
 #define MAX_SERVER_PAYLOAD_LENGTH 8192
 #define MSM_CAM_IOCTL_GET_SENSOR_INFO _IOR(MSM_CAM_IOCTL_MAGIC, 1, struct msm_camsensor_info *)
 #define MSM_CAM_IOCTL_REGISTER_PMEM _IOW(MSM_CAM_IOCTL_MAGIC, 2, struct msm_pmem_info *)
-#define MSM_CAM_IOCTL_UNREGISTER_PMEM _IOW(MSM_CAM_IOCTL_MAGIC, 3, unsigned)
+#define MSM_CAM_IOCTL_UNREGISTER_PMEM _IOW(MSM_CAM_IOCTL_MAGIC, 3, unsigned int)
 #define MSM_CAM_IOCTL_CTRL_COMMAND _IOW(MSM_CAM_IOCTL_MAGIC, 4, struct msm_ctrl_cmd *)
 #define MSM_CAM_IOCTL_CONFIG_VFE _IOW(MSM_CAM_IOCTL_MAGIC, 5, struct msm_camera_vfe_cfg_cmd *)
 #define MSM_CAM_IOCTL_GET_STATS _IOR(MSM_CAM_IOCTL_MAGIC, 6, struct msm_camera_stats_event_ctrl *)
@@ -46,7 +46,7 @@
 #define MSM_CAM_IOCTL_PICT_PP _IOW(MSM_CAM_IOCTL_MAGIC, 19, uint8_t *)
 #define MSM_CAM_IOCTL_PICT_PP_DONE _IOW(MSM_CAM_IOCTL_MAGIC, 20, struct msm_snapshot_pp_status *)
 #define MSM_CAM_IOCTL_SENSOR_IO_CFG _IOW(MSM_CAM_IOCTL_MAGIC, 21, struct sensor_cfg_data *)
-#define MSM_CAM_IOCTL_FLASH_LED_CFG _IOW(MSM_CAM_IOCTL_MAGIC, 22, unsigned *)
+#define MSM_CAM_IOCTL_FLASH_LED_CFG _IOW(MSM_CAM_IOCTL_MAGIC, 22, unsigned int *)
 #define MSM_CAM_IOCTL_UNBLOCK_POLL_FRAME _IO(MSM_CAM_IOCTL_MAGIC, 23)
 #define MSM_CAM_IOCTL_CTRL_COMMAND_2 _IOW(MSM_CAM_IOCTL_MAGIC, 24, struct msm_ctrl_cmd *)
 #define MSM_CAM_IOCTL_AF_CTRL _IOR(MSM_CAM_IOCTL_MAGIC, 25, struct msm_ctrl_cmt_t *)
@@ -1188,7 +1188,9 @@ enum msm_camera_i2c_reg_addr_type {
   MSM_CAMERA_I2C_BYTE_ADDR = 1,
   MSM_CAMERA_I2C_WORD_ADDR,
   MSM_CAMERA_I2C_3B_ADDR,
+  MSM_CAMERA_I2C_DWORD_ADDR,
 };
+#define MSM_CAMERA_I2C_DWORD_ADDR MSM_CAMERA_I2C_DWORD_ADDR
 struct msm_camera_i2c_reg_array {
   uint16_t reg_addr;
   uint16_t reg_data;
@@ -1310,7 +1312,7 @@ enum gpio_operation_type {
 };
 struct msm_cam_gpio_operation {
   enum gpio_operation_type op_type;
-  unsigned address;
+  unsigned int address;
   int value;
   const char * tag;
 };
