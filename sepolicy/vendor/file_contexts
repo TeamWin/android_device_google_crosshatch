@@ -123,7 +123,6 @@
 /vendor/bin/hw/android\.hardware\.vr@1\.0-service.crosshatch      u:object_r:hal_vr_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.fpc u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/thermal-engine      u:object_r:thermal-engine_exec:s0
-/vendor/bin/sensors\.qcom        u:object_r:sensors_exec:s0
 /vendor/bin/sensors\.qti        u:object_r:sensors_exec:s0
 /vendor/bin/sscrpcd             u:object_r:sensors_exec:s0
 /vendor/bin/ssr_setup           u:object_r:ssr_setup_exec:s0
