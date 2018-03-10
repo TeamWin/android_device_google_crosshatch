@@ -574,7 +574,12 @@ on property:persist.sys.ssr.enable_ramdumps=1
 on property:persist.sys.ssr.enable_ramdumps=0
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
 
-service sensors /vendor/bin/sensors.qcom
+service sensors.qti /vendor/bin/sensors.qti
+    class core
+    user root
+    group root
+
+service sensors /vendor/bin/sscrpcd
     class core
     user root
     group root

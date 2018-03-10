@@ -286,5 +286,12 @@ struct drm_msm_dither {
   __u32 c3_bitdepth;
   __u32 matrix[DITHER_MATRIX_SZ];
 };
+#define DRM_MSM_PA_DITHER
+struct drm_msm_pa_dither {
+  __u64 flags;
+  __u32 strength;
+  __u32 offset_en;
+  __u32 matrix[DITHER_MATRIX_SZ];
+};
 #endif
 
