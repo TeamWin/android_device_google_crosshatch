@@ -212,7 +212,6 @@
     <ctl name="Cirrus SP" value="Enable"/>
     <ctl name="Cirrus SP FBPort" value="QUAT_TDM_TX_0"/>
     <ctl name="FB Channels" value="Eight"/>
-    <ctl name="Cirrus SP Usecase Config" value="Music"/>
     <!-- Cirrus Booster Amp Algorithm end -->
     <!-- Cirrus Amp Gain -->
     <ctl name="Boost Control" value="On"/>
@@ -2100,19 +2099,19 @@
     <!-- Triple MIC case -->
     <!-- Ch1: 3rd mic DEC8/TX8, Ch2: 2nd mic DEC6/TX6, Ch3: 1st mic DEC5/TX5-->
     <path name="triple-mic">
-        <ctl name="AIF1_CAP Mixer SLIM TX5" value="1"/>
-        <ctl name="AIF1_CAP Mixer SLIM TX6" value="1"/>
         <ctl name="AIF1_CAP Mixer SLIM TX8" value="1"/>
+        <ctl name="AIF1_CAP Mixer SLIM TX6" value="1"/>
+        <ctl name="AIF1_CAP Mixer SLIM TX5" value="1"/>
         <ctl name="SLIM_0_TX Channels" value="Three"/>
-        <ctl name="CDC_IF TX5 MUX" value="DEC5"/>
-        <ctl name="ADC MUX5" value="DMIC"/>
-        <ctl name="DMIC MUX5" value="DMIC4"/>
-        <ctl name="CDC_IF TX6 MUX" value="DEC6"/>
-        <ctl name="ADC MUX6" value="DMIC"/>
-        <ctl name="DMIC MUX6" value="DMIC3"/>
         <ctl name="CDC_IF TX8 MUX" value="DEC8"/>
         <ctl name="ADC MUX8" value="DMIC"/>
         <ctl name="DMIC MUX8" value="DMIC0"/>
+        <ctl name="CDC_IF TX6 MUX" value="DEC6"/>
+        <ctl name="ADC MUX6" value="DMIC"/>
+        <ctl name="DMIC MUX6" value="DMIC3"/>
+        <ctl name="CDC_IF TX5 MUX" value="DEC5"/>
+        <ctl name="ADC MUX5" value="DMIC"/>
+        <ctl name="DMIC MUX5" value="DMIC4"/>
     </path>
 
     <!-- SPK -->
@@ -2120,30 +2119,34 @@
         <ctl name="QUAT_TDM_RX_0 Format" value="S32_LE"/>
         <ctl name="Boost Control" value="On"/>
         <ctl name="AMP Enable Switch" value="1"/>
+        <ctl name="AMP PCM Gain" value="17"/>
         <ctl name="R Boost Control" value="On"/>
         <ctl name="R AMP Enable Switch" value="1"/>
-        <ctl name="Cirrus SP Usecase Config" value="Music"/>
+        <ctl name="R AMP PCM Gain" value="17"/>
     </path>
 
     <path name="speaker-mono">
         <ctl name="QUAT_TDM_RX_0 Format" value="S32_LE"/>
         <ctl name="Boost Control" value="Off"/>
         <ctl name="AMP Enable Switch" value="0"/>
+        <ctl name="AMP PCM Gain" value="17"/>
         <ctl name="R Boost Control" value="On"/>
         <ctl name="R AMP Enable Switch" value="1"/>
+        <ctl name="R AMP PCM Gain" value="17"/>
     </path>
 
     <path name="speaker-mono-2">
         <ctl name="QUAT_TDM_RX_0 Format" value="S32_LE"/>
         <ctl name="R Boost Control" value="Off"/>
         <ctl name="R AMP Enable Switch" value="0"/>
+        <ctl name="R AMP PCM Gain" value="17"/>
         <ctl name="Boost Control" value="On"/>
         <ctl name="AMP Enable Switch" value="1"/>
+        <ctl name="AMP PCM Gain" value="17"/>
     </path>
 
     <path name="speaker-safe">
         <path name="speaker-mono"/>
-        <ctl name="Cirrus SP Usecase Config" value="Music"/>
     </path>
 
     <path name="speaker-reverse">
@@ -2218,9 +2221,9 @@
     <!-- Phone SPK TX 3rd:DEC8 16dB, 2nd:DEC6 16dB, 1st:DEC5 16dB,-->
     <path name="speaker-mic">
         <path name="triple-mic"/>
-        <ctl name="DEC5 Volume" value="100"/>
-        <ctl name="DEC6 Volume" value="100"/>
-        <ctl name="DEC8 Volume" value="100"/>
+        <ctl name="DEC8 Volume" value="88"/>
+        <ctl name="DEC6 Volume" value="88"/>
+        <ctl name="DEC5 Volume" value="88"/>
     </path>
 
     <path name="speaker-mic-liquid">
@@ -2253,6 +2256,8 @@
         <ctl name="Boost Control" value="Off"/>
         <ctl name="R AMP Enable Switch" value="0"/>
         <ctl name="AMP Enable Switch" value="1"/>
+        <ctl name="R AMP PCM Gain" value="17"/>
+        <ctl name="AMP PCM Gain" value="0"/>
     </path>
 
     <path name="handset-qrd">
@@ -2282,9 +2287,9 @@
     <!-- three mic TX 3rd:DEC8 22dB, 2nd:DEC6 22dB, 1st:DEC5 22dB,-->
     <path name="three-mic">
         <path name="triple-mic"/>
-        <ctl name="DEC5 Volume" value="106"/>
-        <ctl name="DEC6 Volume" value="106"/>
         <ctl name="DEC8 Volume" value="106"/>
+        <ctl name="DEC6 Volume" value="106"/>
+        <ctl name="DEC5 Volume" value="106"/>
     </path>
 
     <path name="anc-handset">
@@ -2366,19 +2371,16 @@
 
     <!-- Phone RCV RX -->
     <path name="voice-handset">
-        <ctl name="Cirrus SP Usecase Config" value="Voice"/>
         <path name="handset"/>
     </path>
 
     <!-- Phone RCV tmus RX -->
     <path name="voice-handset-tmus">
-        <ctl name="Cirrus SP Usecase Config" value="Voice"/>
         <path name="handset"/>
     </path>
 
     <!-- Phone RCV HAC RX -->
     <path name="voice-hac-handset">
-        <ctl name="Cirrus SP Usecase Config" value="Voice"/>
         <path name="handset"/>
     </path>
 
@@ -2394,13 +2396,11 @@
     <!-- Phone SPK RX -->
     <path name="voice-speaker">
         <path name="speaker-mono"/>
-        <ctl name="Cirrus SP Usecase Config" value="Voice"/>
     </path>
 
     <!-- Phone SPK RX -->
     <path name="voice-speaker-hfp">
         <path name="speaker-mono"/>
-        <ctl name="Cirrus SP Usecase Config" value="Voice"/>
     </path>
 
     <path name="voice-speaker-qrd">
@@ -2409,7 +2409,6 @@
 
     <path name="voice-speaker-2">
         <path name="speaker-mono-2"/>
-        <ctl name="Cirrus SP Usecase Config" value="Voice"/>
     </path>
 
     <path name="voice-speaker-fluid">
@@ -2419,9 +2418,9 @@
     <!-- Phone SPK TX 3rd:DEC8 16dB, 2nd:DEC6 16dB, 1st:DEC5 16dB,-->
     <path name="voice-speaker-mic">
         <path name="triple-mic"/>
-        <ctl name="DEC5 Volume" value="100"/>
-        <ctl name="DEC6 Volume" value="100"/>
         <ctl name="DEC8 Volume" value="100"/>
+        <ctl name="DEC6 Volume" value="100"/>
+        <ctl name="DEC5 Volume" value="100"/>
     </path>
 
     <path name="voice-headphones">
@@ -2604,17 +2603,17 @@
     <!-- Phone SPK TX 3rd:DEC8 0dB, 2nd:DEC6 0dB, 1st:DEC5 0dB,-->
     <path name="speaker-dmic-endfire">
         <path name="triple-mic"/>
-        <ctl name="DEC5 Volume" value="84"/>
-        <ctl name="DEC6 Volume" value="84"/>
-        <ctl name="DEC8 Volume" value="84"/>
+        <ctl name="DEC8 Volume" value="88"/>
+        <ctl name="DEC6 Volume" value="88"/>
+        <ctl name="DEC5 Volume" value="88"/>
     </path>
 
     <!-- TX Dual-mic 1st MIC D:0 dB, 2nd MIC:0 dB -->
     <path name="dmic-endfire">
         <path name="handset-dmic-endfire"/>
         <ctl name="IIR0 INP0 MUX" value="DEC7"/>
-        <ctl name="DEC7 Volume" value="84"/>
-        <ctl name="DEC8 Volume" value="84"/>
+        <ctl name="DEC7 Volume" value="88"/>
+        <ctl name="DEC8 Volume" value="88"/>
     </path>
 
     <path name="dmic-endfire-liquid">
@@ -2647,9 +2646,9 @@
     <!-- Phone SPK TX 3rd:DEC8 16dB, 2nd:DEC6 16dB, 1st:DEC5 16dB,-->
     <path name="voice-speaker-dmic-ef">
         <path name="triple-mic"/>
-        <ctl name="DEC5 Volume" value="100"/>
-        <ctl name="DEC6 Volume" value="100"/>
         <ctl name="DEC8 Volume" value="100"/>
+        <ctl name="DEC6 Volume" value="100"/>
+        <ctl name="DEC5 Volume" value="100"/>
     </path>
 
     <!-- VR Dual-MIC 1st D:22 dB -->
@@ -2820,9 +2819,9 @@
     <!-- Unprocessed-three-mic TX 3rd:DEC8 5dB, 2nd:DEC6 5dB, 1st:DEC5 5dB,-->
     <path name="unprocessed-three-mic">
         <path name="triple-mic"/>
-        <ctl name="DEC5 Volume" value="89"/>
-        <ctl name="DEC6 Volume" value="89"/>
         <ctl name="DEC8 Volume" value="89"/>
+        <ctl name="DEC6 Volume" value="89"/>
+        <ctl name="DEC5 Volume" value="89"/>
     </path>
 
     <!-- USB TTY start -->
