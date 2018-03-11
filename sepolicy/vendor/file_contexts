@@ -35,6 +35,7 @@
 /dev/mnh_sm                                     u:object_r:easel_device:s0
 /dev/easelcomm-client                           u:object_r:easel_device:s0
 /dev/citadel0                                   u:object_r:citadel_device:s0
+/dev/pn81a                                      u:object_r:secure_element_device:s0
 
 /dev/dri/card0                                  u:object_r:graphics_device:s0
 
@@ -122,7 +123,8 @@
 /vendor/bin/hw/android\.hardware\.vr@1\.0-service.crosshatch      u:object_r:hal_vr_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.fpc u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/thermal-engine      u:object_r:thermal-engine_exec:s0
-/vendor/bin/sensors.qcom        u:object_r:sensors_exec:s0
+/vendor/bin/sensors\.qti        u:object_r:sensors_exec:s0
+/vendor/bin/sscrpcd             u:object_r:sensors_exec:s0
 /vendor/bin/ssr_setup           u:object_r:ssr_setup_exec:s0
 /vendor/bin/ssr_diag            u:object_r:ssr_diag_exec:s0
 /vendor/bin/pm-service          u:object_r:per_mgr_exec:s0
@@ -154,10 +156,10 @@
 /vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 /vendor/bin/easelmanagerd       u:object_r:easel_exec:s0
-/vendor/bin/hw/android\.hardware\.usb@1\.1-service.crosshatch             u:object_r:hal_usb_default_exec:s0
-/vendor/bin/hw/android\.hardware\.power@1\.2-service.crosshatch           u:object_r:hal_power_default_exec:s0
-/vendor/bin/hw/android\.hardware\.power@1\.2-service.crosshatch-libperfmgr u:object_r:hal_power_default_exec:s0
-/vendor/bin/hw/android\.hardware\.thermal@1\.0-service.crosshatch         u:object_r:hal_thermal_default_exec:s0
+/vendor/bin/hw/android\.hardware\.usb@1\.1-service\.crosshatch             u:object_r:hal_usb_default_exec:s0
+/vendor/bin/hw/android\.hardware\.power@1\.2-service\.crosshatch           u:object_r:hal_power_default_exec:s0
+/vendor/bin/hw/android\.hardware\.power@1\.2-service\.crosshatch-libperfmgr u:object_r:hal_power_default_exec:s0
+/vendor/bin/hw/android\.hardware\.thermal@1\.0-service\.crosshatch         u:object_r:hal_thermal_default_exec:s0
 /vendor/bin/chre                u:object_r:chre_exec:s0
 /vendor/bin/time_daemon         u:object_r:time_daemon_exec:s0
 /vendor/bin/imsrcsd             u:object_r:hal_rcsservice_exec:s0
@@ -171,14 +173,14 @@
 /vendor/bin/ftmdaemon           u:object_r:ftmd_exec:s0
 /vendor/bin/hw/qcrild           u:object_r:rild_exec:s0
 
-/vendor/bin/hw/android\.hardware\.drm@1\.0-service.widevine          u:object_r:hal_drm_widevine_exec:s0
-/vendor/bin/hw/android\.hardware\.vibrator@1\.1-service.crosshatch        u:object_r:hal_vibrator_default_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.0-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
+/vendor/bin/hw/android\.hardware\.vibrator@1\.2-service\.crosshatch  u:object_r:hal_vibrator_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@3\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gnss@1\.1-service-qti              u:object_r:hal_gnss_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.bluetooth@1\.0-service-qti         u:object_r:hal_bluetooth_default_exec:s0
-/vendor/bin/hw/android\.hardware\.oemlock@1\.0-service.citadel       u:object_r:hal_oemlock_citadel_exec:s0
-/vendor/bin/hw/android\.hardware\.weaver@1\.0-service.citadel        u:object_r:hal_weaver_citadel_exec:s0
+/vendor/bin/hw/android\.hardware\.oemlock@1\.0-service\.citadel       u:object_r:hal_oemlock_citadel_exec:s0
+/vendor/bin/hw/android\.hardware\.weaver@1\.0-service\.citadel        u:object_r:hal_weaver_citadel_exec:s0
 /vendor/bin/hw/citadeld                                              u:object_r:citadeld_exec:s0
 /vendor/bin/hw/init_citadel                                          u:object_r:init_citadel_exec:s0
 /vendor/bin/hw/vendor\.google\.radioext@1\.0-service                 u:object_r:hal_radioext_default_exec:s0
