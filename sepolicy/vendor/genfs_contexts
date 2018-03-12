@@ -24,6 +24,7 @@ genfscon sysfs /devices/platform/soc/188101c.qcom,spss                          
 genfscon sysfs /devices/platform/soc/5c00000.qcom,ssc                            u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_rotator                   u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/894000.i2c/i2c-3/3-005a/leds                u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display@51/backlight           u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc/5000000.qcom,kgsl-3d0                       u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,kgsl-hyp                           u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,ipa_fws                            u:object_r:sysfs_msm_subsys:s0
