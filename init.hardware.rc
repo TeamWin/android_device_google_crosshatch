@@ -99,6 +99,7 @@ on init
     write /dev/cpuset/kernel/cpus 0
     write /dev/cpuset/kernel/mems 0
     chown system system /dev/cpuset/kernel/tasks
+    chown system system /dev/cpuset/kernel/cpus
     chmod 0660 /dev/cpuset/kernel/tasks
 
     mkdir /dev/cpuset/camera-daemon
@@ -402,15 +403,7 @@ on early-boot
     chmod 0660 /sys/devices/platform/soc/ac4a000.qcom,cci/ac4a000.qcom,cci:qcom,rainbow@20/rainbow_write_byte
 
     # Permission for Vibrator
-    chown system system /sys/class/leds/vibrator/device/mode
-    chown system system /sys/class/leds/vibrator/device/od_clamp
-    chown system system /sys/class/leds/vibrator/device/rtp_input
-    chown system system /sys/class/leds/vibrator/device/scale
-    chown system system /sys/class/leds/vibrator/device/set_sequencer
-    chown system system /sys/class/leds/vibrator/device/autocal_result
-    chown system system /sys/class/leds/vibrator/device/ctrl_loop
-    chown system system /sys/class/leds/vibrator/device/ol_lra_period
-    chown system system /sys/class/leds/vibrator/device/autocal
+    chown system system /sys/class/leds/vibrator/device/cp_trigger_index
 
     # Permission for LED driver
     chown system system /sys/class/leds/red/on_off_ms
@@ -442,15 +435,15 @@ on boot
     write /proc/sys/net/core/rmem_max  8388608
 
     # Update DVR cpusets to boot-time values.
-    write /dev/cpuset/kernel/cpus 0-3
-    write /dev/cpuset/system/cpus 0-3
-    write /dev/cpuset/system/performance/cpus 0-3
-    write /dev/cpuset/system/background/cpus 0-3
-    write /dev/cpuset/system/cpus 0-3
-    write /dev/cpuset/application/cpus 0-3
-    write /dev/cpuset/application/performance/cpus 0-3
-    write /dev/cpuset/application/background/cpus 0-3
-    write /dev/cpuset/application/cpus 0-3
+    write /dev/cpuset/kernel/cpus 0-7
+    write /dev/cpuset/system/cpus 0-7
+    write /dev/cpuset/system/performance/cpus 0-7
+    write /dev/cpuset/system/background/cpus 0-7
+    write /dev/cpuset/system/cpus 0-7
+    write /dev/cpuset/application/cpus 0-7
+    write /dev/cpuset/application/performance/cpus 0-7
+    write /dev/cpuset/application/background/cpus 0-7
+    write /dev/cpuset/application/cpus 0-7
 
     # Bluetooth
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
@@ -528,13 +521,13 @@ on property:sys.boot_completed=1
     write /dev/cpuset/system-background/cpus 0-3
 
     # Update DVR cpusets to runtime values.
-    write /dev/cpuset/kernel/cpus 0,1
-    write /dev/cpuset/system/performance/cpus 2
-    write /dev/cpuset/system/background/cpus 0
-    write /dev/cpuset/system/cpus 0,2
-    write /dev/cpuset/application/performance/cpus 3
-    write /dev/cpuset/application/background/cpus 1
-    write /dev/cpuset/application/cpus 1,3
+    # Kernel cpuset will be apply on PowerHAL
+    write /dev/cpuset/system/performance/cpus 6-7
+    write /dev/cpuset/system/background/cpus 0-1
+    write /dev/cpuset/system/cpus 0-1,6-7
+    write /dev/cpuset/application/performance/cpus 4-5
+    write /dev/cpuset/application/background/cpus 0-1
+    write /dev/cpuset/application/cpus 0-1,4-5
 
     # Run time fs tune
     write /sys/block/sda/queue/read_ahead_kb 1024
@@ -581,7 +574,12 @@ on property:persist.sys.ssr.enable_ramdumps=1
 on property:persist.sys.ssr.enable_ramdumps=0
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
 
-service sensors /vendor/bin/sensors.qcom
+service sensors.qti /vendor/bin/sensors.qti
+    class core
+    user root
+    group root
+
+service sensors /vendor/bin/sscrpcd
     class core
     user root
     group root

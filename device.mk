@@ -233,7 +233,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.sib16_support=1 \
     persist.vendor.radio.data_con_rprt=true \
     persist.rcs.supported=1 \
-    rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
+    vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
 
 # Set snapshot timer to 3 second
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -307,17 +307,18 @@ PRODUCT_PACKAGES += \
   android.hardware.drm@1.0-service \
   android.hardware.drm@1.0-service.widevine
 
-# NFC packages
+# NFC and Secure Element packages
 PRODUCT_PACKAGES += \
-    nfc_nci.sdm845 \
     NfcNci \
     Tag \
-    android.hardware.nfc@1.0-impl \
-    android.hardware.nfc@1.0-service
+    SecureElement \
+    android.hardware.nfc@1.1-service \
+    android.hardware.secure_element@1.0-service
 
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
+    device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
     device/google/crosshatch/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
+    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf \
 
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.1-service.crosshatch
@@ -369,7 +370,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator HAL
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.1-service.crosshatch \
+    android.hardware.vibrator@1.2-service.crosshatch \
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
@@ -549,6 +550,10 @@ PRODUCT_PACKAGES += \
     citadel_updater \
     android.hardware.oemlock@1.0-service.citadel \
     android.hardware.weaver@1.0-service.citadel
+
+# Citadel debug stuff
+PRODUCT_PACKAGES_DEBUG += \
+    test_citadel
 
 # Storage: for factory reset protection feature
 PRODUCT_PROPERTY_OVERRIDES += \

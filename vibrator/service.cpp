@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "android.hardware.vibrator@1.1-service.crosshatch"
+#define LOG_TAG "android.hardware.vibrator@1.2-service.crosshatch"
 
-#include <android/hardware/vibrator/1.1/IVibrator.h>
+#include <android/hardware/vibrator/1.2/IVibrator.h>
 #include <hidl/HidlSupport.h>
 #include <hidl/HidlTransportSupport.h>
 #include <utils/Errors.h>
@@ -25,13 +25,14 @@
 
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
-using android::hardware::vibrator::V1_1::IVibrator;
-using android::hardware::vibrator::V1_1::implementation::Vibrator;
+using android::hardware::vibrator::V1_2::IVibrator;
+using android::hardware::vibrator::V1_2::implementation::Vibrator;
 using namespace android;
 
 static constexpr char ACTIVATE_PATH[] = "/sys/class/leds/vibrator/activate";
 static constexpr char DURATION_PATH[] = "/sys/class/leds/vibrator/duration";
 static constexpr char STATE_PATH[] = "/sys/class/leds/vibrator/state";
+static constexpr char EFFECT_INDEX_PATH[] = "/sys/class/leds/vibrator/device/cp_trigger_index";
 
 status_t registerVibratorService() {
     // ostreams below are required
@@ -50,12 +51,17 @@ status_t registerVibratorService() {
         ALOGE("Failed to open %s (%d): %s", STATE_PATH, errno, strerror(errno));
     }
 
+    std::ofstream effect{EFFECT_INDEX_PATH};
+    if (!state) {
+        ALOGE("Failed to open %s (%d): %s", EFFECT_INDEX_PATH, errno, strerror(errno));
+    }
+
     state << 1 << std::endl;
     if (!state) {
         ALOGE("Failed to set state (%d): %s", errno, strerror(errno));
     }
 
-    sp<IVibrator> vibrator = new Vibrator(std::move(activate), std::move(duration));
+    sp<IVibrator> vibrator = new Vibrator(std::move(activate), std::move(duration), std::move(effect));
 
     return vibrator->registerAsService();
 }
