@@ -78,7 +78,7 @@ genfscon sysfs /class/gpio/export                     u:object_r:sysfs_gpio_expo
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-00/c440000.qcom,spmi:qcom,pm8998@0:pinctrl@c000 u:object_r:sysfs_pinctrl:s0
 genfscon sysfs /firmware/devicetree/base/soc/qcom,spmi@c440000/qcom,pm8998@0/pinctrl@c000/ u:object_r:sysfs_pinctrl:s0
 
-genfscon sysfs /devices/virtual/block                                   u:object_r:sysfs_devices_block:s0
+genfscon sysfs /devices/virtual/block/                                  u:object_r:sysfs_devices_block:s0
 
 genfscon sysfs /power/system_sleep/stats                                u:object_r:sysfs_system_sleep_stats:s0
 
