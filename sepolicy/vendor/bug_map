@@ -4,6 +4,7 @@ cnd cnd netlink_route_socket 73994924
 init cgroup file 74182216
 installd installd capability 74377436
 netd netd capability 73947368
+sensors sensors capability 74548718
 time_daemon system_data_file file 74107905
 wcnss_service wifi_data_file dir 74233478
 zygote cgroup file 74182216
