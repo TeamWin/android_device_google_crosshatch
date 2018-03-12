@@ -48,8 +48,8 @@
         </effectProxy>
         <effect name="downmix" library="downmix" uuid="93f04452-e4fe-41cc-91f9-e475b6d1d69f"/>
         <effect name="loudness_enhancer" library="loudness_enhancer" uuid="fa415329-2034-4bea-b5dc-5b381c8d1e2c"/>
-        <effect name="aec" library="audio_pre_processing" uuid="b4398408-1fb9-11e7-93ae-92361f002671"/>
-        <effect name="ns" library="audio_pre_processing" uuid="b43988c2-1fb9-11e7-93ae-92361f002671"/>
+        <effect name="aec" library="audio_pre_processing" uuid="27dab416-23f8-11e8-b467-0ed5f89f718b"/>
+        <effect name="ns" library="audio_pre_processing" uuid="27dab6d2-23f8-11e8-b467-0ed5f89f718b"/>
         <effect name="music_helper" library="volume_listener" uuid="08b8b058-0590-11e5-ac71-0025b32654a0"/>
         <effect name="ring_helper" library="volume_listener" uuid="0956df94-0590-11e5-bdbe-0025b32654a0"/>
         <effect name="alarm_helper" library="volume_listener" uuid="09f303e2-0590-11e5-8fdb-0025b32654a0"/>
