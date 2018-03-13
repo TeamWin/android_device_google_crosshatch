@@ -33,6 +33,7 @@ r_dir_file(hal_dumpstate_impl, sysfs_uio)
 r_dir_file(hal_dumpstate_impl, sysfs_rmtfs)
 r_dir_file(hal_dumpstate_impl, sysfs_msm_subsys)
 r_dir_file(hal_dumpstate_impl, sysfs_soc)
+r_dir_file(hal_dumpstate_impl, sysfs_thermal)
 
 allow hal_dumpstate_impl sysfs_thermal:dir search;
 allow hal_dumpstate_impl sysfs_thermal:file r_file_perms;
@@ -63,8 +64,20 @@ allow hal_dumpstate_impl display_vendor_data_file:file r_file_perms;
 allow hal_dumpstate_impl sysfs_touch:dir r_dir_perms;
 allow hal_dumpstate_impl sysfs_touch:file r_file_perms;
 
+# Access to UFS info
+allow hal_dumpstate_impl sysfs_scsi_devices_0000:dir r_dir_perms;
+allow hal_dumpstate_impl sysfs_scsi_devices_0000:file r_file_perms;
+
 # Access to MPSS RFS info
 userdebug_or_eng(`
 allow hal_dumpstate_impl mpss_rfs_data_file:dir r_dir_perms;
 allow hal_dumpstate_impl mpss_rfs_data_file:file r_file_perms;
 ')
+
+# For collecting bugreports.
+allow hal_dumpstate_impl shell_data_file:file getattr;
+allow hal_dumpstate_impl sysfs_system_sleep_stats:file r_file_perms;
+# For '/vendor/bin/sh -c getprop | grep sys.modem.diag'
+allow hal_dumpstate_impl vendor_file:file execute_no_trans;
+userdebug_or_eng(`allow hal_dumpstate_impl debugfs_dma_bufinfo:file r_file_perms;')
+dontaudit hal_dumpstate_impl debugfs_dma_bufinfo:file r_file_perms;

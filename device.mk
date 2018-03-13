@@ -46,7 +46,7 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 $(call inherit-product, $(LOCAL_PATH)/utils.mk)
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/google/crosshatch-kernel/Image.gz-dtb
+    LOCAL_KERNEL := device/google/crosshatch-kernel/Image.lz4-dtb
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -427,7 +427,8 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    libaudio-resampler
+    libaudio-resampler \
+    audio.hearing_aid.default
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
@@ -473,6 +474,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
+    frameworks/av/services/audiopolicy/config/hearing_aid_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/hearing_aid_audio_policy_configuration.xml \
 
 # audio hal tables
 PRODUCT_COPY_FILES += \
