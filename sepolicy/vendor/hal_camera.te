@@ -40,7 +40,7 @@ userdebug_or_eng(`
 ')
 
 # access easel dev nodes
-allow hal_camera easel_device:chr_file { read write ioctl open };
+allow hal_camera easel_device:chr_file rw_file_perms;
 allow hal_camera sysfs_easel:file rw_file_perms;
 
 # access hexagon
