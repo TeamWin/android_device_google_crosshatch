@@ -6,7 +6,6 @@ add_service(dataservice_app, cne_service)
 add_service(dataservice_app, uce_service)
 allow dataservice_app {
   app_api_service
-  system_api_service
   audioserver_service
   radio_service
 }:service_manager find;
@@ -14,8 +13,7 @@ allow dataservice_app {
 allow dataservice_app hal_imsrcsd_hwservice:hwservice_manager find;
 allow dataservice_app hal_cne_hwservice:hwservice_manager find;
 
-allow dataservice_app system_app_data_file:dir create_dir_perms;
-allow dataservice_app system_app_data_file:{ file lnk_file } create_file_perms;
+allow dataservice_app radio_data_file:dir create_dir_perms;
+allow dataservice_app radio_data_file:{ file lnk_file } create_file_perms;
 
 hwbinder_use(dataservice_app)
-
