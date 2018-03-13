@@ -1,0 +1,4 @@
+# To read /persist/sensors/elmyra.
+allow platform_app persist_file:dir search;
+allow platform_app persist_sensors_file:dir search;
+allow platform_app persist_sensors_file:file r_file_perms;
