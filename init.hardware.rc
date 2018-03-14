@@ -214,6 +214,9 @@ on late-fs
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --late
 
+    # Required for time_daemon
+    mkdir /persist/time 0770 system system
+
     # Start time daemon early so that the system time can be set early
     start time_daemon
 
@@ -256,7 +259,7 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
     # Wait until the system time is set
-    #STOPSHIP wait_for_prop sys.time.set true
+    wait_for_prop vendor.qcom.time.set true
 
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
@@ -454,10 +457,6 @@ on boot
 
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
-
-    # Required for time_daemon
-    mkdir /persist/time 0770 system system
-    mkdir /data/vendor/time 0700 system system
 
     # default country code
     setprop ro.boot.wificountrycode 00
