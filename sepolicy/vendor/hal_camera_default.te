@@ -19,3 +19,5 @@ userdebug_or_eng(`
 
 # For interfacing with PowerHAL
 hal_client_domain(hal_camera_default, hal_power)
+
+allow hal_camera_default proc_stat:file r_file_perms;
