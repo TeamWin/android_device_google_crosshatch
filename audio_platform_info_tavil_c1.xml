@@ -137,5 +137,13 @@
         <device name="SND_DEVICE_IN_VOICE_TTY_HCO_USB_MIC" backend="usb-headset-mic" interface="USB_AUDIO_TX"/>
         <device name="SND_DEVICE_IN_CAPTURE_VI_FEEDBACK" backend="vi-feedback" interface="QUAT_TDM_TX_0"/>
     </backend_names>
+    <app_types>
+        <app uc_type="PCM_PLAYBACK" mode="default" bit_width="16" id="69936" max_rate="96000" />
+        <app uc_type="PCM_PLAYBACK" mode="default" bit_width="24" id="69940" max_rate="192000" />
+        <app uc_type="PCM_PLAYBACK" mode="voip" bit_width="16" id="69946" max_rate="48000" />
+        <app uc_type="PCM_CAPTURE"  mode="default" bit_width="16" id="69938" max_rate="96000" />
+        <app uc_type="PCM_CAPTURE"  mode="default" bit_width="24" id="69940" max_rate="96000" />
+        <app uc_type="PCM_CAPTURE"  mode="voip" bit_width="16" id="69946" max_rate="48000" />
+    </app_types>
 </audio_platform_info>
 
