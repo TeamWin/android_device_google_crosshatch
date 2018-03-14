@@ -97,5 +97,6 @@ genfscon debugfs /mdp                                 u:object_r:debugfs_mdp:s0
 genfscon debugfs /rmt_storage                         u:object_r:debugfs_rmt_storage:s0
 genfscon debugfs /icnss                               u:object_r:debugfs_icnss:s0
 genfscon debugfs /f2fs                                u:object_r:debugfs_f2fs:s0
+genfscon debugfs /tzdbg                               u:object_r:debugfs_tzdbg:s0
 
 genfscon debugfs /dma_buf/bufinfo                     u:object_r:debugfs_dma_bufinfo:s0
