@@ -5,9 +5,7 @@ cnd cnd netlink_tcpdiag_socket 73994924
 cnd system_data_file dir 73994924
 cnd system_data_file file 73994924
 init cgroup file 74182216
-installd installd capability 74377436
 netd netd capability 73947368
 priv_app sysfs file 72749888
 sensors sensors capability 74548718
-wcnss_service wifi_data_file dir 74233478
 zygote cgroup file 74182216
