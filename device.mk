@@ -19,7 +19,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # The default value of this variable is false and should only be set to true when
 # the device allows users to retain eSIM profiles after factory reset of user data.
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     masterclear.allow_retain_esim_profiles_after_fdr=true
 
 PRODUCT_COPY_FILES += \
@@ -111,7 +111,7 @@ PRODUCT_PACKAGES += \
     update_verifier
 
 # Use Sdcardfs
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.sys.sdcardfs=1
 
 PRODUCT_PACKAGES += \
