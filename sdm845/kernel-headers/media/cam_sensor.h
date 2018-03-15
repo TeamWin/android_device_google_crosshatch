@@ -96,6 +96,7 @@ struct cam_cmd_probe {
   uint32_t expected_data;
   uint32_t data_mask;
   uint16_t camera_id;
+  uint8_t fw_update_flag;
   uint16_t reserved;
 } __attribute__((packed));
 struct cam_power_settings {
