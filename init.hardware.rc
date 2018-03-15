@@ -166,7 +166,7 @@ on init
     setprop ro.boot.hardware.revision ${ro.revision}
 
     # Thermal config file per product
-    setprop sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
+    setprop vendor.sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -470,7 +470,7 @@ service init-radio-sh /vendor/bin/init.radio.sh
     group root radio
     oneshot
 
-service vendor.thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg}
+service vendor.thermal-engine /vendor/bin/thermal-engine -c ${vendor.sys.qcom.thermalcfg}
    class main
    user root
    group root system
@@ -491,7 +491,7 @@ service vendor.ssr_diag /vendor/bin/ssr_diag
     group system
     disabled
 
-service per_mgr /vendor/bin/pm-service
+service vendor.per_mgr /vendor/bin/pm-service
     class core
     user system
     group system
@@ -543,7 +543,7 @@ on property:sys.boot_completed=1
     write /sys/block/sda/queue/scheduler deadline
     write /sys/block/sdf/queue/scheduler deadline
 
-on property:init.svc.per_mgr=running
+on property:init.svc.vendor.per_mgr=running
     start per_proxy
 
 on property:sys.shutdown.requested=*
@@ -565,7 +565,7 @@ service ss_ramdump /vendor/bin/subsystem_ramdump
     group system
     disabled
 
-on property:persist.sys.ssr.enable_ramdumps=1
+on property:persist.vendor.sys.ssr.enable_ramdumps=1
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
     mkdir /data/vendor/wifidump 771 root system
     mkdir /data/vendor/ramdump 771 root system
@@ -573,7 +573,7 @@ on property:persist.sys.ssr.enable_ramdumps=1
     mkdir /data/vendor/ssrlog  771 root system
     start ss_ramdump
 
-on property:persist.sys.ssr.enable_ramdumps=0
+on property:persist.vendor.sys.ssr.enable_ramdumps=0
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
 
 service sensors.qti /vendor/bin/sensors.qti
