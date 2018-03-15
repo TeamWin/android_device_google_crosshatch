@@ -267,7 +267,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "F2FS - fragmentation", "/proc/fs/f2fs/sda19/segment_info");
     DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
     DumpFileToFd(fd, "Sleep Stats", "/sys/power/system_sleep/stats");
-    DumpFileToFd(fd, "Power Management Stats", "/sys/power/rpmh_stats/master_stats");
+    DumpFileToFd(fd, "Power Management Stats", "/d/rpm_master_stats");
     DumpFileToFd(fd, "WLAN Power Stats", "/d/wlan0/power_stats");
     DumpFileToFd(fd, "LL-Stats", "/d/wlan0/ll_stats");
     DumpFileToFd(fd, "ICNSS Stats", "/d/icnss/stats");

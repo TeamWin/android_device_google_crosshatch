@@ -37,11 +37,10 @@ r_dir_file(hal_dumpstate_impl, sysfs_thermal)
 
 allow hal_dumpstate_impl sysfs_thermal:dir search;
 allow hal_dumpstate_impl sysfs_thermal:file r_file_perms;
-allow hal_dumpstate_impl sysfs_rpm:file r_file_perms;
-allow hal_dumpstate_impl sysfs_system_sleep_stats:file r_file_perms;
 
 allow hal_dumpstate_impl debugfs_ion:dir r_dir_perms;
 allow hal_dumpstate_impl debugfs_ion:file r_file_perms;
+allow hal_dumpstate_impl debugfs_rpm:file r_file_perms;
 allow hal_dumpstate_impl debugfs_wlan:dir r_dir_perms;
 allow hal_dumpstate_impl debugfs_wlan:file r_file_perms;
 allow hal_dumpstate_impl debugfs_icnss:dir r_dir_perms;
@@ -53,6 +52,7 @@ allow hal_dumpstate_impl proc_stat:file r_file_perms;
 
 # Access to files for dumping
 allow hal_dumpstate_impl  sysfs:dir r_dir_perms;
+# rpm stat
 # usb logs
 userdebug_or_eng(`allow hal_dumpstate_impl debugfs_usb:file r_file_perms;')
 
