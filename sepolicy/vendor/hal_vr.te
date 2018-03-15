@@ -1,2 +1,2 @@
 # interact with thermal_config
-set_prop(hal_vr, thermal_prop)
+set_prop(hal_vr, vendor_thermal_prop)
