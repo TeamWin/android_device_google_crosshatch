@@ -27,3 +27,6 @@ user=_app seinfo=easel name=com.google.android.imaging.easel.service domain=ease
 
 #Domain for connectivity monitor
 user=radio seinfo=platform name=com.google.android.connectivitymonitor domain=con_monitor_app type=app_data_file levelFrom=all
+
+# Domain for modem diagnostic system
+user=_app seinfo=platform name=com.google.mds domain=modem_diagnostic_app type=app_data_file levelFrom=user
