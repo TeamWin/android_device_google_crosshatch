@@ -34,6 +34,10 @@ on charger
     write /sys/devices/system/cpu/cpu6/online 0
     write /sys/devices/system/cpu/cpu7/online 0
     wait /dev/block/bootdevice
+    # Enable UFS powersaving
+    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 1
+    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 1
+    write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 1
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
 service charger /charger
@@ -45,6 +49,14 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
+    # QSEE rpmb listener need symlink for bootdevice
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
+    # start qseecomd early as we mount system/ vendor/ early
+    # vold needs keymaster that needs qseecomd
+    start qseecomd
+
     # Boot time fs tune
     write /sys/block/sda/queue/iostats 0
     write /sys/block/sda/queue/scheduler cfq
@@ -58,6 +70,11 @@ on init
     write /sys/block/sdf/queue/nr_requests 256
     write /sys/block/dm-0/queue/read_ahead_kb 2048
     write /sys/block/dm-1/queue/read_ahead_kb 2048
+
+    # Disable UFS powersaving
+    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 0
+    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 0
+    write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 0
 
     # Disable powersaving
     write /sys/module/lpm_levels/parameters/sleep_disabled 1
@@ -197,10 +214,6 @@ on fs
     # Start HW service manager early
     start hwservicemanager
 
-    # qseecomd needs /dev/block/bootdevice
-    # vold needs keymaster that needs qseecomd
-    start qseecomd
-
 on late-fs
     # Start devices by sysfs trigger
     start devstart_sh
@@ -228,10 +241,7 @@ on post-fs
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
     write /sys/devices/virtual/graphics/fb0/idle_time 100
 
-    #Wait qseecomd started
-    #STOPSHIP wait_for_prop sys.listeners.registered true
-
-on property:sys.all.modules.ready=1
+on property:vendor.all.modules.ready=1
     setprop wlan.driver.status "ok"
 
 on property:sys.listeners.registered=true
@@ -241,12 +251,6 @@ on property:sys.listeners.registered=true
 on post-fs-data
     # We can start netd here before in is launched in common init.rc on zygote-start
     start netd
-
-    # Restart qseecomd once we have /data
-    # qseecomd being started vey early it needs to restarted once /data
-    # is mounted else storing secure content such as fingerprint data
-    # will fail
-    restart qseecomd
 
     # b/38048356 Setup debug folders for camera
     mkdir /data/vendor/camera 0770 camera camera
@@ -260,6 +264,9 @@ on post-fs-data
 
     # Wait until the system time is set
     wait_for_prop vendor.qcom.time.set true
+
+    # Wait qseecomd started
+    wait_for_prop sys.listeners.registered true
 
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
@@ -387,15 +394,15 @@ on zygote-start
 
 on early-boot
     # wait for devices
-    # STOPSHIP wait_for_prop sys.qcom.devup 1
+    wait_for_prop vendor.qcom.devup 1
 
     write /sys/kernel/boot_adsp/boot 1
 
-    # Start CHRE which need SLPI completed in sys.qcom.devup
+    # Start CHRE which need SLPI completed in vendor.qcom.devup
     start chre
 
     # wait for insmod_sh to finish all modules
-    # STOPSHIP wait_for_prop sys.all.modules.ready 1
+    wait_for_prop vendor.all.modules.ready 1
 
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state
@@ -506,11 +513,11 @@ service per_proxy /vendor/bin/pm-proxy
 on property:sys.boot_completed=1
     # Get the wlan driver/fw version
     start vendor.wlan_sh
+
     # Enable UFS powersaving
-    # write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 1
-    # write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 1
-    # write /sys/devices/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 1
-    # write /sys/module/lpm_levels/parameters/sleep_disabled N
+    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 1
+    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 1
+    write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 1
 
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.${ro.boot.hardware.platform}
