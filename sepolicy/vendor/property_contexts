@@ -16,8 +16,8 @@ debug.ssrdump              u:object_r:ssr_prop:s0
 persist.sys.cnss.          u:object_r:cnss_diag_prop:s0
 sys.listeners.registered   u:object_r:tee_listener_prop:s0
 wc_transport.              u:object_r:wc_prop:s0
-sys.qcom.thermalcfg        u:object_r:thermal_prop:s0
-ctl.vendor.thermal-engine  u:object_r:thermal_prop:s0
+vendor.sys.qcom.thermalcfg u:object_r:vendor_thermal_prop:s0
+ctl.vendor.thermal-engine  u:object_r:vendor_thermal_prop:s0
 persist.sys.modem.diag.    u:object_r:modem_diag_prop:s0
 sys.modem.diag.            u:object_r:modem_diag_prop:s0
 persist.radio.enable_tel_mon  u:object_r:tel_mon_prop:s0
@@ -25,7 +25,7 @@ persist.radio.poweranomaly.start u:object_r:tel_mon_prop:s0
 persist.radio.lowpowermonitor.start u:object_r:tel_mon_prop:s0
 persist.vendor.radio.      u:object_r:radio_prop:s0
 ro.vendor.ril.             u:object_r:radio_prop:s0
-sys.time.set               u:object_r:sys_time_prop:s0
+vendor.qcom.time.set       u:object_r:vendor_time_prop:s0
 vendor.powerhal.state      u:object_r:power_prop:s0
 vendor.powerhal.audio      u:object_r:power_prop:s0
 sys.wlan.driver.version    u:object_r:vendor_wifi_version:s0

@@ -518,7 +518,7 @@ PRODUCT_COPY_FILES += \
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 # Subsystem ramdump
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.ssr.enable_ramdumps=1
+    persist.vendor.sys.ssr.enable_ramdumps=1
 endif
 
 # Subsystem silent restart
@@ -548,7 +548,6 @@ PRODUCT_PACKAGES += \
 # Citadel
 PRODUCT_PACKAGES += \
     citadeld \
-    citadel_test \
     citadel_updater \
     android.hardware.oemlock@1.0-service.citadel \
     android.hardware.weaver@1.0-service.citadel
@@ -573,7 +572,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bluetooth.soc=cherokee
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.adb.secure=0
 
 PRODUCT_COPY_FILES += \
@@ -587,9 +586,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_cdma_sub=0
 
-# Add an extra 10% saturation to display colors
+# Set display color mode to Saturated by default
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.sf.color_saturation=1.1
+    persist.sys.sf.color_saturation=1.0 \
+    persist.sys.sf.native_mode=1
 
 # Easel device feature
 PRODUCT_COPY_FILES += \
