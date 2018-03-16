@@ -396,13 +396,13 @@ on early-boot
     # wait for devices
     wait_for_prop vendor.qcom.devup 1
 
+    # wait for insmod_sh to finish all modules
+    wait_for_prop vendor.all.modules.ready 1
+
     write /sys/kernel/boot_adsp/boot 1
 
     # Start CHRE which need SLPI completed in vendor.qcom.devup
     start chre
-
-    # wait for insmod_sh to finish all modules
-    wait_for_prop vendor.all.modules.ready 1
 
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state
