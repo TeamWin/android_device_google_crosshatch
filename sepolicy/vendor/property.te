@@ -16,5 +16,6 @@ type vendor_time_prop, property_type;
 type power_prop, property_type;
 type vendor_wifi_version, property_type;
 type per_mgr_state_prop, property_type;
+type vendor_net_radio_prop, property_type;
 type vendor_secure_element_prop, property_type;
 type vendor_device_prop, property_type;
