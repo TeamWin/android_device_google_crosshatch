@@ -32,3 +32,5 @@ sys.wlan.driver.version    u:object_r:vendor_wifi_version:s0
 sys.wlan.firmware.version  u:object_r:vendor_wifi_version:s0
 vendor.peripheral.         u:object_r:per_mgr_state_prop:s0
 vendor.ese.debug_enabled   u:object_r:vendor_secure_element_prop:s0
+vendor.qcom.devup          u:object_r:vendor_device_prop:s0
+vendor.all.modules.ready   u:object_r:vendor_device_prop:s0

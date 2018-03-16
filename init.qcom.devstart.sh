@@ -5,7 +5,7 @@
 /vendor/bin/init.edge_sense.sh
 
 echo 1 > /sys/kernel/boot_slpi/boot
-setprop sys.qcom.devup 1
+setprop vendor.qcom.devup 1
 log SLPI boot started.
 
 version=`grep -ao "OEM_IMAGE_VERSION_STRING[ -~]*" \
