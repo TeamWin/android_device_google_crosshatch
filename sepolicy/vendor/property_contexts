@@ -34,3 +34,4 @@ vendor.peripheral.         u:object_r:per_mgr_state_prop:s0
 vendor.ese.debug_enabled   u:object_r:vendor_secure_element_prop:s0
 vendor.qcom.devup          u:object_r:vendor_device_prop:s0
 vendor.all.modules.ready   u:object_r:vendor_device_prop:s0
+sys.slpi.firmware.version  u:object_r:public_vendor_system_prop:s0
