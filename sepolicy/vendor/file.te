@@ -19,15 +19,15 @@ type sysfs_usb_c, sysfs_type, fs_type;
 type sysfs_usb_device, sysfs_type, fs_type;
 # b/70518189 vDSO experiments
 type sysfs_vdso, fs_type, sysfs_type;
-# TODO: Remove these two once b/67205273 is fixed.
+# See b/67205273.
 type sysfs_gpio_export, fs_type, sysfs_type;
 type sysfs_pinctrl, fs_type, sysfs_type;
+type sysfs_rpm, sysfs_type, fs_type;
 
 type debugfs_clk, debugfs_type, fs_type;
 type debugfs_ion, debugfs_type, fs_type;
 type debugfs_ipc, debugfs_type, fs_type;
 type debugfs_kgsl, debugfs_type, fs_type;
-type debugfs_rpm, debugfs_type, fs_type;
 type debugfs_rmt_storage, debugfs_type, fs_type;
 type debugfs_usb, debugfs_type, fs_type;
 type debugfs_wlan, debugfs_type, fs_type;

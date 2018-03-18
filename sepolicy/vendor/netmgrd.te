@@ -4,7 +4,7 @@ type netmgrd_exec, exec_type, vendor_file_type, file_type;
 net_domain(netmgrd)
 init_daemon_domain(netmgrd)
 
-set_prop(netmgrd, net_radio_prop)
+set_prop(netmgrd, vendor_net_radio_prop)
 set_prop(netmgrd, net_rmnet_prop)
 
 # communicate with netd

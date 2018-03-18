@@ -548,7 +548,6 @@ PRODUCT_PACKAGES += \
 # Citadel
 PRODUCT_PACKAGES += \
     citadeld \
-    citadel_test \
     citadel_updater \
     android.hardware.oemlock@1.0-service.citadel \
     android.hardware.weaver@1.0-service.citadel
@@ -573,7 +572,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bluetooth.soc=cherokee
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.adb.secure=0
 
 PRODUCT_COPY_FILES += \

@@ -9,14 +9,16 @@ allow init-qcom-devstart-sh vendor_toolbox_exec:file rx_file_perms;
 # execute grep
 allow init-qcom-devstart-sh vendor_file:file rx_file_perms;
 
-# Set the sys.qcom.devup property
-set_prop(init-qcom-devstart-sh, system_prop)
+# Set the vendor.qcom.devup property
+set_prop(init-qcom-devstart-sh, vendor_device_prop)
+# Set the sys.slpi.firmware.version property.
+set_prop(init-qcom-devstart-sh, public_vendor_system_prop)
 
 # Set boot_adsp and boot_slpi to 1
 allow init-qcom-devstart-sh sysfs_msm_subsys:file w_file_perms;
 
 # Initialize Edge Sense.
-# TODO: b/67205273
+# See b/67205273.
 allow init-qcom-devstart-sh sysfs:dir r_dir_perms;
 allow init-qcom-devstart-sh sysfs_pinctrl:dir r_dir_perms;
 allow init-qcom-devstart-sh sysfs_pinctrl:file rw_file_perms;

@@ -21,4 +21,4 @@ fi
 
 # set property even if there is no insmod config
 # as property value "1" is expected in early-boot trigger
-setprop sys.all.modules.ready 1
+setprop vendor.all.modules.ready 1
