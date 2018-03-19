@@ -135,22 +135,56 @@
          This array should be equal in size to config_screenBrightnessBacklight. -->
     <integer-array name="config_screenBrightnessBacklight">
         <item>1</item>
-        <item>14</item>
-        <item>29</item>
-        <item>44</item>
-        <item>59</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>65</item>
+        <item>70</item>
         <item>75</item>
+        <item>80</item>
+        <item>85</item>
         <item>90</item>
+        <item>95</item>
+        <item>100</item>
         <item>105</item>
+        <item>110</item>
+        <item>115</item>
         <item>120</item>
+        <item>125</item>
+        <item>130</item>
         <item>135</item>
+        <item>140</item>
+        <item>145</item>
         <item>150</item>
+        <item>155</item>
+        <item>160</item>
         <item>165</item>
+        <item>170</item>
+        <item>175</item>
         <item>180</item>
+        <item>185</item>
+        <item>190</item>
         <item>195</item>
+        <item>200</item>
+        <item>205</item>
         <item>210</item>
+        <item>215</item>
+        <item>220</item>
         <item>225</item>
+        <item>230</item>
+        <item>235</item>
         <item>240</item>
+        <item>245</item>
+        <item>250</item>
         <item>255</item>
     </integer-array>
 
@@ -162,24 +196,58 @@
 
          This array should be equal in size to config_screenBrightnessBacklight -->
     <array name="config_screenBrightnessNits">
-        <item>2.46</item>
-        <item>16.82</item>
-        <item>42.59</item>
-        <item>73.92</item>
-        <item>102.4</item>
-        <item>129.4</item>
-        <item>159.7</item>
-        <item>188.9</item>
-        <item>205.3</item>
-        <item>231.9</item>
-        <item>259.8</item>
-        <item>287.5</item>
-        <item>315.6</item>
-        <item>344.1</item>
-        <item>372.4</item>
-        <item>397.6</item>
-        <item>425.4</item>
-        <item>448.5</item>
+        <item>2.01</item>
+        <item>2.825</item>
+        <item>4.261</item>
+        <item>5.858</item>
+        <item>7.459</item>
+        <item>9.054</item>
+        <item>11.101</item>
+        <item>13.884</item>
+        <item>16.757</item>
+        <item>19.749</item>
+        <item>22.81</item>
+        <item>25.854</item>
+        <item>30.118</item>
+        <item>34.333</item>
+        <item>38.405</item>
+        <item>42.483</item>
+        <item>47.079</item>
+        <item>52.286</item>
+        <item>57.669</item>
+        <item>62.842</item>
+        <item>67.858</item>
+        <item>73.225</item>
+        <item>79.419</item>
+        <item>85.61</item>
+        <item>91.966</item>
+        <item>97.868</item>
+        <item>103.423</item>
+        <item>110.721</item>
+        <item>119.605</item>
+        <item>128.082</item>
+        <item>137.651</item>
+        <item>147.163</item>
+        <item>156.534</item>
+        <item>167.231</item>
+        <item>178.28</item>
+        <item>188.815</item>
+        <item>201.423</item>
+        <item>210.105</item>
+        <item>221.947</item>
+        <item>234.328</item>
+        <item>246.15</item>
+        <item>256.853</item>
+        <item>269.394</item>
+        <item>282.538</item>
+        <item>294.379</item>
+        <item>306.732</item>
+        <item>320.947</item>
+        <item>334.88</item>
+        <item>347.678</item>
+        <item>362.273</item>
+        <item>377.857</item>
+        <item>389.7</item>
     </array>
 
     <!-- The bounding path of the cutout region of the main built-in display.
