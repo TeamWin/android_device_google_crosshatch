@@ -352,25 +352,25 @@ service diag_mdlog_stop /vendor/bin/diag_mdlog -k
     disabled
     oneshot
 
-on boot && property:persist.sys.modem.diag.mdlog=*
-    setprop sys.modem.diag.mdlog ${persist.sys.modem.diag.mdlog}
+on boot && property:persist.vendor.sys.modem.diag.mdlog=*
+    setprop vendor.sys.modem.diag.mdlog ${persist.vendor.sys.modem.diag.mdlog}
 
-on property:sys.modem.diag.mdlog=true
+on property:vendor.sys.modem.diag.mdlog=true
     start diag_mdlog_start
 
-on property:sys.modem.diag.mdlog=false
+on property:vendor.sys.modem.diag.mdlog=false
     start diag_mdlog_stop
 
-on property:persist.sys.cnss.diag_qxdm=true
+on property:persist.vendor.sys.cnss.diag_qxdm=true
     start vendor.cnss_diag
 
-on property:persist.sys.cnss.diag_qxdm=false
+on property:persist.vendor.sys.cnss.diag_qxdm=false
     stop vendor.cnss_diag
 
-on property:persist.sys.cnss.diag_txt=true
+on property:persist.vendor.sys.cnss.diag_txt=true
     start vendor.cnss_diag_txt
 
-on property:persist.sys.cnss.diag_txt=false
+on property:persist.vendor.sys.cnss.diag_txt=false
     stop vendor.cnss_diag_txt
 
 service vendor.cnss_diag /vendor/bin/cnss_diag -q -u -w

@@ -20,7 +20,7 @@ dontaudit vendor_init kernel:system module_request;
 
 set_prop(vendor_init, bluetooth_prop)
 set_prop(vendor_init, camera_prop)
-set_prop(vendor_init, modem_diag_prop)
+set_prop(vendor_init, vendor_modem_diag_prop)
 set_prop(vendor_init, power_prop)
 set_prop(vendor_init, vendor_thermal_prop)
 
