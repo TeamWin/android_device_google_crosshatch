@@ -16,6 +16,6 @@ userdebug_or_eng(`
   allow logger_app cnss_vendor_data_file:dir create_dir_perms;
   allow logger_app cnss_vendor_data_file:file create_file_perms;
 
-  set_prop(logger_app, cnss_diag_prop)
-  set_prop(logger_app, modem_diag_prop)
+  set_prop(logger_app, vendor_cnss_diag_prop)
+  set_prop(logger_app, vendor_modem_diag_prop)
 ')
