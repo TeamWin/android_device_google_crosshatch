@@ -19,6 +19,8 @@ userdebug_or_eng(`
   allow hal_dumpstate_impl netmgr_data_file:file r_file_perms;
   allow hal_dumpstate_impl debugfs_ipc:dir r_dir_perms;
   allow hal_dumpstate_impl debugfs_ipc:file r_file_perms;
+  allow hal_dumpstate_impl debugfs_tzdbg:dir search;
+  allow hal_dumpstate_impl debugfs_tzdbg:file r_file_perms;
   allow hal_dumpstate_impl sysfs_usb_device:dir r_dir_perms;
   allow hal_dumpstate_impl sysfs_usb_device:file r_file_perms;
   allow hal_dumpstate_impl ssr_log_file:dir search;
