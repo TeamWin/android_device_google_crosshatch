@@ -19,13 +19,15 @@ userdebug_or_eng(`
   allow hal_dumpstate_impl netmgr_data_file:file r_file_perms;
   allow hal_dumpstate_impl debugfs_ipc:dir r_dir_perms;
   allow hal_dumpstate_impl debugfs_ipc:file r_file_perms;
+  allow hal_dumpstate_impl debugfs_tzdbg:dir search;
+  allow hal_dumpstate_impl debugfs_tzdbg:file r_file_perms;
   allow hal_dumpstate_impl sysfs_usb_device:dir r_dir_perms;
   allow hal_dumpstate_impl sysfs_usb_device:file r_file_perms;
   allow hal_dumpstate_impl ssr_log_file:dir search;
   allow hal_dumpstate_impl ssr_log_file:file r_file_perms;
 
 
-  set_prop(hal_dumpstate_impl, modem_diag_prop)
+  set_prop(hal_dumpstate_impl, vendor_modem_diag_prop)
 ')
 
 allow hal_dumpstate_impl uio_device:chr_file rw_file_perms;
@@ -77,7 +79,7 @@ allow hal_dumpstate_impl mpss_rfs_data_file:file r_file_perms;
 # For collecting bugreports.
 allow hal_dumpstate_impl shell_data_file:file getattr;
 allow hal_dumpstate_impl sysfs_system_sleep_stats:file r_file_perms;
-# For '/vendor/bin/sh -c getprop | grep sys.modem.diag'
+# For '/vendor/bin/sh -c getprop | grep vendor.sys.modem.diag'
 allow hal_dumpstate_impl vendor_file:file execute_no_trans;
 userdebug_or_eng(`allow hal_dumpstate_impl debugfs_dma_bufinfo:file r_file_perms;')
 dontaudit hal_dumpstate_impl debugfs_dma_bufinfo:file r_file_perms;

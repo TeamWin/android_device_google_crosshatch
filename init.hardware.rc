@@ -414,6 +414,8 @@ on early-boot
     chmod 0660 /sys/devices/platform/soc/ac4a000.qcom,cci/ac4a000.qcom,cci:qcom,rainbow@20/rainbow_read_byte
     chown cameraserver camera /sys/devices/platform/soc/ac4a000.qcom,cci/ac4a000.qcom,cci:qcom,rainbow@20/rainbow_write_byte
     chmod 0660 /sys/devices/platform/soc/ac4a000.qcom,cci/ac4a000.qcom,cci:qcom,rainbow@20/rainbow_write_byte
+    chown cameraserver camera /dev/vd6281
+    chmod 0660 /dev/vd6281
 
     # Permission for Vibrator
     chown system system /sys/class/leds/vibrator/device/cp_trigger_index
