@@ -7,5 +7,6 @@ cnd system_data_file file 73994924
 init cgroup file 74182216
 netd netd capability 73947368
 priv_app sysfs file 72749888
+priv_app zygote dir 72749888
 sensors sensors capability 74548718
 zygote cgroup file 74182216
