@@ -33,11 +33,11 @@
 #define MODEM_LOG_LOC_PROPERTY "ro.radio.log_loc"
 #define MODEM_LOGGING_SWITCH "persist.radio.smlog_switch"
 
-#define DIAG_MDLOG_PERSIST_PROPERTY "persist.sys.modem.diag.mdlog"
-#define DIAG_MDLOG_PROPERTY "sys.modem.diag.mdlog"
-#define DIAG_MDLOG_STATUS_PROPERTY "sys.modem.diag.mdlog_on"
+#define DIAG_MDLOG_PERSIST_PROPERTY "persist.vendor.sys.modem.diag.mdlog"
+#define DIAG_MDLOG_PROPERTY "vendor.sys.modem.diag.mdlog"
+#define DIAG_MDLOG_STATUS_PROPERTY "vendor.sys.modem.diag.mdlog_on"
 
-#define DIAG_MDLOG_NUMBER_BUGREPORT "persist.sys.modem.diag.mdlog_br_num"
+#define DIAG_MDLOG_NUMBER_BUGREPORT "persist.vendor.sys.modem.diag.mdlog_br_num"
 
 #define UFS_BOOTDEVICE "ro.boot.bootdevice"
 
@@ -116,7 +116,7 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
                        { "/vendor/bin/sh", "-c", "find /data/vendor/rfs/mpss/OEMFI/" }, options);
 
         RunCommandToFd(fd, "MODEM DIAG SYSTEM PROPERTIES",
-                       { "/vendor/bin/sh", "-c", "getprop | grep sys.modem.diag" }, options);
+                       { "/vendor/bin/sh", "-c", "getprop | grep vendor.sys.modem.diag" }, options);
 
         std::string modemLogAllDir = modemLogDir + "/modem_log";
         std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
