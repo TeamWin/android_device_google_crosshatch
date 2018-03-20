@@ -301,6 +301,10 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl-qti \
     android.hardware.bluetooth@1.0-service-qti
 
+# Property for loading BDA from device tree
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bt.bdaddr_path=/proc/device-tree/chosen/cdt/cdb2/bt_addr
+
 # DRM HAL
 PRODUCT_PACKAGES += \
   android.hardware.drm@1.0-impl \
