@@ -286,11 +286,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "WLAN FW Log Symbol Table", "/vendor/firmware/Data.msc");
     DumpTouch(fd);
     RunCommandToFd(fd, "USB Device Descriptors", {"/vendor/bin/sh", "-c", "cd /sys/bus/usb/devices/1-1 && cat product && cat bcdDevice; cat descriptors | od -t x1 -w16 -N96"});
-
-    /* Check if qsee_logger tool exists */
-    if (!access("/vendor/bin/qsee_logger", X_OK)) {
-      RunCommandToFd(fd, "FP LOGS", {"qsee_logger", "-d"});
-    }
+    RunCommandToFd(fd, "QSEE logs", {"/vendor/bin/sh", "-c", "cat /d/tzdbg/qsee_log"});
 
     return Void();
 };
