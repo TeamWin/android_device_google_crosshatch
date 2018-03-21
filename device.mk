@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
+PRODUCT_SOONG_NAMESPACES += \
+    hardware/google/av \
+    hardware/google/interfaces
+
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
@@ -331,6 +335,10 @@ PRODUCT_PACKAGES += \
     libOmxVdecHevc \
     libOmxVenc \
     libc2dcolorconvert
+
+# Enable Codec 2.0
+PRODUCT_PACKAGES += \
+    libstagefright_ccodec
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
