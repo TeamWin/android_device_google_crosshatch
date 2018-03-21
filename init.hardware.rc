@@ -473,6 +473,9 @@ on boot
     # default country code
     setprop ro.boot.wificountrycode 00
 
+    # WLAN debug access
+    chown system system /d/icnss/stats
+
 service init-radio-sh /vendor/bin/init.radio.sh
     class late_start
     user radio
