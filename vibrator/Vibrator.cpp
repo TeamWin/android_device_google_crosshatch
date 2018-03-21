@@ -51,10 +51,14 @@ static constexpr uint32_t WAVEFORM_HEAVY_CLICK_EFFECT_MS = 15;
 static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_INDEX = 7;
 static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = 130;
 
-Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofstream&& effect) :
+static constexpr int8_t MAX_SCALE_INPUT = 112;
+
+Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofstream&& effect,
+        std::ofstream&& scale) :
     mActivate(std::move(activate)),
     mDuration(std::move(duration)),
-    mEffectIndex(std::move(effect))
+    mEffectIndex(std::move(effect)),
+    mScale(std::move(scale))
 {}
 
 Return<Status> Vibrator::on(uint32_t timeoutMs, uint32_t effectIndex) {
@@ -81,11 +85,19 @@ Return<Status> Vibrator::off()  {
 }
 
 Return<bool> Vibrator::supportsAmplitudeControl()  {
-    return false;
+    return (mScale ? true : false);
 }
 
-Return<Status> Vibrator::setAmplitude(uint8_t) {
-    return Status::UNSUPPORTED_OPERATION;
+Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
+    int32_t scale = MAX_SCALE_INPUT - std::round((amplitude - 1) / 254.0 * MAX_SCALE_INPUT);
+
+    mScale << scale << std::endl;
+    if (!mScale) {
+        ALOGE("Failed to set amplitude (%d): %s", errno, strerror(errno));
+        return Status::UNKNOWN_ERROR;
+    }
+
+    return Status::OK;
 }
 
 Return<void> Vibrator::perform(V1_0::Effect effect, EffectStrength strength,
@@ -131,6 +143,7 @@ Return<void> Vibrator::performEffect(Effect effect, EffectStrength,
         return Void();
     }
 
+    setAmplitude(UINT8_MAX); // Always set full-scale for pre-defined constants
     on(timeMs, effectIndex);
     _hidl_cb(status, timeMs);
 

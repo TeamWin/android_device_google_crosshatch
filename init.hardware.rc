@@ -419,6 +419,7 @@ on early-boot
 
     # Permission for Vibrator
     chown system system /sys/class/leds/vibrator/device/cp_trigger_index
+    chown system system /sys/class/leds/vibrator/device/dig_scale
 
     # Permission for LED driver
     chown system system /sys/class/leds/red/on_off_ms
