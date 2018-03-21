@@ -52,7 +52,11 @@ else
 endif
 
 PRODUCT_CHARACTERISTICS := nosdcard
-PRODUCT_SHIPPING_API_LEVEL := 26
+PRODUCT_SHIPPING_API_LEVEL := 28
+# TODO(b/69574580, b/69575524) remove this
+PRODUCT_USE_VNDK_OVERRIDE := false
+# TODO(b/74266614) remove this
+PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := false
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -300,6 +304,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl-qti \
     android.hardware.bluetooth@1.0-service-qti
+
+# Property for loading BDA from device tree
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bt.bdaddr_path=/proc/device-tree/chosen/cdt/cdb2/bt_addr
 
 # DRM HAL
 PRODUCT_PACKAGES += \
