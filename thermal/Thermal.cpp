@@ -56,7 +56,6 @@ Return<void> Thermal::getTemperatures(getTemperatures_cb _hidl_cb) {
     ThermalStatus status;
     status.code = ThermalStatusCode::SUCCESS;
     hidl_vec<Temperature> temperatures;
-    temperatures.resize(kMaxTempSensors);
 
     if (!thermal_helper.isInitializedOk()) {
         LOG(ERROR) << "ThermalHAL not initialized properly.";
@@ -70,7 +69,7 @@ Return<void> Thermal::getTemperatures(getTemperatures_cb _hidl_cb) {
 
     for (const auto& t : temperatures) {
         LOG(DEBUG) << "getTemperatures "
-                   << " Type: " << static_cast<int>(t.type)
+                   << " Type: " << android::hardware::thermal::V1_0::toString(t.type)
                    << " Name: " << t.name
                    << " CurrentValue: " << t.currentValue
                    << " ThrottlingThreshold: " << t.throttlingThreshold
@@ -85,7 +84,6 @@ Return<void> Thermal::getCpuUsages(getCpuUsages_cb _hidl_cb) {
     ThermalStatus status;
     status.code = ThermalStatusCode::SUCCESS;
     hidl_vec<CpuUsage> cpu_usages;
-    cpu_usages.resize(kMaxCpus);
 
     if (!thermal_helper.isInitializedOk()) {
         return setInitFailureAndCallback(_hidl_cb, cpu_usages);

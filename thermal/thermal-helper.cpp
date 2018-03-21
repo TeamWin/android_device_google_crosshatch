@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-#include <algorithm>
-#include <iostream>
-#include <regex>
 #include <sstream>
 #include <vector>
 
@@ -27,7 +24,9 @@
 #include <android-base/logging.h>
 #include <android-base/properties.h>
 #include <android-base/stringprintf.h>
+#include <android-base/strings.h>
 
+#include "ThermalConfigParser.h"
 #include "thermal-helper.h"
 
 namespace android {
@@ -44,47 +43,32 @@ constexpr char kCpuOnlineFileSuffix[] = "online";
 constexpr char kTemperatureFileSuffix[] = "temp";
 constexpr char kSensorTypeFileSuffix[] = "type";
 constexpr char kThermalZoneDirSuffix[] = "thermal_zone";
-constexpr char kSkinSensorName[] = "quiet-therm-adc";
-constexpr char kBatterySensorName[] = "battery";
-constexpr float kMultiplier = .001;
+constexpr unsigned int kMaxCpus = 8;
 
 // This is a golden set of thermal sensor names and their types.  Used when we
 // read in sensor values.
-const static std::map<std::string, TemperatureType>
+const std::map<std::string, TemperatureType>
 kValidThermalSensorNameTypeMap = {
     {"cpu0-silver-usr", TemperatureType::CPU},  // CPU0
     {"cpu1-silver-usr", TemperatureType::CPU},  // CPU1
     {"cpu2-silver-usr", TemperatureType::CPU},  // CPU2
     {"cpu3-silver-usr", TemperatureType::CPU},  // CPU3
-    {"cpu0-gold-usr", TemperatureType::CPU},  // CPU4
-    {"cpu1-gold-usr", TemperatureType::CPU},  // CPU5
-    {"cpu2-gold-usr", TemperatureType::CPU},  // CPU6
-    {"cpu3-gold-usr", TemperatureType::CPU},  // CPU7
+    {"cpu0-gold-usr", TemperatureType::CPU},    // CPU4
+    {"cpu1-gold-usr", TemperatureType::CPU},    // CPU5
+    {"cpu2-gold-usr", TemperatureType::CPU},    // CPU6
+    {"cpu3-gold-usr", TemperatureType::CPU},    // CPU7
     // GPU thermal sensors.
     {"gpu0-usr", TemperatureType::GPU},
     {"gpu1-usr", TemperatureType::GPU},
-    {kBatterySensorName, TemperatureType::BATTERY},
-    {kSkinSensorName, TemperatureType::SKIN},
+    // Battery thermal sensor.
+    {"battery", TemperatureType::BATTERY},
+    // Skin thermal sensor.
+    {"quiet-therm-adc", TemperatureType::SKIN},
+    // USBC thermal sensor.
     {"usbc-therm-adc", TemperatureType::UNKNOWN},  // USB-C thermistor.
 };
 
 namespace {
-
-using ::android::hardware::thermal::V1_0::TemperatureType;
-
-// For now this just defines the sensor name and thresholds.
-struct SensorConfig {
-    SensorConfig() : sensor_name(""), threshold(0.0), action("") {}
-    SensorConfig(
-        const std::string& sensor_name, float threshold,
-        const std::string& action)
-            : sensor_name(sensor_name),
-              threshold(threshold),
-              action(action) {}
-    std::string sensor_name;
-    float threshold;
-    std::string action;
-};
 
 void parseCpuUsagesFileAndAssignUsages(hidl_vec<CpuUsage>* cpu_usages) {
     uint64_t cpu_num, user, nice, system, idle;
@@ -100,10 +84,7 @@ void parseCpuUsagesFileAndAssignUsages(hidl_vec<CpuUsage>* cpu_usages) {
     while (std::getline(stat_data, line)) {
         if (line.find("cpu") == 0 && isdigit(line[3])) {
             // Split the string using spaces.
-            std::istringstream iss(line);
-            std::vector<std::string> words(
-                std::istream_iterator<std::string>{iss},
-                std::istream_iterator<std::string>());
+            std::vector<std::string> words = android::base::Split(line, " ");
             cpu_name = words[0];
             cpu_num = std::stoi(cpu_name.substr(3));
 
@@ -125,6 +106,7 @@ void parseCpuUsagesFileAndAssignUsages(hidl_vec<CpuUsage>* cpu_usages) {
                                  << cpu_online_path;
                     return;
                 }
+                is_online = android::base::Trim(is_online);
 
                 (*cpu_usages)[cpu_num].name = cpu_name;
                 (*cpu_usages)[cpu_num].active = user + nice + system;
@@ -135,81 +117,6 @@ void parseCpuUsagesFileAndAssignUsages(hidl_vec<CpuUsage>* cpu_usages) {
                 LOG(ERROR) << "Unexpected cpu number: " << words[0];
                 return;
             }
-        }
-    }
-}
-
-void parseThermalEngineConfig(
-        const std::string& config_path, std::vector<SensorConfig>* configs,
-        std::vector<SensorConfig>* shutdown_configs) {
-    std::string data;
-    if (!android::base::ReadFileToString(config_path, &data)) {
-        LOG(ERROR) << "Error reading config path: " << config_path;
-        return;
-    }
-
-    // Parse out sensor name and thresholds for ss configs.
-    std::regex ss_block_regex(
-        R"([.\n]*\[.*\]\nalgo_type\s+ss\n(?:.*\n)?sensor )"
-        R"(([\w\d-]+)\n(?:.*\n)?set_point\s+(\d+))");
-    auto block_begin = std::sregex_iterator(
-        data.begin(), data.end(), ss_block_regex);
-    auto block_end = std::sregex_iterator();
-    for (std::sregex_iterator itr = block_begin; itr != block_end; ++itr) {
-        configs->emplace_back(
-            SensorConfig(
-                itr->str(1), std::stoi(itr->str(2)) * kMultiplier, ""));
-    }
-
-    // Parse out sensor name, thresholds, and action for monitor configs.
-    std::regex monitor_block_regex(
-        R"([.\n]*\[.*\]\nalgo_type\s+monitor\n(?:.*\n)?sensor )"
-        R"(([\w\d-]+)\n(?:.*\n)?thresholds\s+(\d+)\n(?:.*\n)?actions\s+(\w+))");
-    block_begin = std::sregex_iterator(
-        data.begin(), data.end(), monitor_block_regex);
-    for (std::sregex_iterator itr = block_begin; itr != block_end; ++itr) {
-        SensorConfig sensor_config;
-        sensor_config.sensor_name = itr->str(1);
-        sensor_config.threshold = std::stoi(itr->str(2)) * kMultiplier;
-        sensor_config.action = itr->str(3);
-
-        // Filter out the shutdown thresholds.
-        if (sensor_config.action == "shutdown") {
-            shutdown_configs->emplace_back(sensor_config);
-        } else {
-            configs->emplace_back(sensor_config);
-        }
-    }
-}
-
-// Assign out if out == NAN or config_threshold < out.
-static void checkAndAssignThreshold(float config_threshold, float* out) {
-    if (*out == NAN || config_threshold < *out) {
-        *out = config_threshold;
-    }
-}
-
-void assignThresholdsFromConfig(
-        const std::vector<SensorConfig>& configs,
-        const std::map<std::string, TemperatureType>& sensor_name_type_map,
-    ThrottlingThresholds* threshold) {
-    for (const SensorConfig& config : configs) {
-        switch(sensor_name_type_map.at(config.sensor_name)) {
-            case TemperatureType::CPU:
-              checkAndAssignThreshold(config.threshold, &threshold->cpu);
-              break;
-            case TemperatureType::GPU:
-              checkAndAssignThreshold(config.threshold, &threshold->gpu);
-              break;
-            case TemperatureType::BATTERY:
-              checkAndAssignThreshold(config.threshold, &threshold->battery);
-              break;
-            case TemperatureType::SKIN:
-              checkAndAssignThreshold(config.threshold, &threshold->ss);
-              break;
-            default:
-              LOG(ERROR) << "Unknown sensor: " << config.sensor_name;
-              break;
         }
     }
 }
@@ -226,18 +133,9 @@ float getThresholdFromType(const TemperatureType type,
         case TemperatureType::SKIN:
           return threshold.ss;
         default:
-          LOG(ERROR) << "Attempting to read unknown sensor type: "
-                     << static_cast<int>(type);
+          LOG(WARNING) << "Attempting to read unknown sensor type: "
+                       << android::hardware::thermal::V1_0::toString(type);
           return NAN;
-    }
-}
-
-void dumpSensorConfigs(const std::vector<SensorConfig>& sensor_config_vec) {
-    for (const auto& sensor_config : sensor_config_vec) {
-        LOG(DEBUG) << "Sensor name: " << sensor_config.sensor_name
-                   << " with threshold: " << sensor_config.threshold
-                   << sensor_config.action.empty() ? ""
-                   : " sensor config action" + sensor_config.action;
     }
 }
 
@@ -253,40 +151,12 @@ ThermalHelper::ThermalHelper() {
     std::string thermal_config(kThermalConfigPrefix + hw + ".conf");
     std::string vr_thermal_config(kThermalConfigPrefix + hw + "-vr.conf");
     is_initialized_ = initializeSensorMap();
-    initializeThresholds(thermal_config, vr_thermal_config);
-}
-
-void ThermalHelper::initializeThresholds(
-  const std::string& thermal_config, const std::string& vr_thermal_config) {
-    // For now just read the blueline configs but it would be easy to make this
-    // platform specific.
-    std::vector<SensorConfig> sensor_configs;
-    std::vector<SensorConfig> shutdown_configs;
-    parseThermalEngineConfig(
-        thermal_config, &sensor_configs, &shutdown_configs);
-
-    assignThresholdsFromConfig(
-        sensor_configs, kValidThermalSensorNameTypeMap, &thresholds_);
-    assignThresholdsFromConfig(
-        shutdown_configs, kValidThermalSensorNameTypeMap,
-        &shutdown_thresholds_);
-
-    LOG(DEBUG) << "Sensor configs";
-    dumpSensorConfigs(sensor_configs);
-    LOG(DEBUG) << "Shutdown configs";
-    dumpSensorConfigs(shutdown_configs);
-
-    sensor_configs.clear();
-    parseThermalEngineConfig(
-        vr_thermal_config, &sensor_configs, &shutdown_configs);
-
-    LOG(DEBUG) << "VR Sensor configs";
-    dumpSensorConfigs(sensor_configs);
-    LOG(DEBUG) << "VR Shutdown configs";
-    dumpSensorConfigs(shutdown_configs);
-
-    assignThresholdsFromConfig(
-        sensor_configs, kValidThermalSensorNameTypeMap, &vr_thresholds_);
+    InitializeThresholdsFromThermalConfig(thermal_config,
+                                          vr_thermal_config,
+                                          kValidThermalSensorNameTypeMap,
+                                          &thresholds_,
+                                          &shutdown_thresholds_,
+                                          &vr_thresholds_);
 }
 
 bool ThermalHelper::readTemperature(
@@ -327,28 +197,27 @@ bool ThermalHelper::readTemperature(
 }
 
 bool ThermalHelper::initializeSensorMap() {
-    std::string base_path(kThermalSensorsRoot);
-    DIR* thermal_zone_dir = opendir(base_path.c_str());
+    auto thermal_zone_dir = std::unique_ptr<DIR, int (*)(DIR*)>(
+        opendir(kThermalSensorsRoot), closedir);
     struct dirent* dp;
     size_t num_thermal_zones = 0;
-    while ((dp = readdir(thermal_zone_dir)) != nullptr) {
+    while ((dp = readdir(thermal_zone_dir.get())) != nullptr) {
         std::string dir_name(dp->d_name);
         if (dir_name.find(kThermalZoneDirSuffix) != std::string::npos) {
             ++num_thermal_zones;
         }
     }
-    closedir(thermal_zone_dir);
 
     for (size_t sensor_zone_num = 0; sensor_zone_num < num_thermal_zones;
             ++sensor_zone_num) {
-        std::string path = base_path + "/" + kThermalZoneDirSuffix +
-            std::to_string(sensor_zone_num);
+        std::string path = android::base::StringPrintf("%s/%s%zu",
+                                                       kThermalSensorsRoot,
+                                                       kThermalZoneDirSuffix,
+                                                       sensor_zone_num);
         std::string sensor_name;
         if (android::base::ReadFileToString(
                 path + "/" + kSensorTypeFileSuffix, &sensor_name)) {
-            sensor_name.erase(
-                std::remove(sensor_name.begin(), sensor_name.end(), '\n'),
-                sensor_name.end());
+            sensor_name = android::base::Trim(sensor_name);
             if (kValidThermalSensorNameTypeMap.find(sensor_name) !=
                 kValidThermalSensorNameTypeMap.end()) {
                   if (!thermal_sensors.addSensor(
@@ -364,10 +233,7 @@ bool ThermalHelper::initializeSensorMap() {
 }
 
 bool ThermalHelper::fillTemperatures(hidl_vec<Temperature>* temperatures) {
-    if (!temperatures || temperatures->size() < kMaxTempSensors) {
-        LOG(ERROR) << "fillTemperatures: incorrect buffer size";
-        return false;
-    }
+    temperatures->resize(kValidThermalSensorNameTypeMap.size());
     int current_index = 0;
     for (const auto& name_type_pair : kValidThermalSensorNameTypeMap) {
         Temperature temp;
@@ -380,15 +246,11 @@ bool ThermalHelper::fillTemperatures(hidl_vec<Temperature>* temperatures) {
         }
         ++current_index;
     }
-    return kValidThermalSensorNameTypeMap.size() > 0;
+    return current_index > 0;
 }
 
 bool ThermalHelper::fillCpuUsages(hidl_vec<CpuUsage>* cpu_usages) {
-    if (!cpu_usages || cpu_usages->size() < kMaxCpus) {
-        LOG(ERROR) << "fillCpuUsages: incorrect buffer size";
-        return false;
-    }
-
+    cpu_usages->resize(kMaxCpus);
     parseCpuUsagesFileAndAssignUsages(cpu_usages);
     return true;
 }
