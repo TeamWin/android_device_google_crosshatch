@@ -274,7 +274,7 @@ void ThermalHelper::initializeThresholds(
     LOG(DEBUG) << "Sensor configs";
     dumpSensorConfigs(sensor_configs);
     LOG(DEBUG) << "Shutdown configs";
-    dumpSensorConfigs(sensor_configs);
+    dumpSensorConfigs(shutdown_configs);
 
     sensor_configs.clear();
     parseThermalEngineConfig(
@@ -282,6 +282,8 @@ void ThermalHelper::initializeThresholds(
 
     LOG(DEBUG) << "VR Sensor configs";
     dumpSensorConfigs(sensor_configs);
+    LOG(DEBUG) << "VR Shutdown configs";
+    dumpSensorConfigs(shutdown_configs);
 
     assignThresholdsFromConfig(
         sensor_configs, kValidThermalSensorNameTypeMap, &vr_thresholds_);
