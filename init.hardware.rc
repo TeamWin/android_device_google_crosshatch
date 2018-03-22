@@ -419,6 +419,7 @@ on early-boot
 
     # Permission for Vibrator
     chown system system /sys/class/leds/vibrator/device/cp_trigger_index
+    chown system system /sys/class/leds/vibrator/device/dig_scale
 
     # Permission for LED driver
     chown system system /sys/class/leds/red/on_off_ms
@@ -473,6 +474,9 @@ on boot
     # default country code
     setprop ro.boot.wificountrycode 00
 
+    # WLAN debug access
+    chown system system /d/icnss/stats
+
 service init-radio-sh /vendor/bin/init.radio.sh
     class late_start
     user radio
@@ -487,7 +491,7 @@ service vendor.thermal-engine /vendor/bin/thermal-engine -c ${vendor.sys.qcom.th
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
 
-on property:persist.sys.ssr.restart_level=*
+on property:persist.vendor.sys.ssr.restart_level=*
     start vendor.ssr_setup
 
 service vendor.ssr_setup /vendor/bin/ssr_setup
