@@ -387,7 +387,7 @@ service vendor.cnss_diag_txt /vendor/bin/cnss_diag -s -f -m /data/vendor/wifi/cn
     disabled
     oneshot
 
-on property:debug.ramdump.force_crash=true
+on property:vendor.debug.ramdump.force_crash=true
     write /proc/sysrq-trigger "c"
 
 on property:ro.vendor.bluetooth.ftm_enabled=true

@@ -10,8 +10,8 @@ persist.net.doxlat         u:object_r:vendor_net_radio_prop:s0
 sys.post_boot.             u:object_r:post_boot_prop:s0
 radio.                     u:object_r:radio_prop:s0
 rcs.publish.status         u:object_r:radio_prop:s0
-debug.ramdump.             u:object_r:ramdump_prop:s0
-persist.sys.crash_rcu      u:object_r:ramdump_prop:s0
+vendor.debug.ramdump.      u:object_r:vendor_ramdump_prop:s0
+persist.vendor.sys.crash_rcu  u:object_r:vendor_ramdump_prop:s0
 vendor.debug.ssrdump       u:object_r:vendor_ssr_prop:s0
 persist.vendor.sys.cnss.   u:object_r:vendor_cnss_diag_prop:s0
 sys.listeners.registered   u:object_r:tee_listener_prop:s0

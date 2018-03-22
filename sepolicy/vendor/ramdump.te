@@ -4,7 +4,7 @@ userdebug_or_eng(`
   type ramdump, domain;
   init_daemon_domain(ramdump)
 
-  set_prop(ramdump, ramdump_prop)
+  set_prop(ramdump, vendor_ramdump_prop)
 
   allow ramdump self:capability sys_rawio;
 

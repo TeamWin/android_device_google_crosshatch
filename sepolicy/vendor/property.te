@@ -3,7 +3,7 @@ type cnd_prop, property_type;
 type ims_prop, property_type;
 type keymaster_prop, property_type;
 type net_rmnet_prop, property_type;
-type ramdump_prop, property_type;
+type vendor_ramdump_prop, property_type;
 type post_boot_prop, property_type;
 type public_vendor_system_prop, property_type;
 type vendor_ssr_prop, property_type;
