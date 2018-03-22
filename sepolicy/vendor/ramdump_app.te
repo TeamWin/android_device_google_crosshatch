@@ -11,5 +11,5 @@ userdebug_or_eng(`
   allow ramdump_app wifidump_vendor_data_file:file r_file_perms;
 
   set_prop(ramdump_app, ramdump_prop);
-  get_prop(system_app, ssr_prop)
+  get_prop(system_app, vendor_ssr_prop)
 ')
