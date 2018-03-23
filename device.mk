@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
+PRODUCT_SOONG_NAMESPACES += \
+    hardware/google/av \
+    hardware/google/interfaces
+
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
@@ -52,7 +56,11 @@ else
 endif
 
 PRODUCT_CHARACTERISTICS := nosdcard
-PRODUCT_SHIPPING_API_LEVEL := 26
+PRODUCT_SHIPPING_API_LEVEL := 28
+# TODO(b/69574580, b/69575524) remove this
+PRODUCT_USE_VNDK_OVERRIDE := false
+# TODO(b/74266614) remove this
+PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := false
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -143,7 +151,8 @@ PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     libcutils
 
 PRODUCT_PACKAGES += \
-    update_engine_sideload
+    update_engine_sideload \
+    sg_write_buffer
 
 # The following modules are included in debuggable builds only.
 PRODUCT_PACKAGES_DEBUG += \
@@ -301,6 +310,10 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl-qti \
     android.hardware.bluetooth@1.0-service-qti
 
+# Property for loading BDA from device tree
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bt.bdaddr_path=/proc/device-tree/chosen/cdt/cdb2/bt_addr
+
 # DRM HAL
 PRODUCT_PACKAGES += \
   android.hardware.drm@1.0-impl \
@@ -331,6 +344,10 @@ PRODUCT_PACKAGES += \
     libOmxVdecHevc \
     libOmxVenc \
     libc2dcolorconvert
+
+# Enable Codec 2.0
+PRODUCT_PACKAGES += \
+    libstagefright_ccodec
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
@@ -452,12 +469,6 @@ PRODUCT_COPY_FILES += \
 # PRODUCT_COPY_FILES += \
 #   frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml
 
-# Thermal packages
-PRODUCT_PACKAGES += \
-    thermal.default \
-    thermal.sdm845 \
-    vr.sdm845 \
-
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
     tinyplay \
@@ -469,6 +480,7 @@ endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio_policy_a2dp_offload_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_a2dp_offload_configuration.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
@@ -523,7 +535,7 @@ endif
 
 # Subsystem silent restart
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.ssr.restart_level=modem,slpi,adsp
+    persist.vendor.sys.ssr.restart_level=modem,slpi,adsp
 
 # setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
@@ -669,3 +681,8 @@ endif
 # Preopt SystemUI
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUIGoogle
+
+# Enable stats logging in LMKD
+TARGET_LMKD_STATS_LOG := true
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.lmk.log_stats=true
