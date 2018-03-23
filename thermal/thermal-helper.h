@@ -48,12 +48,9 @@ namespace implementation {
 
 using ::android::hardware::thermal::V1_0::CpuUsage;
 using ::android::hardware::thermal::V1_0::Temperature;
+using ::android::hardware::thermal::V1_0::TemperatureType;
 
-namespace {
-
-constexpr unsigned int kMaxCpus = 8;
-// 1 temp sensor for each CPU + 2 GPU, battery, and skin sensor.
-constexpr unsigned int kMaxTempSensors = 12;
+constexpr float kMultiplier = .001;
 
 struct ThrottlingThresholds {
     ThrottlingThresholds() : cpu(NAN), gpu(NAN), ss(NAN), battery(NAN) {}
@@ -62,8 +59,6 @@ struct ThrottlingThresholds {
     float ss;
     float battery;
 };
-
-}  // namespace
 
 class ThermalHelper {
  public:
@@ -79,11 +74,6 @@ class ThermalHelper {
     bool isInitializedOk() const { return is_initialized_; }
 
  private:
-    // Assign thresholds by reading the config files.
-    void initializeThresholds(
-        const std::string& thermal_config,
-        const std::string& vr_thermal_config);
-
     bool initializeSensorMap();
 
     // Read the temperature of a single sensor.
