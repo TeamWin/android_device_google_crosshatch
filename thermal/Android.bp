@@ -13,6 +13,7 @@ cc_binary {
     "sensors.cpp",
     "service.cpp",
     "Thermal.cpp",
+    "ThermalConfigParser.cpp",
     "thermal-helper.cpp",
   ],
   shared_libs: [
