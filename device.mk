@@ -469,12 +469,6 @@ PRODUCT_COPY_FILES += \
 # PRODUCT_COPY_FILES += \
 #   frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml
 
-# Thermal packages
-PRODUCT_PACKAGES += \
-    thermal.default \
-    thermal.sdm845 \
-    vr.sdm845 \
-
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
     tinyplay \
