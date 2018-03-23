@@ -53,6 +53,21 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.lmk.kill_heaviest_task=true \
     ro.lmk.kill_timeout_ms=100
 
+# Enable A2DP offload (compile-time switch)
+AUDIO_FEATURE_ENABLED_A2DP_OFFLOAD := true
+
+# Enable A2DP offload (run-time switch for system components)
+PRODUCT_PROPERTY_OVERRIDES += \
+persist.bluetooth.a2dp_offload.enable=false
+
+# Enable A2DP offload (run-time switch for vendor components)
+PRODUCT_PROPERTY_OVERRIDES += \
+persist.vendor.bluetooth.a2dp_offload.enable=false
+
+# A2DP offload DSP supported encoder list
+PRODUCT_PROPERTY_OVERRIDES += \
+persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac
+
 # Modem loging file
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/init.logging.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).logging.rc
