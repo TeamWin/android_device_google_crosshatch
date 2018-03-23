@@ -29,3 +29,6 @@ hwbinder_use(cnd)
 get_prop(cnd, hwservicemanager_prop)
 binder_call(cnd, dataservice_app)
 binder_call(cnd, ims)
+
+# Todo b/76173675
+userdebug_or_eng(`permissive cnd;')
