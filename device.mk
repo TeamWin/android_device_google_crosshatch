@@ -348,6 +348,8 @@ PRODUCT_PACKAGES += \
 
 # Enable Codec 2.0
 PRODUCT_PACKAGES += \
+    hardware.google.media.c2@1.0-service \
+    hardware.google.media.c2@1.0-service-system \
     libstagefright_ccodec
 
 PRODUCT_PACKAGES += \
@@ -526,6 +528,8 @@ PRODUCT_COPY_FILES += \
 
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp_policy/codec2.system.ext.policy:$(TARGET_COPY_OUT)/etc/seccomp_policy/codec2.system.ext.policy \
+    $(LOCAL_PATH)/seccomp_policy/codec2.vendor.ext.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/codec2.vendor.ext.policy \
     $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
