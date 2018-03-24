@@ -134,7 +134,8 @@ AB_OTA_PARTITIONS += \
     boot \
     system \
     vbmeta \
-    vendor
+    vendor \
+    dtbo
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
