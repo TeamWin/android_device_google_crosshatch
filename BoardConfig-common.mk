@@ -40,8 +40,6 @@ BOARD_KERNEL_CMDLINE += service_locator.enable=1
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 # STOPSHIP Bringup hack- no low power
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
-# STOPSHIP if androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
@@ -54,6 +52,10 @@ else
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 endif
+
+# DTBO partition definitions
+BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo.img
+BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
 TARGET_NO_BOOTLOADER ?= true
 TARGET_NO_KERNEL := false
@@ -178,6 +180,7 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 # Vendor Interface Manifest
 DEVICE_MANIFEST_FILE := device/google/crosshatch/manifest.xml
 DEVICE_MATRIX_FILE := device/google/crosshatch/compatibility_matrix.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE := device/google/crosshatch/framework_manifest.xml
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
