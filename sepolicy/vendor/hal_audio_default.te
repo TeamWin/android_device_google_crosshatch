@@ -12,3 +12,6 @@ allow hal_audio_default persist_file:dir search;
 
 # For interfacing with PowerHAL
 hal_client_domain(hal_audio_default, hal_power)
+
+# TODO(b/74110604)
+userdebug_or_eng(`permissive hal_audio_default;')
