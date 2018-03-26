@@ -529,9 +529,6 @@ service per_proxy /vendor/bin/pm-proxy
     disabled
 
 on property:sys.boot_completed=1
-    # Get the wlan driver/fw version
-    start vendor.wlan_sh
-
     # Enable UFS powersaving
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 1
@@ -788,3 +785,7 @@ on property:sys.vdso=64
 
 on property:sys.vdso=32
     write /sys/module/vdso/parameters/enable_64 0
+
+on property:wlan.driver.status=ok
+    # Get the wlan driver/fw version
+    start vendor.wlan_sh
