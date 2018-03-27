@@ -10,4 +10,8 @@ allow hal_neuralnetworks_paintbox easel_service:service_manager find;
 allow hal_neuralnetworks_paintbox proc_stat:file r_file_perms;
 allow hal_neuralnetworks_paintbox easel_device:chr_file rw_file_perms;
 
+# allow hal_neuralnetworks_paintbox to use ION buffer
+allow hal_neuralnetworks_paintbox hal_graphics_allocator_default:fd use;
+allow hal_neuralnetworks_paintbox ion_device:chr_file r_file_perms;
+
 binder_call(hal_neuralnetworks_paintbox, easel)
