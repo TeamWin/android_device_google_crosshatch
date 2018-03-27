@@ -52,7 +52,8 @@ genfscon sysfs /devices/virtual/graphics/fb0                            u:object
 genfscon sysfs /devices/virtual/graphics/fb1                            u:object_r:sysfs_graphics:s0
 genfscon sysfs /devices/soc0                                            u:object_r:sysfs_soc:s0
 genfscon sysfs /devices/virtual/misc/mnh_sm                             u:object_r:sysfs_easel:s0
-genfscon sysfs /devices/platform/soc/ac5a000.qcom,fd                             u:object_r:sysfs_camera:s0
+genfscon sysfs /devices/platform/soc/ac5a000.qcom,fd                    u:object_r:sysfs_camera:s0
+genfscon sysfs /devices/platform/soc/ac4a000.qcom,cci                   u:object_r:sysfs_camera:s0
 genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-000c/a88000.i2c:qcom,smb1355@c:qcom,smb1355-charger@1000/power_supply          u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-0061/power_supply                                                              u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply                                                              u:object_r:sysfs_batteryinfo:s0
