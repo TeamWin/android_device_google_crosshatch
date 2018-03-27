@@ -23,3 +23,5 @@ allow rmt_storage debugfs_rmt_storage:file w_file_perms;
 
 allow rmt_storage self:socket create_socket_perms;
 allowxperm rmt_storage self:socket ioctl IPC_ROUTER_IOCTL_BIND_CONTROL_PORT;
+
+allow rmt_storage kmsg_device:chr_file w_file_perms;
