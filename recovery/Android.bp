@@ -16,7 +16,6 @@
 
 cc_library_static {
     name: "librecovery_ui_crosshatch",
-    proprietary: true,
     owner: "google",
     cflags: [
         "-Wall",
@@ -30,12 +29,9 @@ cc_library_static {
     include_dirs: [
         "bootable/recovery"
     ],
-    header_libs: [
-        "nos_headers",
-    ],
     static_libs: [
         "libbase",
-        "libnos",
-        "libnos_client_citadel",
+        "libnos_for_recovery",
+        "libnos_citadel_for_recovery",
     ],
 }

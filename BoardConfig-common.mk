@@ -69,10 +69,8 @@ TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_UI_LIB := \
   librecovery_ui_crosshatch \
-  libnos \
-  libnos_client_citadel \
-  libnos_transport \
-  libnos_datagram_citadel
+  libnos_citadel_for_recovery \
+  libnos_for_recovery
 
 BOARD_AVB_ENABLE := true
 
