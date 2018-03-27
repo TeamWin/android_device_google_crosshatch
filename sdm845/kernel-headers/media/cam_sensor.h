@@ -34,12 +34,11 @@ enum rainbow_op_type {
 };
 struct rainbow_config {
   enum rainbow_op_type operation;
-  uint32_t             size;
-  uint32_t             reg_addr[MAX_RAINBOW_CONFIG_SIZE];
-  uint32_t             reg_data[MAX_RAINBOW_CONFIG_SIZE];
+  uint32_t size;
+  uint32_t reg_addr[MAX_RAINBOW_CONFIG_SIZE];
+  uint32_t reg_data[MAX_RAINBOW_CONFIG_SIZE];
 } __attribute__((packed));
-#define RAINBOW_CONFIG \
-  _IOWR('R', 1, struct rainbow_config)
+#define RAINBOW_CONFIG _IOWR('R', 1, struct rainbow_config)
 struct cam_sensor_query_cap {
   uint32_t slot_info;
   uint32_t secure_camera;
