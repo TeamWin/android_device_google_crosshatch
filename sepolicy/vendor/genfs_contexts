@@ -22,6 +22,7 @@ genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth
 
 genfscon sysfs /class/thermal                                           u:object_r:sysfs_thermal:s0
 genfscon sysfs /class/uio                                               u:object_r:sysfs_uio:s0
+genfscon sysfs /devices/platform/soc/894000.i2c                                  u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,gpubw                              u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi                           u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/4080000.qcom,mss                            u:object_r:sysfs_msm_subsys:s0
@@ -29,6 +30,7 @@ genfscon sysfs /devices/platform/soc/17300000.qcom,lpass                        
 genfscon sysfs /devices/platform/soc/188101c.qcom,spss                           u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/5c00000.qcom,ssc                            u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_rotator                   u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/platform/soc/894000.i2c/i2c-3/3-0043/leds                u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc/894000.i2c/i2c-3/3-005a/leds                u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display@4/backlight            u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display@51/backlight           u:object_r:sysfs_leds:s0
@@ -52,7 +54,8 @@ genfscon sysfs /devices/virtual/graphics/fb0                            u:object
 genfscon sysfs /devices/virtual/graphics/fb1                            u:object_r:sysfs_graphics:s0
 genfscon sysfs /devices/soc0                                            u:object_r:sysfs_soc:s0
 genfscon sysfs /devices/virtual/misc/mnh_sm                             u:object_r:sysfs_easel:s0
-genfscon sysfs /devices/platform/soc/ac5a000.qcom,fd                             u:object_r:sysfs_camera:s0
+genfscon sysfs /devices/platform/soc/ac5a000.qcom,fd                    u:object_r:sysfs_camera:s0
+genfscon sysfs /devices/platform/soc/ac4a000.qcom,cci                   u:object_r:sysfs_camera:s0
 genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-000c/a88000.i2c:qcom,smb1355@c:qcom,smb1355-charger@1000/power_supply          u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-0061/power_supply                                                              u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply                                                              u:object_r:sysfs_batteryinfo:s0
@@ -74,8 +77,6 @@ genfscon sysfs /devices/platform/soc/a800000.ssusb/a800000.dwc3/xhci-hcd.0.auto/
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec     u:object_r:sysfs_usb_c:s0
 
 genfscon sysfs /module/diagchar                                         u:object_r:sysfs_diag:s0
-
-genfscon sysfs /devices/platform/soc/894000.i2c/i2c-3/3-0043/leds/vibrator     u:object_r:sysfs_vibrator:s0
 
 genfscon sysfs /class/gpio/export                     u:object_r:sysfs_gpio_export:s0
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-00/c440000.qcom,spmi:qcom,pm8998@0:pinctrl@c000 u:object_r:sysfs_pinctrl:s0
