@@ -8,6 +8,7 @@ vendor.qti.hardware.radio.lpa::IUimLpa                          u:object_r:hal_t
 vendor.qti.hardware.radio.uim_remote_client::IUimRemoteServiceClient    u:object_r:hal_telephony_hwservice:s0
 vendor.qti.hardware.radio.uim_remote_server::IUimRemoteServiceServer    u:object_r:hal_telephony_hwservice:s0
 vendor.qti.hardware.radio.uim::IUim                             u:object_r:hal_telephony_hwservice:s0
+vendor.qti.hardware.tui_comm::ITuiComm                          u:object_r:hal_tui_comm_hwservice:s0
 android.hardware.tetheroffload.config::IOffloadConfig           u:object_r:hal_tetheroffload_hwservice:s0
 android.hardware.tetheroffload.control::IOffloadControl         u:object_r:hal_tetheroffload_hwservice:s0
 com.quicinc.cne.api::IApiService                                u:object_r:hal_cne_hwservice:s0
