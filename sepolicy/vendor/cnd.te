@@ -23,6 +23,9 @@ set_prop(cnd, cnd_prop)
 allow cnd self:socket create_socket_perms;
 allowxperm cnd self:socket ioctl msm_sock_ipc_ioctls;
 
+# allow cnd to obtain wakelock
+wakelock_use(cnd)
+
 # To register cnd to hwbinder
 add_hwservice(cnd, hal_cne_hwservice)
 hwbinder_use(cnd)
