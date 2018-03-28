@@ -53,10 +53,6 @@ persist.fuse_sdcard=true
 # settings to enable Device Orientation Sensors
 ro.qti.sensors.dev_ori=true
 
-# temporary override to store fingerprint data in /data/vendor_de/...
-# until shipping-sdk-version is fixed.
-ro.treble.supports_vendor_data=true
-
 # settings to disable sensors not needed
 # all secondary wakeup
 ro.qti.sensors.wu=false
