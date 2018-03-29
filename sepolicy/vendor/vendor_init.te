@@ -29,5 +29,7 @@ set_prop(vendor_init, vendor_modem_diag_prop)
 set_prop(vendor_init, power_prop)
 set_prop(vendor_init, vendor_thermal_prop)
 
-dontaudit vendor_init sysfs_msm_subsys:dir write;
-dontaudit vendor_init sysfs_msm_subsys_restart:dir write;
+# Suppress false positives when using O_CREAT
+# to open a file that already exists.
+# There's a neverallow rule for this in domain.te
+dontaudit vendor_init cgroup:file create;
