@@ -55,3 +55,8 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk-sp/libz.so)
 # Remove Vibrator HAL 1.1
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.vibrator@1.1-service.crosshatch.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibrator@1.1-service.crosshatch)
+
+# Remove /product mount point
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/product)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/product)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/product)
