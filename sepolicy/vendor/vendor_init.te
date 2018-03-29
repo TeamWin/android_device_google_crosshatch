@@ -18,6 +18,11 @@ allow vendor_init debugfs_clk:file w_file_perms;
 allow vendor_init proc_uid_cpupower:file write;
 dontaudit vendor_init kernel:system module_request;
 
+# Allow vendor_init to write to /proc/sysrq-trigger on userdebug and eng builds
+userdebug_or_eng(`
+  allow vendor_init proc_sysrq:file w_file_perms;
+')
+
 set_prop(vendor_init, bluetooth_prop)
 set_prop(vendor_init, camera_prop)
 set_prop(vendor_init, vendor_modem_diag_prop)
