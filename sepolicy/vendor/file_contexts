@@ -24,6 +24,7 @@
 /dev/sdsprpc-smd                                u:object_r:dsp_device:s0
 /dev/wcd-dsp-glink                              u:object_r:audio_device:s0
 /dev/wcd_dsp0_control                           u:object_r:audio_device:s0
+/dev/wcd-spi-ac-client                          u:object_r:audio_device:s0
 /dev/msm_.*                                     u:object_r:audio_device:s0
 /dev/avtimer                                    u:object_r:avtimer_device:s0
 /dev/subsys_.*                                  u:object_r:ssr_device:s0
