@@ -260,7 +260,7 @@
       <version>1.0</version>
       <interface>
         <name>IRadioConfig</name>
-        <instance>radioconfig</instance>
+        <instance>default</instance>
       </interface>
     </hal>
     <hal format="hidl">
