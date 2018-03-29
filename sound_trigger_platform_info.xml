@@ -106,4 +106,9 @@
         <param sample_rate="16000" />
         <param bit_width="16" />
     </adm_config>
+
+    <lpma_config>
+        <param uid="0x10" />
+        <param bridge_buffer_ids="0x00020010, 0x4, 0x00020018" />
+    </lpma_config>
 </sound_trigger_platform_info>
