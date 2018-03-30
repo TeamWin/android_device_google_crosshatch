@@ -6,3 +6,5 @@ add_hwservice(hal_secure_element_default, nxpese_hwservice)
 
 allow hal_secure_element_default secure_element_vendor_data_file:dir create_dir_perms;
 allow hal_secure_element_default secure_element_vendor_data_file:file create_file_perms;
+
+allow hal_secure_element_default debugfs_ipc:dir search;
