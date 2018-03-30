@@ -18,11 +18,18 @@ allow vendor_init debugfs_clk:file w_file_perms;
 allow vendor_init proc_uid_cpupower:file write;
 dontaudit vendor_init kernel:system module_request;
 
+# Allow vendor_init to write to /proc/sysrq-trigger on userdebug and eng builds
+userdebug_or_eng(`
+  allow vendor_init proc_sysrq:file w_file_perms;
+')
+
 set_prop(vendor_init, bluetooth_prop)
 set_prop(vendor_init, camera_prop)
 set_prop(vendor_init, vendor_modem_diag_prop)
 set_prop(vendor_init, power_prop)
 set_prop(vendor_init, vendor_thermal_prop)
 
-dontaudit vendor_init sysfs_msm_subsys:dir write;
-dontaudit vendor_init sysfs_msm_subsys_restart:dir write;
+# Suppress false positives when using O_CREAT
+# to open a file that already exists.
+# There's a neverallow rule for this in domain.te
+dontaudit vendor_init cgroup:file create;

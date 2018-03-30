@@ -38,7 +38,7 @@ type debugfs_dma_bufinfo, debugfs_type, fs_type;
 type debugfs_tzdbg, debugfs_type, fs_type;
 
 # /proc
-type proc_wifi_dbg, fs_type;
+type proc_wifi_dbg, proc_type, fs_type;
 
 type qmuxd_socket, file_type;
 type netmgrd_socket, file_type;
@@ -81,6 +81,7 @@ type sensors_vendor_data_file, file_type, data_file_type;
 type secure_element_vendor_data_file, file_type, data_file_type;
 type ssr_log_file, file_type, data_file_type;
 type vendor_firmware_file, vendor_file_type, file_type;
+type audio_vendor_data_file, file_type, data_file_type;
 
 #data sysfs files
 type sysfs_data, fs_type, sysfs_type;

@@ -36,6 +36,7 @@
 /dev/easelcomm-client                           u:object_r:easel_device:s0
 /dev/citadel0                                   u:object_r:citadel_device:s0
 /dev/pn81a                                      u:object_r:secure_element_device:s0
+/dev/vd6281                                     u:object_r:camera_device:s0
 
 /dev/dri/card0                                  u:object_r:graphics_device:s0
 
@@ -98,6 +99,7 @@
 
 /dev/block/platform/soc/1d84000\.ufshc/by-name/ssd             u:object_r:ssd_block_device:s0
 
+/dev/block/platform/soc/1d84000\.ufshc/by-name/product_[ab]    u:object_r:system_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/system_[ab]     u:object_r:system_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/vendor_[ab]     u:object_r:system_block_device:s0
 
@@ -243,6 +245,7 @@
 /data/vendor/tombstones/rfs(/.*)?      u:object_r:rfs_tombstone_data_file:s0
 /data/vendor/ssrlog(/.*)?              u:object_r:ssr_log_file:s0
 /data/vendor/secure_element(/.*)?      u:object_r:secure_element_vendor_data_file:s0
+/data/vendor/misc/audio(/.*)?          u:object_r:audio_vendor_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0
