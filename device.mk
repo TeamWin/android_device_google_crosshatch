@@ -57,8 +57,6 @@ endif
 
 PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_SHIPPING_API_LEVEL := 28
-# TODO(b/69574580, b/69575524) remove this
-PRODUCT_USE_VNDK_OVERRIDE := false
 # TODO(b/74266614) remove this
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := false
 
@@ -597,6 +595,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/hidl/android.hidl.base@1.0.so-32:system/lib/android.hidl.base@1.0.so \
     device/google/crosshatch/hidl/android.hidl.base@1.0.so-64:system/lib64/android.hidl.base@1.0.so \
+    device/google/crosshatch/hidl/android.hidl.base@1.0.so-32:vendor/lib/android.hidl.base@1.0.so \
+    device/google/crosshatch/hidl/android.hidl.base@1.0.so-64:vendor/lib64/android.hidl.base@1.0.so \
 
 PRODUCT_PACKAGES += \
     ipacm
