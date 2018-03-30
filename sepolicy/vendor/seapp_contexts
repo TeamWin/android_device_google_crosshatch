@@ -2,6 +2,9 @@ user=system seinfo=platform name=com.google.SSRestartDetector domain=ssr_detecto
 user=_app seinfo=platform name=com.android.pixellogger domain=logger_app type=app_data_file levelFrom=all
 user=_app seinfo=platform name=com.android.ramdump domain=ramdump_app type=app_data_file levelFrom=all
 
+#TODO Remove user "system" when b/63588267 is resolved
+user=system seinfo=platform name=com.qualcomm.telephony domain=qtelephony type=system_app_data_file
+
 #Add new domain for DataServices
 # Domain for CNEService , uceShimService and other connectivity services
 user=radio seinfo=platform name=.dataservices domain=dataservice_app type=radio_data_file
