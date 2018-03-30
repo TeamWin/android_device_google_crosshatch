@@ -1872,11 +1872,13 @@
     </path>
 
     <path name="voicemmode1-call handset">
+        <ctl name="VOC_EXT_EC MUX" value="QUAT_TDM_RX_0" />
         <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode1" value="1"/>
         <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1"/>
     </path>
 
     <path name="voicemmode1-call speaker">
+        <ctl name="VOC_EXT_EC MUX" value="QUAT_TDM_RX_0" />
         <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode1" value="1"/>
         <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1"/>
     </path>
