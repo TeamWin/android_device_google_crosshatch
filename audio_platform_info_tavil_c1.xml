@@ -138,6 +138,10 @@
         <device name="SND_DEVICE_IN_VOICE_TTY_FULL_USB_MIC" backend="usb-headset-mic" interface="USB_AUDIO_TX"/>
         <device name="SND_DEVICE_IN_VOICE_TTY_HCO_USB_MIC" backend="usb-headset-mic" interface="USB_AUDIO_TX"/>
         <device name="SND_DEVICE_IN_CAPTURE_VI_FEEDBACK" backend="vi-feedback" interface="QUAT_TDM_TX_0"/>
+        <device name="SND_DEVICE_IN_BT_SCO_MIC" backend="bt-sco" interface="SLIMBUS_7_TX"/>
+        <device name="SND_DEVICE_IN_BT_SCO_MIC_NREC" backend="bt-sco" interface="SLIMBUS_7_TX"/>
+        <device name="SND_DEVICE_IN_BT_SCO_MIC_WB" backend="bt-sco-mic-wb" interface="SLIMBUS_7_TX"/>
+        <device name="SND_DEVICE_IN_BT_SCO_MIC_WB_NREC" backend="bt-sco-mic-wb" interface="SLIMBUS_7_TX"/>
     </backend_names>
     <app_types>
         <app uc_type="PCM_PLAYBACK" mode="default" bit_width="16" id="69936" max_rate="96000" />

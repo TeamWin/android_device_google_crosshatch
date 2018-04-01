@@ -57,8 +57,6 @@ endif
 
 PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_SHIPPING_API_LEVEL := 28
-# TODO(b/69574580, b/69575524) remove this
-PRODUCT_USE_VNDK_OVERRIDE := false
 # TODO(b/74266614) remove this
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := false
 
@@ -293,6 +291,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
+# Health HAL
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.0-service
+
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.$(PRODUCT_PLATFORM) \
@@ -348,7 +350,7 @@ PRODUCT_PACKAGES += \
 # Enable Codec 2.0
 PRODUCT_PACKAGES += \
     hardware.google.media.c2@1.0-service \
-    hardware.google.media.c2@1.0-service-system \
+    hardware.google.media.c2@1.0-service-software \
     libstagefright_ccodec
 
 PRODUCT_PACKAGES += \
@@ -450,8 +452,8 @@ PRODUCT_PACKAGES += \
     audio.hearing_aid.default
 
 PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio.effect@2.0-impl \
+    android.hardware.audio@4.0-impl:32 \
+    android.hardware.audio.effect@4.0-impl:32 \
     android.hardware.broadcastradio@1.0-impl \
     android.hardware.soundtrigger@2.1-impl \
     android.hardware.audio@2.0-service
@@ -530,7 +532,7 @@ PRODUCT_COPY_FILES += \
 
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp_policy/codec2.system.ext.policy:$(TARGET_COPY_OUT)/etc/seccomp_policy/codec2.system.ext.policy \
+    $(LOCAL_PATH)/seccomp_policy/codec2.software.ext.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/codec2.software.ext.policy \
     $(LOCAL_PATH)/seccomp_policy/codec2.vendor.ext.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/codec2.vendor.ext.policy \
     $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
@@ -597,6 +599,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/hidl/android.hidl.base@1.0.so-32:system/lib/android.hidl.base@1.0.so \
     device/google/crosshatch/hidl/android.hidl.base@1.0.so-64:system/lib64/android.hidl.base@1.0.so \
+    device/google/crosshatch/hidl/android.hidl.base@1.0.so-32:vendor/lib/android.hidl.base@1.0.so \
+    device/google/crosshatch/hidl/android.hidl.base@1.0.so-64:vendor/lib64/android.hidl.base@1.0.so \
 
 PRODUCT_PACKAGES += \
     ipacm

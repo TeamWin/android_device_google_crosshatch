@@ -53,6 +53,9 @@ BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 endif
 
+BOARD_BOOT_HEADER_VERSION := 1
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+
 # DTBO partition definitions
 BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo.img
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
@@ -67,6 +70,7 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 TARGET_RECOVERY_WIPE := device/google/crosshatch/recovery.wipe
 TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+TARGET_RECOVERY_UI_MARGIN_HEIGHT := 20
 TARGET_RECOVERY_UI_LIB := \
   librecovery_ui_crosshatch \
   libnos_citadel_for_recovery \

@@ -52,6 +52,21 @@
     </exception>
 
     <exception
+            package="com.google.android.projection.gearhead"
+            sha256-cert-digest="19:75:B2:F1:71:77:BC:89:A5:DF:F3:1F:9E:64:A6:CA:E2:81:A5:3D:C1:D1:D5:9B:1D:14:7F:E1:C8:2A:FA:00">
+        <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
+        <permission name="android.permission.CALL_PHONE" fixed="false"/>
+        <permission name="android.permission.READ_CALL_LOG" fixed="false"/>
+        <permission name="android.permission.READ_CONTACTS" fixed="false"/>
+        <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="false"/>
+        <permission name="com.google.android.gms.permission.CAR_SPEED" fixed="false"/>
+        <permission name="android.permission.RECEIVE_SMS" fixed="false"/>
+        <permission name="android.permission.SEND_SMS" fixed="false"/>
+        <permission name="android.permission.RECORD_AUDIO" fixed="false"/>
+        <permission name="android.permission.READ_CALENDAR" fixed="false"/>
+    </exception>
+
+    <exception
             package="com.google.android.apps.restore"
             sha256-cert-digest="56:BE:13:2B:78:06:56:FE:24:44:CD:34:32:6E:B5:D7:AA:C9:1D:20:96:AB:F0:FE:67:3A:99:27:06:22:EC:87">
         <!-- External storage -->
@@ -78,6 +93,13 @@
             package="com.qualcomm.ltebc_vzw">
         <!-- Phone -->
         <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
+    </exception>
+
+    <exception package="com.google.android.settings.intelligence">
+        <!-- Calendar -->
+        <permission name="android.permission.READ_CALENDAR" fixed="true"/>
+        <!-- Location -->
+        <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="true"/>
     </exception>
 
 </exceptions>

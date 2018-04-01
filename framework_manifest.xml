@@ -5,7 +5,7 @@
         <version>1.0</version>
         <interface>
             <name>IComponentStore</name>
-            <instance>system</instance>
+            <instance>software</instance>
             <instance>v4l2</instance>
         </interface>
     </hal>

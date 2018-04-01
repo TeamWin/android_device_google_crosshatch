@@ -21,3 +21,6 @@ userdebug_or_eng(`
 hal_client_domain(hal_camera_default, hal_power)
 
 allow hal_camera_default proc_stat:file r_file_perms;
+
+allow hal_camera_default easel_service:service_manager find;
+binder_call(hal_camera_default, easel)
