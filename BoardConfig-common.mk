@@ -137,6 +137,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # Sensors
 USE_SENSOR_MULTI_HAL := true
+TARGET_SUPPORT_DIRECT_REPORT := true
 
 # wlan
 BOARD_WLAN_DEVICE := qcwcn
