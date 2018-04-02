@@ -16,6 +16,7 @@
 
 #include <cerrno>
 
+#include <android-base/file.h>
 #include <android-base/logging.h>
 
 #include "Thermal.h"
@@ -115,6 +116,55 @@ Return<void> Thermal::getCoolingDevices(getCoolingDevices_cb _hidl_cb) {
     }
     LOG(DEBUG) << "No Cooling Devices";
     _hidl_cb(status, cooling_devices);
+    return Void();
+}
+
+Return<void> Thermal::debug(const hidl_handle& handle, const hidl_vec<hidl_string>&) {
+    if (handle != nullptr && handle->numFds >= 1) {
+        int fd = handle->data[0];
+        std::ostringstream dump_buf;
+
+        if (!thermal_helper.isInitializedOk()) {
+            dump_buf << "ThermalHAL not initialized properly." << std::endl;
+        } else {
+            hidl_vec<Temperature> temperatures;
+            hidl_vec<CpuUsage> cpu_usages;
+
+            dump_buf << "getTemperatures:" << std::endl;
+            if (!thermal_helper.fillTemperatures(&temperatures)) {
+                dump_buf << "Failed to read thermal sensors." << std::endl;
+            }
+
+            for (const auto& t : temperatures) {
+                dump_buf << "Name: " << t.name
+                         << " Type: " << android::hardware::thermal::V1_0::toString(t.type)
+                         << " CurrentValue: " << t.currentValue
+                         << " ThrottlingThreshold: " << t.throttlingThreshold
+                         << " ShutdownThreshold: " << t.shutdownThreshold
+                         << " VrThrottlingThreshold: " << t.vrThrottlingThreshold
+                         << std::endl;
+            }
+
+            dump_buf << "getCpuUsages:" << std::endl;
+            if (!thermal_helper.fillCpuUsages(&cpu_usages)) {
+                dump_buf << "Failed to get CPU usages." << std::endl;
+            }
+
+            for (const auto& usage : cpu_usages) {
+                dump_buf << "Name: " << usage.name
+                         << " Active: " << usage.active
+                         << " Total: " << usage.total
+                         << " IsOnline: " << usage.isOnline
+                         << std::endl;
+            }
+
+        }
+        std::string buf = dump_buf.str();
+        if (!android::base::WriteStringToFd(buf, fd)) {
+            PLOG(ERROR) << "Failed to dump state to fd";
+        }
+        fsync(fd);
+    }
     return Void();
 }
 
