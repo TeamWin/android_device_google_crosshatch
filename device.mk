@@ -133,7 +133,8 @@ AB_OTA_PARTITIONS += \
     system \
     vbmeta \
     vendor \
-    dtbo
+    dtbo \
+    product
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
