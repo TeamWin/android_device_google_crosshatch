@@ -43,6 +43,8 @@ class Thermal : public IThermal {
     Return<void> getCpuUsages(getCpuUsages_cb _hidl_cb) override;
     Return<void> getCoolingDevices(getCoolingDevices_cb _hidl_cb) override;
 
+    // Methods from ::android::hidl::base::V1_0::IBase follow.
+    Return<void> debug(const hidl_handle& fd, const hidl_vec<hidl_string>& args) override;
  private:
     ThermalHelper thermal_helper;
 };
