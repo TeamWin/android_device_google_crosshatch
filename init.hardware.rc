@@ -420,6 +420,7 @@ on early-boot
     wait_for_prop vendor.all.modules.ready 1
 
     write /sys/kernel/boot_adsp/boot 1
+    write /sys/kernel/boot_cdsp/boot 1
 
     # Start CHRE which need SLPI completed in vendor.qcom.devup
     start chre
