@@ -1,0 +1,26 @@
+type secure_ui_service, domain;
+app_domain(secure_ui_service);
+
+binder_use(secure_ui_service);
+hwbinder_use(secure_ui_service);
+binder_call(secure_ui_service, hal_tui_comm);
+binder_call(secure_ui_service, surfaceflinger);
+binder_call(secure_ui_service, system_server);
+
+allow secure_ui_service  {
+  hal_tui_comm_hwservice
+  telecom_service
+  power_service
+  trust_service
+  activity_service
+  display_service
+  network_management_service
+  connectivity_service
+  surfaceflinger_service
+  accessibility_service
+  notification_service
+  input_method_service
+  graphicsstats_service
+}:service_manager find;
+
+allow secure_ui_service secure_ui_service_data_file:dir r_dir_perms;

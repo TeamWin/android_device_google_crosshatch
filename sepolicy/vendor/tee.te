@@ -4,6 +4,15 @@ allow tee device:dir r_dir_perms;
 
 set_prop(tee, tee_listener_prop)
 set_prop(tee, keymaster_prop)
+get_prop(tee, hwservicemanager_prop)
+
+hwbinder_use(tee)
+vndbinder_use(tee)
+
+binder_call(tee, hal_tui_comm)
+binder_call(tee, hal_graphics_composer_default)
+allow tee hal_tui_comm_hwservice:hwservice_manager find;
+allow tee qdisplay_service:service_manager find;
 
 allow tee firmware_file:dir search;
 allow tee block_device:dir { getattr search };
@@ -17,3 +26,5 @@ allow tee persist_data_file:dir create_dir_perms;
 allow tee persist_data_file:file create_file_perms;
 
 allow tee time_daemon:unix_stream_socket connectto;
+
+allow tee hal_graphics_allocator_default:fd use;
