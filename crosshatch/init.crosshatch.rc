@@ -18,6 +18,3 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.rc
 
 on init
     setprop ro.sf.lcd_density 560
-    setprop ro.hwui.texture_cache_size 84
-    setprop ro.hwui.layer_cache_size 64
-    setprop ro.hwui.path_cache_size 32

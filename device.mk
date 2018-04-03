@@ -319,9 +319,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # DRM HAL
 PRODUCT_PACKAGES += \
-  android.hardware.drm@1.0-impl \
-  android.hardware.drm@1.0-service \
-  android.hardware.drm@1.0-service.widevine
+    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.1-service.clearkey \
+    android.hardware.drm@1.0-service.widevine
 
 # NFC and Secure Element packages
 PRODUCT_PACKAGES += \
@@ -572,7 +573,8 @@ PRODUCT_PACKAGES += \
     citadeld \
     citadel_updater \
     android.hardware.oemlock@1.0-service.citadel \
-    android.hardware.weaver@1.0-service.citadel
+    android.hardware.weaver@1.0-service.citadel \
+    android.hardware.keymaster@4.0-service.citadel
 
 # Citadel debug stuff
 PRODUCT_PACKAGES_DEBUG += \
@@ -696,5 +698,5 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 
 # Enable stats logging in LMKD
 TARGET_LMKD_STATS_LOG := true
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.lmk.log_stats=true
