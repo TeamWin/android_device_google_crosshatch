@@ -7,3 +7,5 @@ add_service(citadeld, citadeld_service)
 allow citadeld citadel_device:chr_file rw_file_perms;
 
 init_daemon_domain(citadeld)
+
+allow citadeld debugfs_ipc:dir search;

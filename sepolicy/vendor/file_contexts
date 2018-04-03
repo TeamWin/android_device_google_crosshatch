@@ -42,6 +42,7 @@
 
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
+/dev/socket/msm_irqbalance                      u:object_r:irqbalance_socket:s0
 /dev/socket/qmux_audio(/.*)?                    u:object_r:qmuxd_socket:s0
 /dev/socket/qmux_bluetooth(/.*)?                u:object_r:qmuxd_socket:s0
 /dev/socket/qmux_gps(/.*)?                      u:object_r:qmuxd_socket:s0
@@ -155,6 +156,7 @@
 /vendor/bin/ims_rtp_daemon      u:object_r:hal_imsrtp_exec:s0
 /vendor/bin/ipacm               u:object_r:hal_tetheroffload_default_exec:s0
 /vendor/bin/ipacm-diag          u:object_r:hal_tetheroffload_default_exec:s0
+/vendor/bin/msm_irqbalance      u:object_r:irqbalance_exec:s0
 /vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 /vendor/bin/easelmanagerd       u:object_r:easel_exec:s0
@@ -176,6 +178,7 @@
 /vendor/bin/hw/qcrild           u:object_r:rild_exec:s0
 
 /vendor/bin/hw/android\.hardware\.drm@1\.0-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey          u:object_r:hal_drm_clearkey_exec:s0
 /vendor/bin/hw/android\.hardware\.vibrator@1\.2-service\.crosshatch  u:object_r:hal_vibrator_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@3\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
@@ -183,6 +186,7 @@
 /vendor/bin/hw/android\.hardware\.bluetooth@1\.0-service-qti         u:object_r:hal_bluetooth_default_exec:s0
 /vendor/bin/hw/android\.hardware\.oemlock@1\.0-service\.citadel       u:object_r:hal_oemlock_citadel_exec:s0
 /vendor/bin/hw/android\.hardware\.weaver@1\.0-service\.citadel        u:object_r:hal_weaver_citadel_exec:s0
+/vendor/bin/hw/android\.hardware\.keymaster@4\.0-service.citadel     u:object_r:hal_keymaster_citadel_exec:s0
 /vendor/bin/hw/citadeld                                              u:object_r:citadeld_exec:s0
 /vendor/bin/hw/init_citadel                                          u:object_r:init_citadel_exec:s0
 /vendor/bin/hw/vendor\.google\.radioext@1\.0-service                 u:object_r:hal_radioext_default_exec:s0

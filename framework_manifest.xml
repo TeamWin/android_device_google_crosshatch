@@ -1,13 +1,3 @@
 <manifest version="1.0" type="framework">
-    <hal format="hidl">
-        <name>hardware.google.media.c2</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IComponentStore</name>
-            <instance>software</instance>
-            <instance>v4l2</instance>
-        </interface>
-    </hal>
 </manifest>
 
