@@ -35,5 +35,10 @@ binder_call(cnd, ims)
 
 dontaudit cnd kernel:system module_request;
 
+allow cnd wpa_data_file:dir rw_dir_perms;
+allow cnd wpa_data_file:sock_file create_file_perms;
+allow cnd wpa_socket:sock_file write;
+unix_socket_send(cnd, wpa, hal_wifi_supplicant)
+
 # Todo b/76173675
 userdebug_or_eng(`permissive cnd;')
