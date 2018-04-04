@@ -248,7 +248,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
         int fdModem = handle->data[1];
         dumpModem(fd, fdModem);
     }
-
+    RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
     DumpFileToFd(fd, "SoC serial number", "/sys/devices/soc0/serial_number");
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
@@ -285,8 +285,8 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "WLAN FW Log Symbol Table", "/vendor/firmware/Data.msc");
     DumpTouch(fd);
     RunCommandToFd(fd, "USB Device Descriptors", {"/vendor/bin/sh", "-c", "cd /sys/bus/usb/devices/1-1 && cat product && cat bcdDevice; cat descriptors | od -t x1 -w16 -N96"});
-    RunCommandToFd(fd, "QSEE logs", {"/vendor/bin/sh", "-c", "cat /d/tzdbg/qsee_log"});
-
+    // Timeout after 3s
+    RunCommandToFd(fd, "QSEE logs", {"/vendor/bin/sh", "-c", "/vendor/bin/timeout 3 cat /d/tzdbg/qsee_log"});
     RunCommandToFd(fd, "Battery cycle count", {"/vendor/bin/sh", "-c", "for f in 1 2 3 4 5 6 7 8 ; do echo $f > /sys/class/power_supply/bms/cycle_count_id; count=`cat /sys/class/power_supply/bms/cycle_count`; echo \"$f: $count\"; done"});
     return Void();
 }
