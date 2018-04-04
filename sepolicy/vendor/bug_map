@@ -3,6 +3,7 @@ cnd cnd capability 73994924
 cnd cnd netlink_generic_socket 73994924
 cnd cnd netlink_route_socket 73994924
 cnd cnd netlink_tcpdiag_socket 73994924
+cnd kernel system 73994924
 cnd system_data_file dir 73994924
 cnd system_data_file file 73994924
 e2fs sysfs_dm dir 75285088
