@@ -63,3 +63,18 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/product)
 
 # Remove android.hardware.audio*@2.0 implementation
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.audio*@2.0-impl.so)
+
+# Adds product.img
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/product)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/product)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/fonts)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/media)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/product)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/usr)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@3.0-service-qti.rc)
+

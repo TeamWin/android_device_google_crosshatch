@@ -161,18 +161,10 @@
     <hal format="hidl">
         <name>android.hardware.keymaster</name>
         <transport>hwbinder</transport>
-        <version>3.0</version>
-        <interface>
-            <name>IKeymasterDevice</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.keymaster</name>
-        <transport>hwbinder</transport>
         <version>4.0</version>
         <interface>
             <name>IKeymasterDevice</name>
+            <instance>default</instance>
             <instance>strongbox</instance>
         </interface>
     </hal>
@@ -416,6 +408,15 @@
         <interface>
             <name>IQtiOemHook</name>
             <instance>oemhook0</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.hardware.tui_comm</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ITuiComm</name>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl">
