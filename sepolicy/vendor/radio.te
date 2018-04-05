@@ -1,5 +1,6 @@
 get_prop(radio, ims_prop)
 set_prop(radio, tel_mon_prop)
+set_prop(radio, vendor_radio_prop)
 
 allow radio qmuxd_socket:dir search;
 allow radio qmuxd_socket:sock_file write;
