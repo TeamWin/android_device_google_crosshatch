@@ -151,7 +151,8 @@ PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     libcutils
 
 PRODUCT_PACKAGES += \
-    update_engine_sideload
+    update_engine_sideload \
+    sg_write_buffer
 
 # The following modules are included in debuggable builds only.
 PRODUCT_PACKAGES_DEBUG += \
