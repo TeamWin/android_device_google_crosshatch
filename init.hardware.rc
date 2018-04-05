@@ -186,9 +186,8 @@ on init
     setprop vendor.sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
 
 on fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
+    # Start HW service manager early
+    start hwservicemanager
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --early
 
     mkdir /persist/data 0700 system system
@@ -211,9 +210,6 @@ on fs
     chmod 0770 /persist/hlos_rfs
     restorecon_recursive /persist
 
-    # Start HW service manager early
-    start hwservicemanager
-
 on late-fs
     # Start devices by sysfs trigger
     start devstart_sh
@@ -221,9 +217,13 @@ on late-fs
     start surfaceflinger
     start bootanim
     start vendor.hwcomposer-2-1
-    start vendor.configstore-hal
+    start vendor.configstore-hal-1-0
     start vendor.gralloc-2-0
 
+    # Wait for hwservicemanager ready since fsck might be triggered in mount_all --late
+    # In such case, init won't responce the property_set from hwservicemanager and then
+    # cause services for bootanim not running.
+    wait_for_prop hwservicemanager.ready true
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --late
 
