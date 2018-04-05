@@ -75,6 +75,3 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/media)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/product)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/usr)
-
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@3.0-service-qti.rc)
-
