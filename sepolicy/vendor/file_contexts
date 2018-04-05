@@ -180,7 +180,7 @@
 /vendor/bin/hw/android\.hardware\.drm@1\.0-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey          u:object_r:hal_drm_clearkey_exec:s0
 /vendor/bin/hw/android\.hardware\.vibrator@1\.2-service\.crosshatch  u:object_r:hal_vibrator_default_exec:s0
-/vendor/bin/hw/android\.hardware\.keymaster@4\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
+/vendor/bin/hw/android\.hardware\.keymaster@3\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gnss@1\.1-service-qti              u:object_r:hal_gnss_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.bluetooth@1\.0-service-qti         u:object_r:hal_bluetooth_default_exec:s0
