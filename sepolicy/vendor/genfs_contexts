@@ -47,7 +47,7 @@ genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_mdp/idle_state           
 genfscon sysfs /devices/virtual/thermal                                 u:object_r:sysfs_thermal:s0
 genfscon sysfs /devices/virtual/wahoo_laser                             u:object_r:sysfs_laser:s0
 genfscon sysfs /module/msm_thermal                                      u:object_r:sysfs_thermal:s0
-genfscon sysfs /devices/soc/18800000.qcom,icnss/net                     u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc/18800000.qcom,icnss/net            u:object_r:sysfs_net:s0
 genfscon sysfs /module/tcp_cubic/parameters                             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/virtual/net                                     u:object_r:sysfs_net:s0
 genfscon sysfs /module/diagchar/parameters/timestamp_switch             u:object_r:sysfs_timestamp_switch:s0
