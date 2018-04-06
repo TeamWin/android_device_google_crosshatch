@@ -23,3 +23,6 @@ allow easel proc_stat:file r_file_perms;
 
 allow easel hal_neuralnetworks_paintbox:binder call;
 allow easel hal_camera_default:binder call;
+
+allow easel hal_graphics_allocator_default:fd use;
+allow easel ion_device:chr_file r_file_perms;
