@@ -34,6 +34,7 @@ allow init-qcom-devstart-sh sysfs_soc:dir r_dir_perms;
 allow init-qcom-devstart-sh sysfs_soc:file r_file_perms;
 allow init-qcom-devstart-sh sysfs_msm_subsys:dir r_dir_perms;
 allow init-qcom-devstart-sh sysfs_msm_subsys:file r_file_perms;
+allow init-qcom-devstart-sh sysfs_scsi_devices_0000:file r_file_perms;
 # Ignore permissions used but not needed.
 dontaudit init-qcom-devstart-sh sysfs:file { create getattr };
 dontaudit init-qcom-devstart-sh sysfs_type:dir { read write };

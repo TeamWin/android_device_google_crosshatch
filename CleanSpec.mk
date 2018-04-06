@@ -75,3 +75,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/media)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/product)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/usr)
+
+# Remove default android.hardware.health@2.0-service
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.health@2.0-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.health@2.0-service.rc)
