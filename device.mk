@@ -57,8 +57,6 @@ endif
 
 PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_SHIPPING_API_LEVEL := 28
-# TODO(b/74266614) remove this
-PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := false
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -133,7 +131,8 @@ AB_OTA_PARTITIONS += \
     system \
     vbmeta \
     vendor \
-    dtbo
+    dtbo \
+    product
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \

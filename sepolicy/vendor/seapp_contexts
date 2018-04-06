@@ -33,3 +33,5 @@ user=radio seinfo=platform name=com.google.android.connectivitymonitor domain=co
 
 # Domain for modem diagnostic system
 user=_app seinfo=platform name=com.google.mds domain=modem_diagnostic_app type=app_data_file levelFrom=user
+
+user=system seinfo=platform name=com.qualcomm.qti.services.secureui* domain=secure_ui_service type=secure_ui_service_data_file
