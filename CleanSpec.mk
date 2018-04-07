@@ -83,3 +83,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.he
 # Remove healthd
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/healthd)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/healthd.rc)
+
+# Remove KM3 RC
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@3.0-service-qti.rc)
+
