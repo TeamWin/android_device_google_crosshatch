@@ -55,6 +55,7 @@ persist.audio.fluence.speaker  u:object_r:vendor_default_prop:s0
 persist.audio.fluence.voicecall  u:object_r:vendor_default_prop:s0
 persist.audio.fluence.voicecomm  u:object_r:vendor_default_prop:s0
 persist.audio.fluence.voicerec  u:object_r:vendor_default_prop:s0
+persist.cne.override.memlimit  u:object_r:vendor_default_prop:s0
 persist.data_netmgrd_mtu   u:object_r:vendor_default_prop:s0
 persist.data.df.agg.dl_pad  u:object_r:vendor_default_prop:s0
 persist.data.df.agg.dl_pkt  u:object_r:vendor_default_prop:s0
@@ -132,6 +133,7 @@ sdm.mixer_resolution       u:object_r:vendor_default_prop:s0
 sdm.primary.mixer_stages   u:object_r:vendor_default_prop:s0
 sdm.virtual.mixer_stages   u:object_r:vendor_default_prop:s0
 sdm.video_mode_panel       u:object_r:vendor_default_prop:s0
+sdm.drop_skewed_vsync      u:object_r:vendor_default_prop:s0
 sys.disable_ext_animation  u:object_r:vendor_default_prop:s0
 sys.hwc_disable_hdr        u:object_r:vendor_default_prop:s0
 
