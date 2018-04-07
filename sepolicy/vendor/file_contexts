@@ -121,7 +121,6 @@
 /dev/block/zram0                                u:object_r:swap_block_device:s0
 
 # files in /vendor
-/vendor/firmware(/.*)?          u:object_r:vendor_firmware_file:s0
 /vendor/bin/hw/android\.hardware\.dumpstate@1\.0-service.crosshatch      u:object_r:hal_dumpstate_impl_exec:s0
 /vendor/bin/hw/android\.hardware\.vr@1\.0-service.crosshatch      u:object_r:hal_vr_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.fpc u:object_r:hal_fingerprint_default_exec:s0
