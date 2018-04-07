@@ -5,3 +5,6 @@ allow bootanim hwservicemanager:binder call;
 # in /data/system. This should be moved. In the meantime, suppress
 # this denial on phones since this functionality is not used.
 dontaudit bootanim system_data_file:dir read;
+
+# TODO(b/37205419): Remove upon resolution
+dontaudit bootanim kernel:system module_request;
