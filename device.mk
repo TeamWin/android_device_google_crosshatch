@@ -57,8 +57,6 @@ endif
 
 PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_SHIPPING_API_LEVEL := 28
-# TODO(b/74266614) remove this
-PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := false
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -295,7 +293,7 @@ PRODUCT_PACKAGES += \
 
 # Health HAL
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-service
+    android.hardware.health@2.0-service.crosshatch
 
 # Light HAL
 PRODUCT_PACKAGES += \
