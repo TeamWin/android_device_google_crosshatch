@@ -121,7 +121,6 @@
 /dev/block/zram0                                u:object_r:swap_block_device:s0
 
 # files in /vendor
-/vendor/firmware(/.*)?          u:object_r:vendor_firmware_file:s0
 /vendor/bin/hw/android\.hardware\.dumpstate@1\.0-service.crosshatch      u:object_r:hal_dumpstate_impl_exec:s0
 /vendor/bin/hw/android\.hardware\.vr@1\.0-service.crosshatch      u:object_r:hal_vr_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.fpc u:object_r:hal_fingerprint_default_exec:s0
@@ -181,7 +180,7 @@
 /vendor/bin/hw/android\.hardware\.drm@1\.0-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey          u:object_r:hal_drm_clearkey_exec:s0
 /vendor/bin/hw/android\.hardware\.vibrator@1\.2-service\.crosshatch  u:object_r:hal_vibrator_default_exec:s0
-/vendor/bin/hw/android\.hardware\.keymaster@3\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
+/vendor/bin/hw/android\.hardware\.keymaster@4\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gnss@1\.1-service-qti              u:object_r:hal_gnss_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.bluetooth@1\.0-service-qti         u:object_r:hal_bluetooth_default_exec:s0
@@ -193,6 +192,7 @@
 /vendor/bin/hw/init_citadel                                          u:object_r:init_citadel_exec:s0
 /vendor/bin/hw/vendor\.google\.radioext@1\.0-service                 u:object_r:hal_radioext_default_exec:s0
 /vendor/bin/hw/android\.hardware\.neuralnetworks@1\.0-service-paintbox    u:object_r:hal_neuralnetworks_paintbox_exec:s0
+/vendor/bin/hw/android\.hardware\.health@2\.0-service\.crosshatch         u:object_r:hal_health_default_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
