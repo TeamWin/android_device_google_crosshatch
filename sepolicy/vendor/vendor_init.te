@@ -31,8 +31,3 @@ set_prop(vendor_init, vendor_thermal_prop)
 set_prop(vendor_init, public_vendor_default_prop)
 set_prop(vendor_init, vendor_radio_prop)
 set_prop(vendor_init, wifi_prop)
-
-# Suppress false positives when using O_CREAT
-# to open a file that already exists.
-# There's a neverallow rule for this in domain.te
-dontaudit vendor_init cgroup:file create;
