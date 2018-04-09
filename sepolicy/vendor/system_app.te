@@ -8,3 +8,5 @@ userdebug_or_eng(`set_prop(system_app, camera_prop)')
 # read regulatory info
 allow system_app elabel_data_file:dir r_dir_perms;
 allow system_app elabel_data_file:file r_file_perms;
+
+set_prop(system_app, vendor_bluetooth_prop)

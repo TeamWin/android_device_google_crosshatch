@@ -93,7 +93,6 @@ persist.rmnet.data.enable  u:object_r:vendor_default_prop:s0
 qcom.bluetooth.soc         u:object_r:vendor_default_prop:s0
 qdcm.diagonal_matrix_mode  u:object_r:vendor_default_prop:s0
 qdcm.only_pcc_for_trans    u:object_r:vendor_default_prop:s0
-ro.bluetooth.emb_wp_mode   u:object_r:vendor_default_prop:s0
 ro.boot.factoryota         u:object_r:vendor_default_prop:s0
 ro.build.software.version  u:object_r:vendor_default_prop:s0
 ro.camera.wrapper.hal3TrebleMinorVersion  u:object_r:vendor_default_prop:s0
@@ -165,3 +164,14 @@ persist.vendor.radio.snapshot_enabled  u:object_r:vendor_radio_prop:s0
 persist.vendor.radio.snapshot_timer  u:object_r:vendor_radio_prop:s0
 ro.radio.log_loc           u:object_r:vendor_radio_prop:s0
 ro.radio.log_prefix        u:object_r:vendor_radio_prop:s0
+
+# vendor_bluetooth_prop
+persist.bluetooth.a4wp     u:object_r:vendor_bluetooth_prop:s0
+persist.bluetooth.csoc.cnt  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.fwsnoop  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.sibs  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.soclog  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.ssrlvl  u:object_r:vendor_bluetooth_prop:s0
+ro.bluetooth.a4wp          u:object_r:vendor_bluetooth_prop:s0
+ro.bluetooth.emb_wp_mode   u:object_r:vendor_bluetooth_prop:s0
+ro.bluetooth.wipower       u:object_r:vendor_bluetooth_prop:s0
