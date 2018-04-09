@@ -45,8 +45,6 @@ audio.snd_card.open.retries  u:object_r:vendor_default_prop:s0
 audio.usb.enable.debug     u:object_r:vendor_default_prop:s0
 audio.volume.listener.dump  u:object_r:vendor_default_prop:s0
 audio.volume.headset.gain.depcal  u:object_r:vendor_default_prop:s0
-easel.logdestination       u:object_r:vendor_default_prop:s0
-easel.nosuspend            u:object_r:vendor_default_prop:s0
 fpc_kpi                    u:object_r:vendor_default_prop:s0
 perist.vendor.ims.enable_rateadapt  u:object_r:vendor_default_prop:s0
 persist.audio.calfile0     u:object_r:vendor_default_prop:s0
