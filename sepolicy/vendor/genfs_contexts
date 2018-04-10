@@ -71,7 +71,6 @@ genfscon sysfs /module/subsystem_restart                                u:object
 genfscon sysfs /kernel/boot_adsp/boot                                   u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /kernel/boot_slpi/boot                                   u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /kernel/irq_helper/irq_blacklist_on                      u:object_r:sysfs_irq:s0
-genfscon sysfs /kernel/memory_state_time                                u:object_r:sysfs_power:s0
 genfscon sysfs /kernel/wifi/wlan                                        u:object_r:sysfs_msm_wlan:s0
 genfscon sysfs /class/typec                                             u:object_r:sysfs_usb_c:s0
 genfscon sysfs /class/typec/usbc0                                       u:object_r:sysfs_usb_c:s0

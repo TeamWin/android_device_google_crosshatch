@@ -4,6 +4,7 @@ persist.vendor.sys.cnd     u:object_r:cnd_prop:s0
 persist.sys.cnd            u:object_r:cnd_prop:s0
 sys.ims.                   u:object_r:ims_prop:s0
 vendor.ims.                u:object_r:ims_prop:s0
+persist.vendor.ims.        u:object_r:ims_prop:s0
 sys.keymaster.loaded       u:object_r:keymaster_prop:s0
 net.r_rmnet_data0          u:object_r:net_rmnet_prop:s0
 persist.net.doxlat         u:object_r:vendor_net_radio_prop:s0
@@ -45,8 +46,6 @@ audio.snd_card.open.retries  u:object_r:vendor_default_prop:s0
 audio.usb.enable.debug     u:object_r:vendor_default_prop:s0
 audio.volume.listener.dump  u:object_r:vendor_default_prop:s0
 audio.volume.headset.gain.depcal  u:object_r:vendor_default_prop:s0
-easel.logdestination       u:object_r:vendor_default_prop:s0
-easel.nosuspend            u:object_r:vendor_default_prop:s0
 fpc_kpi                    u:object_r:vendor_default_prop:s0
 perist.vendor.ims.enable_rateadapt  u:object_r:vendor_default_prop:s0
 persist.audio.calfile0     u:object_r:vendor_default_prop:s0
