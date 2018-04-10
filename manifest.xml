@@ -291,6 +291,7 @@
         <interface>
             <name>ISecureElement</name>
             <instance>eSE1</instance>
+            <instance>SIM1</instance>
         </interface>
     </hal>
     <hal format="hidl">
