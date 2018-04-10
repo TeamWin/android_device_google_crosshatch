@@ -23,6 +23,8 @@
 #include <android-base/strings.h>
 #include <android-base/stringprintf.h>
 
+#include <mutex>
+
 #include <utils/Log.h>
 #include <utils/Trace.h>
 
@@ -298,6 +300,63 @@ static int get_wlan_low_power_stats(struct PowerStateSubsystem *subsystem) {
     return 0;
 }
 
+enum easel_state {
+    EASEL_OFF = 0,
+    EASEL_ON,
+    EASEL_SUSPENDED,
+    NUM_EASEL_STATES
+};
+
+// Get low power stats for easel subsystem
+static int get_easel_low_power_stats(struct PowerStateSubsystem *subsystem) {
+    // This implementation is a workaround to provide minimal visibility into
+    // Easel state behavior until canonical low power stats are supported.
+    // It takes an "external observer" snapshot of the current Easel state every
+    // time it is called, and synthesizes an artificial sleep state that will
+    // behave similarly to real stats if Easel gets "wedged" in the "on" state.
+    static std::mutex statsLock;
+    static uint64_t totalOnSnapshotCount = 0;
+    static uint64_t totalNotOnSnapshotCount = 0;
+    unsigned long currentState;
+    struct PowerStateSubsystemSleepState *state;
+
+    subsystem->name = "Easel";
+
+    if (get_easel_state(&currentState) != 0) {
+        subsystem->states.resize(0);
+        return -1;
+    }
+
+    if (currentState >= NUM_EASEL_STATES) {
+        ALOGE("%s: unrecognized Easel state(%lu)", __func__, currentState);
+        return -1;
+    }
+
+    subsystem->states.resize(1);
+
+    // Since we are storing stats locally but can have multiple parallel
+    // callers, locking is required to ensure stats are not corrupted.
+    std::lock_guard<std::mutex> lk(statsLock);
+
+    // Update statistics for synthetic sleep state.  We combine OFF and
+    // SUSPENDED to act as a composite "not on" state so the numbers will behave
+    // like a real sleep state.
+    if ((currentState == EASEL_OFF) || (currentState == EASEL_SUSPENDED)) {
+        totalNotOnSnapshotCount++;
+    } else {
+        totalOnSnapshotCount++;
+    }
+
+    state = &subsystem->states[0];
+    state->name = "SyntheticSleep";
+    state->totalTransitions = totalOnSnapshotCount;
+    state->residencyInMsecSinceBoot = totalNotOnSnapshotCount;
+    state->lastEntryTimestampMs = 0;  // No added value for the workaround
+    state->supportedOnlyInSuspend = false;
+
+    return 0;
+}
+
 // Methods from ::android::hardware::power::V1_1::IPower follow.
 Return<void> Power::getSubsystemLowPowerStats(getSubsystemLowPowerStats_cb _hidl_cb) {
     hidl_vec<PowerStateSubsystem> subsystems;
@@ -312,6 +371,11 @@ Return<void> Power::getSubsystemLowPowerStats(getSubsystemLowPowerStats_cb _hidl
     // Get WLAN subsystem low power stats.
     if (get_wlan_low_power_stats(&subsystems[SUBSYSTEM_WLAN]) != 0) {
         ALOGE("%s: failed to process wlan stats", __func__);
+    }
+
+    // Get Easel subsystem low power stats.
+    if (get_easel_low_power_stats(&subsystems[SUBSYSTEM_EASEL]) != 0) {
+        ALOGE("%s: failed to process Easel stats", __func__);
     }
 
     _hidl_cb(subsystems, Status::SUCCESS);
