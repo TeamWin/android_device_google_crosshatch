@@ -47,7 +47,6 @@ audio.usb.enable.debug     u:object_r:vendor_default_prop:s0
 audio.volume.listener.dump  u:object_r:vendor_default_prop:s0
 audio.volume.headset.gain.depcal  u:object_r:vendor_default_prop:s0
 fpc_kpi                    u:object_r:vendor_default_prop:s0
-perist.vendor.ims.enable_rateadapt  u:object_r:vendor_default_prop:s0
 persist.audio.calfile0     u:object_r:vendor_default_prop:s0
 persist.audio.dualmic.config  u:object_r:vendor_default_prop:s0
 persist.audio.fluence.speaker  u:object_r:vendor_default_prop:s0
