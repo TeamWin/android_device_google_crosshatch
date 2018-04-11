@@ -215,7 +215,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196608
+    ro.opengles.version=196610
 
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
