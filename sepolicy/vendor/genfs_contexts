@@ -56,13 +56,14 @@ genfscon sysfs /devices/virtual/graphics/fb0                            u:object
 genfscon sysfs /devices/virtual/graphics/fb1                            u:object_r:sysfs_graphics:s0
 genfscon sysfs /devices/soc0                                            u:object_r:sysfs_soc:s0
 genfscon sysfs /devices/virtual/misc/mnh_sm                             u:object_r:sysfs_easel:s0
+genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-0066            u:object_r:sysfs_easel:s0
 genfscon sysfs /devices/platform/soc/ac5a000.qcom,fd                    u:object_r:sysfs_camera:s0
 genfscon sysfs /devices/platform/soc/ac4a000.qcom,cci                   u:object_r:sysfs_camera:s0
 genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-000c/a88000.i2c:qcom,smb1355@c:qcom,smb1355-charger@1000/power_supply          u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/a88000.i2c/i2c-0/0-0061/power_supply                                                              u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply                                                              u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qcom,qpnp-smb2/power_supply    u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/power_supply           u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg                        u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-03/c440000.qcom,spmi:qcom,pmi8998@3:qcom,leds                      u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_mdp/backlight/panel0-backlight                                                  u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-00/c440000.qcom,spmi:qcom,pm8998@0:qcom,pm8998_rtc/rtc             u:object_r:sysfs_rtc:s0
@@ -104,5 +105,8 @@ genfscon debugfs /rmt_storage                         u:object_r:debugfs_rmt_sto
 genfscon debugfs /icnss                               u:object_r:debugfs_icnss:s0
 genfscon debugfs /f2fs                                u:object_r:debugfs_f2fs:s0
 genfscon debugfs /tzdbg                               u:object_r:debugfs_tzdbg:s0
-
+genfscon debugfs /fg/sram                             u:object_r:debugfs_fg_sram:s0
+genfscon debugfs /pmic-votable                        u:object_r:debugfs_pmic_votable:s0
+genfscon debugfs /regmap/4-0036                       u:object_r:debugfs_maxfg:s0
+genfscon debugfs /regmap/4-000b                       u:object_r:debugfs_maxfg:s0
 genfscon debugfs /dma_buf/bufinfo                     u:object_r:debugfs_dma_bufinfo:s0
