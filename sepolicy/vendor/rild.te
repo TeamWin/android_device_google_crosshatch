@@ -28,3 +28,5 @@ allow rild radio_vendor_data_file:file create_file_perms;
 
 get_prop(rild, tel_mon_prop)
 set_prop(rild, vendor_radio_prop)
+
+hal_server_domain(rild, hal_secure_element)
