@@ -1,4 +1,4 @@
-allow hal_wifi_supplicant_default proc_net:file write;
+allow hal_wifi_supplicant_default proc_net_type:file write;
 
 allow hal_wifi_supplicant_default self:socket create_socket_perms;
 # ioctlcmd=c304, c302
