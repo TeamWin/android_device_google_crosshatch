@@ -51,7 +51,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.lmk.upgrade_pressure=100 \
     ro.lmk.downgrade_pressure=100 \
     ro.lmk.kill_heaviest_task=true \
-    ro.lmk.kill_timeout_ms=100
+    ro.lmk.kill_timeout_ms=100 \
+    ro.lmk.use_minfree_levels=true \
 
 # Enable A2DP offload (compile-time switch)
 AUDIO_FEATURE_ENABLED_A2DP_OFFLOAD := true
