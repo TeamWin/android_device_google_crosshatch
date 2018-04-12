@@ -184,6 +184,7 @@
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gnss@1\.1-service-qti              u:object_r:hal_gnss_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.bluetooth@1\.0-service-qti         u:object_r:hal_bluetooth_default_exec:s0
+/vendor/bin/hw/android\.hardware\.authsecret@1\.0-service\.citadel    u:object_r:hal_authsecret_citadel_exec:s0
 /vendor/bin/hw/android\.hardware\.oemlock@1\.0-service\.citadel       u:object_r:hal_oemlock_citadel_exec:s0
 /vendor/bin/hw/vendor\.qti\.hardware\.tui_comm@1\.0-service-qti       u:object_r:hal_tui_comm_exec:s0
 /vendor/bin/hw/android\.hardware\.weaver@1\.0-service\.citadel        u:object_r:hal_weaver_citadel_exec:s0
