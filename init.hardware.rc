@@ -577,6 +577,21 @@ on property:sys.boot_completed=1
     write /sys/block/sda/queue/scheduler deadline
     write /sys/block/sdf/queue/scheduler deadline
 
+    # QCOM FG SRAM dump for dumpstate
+    chown system system /d/fg/sram/data
+    chown system system /d/fg/sram/count
+    chown system system /d/fg/sram/address
+
+    # Maxim FG dump for dumpstate
+    chown system system /d/regmap/4-0036/registers
+    chown system system /d/regmap/4-000b/registers
+
+    # Dump QCOM FG cycle counts for dumpstate
+    chown system system /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+
+    # HardwareInfo needs to be able to read CC bins
+    chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+
 on property:init.svc.vendor.per_mgr=running
     start per_proxy
 
