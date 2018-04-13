@@ -26,7 +26,7 @@ using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 
 // Generated HIDL files
-using android::hardware::usb::V1_0::IUsb;
+using android::hardware::usb::V1_1::IUsb;
 using android::hardware::usb::V1_1::implementation::Usb;
 
 using android::status_t;
