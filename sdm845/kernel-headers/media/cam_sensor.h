@@ -131,7 +131,7 @@ struct i2c_rdwr_header {
   uint8_t cmd_type;
   uint8_t data_type;
   uint8_t addr_type;
-  uint16_t reserved;
+  uint16_t slave_addr;
 } __attribute__((packed));
 struct i2c_random_wr_payload {
   uint32_t reg_addr;
