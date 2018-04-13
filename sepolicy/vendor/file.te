@@ -85,8 +85,6 @@ type secure_element_vendor_data_file, file_type, data_file_type;
 type ssr_log_file, file_type, data_file_type;
 type audio_vendor_data_file, file_type, data_file_type;
 
-type secure_ui_service_data_file, file_type, data_file_type, core_data_file_type;
-
 #data sysfs files
 type sysfs_data, fs_type, sysfs_type;
 
