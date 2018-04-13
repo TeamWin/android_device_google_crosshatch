@@ -57,7 +57,7 @@ allow hal_dumpstate_impl proc_stat:file r_file_perms;
 # Access to files for dumping
 allow hal_dumpstate_impl  sysfs:dir r_dir_perms;
 # usb logs
-userdebug_or_eng(`allow hal_dumpstate_impl debugfs_usb:file r_file_perms;')
+allow hal_dumpstate_impl debugfs_usb:file r_file_perms;
 
 #Access display debug data
 allow hal_dumpstate_impl display_vendor_data_file:dir r_dir_perms;
@@ -84,3 +84,19 @@ allow hal_dumpstate_impl sysfs_system_sleep_stats:file r_file_perms;
 allow hal_dumpstate_impl vendor_file:file execute_no_trans;
 userdebug_or_eng(`allow hal_dumpstate_impl debugfs_dma_bufinfo:file r_file_perms;')
 dontaudit hal_dumpstate_impl debugfs_dma_bufinfo:file r_file_perms;
+
+# Query and dump power supply nodes
+allow hal_dumpstate_impl sysfs_batteryinfo:dir search;
+allow hal_dumpstate_impl sysfs_batteryinfo:file r_file_perms;
+
+# Dump QCOM FG content
+allow hal_dumpstate_impl debugfs_fg_sram:dir search;
+allow hal_dumpstate_impl debugfs_fg_sram:file rw_file_perms;
+
+# Dump Maxim FG content
+allow hal_dumpstate_impl debugfs_maxfg:dir search;
+allow hal_dumpstate_impl debugfs_maxfg:file r_file_perms;
+
+# Dump PMIC votables
+allow hal_dumpstate_impl debugfs_pmic_votable:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_pmic_votable:file r_file_perms;

@@ -36,6 +36,9 @@ type debugfs_icnss, debugfs_type, fs_type;
 type debugfs_f2fs, debugfs_type, fs_type;
 type debugfs_dma_bufinfo, debugfs_type, fs_type;
 type debugfs_tzdbg, debugfs_type, fs_type;
+type debugfs_fg_sram, debugfs_type, fs_type;
+type debugfs_pmic_votable, debugfs_type, fs_type;
+type debugfs_maxfg, debugfs_type, fs_type;
 
 # /proc
 type proc_wifi_dbg, proc_type, fs_type;
@@ -81,8 +84,6 @@ type sensors_vendor_data_file, file_type, data_file_type;
 type secure_element_vendor_data_file, file_type, data_file_type;
 type ssr_log_file, file_type, data_file_type;
 type audio_vendor_data_file, file_type, data_file_type;
-
-type secure_ui_service_data_file, file_type, data_file_type, core_data_file_type;
 
 #data sysfs files
 type sysfs_data, fs_type, sysfs_type;

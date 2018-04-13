@@ -253,10 +253,10 @@
          -->
     <string translatable="false" name="config_mainBuiltInDisplayCutout">
         M -256.5,0
-        C 85.5, 0 0, 171 85.5, 171
-        L 342.0, 0
-        C 85.5, 0 0, -171 85.5, -171
-        Z
+        c 85.5, 0 0, 171 85.5, 171
+        l 342.0, 0
+        c 85.5, 0 0, -171 85.5, -171
+        z
     </string>
 
     <!-- Height of the status bar -->
