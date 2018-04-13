@@ -45,7 +45,7 @@ userdebug_or_eng(`
 #Ignore if device loading for private IOCTL failed
 dontaudit netmgrd kernel:system { module_request };
 
-allow netmgrd proc_net:file rw_file_perms;
+allow netmgrd proc_net_type:file rw_file_perms;
 allow netmgrd netmgr_data_file:dir rw_dir_perms;
 allow netmgrd netmgr_data_file:file create_file_perms;
 allow netmgrd system_file:file execute_no_trans;
