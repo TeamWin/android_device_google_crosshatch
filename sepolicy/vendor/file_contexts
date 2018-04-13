@@ -207,6 +207,7 @@
 /vendor/lib(64)?/libadreno_utils\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libgsl\.so                u:object_r:same_process_hal_file:s0
 
+/vendor/lib(64)?/hw/vulkan\.sdm845\.so     u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libEGL_adreno\.so         u:object_r:same_process_hal_file:s0
 
 /vendor/lib(64)?/libdrmutils\.so           u:object_r:same_process_hal_file:s0
