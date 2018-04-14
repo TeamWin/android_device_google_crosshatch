@@ -35,7 +35,7 @@ r_dir_file(location, sysfs_type)
 
 dontaudit location kernel:system module_request;
 
-allow location proc_net:file r_file_perms;
+allow location proc_net_type:file r_file_perms;
 
 # execute /vendor/bin/lowi-server
 allow location location_exec:file rx_file_perms;
