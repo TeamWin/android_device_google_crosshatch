@@ -154,6 +154,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # Sensors
 USE_SENSOR_MULTI_HAL := true
+TARGET_SUPPORT_DIRECT_REPORT := true
 
 # wlan
 BOARD_WLAN_DEVICE := qcwcn
@@ -204,5 +205,7 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
+
+BOARD_SYSTEMSDK_VERSIONS := P
 
 -include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk

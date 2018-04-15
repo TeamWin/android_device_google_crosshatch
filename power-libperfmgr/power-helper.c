@@ -47,12 +47,16 @@
 #define MASTER_STATS_FILE "/sys/power/rpmh_stats/master_stats"
 #endif
 
+#ifndef SYSTEM_STATS_FILE
+#define SYSTEM_STATS_FILE "/sys/power/system_sleep/stats"
+#endif
+
 #ifndef WLAN_STATS_FILE
 #define WLAN_STATS_FILE "/d/wlan0/power_stats"
 #endif
 
-#ifndef SYSTEM_STATS_FILE
-#define SYSTEM_STATS_FILE "/sys/power/system_sleep/stats"
+#ifndef EASEL_STATE_FILE
+#define EASEL_STATE_FILE "/sys/devices/virtual/misc/mnh_sm/state"
 #endif
 
 #define LINE_SIZE 128
@@ -224,3 +228,44 @@ int extract_system_stats(uint64_t *list, size_t list_length) {
     return extract_stats(list, entries_per_section, SYSTEM_STATS_FILE,
             system_sections, ARRAY_SIZE(system_sections));
 }
+
+int get_easel_state(unsigned long *current_state) {
+    FILE *fp = NULL;
+    static const size_t EASEL_STATE_LINE_SIZE = 16;
+    char buffer[EASEL_STATE_LINE_SIZE];
+    char *parse_end = buffer;
+    unsigned long state;
+
+    if (current_state == NULL) {
+        ALOGD("%s: null current_state pointer from caller", __func__);
+        return -1;
+    }
+
+    fp = fopen(EASEL_STATE_FILE, "re");
+    if (fp == NULL) {
+        ALOGE("%s: failed to open: %s Error = %s", __func__, EASEL_STATE_FILE,
+                strerror(errno));
+        return -errno;
+    }
+
+    if (fgets(buffer, EASEL_STATE_LINE_SIZE, fp) == NULL) {
+        fclose(fp);
+        ALOGE("%s: failed to read: %s", __func__, EASEL_STATE_FILE);
+        return -1;
+    }
+
+    fclose(fp);
+
+    parse_end = buffer;
+    state = strtoul(buffer, &parse_end, 10);
+    if ((parse_end == buffer) || (state > 2)) {
+        ALOGE("%s: unrecognized format: %s '%s'", __func__, EASEL_STATE_FILE,
+                buffer);
+        return -1;
+    }
+
+    *current_state = state;
+
+    return 0;
+}
+

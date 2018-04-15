@@ -25,7 +25,7 @@ using ::android::hardware::usb::V1_0::PortRoleType;
 using ::android::hardware::usb::V1_0::PortDataRole;
 using ::android::hardware::usb::V1_0::PortPowerRole;
 using ::android::hardware::usb::V1_0::Status;
-using ::android::hardware::usb::V1_0::IUsb;
+using ::android::hardware::usb::V1_1::IUsb;
 using ::android::hardware::usb::V1_1::IUsbCallback;
 using ::android::hardware::usb::V1_1::PortMode_1_1;
 using ::android::hardware::usb::V1_1::PortStatus_1_1;
@@ -40,6 +40,8 @@ using ::android::hardware::Void;
 using ::android::sp;
 
 struct Usb : public IUsb {
+    Usb();
+
     Return<void> switchRole(const hidl_string& portName, const PortRole& role) override;
     Return<void> setCallback(const sp<V1_0::IUsbCallback>& callback) override;
     Return<void> queryPortStatus() override;
@@ -47,13 +49,13 @@ struct Usb : public IUsb {
 
     sp<V1_0::IUsbCallback> mCallback_1_0;
     // Protects mCallback variable
-    pthread_mutex_t mLock = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_t mLock;
     // Protects roleSwitch operation
-    pthread_mutex_t mRoleSwitchLock = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_t mRoleSwitchLock;
     // Threads waiting for the partner to come back wait here
-    pthread_cond_t mPartnerCV = PTHREAD_COND_INITIALIZER;
+    pthread_cond_t mPartnerCV;
     // lock protecting mPartnerCV
-    pthread_mutex_t mPartnerLock = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_t mPartnerLock;
     // Variable to signal partner coming back online after type switch
     bool mPartnerUp;
 

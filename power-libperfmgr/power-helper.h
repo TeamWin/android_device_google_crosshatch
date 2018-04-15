@@ -55,6 +55,7 @@ enum stats_source {
     // Subsystem stats.  (Numbering starts at MASTER_COUNT to preserve
     // contiguous source numbering.)
     SUBSYSTEM_WLAN = MASTER_COUNT,
+    SUBSYSTEM_EASEL,
     // Uncomment when Citadel returns
     //SUBSYSTEM_CITADEL,
 
@@ -131,6 +132,8 @@ struct stats_section {
 int extract_master_stats(uint64_t *list, size_t list_length);
 int extract_wlan_stats(uint64_t *list, size_t list_length);
 int extract_system_stats(uint64_t *list, size_t list_length);
+
+int get_easel_state(unsigned long *current_state);
 
 #ifdef __cplusplus
 }
