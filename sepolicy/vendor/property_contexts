@@ -21,9 +21,6 @@ vendor.sys.qcom.thermalcfg u:object_r:vendor_thermal_prop:s0
 ctl.vendor.thermal-engine  u:object_r:vendor_thermal_prop:s0
 persist.vendor.sys.modem.diag.  u:object_r:vendor_modem_diag_prop:s0
 vendor.sys.modem.diag.     u:object_r:vendor_modem_diag_prop:s0
-persist.radio.enable_tel_mon  u:object_r:tel_mon_prop:s0
-persist.radio.poweranomaly.start u:object_r:tel_mon_prop:s0
-persist.radio.lowpowermonitor.start u:object_r:tel_mon_prop:s0
 persist.vendor.radio.      u:object_r:radio_prop:s0
 ro.vendor.ril.             u:object_r:radio_prop:s0
 vendor.qcom.time.set       u:object_r:vendor_time_prop:s0
