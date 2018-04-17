@@ -61,6 +61,7 @@
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
 /dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
 /dev/socket/pps                                 u:object_r:pps_socket:s0
+/dev/socket/location(/.*)?                      u:object_r:location_socket:s0
 /dev/nq-nci                                     u:object_r:nfc_device:s0
 /dev/ttyHS0                                     u:object_r:hci_attach_dev:s0
 /dev/wlan                                       u:object_r:wlan_device:s0
