@@ -36,3 +36,5 @@ allow wcnss_service sysfs_soc:file r_file_perms;
 
 # request_firmware causes a denial for /firmware. It can be safely ignored
 dontaudit wcnss_service firmware_file:dir search;
+
+r_dir_file(wcnss_service, sysfs_net)
