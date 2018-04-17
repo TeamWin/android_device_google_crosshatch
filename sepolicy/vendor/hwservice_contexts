@@ -20,4 +20,3 @@ vendor.nxp.nxpnfc::INxpNfc                                      u:object_r:nxpnf
 vendor.nxp.nxpese::INxpEse                                      u:object_r:nxpese_hwservice:s0
 hardware.google.media.c2::IConfigurable                         u:object_r:hal_codec2_hwservice:s0
 hardware.google.media.c2::IComponentStore                       u:object_r:hal_codec2_hwservice:s0
-vendor.google.paintbox::IManagerService                         u:object_r:hal_paintbox_hwservice:s0

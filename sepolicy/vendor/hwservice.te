@@ -8,4 +8,3 @@ type hal_display_config_hwservice, hwservice_manager_type;
 type nxpese_hwservice, hwservice_manager_type;
 type nxpnfc_hwservice, hwservice_manager_type;
 type hal_tui_comm_hwservice, hwservice_manager_type;
-type hal_paintbox_hwservice, hwservice_manager_type;
