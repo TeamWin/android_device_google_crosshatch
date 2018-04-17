@@ -35,6 +35,7 @@ wakelock_use(netmgrd)
 
 #Allow netutils usage
 domain_auto_trans(netmgrd, netutils_wrapper_exec, netutils_wrapper)
+allow netmgrd netutils_wrapper:process sigkill;
 
 #Allow diag logging
 allow netmgrd sysfs_timestamp_switch:file { read open };
