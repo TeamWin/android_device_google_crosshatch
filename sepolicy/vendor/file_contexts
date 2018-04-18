@@ -283,7 +283,6 @@
 /persist/data(/.*)?       u:object_r:persist_data_file:s0
 /persist/display(/.*)?    u:object_r:persist_display_file:s0
 /persist/drm(/.*)?        u:object_r:persist_drm_file:s0
-/persist/elabel(/.*)?     u:object_r:persist_elabel_file:s0
 /persist/haptics(/.*)?    u:object_r:persist_haptics_file:s0
 /persist/hlos_rfs(/.*)?   u:object_r:persist_rfs_file:s0
 /persist/rfs(/.*)?        u:object_r:persist_rfs_file:s0
