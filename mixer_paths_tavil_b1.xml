@@ -567,6 +567,13 @@
     <ctl name="ANC OUT HPHL Enable Switch" value="0"/>
     <ctl name="ANC OUT HPHR Enable Switch" value="0"/>
 
+    <!-- mmap record init -->
+    <ctl name="MultiMedia16 Mixer SLIM_0_TX" value="0" />
+    <ctl name="MultiMedia16 Mixer SLIM_7_TX" value="0" />
+    <ctl name="MultiMedia16 Mixer SLIM_8_TX" value="0" />
+    <ctl name="MultiMedia16 Mixer USB_AUDIO_TX" value="0" />
+    <!-- mmap record init end -->
+
     <!-- Codec controls end -->
 
     <!-- mixer control to disable lowlatency qos voting -->
