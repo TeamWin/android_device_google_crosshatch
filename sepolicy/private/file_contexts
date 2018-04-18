@@ -1,4 +1,2 @@
-/data/misc/elabel(/.*)?         u:object_r:elabel_data_file:s0
-/system/bin/init\.elabel\.sh    u:object_r:init_elabel_exec:s0
 /vendor/bin/hw/hardware\.google\.media\.c2@1\.0-service-software u:object_r:mediacodec_exec:s0
 /vendor/bin/hw/hardware\.google\.media\.c2@1\.0-service          u:object_r:mediacodec_exec:s0
