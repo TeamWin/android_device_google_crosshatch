@@ -36,6 +36,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicerec=false \
     ro.config.vc_call_vol_steps=7
 
+# Enable AAudio MMAP/NOIRQ data path.
+# 2 is AAUDIO_POLICY_AUTO so it will try MMAP then fallback to Legacy path.
+PRODUCT_PROPERTY_OVERRIDES += \
+    aaudio.mmap_policy=2
+# Allow EXCLUSIVE then fall back to SHARED.
+PRODUCT_PROPERTY_OVERRIDES += \
+    aaudio.mmap_exclusive_policy=2
+
 # Set lmkd options
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.lmk.low=1001 \
