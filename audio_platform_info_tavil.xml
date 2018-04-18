@@ -46,6 +46,7 @@
         <usecase name="USECASE_VOICEMMODE2_CALL" type="in" id="19" />
         <usecase name="USECASE_VOICEMMODE2_CALL" type="out" id="19" />
         <usecase name="USECASE_INCALL_MUSIC_UPLINK" type="out" id="27" />
+        <usecase name="USECASE_AUDIO_A2DP_ABR_FEEDBACK" type="in" id="42" />
     </pcm_ids>
     <config_params>
         <param key="input_mic_max_count" value="3"/>
