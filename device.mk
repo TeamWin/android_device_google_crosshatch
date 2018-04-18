@@ -682,6 +682,10 @@ PRODUCT_COPY_FILES += \
     device/google/crosshatch/audio/crus_sp_config_c1_rx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_rx.bin \
     device/google/crosshatch/audio/crus_sp_config_c1_tx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_tx.bin
 
+# Keymaster configuration
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
+
 # Enable modem logging
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \

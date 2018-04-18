@@ -53,6 +53,8 @@ allow hal_dumpstate_impl debugfs_ipc:file r_file_perms;
 allow hal_dumpstate_impl debugfs_f2fs:dir r_dir_perms;
 allow hal_dumpstate_impl debugfs_f2fs:file r_file_perms;
 allow hal_dumpstate_impl proc_stat:file r_file_perms;
+allow hal_dumpstate_impl proc_f2fs:dir r_dir_perms;
+allow hal_dumpstate_impl proc_f2fs:file r_file_perms;
 
 # Access to files for dumping
 allow hal_dumpstate_impl  sysfs:dir r_dir_perms;

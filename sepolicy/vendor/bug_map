@@ -6,9 +6,12 @@ cnd cnd netlink_tcpdiag_socket 73994924
 cnd kernel system 73994924
 cnd system_data_file dir 73994924
 cnd system_data_file file 73994924
+drmserver sdcardfs dir 77869200
 e2fs sysfs_dm dir 75285088
 e2fs proc_version file 75285088
+hal_fingerprint_default sysfs_easel dir 77977275
 hal_imsrtp default_prop file 77725358
+ims default_prop file 78119118
 netd netd capability 73947368
 priv_app fs_bpf dir 75285088
 priv_app sysfs file 72749888
