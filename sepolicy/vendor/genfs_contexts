@@ -8,8 +8,8 @@ genfscon sysfs /devices/platform/soc/soc:qcom,mincpubw         u:object_r:sysfs_
 genfscon sysfs /class/devfreq                         u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,memlat-cpu0      u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,memlat-cpu4      u:object_r:sysfs_msm_subsys:s0
-genfscon sysfs /android_touch                         u:object_r:sysfs_touch:s0
-genfscon sysfs /devices/virtual/input/ftm4_touch      u:object_r:sysfs_touch:s0
+genfscon sysfs /devices/virtual/sec/tsp                        u:object_r:sysfs_touch:s0
+genfscon sysfs /devices/platform/soc/888000.i2c/i2c-2/2-0049   u:object_r:sysfs_touch:s0
 
 genfscon sysfs /devices/platform/soc/1d84000.ufshc/host0/target0:0:0/0:0:0:0 u:object_r:sysfs_scsi_devices_0000:s0
 genfscon sysfs /devices/platform/soc/1d84000.ufshc/host0/target0:0:0/0:0:0:1 u:object_r:sysfs_scsi_devices_other:s0
