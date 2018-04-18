@@ -218,15 +218,13 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
 }
 
 static void DumpTouch(int fd) {
-    if (!access("/sys/android_touch", R_OK)) {
-        DumpFileToFd(fd, "Synaptics touch firmware version",
-                     "/sys/android_touch/vendor");
-        DumpFileToFd(fd, "Synaptics touch firmware config",
-                     "/sys/android_touch/config");
+    if (!access("/sys/devices/virtual/sec/tsp", R_OK)) {
+        DumpFileToFd(fd, "LSI touch firmware version",
+                     "/sys/devices/virtual/sec/tsp/fw_version");
     }
-    if (!access("/sys/class/input/ftm4_touch", R_OK)) {
-        DumpFileToFd(fd, "STM touch firmware config",
-                     "/sys/class/input/ftm4_touch/version");
+    if (!access("/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049", R_OK)) {
+        DumpFileToFd(fd, "STM touch firmware version",
+                     "/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/appid");
     }
 }
 
