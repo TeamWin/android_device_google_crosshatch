@@ -6,6 +6,7 @@ allow hal_bluetooth_default wcnss_filter:unix_stream_socket connectto;
 allow hal_bluetooth fwk_scheduler_hwservice:hwservice_manager find;
 allow hal_bluetooth system_server:binder call;
 
+set_prop(hal_bluetooth_default, vendor_bluetooth_prop)
 set_prop(hal_bluetooth_default, wc_prop)
 
 userdebug_or_eng(`
