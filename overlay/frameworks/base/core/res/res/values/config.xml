@@ -191,8 +191,9 @@
 
 
     <!-- Vibrator pattern for feedback about a long screen/key press -->
+    <!-- TODO(b/78128429): increase duration to account for the long latency -->
     <integer-array name="config_longPressVibePattern">
-        <item>8</item>
+        <item>23</item>
     </integer-array>
 
     <!-- Make things go fast -->

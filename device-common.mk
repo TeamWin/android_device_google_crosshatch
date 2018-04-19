@@ -23,12 +23,6 @@ PRODUCT_PLATFORM := sdm845
 
 # Audio XMLs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/mixer_paths_tavil.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil.xml \
-    $(LOCAL_PATH)/mixer_paths_tavil_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil_b1.xml \
-    $(LOCAL_PATH)/mixer_paths_tavil_c1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil_c1.xml \
-    $(LOCAL_PATH)/audio_platform_info_tavil.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil.xml \
-    $(LOCAL_PATH)/audio_platform_info_tavil_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil_b1.xml \
-    $(LOCAL_PATH)/audio_platform_info_tavil_c1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil_c1.xml \
     $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
 
 include device/google/crosshatch/device.mk
@@ -41,6 +35,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicecomm=true \
     persist.audio.fluence.voicerec=false \
     ro.config.vc_call_vol_steps=7
+
+# Enable AAudio MMAP/NOIRQ data path.
+# 2 is AAUDIO_POLICY_AUTO so it will try MMAP then fallback to Legacy path.
+PRODUCT_PROPERTY_OVERRIDES += \
+    aaudio.mmap_policy=2
+# Allow EXCLUSIVE then fall back to SHARED.
+PRODUCT_PROPERTY_OVERRIDES += \
+    aaudio.mmap_exclusive_policy=2
 
 # Set lmkd options
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
