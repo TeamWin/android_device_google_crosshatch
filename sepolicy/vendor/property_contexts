@@ -65,7 +65,7 @@ persist.data.dont_use_npflag  u:object_r:vendor_default_prop:s0
 persist.data.dpm.enable    u:object_r:vendor_default_prop:s0
 persist.data.dropssdp      u:object_r:vendor_default_prop:s0
 persist.data.ibfc.enable   u:object_r:vendor_default_prop:s0
-persist.data.iwlan.enable  u:object_r:vendor_default_prop:s0
+persist.vendor.data.iwlan.enable  u:object_r:vendor_default_prop:s0
 persist.data.iwlan.ims.enable  u:object_r:vendor_default_prop:s0
 persist.data.iwlan.rekey   u:object_r:vendor_default_prop:s0
 persist.data.llf.enable    u:object_r:vendor_default_prop:s0
@@ -73,7 +73,7 @@ persist.data.netmgrd.qos.enable  u:object_r:vendor_default_prop:s0
 persist.data.netmgrd.qos.hybrid  u:object_r:vendor_default_prop:s0
 persist.data.netmgr.log_to_file  u:object_r:vendor_default_prop:s0
 persist.data.netmgr.wl.timeout  u:object_r:vendor_default_prop:s0
-persist.data.port_bridge.log  u:object_r:vendor_default_prop:s0
+persist.vendor.data.port_bridge.log  u:object_r:vendor_default_prop:s0
 persist.data.profile_update  u:object_r:vendor_default_prop:s0
 persist.data.target.msm8998  u:object_r:vendor_default_prop:s0
 persist.data.tcpackprio.enable  u:object_r:vendor_default_prop:s0
@@ -84,7 +84,7 @@ persist.debug.sensors.hal  u:object_r:vendor_default_prop:s0
 persist.hwc.blit.comp      u:object_r:vendor_default_prop:s0
 persist.metadata_dynfps.disable  u:object_r:vendor_default_prop:s0
 persist.msmirqbalance.debug  u:object_r:vendor_default_prop:s0
-persist.net.logmask        u:object_r:vendor_default_prop:s0
+persist.vendor.net.logmask        u:object_r:vendor_default_prop:s0
 persist.rmnet.data.enable  u:object_r:vendor_default_prop:s0
 qcom.bluetooth.soc         u:object_r:vendor_default_prop:s0
 qdcm.diagonal_matrix_mode  u:object_r:vendor_default_prop:s0
