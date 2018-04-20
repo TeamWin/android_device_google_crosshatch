@@ -206,6 +206,7 @@ enum kgsl_timestamp_type {
 #define KGSL_PROP_MIN_ACCESS_LENGTH 0x1A
 #define KGSL_PROP_UBWC_MODE 0x1B
 #define KGSL_PROP_DEVICE_QTIMER 0x20
+#define KGSL_PROP_L3_PWR_CONSTRAINT 0x22
 struct kgsl_shadowprop {
   unsigned long gpuaddr;
   size_t size;
@@ -573,8 +574,12 @@ struct kgsl_device_constraint {
 };
 #define KGSL_CONSTRAINT_NONE 0
 #define KGSL_CONSTRAINT_PWRLEVEL 1
+#define KGSL_CONSTRAINT_L3_NONE 2
+#define KGSL_CONSTRAINT_L3_PWRLEVEL 3
 #define KGSL_CONSTRAINT_PWR_MIN 0
 #define KGSL_CONSTRAINT_PWR_MAX 1
+#define KGSL_CONSTRAINT_L3_PWR_MED 0
+#define KGSL_CONSTRAINT_L3_PWR_MAX 1
 struct kgsl_device_constraint_pwrlevel {
   unsigned int level;
 };
