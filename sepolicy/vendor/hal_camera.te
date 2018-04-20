@@ -23,6 +23,7 @@ allow hal_camera qdisplay_service:service_manager find;
 # access vd6281 rainbow sensor files
 allow hal_camera sysfs_camera:dir search;
 allow hal_camera sysfs_camera:file rw_file_perms;
+allow hal_camera audio_device:dir search;
 
 # talk to system_server
 
