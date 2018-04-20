@@ -56,16 +56,16 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.lmk.kill_timeout_ms=100 \
     ro.lmk.use_minfree_levels=true \
 
-# Enable A2DP offload (compile-time switch)
+# A2DP offload enabled for compilation
 AUDIO_FEATURE_ENABLED_A2DP_OFFLOAD := true
 
-# Enable A2DP offload (run-time switch for system components)
+# A2DP offload supported
 PRODUCT_PROPERTY_OVERRIDES += \
-persist.bluetooth.a2dp_offload.enable=false
+ro.bluetooth.a2dp_offload.supported=true
 
-# Enable A2DP offload (run-time switch for vendor components)
+# A2DP offload disabled (UI toggle property)
 PRODUCT_PROPERTY_OVERRIDES += \
-persist.vendor.bluetooth.a2dp_offload.enable=false
+persist.bluetooth.a2dp_offload.disabled=true
 
 # A2DP offload DSP supported encoder list
 PRODUCT_PROPERTY_OVERRIDES += \
