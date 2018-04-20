@@ -16,7 +16,7 @@ vendor.debug.ramdump.      u:object_r:vendor_ramdump_prop:s0
 persist.vendor.sys.crash_rcu  u:object_r:vendor_ramdump_prop:s0
 vendor.debug.ssrdump       u:object_r:vendor_ssr_prop:s0
 persist.vendor.sys.cnss.   u:object_r:vendor_cnss_diag_prop:s0
-sys.listeners.registered   u:object_r:tee_listener_prop:s0
+vendor.sys.listeners.registered   u:object_r:vendor_tee_listener_prop:s0
 wc_transport.              u:object_r:wc_prop:s0
 vendor.sys.qcom.thermalcfg u:object_r:vendor_thermal_prop:s0
 ctl.vendor.thermal-engine  u:object_r:vendor_thermal_prop:s0
