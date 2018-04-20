@@ -242,7 +242,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.sib16_support=1 \
     persist.vendor.radio.data_con_rprt=true \
     persist.rcs.supported=1 \
-    vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
+    vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so\
+    ro.hardware.keystore_desede=true \
 
 # Set snapshot timer to 3 second
 PRODUCT_PROPERTY_OVERRIDES += \
