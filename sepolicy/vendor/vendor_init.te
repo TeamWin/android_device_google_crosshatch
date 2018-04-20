@@ -1,14 +1,3 @@
-typeattribute vendor_init data_between_core_and_vendor_violators;
-
-allow vendor_init {
-  audio_data_file
-  dhcp_data_file
-  elabel_data_file
-  media_rw_data_file
-  system_data_file
-  tombstone_data_file
-}:dir { create search getattr open read setattr ioctl write add_name remove_name rmdir relabelfrom };
-
 allow vendor_init debugfs_clk:file w_file_perms;
 allow vendor_init proc_uid_cpupower:file write;
 dontaudit vendor_init kernel:system module_request;
