@@ -191,8 +191,9 @@
 
 
     <!-- Vibrator pattern for feedback about a long screen/key press -->
+    <!-- TODO(b/78128429): increase duration to account for the long latency -->
     <integer-array name="config_longPressVibePattern">
-        <item>8</item>
+        <item>23</item>
     </integer-array>
 
     <!-- Make things go fast -->
@@ -221,9 +222,6 @@
 
     <!-- Type of the double tap sensor. Empty if double tap is not supported. -->
     <string name="config_dozeDoubleTapSensorType" translatable="false">com.google.sensor.double_touch</string>
-
-    <!-- Whether the always on display mode is available. -->
-    <bool name="config_dozeAlwaysOnDisplayAvailable">false</bool>
 
     <!-- ImsService package name to bind to by default, if config_dynamic_bind_ims is true -->
     <string name="config_ims_package">org.codeaurora.ims</string>

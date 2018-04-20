@@ -38,6 +38,7 @@ BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
 BOARD_KERNEL_CMDLINE += ehci-hcd.park=3
 BOARD_KERNEL_CMDLINE += service_locator.enable=1
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
+BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
 # STOPSHIP Bringup hack- no low power
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
 
@@ -205,5 +206,59 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
+
+# Kernel modules
+ifeq (,$(filter-out blueline_gcc crosshatch_gcc, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/gcc/*.ko)
+else ifeq (,$(filter-out blueline_kasan crosshatch_kasan, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/kasan/*.ko)
+else ifeq (,$(filter-out blueline_kcfi crosshatch_kcfi, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/kcfi/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_memory crosshatch_kernel_debug_memory, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_memory/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_locking crosshatch_kernel_debug_locking, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_locking/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_hang crosshatch_kernel_debug_hang, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_hang/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_api crosshatch_kernel_debug_api, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_api/*.ko)
+else
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/*.ko)
+endif
+
+# Kernel modules
+ifeq (,$(filter-out blueline_gcc crosshatch_gcc, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/gcc/*.ko)
+else ifeq (,$(filter-out blueline_kasan crosshatch_kasan, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/kasan/*.ko)
+else ifeq (,$(filter-out blueline_kcfi crosshatch_kcfi, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/kcfi/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_memory crosshatch_kernel_debug_memory, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_memory/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_locking crosshatch_kernel_debug_locking, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_locking/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_hang crosshatch_kernel_debug_hang, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_hang/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_api crosshatch_kernel_debug_api, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_api/*.ko)
+else
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/*.ko)
+endif
 
 -include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk

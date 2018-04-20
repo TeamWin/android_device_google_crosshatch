@@ -195,6 +195,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.telephony.carrierlock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.carrierlock.xml \
+    frameworks/native/data/etc/android.hardware.strongbox_keystore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.strongbox_keystore.xml \
 
 # power HAL
 PRODUCT_PACKAGES += \
@@ -681,6 +682,10 @@ PRODUCT_COPY_FILES += \
     device/google/crosshatch/audio/crus_sp_config_b1_tx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_b1_tx.bin \
     device/google/crosshatch/audio/crus_sp_config_c1_rx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_rx.bin \
     device/google/crosshatch/audio/crus_sp_config_c1_tx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_tx.bin
+
+# Keymaster configuration
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
 
 # Enable modem logging
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))

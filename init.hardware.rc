@@ -272,21 +272,6 @@ on post-fs-data
 on zygote-start
     # zygote is started in common init.rc
     # and now we can continue initialize /data/
-    mkdir /data/tombstones 0771 system system
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/wcnss 0771 system system
-    mkdir /tombstones/dsps 0771 system system
-    mkdir /data/misc/qvop 0660 system system
-    mkdir /data/misc/hbtp 0750 system system
-    mkdir /data/misc/seemp 0700 system system
-
-    # Create directory for TZ Apps
-    mkdir /data/misc/qsee 0770 system system
-
-    mkdir /data/media 0770 media_rw media_rw
-    chown media_rw media_rw /data/media
-
     mkdir /data/vendor/ipa 0770 radio radio
     chown radio radio /data/vendor/ipa
 
@@ -294,8 +279,6 @@ on zygote-start
     mkdir /data/vendor/wifi 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
@@ -303,30 +286,12 @@ on zygote-start
     chmod 0771 /persist
     chown system system /persist/WCNSS_qcom_wlan_nv.bin
 
-    # Create directory for hostapd
-    mkdir /data/hostapd 0770 system wifi
-
     # Trigger WLAN driver load
     write /sys/kernel/boot_wlan/boot_wlan 1
-
-    #create port-bridge log dir
-    mkdir /data/misc/port_bridge 0770 radio radio
-    chmod 0770 /data/misc/port_bridge
 
     #create netmgr log dir
     mkdir /data/vendor/netmgr 0771 radio radio
     chmod 0771 /data/vendor/netmgr
-
-    # Create the directories used by CnE subsystem
-    mkdir /data/connectivity 0771 system system
-    chown system system /data/connectivity
-
-    # Create the directories used by DPM subsystem
-    mkdir /data/dpm 0771 system system
-    chown system system /data/dpm
-
-    mkdir /data/dpm/nsrm 0771 system system
-    chown system system /data/dpm/nsrm
 
     # Create directory used by audio subsystem
     mkdir /data/vendor/misc/audio 0770 audio audio
@@ -335,14 +300,8 @@ on zygote-start
     mkdir /data/vendor/misc/audio/acdbdata 0770 media audio
     mkdir /data/vendor/misc/audio/acdbdata/delta 0770 media audio
 
-    # Create directory used by the DASH client
-    mkdir /data/misc/dash 0770 media audio
-
     # Create directory for radio
     mkdir /data/vendor/radio 0771 system radio
-
-    # Create directory used by display clients
-    mkdir /data/misc/display 0770 system graphics
 
     # Set up sensors-related directories and permissions
     chmod 775 /persist/sensors
@@ -354,9 +313,6 @@ on zygote-start
 
     chown system root /persist/sensors/sensors_settings
     chown root root /persist/sensors/registry/registry/sensors_settings
-
-    mkdir /data/misc/sensors
-    chmod 775 /data/misc/sensors
 
     mkdir /data/vendor/sensors 0770
     chown system system /data/vendor/sensors
@@ -400,9 +356,6 @@ on zygote-start
 
     # Secure Element directory for loader service functionality
     mkdir /data/vendor/secure_element 0770 secure_element secure_element
-
-    # Create /data/time folder for time-services
-    mkdir /data/time/ 0700 system system
 
     # Setup permission for powerHAL
     chown system system /dev/stune/top-app/schedtune.boost
@@ -555,6 +508,7 @@ on property:sys.boot_completed=1
     write /dev/cpuset/foreground/cpus 0-3,6-7
     write /dev/cpuset/background/cpus 0-1
     write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/restricted/cpus 0-3
 
     # Update DVR cpusets to runtime values.
     # Kernel cpuset will be apply on PowerHAL

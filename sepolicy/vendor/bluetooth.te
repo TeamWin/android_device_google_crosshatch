@@ -1,3 +1,4 @@
+set_prop(bluetooth, vendor_bluetooth_prop)
 set_prop(bluetooth, wc_prop)
 
 # Allow access to net_admin ioctls
