@@ -16,5 +16,4 @@ netd netd capability 73947368
 priv_app fs_bpf dir 75285088
 priv_app sysfs file 72749888
 priv_app zygote dir 72749888
-vendor_init system_data_file dir 78345561
 vold vold capability 75285088
