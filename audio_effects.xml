@@ -6,6 +6,7 @@
         <library name="visualizer_sw" path="libvisualizer.so"/>
         <library name="visualizer_hw" path="libqcomvisualizer.so"/>
         <library name="fmas" path="libfmas.so"/>
+        <library name="dynamics_processing" path="libdynproc.so"/>
         <library name="loudness_enhancer" path="libldnhncr.so"/>
         <library name="proxy" path="libeffectproxy.so"/>
         <library name="offload_bundle" path="libqcompostprocbundle.so"/>
@@ -52,6 +53,7 @@
         <effect name="alarm_helper" library="volume_listener" uuid="09f303e2-0590-11e5-8fdb-0025b32654a0"/>
         <effect name="voice_helper" library="volume_listener" uuid="0ace5c08-0590-11e5-ae9e-0025b32654a0"/>
         <effect name="notification_helper" library="volume_listener" uuid="0b776dde-0590-11e5-81ba-0025b32654a0"/>
+        <effect name="dynamics_processing" library="dynamics_processing" uuid="e0e6539b-1781-7261-676f-6d7573696340"/>
     </effects>
     <postprocess>
         <stream type="music">

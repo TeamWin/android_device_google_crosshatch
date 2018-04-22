@@ -106,6 +106,9 @@ BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
 # vendor.img
 BOARD_VENDORIMAGE_PARTITION_SIZE := 671088640
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_JOURNAL_SIZE := 0
+BOARD_VENDORIMAGE_EXTFS_INODE_COUNT := 4096
+
 TARGET_COPY_OUT_VENDOR := vendor
 
 BOARD_FLASH_BLOCK_SIZE := 131072
@@ -177,6 +180,7 @@ AUDIO_FEATURE_ENABLED_USB_TUNNEL := true
 BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 AUDIO_FEATURE_ENABLED_CIRRUS_SPKR_PROTECTION := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
+AUDIO_FEATURE_FLICKER_SENSOR_INPUT := true
 
 # Graphics
 TARGET_USES_GRALLOC1 := true
@@ -208,5 +212,32 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 TARGET_USES_MKE2FS := true
 
 BOARD_SYSTEMSDK_VERSIONS := P
+
+# Kernel modules
+ifeq (,$(filter-out blueline_gcc crosshatch_gcc, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/gcc/*.ko)
+else ifeq (,$(filter-out blueline_kasan crosshatch_kasan, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/kasan/*.ko)
+else ifeq (,$(filter-out blueline_kcfi crosshatch_kcfi, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/kcfi/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_memory crosshatch_kernel_debug_memory, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_memory/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_locking crosshatch_kernel_debug_locking, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_locking/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_hang crosshatch_kernel_debug_hang, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_hang/*.ko)
+else ifeq (,$(filter-out blueline_kernel_debug_api crosshatch_kernel_debug_api, $(TARGET_PRODUCT)))
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/debug_api/*.ko)
+else
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard device/google/crosshatch-kernel/*.ko)
+endif
 
 -include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk
