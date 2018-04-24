@@ -13,7 +13,4 @@ hal_fingerprint_default sysfs_easel dir 77977275
 hal_imsrtp default_prop file 77725358
 ims default_prop file 78119118
 netd netd capability 73947368
-priv_app fs_bpf dir 72749888
-priv_app sysfs file 72749888
-priv_app zygote dir 72749888
 vold vold capability 78357846

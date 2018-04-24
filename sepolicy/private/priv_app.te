@@ -1,0 +1,2 @@
+dontaudit priv_app sysfs:file read;
+dontaudit priv_app zygote:dir search;
