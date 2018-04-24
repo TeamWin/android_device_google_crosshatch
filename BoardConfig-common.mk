@@ -211,8 +211,6 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
 
-BOARD_SYSTEMSDK_VERSIONS := P
-
 # Kernel modules
 ifeq (,$(filter-out blueline_gcc crosshatch_gcc, $(TARGET_PRODUCT)))
 BOARD_VENDOR_KERNEL_MODULES += \
