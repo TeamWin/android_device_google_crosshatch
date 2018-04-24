@@ -34,3 +34,8 @@ PRODUCT_BRAND := Android
 PRODUCT_NAME := aosp_blueline
 PRODUCT_DEVICE := blueline
 PRODUCT_MODEL := AOSP on blueline
+
+# Audio XMLs
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
+
