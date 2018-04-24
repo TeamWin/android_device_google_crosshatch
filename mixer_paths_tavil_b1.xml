@@ -683,6 +683,39 @@
         <path name="deep-buffer-playback speaker"/>
     </path>
 
+    <path name="hifi-playback">
+        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia2" value="1" />
+    </path>
+
+    <path name="hifi-playback speaker">
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia2" value="1" />
+    </path>
+
+    <path name="hifi-playback handset">
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia2" value="1" />
+    </path>
+
+    <path name="hifi-playback bt-sco">
+        <ctl name="SLIMBUS_7_RX Audio Mixer MultiMedia2" value="1" />
+    </path>
+
+    <path name="hifi-playback bt-sco-wb">
+        <ctl name="BT SampleRate" value="KHZ_16" />
+        <path name="hifi-playback bt-sco" />
+    </path>
+
+    <path name="hifi-playback afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia2" value="1" />
+    </path>
+
+    <path name="hifi-playback usb-headset">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia2" value="1" />
+    </path>
+
+    <path name="hifi-playback usb-headphones">
+        <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia2" value="1" />
+    </path>
+
     <path name="low-latency-playback">
         <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia5" value="1"/>
     </path>
