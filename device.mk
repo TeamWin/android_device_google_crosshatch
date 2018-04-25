@@ -352,7 +352,8 @@ PRODUCT_PACKAGES += \
 
 # Enable Codec 2.0
 PRODUCT_PACKAGES += \
-    hardware.google.media.c2@1.0-service \
+    vendor.qti.media.c2@1.0-service \
+    libqcodec2 \
     hardware.google.media.c2@1.0-service-software \
     libstagefright_ccodec
 

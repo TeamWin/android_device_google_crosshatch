@@ -1,19 +1,93 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2018 The Android Open Source Project
+<!--
+    Copyright (C) 2018 The Android Open Source Project
 
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 -->
-<MediaCodecs>
+
+<!--
+ 845 Non-Secure decoder capabilities
+ _________________________________________________________
+ | Codec       | W       H       fps     Mbps    MB/s    |
+ |_____________|_________________________________________|
+ | h264        | 4096    2160    60      120     2073600 |
+ |             | (4096)  (2304)  (30)    (120)           |
+ | hevc        | 4096    2160    60      120     2073600 |
+ |             | (4096)  (2304)  (30)    (120)           |
+ | mpeg4-sw    | 1920    1088    30      40      244800  |
+ | vp8         | 4096    2160    30      120     1036800 |
+ |             | (4096)  (2304)  (24)    (120)           |
+ | vp9         | 4096    2160    60      120     2073600 |
+ |             | (4096)  (2304)  (30)    (120)           |
+ | vc1         | 1920    1088    30      20      244800  |
+ | div4/5/6-sw | 1920    1088    30      10      244800  |
+ | h263-sw     | 864     480     30      16       48600  |
+ | mpeg2       | 1920    1088    30      40      244800  |
+ |_____________|_________________________________________|
+
+ 845 Secure decoder capabilities
+ ______________________________________________________
+ | Codec    | W       H       fps     Mbps    MB/s    |
+ |__________|_________________________________________|
+ | h264     | 4096    2160    60      40      2073600 |
+ |          | (4096)  (2304)  (30)    (40)            |
+ | vp9      | 4096    2160    60      40      2073600 |
+ |          | (4096)  (2304)  (30)    (40)            |
+ | hevc     | 4096    2160    60      40      2073600 |
+ |          | (4096)  (2304)  (30)    (40)            |
+ | mpeg2    | 1920    1088    30      40      244800  |
+ |__________|_________________________________________|
+
+ 845 Non-Secure encoder capabilities (Secure not supported)
+ ______________________________________________________
+ | Codec    | W       H       fps     Mbps    MB/s    |
+ |__________|_________________________________________|
+ | h264     | 4096    2160    60      120     2073600 |
+ |          | (4096)  (2304)  (30)    (120)           |
+ | hevc     | 4096    2160    60      120     2073600 |
+ |          | (4096)  (2304)  (30)    (120)           |
+ | mpeg4-sw | 1280     720    30      6       108000  |
+ | vp8      | 4096    2160    30      120     1036800 |
+ |          | (4096)  (2304)  (24)    (120)           |
+ | h263-sw  | 864     480     30      2       48600   |
+ |__________|_________________________________________|
+-->
+
+<Included>
+    <Decoders>
+        <MediaCodec name="c2.qti.avc.decoder" type="video/avc">
+            <Limit name="size" min="96x96" max="4096x2304" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" range="24-2073600" />
+            <Limit name="bitrate" range="1-120000000" />
+            <Limit name="frame-rate" range="1-480" />
+            <Limit name="concurrent-instances" max="16" />
+            <Feature name="adaptive-playback" />
+        </MediaCodec>
+    </Decoders>
+
+    <Encoders>
+        <MediaCodec name="c2.qti.avc.encoder" type="video/avc">
+            <Limit name="size" min="96x96" max="4096x2304" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" min="24" max="2073600" />
+            <Limit name="bitrate" range="1-120000000" />
+            <Limit name="frame-rate" range="1-480" />
+            <Limit name="concurrent-instances" max="16" />
+        </MediaCodec>
+    </Encoders>
     <Include href="media_codecs_google_c2_audio.xml" />
     <Include href="media_codecs_google_c2_video.xml" />
-</MediaCodecs>
+</Included>
