@@ -811,6 +811,19 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.
     group root
     writepid /dev/cpuset/system-background/tasks
 
+service ppd /vendor/bin/mm-pp-dpps
+    class late_start
+    user graphics
+    group graphics
+    socket pps stream 0660 system system
+    disabled
+
+on property:init.svc.vendor.hwcomposer-2-1=stopped
+    stop ppd
+
+on property:init.svc.vendor.hwcomposer-2-1=running
+    start ppd
+
 # b/70518189 vDSO experiments
 on property:sys.vdso=*
     write /sys/module/vdso/parameters/enable_32 1
