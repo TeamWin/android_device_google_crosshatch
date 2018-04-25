@@ -101,3 +101,5 @@ type rfs_tombstone_data_file, data_file_type, file_type;
 type proc_irq, fs_type, proc_type;
 type sysfs_irq, fs_type, sysfs_type;
 type irqbalance_socket, file_type;
+
+allow rootfs labeledfs:filesystem associate;
