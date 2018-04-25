@@ -7,6 +7,7 @@ service vendor.power-hal-1-2 /vendor/bin/hw/android.hardware.power@1.2-service.c
 on property:init.svc.zygote=restarting && property:vendor.powerhal.state=*
    setprop vendor.powerhal.state ""
    setprop vendor.powerhal.audio ""
+   setprop vendor.powerhal.lpm ""
    restart vendor.power-hal-1-2
 
 # restart powerHAL when audioHAL died
