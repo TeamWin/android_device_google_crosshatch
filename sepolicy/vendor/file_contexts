@@ -41,6 +41,8 @@
 # pcm device receiving rainbow sensor data
 /dev/snd/pcmC0D1c                               u:object_r:camera_device:s0
 /dev/dri/card0                                  u:object_r:graphics_device:s0
+/dev/dri/controlD64                             u:object_r:graphics_device:s0
+/dev/dri/renderD128                             u:object_r:graphics_device:s0
 
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
@@ -58,6 +60,7 @@
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
 /dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
+/dev/socket/pps                                 u:object_r:pps_socket:s0
 /dev/nq-nci                                     u:object_r:nfc_device:s0
 /dev/ttyHS0                                     u:object_r:hci_attach_dev:s0
 /dev/wlan                                       u:object_r:wlan_device:s0
@@ -177,6 +180,7 @@
 /vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
 /vendor/bin/ftmdaemon           u:object_r:ftmd_exec:s0
 /vendor/bin/hw/qcrild           u:object_r:rild_exec:s0
+/vendor/bin/mm-pp-dpps          u:object_r:mm-pp-daemon_exec:s0
 
 /vendor/bin/hw/android\.hardware\.confirmationui@1\.0-service-crosshatch u:object_r:hal_confirmationui_default_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.0-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
