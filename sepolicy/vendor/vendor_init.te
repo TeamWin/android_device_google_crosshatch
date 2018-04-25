@@ -25,3 +25,6 @@ set_prop(vendor_init, power_prop)
 set_prop(vendor_init, vendor_thermal_prop)
 set_prop(vendor_init, public_vendor_default_prop)
 set_prop(vendor_init, vendor_radio_prop)
+
+allow vendor_init unlabeled:dir { getattr relabelfrom };
+allow vendor_init vold_metadata_file:dir { create setattr };
