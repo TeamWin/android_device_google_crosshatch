@@ -87,3 +87,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/healthd.rc)
 # Remove KM3 RC
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@3.0-service-qti.rc)
 
+# Remove Codec2.0 software process
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/hw/hardware.google.media.c2@1.0-service-software)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/hardware.google.media.c2@1.0-service-software.rc)
+

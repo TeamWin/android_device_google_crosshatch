@@ -357,10 +357,10 @@ PRODUCT_PACKAGES += \
 
 # Enable Codec 2.0
 PRODUCT_PACKAGES += \
-    vendor.qti.media.c2@1.0-service \
+    libmedia_codecserviceregistrant \
     libqcodec2 \
-    hardware.google.media.c2@1.0-service-software \
-    libstagefright_ccodec
+    libstagefright_ccodec \
+    vendor.qti.media.c2@1.0-service \
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
@@ -530,7 +530,6 @@ PRODUCT_COPY_FILES += \
 
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp_policy/codec2.software.ext.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/codec2.software.ext.policy \
     $(LOCAL_PATH)/seccomp_policy/codec2.vendor.ext.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/codec2.vendor.ext.policy \
     $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
