@@ -251,6 +251,9 @@ on late-fs
     start time_daemon
 
 on post-fs
+    # Disable sched autogroup
+    write /proc/sys/kernel/sched_autogroup_enabled 0
+
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
