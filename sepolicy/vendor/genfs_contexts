@@ -3,6 +3,7 @@ genfscon proc /debugdriver/driverdump                 u:object_r:proc_wifi_dbg:s
 genfscon proc /ath_pktlog/cld                         u:object_r:proc_wifi_dbg:s0
 genfscon proc /irq                                    u:object_r:proc_irq:s0
 genfscon proc /fs/f2fs                                u:object_r:proc_f2fs:s0
+genfscon proc /sys/kernel/sched_autogroup_enabled     u:object_r:proc_sysctl_autogroup:s0
 
 genfscon sysfs /devices/platform/soc/soc:qcom,cpubw            u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,mincpubw         u:object_r:sysfs_msm_subsys:s0
