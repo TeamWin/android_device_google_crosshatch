@@ -21,6 +21,7 @@ allow easel sysfs_thermal:lnk_file r_file_perms;
 # access "/proc/stat"
 allow easel proc_stat:file r_file_perms;
 
+allow easel google_camera_app:binder call;
 allow easel hal_camera_default:binder call;
 allow easel hal_neuralnetworks_paintbox:binder call;
 
