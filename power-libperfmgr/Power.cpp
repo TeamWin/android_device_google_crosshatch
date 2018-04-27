@@ -315,59 +315,43 @@ static int get_wlan_low_power_stats(struct PowerStateSubsystem *subsystem) {
     return 0;
 }
 
-enum easel_state {
-    EASEL_OFF = 0,
-    EASEL_ON,
-    EASEL_SUSPENDED,
-    NUM_EASEL_STATES
-};
+static const std::string get_easel_state_name(int state) {
+    if (state == EASEL_OFF) {
+        return "Off";
+    } else if (state == EASEL_ACTIVE) {
+        return "Active";
+    } else if (state == EASEL_SUSPEND) {
+        return "Suspend";
+    } else {
+        return "Unknown";
+    }
+}
 
 // Get low power stats for easel subsystem
 static int get_easel_low_power_stats(struct PowerStateSubsystem *subsystem) {
-    // This implementation is a workaround to provide minimal visibility into
-    // Easel state behavior until canonical low power stats are supported.
-    // It takes an "external observer" snapshot of the current Easel state every
-    // time it is called, and synthesizes an artificial sleep state that will
-    // behave similarly to real stats if Easel gets "wedged" in the "on" state.
-    static std::mutex statsLock;
-    static uint64_t totalOnSnapshotCount = 0;
-    static uint64_t totalNotOnSnapshotCount = 0;
-    unsigned long currentState;
+    uint64_t stats[EASEL_SLEEP_STATE_COUNT * EASEL_STATS_COUNT] = {0};
+    uint64_t *state_stats;
     struct PowerStateSubsystemSleepState *state;
 
     subsystem->name = "Easel";
 
-    if (get_easel_state(&currentState) != 0) {
+    if (extract_easel_stats(stats, ARRAY_SIZE(stats)) != 0) {
         subsystem->states.resize(0);
         return -1;
     }
 
-    if (currentState >= NUM_EASEL_STATES) {
-        ALOGE("%s: unrecognized Easel state(%lu)", __func__, currentState);
-        return -1;
+    subsystem->states.resize(EASEL_SLEEP_STATE_COUNT);
+
+    for (int easel_state = 0; easel_state < EASEL_SLEEP_STATE_COUNT; easel_state++) {
+        state = &subsystem->states[easel_state];
+        state_stats = &stats[easel_state * EASEL_STATS_COUNT];
+
+        state->name = get_easel_state_name(easel_state);
+        state->residencyInMsecSinceBoot = state_stats[CUMULATIVE_DURATION_MS];
+        state->totalTransitions = state_stats[CUMULATIVE_COUNT];
+        state->lastEntryTimestampMs = state_stats[LAST_ENTRY_TSTAMP_MS];
+        state->supportedOnlyInSuspend = false;
     }
-
-    subsystem->states.resize(1);
-
-    // Since we are storing stats locally but can have multiple parallel
-    // callers, locking is required to ensure stats are not corrupted.
-    std::lock_guard<std::mutex> lk(statsLock);
-
-    // Update statistics for synthetic sleep state.  We combine OFF and
-    // SUSPENDED to act as a composite "not on" state so the numbers will behave
-    // like a real sleep state.
-    if ((currentState == EASEL_OFF) || (currentState == EASEL_SUSPENDED)) {
-        totalNotOnSnapshotCount++;
-    } else {
-        totalOnSnapshotCount++;
-    }
-
-    state = &subsystem->states[0];
-    state->name = "SyntheticSleep";
-    state->totalTransitions = totalOnSnapshotCount;
-    state->residencyInMsecSinceBoot = totalNotOnSnapshotCount;
-    state->lastEntryTimestampMs = 0;  // No added value for the workaround
-    state->supportedOnlyInSuspend = false;
 
     return 0;
 }
