@@ -225,7 +225,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.display.foss=1 \
     ro.vendor.display.paneltype=2 \
-    ro.vendor.display.sensortype=2
+    ro.vendor.display.sensortype=2 \
+    vendor.display.foss.config=1 \
+    vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
