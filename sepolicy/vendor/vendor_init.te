@@ -1,5 +1,6 @@
 allow vendor_init debugfs_clk:file w_file_perms;
-allow vendor_init proc_uid_cpupower:file write;
+allow vendor_init proc_uid_cpupower:file w_file_perms;
+allow vendor_init proc_sysctl_autogroup:file w_file_perms;
 dontaudit vendor_init kernel:system module_request;
 
 # Allow vendor_init to write to /proc/sysrq-trigger on userdebug and eng builds
@@ -14,3 +15,6 @@ set_prop(vendor_init, power_prop)
 set_prop(vendor_init, vendor_thermal_prop)
 set_prop(vendor_init, public_vendor_default_prop)
 set_prop(vendor_init, vendor_radio_prop)
+
+allow vendor_init unlabeled:dir { getattr relabelfrom };
+allow vendor_init vold_metadata_file:dir { create setattr };

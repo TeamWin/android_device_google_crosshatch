@@ -48,6 +48,10 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
 
+# We need vold early for metadata encryption
+on early-fs
+    start vold
+
 on init
     # QSEE rpmb listener need symlink for bootdevice
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -100,11 +104,17 @@ on init
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor schedutil
     write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
     write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/hispeed_freq 1209600
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/hispeed_load 90
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/pl 1
 
     # configure governor settings for big cluster
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor schedutil
     write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/up_rate_limit_us 500
     write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/hispeed_freq 1574400
+    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/hispeed_load 90
+    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/pl 1
 
     # set default schedTune value for foreground/top-app
     write /dev/stune/foreground/schedtune.prefer_idle 1
@@ -210,6 +220,10 @@ on fs
     chmod 0770 /persist/hlos_rfs
     restorecon_recursive /persist
 
+    restorecon_recursive /metadata
+    mkdir /metadata/vold
+    chmod 0700 /metadata/vold
+
 on late-fs
     # Start devices by sysfs trigger, including SLPI. SLPI waits for sscrpcd to
     # read /persist, so to prevent SLPI startup delays, start both here.
@@ -237,12 +251,18 @@ on late-fs
     start time_daemon
 
 on post-fs
+    # Disable sched autogroup
+    write /proc/sys/kernel/sched_autogroup_enabled 0
+
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
     chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
     write /sys/devices/virtual/graphics/fb0/idle_time 100
+
+    wait_for_prop hwservicemanager.ready true
+    exec - root root -- /system/bin/wait_for_keymaster
 
 on property:vendor.all.modules.ready=1
     setprop wlan.driver.status "ok"
@@ -752,6 +772,19 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
+
+service ppd /vendor/bin/mm-pp-dpps
+    class late_start
+    user graphics
+    group graphics
+    socket pps stream 0660 system system
+    disabled
+
+on property:init.svc.vendor.hwcomposer-2-1=stopped
+    stop ppd
+
+on property:init.svc.vendor.hwcomposer-2-1=running
+    start ppd
 
 # b/70518189 vDSO experiments
 on property:sys.vdso=*
