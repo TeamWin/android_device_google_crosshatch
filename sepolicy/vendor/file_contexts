@@ -200,6 +200,8 @@
 /vendor/bin/hw/vendor\.google\.radioext@1\.0-service                 u:object_r:hal_radioext_default_exec:s0
 /vendor/bin/hw/android\.hardware\.neuralnetworks@1\.0-service-paintbox    u:object_r:hal_neuralnetworks_paintbox_exec:s0
 /vendor/bin/hw/android\.hardware\.health@2\.0-service\.crosshatch         u:object_r:hal_health_default_exec:s0
+/vendor/bin/hw/vendor\.qti\.media\.c2@1\.0-service               u:object_r:mediacodec_exec:s0
+/vendor/bin/hw/hardware\.google\.media\.c2@1\.0-service-software u:object_r:mediacodec_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
