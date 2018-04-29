@@ -43,6 +43,7 @@ type debugfs_maxfg, debugfs_type, fs_type;
 # /proc
 type proc_wifi_dbg, proc_type, fs_type;
 type proc_f2fs, proc_type, fs_type;
+type proc_sysctl_autogroup, proc_type, fs_type;
 
 type qmuxd_socket, file_type;
 type netmgrd_socket, file_type;
@@ -103,5 +104,8 @@ type rfs_tombstone_data_file, data_file_type, file_type;
 type proc_irq, fs_type, proc_type;
 type sysfs_irq, fs_type, sysfs_type;
 type irqbalance_socket, file_type;
+
+# easel lib files
+type easel_lib_file, vendor_file_type, file_type;
 
 allow rootfs labeledfs:filesystem associate;
