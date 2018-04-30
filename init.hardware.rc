@@ -233,7 +233,7 @@ on late-fs
     # Start services for bootanim
     start surfaceflinger
     start bootanim
-    start vendor.hwcomposer-2-1
+    start vendor.hwcomposer-2-2
     start vendor.configstore-hal-1-0
     start vendor.gralloc-2-0
 
