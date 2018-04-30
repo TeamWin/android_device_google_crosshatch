@@ -69,7 +69,7 @@ enum stats_source {
 enum master_sleep_states {
     MASTER_SLEEP = 0,
 
-    //Don't add any lines after this line
+    // Don't add any lines after this line
     MASTER_SLEEP_STATE_COUNT
 };
 
@@ -78,7 +78,7 @@ enum master_stats {
     SLEEP_ENTER_COUNT,
     SLEEP_LAST_ENTER_TSTAMP_MS,
 
-    //Don't add any lines after this line
+    // Don't add any lines after this line
     MASTER_STATS_COUNT
 };
 
@@ -86,7 +86,7 @@ enum wlan_sleep_states {
     WLAN_STATE_ACTIVE = 0,
     WLAN_STATE_DEEP_SLEEP,
 
-    //Don't add any lines after this line
+    // Don't add any lines after this line
     WLAN_SLEEP_STATE_COUNT
 };
 
@@ -98,8 +98,26 @@ enum wlan_stats {
     DEEP_SLEEP_ENTER_COUNTER,
     LAST_DEEP_SLEEP_ENTER_TSTAMP_MS,
 
-    //Don't add any lines after this line
+    // Don't add any lines after this line
     WLAN_STATS_COUNT
+};
+
+enum easel_sleep_states {
+    EASEL_OFF = 0,
+    EASEL_ACTIVE,
+    EASEL_SUSPEND,
+
+    // Don't add any lines after this line
+    EASEL_SLEEP_STATE_COUNT
+};
+
+enum easel_stats {
+    CUMULATIVE_COUNT = 0,
+    CUMULATIVE_DURATION_MS,
+    LAST_ENTRY_TSTAMP_MS,
+
+    // Don't add any lines after this line
+    EASEL_STATS_COUNT
 };
 
 enum system_sleep_states {
@@ -131,6 +149,7 @@ struct stats_section {
 
 int extract_master_stats(uint64_t *list, size_t list_length);
 int extract_wlan_stats(uint64_t *list, size_t list_length);
+int extract_easel_stats(uint64_t *list, size_t list_length);
 int extract_system_stats(uint64_t *list, size_t list_length);
 
 int get_easel_state(unsigned long *current_state);
