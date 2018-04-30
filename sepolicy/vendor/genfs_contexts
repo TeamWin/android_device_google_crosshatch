@@ -95,6 +95,7 @@ genfscon sysfs /power/system_sleep/stats                                u:object
 genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0
 genfscon debugfs /clk/debug_suspend                   u:object_r:debugfs_clk:s0
 genfscon debugfs /wlan0                               u:object_r:debugfs_wlan:s0
+genfscon debugfs /mnh_sm                              u:object_r:debugfs_easel:s0
 
 genfscon debugfs /ion                                 u:object_r:debugfs_ion:s0
 genfscon debugfs /ipc_logging                         u:object_r:debugfs_ipc:s0
