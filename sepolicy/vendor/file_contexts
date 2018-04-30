@@ -243,8 +243,8 @@
 /vendor/lib/dsp/cdsp/fastrpc_shell_3        u:object_r:hexagon_halide_file:s0
 
 # Easel manager client lib
-/vendor/lib(64)?/libeaselmanager_client\.so           u:object_r:easel_lib_file:s0
-/vendor/lib(64)?/vendor\.google\.paintbox@1\.0\.so    u:object_r:easel_lib_file:s0
+/vendor/lib(64)?/libeaselmanager_client\.so          u:object_r:easel_lib_file:s0
+/vendor/lib(64)?/vendor\.google_paintbox@1\.0\.so    u:object_r:easel_lib_file:s0
 
 # data files
 /data/vendor/netmgr(/.*)?              u:object_r:netmgr_data_file:s0
