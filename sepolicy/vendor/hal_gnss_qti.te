@@ -16,9 +16,13 @@ allow hal_gnss_qti per_mgr_service:service_manager find;
 
 # /data/vendor/location
 allow hal_gnss_qti location_data_file:dir create_dir_perms;
-allow hal_gnss_qti location_data_file:fifo_file { open read setattr write };
-# socket_hal
 allow hal_gnss_qti location_data_file:sock_file { create unlink write};
+allow hal_gnss_qti location_data_file:file create_file_perms;
+
+# /dev/socket/location
+allow hal_gnss_qti location_socket:sock_file create_file_perms;
+allow hal_gnss_qti location_socket:dir rw_dir_perms;
+
 # xtra/socket_xtra
 allow hal_gnss_qti location:unix_dgram_socket sendto;
 
