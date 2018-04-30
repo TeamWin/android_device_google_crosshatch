@@ -209,8 +209,8 @@
     <ctl name="QUAT_TDM_TX_0 Format" value="S32_LE"/>
 
     <!-- Cirrus Booster Amp Algorithm Enable/Disable -->
-    <ctl name="Cirrus SP" value="Enable"/>
-    <ctl name="Cirrus SP FBPort" value="QUAT_TDM_TX_0"/>
+    <ctl name="Cirrus SP" value="Config SP Enable"/>
+    <ctl name="Cirrus SP FBPort" value="QUAT_TDM_RX_0"/>
     <ctl name="FB Channels" value="Eight"/>
     <!-- Cirrus Booster Amp Algorithm end -->
     <!-- Cirrus Amp Gain -->
@@ -222,6 +222,20 @@
     <!-- Cirrus Amp Enables -->
     <ctl name="AMP Enable Switch" value="1"/>
     <ctl name="R AMP Enable Switch" value="1"/>
+    <ctl name="Channel Mux" value="RX1"/>
+    <ctl name="ASPTX1SRC" value="VMON"/>
+    <ctl name="ASPTX2SRC" value="IMON"/>
+    <ctl name="ASPTX3SRC" value="VPMON"/>
+    <ctl name="ASPTX4SRC" value="Zero Fill"/>
+    <ctl name="ASPTX5SRC" value="Zero Fill"/>
+    <ctl name="ASPTX6SRC" value="Zero Fill"/>
+    <ctl name="R Channel Mux" value="RX2"/>
+    <ctl name="R ASPTX1SRC" value="Zero Fill"/>
+    <ctl name="R ASPTX2SRC" value="Zero Fill"/>
+    <ctl name="R ASPTX3SRC" value="Zero Fill"/>
+    <ctl name="R ASPTX4SRC" value="VMON"/>
+    <ctl name="R ASPTX5SRC" value="IMON"/>
+    <ctl name="R ASPTX6SRC" value="VPMON"/>
     <!-- Cirrus Amp Enables end -->
     <!-- HFP start -->
     <ctl name="HFP_PRI_AUX_UL_HL Switch" value="0"/>
@@ -2212,6 +2226,7 @@
     </path>
 
     <path name="speaker-reverse">
+        <path name="speaker"/>
     </path>
 
     <path name="speaker-qrd">
