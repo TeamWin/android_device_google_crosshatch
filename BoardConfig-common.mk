@@ -78,6 +78,7 @@ TARGET_RECOVERY_UI_LIB := \
   libnos_for_recovery
 
 BOARD_AVB_ENABLE := true
+BOARD_AVB_ROLLBACK_INDEX := $(shell date --date='TZ="GMT" $(PLATFORM_SECURITY_PATCH)' +%s)
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
