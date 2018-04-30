@@ -26,7 +26,11 @@
 <!--- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN    -->
 <!--- IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                             -->
 <sound_trigger_platform_info>
-    <param version="0x0101" /> <!-- this must be the first param -->
+    <param version="0x0102" /> <!-- this must be the first param -->
+<!--- Version History:                                                          -->
+<!--- 0x0101: Legacy version.                                                   -->
+<!--- 0x0102: Includes acdb_ids param with the gcs_usecase tag. This matches    -->
+<!--- the gcs_usecase with the acdb device that uses it.                        -->
     <common_config>
         <param max_cpe_sessions="1" />
         <param max_wdsp_sessions="3" />
@@ -48,13 +52,23 @@
         <param library="none" />
         <param max_cpe_phrases="1" />
         <param max_cpe_users="1" />
+        <!-- Profile specific data which the algorithm can support -->
+        <param sample_rate="16000" />
+        <param bit_width="16" />
+        <param channel_count="1"/>
+        <!-- wdsp_fluence_type: fluence disabled: "NONE" -->
+        <!-- fluence enabled: "FLUENCE_DMIC", "FLUENCE_QMIC" -->
+        <param wdsp_fluence_type="NONE" />
         <gcs_usecase>
-            <param uid="0x1" />
-            <param load_sound_model_ids="0x18000001, 0x1, 0x18000100" />
-            <param start_engine_ids="0x18000001, 0x1, 0x18000101" />
-            <param detection_event_ids="0x18000001, 0x1, 0x00012C29" />
-            <param read_cmd_ids="0x00020013, 0x1, 0x00020015" />
-            <param read_rsp_ids="0x00020013, 0x1, 0x00020016" />
+            <param uid="0x3" />
+            <param acdb_devices="DEVICE_HANDSET_MIC_CPE" />
+            <param load_sound_model_ids="0x18000001, 0x4, 0x18000100" />
+            <param start_engine_ids="0x18000001, 0x4, 0x18000101" />
+            <param confidence_levels_ids="0x18000001, 0x4, 0x00012C28" />
+            <param detection_event_ids="0x18000001, 0x4, 0x00012C29" />
+            <param custom_config_ids="0x18000001, 0x4, 0x00012C20" />
+            <param read_cmd_ids="0x00020013, 0x4, 0x00020015" />
+            <param read_rsp_ids="0x00020013, 0x4, 0x00020016" />
         </gcs_usecase>
         <!--  kw_duration is in milli seconds. It is valid only for FTRT
             transfer mode -->
