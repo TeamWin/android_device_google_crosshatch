@@ -91,3 +91,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.ke
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/hw/hardware.google.media.c2@1.0-service-software)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/hardware.google.media.c2@1.0-service-software.rc)
 
+# Remove default android.hardware.graphics.composer@2.1
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.graphics.composer@2.1-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.graphics.composer@2.1-service.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.graphics.composer@2.1-impl.so)
