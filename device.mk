@@ -21,6 +21,10 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
+# enable cal by default on accel sensor
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.debug.sensors.accel_cal=1
+
 # The default value of this variable is false and should only be set to true when
 # the device allows users to retain eSIM profiles after factory reset of user data.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
