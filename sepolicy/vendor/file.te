@@ -31,6 +31,7 @@ type debugfs_kgsl, debugfs_type, fs_type;
 type debugfs_rmt_storage, debugfs_type, fs_type;
 type debugfs_usb, debugfs_type, fs_type;
 type debugfs_wlan, debugfs_type, fs_type;
+type debugfs_easel, debugfs_type, fs_type;
 type debugfs_mdp, debugfs_type, fs_type;
 type debugfs_icnss, debugfs_type, fs_type;
 type debugfs_f2fs, debugfs_type, fs_type;
@@ -55,6 +56,7 @@ type cnd_socket, file_type;
 type chre_socket, file_type;
 type hal_bootctl_socket, file_type;
 type pps_socket, file_type;
+type location_socket, file_type;
 
 type firmware_file, fs_type, contextmount_type;
 

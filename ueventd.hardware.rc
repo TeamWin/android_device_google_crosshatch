@@ -51,6 +51,7 @@
 
 /dev/wcd-dsp-glink        0660   system     audio
 /dev/wcd_dsp0_control     0660   system     audio
+/dev/wcd-spi-ac-client    0660   system     audio
 
 /dev/msm_qcelp            0660   system     audio
 /dev/msm_evrc             0660   system     audio

@@ -24,6 +24,7 @@
 /dev/sdsprpc-smd                                u:object_r:dsp_device:s0
 /dev/wcd-dsp-glink                              u:object_r:audio_device:s0
 /dev/wcd_dsp0_control                           u:object_r:audio_device:s0
+/dev/wcd-spi-ac-client                          u:object_r:audio_device:s0
 /dev/msm_.*                                     u:object_r:audio_device:s0
 /dev/avtimer                                    u:object_r:avtimer_device:s0
 /dev/subsys_.*                                  u:object_r:ssr_device:s0
@@ -61,6 +62,7 @@
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
 /dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
 /dev/socket/pps                                 u:object_r:pps_socket:s0
+/dev/socket/location(/.*)?                      u:object_r:location_socket:s0
 /dev/nq-nci                                     u:object_r:nfc_device:s0
 /dev/ttyHS0                                     u:object_r:hci_attach_dev:s0
 /dev/wlan                                       u:object_r:wlan_device:s0
@@ -243,8 +245,8 @@
 /vendor/lib/dsp/cdsp/fastrpc_shell_3        u:object_r:hexagon_halide_file:s0
 
 # Easel manager client lib
-/vendor/lib(64)?/libeaselmanager_client\.so           u:object_r:easel_lib_file:s0
-/vendor/lib(64)?/vendor\.google\.paintbox@1\.0\.so    u:object_r:easel_lib_file:s0
+/vendor/lib(64)?/libeaselmanager_client\.so          u:object_r:easel_lib_file:s0
+/vendor/lib(64)?/vendor\.google_paintbox@1\.0\.so    u:object_r:easel_lib_file:s0
 
 # data files
 /data/vendor/netmgr(/.*)?              u:object_r:netmgr_data_file:s0
