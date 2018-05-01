@@ -584,7 +584,7 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>vendor.google.paintbox</name>
+        <name>vendor.google_paintbox</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
