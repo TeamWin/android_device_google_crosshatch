@@ -34,3 +34,5 @@ allow hal_gnss_qti netmgrd_socket:dir search;
 
 allow hal_gnss_qti self:netlink_generic_socket { bind create read };
 allow hal_gnss_qti self:netlink_route_socket { bind create nlmsg_read read write };
+
+dontaudit hal_gnss_qti kernel:system module_request;

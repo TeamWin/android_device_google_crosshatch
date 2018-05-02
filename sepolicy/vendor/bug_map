@@ -16,9 +16,6 @@ netd netd capability 73947368
 vold vold capability 78357846
 bootanim vendor_default_prop file 78460200
 crash_dump hexagon_halide_file file 78460200
-hal_camera_default kernel system 78460200
-hal_gnss_qti kernel system 78460200
-hal_imsrtp kernel system 78460200
 hal_radioext_default kernel system 78460200
 hal_rcsservice hal_rcsservice socket 78460200
 hal_sensors_default kernel system 78460200
@@ -31,16 +28,13 @@ per_mgr kernel system 78460200
 platform_app vendor_default_prop file 78460200
 priv_app vendor_default_prop file 78460200
 qti kernel system 78460200
-rfs_access kernel system 78460200
 rild default_prop file 78460200
 rmt_storage kernel system 78460200
-sensors kernel system 78460200
 subsystem_ramdump kernel system 78460200
 surfaceflinger vendor_default_prop file 78460200
 system_app vendor_default_prop file 78460200
 system_server vendor_default_prop file 78460200
 thermal-engine kernel system 78460200
-time_daemon kernel system 78460200
 untrusted_app vendor_default_prop file 78460200
 vold debugfs_tracing_debug filesystem 78460200
 wcnss_service kernel system 78460200
