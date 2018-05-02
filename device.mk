@@ -223,6 +223,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.display.paneltype=2 \
     ro.vendor.display.sensortype=2
 
+# b/73168288
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.disable_rotator_downscale=1
+
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
