@@ -195,6 +195,9 @@ on init
     # Thermal config file per product
     setprop vendor.sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
 
+    # Allow PAI targeting per hardware SKU
+    setprop ro.oem.key1 ${ro.boot.hardware.sku}
+
 on fs
     # Start HW service manager early
     start hwservicemanager
