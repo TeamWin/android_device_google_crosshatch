@@ -21,6 +21,10 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
+# enable cal by default on accel sensor
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.debug.sensors.accel_cal=1
+
 # The default value of this variable is false and should only be set to true when
 # the device allows users to retain eSIM profiles after factory reset of user data.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -221,7 +225,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.display.foss=1 \
     ro.vendor.display.paneltype=2 \
-    ro.vendor.display.sensortype=2
+    ro.vendor.display.sensortype=2 \
+    vendor.display.foss.config=1 \
+    vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -285,8 +291,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     hwcomposer.sdm845 \
-    android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.composer@2.1-service \
+    android.hardware.graphics.composer@2.2-service \
     gralloc.sdm845 \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \

@@ -53,8 +53,7 @@ static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = 130;
 
 static constexpr int8_t MAX_SCALE_INPUT = 112;
 
-// TODO (b/78128429): Lower the max latency to 5 ms or below
-static constexpr int8_t MAX_TRIGGER_LATENCY_MS = 15;
+static constexpr int8_t MAX_TRIGGER_LATENCY_MS = 5;
 
 Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofstream&& effect,
         std::ofstream&& scale) :
@@ -75,7 +74,6 @@ Return<Status> Vibrator::on(uint32_t timeoutMs, uint32_t effectIndex) {
 
 // Methods from ::android::hardware::vibrator::V1_1::IVibrator follow.
 Return<Status> Vibrator::on(uint32_t timeoutMs) {
-    timeoutMs += MAX_TRIGGER_LATENCY_MS;
     return on(timeoutMs, 0);
 }
 
@@ -147,7 +145,7 @@ Return<void> Vibrator::performEffect(Effect effect, EffectStrength,
         return Void();
     }
 
-    timeMs += MAX_TRIGGER_LATENCY_MS;
+    timeMs += MAX_TRIGGER_LATENCY_MS; // Add expected cold-start latency
 
     setAmplitude(UINT8_MAX); // Always set full-scale for pre-defined constants
     on(timeMs, effectIndex);

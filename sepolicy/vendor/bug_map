@@ -24,6 +24,7 @@ hal_rcsservice hal_rcsservice socket 78460200
 hal_sensors_default kernel system 78460200
 hal_sensors_default persist_debug_prop file 78460200
 ims kernel system 78460200
+location hal_gnss_qti unix_dgram_socket 78460200
 mediaserver vendor_default_prop file 78460200
 pd_mapper kernel system 78460200
 per_mgr kernel system 78460200
