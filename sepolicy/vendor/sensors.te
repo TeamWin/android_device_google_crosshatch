@@ -32,3 +32,5 @@ allow sensors qdsp_device:chr_file r_file_perms;
 
 # Allow to read /sys/class/power_supply/usb/input_current_now
 r_dir_file(sensors, sysfs_batteryinfo)
+
+dontaudit sensors kernel:system module_request;
