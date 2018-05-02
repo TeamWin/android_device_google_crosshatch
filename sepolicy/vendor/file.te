@@ -113,6 +113,9 @@ type hexagon_halide_file, vendor_file_type, file_type;
 type mpss_rfs_data_file, data_file_type, file_type;
 type rfs_tombstone_data_file, data_file_type, file_type;
 
+# used for /dsp files
+type adsprpcd_file, file_type;
+
 # msm_irqbalance
 type proc_irq, fs_type, proc_type;
 type sysfs_irq, fs_type, sysfs_type;
