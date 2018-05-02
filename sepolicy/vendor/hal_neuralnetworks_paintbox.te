@@ -4,7 +4,6 @@ hal_server_domain(hal_neuralnetworks_paintbox, hal_neuralnetworks)
 type hal_neuralnetworks_paintbox_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(hal_neuralnetworks_paintbox)
 
-vndbinder_use(hal_neuralnetworks_paintbox)
 allow hal_neuralnetworks_paintbox hal_paintbox_hwservice:hwservice_manager find;
 
 allow hal_neuralnetworks_paintbox proc_stat:file r_file_perms;
