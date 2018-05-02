@@ -23,3 +23,5 @@ allow time_daemon persist_file:dir search;
 
 allow time_daemon self:socket create_socket_perms;
 allowxperm time_daemon self:socket ioctl msm_sock_ipc_ioctls;
+
+dontaudit time_daemon kernel:system module_request;
