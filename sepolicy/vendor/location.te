@@ -47,6 +47,7 @@ allow location location_data_file:file create_file_perms;
 # /dev/socket/location
 allow location location_socket:sock_file create_file_perms;
 allow location location_socket:dir rw_dir_perms;
+allow location hal_gnss_qti:unix_dgram_socket sendto;
 
 userdebug_or_eng(`
   allow location diag_device:chr_file rw_file_perms;
