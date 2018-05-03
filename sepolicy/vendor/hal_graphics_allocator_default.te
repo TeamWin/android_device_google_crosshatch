@@ -1,0 +1,2 @@
+dontaudit hal_graphics_allocator_default vendor_display_prop:file r_file_perms;
+

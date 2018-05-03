@@ -38,3 +38,5 @@ allow wcnss_service sysfs_soc:file r_file_perms;
 dontaudit wcnss_service firmware_file:dir search;
 
 r_dir_file(wcnss_service, sysfs_net)
+
+dontaudit wcnss_service kernel:system module_request;

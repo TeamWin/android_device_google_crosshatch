@@ -13,3 +13,5 @@ allowxperm pd_mapper self:socket ioctl IPC_ROUTER_IOCTL_BIND_CONTROL_PORT;
 
 r_dir_file(pd_mapper, sysfs_msm_subsys)
 userdebug_or_eng(`set_prop(pd_mapper, vendor_ssr_prop)')
+
+dontaudit pd_mapper kernel:system module_request;
