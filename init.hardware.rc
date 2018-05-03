@@ -264,6 +264,9 @@ on post-fs
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
     write /sys/devices/virtual/graphics/fb0/idle_time 100
 
+    # turn off vblank irq immediately after turning off
+    write /sys/module/drm/parameters/vblankoffdelay -1
+
     wait_for_prop hwservicemanager.ready true
     exec - root root -- /system/bin/wait_for_keymaster
 
