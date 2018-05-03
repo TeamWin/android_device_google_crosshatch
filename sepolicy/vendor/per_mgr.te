@@ -25,3 +25,5 @@ r_dir_file(per_mgr, sysfs_msm_subsys)
 r_dir_file(per_mgr, sysfs)
 
 set_prop(per_mgr, per_mgr_state_prop)
+
+dontaudit per_mgr kernel:system module_request;

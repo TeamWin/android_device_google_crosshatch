@@ -42,3 +42,5 @@ userdebug_or_eng(`
 ')
 
 dontaudit hal_graphics_composer_default kernel:system module_request;
+
+dontaudit hal_graphics_composer_default vendor_display_prop:file r_file_perms;
