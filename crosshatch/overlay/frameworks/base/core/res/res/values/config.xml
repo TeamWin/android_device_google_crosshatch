@@ -252,12 +252,18 @@
          Note that a physical cutout should be configured in pixels for the best results.
          -->
     <string translatable="false" name="config_mainBuiltInDisplayCutout">
-        M -256.5,0
-        c 85.5, 0 0, 171 85.5, 171
-        l 342.0, 0
-        c 85.5, 0 0, -171 85.5, -171
-        z
+      M -337,0
+      q 80,0 80,71.5 v 16 q 5,82 95,84
+      h 162 v -171.5 z
+      M 337,0
+      q -80,0 -80,71.5 v 16 q 5,82 -95,84
+      h -162 v -171.5 z
     </string>
+
+    <!-- Whether the display cutout region of the main built-in display should be forced to
+         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
+     -->
+    <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
 
     <!-- Height of the status bar -->
     <dimen name="status_bar_height_portrait">49dp</dimen>
