@@ -66,7 +66,6 @@
         <device name="SND_DEVICE_IN_CAPTURE_VI_FEEDBACK" acdb_id="512"/>
         <device name="SND_DEVICE_IN_HANDSET_DMIC_AEC_NS" acdb_id="111"/>
         <device name="SND_DEVICE_IN_SPEAKER_DMIC_AEC_NS" acdb_id="117"/>
-        <device name="SND_DEVICE_OUT_USB_HEADPHONES" acdb_id="10"/>
         <device name="SND_DEVICE_IN_HANDSET_DMIC_AEC" acdb_id="109"/>
         <device name="SND_DEVICE_IN_USB_HEADSET_MIC" acdb_id="4"/>
         <device name="SND_DEVICE_IN_SPEAKER_MIC" acdb_id="4"/>
