@@ -15,7 +15,7 @@ netd netd capability 73947368
 vold vold capability 78357846
 crash_dump hexagon_halide_file file 78460200
 hal_rcsservice hal_rcsservice socket 78460200
-hal_sensors_default persist_debug_prop file 78460200
+hal_sensors_default persist_debug_prop file 77958108
 mediaserver vendor_default_prop file 78460200
 rild default_prop file 78460200
 system_server vendor_default_prop file 78460200
