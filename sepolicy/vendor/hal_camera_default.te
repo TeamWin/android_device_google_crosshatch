@@ -24,3 +24,5 @@ allow hal_camera_default proc_stat:file r_file_perms;
 
 allow hal_camera_default hal_paintbox_hwservice:hwservice_manager find;
 binder_call(hal_camera_default, easel)
+
+dontaudit hal_camera_default kernel:system module_request;

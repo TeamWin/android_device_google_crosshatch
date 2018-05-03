@@ -172,3 +172,9 @@ persist.service.bdroid.ssrlvl  u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.a4wp          u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.emb_wp_mode   u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.wipower       u:object_r:vendor_bluetooth_prop:s0
+
+#Display
+vendor.gralloc.map_fb_memory       u:object_r:vendor_display_prop:s0
+vendor.gralloc.disable_ubwc        u:object_r:vendor_display_prop:s0
+vendor.debug.prerotation.disable   u:object_r:vendor_display_prop:s0
+vendor.debug.egl.changepixelformat u:object_r:vendor_display_prop:s0

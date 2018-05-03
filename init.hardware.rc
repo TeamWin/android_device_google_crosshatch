@@ -195,6 +195,9 @@ on init
     # Thermal config file per product
     setprop vendor.sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
 
+    # Allow PAI targeting per hardware SKU
+    setprop ro.oem.key1 ${ro.boot.hardware.sku}
+
 on fs
     # Start HW service manager early
     start hwservicemanager
@@ -260,6 +263,9 @@ on post-fs
     chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
     write /sys/devices/virtual/graphics/fb0/idle_time 100
+
+    # turn off vblank irq immediately after turning off
+    write /sys/module/drm/parameters/vblankoffdelay -1
 
     wait_for_prop hwservicemanager.ready true
     exec - root root -- /system/bin/wait_for_keymaster
