@@ -122,7 +122,7 @@ BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy/vendor
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/crosshatch/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR := device/google/crosshatch/sepolicy/private
 
-TARGET_ANDROID_FILESYSTEM_CONFIG_H := device/google/crosshatch/android_filesystem_config.h
+TARGET_FS_CONFIG_GEN := device/google/crosshatch/config.fs
 
 QCOM_BOARD_PLATFORMS += sdm845
 BOARD_HAVE_BLUETOOTH_QCOM := true
