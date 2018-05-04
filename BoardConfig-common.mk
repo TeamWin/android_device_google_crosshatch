@@ -181,6 +181,7 @@ BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 AUDIO_FEATURE_ENABLED_CIRRUS_SPKR_PROTECTION := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 AUDIO_FEATURE_FLICKER_SENSOR_INPUT := true
+SOUND_TRIGGER_FEATURE_LPMA_ENABLED := true
 
 # Graphics
 TARGET_USES_GRALLOC1 := true
@@ -191,7 +192,8 @@ SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 
 # Display
 TARGET_HAS_WIDE_COLOR_DISPLAY := true
-TARGET_HAS_HDR_DISPLAY := false
+TARGET_HAS_HDR_DISPLAY := true
+TARGET_USES_DISPLAY_RENDER_INTENTS := true
 TARGET_USES_COLOR_METADATA := true
 TARGET_USES_DRM_PP := true
 
@@ -202,9 +204,6 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 DEVICE_MANIFEST_FILE := device/google/crosshatch/manifest.xml
 DEVICE_MATRIX_FILE := device/google/crosshatch/compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/google/crosshatch/framework_manifest.xml
-
-# Remove health /backup instance
-DEVICE_FRAMEWORK_MANIFEST_FILE += system/libhidl/vintfdata/manifest_healthd_exclude.xml
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 

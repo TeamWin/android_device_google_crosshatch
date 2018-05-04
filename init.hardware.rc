@@ -195,6 +195,9 @@ on init
     # Thermal config file per product
     setprop vendor.sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
 
+    # Allow PAI targeting per hardware SKU
+    setprop ro.oem.key1 ${ro.boot.hardware.sku}
+
 on fs
     # Start HW service manager early
     start hwservicemanager
@@ -233,7 +236,7 @@ on late-fs
     # Start services for bootanim
     start surfaceflinger
     start bootanim
-    start vendor.hwcomposer-2-1
+    start vendor.hwcomposer-2-2
     start vendor.configstore-hal-1-0
     start vendor.gralloc-2-0
 
@@ -260,6 +263,9 @@ on post-fs
     chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
     write /sys/devices/virtual/graphics/fb0/idle_time 100
+
+    # turn off vblank irq immediately after turning off
+    write /sys/module/drm/parameters/vblankoffdelay -1
 
     wait_for_prop hwservicemanager.ready true
     exec - root root -- /system/bin/wait_for_keymaster
@@ -783,10 +789,10 @@ service ppd /vendor/bin/mm-pp-dpps
     socket pps stream 0660 system system
     disabled
 
-on property:init.svc.vendor.hwcomposer-2-1=stopped
+on property:init.svc.vendor.hwcomposer-2-2=stopped
     stop ppd
 
-on property:init.svc.vendor.hwcomposer-2-1=running
+on property:init.svc.vendor.hwcomposer-2-2=running
     start ppd
 
 # b/70518189 vDSO experiments

@@ -1,0 +1,2 @@
+dontaudit mediaserver vendor_display_prop:file r_file_perms;
+
