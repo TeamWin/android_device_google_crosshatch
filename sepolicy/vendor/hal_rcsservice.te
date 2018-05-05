@@ -23,6 +23,8 @@ r_dir_file(hal_rcsservice, sysfs_diag)
 allow hal_rcsservice sysfs_timestamp_switch:file r_file_perms;
 
 unix_socket_connect(hal_rcsservice, ims, ims)
+allow hal_rcsservice self:socket create_socket_perms;
+allowxperm hal_rcsservice self:socket ioctl msm_sock_ipc_ioctls;
 
 # imsrcsd to bind with UceShimService.apk
 binder_call(hal_rcsservice, dataservice_app)
@@ -31,3 +33,5 @@ binder_call(hal_rcsservice, dataservice_app)
 allow hal_rcsservice devpts:chr_file rw_file_perms;
 
 set_prop(hal_rcsservice, ctl_vendor_imsrcsservice_prop)
+
+dontaudit hal_rcsservice kernel:system module_request;
