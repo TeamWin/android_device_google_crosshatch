@@ -411,7 +411,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-service.crosshatch \
+    android.hardware.thermal@1.1-service.crosshatch \
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
