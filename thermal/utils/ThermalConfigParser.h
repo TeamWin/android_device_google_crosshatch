@@ -22,7 +22,7 @@
 namespace android {
 namespace hardware {
 namespace thermal {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
 void InitializeThresholdsFromThermalConfig(
