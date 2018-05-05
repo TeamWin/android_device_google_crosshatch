@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,16 @@
 #include <hidl/HidlTransportSupport.h>
 #include "Thermal.h"
 
-using android::status_t;
-using android::OK;
+using ::android::status_t;
+using ::android::OK;
 
 // libhwbinder:
-using android::hardware::configureRpcThreadpool;
-using android::hardware::joinRpcThreadpool;
+using ::android::hardware::configureRpcThreadpool;
+using ::android::hardware::joinRpcThreadpool;
 
-// Generated HILD files:
-using android::hardware::thermal::V1_0::IThermal;
-using android::hardware::thermal::V1_0::implementation::Thermal;
+// Generated HIDL files:
+using ::android::hardware::thermal::V1_1::implementation::Thermal;
+using ::android::hardware::thermal::V1_1::IThermal;
 
 static int shutdown() {
   LOG(ERROR) << "Thermal Service is shutting down.";
@@ -37,7 +37,7 @@ int main(int /* argc */, char** /* argv */) {
     status_t status;
     android::sp<IThermal> service = nullptr;
 
-    LOG(INFO) << "Thermal HAL Service 1.0 starting...";
+    LOG(INFO) << "Thermal HAL Service 1.1 starting...";
 
     service = new Thermal();
     if (service == nullptr) {
@@ -49,7 +49,7 @@ int main(int /* argc */, char** /* argv */) {
 
     status = service->registerAsService();
     if (status != OK) {
-        LOG(ERROR) << "Could not register servie for ThermalHAL ("
+        LOG(ERROR) << "Could not register service for ThermalHAL ("
                    << status << ")";
         return shutdown();
     }
