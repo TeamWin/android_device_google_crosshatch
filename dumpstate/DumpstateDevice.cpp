@@ -21,6 +21,8 @@
 #include <android-base/properties.h>
 #include <android-base/unique_fd.h>
 #include <cutils/properties.h>
+#include <hidl/HidlBinderSupport.h>
+
 #include <log/log.h>
 #include <string.h>
 
@@ -230,6 +232,11 @@ static void DumpTouch(int fd) {
 
 // Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
 Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
+    // Exit when dump is completed since this is a lazy HAL.
+    addPostCommandTask([]() {
+        exit(0);
+    });
+
     if (handle == nullptr || handle->numFds < 1) {
         ALOGE("no FDs\n");
         return Void();
