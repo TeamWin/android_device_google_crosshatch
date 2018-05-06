@@ -297,9 +297,8 @@ PRODUCT_PACKAGES += \
     hwcomposer.sdm845 \
     android.hardware.graphics.composer@2.2-service \
     gralloc.sdm845 \
-    android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl-qti-display \
+    vendor.qti.hardware.display.allocator@1.0-service \
     android.hardware.configstore@1.0-service
 
 # RenderScript HAL
@@ -412,7 +411,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-service.crosshatch \
+    android.hardware.thermal@1.1-service.crosshatch \
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
@@ -618,6 +617,10 @@ PRODUCT_COPY_FILES += \
 # Fingerprint
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service.fpc
+
+# Reliability reporting
+PRODUCT_PACKAGES += \
+    hardware.google.pixelstats@1.0-service
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml

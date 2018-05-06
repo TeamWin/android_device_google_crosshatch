@@ -169,7 +169,7 @@
 /vendor/bin/hw/android\.hardware\.usb@1\.1-service\.crosshatch             u:object_r:hal_usb_default_exec:s0
 /vendor/bin/hw/android\.hardware\.power@1\.2-service\.crosshatch           u:object_r:hal_power_default_exec:s0
 /vendor/bin/hw/android\.hardware\.power@1\.2-service\.crosshatch-libperfmgr u:object_r:hal_power_default_exec:s0
-/vendor/bin/hw/android\.hardware\.thermal@1\.0-service\.crosshatch         u:object_r:hal_thermal_default_exec:s0
+/vendor/bin/hw/android\.hardware\.thermal@1\.1-service\.crosshatch         u:object_r:hal_thermal_default_exec:s0
 /vendor/bin/chre                u:object_r:chre_exec:s0
 /vendor/bin/time_daemon         u:object_r:time_daemon_exec:s0
 /vendor/bin/imsrcsd             u:object_r:hal_rcsservice_exec:s0
@@ -204,10 +204,12 @@
 /vendor/bin/hw/android\.hardware\.health@2\.0-service\.crosshatch         u:object_r:hal_health_default_exec:s0
 /vendor/bin/hw/vendor\.qti\.media\.c2@1\.0-service               u:object_r:mediacodec_exec:s0
 /vendor/bin/hw/hardware\.google\.media\.c2@1\.0-service-software u:object_r:mediacodec_exec:s0
+/vendor/bin/hw/vendor\.qti\.hardware\.display\.allocator@1\.0-service   u:object_r:hal_graphics_allocator_default_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
 #
+/vendor/lib(64)?/hw/android\.hardware\.graphics\.mapper@2\.0-impl-qti-display\.so   u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/gralloc\.sdm845\.so    u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libgrallocutils\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libgralloccore\.so        u:object_r:same_process_hal_file:s0
@@ -283,7 +285,6 @@
 /persist/data(/.*)?       u:object_r:persist_data_file:s0
 /persist/display(/.*)?    u:object_r:persist_display_file:s0
 /persist/drm(/.*)?        u:object_r:persist_drm_file:s0
-/persist/elabel(/.*)?     u:object_r:persist_elabel_file:s0
 /persist/haptics(/.*)?    u:object_r:persist_haptics_file:s0
 /persist/hlos_rfs(/.*)?   u:object_r:persist_rfs_file:s0
 /persist/rfs(/.*)?        u:object_r:persist_rfs_file:s0
@@ -295,3 +296,6 @@
 
 # b/70518189 vDSO experiments
 /sys/module/vdso/parameters  u:object_r:sysfs_vdso:s0
+
+# vendor-provided system HAL
+/system/bin/hw/hardware\.google\.pixelstats@1\.0-service  u:object_r:pixelstats_system_exec:s0
