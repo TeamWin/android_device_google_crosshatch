@@ -813,3 +813,6 @@ on property:sys.vdso=32
 on property:wlan.driver.status=ok
     # Get the wlan driver/fw version
     start vendor.wlan_sh
+
+on property:ro.boot.mode=sota
+    setprop ro.boot.sota enabled
