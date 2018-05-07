@@ -19,4 +19,6 @@ userdebug_or_eng(`
   set_prop(logger_app, vendor_cnss_diag_prop)
   set_prop(logger_app, vendor_modem_diag_prop)
   set_prop(logger_app, vendor_bluetooth_log_prop)
+
+  get_prop(logger_app, vendor_usb_config_prop)
 ')
