@@ -1,6 +1,7 @@
 allow vendor_init debugfs_clk:file w_file_perms;
 allow vendor_init proc_uid_cpupower:file w_file_perms;
 allow vendor_init proc_sysctl_autogroup:file w_file_perms;
+allow vendor_init proc_irq:file w_file_perms;
 dontaudit vendor_init kernel:system module_request;
 
 # Allow vendor_init to write to /proc/sysrq-trigger on userdebug and eng builds
