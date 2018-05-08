@@ -40,13 +40,14 @@ using Status = ::android::hardware::vibrator::V1_0::Status;
 using EffectStrength = ::android::hardware::vibrator::V1_0::EffectStrength;
 
 static constexpr uint32_t WAVEFORM_TICK_EFFECT_INDEX = 2;
-static constexpr uint32_t WAVEFORM_TICK_EFFECT_MS = 15;
+static constexpr uint32_t WAVEFORM_TICK_EFFECT_MS = 9;
 
 static constexpr uint32_t WAVEFORM_CLICK_EFFECT_INDEX = 3;
-static constexpr uint32_t WAVEFORM_CLICK_EFFECT_MS = 11;
+static constexpr uint32_t WAVEFORM_CLICK_EFFECT_MS = 9;
 
 static constexpr uint32_t WAVEFORM_HEAVY_CLICK_EFFECT_INDEX = 4;
-static constexpr uint32_t WAVEFORM_HEAVY_CLICK_EFFECT_MS = 15;
+static constexpr uint32_t WAVEFORM_HEAVY_CLICK_EFFECT_MS = 9;
+static constexpr uint32_t WAVEFORM_STRONG_HEAVY_CLICK_EFFECT_MS = 12;
 
 static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_INDEX = 7;
 static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = 130;
@@ -117,7 +118,7 @@ Return<void> Vibrator::perform_1_2(Effect effect, EffectStrength strength,
     return performEffect(effect, strength, _hidl_cb);
 }
 
-Return<void> Vibrator::performEffect(Effect effect, EffectStrength,
+Return<void> Vibrator::performEffect(Effect effect, EffectStrength strength,
         perform_cb _hidl_cb) {
     Status status = Status::OK;
     uint32_t timeMs;
@@ -134,11 +135,29 @@ Return<void> Vibrator::performEffect(Effect effect, EffectStrength,
         break;
     case Effect::HEAVY_CLICK:
         effectIndex = WAVEFORM_HEAVY_CLICK_EFFECT_INDEX;
-        timeMs = WAVEFORM_HEAVY_CLICK_EFFECT_MS;
+        if (strength == EffectStrength::STRONG) {
+            timeMs = WAVEFORM_STRONG_HEAVY_CLICK_EFFECT_MS;
+        } else {
+            timeMs = WAVEFORM_HEAVY_CLICK_EFFECT_MS;
+        }
         break;
     case Effect::DOUBLE_CLICK:
         effectIndex = WAVEFORM_DOUBLE_CLICK_EFFECT_INDEX;
         timeMs = WAVEFORM_DOUBLE_CLICK_EFFECT_MS;
+        break;
+    default:
+        _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
+        return Void();
+    }
+
+    switch (strength) {
+    case EffectStrength::LIGHT:
+        effectIndex -= 1;
+        break;
+    case EffectStrength::MEDIUM:
+        break;
+    case EffectStrength::STRONG:
+        effectIndex += 1;
         break;
     default:
         _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
