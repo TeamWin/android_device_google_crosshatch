@@ -18,7 +18,7 @@
  ****************************************************************************/
 #ifndef UAPI_UFS_H_
 #define UAPI_UFS_H_
-#define MAX_QUERY_IDN 0x12
+#define MAX_QUERY_IDN 0x18
 enum flag_idn {
   QUERY_FLAG_IDN_FDEVICEINIT = 0x01,
   QUERY_FLAG_IDN_PERMANENT_WPE = 0x02,
@@ -29,6 +29,7 @@ enum flag_idn {
   QUERY_FLAG_IDN_RESERVED2 = 0x07,
   QUERY_FLAG_IDN_FPHYRESOURCEREMOVAL = 0x08,
   QUERY_FLAG_IDN_BUSY_RTC = 0x09,
+  QUERY_FLAG_IDN_MANUAL_GC_CONT = 0x0E,
 };
 enum attr_idn {
   QUERY_ATTR_IDN_BOOT_LU_EN = 0x00,
@@ -49,6 +50,7 @@ enum attr_idn {
   QUERY_ATTR_IDN_SECONDS_PASSED = 0x0F,
   QUERY_ATTR_IDN_CNTX_CONF = 0x10,
   QUERY_ATTR_IDN_CORR_PRG_BLK_NUM = 0x11,
+  QUERY_ATTR_IDN_MANUAL_GC_STATUS = 0x17,
 };
 #define QUERY_ATTR_IDN_BOOT_LU_EN_MAX 0x02
 enum desc_idn {
@@ -77,5 +79,8 @@ enum query_opcode {
   UPIU_QUERY_OPCODE_TOGGLE_FLAG = 0x8,
   UPIU_QUERY_OPCODE_MAX,
 };
+#define UPIU_QUERY_OPCODE_HIGH_HPB 0x5500
+#define UPIU_QUERY_OPCODE_HIGH(opcode) ((opcode) >> 16)
+#define UPIU_QUERY_OPCODE_LOW(opcode) ((opcode) & 0xffff)
 #endif
 

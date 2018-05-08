@@ -39,7 +39,7 @@ vidc.enc.disable.pq=1
 
 # system props for the data netmgrd
 persist.data.netmgrd.qos.enable=true
-persist.data.mode=concurrent
+persist.vendor.data.mode=concurrent
 
 # system props for time-services
 persist.timed.enable=true
