@@ -59,7 +59,7 @@ on property:sys.boot_completed=1
     write /sys/class/devfreq/soc:qcom,l3-cpu0/mem_latency/ratio_ceil 400
     write /sys/class/devfreq/soc:qcom,l3-cpu4/governor "mem_latency"
     write /sys/class/devfreq/soc:qcom,l3-cpu4/polling_interval 10
-    write /sys/class/devfreq/soc:qcom,l3-cpu4/mem_latency/ratio_ceil 400
+    write /sys/class/devfreq/soc:qcom,l3-cpu4/mem_latency/ratio_ceil 4000
 
     # Turn on sleep modes.
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
