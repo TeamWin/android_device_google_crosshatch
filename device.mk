@@ -16,7 +16,8 @@
 
 PRODUCT_SOONG_NAMESPACES += \
     hardware/google/av \
-    hardware/google/interfaces
+    hardware/google/interfaces \
+    hardware/qcom/sdm845/display
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
