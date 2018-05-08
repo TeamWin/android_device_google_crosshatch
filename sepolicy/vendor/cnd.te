@@ -32,6 +32,7 @@ hwbinder_use(cnd)
 get_prop(cnd, hwservicemanager_prop)
 binder_call(cnd, dataservice_app)
 binder_call(cnd, ims)
+binder_call(cnd, location)
 
 dontaudit cnd kernel:system module_request;
 
