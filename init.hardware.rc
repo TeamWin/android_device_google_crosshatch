@@ -35,7 +35,6 @@ on charger
     write /sys/devices/system/cpu/cpu7/online 0
     wait /dev/block/bootdevice
     # Enable UFS powersaving
-    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 1
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
@@ -76,7 +75,6 @@ on init
     write /sys/block/dm-1/queue/read_ahead_kb 2048
 
     # Disable UFS powersaving
-    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 0
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 0
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 0
 
@@ -323,11 +321,11 @@ on zygote-start
     chmod 0771 /data/vendor/netmgr
 
     # Create directory used by audio subsystem
-    mkdir /data/vendor/misc/audio 0770 audio audio
+    mkdir /data/vendor/audio 0770 audio audio
 
     # Create directory for audio delta files
-    mkdir /data/vendor/misc/audio/acdbdata 0770 media audio
-    mkdir /data/vendor/misc/audio/acdbdata/delta 0770 media audio
+    mkdir /data/vendor/audio/acdbdata 0770 media audio
+    mkdir /data/vendor/audio/acdbdata/delta 0770 media audio
 
     # Create directory for radio
     mkdir /data/vendor/radio 0771 system radio
@@ -526,8 +524,10 @@ service per_proxy /vendor/bin/pm-proxy
     disabled
 
 on property:sys.boot_completed=1
+    # Set the default IRQ affinity to the silver cluster.
+    write /proc/irq/default_smp_affinity f
+
     # Enable UFS powersaving
-    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 1
 

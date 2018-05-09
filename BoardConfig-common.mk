@@ -182,6 +182,7 @@ AUDIO_FEATURE_ENABLED_CIRRUS_SPKR_PROTECTION := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 AUDIO_FEATURE_FLICKER_SENSOR_INPUT := true
 SOUND_TRIGGER_FEATURE_LPMA_ENABLED := true
+AUDIO_FEATURE_ENABLED_MAXX_AUDIO := true
 
 # Graphics
 TARGET_USES_GRALLOC1 := true
@@ -239,5 +240,8 @@ else
 BOARD_VENDOR_KERNEL_MODULES += \
     $(wildcard device/google/crosshatch-kernel/*.ko)
 endif
+
+# Testing related defines
+BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/b1c1-setup.sh
 
 -include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk
