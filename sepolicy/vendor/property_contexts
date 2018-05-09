@@ -178,3 +178,6 @@ vendor.gralloc.map_fb_memory       u:object_r:vendor_display_prop:s0
 vendor.gralloc.disable_ubwc        u:object_r:vendor_display_prop:s0
 vendor.debug.prerotation.disable   u:object_r:vendor_display_prop:s0
 vendor.debug.egl.changepixelformat u:object_r:vendor_display_prop:s0
+
+# persist_nfc_prop
+persist.nfc. u:object_r:persist_nfc_prop:s0
