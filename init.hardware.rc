@@ -281,6 +281,9 @@ on post-fs-data
     # b/38496103 Setup debug folders for display
     mkdir /data/vendor/display 0770 system graphics
 
+    # Setup folder for modem fdr
+    mkdir /data/vendor/modem_fdr 0700 root system
+
     # keep that at the end of on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1

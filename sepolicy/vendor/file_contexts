@@ -270,6 +270,7 @@
 /data/vendor/ssrlog(/.*)?              u:object_r:ssr_log_file:s0
 /data/vendor/secure_element(/.*)?      u:object_r:secure_element_vendor_data_file:s0
 /data/vendor/audio(/.*)?               u:object_r:audio_vendor_data_file:s0
+/data/vendor/modem_fdr(/.*)?           u:object_r:modem_fdr_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0
