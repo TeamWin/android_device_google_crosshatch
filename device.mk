@@ -355,8 +355,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
-    device/google/crosshatch/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
-    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf \
+    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf
 
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.1-service.crosshatch
@@ -577,8 +576,7 @@ PRODUCT_PACKAGES += \
     citadel_updater \
     android.hardware.authsecret@1.0-service.citadel \
     android.hardware.oemlock@1.0-service.citadel \
-    android.hardware.weaver@1.0-service.citadel \
-    android.hardware.keymaster@4.0-service.citadel
+    android.hardware.weaver@1.0-service.citadel
 
 # Citadel debug stuff
 PRODUCT_PACKAGES_DEBUG += \
@@ -715,3 +713,5 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 TARGET_LMKD_STATS_LOG := true
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.lmk.log_stats=true
+
+TARGET_ENABLE_MEDIADRM_64 := true
