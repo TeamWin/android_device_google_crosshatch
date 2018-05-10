@@ -242,6 +242,7 @@ on late-fs
     # In such case, init won't responce the property_set from hwservicemanager and then
     # cause services for bootanim not running.
     wait_for_prop hwservicemanager.ready true
+    exec - root root -- /system/bin/wait_for_keymaster
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --late
 
@@ -264,9 +265,6 @@ on post-fs
 
     # turn off vblank irq immediately after turning off
     write /sys/module/drm/parameters/vblankoffdelay -1
-
-    wait_for_prop hwservicemanager.ready true
-    exec - root root -- /system/bin/wait_for_keymaster
 
 on property:vendor.all.modules.ready=1
     setprop wlan.driver.status "ok"
