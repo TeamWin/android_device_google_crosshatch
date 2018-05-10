@@ -98,3 +98,6 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.gr
 
 # Remove StrongBox RC
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@4.0-service.citadel.rc)
+
+# Migrate to versioned VNDK directory
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp)
