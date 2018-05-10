@@ -60,6 +60,7 @@ type location_socket, file_type;
 
 type firmware_file, fs_type, contextmount_type;
 
+type cnd_data_file, file_type, data_file_type;
 type location_data_file, file_type, data_file_type;
 
 type persist_file, file_type;
