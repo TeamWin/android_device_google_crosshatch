@@ -266,10 +266,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rcs.supported=1 \
     vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
 
-# Set snapshot timer to 3 second
+# Disable snapshot timer
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.radio.snapshot_enabled=1 \
-    persist.vendor.radio.snapshot_timer=3
+    persist.vendor.radio.snapshot_enabled=0 \
+    persist.vendor.radio.snapshot_timer=0
 
 # camera gyro and laser sensor
 PRODUCT_PROPERTY_OVERRIDES += \
