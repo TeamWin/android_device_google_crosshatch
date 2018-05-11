@@ -27,3 +27,6 @@ allow easel hal_neuralnetworks_paintbox:binder call;
 
 allow easel hal_graphics_allocator_default:fd use;
 allow easel ion_device:chr_file r_file_perms;
+
+# access to keychain for kernel based authentication
+allow easel kernel:key search;
