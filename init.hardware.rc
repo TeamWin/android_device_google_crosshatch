@@ -35,7 +35,6 @@ on charger
     write /sys/devices/system/cpu/cpu7/online 0
     wait /dev/block/bootdevice
     # Enable UFS powersaving
-    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 1
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
@@ -76,7 +75,6 @@ on init
     write /sys/block/dm-1/queue/read_ahead_kb 2048
 
     # Disable UFS powersaving
-    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 0
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 0
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 0
 
@@ -244,6 +242,7 @@ on late-fs
     # In such case, init won't responce the property_set from hwservicemanager and then
     # cause services for bootanim not running.
     wait_for_prop hwservicemanager.ready true
+    exec - root root -- /system/bin/wait_for_keymaster
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --late
 
@@ -267,9 +266,6 @@ on post-fs
     # turn off vblank irq immediately after turning off
     write /sys/module/drm/parameters/vblankoffdelay -1
 
-    wait_for_prop hwservicemanager.ready true
-    exec - root root -- /system/bin/wait_for_keymaster
-
 on property:vendor.all.modules.ready=1
     setprop wlan.driver.status "ok"
 
@@ -282,6 +278,9 @@ on post-fs-data
 
     # b/38496103 Setup debug folders for display
     mkdir /data/vendor/display 0770 system graphics
+
+    # Setup folder for modem fdr
+    mkdir /data/vendor/modem_fdr 0700 root system
 
     # keep that at the end of on post-fs-data
     # Set indication (checked by vold) that we have finished this action
@@ -323,11 +322,11 @@ on zygote-start
     chmod 0771 /data/vendor/netmgr
 
     # Create directory used by audio subsystem
-    mkdir /data/vendor/misc/audio 0770 audio audio
+    mkdir /data/vendor/audio 0770 audio audio
 
     # Create directory for audio delta files
-    mkdir /data/vendor/misc/audio/acdbdata 0770 media audio
-    mkdir /data/vendor/misc/audio/acdbdata/delta 0770 media audio
+    mkdir /data/vendor/audio/acdbdata 0770 media audio
+    mkdir /data/vendor/audio/acdbdata/delta 0770 media audio
 
     # Create directory for radio
     mkdir /data/vendor/radio 0771 system radio
@@ -526,8 +525,10 @@ service per_proxy /vendor/bin/pm-proxy
     disabled
 
 on property:sys.boot_completed=1
+    # Set the default IRQ affinity to the silver cluster.
+    write /proc/irq/default_smp_affinity f
+
     # Enable UFS powersaving
-    write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkscale_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 1
 
@@ -816,3 +817,29 @@ on property:wlan.driver.status=ok
 
 on property:ro.boot.mode=sota
     setprop ro.boot.sota enabled
+
+on property:ro.boot.hardware.sku=G013A
+    setprop persist.nfc.uicc_enabled true
+on property:ro.boot.hardware.sku=G013B
+    setprop persist.nfc.uicc_enabled false
+on property:ro.boot.hardware.sku=G013C
+    setprop persist.nfc.uicc_enabled true
+on property:ro.boot.hardware.sku=G013D
+    setprop persist.nfc.uicc_enabled false
+
+# charger driver exposes now finer grain control, map demo mode to those properties
+# demo mode can only be exit wipping data which will also reset the persist properties
+on property:sys.retaildemo.enabled=1
+    setprop persist.vendor.charge.stop.level 35
+    setprop persist.vendor.charge.start.level 30
+
+# system will not set the sys.retaildemo.enabled to 0 but this is used to set back to default charging
+on property:sys.retaildemo.enabled=0
+    setprop persist.vendor.charge.stop.level 100
+    setprop persist.vendor.charge.start.level 0
+
+on property:persist.vendor.charge.stop.level=*
+    write /sys/devices/platform/soc/soc:google,charger/charge_stop_level ${persist.vendor.charge.stop.level}
+
+on property:persist.vendor.charge.start.level=*
+    write /sys/devices/platform/soc/soc:google,charger/charge_start_level ${persist.vendor.charge.start.level}
