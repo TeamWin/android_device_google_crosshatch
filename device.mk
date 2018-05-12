@@ -378,7 +378,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service \
+    android.hardware.camera.provider@2.4-service_64 \
     camera.device@3.2-impl \
     camera.sdm845 \
     libqomx_core \
