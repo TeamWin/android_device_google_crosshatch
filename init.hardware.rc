@@ -579,6 +579,13 @@ on property:sys.boot_completed=1
     # HardwareInfo needs to be able to read CC bins
     chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
 
+    # UFS health
+    chmod 755 /sys/kernel/debug/ufshcd0
+    chmod 644 /sys/kernel/debug/ufshcd0/show_hba
+    chmod 644 /sys/kernel/debug/ufshcd0/stats/err_stats
+    chmod 644 /sys/kernel/debug/ufshcd0/stats/io_stats
+    chmod 644 /sys/kernel/debug/ufshcd0/stats/req_stats
+
 on property:init.svc.vendor.per_mgr=running
     start per_proxy
 
