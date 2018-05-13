@@ -52,6 +52,8 @@ allow hal_dumpstate_impl debugfs_icnss:file r_file_perms;
 allow hal_dumpstate_impl debugfs_ipc:file r_file_perms;
 allow hal_dumpstate_impl debugfs_f2fs:dir r_dir_perms;
 allow hal_dumpstate_impl debugfs_f2fs:file r_file_perms;
+allow hal_dumpstate_impl debugfs_ufs:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_ufs:file r_file_perms;
 allow hal_dumpstate_impl proc_stat:file r_file_perms;
 allow hal_dumpstate_impl proc_f2fs:dir r_dir_perms;
 allow hal_dumpstate_impl proc_f2fs:file r_file_perms;
