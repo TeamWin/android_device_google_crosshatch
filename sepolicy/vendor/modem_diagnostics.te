@@ -2,6 +2,7 @@
 type modem_diagnostic_app, domain;
 
 app_domain(modem_diagnostic_app)
+net_domain(modem_diagnostic_app)
 
 allow modem_diagnostic_app app_api_service:service_manager find;
 allow modem_diagnostic_app surfaceflinger_service:service_manager find;
