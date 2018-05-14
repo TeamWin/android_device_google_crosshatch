@@ -20,7 +20,8 @@ genfscon sysfs /devices/platform/soc/1d84000.ufshc/host0/target0:0:0/0:0:0:3 u:o
 genfscon sysfs /devices/platform/soc/1d84000.ufshc/host0/target0:0:0/0:0:0:4 u:object_r:sysfs_scsi_devices_other:s0
 genfscon sysfs /devices/platform/soc/1d84000.ufshc/host0/target0:0:0/0:0:0:5 u:object_r:sysfs_scsi_devices_other:s0
 genfscon sysfs /devices/platform/soc/1d84000.ufshc/health                    u:object_r:sysfs_scsi_devices_0000:s0
-genfscon sysfs /devices/platform/soc/1d84000.ufshc/version                    u:object_r:sysfs_scsi_devices_0000:s0
+genfscon sysfs /devices/platform/soc/1d84000.ufshc/version                   u:object_r:sysfs_scsi_devices_0000:s0
+genfscon sysfs /devices/platform/soc/1d84000.ufshc/slowio_cnt                u:object_r:sysfs_scsi_devices_0000:s0
 
 genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth_writable:s0
 
@@ -107,6 +108,7 @@ genfscon debugfs /mdp                                 u:object_r:debugfs_mdp:s0
 genfscon debugfs /rmt_storage                         u:object_r:debugfs_rmt_storage:s0
 genfscon debugfs /icnss                               u:object_r:debugfs_icnss:s0
 genfscon debugfs /f2fs                                u:object_r:debugfs_f2fs:s0
+genfscon debugfs /ufshcd0                             u:object_r:debugfs_ufs:s0
 genfscon debugfs /tzdbg                               u:object_r:debugfs_tzdbg:s0
 genfscon debugfs /fg/sram                             u:object_r:debugfs_fg_sram:s0
 genfscon debugfs /pmic-votable                        u:object_r:debugfs_pmic_votable:s0

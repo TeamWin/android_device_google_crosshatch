@@ -35,6 +35,7 @@ type debugfs_easel, debugfs_type, fs_type;
 type debugfs_mdp, debugfs_type, fs_type;
 type debugfs_icnss, debugfs_type, fs_type;
 type debugfs_f2fs, debugfs_type, fs_type;
+type debugfs_ufs, debugfs_type, fs_type;
 type debugfs_dma_bufinfo, debugfs_type, fs_type;
 type debugfs_tzdbg, debugfs_type, fs_type;
 type debugfs_fg_sram, debugfs_type, fs_type;
