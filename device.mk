@@ -245,6 +245,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_rotator_downscale=1
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.disable_inline_rotator=1
+
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
