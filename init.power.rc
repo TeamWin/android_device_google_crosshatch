@@ -23,9 +23,6 @@ on property:sys.boot_completed=1
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/io_percent 40
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/hist_memory 20
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/hyst_length 10
-    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/low_power_ceil_mbps 0
-    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/low_power_io_percent 40
-    write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/low_power_delay 20
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/guard_band_mbps 0
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/up_scale 250
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/idle_mbps 1600
@@ -37,9 +34,6 @@ on property:sys.boot_completed=1
     write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/io_percent 80
     write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/hist_memory 20
     write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/hyst_length 10
-    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/low_power_ceil_mbps 0
-    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/low_power_io_percent 80
-    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/low_power_delay 20
     write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/guard_band_mbps 0
     write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/up_scale 250
     write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/idle_mbps 1600
