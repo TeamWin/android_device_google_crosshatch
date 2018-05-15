@@ -36,12 +36,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
 # Enforce privapp-permissions whitelist
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.control_privapp_permissions=enforce
-# b/67718369 temporarily disable privapp-permissions whitelist enforcement
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=disable
-
+    ro.control_privapp_permissions=enforce
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/permissions/privapp-permissions-aosp.xml:system/etc/permissions/privapp-permissions-aosp.xml
 
 PRODUCT_PACKAGES += \
     messaging
