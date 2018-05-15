@@ -697,6 +697,10 @@
         <path name="deep-buffer-playback speaker"/>
     </path>
 
+    <path name="deep-buffer-playback voice-tty-hco-handset">
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia1" value="1"/>
+    </path>
+
     <path name="hifi-playback">
         <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia2" value="1" />
     </path>
@@ -813,6 +817,10 @@
         <path name="low-latency-playback speaker"/>
     </path>
 
+    <path name="low-latency-playback voice-tty-hco-handset">
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia5" value="1"/>
+    </path>
+
     <path name="audio-ull-playback">
         <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia8" value="1"/>
     </path>
@@ -887,6 +895,10 @@
         <path name="audio-ull-playback speaker"/>
     </path>
 
+    <path name="audio-ull-playback voice-tty-hco-handset">
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia8" value="1"/>
+    </path>
+
     <path name="multi-channel-playback display-port">
         <ctl name="DISPLAY_PORT Mixer MultiMedia2" value="1"/>
     </path>
@@ -930,6 +942,10 @@
     <path name="compress-offload-playback bt-sco-wb">
         <ctl name="BT SampleRate" value="KHZ_16"/>
         <path name="compress-offload-playback bt-sco"/>
+    </path>
+
+    <path name="compress-offload-playback voice-tty-hco-handset">
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia4" value="1"/>
     </path>
 
     <path name="compress-offload-playback speaker-and-hdmi">
@@ -1979,6 +1995,11 @@
         <ctl name="VoiceMMode1_Tx Mixer USB_AUDIO_TX_MMode1" value="1"/>
     </path>
 
+    <path name="voicemmode1-call voice-tty-hco-handset">
+        <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode1" value="1"/>
+        <ctl name="VoiceMMode1_Tx Mixer USB_AUDIO_TX_MMode1" value="1"/>
+    </path>
+
     <path name="voicemmode2-call">
         <ctl name="SLIM_0_RX_Voice Mixer VoiceMMode2" value="1"/>
         <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1"/>
@@ -2021,6 +2042,11 @@
 
     <path name="voicemmode2-call usb-headset">
         <ctl name="USB_AUDIO_RX_Voice Mixer VoiceMMode2" value="1"/>
+        <ctl name="VoiceMMode2_Tx Mixer USB_AUDIO_TX_MMode2" value="1"/>
+    </path>
+
+    <path name="voicemmode2-call voice-tty-hco-handset">
+        <ctl name="QUAT_TDM_RX_0 Mixer VoiceMMode2" value="1"/>
         <ctl name="VoiceMMode2_Tx Mixer USB_AUDIO_TX_MMode2" value="1"/>
     </path>
 
@@ -2614,11 +2640,24 @@
         <ctl name="DEC7 Volume" value="106"/>
     </path>
 
-    <!-- CAMCORDER MIC 2nd:DEC7 0dB-->
+    <!-- Ch1: mic2 DEC6/TX6, Ch2: mic3 DEC7/TX7, Ch3: mic1 DEC8/TX8-->
     <path name="camcorder-mic">
-        <path name="handset-mic"/>
-        <ctl name="DEC7 Volume" value="84"/>
-        <ctl name="SLIM_0_TX Format" value="S24_LE"/>
+        <ctl name="AIF1_CAP Mixer SLIM TX6" value="1"/>
+        <ctl name="AIF1_CAP Mixer SLIM TX7" value="1"/>
+        <ctl name="AIF1_CAP Mixer SLIM TX8" value="1"/>
+        <ctl name="SLIM_0_TX Channels" value="Three"/>
+        <ctl name="CDC_IF TX6 MUX" value="DEC6"/>
+        <ctl name="ADC MUX6" value="DMIC"/>
+        <ctl name="DMIC MUX6" value="DMIC3"/>
+        <ctl name="CDC_IF TX7 MUX" value="DEC7"/>
+        <ctl name="ADC MUX7" value="DMIC"/>
+        <ctl name="DMIC MUX7" value="DMIC0"/>
+        <ctl name="CDC_IF TX8 MUX" value="DEC8"/>
+        <ctl name="ADC MUX8" value="DMIC"/>
+        <ctl name="DMIC MUX8" value="DMIC4"/>
+        <ctl name="DEC6 Volume" value="84" />
+        <ctl name="DEC7 Volume" value="84" />
+        <ctl name="DEC8 Volume" value="84" />
     </path>
 
     <path name="bt-sco-headset">
