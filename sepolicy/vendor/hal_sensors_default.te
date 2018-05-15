@@ -19,3 +19,6 @@ allow hal_sensors_default chre:unix_stream_socket connectto;
 allow hal_sensors_default chre_socket:sock_file write;
 
 dontaudit hal_sensors_default kernel:system module_request;
+
+# Allow to read /sys/class/power_supply/usb/input_current_now
+r_dir_file(hal_sensors_default, sysfs_batteryinfo)
