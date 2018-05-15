@@ -12,6 +12,7 @@ hal_fingerprint_default sysfs_easel dir 77977275
 hal_imsrtp default_prop file 77725358
 ims default_prop file 78119118
 netd netd capability 73947368
+per_proxy exported3_system_prop file 79541095
 vold vold capability 78357846
 crash_dump hexagon_halide_file file 78460200
 hal_sensors_default persist_debug_prop file 77958108
