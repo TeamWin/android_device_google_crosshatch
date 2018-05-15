@@ -300,5 +300,8 @@
 # b/70518189 vDSO experiments
 /sys/module/vdso/parameters  u:object_r:sysfs_vdso:s0
 
+# eSIM
+/sys/firmware/devicetree/base/chosen/cdt/cdb2/esim u:object_r:sysfs_esim:s0
+
 # vendor-provided system HAL
 /system/bin/hw/hardware\.google\.pixelstats@1\.0-service  u:object_r:pixelstats_system_exec:s0
