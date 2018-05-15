@@ -438,6 +438,12 @@ on early-boot
     chown system system /sys/class/backlight/panel0-backlight/brightness
     chown system system /sys/class/graphics/fb0/msm_fb_persist_mode
 
+    # Permission for Wireless charger
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/rxdata
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/txdata
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/txlen
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/ccreset
+
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio

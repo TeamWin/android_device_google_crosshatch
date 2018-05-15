@@ -432,6 +432,10 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.1-impl-qti \
     android.hardware.gnss@1.1-service-qti
 
+# Wireless Charger HAL
+PRODUCT_PACKAGES += \
+    vendor.google.wireless_charger@1.0
+
 # VR HAL
 PRODUCT_PACKAGES += \
     android.hardware.vr@1.0-service.crosshatch \
