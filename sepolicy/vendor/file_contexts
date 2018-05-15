@@ -40,7 +40,7 @@
 # camera rainbow sensor
 /dev/vd6281                                     u:object_r:camera_device:s0
 # pcm device receiving rainbow sensor data
-/dev/snd/pcmC0D1c                               u:object_r:camera_device:s0
+/dev/snd/pcmC0D27c                              u:object_r:camera_device:s0
 /dev/dri/card0                                  u:object_r:graphics_device:s0
 /dev/dri/controlD64                             u:object_r:graphics_device:s0
 /dev/dri/renderD128                             u:object_r:graphics_device:s0
