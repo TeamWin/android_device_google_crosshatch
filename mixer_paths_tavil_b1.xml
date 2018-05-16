@@ -2621,6 +2621,26 @@
         <ctl name="SLIM_0_TX Format" value="S24_LE"/>
     </path>
 
+    <path name="speaker-and-bt-sco">
+        <path name="speaker"/>
+        <path name="bt-sco-headset"/>
+    </path>
+
+    <path name="speaker-and-bt-sco-wb">
+        <path name="speaker"/>
+        <path name="bt-sco-headset-wb"/>
+    </path>
+
+    <path name="speaker-safe-and-bt-sco">
+        <path name="speaker-safe"/>
+        <path name="bt-sco-headset"/>
+    </path>
+
+    <path name="speaker-safe-and-bt-sco-wb">
+        <path name="speaker-safe"/>
+        <path name="bt-sco-headset-wb"/>
+    </path>
+
     <path name="bt-sco-headset">
     </path>
 
