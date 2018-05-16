@@ -1,0 +1,79 @@
+  google_devices)
+    TO_EXTRACT="\
+            IMAGES/vendor.img \
+            "
+    ;;
+  qcom)
+    TO_EXTRACT="\
+            system/etc/firmware/dnd.descriptor \
+            system/etc/firmware/dnd.sound_model \
+            system/etc/firmware/music_detector.descriptor \
+            system/etc/firmware/music_detector.sound_model \
+            system/etc/init/init-persist.rc \
+            system/etc/permissions/cneapiclient.xml \
+            system/etc/permissions/com.qualcomm.qti.imscmservice.xml \
+            system/etc/permissions/com.quicinc.cne.xml \
+            system/etc/permissions/embms.xml \
+            system/etc/permissions/lpa.xml \
+            system/etc/permissions/LteDirectDiscovery.xml \
+            system/etc/permissions/qcrilhook.xml \
+            system/etc/permissions/radioconfiginterface.xml \
+            system/etc/permissions/radioconfig.xml \
+            system/etc/permissions/RemoteSimlock.xml \
+            system/etc/permissions/telephonyservice.xml \
+            system/etc/permissions/uimremoteclient.xml \
+            system/etc/permissions/uimremoteserver.xml \
+            system/framework/com.qualcomm.qti.uceservice-V2.0-java.jar \
+            system/framework/embmslibrary.jar \
+            system/framework/LteDirectDiscoveryLibrary.jar \
+            system/framework/qcrilhook.jar \
+            system/framework/QtiTelephonyServicelibrary.jar \
+            system/framework/radioconfiginterfacelibrary.jar \
+            system/framework/radioconfiglibrary.jar \
+            system/framework/uimlpalibrary.jar \
+            system/framework/uimremoteclientlibrary.jar \
+            system/framework/uimremoteserverlibrary.jar \
+            system/framework/uimremotesimlocklibrary.jar \
+            system/framework/vendor.qti.hardware.alarm-V1.0-java.jar \
+            system/framework/vendor.qti.hardware.data.latency-V1.0-java.jar \
+            system/lib64/libDiagService.so \
+            system/lib64/libimscamera_jni.so \
+            system/lib64/libimsmedia_jni.so \
+            system/lib64/lib-imsvideocodec.so \
+            system/lib64/lib-imsvtextutils.so \
+            system/lib64/lib-imsvt.so \
+            system/lib64/lib-imsvtutils.so \
+            system/lib64/liblistenjni.so \
+            system/lib64/liblistensoundmodel2.so \
+            system/lib64/libqcbor.so \
+            system/lib64/librcc.so \
+            system/lib64/libsdm-disp-apis.so \
+            system/lib64/libseccam.so \
+            system/lib64/libsecureuisvc_jni.so \
+            system/lib64/libSeemplog.so \
+            system/lib64/libsensorslog.so \
+            system/lib64/libsmcinvokecred.so \
+            system/lib64/libsns_low_lat_stream_stub.so \
+            system/lib64/libtzcom.so \
+            system/lib/libimscamera_jni.so \
+            system/lib/libimsmedia_jni.so \
+            system/lib/lib-imsvideocodec.so \
+            system/lib/lib-imsvtextutils.so \
+            system/lib/lib-imsvt.so \
+            system/lib/lib-imsvtutils.so \
+            system/lib/liblistenjni.so \
+            system/lib/liblistensoundmodel2.so \
+            system/lib/libqcbor.so \
+            system/lib/libqct_resampler.so \
+            system/lib/librcc.so \
+            system/lib/libsdm-disp-apis.so \
+            system/lib/libseccam.so \
+            system/lib/libsecureuisvc_jni.so \
+            system/lib/libSeemplog.so \
+            system/lib/libsensorslog.so \
+            system/lib/libsmcinvokecred.so \
+            system/lib/libsns_low_lat_stream_stub.so \
+            system/lib/libtzcom.so \
+            system/lib/rfsa/adsp/libsns_low_lat_stream_skel.so \
+            "
+    ;;

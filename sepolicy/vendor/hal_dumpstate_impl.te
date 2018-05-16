@@ -25,7 +25,7 @@ userdebug_or_eng(`
   allow hal_dumpstate_impl sysfs_usb_device:file r_file_perms;
   allow hal_dumpstate_impl ssr_log_file:dir search;
   allow hal_dumpstate_impl ssr_log_file:file r_file_perms;
-
+  allow hal_dumpstate_impl sysfs_esim:file r_file_perms;
 
   set_prop(hal_dumpstate_impl, vendor_modem_diag_prop)
 ')

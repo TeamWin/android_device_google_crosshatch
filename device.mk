@@ -36,12 +36,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
 # Enforce privapp-permissions whitelist
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.control_privapp_permissions=enforce
-# b/67718369 temporarily disable privapp-permissions whitelist enforcement
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=disable
-
+    ro.control_privapp_permissions=enforce
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/permissions/privapp-permissions-aosp.xml:system/etc/permissions/privapp-permissions-aosp.xml
 
 PRODUCT_PACKAGES += \
     messaging
@@ -106,6 +104,7 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/crosshatch/init.crosshatch.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.crosshatch.rc \
     $(LOCAL_PATH)/blueline/init.blueline.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.blueline.rc \
+    $(LOCAL_PATH)/init.common.rc:root/init.$(PRODUCT_HARDWARE).rc \
     $(LOCAL_PATH)/init.recovery.hardware.device.rc:root/init.recovery.crosshatch.rc \
     $(LOCAL_PATH)/init.recovery.hardware.device.rc:root/init.recovery.blueline.rc \
 
@@ -128,6 +127,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cp_system_other_odex=1
+
+# Script that copies preloads directory from system_other to data partition
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/preloads_copy.sh:system/bin/preloads_copy.sh
 
 AB_OTA_UPDATER := true
 
@@ -239,6 +242,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # b/73168288
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_rotator_downscale=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.disable_inline_rotator=1
 
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -426,6 +432,10 @@ PRODUCT_PACKAGES += \
     liblocation_api \
     android.hardware.gnss@1.1-impl-qti \
     android.hardware.gnss@1.1-service-qti
+
+# Wireless Charger HAL
+PRODUCT_PACKAGES += \
+    vendor.google.wireless_charger@1.0
 
 # VR HAL
 PRODUCT_PACKAGES += \
