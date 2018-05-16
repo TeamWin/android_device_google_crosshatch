@@ -137,7 +137,7 @@ static void parseThermalEngineConfig(
             sensor_config.action = actions[i];
 
             // Filter out the shutdown thresholds.
-            if (sensor_config.action == "shutdown") {
+            if (sensor_config.action.find("shutdown") != std::string::npos)  {
                 shutdown_configs->push_back(sensor_config);
             } else {
                 configs->push_back(sensor_config);
