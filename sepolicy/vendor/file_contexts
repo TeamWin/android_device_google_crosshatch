@@ -40,7 +40,7 @@
 # camera rainbow sensor
 /dev/vd6281                                     u:object_r:camera_device:s0
 # pcm device receiving rainbow sensor data
-/dev/snd/pcmC0D1c                               u:object_r:camera_device:s0
+/dev/snd/pcmC0D27c                              u:object_r:camera_device:s0
 /dev/dri/card0                                  u:object_r:graphics_device:s0
 /dev/dri/controlD64                             u:object_r:graphics_device:s0
 /dev/dri/renderD128                             u:object_r:graphics_device:s0
@@ -185,8 +185,8 @@
 /vendor/bin/mm-pp-dpps          u:object_r:mm-pp-daemon_exec:s0
 
 /vendor/bin/hw/android\.hardware\.confirmationui@1\.0-service-crosshatch u:object_r:hal_confirmationui_default_exec:s0
-/vendor/bin/hw/android\.hardware\.drm@1\.0-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
-/vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey          u:object_r:hal_drm_clearkey_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.1-service\.widevine         u:object_r:hal_drm_widevine_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey         u:object_r:hal_drm_clearkey_exec:s0
 /vendor/bin/hw/android\.hardware\.vibrator@1\.2-service\.crosshatch  u:object_r:hal_vibrator_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@4\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
@@ -273,6 +273,7 @@
 /data/vendor/audio(/.*)?               u:object_r:audio_vendor_data_file:s0
 /data/vendor/modem_fdr(/.*)?           u:object_r:modem_fdr_file:s0
 /data/vendor/connectivity(/.*)?        u:object_r:cnd_data_file:s0
+/data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0

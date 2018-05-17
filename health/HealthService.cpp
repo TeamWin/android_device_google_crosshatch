@@ -29,11 +29,16 @@
 #include <string>
 #include <vector>
 
+#include "BatteryRechargingControl.h"
+
 namespace {
 
 using android::hardware::health::V2_0::DiskStats;
 using android::hardware::health::V2_0::StorageAttribute;
 using android::hardware::health::V2_0::StorageInfo;
+using ::device::google::crosshatch::health::BatteryRechargingControl;
+
+static BatteryRechargingControl battRechargingControl;
 
 #define UFS_DIR "/sys/devices/platform/soc/1d84000.ufshc"
 const std::string kUfsHealthEol{UFS_DIR "/health/eol"};
@@ -77,7 +82,8 @@ void fill_ufs_storage_attribute(StorageAttribute* attr) {
 void healthd_board_init(struct healthd_config*) {
 }
 
-int healthd_board_battery_update(struct android::BatteryProperties*) {
+int healthd_board_battery_update(struct android::BatteryProperties *props) {
+    props->batteryLevel = battRechargingControl.updateBatteryProperties(props);
     return 0;
 }
 
