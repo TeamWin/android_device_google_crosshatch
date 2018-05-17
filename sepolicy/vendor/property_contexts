@@ -167,6 +167,7 @@ persist.bluetooth.a4wp     u:object_r:vendor_bluetooth_prop:s0
 persist.bluetooth.csoc.cnt  u:object_r:vendor_bluetooth_prop:s0
 persist.service.bdroid.fwsnoop  u:object_r:vendor_bluetooth_prop:s0
 persist.service.bdroid.sibs  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.snooplog  u:object_r:vendor_bluetooth_prop:s0
 persist.service.bdroid.soclog  u:object_r:vendor_bluetooth_prop:s0
 persist.service.bdroid.ssrlvl  u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.a4wp          u:object_r:vendor_bluetooth_prop:s0
