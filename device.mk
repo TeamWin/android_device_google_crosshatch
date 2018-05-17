@@ -41,6 +41,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/permissions/privapp-permissions-aosp.xml:system/etc/permissions/privapp-permissions-aosp.xml
 
+# Enable on-access verification of priv apps. This requires fs-verity support in kernel.
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.apk_verity.mode=1
+
 PRODUCT_PACKAGES += \
     messaging
 
