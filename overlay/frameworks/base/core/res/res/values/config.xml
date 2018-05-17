@@ -192,10 +192,6 @@
     <!-- Boolean indicating whether the wifi chipset has background scan support -->
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
 
-    <!-- Integer thresholds, do not connect to APs with RSSI lower than these values  -->
-    <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_5GHz">-82</integer>
-    <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_24GHz">-85</integer>
-
 
     <!-- Vibrator pattern for feedback about a long screen/key press -->
     <!-- TODO(b/78128429): increase duration to account for the long latency -->
