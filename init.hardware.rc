@@ -412,9 +412,6 @@ on early-boot
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_cdsp/boot 1
 
-    # Start CHRE which need SLPI completed in vendor.qcom.devup
-    start chre
-
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state
 
