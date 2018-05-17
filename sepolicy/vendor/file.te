@@ -3,6 +3,7 @@ type sysfs_easel, sysfs_type, fs_type;
 type sysfs_fingerprint, sysfs_type, fs_type;
 type sysfs_graphics, sysfs_type, fs_type;
 type sysfs_laser, sysfs_type, fs_type;
+type sysfs_lights, sysfs_type, fs_type;
 type sysfs_mdss_mdp_caps, sysfs_type, fs_type;
 type sysfs_msm_subsys, sysfs_type, fs_type;
 type sysfs_msm_subsys_restart, sysfs_type, fs_type;
