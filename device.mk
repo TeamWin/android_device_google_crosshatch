@@ -280,21 +280,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.snapshot_enabled=0 \
     persist.vendor.radio.snapshot_timer=0
 
-# camera gyro and laser sensor
-PRODUCT_PROPERTY_OVERRIDES += \
-  persist.camera.gyro.android=20 \
-  persist.camera.tof.direct=1 \
-  persist.camera.max.previewfps=60 \
-  persist.camera.sensor.hdr=2
-
-# camera TNR controls
-PRODUCT_PROPERTY_OVERRIDES += \
-  persist.camera.tnr.video=1 \
-
-# camera API1 ZSL control
-PRODUCT_PROPERTY_OVERRIDES += \
-  camera.disable_zsl_mode=true \
-
 # logical camera for dual front sensors
 PRODUCT_PROPERTY_OVERRIDES += \
   persist.vendor.camera.multicam=1
