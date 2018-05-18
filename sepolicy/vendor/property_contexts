@@ -25,6 +25,8 @@ vendor.sys.modem.diag.     u:object_r:vendor_modem_diag_prop:s0
 persist.vendor.radio.      u:object_r:radio_prop:s0
 ro.vendor.ril.             u:object_r:radio_prop:s0
 vendor.qcom.time.set       u:object_r:vendor_time_prop:s0
+vendor.usb.                u:object_r:vendor_usb_prop:s0
+persist.vendor.usb.        u:object_r:vendor_usb_prop:s0
 vendor.powerhal.state      u:object_r:power_prop:s0
 vendor.powerhal.audio      u:object_r:power_prop:s0
 vendor.powerhal.lpm        u:object_r:power_prop:s0
