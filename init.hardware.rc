@@ -718,7 +718,7 @@ service qmuxd /vendor/bin/qmuxd
 
 service cnd /vendor/bin/cnd
    class main
-   group system
+   group system wifi inet radio wakelock
    socket cnd stream 660 root inet
 
 service netmgrd /vendor/bin/netmgrd
