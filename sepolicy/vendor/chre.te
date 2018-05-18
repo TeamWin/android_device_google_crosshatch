@@ -11,3 +11,6 @@ allow chre system_file:dir read;
 allow chre ion_device:chr_file r_file_perms;
 allow chre qdsp_device:chr_file r_file_perms;
 allow chre dsp_device:chr_file r_file_perms;
+
+# To communicate with ST HAL
+hal_client_domain(chre, hal_audio)
