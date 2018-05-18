@@ -56,6 +56,7 @@
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
 /dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
+/data/vendor/netmgr/recovery(/.*)?              u:object_r:netmgr_recovery_data_file:s0
 /dev/socket/pps                                 u:object_r:pps_socket:s0
 /dev/socket/location(/.*)?                      u:object_r:location_socket:s0
 /dev/nq-nci                                     u:object_r:nfc_device:s0
