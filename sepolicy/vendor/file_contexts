@@ -283,6 +283,7 @@
 /data/vendor/connectivity(/.*)?        u:object_r:cnd_data_file:s0
 /data/vendor/misc/qsee(/.*)?           u:object_r:data_qsee_file:s0
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
+/data/vendor/tui(/.*)?                 u:object_r:vendor_tui_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0
