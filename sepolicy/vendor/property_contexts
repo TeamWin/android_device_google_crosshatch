@@ -183,3 +183,6 @@ vendor.display.disable_inline_rotator  u:object_r:vendor_display_prop:s0
 
 # persist_nfc_prop
 persist.nfc. u:object_r:persist_nfc_prop:s0
+
+# Pixel Logger (Bluetooth)
+vendor.sys.logger.bluetooth        u:object_r:vendor_bluetooth_log_prop:s0
