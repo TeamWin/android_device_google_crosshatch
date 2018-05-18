@@ -117,3 +117,4 @@ genfscon debugfs /pmic-votable                        u:object_r:debugfs_pmic_vo
 genfscon debugfs /regmap/4-0036                       u:object_r:debugfs_maxfg:s0
 genfscon debugfs /regmap/4-000b                       u:object_r:debugfs_maxfg:s0
 genfscon debugfs /dma_buf/bufinfo                     u:object_r:debugfs_dma_bufinfo:s0
+genfscon debugfs /sched_features                      u:object_r:debugfs_sched_features:s0
