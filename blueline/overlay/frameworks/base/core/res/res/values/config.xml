@@ -101,14 +101,14 @@
     <integer name="config_screenBrightnessDim">6</integer>
 
     <!-- Screen brightness when dozing. -->
-    <integer name="config_screenBrightnessDoze">120</integer>
+    <integer name="config_screenBrightnessDoze">30</integer>
 
     <!-- Whether the always on display mode is available. -->
     <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
 
     <!-- True if the display hardware only has brightness buckets rather than a full range of
          backlight values -->
-    <bool name="config_displayBrightnessBucketsInDoze">false</bool>
+    <bool name="config_displayBrightnessBucketsInDoze">true</bool>
 
     <!-- Default screen brightness setting.
          Must be in the range specified by minimum and maximum. -->
