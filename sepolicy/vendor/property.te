@@ -26,6 +26,7 @@ type vendor_device_prop, property_type;
 type vendor_radio_prop, property_type;
 type vendor_display_prop, property_type;
 type persist_nfc_prop, property_type;
+type vendor_bluetooth_log_prop, property_type;
 
 #imsrcsservice
 type ctl_vendor_imsrcsservice_prop, property_type;
