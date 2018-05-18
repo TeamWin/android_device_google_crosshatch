@@ -101,3 +101,11 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.ke
 
 # Migrate to versioned VNDK directory
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp)
+
+# Remove non-qti-display mapper (b/79269048)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.graphics.mapper@2.0-impl.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.graphics.allocator@2.0-impl.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.graphics.allocator@2.0-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.graphics.allocator@2.0-service.rc)

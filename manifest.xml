@@ -112,6 +112,8 @@
         </interface>
         <fqname>@1.1::ICryptoFactory/clearkey</fqname>
         <fqname>@1.1::IDrmFactory/clearkey</fqname>
+        <fqname>@1.1::ICryptoFactory/widevine</fqname>
+        <fqname>@1.1::IDrmFactory/widevine</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.dumpstate</name>
@@ -268,6 +270,15 @@
         <version>1.0</version>
         <interface>
             <name>IRadioExt</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.google.wireless_charger</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IWirelessCharger</name>
             <instance>default</instance>
         </interface>
     </hal>

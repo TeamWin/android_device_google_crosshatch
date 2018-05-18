@@ -36,12 +36,14 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
 # Enforce privapp-permissions whitelist
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.control_privapp_permissions=enforce
-# b/67718369 temporarily disable privapp-permissions whitelist enforcement
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=disable
+    ro.control_privapp_permissions=enforce
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/permissions/privapp-permissions-aosp.xml:system/etc/permissions/privapp-permissions-aosp.xml
 
+# Enable on-access verification of priv apps. This requires fs-verity support in kernel.
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.apk_verity.mode=1
 
 PRODUCT_PACKAGES += \
     messaging
@@ -95,6 +97,8 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
       $(LOCAL_PATH)/init.hardware.diag.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).diag.rc
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.mpssrfs.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).mpssrfs.rc
+  PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/init.hardware.chamber.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_PLATFORM).chamber.rc
 else
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.diag.rc.user:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).diag.rc
@@ -245,6 +249,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_rotator_downscale=1
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.disable_inline_rotator=1
+
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
@@ -274,21 +281,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.snapshot_enabled=0 \
     persist.vendor.radio.snapshot_timer=0
-
-# camera gyro and laser sensor
-PRODUCT_PROPERTY_OVERRIDES += \
-  persist.camera.gyro.android=20 \
-  persist.camera.tof.direct=1 \
-  persist.camera.max.previewfps=60 \
-  persist.camera.sensor.hdr=2
-
-# camera TNR controls
-PRODUCT_PROPERTY_OVERRIDES += \
-  persist.camera.tnr.video=1 \
-
-# camera API1 ZSL control
-PRODUCT_PROPERTY_OVERRIDES += \
-  camera.disable_zsl_mode=true \
 
 # logical camera for dual front sensors
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -347,7 +339,7 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.1-service.clearkey \
-    android.hardware.drm@1.0-service.widevine
+    android.hardware.drm@1.1-service.widevine
 
 # NFC and Secure Element packages
 PRODUCT_PACKAGES += \
@@ -431,6 +423,10 @@ PRODUCT_PACKAGES += \
     liblocation_api \
     android.hardware.gnss@1.1-impl-qti \
     android.hardware.gnss@1.1-service-qti
+
+# Wireless Charger HAL
+PRODUCT_PACKAGES += \
+    vendor.google.wireless_charger@1.0
 
 # VR HAL
 PRODUCT_PACKAGES += \

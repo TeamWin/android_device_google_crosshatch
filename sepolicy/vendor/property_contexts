@@ -167,6 +167,7 @@ persist.bluetooth.a4wp     u:object_r:vendor_bluetooth_prop:s0
 persist.bluetooth.csoc.cnt  u:object_r:vendor_bluetooth_prop:s0
 persist.service.bdroid.fwsnoop  u:object_r:vendor_bluetooth_prop:s0
 persist.service.bdroid.sibs  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.snooplog  u:object_r:vendor_bluetooth_prop:s0
 persist.service.bdroid.soclog  u:object_r:vendor_bluetooth_prop:s0
 persist.service.bdroid.ssrlvl  u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.a4wp          u:object_r:vendor_bluetooth_prop:s0
@@ -178,6 +179,10 @@ vendor.gralloc.map_fb_memory       u:object_r:vendor_display_prop:s0
 vendor.gralloc.disable_ubwc        u:object_r:vendor_display_prop:s0
 vendor.debug.prerotation.disable   u:object_r:vendor_display_prop:s0
 vendor.debug.egl.changepixelformat u:object_r:vendor_display_prop:s0
+vendor.display.disable_inline_rotator  u:object_r:vendor_display_prop:s0
 
 # persist_nfc_prop
 persist.nfc. u:object_r:persist_nfc_prop:s0
+
+# Pixel Logger (Bluetooth)
+vendor.sys.logger.bluetooth        u:object_r:vendor_bluetooth_log_prop:s0

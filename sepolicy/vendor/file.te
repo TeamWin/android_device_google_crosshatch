@@ -3,6 +3,7 @@ type sysfs_easel, sysfs_type, fs_type;
 type sysfs_fingerprint, sysfs_type, fs_type;
 type sysfs_graphics, sysfs_type, fs_type;
 type sysfs_laser, sysfs_type, fs_type;
+type sysfs_lights, sysfs_type, fs_type;
 type sysfs_mdss_mdp_caps, sysfs_type, fs_type;
 type sysfs_msm_subsys, sysfs_type, fs_type;
 type sysfs_msm_subsys_restart, sysfs_type, fs_type;
@@ -23,6 +24,8 @@ type sysfs_vdso, fs_type, sysfs_type;
 type sysfs_gpio_export, fs_type, sysfs_type;
 type sysfs_pinctrl, fs_type, sysfs_type;
 type sysfs_rpm, sysfs_type, fs_type;
+type sysfs_wlc, sysfs_type, fs_type;
+type sysfs_esim, sysfs_type, fs_type;
 
 type debugfs_clk, debugfs_type, fs_type;
 type debugfs_ion, debugfs_type, fs_type;
@@ -91,6 +94,7 @@ type secure_element_vendor_data_file, file_type, data_file_type;
 type ssr_log_file, file_type, data_file_type;
 type audio_vendor_data_file, file_type, data_file_type;
 type modem_fdr_file, file_type, data_file_type;
+type mediadrm_vendor_data_file, file_type, data_file_type;
 
 #data sysfs files
 type sysfs_data, fs_type, sysfs_type;
