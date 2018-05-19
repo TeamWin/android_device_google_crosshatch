@@ -47,6 +47,11 @@
     <!-- Type of the double tap sensor. Empty if double tap is not supported. -->
     <string name="config_dozeDoubleTapSensorType" translatable="false">com.google.sensor.double_touch</string>
 
+    <!-- MMS user agent string -->
+    <string name="config_mms_user_agent" translatable="false">g013c</string>
+    <!-- MMS user agent profile url -->
+    <string name="config_mms_user_agent_profile_url" translatable="false">http://www.gstatic.com/android/sms/G013C.xml</string>
+
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N  1 zones as follows:
 
@@ -101,7 +106,7 @@
     <integer name="config_screenBrightnessDim">6</integer>
 
     <!-- Screen brightness when dozing. -->
-    <integer name="config_screenBrightnessDoze">130</integer>
+    <integer name="config_screenBrightnessDoze">87</integer>
 
     <!-- Whether the always on display mode is available. -->
     <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>

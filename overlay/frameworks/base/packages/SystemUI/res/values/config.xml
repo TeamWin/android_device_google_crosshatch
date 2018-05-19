@@ -36,14 +36,4 @@
 
     <!-- Doze: whether the double tap sensor reports 2D touch coordinates -->
     <bool name="doze_double_tap_reports_touch_coordinates">true</bool>
-
-    <!-- Doze: Table that translates sensor values from the doze_brightness_sensor_type sensor
-               to brightness values; -1 means keeping the current brightness. -->
-    <integer-array name="config_doze_brightness_sensor_to_brightness">
-        <item>-1</item> <!-- 0: OFF -->
-        <item>100</item> <!-- 1: NIGHT -->
-        <item>120</item> <!-- 2: LOW -->
-        <item>254</item> <!-- 3: HIGH -->
-        <item>255</item> <!-- 4: SUN -->
-    </integer-array>
 </resources>

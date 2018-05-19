@@ -56,6 +56,10 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
 $(call inherit-product, $(LOCAL_PATH)/utils.mk)
 
+ifeq ($(wildcard vendor/google_devices/crosshatch/proprietary/device-vendor-crosshatch.mk),)
+    BUILD_WITHOUT_VENDOR := true
+endif
+
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/google/crosshatch-kernel/Image.lz4-dtb
 else
@@ -257,6 +261,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
     persist.camera.gzoom.at=0
 
+# camera google face detection
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.googfd.enable=1
+
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
@@ -275,7 +283,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.sib16_support=1 \
     persist.vendor.radio.data_con_rprt=true \
     persist.rcs.supported=1 \
-    vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
+    vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so\
+    ro.hardware.keystore_desede=true \
 
 # Disable snapshot timer
 PRODUCT_PROPERTY_OVERRIDES += \
