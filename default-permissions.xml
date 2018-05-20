@@ -59,7 +59,6 @@
         <permission name="android.permission.READ_CALL_LOG" fixed="false"/>
         <permission name="android.permission.READ_CONTACTS" fixed="false"/>
         <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="false"/>
-        <permission name="com.google.android.gms.permission.CAR_SPEED" fixed="false"/>
         <permission name="android.permission.RECEIVE_SMS" fixed="false"/>
         <permission name="android.permission.SEND_SMS" fixed="false"/>
         <permission name="android.permission.RECORD_AUDIO" fixed="false"/>

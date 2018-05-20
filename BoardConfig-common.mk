@@ -116,6 +116,7 @@ BOARD_ROOT_EXTRA_FOLDERS := persist firmware metadata
 BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy/vendor
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/crosshatch/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR := device/google/crosshatch/sepolicy/private
+BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy/verizon
 
 TARGET_FS_CONFIG_GEN := device/google/crosshatch/config.fs
 
@@ -199,6 +200,7 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 # Vendor Interface Manifest
 DEVICE_MANIFEST_FILE := device/google/crosshatch/manifest.xml
 DEVICE_MATRIX_FILE := device/google/crosshatch/compatibility_matrix.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/google/crosshatch/device_framework_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/google/crosshatch/framework_manifest.xml
 
 # Remove health /backup instance

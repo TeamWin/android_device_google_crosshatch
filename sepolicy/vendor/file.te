@@ -3,6 +3,7 @@ type sysfs_easel, sysfs_type, fs_type;
 type sysfs_fingerprint, sysfs_type, fs_type;
 type sysfs_graphics, sysfs_type, fs_type;
 type sysfs_laser, sysfs_type, fs_type;
+type sysfs_lights, sysfs_type, fs_type;
 type sysfs_mdss_mdp_caps, sysfs_type, fs_type;
 type sysfs_msm_subsys, sysfs_type, fs_type;
 type sysfs_msm_subsys_restart, sysfs_type, fs_type;
@@ -43,6 +44,7 @@ type debugfs_tzdbg, debugfs_type, fs_type;
 type debugfs_fg_sram, debugfs_type, fs_type;
 type debugfs_pmic_votable, debugfs_type, fs_type;
 type debugfs_maxfg, debugfs_type, fs_type;
+type debugfs_sched_features, debugfs_type, fs_type;
 
 # /proc
 type proc_wifi_dbg, proc_type, fs_type;

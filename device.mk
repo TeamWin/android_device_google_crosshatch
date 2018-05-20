@@ -41,6 +41,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/permissions/privapp-permissions-aosp.xml:system/etc/permissions/privapp-permissions-aosp.xml
 
+# Enable on-access verification of priv apps. This requires fs-verity support in kernel.
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.apk_verity.mode=1
+
 PRODUCT_PACKAGES += \
     messaging
 
@@ -51,6 +55,10 @@ SRC_DISPLAY_HAL_DIR := hardware/qcom/display/sdm845
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
 $(call inherit-product, $(LOCAL_PATH)/utils.mk)
+
+ifeq ($(wildcard vendor/google_devices/crosshatch/proprietary/device-vendor-crosshatch.mk),)
+    BUILD_WITHOUT_VENDOR := true
+endif
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/google/crosshatch-kernel/Image.lz4-dtb
@@ -93,6 +101,8 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
       $(LOCAL_PATH)/init.hardware.diag.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).diag.rc
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.mpssrfs.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).mpssrfs.rc
+  PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/init.hardware.chamber.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_PLATFORM).chamber.rc
 else
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.diag.rc.user:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).diag.rc
@@ -251,6 +261,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
     persist.camera.gzoom.at=0
 
+# camera google face detection
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.googfd.enable=1
+
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
@@ -269,27 +283,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.sib16_support=1 \
     persist.vendor.radio.data_con_rprt=true \
     persist.rcs.supported=1 \
-    vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
+    vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so\
+    ro.hardware.keystore_desede=true \
 
 # Disable snapshot timer
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.snapshot_enabled=0 \
     persist.vendor.radio.snapshot_timer=0
-
-# camera gyro and laser sensor
-PRODUCT_PROPERTY_OVERRIDES += \
-  persist.camera.gyro.android=20 \
-  persist.camera.tof.direct=1 \
-  persist.camera.max.previewfps=60 \
-  persist.camera.sensor.hdr=2
-
-# camera TNR controls
-PRODUCT_PROPERTY_OVERRIDES += \
-  persist.camera.tnr.video=1 \
-
-# camera API1 ZSL control
-PRODUCT_PROPERTY_OVERRIDES += \
-  camera.disable_zsl_mode=true \
 
 # logical camera for dual front sensors
 PRODUCT_PROPERTY_OVERRIDES += \
