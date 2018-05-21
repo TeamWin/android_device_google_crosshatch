@@ -175,6 +175,8 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-100000000" />
             <Limit name="frame-rate" range="1-240" />
             <Limit name="concurrent-instances" max="16" />
+            <Limit name="quality" range="0-100"  default="80" />
+            <Feature name="bitrate-modes" value="VBR,CQ" />
         </MediaCodec>
     </Encoders>
     <Decoders>
