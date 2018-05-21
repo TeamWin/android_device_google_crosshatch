@@ -49,6 +49,12 @@
         <!-- Contacts -->
         <permission name="android.permission.READ_CONTACTS" fixed="false"/>
         <permission name="android.permission.WRITE_CONTACTS" fixed="false"/>
+        <!-- Call logs -->
+        <permission name="android.permission.READ_CALL_LOG" fixed="false"/>
+        <permission name="android.permission.WRITE_CALL_LOG" fixed="false"/>
+        <!-- SMS -->
+        <permission name="android.permission.RECEIVE_SMS" fixed="false"/>
+        <permission name="android.permission.READ_PHONE_NUMBERS" fixed="false"/>
     </exception>
 
     <exception
