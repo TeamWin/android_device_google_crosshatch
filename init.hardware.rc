@@ -225,10 +225,6 @@ on fs
     chmod 0770 /persist/hlos_rfs
     restorecon_recursive /persist
 
-    restorecon_recursive /metadata
-    mkdir /metadata/vold
-    chmod 0700 /metadata/vold
-
 on late-fs
     # Start devices by sysfs trigger, including SLPI. SLPI waits for sscrpcd to
     # read /persist, so to prevent SLPI startup delays, start both here.
