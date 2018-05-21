@@ -20,5 +20,3 @@ set_prop(vendor_init, vendor_radio_prop)
 set_prop(vendor_init, persist_nfc_prop)
 
 allow vendor_init unlabeled:dir { getattr relabelfrom };
-allow vendor_init vold_metadata_file:dir create_dir_perms;
-allow vendor_init vold_metadata_file:file getattr;
