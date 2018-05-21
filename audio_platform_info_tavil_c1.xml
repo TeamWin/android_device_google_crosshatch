@@ -135,7 +135,7 @@
         <device name="SND_DEVICE_OUT_VOICE_HAC_HANDSET" backend="handset" interface="QUAT_TDM_RX_0"/>
         <device name="SND_DEVICE_OUT_VOICE_HANDSET_TMUS" backend="handset" interface="QUAT_TDM_RX_0"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_FULL_USB" backend="usb-headset" interface="USB_AUDIO_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_TTY_HCO_HANDSET" backend="speaker" interface="QUAT_TDM_RX_0"/>
+        <device name="SND_DEVICE_OUT_VOICE_TTY_HCO_HANDSET" backend="voice-tty-hco-handset" interface="QUAT_TDM_RX_0"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_VCO_USB" backend="usb-headphones" interface="USB_AUDIO_RX"/>
         <device name="SND_DEVICE_IN_VOICE_TTY_FULL_USB_MIC" backend="usb-headset-mic" interface="USB_AUDIO_TX"/>
         <device name="SND_DEVICE_IN_VOICE_TTY_HCO_USB_MIC" backend="usb-headset-mic" interface="USB_AUDIO_TX"/>
