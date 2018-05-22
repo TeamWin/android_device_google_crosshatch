@@ -85,13 +85,3 @@ persist.data.df.dev_name=rmnet_usb0
 #ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
 persist.data.mode=concurrent
-
-#system prop for A4WP profile support
-ro.bluetooth.a4wp=false
-
-#system prop for wipower support
-ro.bluetooth.emb_wp_mode=false
-ro.bluetooth.wipower=false
-
-# Property is used by BT HAL to discover device BT MAC address
-ro.bt.bdaddr_path=/proc/device-tree/chosen/cdt/cdb2/bt_addr

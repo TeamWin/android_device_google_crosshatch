@@ -225,10 +225,6 @@ on fs
     chmod 0770 /persist/hlos_rfs
     restorecon_recursive /persist
 
-    restorecon_recursive /metadata
-    mkdir /metadata/vold
-    chmod 0700 /metadata/vold
-
 on late-fs
     # Start devices by sysfs trigger, including SLPI. SLPI waits for sscrpcd to
     # read /persist, so to prevent SLPI startup delays, start both here.
@@ -400,8 +396,15 @@ on zygote-start
     chown system system /dev/cpu_dma_latency
     chown system system /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
     chown system system /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
+    chown system system /sys/class/kgsl/kgsl-3d0/force_rail_on
+    chown system system /sys/class/kgsl/kgsl-3d0/force_clk_on
+    chown system system /sys/class/kgsl/kgsl-3d0/idle_timer
+    chown system system /sys/kernel/debug/sched_features
     chown system system /sys/class/devfreq/soc:qcom,gpubw/min_freq
     chown system system /sys/class/devfreq/soc:qcom,cpubw/min_freq
+    chown system system /sys/class/devfreq/soc:qcom,llccbw/min_freq
+    chown system system /sys/class/devfreq/soc:qcom,l3-cpu0/min_freq
+    chown system system /sys/class/devfreq/soc:qcom,l3-cpu4/min_freq
 
 on early-boot
     # wait for devices
@@ -719,8 +722,8 @@ service qmuxd /vendor/bin/qmuxd
 
 service cnd /vendor/bin/cnd
    class main
+   user radio
    group system wifi inet radio wakelock
-   socket cnd stream 660 root inet
 
 service netmgrd /vendor/bin/netmgrd
     class main
