@@ -163,16 +163,15 @@ ro.radio.log_loc           u:object_r:vendor_radio_prop:s0
 ro.radio.log_prefix        u:object_r:vendor_radio_prop:s0
 
 # vendor_bluetooth_prop
-persist.bluetooth.a4wp     u:object_r:vendor_bluetooth_prop:s0
-persist.bluetooth.csoc.cnt  u:object_r:vendor_bluetooth_prop:s0
-persist.service.bdroid.fwsnoop  u:object_r:vendor_bluetooth_prop:s0
-persist.service.bdroid.sibs  u:object_r:vendor_bluetooth_prop:s0
-persist.service.bdroid.snooplog  u:object_r:vendor_bluetooth_prop:s0
-persist.service.bdroid.soclog  u:object_r:vendor_bluetooth_prop:s0
-persist.service.bdroid.ssrlvl  u:object_r:vendor_bluetooth_prop:s0
-ro.bluetooth.a4wp          u:object_r:vendor_bluetooth_prop:s0
-ro.bluetooth.emb_wp_mode   u:object_r:vendor_bluetooth_prop:s0
-ro.bluetooth.wipower       u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.bluetooth.a4wp           u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.bluetooth.csoc.cnt       u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.service.bdroid.fwsnoop   u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.service.bdroid.sibs      u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.service.bdroid.snooplog  u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.service.bdroid.soclog    u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.service.bdroid.ssrlvl    u:object_r:vendor_bluetooth_prop:s0
+ro.vendor.bluetooth.emb_wp_mode         u:object_r:vendor_bluetooth_prop:s0
+ro.vendor.bluetooth.wipower             u:object_r:vendor_bluetooth_prop:s0
 
 #Display
 vendor.gralloc.map_fb_memory       u:object_r:vendor_display_prop:s0
