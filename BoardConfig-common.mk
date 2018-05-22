@@ -72,7 +72,6 @@ BOARD_USES_METADATA_PARTITION := true
 TARGET_RECOVERY_WIPE := device/google/crosshatch/recovery.wipe
 TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
-TARGET_RECOVERY_UI_MARGIN_HEIGHT := 20
 TARGET_RECOVERY_UI_LIB := \
   librecovery_ui_crosshatch \
   libnos_citadel_for_recovery \
