@@ -125,6 +125,8 @@
             <Limit name="bitrate" range="1-120000000" />
             <Limit name="frame-rate" range="1-480" />
             <Limit name="concurrent-instances" max="16" />
+            <Limit name="quality" range="0-100"  default="80" />
+            <Feature name="bitrate-modes" value="VBR,CQ" />
         </MediaCodec>
         <MediaCodec name="c2.qti.vp8.encoder" type="video/vp8">
             <Limit name="size" min="96x96" max="4096x2304" />

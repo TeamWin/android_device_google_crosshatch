@@ -66,12 +66,12 @@ TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_USES_METADATA_PARTITION := true
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/crosshatch/recovery.wipe
 TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
-TARGET_RECOVERY_UI_MARGIN_HEIGHT := 20
 TARGET_RECOVERY_UI_LIB := \
   librecovery_ui_crosshatch \
   libnos_citadel_for_recovery \
@@ -111,7 +111,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # Install odex files into the other system image
 BOARD_USES_SYSTEM_OTHER_ODEX := true
 
-BOARD_ROOT_EXTRA_FOLDERS := persist firmware metadata
+BOARD_ROOT_EXTRA_FOLDERS := persist firmware
 
 BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy/vendor
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/crosshatch/sepolicy/public

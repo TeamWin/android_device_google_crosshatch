@@ -63,3 +63,4 @@ hwbinder_use(netmgrd)
 
 dontaudit netmgrd kernel:system module_request;
 dontaudit netmgrd self:system module_request;
+dontaudit netmgrd self:capability sys_module;

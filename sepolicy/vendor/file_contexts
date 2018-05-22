@@ -295,9 +295,6 @@
 /persist/sensors(/.*)?    u:object_r:persist_sensors_file:s0
 /persist/time(/.*)?       u:object_r:persist_time_file:s0
 
-/metadata(/.*)?           u:object_r:metadata_file:s0
-/metadata/vold(/.*)?      u:object_r:vold_metadata_file:s0
-
 # b/70518189 vDSO experiments
 /sys/module/vdso/parameters  u:object_r:sysfs_vdso:s0
 

@@ -30,6 +30,9 @@ r_dir_file(sensors, sysfs_msm_subsys)
 allow sensors ion_device:chr_file r_file_perms;
 allow sensors qdsp_device:chr_file r_file_perms;
 
+# Allow to getprop persist.vendor.sys.modem.diag.mdlog
+get_prop(sensors, vendor_modem_diag_prop)
+
 # Allow to read /sys/class/power_supply/usb/input_current_now
 r_dir_file(sensors, sysfs_batteryinfo)
 
