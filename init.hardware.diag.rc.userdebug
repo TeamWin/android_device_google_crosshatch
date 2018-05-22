@@ -402,9 +402,9 @@ service ftmd /vendor/bin/ftmdaemon
     oneshot
 
 on property:vendor.sys.logger.bluetooth=true
-   setprop persist.service.bdroid.snooplog true
-   setprop persist.service.bdroid.fwsnoop true
+   setprop persist.vendor.service.bdroid.snooplog true
+   setprop persist.vendor.service.bdroid.fwsnoop true
 
 on property:vendor.sys.logger.bluetooth=false
-   setprop persist.service.bdroid.snooplog false
-   setprop persist.service.bdroid.fwsnoop false
+   setprop persist.vendor.service.bdroid.snooplog false
+   setprop persist.vendor.service.bdroid.fwsnoop false
