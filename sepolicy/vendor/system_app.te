@@ -1,6 +1,4 @@
-# Needed by Settings app's TelephonyMonitorPreferenceController
 typeattribute system_app system_writes_vendor_properties_violators;
-set_prop(system_app, tel_mon_prop)
 
 # Needed by Settings app's CameraHalHdrplusPreferenceController, available only on a subset of
 # userdebug and eng devices
