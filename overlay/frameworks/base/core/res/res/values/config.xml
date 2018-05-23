@@ -201,6 +201,26 @@
         <item>23</item>
     </integer-array>
 
+    <!-- The URI to associate with each ringtone effect constant, intended to be used with the
+         android.os.VibrationEffect#get(Uri, Context) API.
+         The position of the string in the string-array determines which ringtone effect is chosen.
+         For example, if the URI passed into get match the third string in the string-array, then
+         RINGTONE_3 will be the returned effect -->
+    <string-array translatable="false" formatted="false" name="config_ringtoneEffectUris">
+        <item>content://media/internal/audio/media/13?canonical=1&amp;title=The%20Big%20Adventure</item>
+        <item>content://media/internal/audio/media/17?canonical=1&amp;title=Copycat</item>
+        <item>content://media/internal/audio/media/7?canonical=1&amp;title=Crackle</item>
+        <item>content://media/internal/audio/media/8?canonical=1&amp;title=Flutterby</item>
+        <item>content://media/internal/audio/media/9?canonical=1&amp;title=Hotline</item>
+        <item>content://media/internal/audio/media/5?canonical=1&amp;title=Leaps%20%26%20Bounds</item>
+        <item>content://media/internal/audio/media/15?canonical=1&amp;title=Lollipop</item>
+        <item>content://media/internal/audio/media/10?canonical=1&amp;title=Lost%20%26%20Found</item>
+        <item>content://media/internal/audio/media/11?canonical=1&amp;title=Mash-up</item>
+        <item>content://media/internal/audio/media/16?canonical=1&amp;title=Monkey%20Around</item>
+        <item>content://media/internal/audio/media/6?canonical=1&amp;title=School\'s%20Out</item>
+        <item>content://media/internal/audio/media/12?canonical=1&amp;title=Zen%20Too</item>
+    </string-array>
+
     <!-- Make things go fast -->
     <bool name="config_ui_enableFadingMarquee">false</bool>
 
