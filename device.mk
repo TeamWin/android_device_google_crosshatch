@@ -314,8 +314,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.2-service \
     gralloc.sdm845 \
     android.hardware.graphics.mapper@2.0-impl-qti-display \
-    vendor.qti.hardware.display.allocator@1.0-service \
-    android.hardware.configstore@1.0-service
+    vendor.qti.hardware.display.allocator@1.0-service
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
