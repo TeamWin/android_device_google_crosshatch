@@ -33,6 +33,9 @@ r_dir_file(hal_graphics_composer_default, sysfs_type)
 allow hal_graphics_composer_default display_vendor_data_file:dir create_dir_perms;
 allow hal_graphics_composer_default display_vendor_data_file:file create_file_perms;
 
+# Rule for pps socket usage
+unix_socket_connect(hal_graphics_composer_default, pps, mm-pp-daemon)
+
 # allow composer to register display config
 add_hwservice(hal_graphics_composer_default, hal_display_config_hwservice);
 
