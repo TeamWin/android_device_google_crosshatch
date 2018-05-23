@@ -2013,6 +2013,26 @@
         <ctl name="DEC8 Volume" value="84" />
     </path>
 
+    <path name="speaker-and-bt-sco">
+        <path name="speaker"/>
+        <path name="bt-sco-headset"/>
+    </path>
+
+    <path name="speaker-and-bt-sco-wb">
+        <path name="speaker"/>
+        <path name="bt-sco-headset-wb"/>
+    </path>
+
+    <path name="speaker-safe-and-bt-sco">
+        <path name="speaker-safe"/>
+        <path name="bt-sco-headset"/>
+    </path>
+
+    <path name="speaker-safe-and-bt-sco-wb">
+        <path name="speaker-safe"/>
+        <path name="bt-sco-headset-wb"/>
+    </path>
+
     <path name="bt-sco-headset">
     </path>
 
