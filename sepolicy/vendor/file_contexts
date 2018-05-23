@@ -215,6 +215,7 @@
 /vendor/lib(64)?/libgrallocutils\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libgralloccore\.so        u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdMetaData\.so         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_aion_buffer\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqservice\.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdutils\.so            u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libadreno_utils\.so       u:object_r:same_process_hal_file:s0
