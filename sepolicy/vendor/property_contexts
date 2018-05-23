@@ -141,7 +141,7 @@ sys.hwc_disable_hdr        u:object_r:vendor_default_prop:s0
 fastrpc.perf.kernel        u:object_r:public_vendor_default_prop:s0
 fastrpc.perf.adsp          u:object_r:public_vendor_default_prop:s0
 fastrpc.perf.freq          u:object_r:public_vendor_default_prop:s0
-persist.cne.feature        u:object_r:public_vendor_default_prop:s0
+persist.vendor.cne.feature u:object_r:public_vendor_default_prop:s0
 persist.cne.logging.qxdm   u:object_r:public_vendor_default_prop:s0
 persist.vendor.cnd.wqe     u:object_r:public_vendor_default_prop:s0
 persist.vendor.qti.telephony.vt_cam_interface  u:object_r:public_vendor_default_prop:s0
