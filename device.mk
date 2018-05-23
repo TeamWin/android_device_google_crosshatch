@@ -256,6 +256,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_inline_rotator=1
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.dataspace_saturation_matrix=1.16868,-0.03155,-0.01473,-0.16868,1.03155,-0.05899,0.00000,0.00000,1.07372
+
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
@@ -625,10 +628,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_cdma_sub=0
 
-# Set display color mode to Saturated by default
+# Set display color mode to Automatic by default
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.0 \
-    persist.sys.sf.native_mode=1
+    persist.sys.sf.native_mode=2
 
 # Easel device feature
 PRODUCT_COPY_FILES += \
@@ -701,9 +704,10 @@ PRODUCT_COPY_FILES += \
 
 # MAXX prebuild library and tuning table
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/audio/libmaqdspparams.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmaqdspparams.so \
+    device/google/crosshatch/audio/libmaxxaudioqdsp.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmaxxaudioqdsp.so \
     device/google/crosshatch/audio/capi_v2_MAM.so:$(TARGET_COPY_OUT_VENDOR)/lib/rfsa/adsp/capi_v2_MAM.so \
-    device/google/crosshatch/audio/default.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default.mps \
+    device/google/crosshatch/audio/default_b1.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default_b1.mps \
+    device/google/crosshatch/audio/default_c1.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default_c1.mps \
     device/google/crosshatch/audio/maxx_conf.ini:$(TARGET_COPY_OUT_VENDOR)/etc/maxx_conf.ini
 
 # Keymaster configuration

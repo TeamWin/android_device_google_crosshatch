@@ -31,3 +31,5 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nxp.blueline.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
+
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.com.google.ime.height_ratio=1.2

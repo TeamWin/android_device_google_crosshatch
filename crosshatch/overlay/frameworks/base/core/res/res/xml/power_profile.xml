@@ -95,24 +95,24 @@
     <!-- Additional power used by a CPU core from cluster 0 when running at
          different speeds, excluding cluster and active cost -->
     <array name="cpu.core_power.cluster0">
-        <value>2.27<!-- 300 MHz CPU speed -->
-        <value>3.63<!-- 403 MHz CPU speed -->
-        <value>4.36<!-- 480 MHz CPU speed -->
-        <value>5.21<!-- 576 MHz CPU speed -->
-        <value>5.47<!-- 652 MHz CPU speed -->
-        <value>6.74<!-- 748 MHz CPU speed -->
-        <value>7.69<!-- 825 MHz CPU speed -->
-        <value>8.57<!-- 902 MHz CPU speed -->
-        <value>9.42<!-- 979 MHz CPU speed -->
-        <value>10.41<!-- 1056 MHz CPU speed -->
-        <value>11.56<!-- 1132 MHz CPU speed -->
-        <value>12.87<!-- 1228 MHz CPU speed -->
-        <value>14.61<!-- 1324 MHz CPU speed -->
-        <value>16.49<!-- 1420 MHz CPU speed -->
-        <value>18.90<!-- 1516 MHz CPU speed -->
-        <value>21.62<!-- 1612 MHz CPU speed -->
-        <value>24.47<!-- 1689 MHz CPU speed -->
-        <value>26.45<!-- 1766 MHz CPU speed -->
+        <value>2.27</value> <!-- 300 MHz CPU speed -->
+        <value>3.63</value> <!-- 403 MHz CPU speed -->
+        <value>4.36</value> <!-- 480 MHz CPU speed -->
+        <value>5.21</value> <!-- 576 MHz CPU speed -->
+        <value>5.47</value> <!-- 652 MHz CPU speed -->
+        <value>6.74</value> <!-- 748 MHz CPU speed -->
+        <value>7.69</value> <!-- 825 MHz CPU speed -->
+        <value>8.57</value> <!-- 902 MHz CPU speed -->
+        <value>9.42</value> <!-- 979 MHz CPU speed -->
+        <value>10.41</value> <!-- 1056 MHz CPU speed -->
+        <value>11.56</value> <!-- 1132 MHz CPU speed -->
+        <value>12.87</value> <!-- 1228 MHz CPU speed -->
+        <value>14.61</value> <!-- 1324 MHz CPU speed -->
+        <value>16.49</value> <!-- 1420 MHz CPU speed -->
+        <value>18.90</value> <!-- 1516 MHz CPU speed -->
+        <value>21.62</value> <!-- 1612 MHz CPU speed -->
+        <value>24.47</value> <!-- 1689 MHz CPU speed -->
+        <value>26.45</value> <!-- 1766 MHz CPU speed -->
     </array>
     <!-- Additional power used by a CPU core from cluster 1 when running at
          different speeds, excluding cluster and active cost -->
