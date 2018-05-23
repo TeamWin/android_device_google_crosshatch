@@ -249,6 +249,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.foss.config=1 \
     vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.disable_fbid_cache=1
+
 # b/73168288
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_rotator_downscale=1
