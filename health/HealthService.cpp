@@ -83,7 +83,7 @@ void healthd_board_init(struct healthd_config*) {
 }
 
 int healthd_board_battery_update(struct android::BatteryProperties *props) {
-    props->batteryLevel = battRechargingControl.updateBatteryProperties(props);
+    battRechargingControl.updateBatteryProperties(props);
     return 0;
 }
 
