@@ -31,11 +31,11 @@ namespace crosshatch {
 namespace health {
 
 enum RechargeState {
-    WAIT_EOC,          // Wait for the charge done.
+    WAIT_EOC,          // Wait for the charge done
     RECHARGING_CYCLE,  // During the recharging cycle state
-    OVER_LOADING,      // When the power consumption is high than charging
-    CABLE_OUT,         // Remove the charging
-    INACTIVE           // Not active the recharging state checking.
+    OVER_LOADING,      // When system power draw is higher than what charges the battery
+    NO_POWER_SOURCE,   // No power source detected
+    INACTIVE           // Not active the recharging state checking
 };
 
 struct sysfsStringEnumMap {
@@ -43,14 +43,28 @@ struct sysfsStringEnumMap {
     int val;
 };
 
+/**
+ * updateBatteryProperties is called with the active Fuel Gauge properties values.
+ * In bluecross case, the Maxim FG. The charger SOC level should not be considered
+ * and cannot be used to make any assumption on the SOC we should reporting to the
+ * user.
+ *
+ * Once 100% is reached, the class will track the charger status to detect
+ * when reaching charge termination (EOC), then will report 100% as long as
+ * in Full or Charging states.
+ * The power source might be disconnected at any FG level, recharge_soc_ is used
+ * to keep track of that level to be reached within defined transition time.
+ */
 class BatteryRechargingControl {
   public:
     BatteryRechargingControl();
-    int updateBatteryProperties(struct android::BatteryProperties *props);
+    void updateBatteryProperties(struct android::BatteryProperties *props);
 
   private:
     enum RechargeState state_;
     time_t start_time_;
+    /* Keeps track of the target level to detect OVER_LOADING or 0 when no target is set */
+    int recharge_soc_;
 
     int mapSysfsString(const char *str, struct sysfsStringEnumMap map[]);
     int getBatteryStatus(const char *status);
