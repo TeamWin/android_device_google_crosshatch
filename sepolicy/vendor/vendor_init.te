@@ -25,3 +25,5 @@ allow vendor_init unlabeled:dir { getattr relabelfrom };
 
 #TUI Files
 allow vendor_init vendor_tui_data_file:dir create_dir_perms;
+
+set_prop(vendor_init, vendor_usb_prop)
