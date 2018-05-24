@@ -17,7 +17,7 @@ debug.sf.hw=1
 debug.gralloc.enable_fb_ubwc=1
 
 # system props for the cne module
-persist.cne.feature=1
+persist.vendor.cne.feature=1
 
 # system props for the MM modules
 media.stagefright.enable-player=true
