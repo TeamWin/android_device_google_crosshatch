@@ -22,7 +22,7 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.mpssrfs.rc
 
 
 on charger
-    stop qseecomd
+    stop vendor.qseecomd
     stop keymaster-4-0
     # Lock to lowest freqency on charger mode
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
@@ -61,7 +61,7 @@ on init
 
     # start qseecomd early as we mount system/ vendor/ early
     # vold needs keymaster that needs qseecomd
-    start qseecomd
+    start vendor.qseecomd
     start keymaster-4-0
 
     # Boot time fs tune
@@ -299,10 +299,10 @@ on post-fs-data
     wait_for_prop vendor.qcom.time.set true
 
     # Wait qseecomd started
-    wait_for_prop sys.listeners.registered true
+    wait_for_prop vendor.sys.listeners.registered true
 
     # load IPA FWs
-    # This must be started when sys.listeners.registered is true
+    # This must be started when vendor.sys.listeners.registered is true
     start ipastart_sh
 
 # zygote need to be started after otapreopt which will be done on post-fs-data
@@ -616,7 +616,7 @@ on property:init.svc.vendor.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service qseecomd /vendor/bin/qseecomd
+service vendor.qseecomd /vendor/bin/qseecomd
    class core
    user root
    group root
