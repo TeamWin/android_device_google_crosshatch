@@ -1,9 +1,5 @@
 type google_camera_app, domain, coredomain;
 
-# TODO(b/62041836): system processes should not execute vendor code, except for
-# same-process hals and required libraries.
-typeattribute google_camera_app system_executes_vendor_violators;
-
 app_domain(google_camera_app)
 net_domain(google_camera_app)
 
@@ -38,12 +34,7 @@ allow google_camera_app qdsp_device:chr_file { r_file_perms };
 # cropping or taking user photos.
 allow google_camera_app system_app_data_file:file { read write getattr };
 
-# Allow GoogleCamera access to necessary vendor libraries to execute
-# Halide code
-allow google_camera_app hexagon_halide_file:file { execute read open getattr };
-
 # Allow GoogleCamera access easel.
 allow google_camera_app hal_paintbox_hwservice:hwservice_manager find;
 binder_call(google_camera_app, easel)
-allow google_camera_app easel_lib_file:file rx_file_perms;
 allow google_camera_app easel_device:chr_file rw_file_perms;
