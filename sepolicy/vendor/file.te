@@ -114,7 +114,4 @@ type proc_irq, fs_type, proc_type;
 type sysfs_irq, fs_type, sysfs_type;
 type irqbalance_socket, file_type;
 
-# easel lib files
-type easel_lib_file, vendor_file_type, file_type;
-
 allow rootfs labeledfs:filesystem associate;
