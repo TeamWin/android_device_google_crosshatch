@@ -330,6 +330,12 @@ on zygote-start
     mkdir /data/vendor/netmgr 0771 radio radio
     chmod 0771 /data/vendor/netmgr
 
+    # Create netmgr recovery folder
+    mkdir /data/vendor/netmgr/recovery 0700 radio radio
+    chmod 0770 /data/vendor/netmgr/recovery
+    write /data/vendor/netmgr/recovery/recovery_info ""
+    chown radio radio /data/vendor/netmgr/recovery/recovery_info
+
     # Create directory used by audio subsystem
     mkdir /data/vendor/audio 0770 audio audio
 
