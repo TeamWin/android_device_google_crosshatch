@@ -109,3 +109,9 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.grap
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.graphics.allocator@2.0-service)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.graphics.allocator@2.0-service.rc)
+
+#AU300 cleanup
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/product)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/include)
