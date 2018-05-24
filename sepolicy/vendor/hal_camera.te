@@ -37,6 +37,9 @@ allowxperm hal_camera self:socket ioctl { IPC_ROUTER_IOCTL_LOOKUP_SERVER IPC_ROU
 # ignore spurious denial
 dontaudit hal_camera graphics_device:dir search;
 
+allow hal_camera camera_vendor_data_file:dir rw_dir_perms;
+allow hal_camera camera_vendor_data_file:file create_file_perms;
+
 userdebug_or_eng(`
   allow hal_camera diag_device:chr_file rw_file_perms;
 ')
