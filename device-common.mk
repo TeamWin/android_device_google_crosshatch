@@ -88,7 +88,7 @@ ro.bluetooth.a2dp_offload.supported=true
 
 # A2DP offload disabled (UI toggle property)
 PRODUCT_PROPERTY_OVERRIDES += \
-persist.bluetooth.a2dp_offload.disabled=false
+persist.bluetooth.a2dp_offload.disabled=true
 
 # A2DP offload DSP supported encoder list
 PRODUCT_PROPERTY_OVERRIDES += \
