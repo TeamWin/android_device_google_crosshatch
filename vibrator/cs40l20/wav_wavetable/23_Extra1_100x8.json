@@ -1,0 +1,10 @@
+[
+	{
+	"Version": "1.4.0", "Repeat": "7", "WaitTime": "0",
+	"Time0" : "0" , "Level0" : "0" , "Frequency0" : "0",
+	"Time1" : "40" , "Level1" : "0.30" , "Frequency1" : "0",
+	"Time2" : "20" , "Level2" : "0.30" , "Frequency2" : "0",
+	"Time3" : "20" , "Level3" : "0" , "Frequency3" : "0",
+	"Time4" : "20" , "Level4" : "0" , "Frequency4" : "0"
+	}
+]
