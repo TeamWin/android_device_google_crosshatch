@@ -408,3 +408,9 @@ on property:vendor.sys.logger.bluetooth=true
 on property:vendor.sys.logger.bluetooth=false
    setprop persist.vendor.service.bdroid.snooplog false
    setprop persist.vendor.service.bdroid.fwsnoop false
+
+on property:persist.bluetooth.btsnoopenable=true
+   setprop persist.vendor.service.bdroid.soclog true
+
+on property:persist.bluetooth.btsnoopenable=false
+   setprop persist.vendor.service.bdroid.soclog false
