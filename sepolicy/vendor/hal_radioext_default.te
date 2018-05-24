@@ -10,8 +10,6 @@ binder_call(hal_radioext_default, radio)
 r_dir_file(hal_radioext_default, sysfs_msm_subsys)
 
 allow hal_radioext_default self:socket create_socket_perms;
-allow hal_radioext_default qmuxd_socket:dir w_dir_perms;
-allow hal_radioext_default qmuxd_socket:sock_file create_file_perms;
 allow hal_radioext_default sysfs_soc:dir search;
 allow hal_radioext_default sysfs_soc:file r_file_perms;
 allowxperm hal_radioext_default self:socket ioctl msm_sock_ipc_ioctls;

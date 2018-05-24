@@ -2,9 +2,6 @@ binder_call(rild, per_mgr)
 
 vndbinder_use(rild)
 
-allow rild qmuxd_socket:dir w_dir_perms;
-allow rild qmuxd_socket:sock_file create_file_perms;
-
 allow rild netmgrd_socket:dir search;
 unix_socket_connect(rild, netmgrd, netmgrd)
 
