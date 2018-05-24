@@ -1,8 +1,8 @@
 on post-fs-data
     # Modem Remote FS
-    mkdir /data/vendor/rfs      0755 system system
-    mkdir /data/vendor/rfs/mpss 0777 system system
-    mkdir /data/vendor/tombstones/rfs      0755 system system
+    mkdir /data/vendor/rfs      0700 system system
+    mkdir /data/vendor/rfs/mpss 0700 system system
+    mkdir /data/vendor/tombstones/rfs      0700 system system
     write /data/vendor/rfs/mpss/mcfg_nv_list_flag "1"
     chown system system /data/vendor/rfs/mpss/mcfg_nv_list_flag
-    chmod 0755 /data/vendor/rfs/mpss/mcfg_nv_list_flag
+    chmod 0700 /data/vendor/rfs/mpss/mcfg_nv_list_flag
