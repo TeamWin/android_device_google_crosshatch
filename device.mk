@@ -249,6 +249,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.foss.config=1 \
     vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.disable_fbid_cache=1
+
 # b/73168288
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_rotator_downscale=1
@@ -267,6 +270,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # camera google face detection
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.googfd.enable=1
+
+# Enable logical camera as default (camera id 1)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.logical.default=1
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -314,8 +321,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.2-service \
     gralloc.sdm845 \
     android.hardware.graphics.mapper@2.0-impl-qti-display \
-    vendor.qti.hardware.display.allocator@1.0-service \
-    android.hardware.configstore@1.0-service
+    vendor.qti.hardware.display.allocator@1.0-service
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \

@@ -244,13 +244,20 @@
 # libGLESv2_adreno depends on this
 /vendor/lib(64)?/libllvm-glnext\.so         u:object_r:same_process_hal_file:s0
 
-# Hexagon DSP host runtime and DSP-side executable needed for Halide operation
-/vendor/lib(64)?/libcdsprpc\.so             u:object_r:hexagon_halide_file:s0
-/vendor/lib/dsp/cdsp/fastrpc_shell_3        u:object_r:hexagon_halide_file:s0
+# Hexagon DSP-side executable needed for Halide operation
+# This is labeled as same_process_hal_file as it needs to be read by apps
+# (e.g. Google Camera App)
+/vendor/lib/dsp/cdsp/fastrpc_shell_3        u:object_r:same_process_hal_file:s0
 
-# Easel manager client lib
-/vendor/lib(64)?/libeaselmanager_client\.so          u:object_r:easel_lib_file:s0
-/vendor/lib(64)?/vendor\.google_paintbox@1\.0\.so    u:object_r:easel_lib_file:s0
+# Vendor libs that are exposed to apps (those listed in /vendor/etc/public.libraries.txt
+# and their dependencies)
+/vendor/lib(64)?/libOpenCL\.so                       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libadsprpc\.so                      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libcdsprpc\.so                      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libsdsprpc\.so                      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libeaselmanager_client\.so          u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/vendor\.google_paintbox@1\.0\.so    u:object_r:same_process_hal_file:s0
+
 
 # data files
 /data/vendor/netmgr(/.*)?              u:object_r:netmgr_data_file:s0

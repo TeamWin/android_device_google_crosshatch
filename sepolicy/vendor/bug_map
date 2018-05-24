@@ -1,4 +1,3 @@
-bpfloader bpfloader capability 73947368
 cnd cnd capability 73994924
 cnd cnd netlink_generic_socket 73994924
 cnd cnd netlink_route_socket 73994924

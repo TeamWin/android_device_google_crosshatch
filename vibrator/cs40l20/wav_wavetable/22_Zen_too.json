@@ -1,0 +1,22 @@
+[
+	{
+	"Version": "1.4.0", "Repeat": "7", "WaitTime": "0",
+	"Time0" : "0" , "Level0" : "0" , "Frequency0" : "0",
+	"Time1" : "4" , "Level1" : "0.69" , "Frequency1" : "0",
+	"Time2" : "8" , "Level2" : "0.69" , "Frequency2" : "0",
+	"Time3" : "4" , "Level3" : "0" , "Frequency3" : "0",
+	"Time4" : "388" , "Level4" : "0" , "Frequency4" : "0",
+	"Time5" : "4" , "Level5" : "0.69" , "Frequency5" : "0",
+	"Time6" : "8" , "Level6" : "0.69" , "Frequency6" : "0",
+	"Time7" : "4" , "Level7" : "0" , "Frequency7" : "0",
+	"Time8" : "92" , "Level8" : "0" , "Frequency8" : "0",
+	"Time9" : "4" , "Level9" : "0.69" , "Frequency9" : "0",
+	"Time10" : "8" , "Level10" : "0.69" , "Frequency10" : "0",
+	"Time11" : "4" , "Level11" : "0" , "Frequency11" : "0",
+	"Time12" : "316" , "Level12" : "0" , "Frequency12" : "0",
+	"Time13" : "300" , "Level13" : "0.30" , "Frequency13" : "0",
+	"Time14" : "100" , "Level14" : "0.30" , "Frequency14" : "0",
+	"Time15" : "4" , "Level15" : "0" , "Frequency15" : "0",
+	"Time16" : "972" , "Level16" : "0" , "Frequency16" : "0"
+	}
+]
