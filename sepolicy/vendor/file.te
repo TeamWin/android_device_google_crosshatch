@@ -96,6 +96,7 @@ type ssr_log_file, file_type, data_file_type;
 type audio_vendor_data_file, file_type, data_file_type;
 type modem_fdr_file, file_type, data_file_type;
 type mediadrm_vendor_data_file, file_type, data_file_type;
+type data_qsee_file, file_type, data_file_type;
 
 #data sysfs files
 type sysfs_data, fs_type, sysfs_type;
