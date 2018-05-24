@@ -52,15 +52,55 @@ static constexpr uint32_t WAVEFORM_STRONG_HEAVY_CLICK_EFFECT_MS = 12;
 static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_INDEX = 7;
 static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = 130;
 
+static constexpr uint32_t WAVEFORM_RINGTONE_EFFECT_INDEX = 65534;
+static constexpr uint32_t WAVEFORM_RINGTONE_EFFECT_MS = 30000;
+
+// The_big_adventure - RINGTONE_1
+static constexpr char WAVEFORM_RINGTONE1_EFFECT_QUEUE[] = "160, 11.100, 560, 1!";
+
+// Copycat - RINGTONE_2
+static constexpr char WAVEFORM_RINGTONE2_EFFECT_QUEUE[] = "260, 12.100, 932, 2!";
+
+// Crackle - RINGTONE_3
+static constexpr char WAVEFORM_RINGTONE3_EFFECT_QUEUE[] = "352, 13.100, 748, 5!";
+
+// Flutterby - RINGTONE_4
+static constexpr char WAVEFORM_RINGTONE4_EFFECT_QUEUE[] = "14.100, 6!";
+
+// Hotline - RINGTONE_5
+static constexpr char WAVEFORM_RINGTONE5_EFFECT_QUEUE[] = "15.100, 4!";
+
+// Leaps_and_bounds - RINGTONE_6
+static constexpr char WAVEFORM_RINGTONE6_EFFECT_QUEUE[] = "140, 16.100, 1!";
+
+// Lollipop - RINGTONE_7
+static constexpr char WAVEFORM_RINGTONE7_EFFECT_QUEUE[] = "140, 17.100, 624, 1!";
+
+// Lost_and_found - RINGTONE_8
+static constexpr char WAVEFORM_RINGTONE8_EFFECT_QUEUE[] = "140, 18.100, 1020,496, 1!";
+
+// Mash_up - RINGTONE_9
+static constexpr char WAVEFORM_RINGTONE9_EFFECT_QUEUE[] = "140, 19.100, 8, 3!";
+
+// Monkey_around - RINGTONE_10
+static constexpr char WAVEFORM_RINGTONE10_EFFECT_QUEUE[] = "20.100, 23.100, 23.80, 23.60, 892, 4!";
+
+// Schools_out - RINGTONE_11
+static constexpr char WAVEFORM_RINGTONE11_EFFECT_QUEUE[] = "21.60, 21.80, 21.100, 1020, 564, 6!";
+
+// Zen_too - RINGTONE_12
+static constexpr char WAVEFORM_RINGTONE12_EFFECT_QUEUE[] = "140, 22.100, 972, 1!";
+
 static constexpr int8_t MAX_SCALE_INPUT = 112;
 
 static constexpr int8_t MAX_TRIGGER_LATENCY_MS = 5;
 
 Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofstream&& effect,
-        std::ofstream&& scale) :
+        std::ofstream&& queue, std::ofstream&& scale) :
     mActivate(std::move(activate)),
     mDuration(std::move(duration)),
     mEffectIndex(std::move(effect)),
+    mEffectQueue(std::move(queue)),
     mScale(std::move(scale))
 {}
 
@@ -145,28 +185,83 @@ Return<void> Vibrator::performEffect(Effect effect, EffectStrength strength,
         effectIndex = WAVEFORM_DOUBLE_CLICK_EFFECT_INDEX;
         timeMs = WAVEFORM_DOUBLE_CLICK_EFFECT_MS;
         break;
+    case Effect::RINGTONE_1:
+        mEffectQueue << WAVEFORM_RINGTONE1_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_2:
+        mEffectQueue << WAVEFORM_RINGTONE2_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_3:
+        mEffectQueue << WAVEFORM_RINGTONE3_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_4:
+        mEffectQueue << WAVEFORM_RINGTONE4_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_5:
+        mEffectQueue << WAVEFORM_RINGTONE5_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_6:
+        mEffectQueue << WAVEFORM_RINGTONE6_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_7:
+        mEffectQueue << WAVEFORM_RINGTONE7_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_8:
+        mEffectQueue << WAVEFORM_RINGTONE8_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_9:
+        mEffectQueue << WAVEFORM_RINGTONE9_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_10:
+        mEffectQueue << WAVEFORM_RINGTONE10_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_11:
+        mEffectQueue << WAVEFORM_RINGTONE11_EFFECT_QUEUE << std::endl;
+        break;
+    case Effect::RINGTONE_12:
+        mEffectQueue << WAVEFORM_RINGTONE12_EFFECT_QUEUE << std::endl;
+        break;
     default:
         _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
         return Void();
     }
 
-    switch (strength) {
-    case EffectStrength::LIGHT:
-        effectIndex -= 1;
-        break;
-    case EffectStrength::MEDIUM:
-        break;
-    case EffectStrength::STRONG:
-        effectIndex += 1;
-        break;
-    default:
-        _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
-        return Void();
+    // EffectStrength needs to be handled differently for ringtone effects
+    if (effect >= Effect::RINGTONE_1 && effect <= Effect::RINGTONE_15) {
+        effectIndex = WAVEFORM_RINGTONE_EFFECT_INDEX;
+        timeMs = WAVEFORM_RINGTONE_EFFECT_MS;
+        switch (strength) {
+        case EffectStrength::LIGHT:
+            setAmplitude(UINT8_MAX / 3);
+            break;
+        case EffectStrength::MEDIUM:
+            setAmplitude(UINT8_MAX / 2);
+            break;
+        case EffectStrength::STRONG:
+            setAmplitude(UINT8_MAX);
+            break;
+        default:
+            _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
+            return Void();
+        }
+    } else {
+        switch (strength) {
+        case EffectStrength::LIGHT:
+            effectIndex -= 1;
+            break;
+        case EffectStrength::MEDIUM:
+            break;
+        case EffectStrength::STRONG:
+            effectIndex += 1;
+            break;
+        default:
+            _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
+            return Void();
+        }
+        timeMs += MAX_TRIGGER_LATENCY_MS; // Add expected cold-start latency
+        setAmplitude(UINT8_MAX); // Always set full-scale for non-ringtone constants
     }
 
-    timeMs += MAX_TRIGGER_LATENCY_MS; // Add expected cold-start latency
-
-    setAmplitude(UINT8_MAX); // Always set full-scale for pre-defined constants
     on(timeMs, effectIndex);
     _hidl_cb(status, timeMs);
 
