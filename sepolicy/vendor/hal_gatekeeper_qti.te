@@ -6,4 +6,4 @@ init_daemon_domain(hal_gatekeeper_qti)
 
 dontaudit hal_gatekeeper_qti firmware_file:dir search;
 
-get_prop(hal_gatekeeper_qti, tee_listener_prop)
+get_prop(hal_gatekeeper_qti, vendor_tee_listener_prop)

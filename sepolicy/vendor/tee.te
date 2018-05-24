@@ -2,7 +2,7 @@ allow tee self:capability { chown setgid setuid sys_admin sys_rawio };
 
 allow tee device:dir r_dir_perms;
 
-set_prop(tee, tee_listener_prop)
+set_prop(tee, vendor_tee_listener_prop)
 set_prop(tee, keymaster_prop)
 get_prop(tee, hwservicemanager_prop)
 
