@@ -9,4 +9,3 @@ allow easelservice_app easel_device:chr_file { read write ioctl open };
 # Access to libeaselmanager_client.so
 allow easelservice_app hal_paintbox_hwservice:hwservice_manager find;
 binder_call(easelservice_app, easel)
-allow easelservice_app easel_lib_file:file rx_file_perms;
