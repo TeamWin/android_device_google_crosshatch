@@ -202,6 +202,7 @@
     <ctl name="AIF4_VI Mixer SPKR_VI_2" value="0"/>
     <ctl name="SLIM_4_TX Format" value="UNPACKED"/>
     <ctl name="AANC_SLIM_0_RX MUX" value="ZERO"/>
+    <ctl name="ASM Bit Width" value="24"/>
     <!-- Cirrus TDM config -->
     <ctl name="QUAT_TDM_RX_0 Channels" value="Two"/>
     <ctl name="QUAT_TDM_RX_0 Format" value="S32_LE"/>
@@ -2010,6 +2011,26 @@
         <ctl name="DEC6 Volume" value="84" />
         <ctl name="DEC7 Volume" value="84" />
         <ctl name="DEC8 Volume" value="84" />
+    </path>
+
+    <path name="speaker-and-bt-sco">
+        <path name="speaker"/>
+        <path name="bt-sco-headset"/>
+    </path>
+
+    <path name="speaker-and-bt-sco-wb">
+        <path name="speaker"/>
+        <path name="bt-sco-headset-wb"/>
+    </path>
+
+    <path name="speaker-safe-and-bt-sco">
+        <path name="speaker-safe"/>
+        <path name="bt-sco-headset"/>
+    </path>
+
+    <path name="speaker-safe-and-bt-sco-wb">
+        <path name="speaker-safe"/>
+        <path name="bt-sco-headset-wb"/>
     </path>
 
     <path name="bt-sco-headset">

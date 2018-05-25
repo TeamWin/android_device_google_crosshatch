@@ -20,6 +20,15 @@
 [AID_VENDOR_PIXELSTATS_SYSTEM]
 value: 2900
 
+[AID_VENDOR_QDSS]
+value:2902
+
+[AID_VENDOR_RFS]
+value:2903
+
+[AID_VENDOR_RFS_SHARED]
+value:2904
+
 [vendor/bin/pm-service]
 mode: 0755
 user: AID_SYSTEM

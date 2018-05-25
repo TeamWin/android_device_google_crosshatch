@@ -48,11 +48,6 @@
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
 /dev/socket/msm_irqbalance                      u:object_r:irqbalance_socket:s0
-/dev/socket/qmux_audio(/.*)?                    u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_bluetooth(/.*)?                u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_gps(/.*)?                      u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_nfc(/.*)?                      u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_radio(/.*)?                    u:object_r:qmuxd_socket:s0
 /dev/socket/ims_qmid                            u:object_r:ims_socket:s0
 /dev/socket/ims_datad                           u:object_r:ims_socket:s0
 /dev/socket/ipacm_log_file                      u:object_r:ipacm_socket:s0
@@ -61,6 +56,7 @@
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
 /dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
+/data/vendor/netmgr/recovery(/.*)?              u:object_r:netmgr_recovery_data_file:s0
 /dev/socket/pps                                 u:object_r:pps_socket:s0
 /dev/socket/location(/.*)?                      u:object_r:location_socket:s0
 /dev/nq-nci                                     u:object_r:nfc_device:s0
@@ -163,7 +159,6 @@
 /vendor/bin/ipacm               u:object_r:hal_tetheroffload_default_exec:s0
 /vendor/bin/ipacm-diag          u:object_r:hal_tetheroffload_default_exec:s0
 /vendor/bin/msm_irqbalance      u:object_r:irqbalance_exec:s0
-/vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 /vendor/bin/easelmanagerd       u:object_r:easel_exec:s0
 /vendor/bin/hw/android\.hardware\.usb@1\.1-service\.crosshatch             u:object_r:hal_usb_default_exec:s0
@@ -206,6 +201,7 @@
 /vendor/bin/hw/hardware\.google\.media\.c2@1\.0-service-software u:object_r:mediacodec_exec:s0
 /vendor/bin/hw/vendor\.qti\.hardware\.display\.allocator@1\.0-service   u:object_r:hal_graphics_allocator_default_exec:s0
 /vendor/bin/hw/vendor\.google\.wireless_charger@1\.0-service-vendor       u:object_r:hal_wlc_exec:s0
+/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.1-service-qti u:object_r:hal_neuralnetworks_default_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
@@ -215,6 +211,7 @@
 /vendor/lib(64)?/libgrallocutils\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libgralloccore\.so        u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdMetaData\.so         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_aion_buffer\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqservice\.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdutils\.so            u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libadreno_utils\.so       u:object_r:same_process_hal_file:s0
@@ -243,13 +240,20 @@
 # libGLESv2_adreno depends on this
 /vendor/lib(64)?/libllvm-glnext\.so         u:object_r:same_process_hal_file:s0
 
-# Hexagon DSP host runtime and DSP-side executable needed for Halide operation
-/vendor/lib(64)?/libcdsprpc\.so             u:object_r:hexagon_halide_file:s0
-/vendor/lib/dsp/cdsp/fastrpc_shell_3        u:object_r:hexagon_halide_file:s0
+# Hexagon DSP-side executable needed for Halide operation
+# This is labeled as same_process_hal_file as it needs to be read by apps
+# (e.g. Google Camera App)
+/vendor/lib/dsp/cdsp/fastrpc_shell_3        u:object_r:same_process_hal_file:s0
 
-# Easel manager client lib
-/vendor/lib(64)?/libeaselmanager_client\.so          u:object_r:easel_lib_file:s0
-/vendor/lib(64)?/vendor\.google_paintbox@1\.0\.so    u:object_r:easel_lib_file:s0
+# Vendor libs that are exposed to apps (those listed in /vendor/etc/public.libraries.txt
+# and their dependencies)
+/vendor/lib(64)?/libOpenCL\.so                       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libadsprpc\.so                      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libcdsprpc\.so                      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libsdsprpc\.so                      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libeaselmanager_client\.so          u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/vendor\.google_paintbox@1\.0\.so    u:object_r:same_process_hal_file:s0
+
 
 # data files
 /data/vendor/netmgr(/.*)?              u:object_r:netmgr_data_file:s0
@@ -273,7 +277,9 @@
 /data/vendor/audio(/.*)?               u:object_r:audio_vendor_data_file:s0
 /data/vendor/modem_fdr(/.*)?           u:object_r:modem_fdr_file:s0
 /data/vendor/connectivity(/.*)?        u:object_r:cnd_data_file:s0
+/data/vendor/misc/qsee(/.*)?           u:object_r:data_qsee_file:s0
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
+/data/vendor/tui(/.*)?                 u:object_r:vendor_tui_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0

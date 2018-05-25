@@ -2,9 +2,6 @@ binder_call(rild, per_mgr)
 
 vndbinder_use(rild)
 
-allow rild qmuxd_socket:dir w_dir_perms;
-allow rild qmuxd_socket:sock_file create_file_perms;
-
 allow rild netmgrd_socket:dir search;
 unix_socket_connect(rild, netmgrd, netmgrd)
 
@@ -27,7 +24,6 @@ allow rild radio_vendor_data_file:dir rw_dir_perms;
 allow rild radio_vendor_data_file:file create_file_perms;
 
 get_prop(rild, factory_ota_prop)
-get_prop(rild, tel_mon_prop)
 set_prop(rild, vendor_radio_prop)
 
 hal_server_domain(rild, hal_secure_element)

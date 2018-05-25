@@ -11,6 +11,3 @@ allow tango_core vendor_file:file { getattr open read };
 allow tango_core app_api_service:service_manager find;
 allow tango_core surfaceflinger_service:service_manager find;
 allow tango_core cameraserver_service:service_manager find;
-
-# Allow access to necessary vendor libraries to execute Hexagon code
-allow tango_core hexagon_halide_file:file { execute read open getattr };

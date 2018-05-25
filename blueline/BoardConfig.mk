@@ -15,7 +15,6 @@
 #
 
 TARGET_BOOTLOADER_BOARD_NAME := blueline
-DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS := 0x00000056
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 20
 
 include device/google/crosshatch/BoardConfig-common.mk

@@ -1,0 +1,15 @@
+[
+	{
+	"Version": "1.4.0", "Repeat": "1", "WaitTime": "0",
+	"Time0" : "0" , "Level0" : "0" , "Frequency0" : "0",
+	"Time1" : "300" , "Level1" : "0.30" , "Frequency1" : "0",
+	"Time2" : "100" , "Level2" : "0.30" , "Frequency2" : "0",
+	"Time3" : "4" , "Level3" : "0" , "Frequency3" : "0",
+	"Time4" : "296" , "Level4" : "0" , "Frequency4" : "0",
+	"Time5" : "300" , "Level5" : "0.30" , "Frequency5" : "0",
+	"Time6" : "100" , "Level6" : "0.30" , "Frequency6" : "0",
+	"Time7" : "4" , "Level7" : "0" , "Frequency7" : "0",
+	"Time8" : "1020" , "Level8" : "0" , "Frequency8" : "0",
+	"Time9" : "260" , "Level9" : "0" , "Frequency9" : "0"
+	}
+]

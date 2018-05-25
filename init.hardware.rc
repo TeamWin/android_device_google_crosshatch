@@ -22,7 +22,7 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.mpssrfs.rc
 
 
 on charger
-    stop qseecomd
+    stop vendor.qseecomd
     stop keymaster-4-0
     # Lock to lowest freqency on charger mode
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
@@ -61,7 +61,7 @@ on init
 
     # start qseecomd early as we mount system/ vendor/ early
     # vold needs keymaster that needs qseecomd
-    start qseecomd
+    start vendor.qseecomd
     start keymaster-4-0
 
     # Boot time fs tune
@@ -77,6 +77,7 @@ on init
     write /sys/block/sdf/queue/nr_requests 256
     write /sys/block/dm-0/queue/read_ahead_kb 2048
     write /sys/block/dm-1/queue/read_ahead_kb 2048
+    write /sys/block/dm-2/queue/read_ahead_kb 2048
 
     # Disable UFS powersaving
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 0
@@ -200,6 +201,9 @@ on init
     # Allow PAI targeting per hardware SKU
     setprop ro.oem.key1 ${ro.boot.hardware.sku}
 
+on late-init
+   write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
 on fs
     # Start HW service manager early
     start hwservicemanager
@@ -235,7 +239,7 @@ on late-fs
     start surfaceflinger
     start bootanim
     start vendor.hwcomposer-2-2
-    start vendor.configstore-hal-1-0
+    start vendor.configstore-hal
     start vendor.gralloc-2-0
 
     # Wait for hwservicemanager ready since fsck might be triggered in mount_all --late
@@ -248,6 +252,8 @@ on late-fs
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --late
+    # Boot time fs tune
+    write /sys/block/dm-3/queue/read_ahead_kb 2048
 
     # Required for time_daemon
     mkdir /persist/time 0770 system system
@@ -293,10 +299,10 @@ on post-fs-data
     wait_for_prop vendor.qcom.time.set true
 
     # Wait qseecomd started
-    wait_for_prop sys.listeners.registered true
+    wait_for_prop vendor.sys.listeners.registered true
 
     # load IPA FWs
-    # This must be started when sys.listeners.registered is true
+    # This must be started when vendor.sys.listeners.registered is true
     start ipastart_sh
 
 # zygote need to be started after otapreopt which will be done on post-fs-data
@@ -323,6 +329,12 @@ on zygote-start
     #create netmgr log dir
     mkdir /data/vendor/netmgr 0771 radio radio
     chmod 0771 /data/vendor/netmgr
+
+    # Create netmgr recovery folder
+    mkdir /data/vendor/netmgr/recovery 0700 radio radio
+    chmod 0770 /data/vendor/netmgr/recovery
+    write /data/vendor/netmgr/recovery/recovery_info ""
+    chown radio radio /data/vendor/netmgr/recovery/recovery_info
 
     # Create directory used by audio subsystem
     mkdir /data/vendor/audio 0770 audio audio
@@ -431,6 +443,7 @@ on early-boot
 
     # Permission for Vibrator
     chown system system /sys/class/leds/vibrator/device/cp_trigger_index
+    chown system system /sys/class/leds/vibrator/device/cp_trigger_queue
     chown system system /sys/class/leds/vibrator/device/dig_scale
     chown system system /sys/class/leds/vibrator/device/f0_stored
     chown system system /sys/class/leds/vibrator/device/redc_stored
@@ -565,7 +578,9 @@ on property:sys.boot_completed=1
     write /dev/cpuset/application/background/cpus 0-1
     write /dev/cpuset/application/cpus 0-1,4-5
 
-    # Run time fs tune
+    # Runtime fs tuning: as we have init boottime setting and kernel patch setting
+    # default readahead to 2048KB. We should adjust the setting upon boot_complete
+    # for runtime performance
     write /sys/block/sda/queue/read_ahead_kb 1024
     write /sys/block/sda/queue/nr_requests 128
     write /sys/block/sda/queue/iostats 1
@@ -574,6 +589,8 @@ on property:sys.boot_completed=1
     write /sys/block/sdf/queue/iostats 1
     write /sys/block/dm-0/queue/read_ahead_kb 512
     write /sys/block/dm-1/queue/read_ahead_kb 512
+    write /sys/block/dm-2/queue/read_ahead_kb 512
+    write /sys/block/dm-3/queue/read_ahead_kb 512
     write /sys/block/sda/queue/scheduler deadline
     write /sys/block/sdf/queue/scheduler deadline
 
@@ -605,7 +622,7 @@ on property:init.svc.vendor.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service qseecomd /vendor/bin/qseecomd
+service vendor.qseecomd /vendor/bin/qseecomd
    class core
    user root
    group root
@@ -714,11 +731,6 @@ service imsrcsservice /vendor/bin/imsrcsd
 on property:vendor.ims.DATA_DAEMON_STATUS=1
    start ims_rtp_daemon
    start imsrcsservice
-
-service qmuxd /vendor/bin/qmuxd
-   class main
-   user root
-   group radio audio bluetooth gps nfc qcom_diag
 
 service cnd /vendor/bin/cnd
    class main

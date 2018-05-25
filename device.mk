@@ -249,6 +249,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.foss.config=1 \
     vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.disable_fbid_cache=1
+
 # b/73168288
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_rotator_downscale=1
@@ -268,12 +271,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.googfd.enable=1
 
+# Enable logical camera as default (camera id 1)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.logical.default=1
+
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.cne.feature=1 \
+    persist.vendor.cne.feature=1 \
     persist.vendor.data.iwlan.enable=true \
     persist.radio.RATE_ADAPT_ENABLE=1 \
     persist.radio.ROTATION_ENABLE=1 \
@@ -314,8 +321,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.2-service \
     gralloc.sdm845 \
     android.hardware.graphics.mapper@2.0-impl-qti-display \
-    vendor.qti.hardware.display.allocator@1.0-service \
-    android.hardware.configstore@1.0-service
+    vendor.qti.hardware.display.allocator@1.0-service
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -704,9 +710,10 @@ PRODUCT_COPY_FILES += \
 
 # MAXX prebuild library and tuning table
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/audio/libmaqdspparams.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmaqdspparams.so \
+    device/google/crosshatch/audio/libmaxxaudioqdsp.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmaxxaudioqdsp.so \
     device/google/crosshatch/audio/capi_v2_MAM.so:$(TARGET_COPY_OUT_VENDOR)/lib/rfsa/adsp/capi_v2_MAM.so \
-    device/google/crosshatch/audio/default.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default.mps \
+    device/google/crosshatch/audio/default_b1.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default_b1.mps \
+    device/google/crosshatch/audio/default_c1.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default_c1.mps \
     device/google/crosshatch/audio/maxx_conf.ini:$(TARGET_COPY_OUT_VENDOR)/etc/maxx_conf.ini
 
 # Keymaster configuration

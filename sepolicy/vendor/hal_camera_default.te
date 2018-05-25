@@ -20,6 +20,9 @@ userdebug_or_eng(`
 # For interfacing with PowerHAL
 hal_client_domain(hal_camera_default, hal_power)
 
+# For interfacing with ThermalHAL
+hal_client_domain(hal_camera_default, hal_thermal)
+
 allow hal_camera_default proc_stat:file r_file_perms;
 
 allow hal_camera_default hal_paintbox_hwservice:hwservice_manager find;

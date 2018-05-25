@@ -33,6 +33,7 @@ static constexpr char ACTIVATE_PATH[] = "/sys/class/leds/vibrator/activate";
 static constexpr char DURATION_PATH[] = "/sys/class/leds/vibrator/duration";
 static constexpr char STATE_PATH[] = "/sys/class/leds/vibrator/state";
 static constexpr char EFFECT_INDEX_PATH[] = "/sys/class/leds/vibrator/device/cp_trigger_index";
+static constexpr char EFFECT_QUEUE_PATH[] = "/sys/class/leds/vibrator/device/cp_trigger_queue";
 static constexpr char DIGI_SCALE_PATH[] = "/sys/class/leds/vibrator/device/dig_scale";
 
 // File path to the calibration file
@@ -128,6 +129,11 @@ status_t registerVibratorService() {
         ALOGE("Failed to open %s (%d): %s", EFFECT_INDEX_PATH, errno, strerror(errno));
     }
 
+    std::ofstream queue{EFFECT_QUEUE_PATH};
+    if (!state) {
+        ALOGE("Failed to open %s (%d): %s", EFFECT_QUEUE_PATH, errno, strerror(errno));
+    }
+
     std::ofstream scale{DIGI_SCALE_PATH};
     if (!scale) {
         ALOGE("Failed to open %s (%d): %s", DIGI_SCALE_PATH, errno, strerror(errno));
@@ -143,7 +149,7 @@ status_t registerVibratorService() {
     }
 
     sp<IVibrator> vibrator = new Vibrator(std::move(activate), std::move(duration),
-        std::move(effect), std::move(scale));
+        std::move(effect), std::move(queue), std::move(scale));
 
     return vibrator->registerAsService();
 }
