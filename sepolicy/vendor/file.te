@@ -8,6 +8,7 @@ type sysfs_mdss_mdp_caps, sysfs_type, fs_type;
 type sysfs_msm_subsys, sysfs_type, fs_type;
 type sysfs_msm_subsys_restart, sysfs_type, fs_type;
 type sysfs_msm_wlan, sysfs_type, fs_type;
+type sysfs_poweroff, sysfs_type, fs_type;
 type sysfs_rmtfs, sysfs_type, fs_type;
 type sysfs_soc, sysfs_type, fs_type;
 type sysfs_scsi_devices_0000, sysfs_type, fs_type;
