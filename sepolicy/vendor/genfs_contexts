@@ -13,6 +13,9 @@ genfscon sysfs /devices/platform/soc/soc:qcom,l3-cpu4          u:object_r:sysfs_
 genfscon sysfs /class/devfreq                                  u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,memlat-cpu0      u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,memlat-cpu4      u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,l3-cpu0/devfreq  u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,l3-cpu4/devfreq  u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,llccbw/devfreq   u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/virtual/sec/tsp                        u:object_r:sysfs_touch:s0
 genfscon sysfs /devices/platform/soc/888000.i2c/i2c-2/2-0049   u:object_r:sysfs_touch:s0
 

@@ -148,7 +148,6 @@ AB_OTA_PARTITIONS += \
     boot \
     system \
     vbmeta \
-    vendor \
     dtbo \
     product
 
@@ -280,7 +279,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.cne.feature=1 \
+    persist.vendor.cne.feature=1 \
     persist.vendor.data.iwlan.enable=true \
     persist.radio.RATE_ADAPT_ENABLE=1 \
     persist.radio.ROTATION_ENABLE=1 \

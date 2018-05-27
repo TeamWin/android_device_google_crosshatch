@@ -51,7 +51,6 @@ type proc_wifi_dbg, proc_type, fs_type;
 type proc_f2fs, proc_type, fs_type;
 type proc_sysctl_autogroup, proc_type, fs_type;
 
-type qmuxd_socket, file_type;
 type netmgrd_socket, file_type;
 type thermal_socket, file_type;
 
@@ -80,6 +79,7 @@ type persist_sensors_file, file_type;
 type persist_time_file, file_type;
 
 type netmgr_data_file, file_type, data_file_type;
+type netmgr_recovery_data_file, file_type, data_file_type;
 type ipa_vendor_data_file, file_type, data_file_type;
 
 type camera_vendor_data_file, file_type, data_file_type;
@@ -96,6 +96,8 @@ type ssr_log_file, file_type, data_file_type;
 type audio_vendor_data_file, file_type, data_file_type;
 type modem_fdr_file, file_type, data_file_type;
 type mediadrm_vendor_data_file, file_type, data_file_type;
+type data_qsee_file, file_type, data_file_type;
+type vendor_tui_data_file, file_type, data_file_type;
 
 #data sysfs files
 type sysfs_data, fs_type, sysfs_type;

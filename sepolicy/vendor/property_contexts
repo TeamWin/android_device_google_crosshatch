@@ -16,15 +16,18 @@ vendor.debug.ramdump.      u:object_r:vendor_ramdump_prop:s0
 persist.vendor.sys.crash_rcu  u:object_r:vendor_ramdump_prop:s0
 vendor.debug.ssrdump       u:object_r:vendor_ssr_prop:s0
 persist.vendor.sys.cnss.   u:object_r:vendor_cnss_diag_prop:s0
-sys.listeners.registered   u:object_r:tee_listener_prop:s0
+vendor.sys.listeners.registered   u:object_r:vendor_tee_listener_prop:s0
 wc_transport.              u:object_r:wc_prop:s0
 vendor.sys.qcom.thermalcfg u:object_r:vendor_thermal_prop:s0
 ctl.vendor.thermal-engine  u:object_r:vendor_thermal_prop:s0
 persist.vendor.sys.modem.diag.  u:object_r:vendor_modem_diag_prop:s0
 vendor.sys.modem.diag.     u:object_r:vendor_modem_diag_prop:s0
+persist.vendor.sys.ssr.    u:object_r:vendor_ssr_prop:s0
 persist.vendor.radio.      u:object_r:radio_prop:s0
 ro.vendor.ril.             u:object_r:radio_prop:s0
 vendor.qcom.time.set       u:object_r:vendor_time_prop:s0
+vendor.usb.                u:object_r:vendor_usb_prop:s0
+persist.vendor.usb.        u:object_r:vendor_usb_prop:s0
 vendor.powerhal.state      u:object_r:power_prop:s0
 vendor.powerhal.audio      u:object_r:power_prop:s0
 vendor.powerhal.lpm        u:object_r:power_prop:s0
@@ -36,6 +39,7 @@ vendor.qcom.devup          u:object_r:vendor_device_prop:s0
 vendor.all.modules.ready   u:object_r:vendor_device_prop:s0
 sys.slpi.firmware.version  u:object_r:public_vendor_system_prop:s0
 ctl.vendor.imsrcsservice   u:object_r:ctl_vendor_imsrcsservice_prop:s0
+ctl.vendor.hbtp            u:object_r:ctl_vendor_hbtp_prop:s0
 
 # vendor_default_prop
 audio_hal.in_period_size   u:object_r:vendor_default_prop:s0
@@ -137,7 +141,7 @@ sys.hwc_disable_hdr        u:object_r:vendor_default_prop:s0
 fastrpc.perf.kernel        u:object_r:public_vendor_default_prop:s0
 fastrpc.perf.adsp          u:object_r:public_vendor_default_prop:s0
 fastrpc.perf.freq          u:object_r:public_vendor_default_prop:s0
-persist.cne.feature        u:object_r:public_vendor_default_prop:s0
+persist.vendor.cne.feature u:object_r:public_vendor_default_prop:s0
 persist.cne.logging.qxdm   u:object_r:public_vendor_default_prop:s0
 persist.vendor.cnd.wqe     u:object_r:public_vendor_default_prop:s0
 persist.vendor.qti.telephony.vt_cam_interface  u:object_r:public_vendor_default_prop:s0

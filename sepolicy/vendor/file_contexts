@@ -48,11 +48,6 @@
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
 /dev/socket/msm_irqbalance                      u:object_r:irqbalance_socket:s0
-/dev/socket/qmux_audio(/.*)?                    u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_bluetooth(/.*)?                u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_gps(/.*)?                      u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_nfc(/.*)?                      u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_radio(/.*)?                    u:object_r:qmuxd_socket:s0
 /dev/socket/ims_qmid                            u:object_r:ims_socket:s0
 /dev/socket/ims_datad                           u:object_r:ims_socket:s0
 /dev/socket/ipacm_log_file                      u:object_r:ipacm_socket:s0
@@ -61,6 +56,7 @@
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
 /dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
+/data/vendor/netmgr/recovery(/.*)?              u:object_r:netmgr_recovery_data_file:s0
 /dev/socket/pps                                 u:object_r:pps_socket:s0
 /dev/socket/location(/.*)?                      u:object_r:location_socket:s0
 /dev/nq-nci                                     u:object_r:nfc_device:s0
@@ -163,7 +159,6 @@
 /vendor/bin/ipacm               u:object_r:hal_tetheroffload_default_exec:s0
 /vendor/bin/ipacm-diag          u:object_r:hal_tetheroffload_default_exec:s0
 /vendor/bin/msm_irqbalance      u:object_r:irqbalance_exec:s0
-/vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 /vendor/bin/easelmanagerd       u:object_r:easel_exec:s0
 /vendor/bin/hw/android\.hardware\.usb@1\.1-service\.crosshatch             u:object_r:hal_usb_default_exec:s0
@@ -206,6 +201,7 @@
 /vendor/bin/hw/hardware\.google\.media\.c2@1\.0-service-software u:object_r:mediacodec_exec:s0
 /vendor/bin/hw/vendor\.qti\.hardware\.display\.allocator@1\.0-service   u:object_r:hal_graphics_allocator_default_exec:s0
 /vendor/bin/hw/vendor\.google\.wireless_charger@1\.0-service-vendor       u:object_r:hal_wlc_exec:s0
+/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.1-service-qti u:object_r:hal_neuralnetworks_default_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
@@ -281,7 +277,9 @@
 /data/vendor/audio(/.*)?               u:object_r:audio_vendor_data_file:s0
 /data/vendor/modem_fdr(/.*)?           u:object_r:modem_fdr_file:s0
 /data/vendor/connectivity(/.*)?        u:object_r:cnd_data_file:s0
+/data/vendor/misc/qsee(/.*)?           u:object_r:data_qsee_file:s0
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
+/data/vendor/tui(/.*)?                 u:object_r:vendor_tui_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0
