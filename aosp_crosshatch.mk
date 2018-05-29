@@ -23,7 +23,7 @@ $(call inherit-product-if-exists, vendor/google_devices/crosshatch/proprietary/d
 
 PRODUCT_PACKAGES += \
     Dialer \
-    Launcher3 \
+    Launcher3QuickStep \
     WallpaperPicker
 
 # STOPSHIP deal with Qualcomm stuff later
