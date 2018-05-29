@@ -56,7 +56,7 @@ static constexpr uint32_t WAVEFORM_RINGTONE_EFFECT_INDEX = 65534;
 static constexpr uint32_t WAVEFORM_RINGTONE_EFFECT_MS = 30000;
 
 // The_big_adventure - RINGTONE_1
-static constexpr char WAVEFORM_RINGTONE1_EFFECT_QUEUE[] = "160, 11.100, 560, 1!";
+static constexpr char WAVEFORM_RINGTONE1_EFFECT_QUEUE[] = "160, 11.100, 2744, 1!";
 
 // Copycat - RINGTONE_2
 static constexpr char WAVEFORM_RINGTONE2_EFFECT_QUEUE[] = "260, 12.100, 932, 2!";
