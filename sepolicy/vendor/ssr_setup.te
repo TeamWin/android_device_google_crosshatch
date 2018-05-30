@@ -6,3 +6,5 @@ init_daemon_domain(ssr_setup);
 allow ssr_setup sysfs_msm_subsys:dir r_dir_perms;
 allow ssr_setup sysfs_msm_subsys:file rw_file_perms;
 allow ssr_setup sysfs_msm_subsys:lnk_file read;
+
+get_prop(ssr_setup, vendor_ssr_prop)
