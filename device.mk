@@ -707,14 +707,6 @@ PRODUCT_COPY_FILES += \
     device/google/crosshatch/audio/crus_sp_config_c1_rx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_rx.bin \
     device/google/crosshatch/audio/crus_sp_config_c1_tx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_tx.bin
 
-# MAXX prebuild library and tuning table
-PRODUCT_COPY_FILES += \
-    device/google/crosshatch/audio/libmaxxaudioqdsp.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmaxxaudioqdsp.so \
-    device/google/crosshatch/audio/capi_v2_MAM.so:$(TARGET_COPY_OUT_VENDOR)/lib/rfsa/adsp/capi_v2_MAM.so \
-    device/google/crosshatch/audio/default_b1.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default_b1.mps \
-    device/google/crosshatch/audio/default_c1.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default_c1.mps \
-    device/google/crosshatch/audio/maxx_conf.ini:$(TARGET_COPY_OUT_VENDOR)/etc/maxx_conf.ini
-
 # Keymaster configuration
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
