@@ -41,6 +41,8 @@ on charger
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 1
     write /sys/class/typec/port0/port_type sink
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    # Disable sched_boost
+    write /proc/sys/kernel/sched_boost 0
 
 service charger /charger
     class charger
@@ -49,6 +51,8 @@ service charger /charger
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
+    # Enable sched_boost
+    write /proc/sys/kernel/sched_boost 1
 
 # We need vold early for metadata encryption
 on early-fs
@@ -131,6 +135,7 @@ on init
     chown system system /dev/cpuset/kernel/tasks
     chown system system /dev/cpuset/kernel/cpus
     chmod 0660 /dev/cpuset/kernel/tasks
+    chmod 0660 /dev/cpuset/kernel/cpus
 
     mkdir /dev/cpuset/camera-daemon
     write /dev/cpuset/camera-daemon/cpus 0-7
@@ -403,21 +408,6 @@ on zygote-start
     # Secure Element directory for loader service functionality
     mkdir /data/vendor/secure_element 0770 secure_element secure_element
 
-    # Setup permission for powerHAL
-    chown system system /dev/stune/top-app/schedtune.boost
-    chown system system /dev/cpu_dma_latency
-    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
-    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
-    chown system system /sys/class/kgsl/kgsl-3d0/force_rail_on
-    chown system system /sys/class/kgsl/kgsl-3d0/force_clk_on
-    chown system system /sys/class/kgsl/kgsl-3d0/idle_timer
-    chown system system /sys/kernel/debug/sched_features
-    chown system system /sys/class/devfreq/soc:qcom,gpubw/min_freq
-    chown system system /sys/class/devfreq/soc:qcom,cpubw/min_freq
-    chown system system /sys/class/devfreq/soc:qcom,llccbw/min_freq
-    chown system system /sys/class/devfreq/soc:qcom,l3-cpu0/min_freq
-    chown system system /sys/class/devfreq/soc:qcom,l3-cpu4/min_freq
-
 on early-boot
     # wait for devices
     wait_for_prop vendor.qcom.devup 1
@@ -616,7 +606,12 @@ on property:sys.boot_completed=1
     chmod 644 /sys/kernel/debug/ufshcd0/stats/io_stats
     chmod 644 /sys/kernel/debug/ufshcd0/stats/req_stats
 
-on property:init.svc.vendor.per_mgr=running
+    # Disable sched_boost
+    write /proc/sys/kernel/sched_boost 0
+
+    # Enable PowerHAL hint processing
+    setprop vendor.powerhal.init 1
+
     start per_proxy
 
 on property:sys.shutdown.requested=*
@@ -675,6 +670,8 @@ service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
 service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
+    ioprio rt 0
+    shutdown critical
 
 service tftp_server /vendor/bin/tftp_server
    class core
