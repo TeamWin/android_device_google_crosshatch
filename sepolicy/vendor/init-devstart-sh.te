@@ -17,13 +17,6 @@ set_prop(init-qcom-devstart-sh, public_vendor_system_prop)
 # Set boot_adsp and boot_slpi to 1
 allow init-qcom-devstart-sh sysfs_msm_subsys:file w_file_perms;
 
-# Change ownership of the sensor registry files to "system"
-# TODO: b/77284159 Remove after all devices are updated.
-allow init-qcom-devstart-sh persist_sensors_file:dir { open read search };
-allow init-qcom-devstart-sh persist_sensors_file:file { getattr setattr };
-allow init-qcom-devstart-sh self:capability chown;
-allow init-qcom-devstart-sh persist_file:dir search;
-
 # Initialize Edge Sense.
 # See b/67205273.
 allow init-qcom-devstart-sh sysfs:dir r_dir_perms;
