@@ -538,13 +538,19 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
     $(LOCAL_PATH)/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
     $(LOCAL_PATH)/media_codecs_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_video.xml \
+
+# configures both aac and xaac decoders
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
+# and ensure that the xaac decoder is built
+PRODUCT_PACKAGES += \
+    libstagefright_soft_xaacdec.vendor
 
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.snd_card.open.retries=50
@@ -706,14 +712,6 @@ PRODUCT_COPY_FILES += \
     device/google/crosshatch/audio/crus_sp_config_b1_tx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_b1_tx.bin \
     device/google/crosshatch/audio/crus_sp_config_c1_rx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_rx.bin \
     device/google/crosshatch/audio/crus_sp_config_c1_tx.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/crus_sp_config_c1_tx.bin
-
-# MAXX prebuild library and tuning table
-PRODUCT_COPY_FILES += \
-    device/google/crosshatch/audio/libmaxxaudioqdsp.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmaxxaudioqdsp.so \
-    device/google/crosshatch/audio/capi_v2_MAM.so:$(TARGET_COPY_OUT_VENDOR)/lib/rfsa/adsp/capi_v2_MAM.so \
-    device/google/crosshatch/audio/default_b1.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default_b1.mps \
-    device/google/crosshatch/audio/default_c1.mps:$(TARGET_COPY_OUT_VENDOR)/etc/default_c1.mps \
-    device/google/crosshatch/audio/maxx_conf.ini:$(TARGET_COPY_OUT_VENDOR)/etc/maxx_conf.ini
 
 # Keymaster configuration
 PRODUCT_COPY_FILES += \

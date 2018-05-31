@@ -212,11 +212,8 @@
     <!-- Cirrus Booster Amp Algorithm Enable/Disable -->
     <ctl name="Cirrus SP" value="Config SP Enable"/>
     <ctl name="Cirrus SP FBPort" value="QUAT_TDM_RX_0"/>
-    <ctl name="FB Channels" value="Eight"/>
     <!-- Cirrus Booster Amp Algorithm end -->
     <!-- Cirrus Amp Gain -->
-    <ctl name="Boost Control" value="On"/>
-    <ctl name="R Boost Control" value="On"/>
     <ctl name="AMP PCM Gain" value="17"/>
     <ctl name="R AMP PCM Gain" value="17"/>
     <!-- Cirrus Amp Gain end-->
@@ -272,6 +269,7 @@
     <!-- Multimode Voice1 -->
     <ctl name="SLIM_0_RX_Voice Mixer VoiceMMode1" value="0"/>
     <ctl name="SLIM_6_RX_Voice Mixer VoiceMMode1" value="0"/>
+    <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode1" value="0"/>
     <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="0"/>
     <!-- Multimode Voice1 BTSCO -->
     <ctl name="SLIM_7_RX_Voice Mixer VoiceMMode1" value="0"/>
@@ -286,6 +284,7 @@
     <!-- Multimode Voice2 -->
     <ctl name="SLIM_0_RX_Voice Mixer VoiceMMode2" value="0"/>
     <ctl name="SLIM_6_RX_Voice Mixer VoiceMMode2" value="0"/>
+    <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode2" value="0"/>
     <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="0"/>
     <!-- Multimode Voice2 BTSCO -->
     <ctl name="SLIM_7_RX_Voice Mixer VoiceMMode2" value="0"/>
@@ -330,6 +329,7 @@
     <ctl name="Voip_Tx Mixer AFE_PCM_TX_Voip" value="0"/>
     <ctl name="USB_AUDIO_RX_Voice Mixer Voip" value="0"/>
     <ctl name="Voip_Tx Mixer USB_AUDIO_TX_Voip" value="0"/>
+    <ctl name="QUAT_TDM_RX_0_Voice Mixer Voip" value="0"/>
     <!-- compress-voip-call end-->
 
     <!-- Audio BTSCO -->
@@ -520,6 +520,7 @@
     <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia4" value="0"/>
     <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia5" value="0"/>
     <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia7" value="0"/>
+    <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia8" value="0"/>
     <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia10" value="0"/>
     <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia11" value="0"/>
     <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia12" value="0"/>
@@ -974,6 +975,10 @@
         <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia4" value="1"/>
     </path>
 
+    <path name="compress-offload-playback hdmi">
+        <ctl name="HDMI Mixer MultiMedia4" value="1"/>
+    </path>
+
     <path name="compress-offload-playback speaker-and-hdmi">
         <path name="compress-offload-playback hdmi"/>
         <path name="compress-offload-playback speaker"/>
@@ -1252,12 +1257,12 @@
     </path>
 
     <path name="compress-voip-call handset">
-        <ctl name="QUAT_TDM_RX_0 Mixer Voip" value="1"/>
+        <ctl name="QUAT_TDM_RX_0_Voice Mixer Voip" value="1"/>
         <ctl name="Voip_Tx Mixer SLIM_0_TX_Voip" value="1"/>
     </path>
 
     <path name="compress-voip-call speaker">
-        <ctl name="QUAT_TDM_RX_0 Mixer Voip" value="1"/>
+        <ctl name="QUAT_TDM_RX_0_Voice Mixer Voip" value="1"/>
         <ctl name="Voip_Tx Mixer SLIM_0_TX_Voip" value="1"/>
     </path>
 
@@ -1367,12 +1372,14 @@
     </path>
 
     <path name="voicemmode2-call handset">
-        <ctl name="QUAT_TDM_RX_0 Mixer VoiceMMode2" value="1"/>
+        <ctl name="VOC_EXT_EC MUX" value="QUAT_TDM_RX_0" />
+        <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode2" value="1"/>
         <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1"/>
     </path>
 
     <path name="voicemmode2-call speaker">
-        <ctl name="QUAT_TDM_RX_0 Mixer VoiceMMode2" value="1"/>
+        <ctl name="VOC_EXT_EC MUX" value="QUAT_TDM_RX_0" />
+        <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode2" value="1"/>
         <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1"/>
     </path>
 
@@ -1407,7 +1414,7 @@
     </path>
 
     <path name="voicemmode2-call voice-tty-hco-handset">
-        <ctl name="QUAT_TDM_RX_0 Mixer VoiceMMode2" value="1"/>
+        <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode2" value="1"/>
         <ctl name="VoiceMMode2_Tx Mixer USB_AUDIO_TX_MMode2" value="1"/>
     </path>
 
@@ -1580,30 +1587,24 @@
     <!-- SPK -->
     <path name="speaker">
         <ctl name="QUAT_TDM_RX_0 Format" value="S32_LE"/>
-        <ctl name="Boost Control" value="On"/>
         <ctl name="AMP Enable Switch" value="1"/>
         <ctl name="AMP PCM Gain" value="17"/>
-        <ctl name="R Boost Control" value="On"/>
         <ctl name="R AMP Enable Switch" value="1"/>
         <ctl name="R AMP PCM Gain" value="17"/>
     </path>
 
     <path name="speaker-mono">
         <ctl name="QUAT_TDM_RX_0 Format" value="S32_LE"/>
-        <ctl name="Boost Control" value="Off"/>
         <ctl name="AMP Enable Switch" value="0"/>
         <ctl name="AMP PCM Gain" value="17"/>
-        <ctl name="R Boost Control" value="On"/>
         <ctl name="R AMP Enable Switch" value="1"/>
         <ctl name="R AMP PCM Gain" value="17"/>
     </path>
 
     <path name="speaker-mono-2">
         <ctl name="QUAT_TDM_RX_0 Format" value="S32_LE"/>
-        <ctl name="R Boost Control" value="Off"/>
         <ctl name="R AMP Enable Switch" value="0"/>
         <ctl name="R AMP PCM Gain" value="17"/>
-        <ctl name="Boost Control" value="On"/>
         <ctl name="AMP Enable Switch" value="1"/>
         <ctl name="AMP PCM Gain" value="17"/>
     </path>
@@ -1716,8 +1717,6 @@
     </path>
 
     <path name="handset">
-        <ctl name="R Boost Control" value="Off"/>
-        <ctl name="Boost Control" value="Off"/>
         <ctl name="R AMP Enable Switch" value="0"/>
         <ctl name="AMP Enable Switch" value="1"/>
         <ctl name="R AMP PCM Gain" value="17"/>
@@ -2021,6 +2020,18 @@
         <ctl name="DEC8 Volume" value="84" />
     </path>
 
+    <path name="bt-sco-headset">
+    </path>
+
+    <path name="bt-sco-mic">
+    </path>
+
+    <path name="bt-sco-headset-wb">
+    </path>
+
+    <path name="bt-sco-mic-wb">
+    </path>
+
     <path name="speaker-and-bt-sco">
         <path name="speaker"/>
         <path name="bt-sco-headset"/>
@@ -2039,18 +2050,6 @@
     <path name="speaker-safe-and-bt-sco-wb">
         <path name="speaker-safe"/>
         <path name="bt-sco-headset-wb"/>
-    </path>
-
-    <path name="bt-sco-headset">
-    </path>
-
-    <path name="bt-sco-mic">
-    </path>
-
-    <path name="bt-sco-headset-wb">
-    </path>
-
-    <path name="bt-sco-mic-wb">
     </path>
 
     <path name="usb-headset-mic">
