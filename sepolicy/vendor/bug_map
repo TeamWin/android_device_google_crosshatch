@@ -17,6 +17,7 @@ hal_rcsservice sysfs_soc dir 78460200
 hal_usb_impl vendor_usb_prop file 80470186
 hardware_info_app sysfs_msm_subsys dir 78460200
 ims default_prop file 78119118
+mediacodec default_prop file 80521431
 netd netd capability 73947368
 per_proxy exported3_system_prop file 79541095
 rild socket_device dir 78460200
