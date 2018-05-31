@@ -21,17 +21,13 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.logging.rc
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.mpssrfs.rc
 
 
-on charger
+on property:init.svc.vendor.charger=running
     stop vendor.qseecomd
     stop keymaster-4-0
-    # Lock to lowest freqency on charger mode
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor powersave
-    # Offline all cores expect cpu0
+    # keep one LITTLE and one big
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/devices/system/cpu/cpu4/online 0
     write /sys/devices/system/cpu/cpu5/online 0
     write /sys/devices/system/cpu/cpu6/online 0
     write /sys/devices/system/cpu/cpu7/online 0
@@ -46,7 +42,7 @@ on charger
     # Enable thermal mitigation
     write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
 
-service charger /charger
+service vendor.charger /charger
     class charger
     seclabel u:r:charger:s0
 
