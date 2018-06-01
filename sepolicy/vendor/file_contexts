@@ -264,6 +264,7 @@
 /data/vendor/nfc(/.*)?                 u:object_r:nfc_vendor_data_file:s0
 /data/vendor/radio(/.*)?               u:object_r:radio_vendor_data_file:s0
 /data/vendor/wifi/cnss_diag(/.*)?      u:object_r:cnss_vendor_data_file:s0
+/data/vendor/wifi/wlan_logs(/.*)?      u:object_r:wifi_vendor_log_data_file:s0
 /data/vendor/ramdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
 /data/vendor/ssrdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
 /data/vendor/wifidump(/.*)?            u:object_r:wifidump_vendor_data_file:s0
