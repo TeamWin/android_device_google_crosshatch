@@ -756,3 +756,7 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_PROPERTY_OVERRIDES += \
       persist.vendor.usb.usbradio.config=diag
 endif
+
+# Early phase offset for SurfaceFlinger (b/75985430)
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.early_phase_offset_ns=5000000
