@@ -1,9 +1,5 @@
 #! /vendor/bin/sh
 
-# Change ownership of the sensor registry files to "system".
-# TODO: b/77284159 Remove after all devices are updated.
-chown system:system /persist/sensors/registry/registry/*
-
 # Initialize Edge Sense.
 /vendor/bin/init.edge_sense.sh
 

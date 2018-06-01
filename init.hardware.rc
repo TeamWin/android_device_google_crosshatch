@@ -365,12 +365,6 @@ on zygote-start
     mkdir /data/vendor/sensors 0770
     chown system system /data/vendor/sensors
 
-    # These files might have been created by root from a prior build - make sure
-    # they are accessible to the sensors daemon
-    # TODO: b/77284159 Remove after all devices are updated.
-    chown system system /data/vendor/sensors/cal.bin
-    chown system system /data/vendor/sensors/cal.txt
-
     chmod 770 /persist/audio
     chmod 660 /persist/audio/audio.cal
     chown media audio /persist/audio
