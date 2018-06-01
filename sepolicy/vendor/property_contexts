@@ -31,6 +31,7 @@ persist.vendor.usb.        u:object_r:vendor_usb_prop:s0
 vendor.powerhal.state      u:object_r:power_prop:s0
 vendor.powerhal.audio      u:object_r:power_prop:s0
 vendor.powerhal.lpm        u:object_r:power_prop:s0
+vendor.powerhal.init       u:object_r:power_prop:s0
 sys.wlan.driver.version    u:object_r:vendor_wifi_version:s0
 sys.wlan.firmware.version  u:object_r:vendor_wifi_version:s0
 vendor.peripheral.         u:object_r:per_mgr_state_prop:s0
@@ -40,6 +41,8 @@ vendor.all.modules.ready   u:object_r:vendor_device_prop:s0
 sys.slpi.firmware.version  u:object_r:public_vendor_system_prop:s0
 ctl.vendor.imsrcsservice   u:object_r:ctl_vendor_imsrcsservice_prop:s0
 ctl.vendor.hbtp            u:object_r:ctl_vendor_hbtp_prop:s0
+persist.vendor.usb.config  u:object_r:vendor_usb_config_prop:s0
+vendor.usb.config          u:object_r:vendor_usb_config_prop:s0
 
 # vendor_default_prop
 audio_hal.in_period_size   u:object_r:vendor_default_prop:s0

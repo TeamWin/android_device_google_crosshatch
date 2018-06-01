@@ -7,3 +7,6 @@ allow hal_keymaster_citadel citadeld_service:service_manager find;
 
 hal_server_domain(hal_keymaster_citadel, hal_keymaster)
 init_daemon_domain(hal_keymaster_citadel)
+
+get_prop(hal_keymaster_citadel, vendor_tee_listener_prop)
+get_prop(hal_keymaster_citadel, vendor_security_patch_level_prop)

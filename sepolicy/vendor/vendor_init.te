@@ -1,6 +1,7 @@
 allow vendor_init debugfs_clk:file w_file_perms;
 allow vendor_init proc_uid_cpupower:file w_file_perms;
 allow vendor_init proc_sysctl_autogroup:file w_file_perms;
+allow vendor_init proc_sysctl_schedboost:file w_file_perms;
 allow vendor_init proc_irq:file w_file_perms;
 allow vendor_init camera_vendor_data_file:dir create_dir_perms;
 dontaudit vendor_init kernel:system module_request;
@@ -19,6 +20,7 @@ set_prop(vendor_init, vendor_modem_diag_prop)
 set_prop(vendor_init, vendor_thermal_prop)
 set_prop(vendor_init, vendor_radio_prop)
 set_prop(vendor_init, persist_nfc_prop)
+set_prop(vendor_init, vendor_display_prop)
 set_prop(vendor_init, ctl_vendor_hbtp_prop)
 set_prop(vendor_init, vendor_ssr_prop)
 

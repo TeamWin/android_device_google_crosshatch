@@ -267,10 +267,10 @@
          -->
     <string translatable="false" name="config_mainBuiltInDisplayCutout">
       M -337,0
-      q 80,0 80,71.5 v 16 q 0,90 95,84
+      q 82,0 80,71.5 v 16 q 0,90 95,84
       h 162 v -171.5 z
       M 337,0
-      q -80,0 -80,71.5 v 16 q 0,90 -95,84
+      q -82,0 -80,71.5 v 16 q 0,90 -95,84
       h -162 v -171.5 z
     </string>
 

@@ -56,13 +56,13 @@ static constexpr uint32_t WAVEFORM_RINGTONE_EFFECT_INDEX = 65534;
 static constexpr uint32_t WAVEFORM_RINGTONE_EFFECT_MS = 30000;
 
 // The_big_adventure - RINGTONE_1
-static constexpr char WAVEFORM_RINGTONE1_EFFECT_QUEUE[] = "160, 11.100, 560, 1!";
+static constexpr char WAVEFORM_RINGTONE1_EFFECT_QUEUE[] = "160, 11.100, 2744, 1!";
 
 // Copycat - RINGTONE_2
-static constexpr char WAVEFORM_RINGTONE2_EFFECT_QUEUE[] = "260, 12.100, 932, 2!";
+static constexpr char WAVEFORM_RINGTONE2_EFFECT_QUEUE[] = "260, 12.100, 716, 2!";
 
 // Crackle - RINGTONE_3
-static constexpr char WAVEFORM_RINGTONE3_EFFECT_QUEUE[] = "352, 13.100, 748, 5!";
+static constexpr char WAVEFORM_RINGTONE3_EFFECT_QUEUE[] = "404, 13.100, 628, 5!";
 
 // Flutterby - RINGTONE_4
 static constexpr char WAVEFORM_RINGTONE4_EFFECT_QUEUE[] = "14.100, 6!";
