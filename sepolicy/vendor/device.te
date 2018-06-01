@@ -6,7 +6,6 @@ type citadel_device, dev_type;
 type diag_device, dev_type, mlstrustedobject;
 type dsp_device, dev_type;
 type easel_device, dev_type, mlstrustedobject;
-type hbtp_device, dev_type;
 type ipa_dev, dev_type;
 type latency_device, dev_type;
 type modem_block_device, dev_type;
