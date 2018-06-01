@@ -29,6 +29,7 @@
 #define QMI_IPA_MAX_PER_CLIENTS_V01 64
 #define QMI_IPA_MAX_CLIENT_DST_PIPES_V01 8
 #define QMI_IPA_MAX_UL_FIREWALL_RULES_V01 64
+#define IPA_QMI_SUPPORTS_STATS
 #define IPA_INT_MAX ((int) (~0U >> 1))
 #define IPA_INT_MIN (- IPA_INT_MAX - 1)
 enum ipa_qmi_result_type_v01 {
@@ -115,6 +116,14 @@ struct ipa_init_modem_driver_req_msg_v01 {
   uint32_t v4_hash_filter_tbl_start_addr;
   uint8_t v6_hash_filter_tbl_start_addr_valid;
   uint32_t v6_hash_filter_tbl_start_addr;
+  uint8_t hw_stats_quota_base_addr_valid;
+  uint32_t hw_stats_quota_base_addr;
+  uint8_t hw_stats_quota_size_valid;
+  uint32_t hw_stats_quota_size;
+  uint8_t hw_drop_stats_base_addr_valid;
+  uint32_t hw_drop_stats_base_addr;
+  uint8_t hw_drop_stats_table_size_valid;
+  uint32_t hw_drop_stats_table_size;
 };
 struct ipa_init_modem_driver_resp_msg_v01 {
   struct ipa_qmi_response_type_v01 resp;
@@ -558,7 +567,7 @@ struct ipa_configure_ul_firewall_rules_ind_msg_v01 {
 #define QMI_IPA_INSTALL_UL_FIREWALL_RULES_REQ_V01 0x003A
 #define QMI_IPA_INSTALL_UL_FIREWALL_RULES_RESP_V01 0x003A
 #define QMI_IPA_INSTALL_UL_FIREWALL_RULES_IND_V01 0x003A
-#define QMI_IPA_INIT_MODEM_DRIVER_REQ_MAX_MSG_LEN_V01 134
+#define QMI_IPA_INIT_MODEM_DRIVER_REQ_MAX_MSG_LEN_V01 162
 #define QMI_IPA_INIT_MODEM_DRIVER_RESP_MAX_MSG_LEN_V01 25
 #define QMI_IPA_INDICATION_REGISTER_REQ_MAX_MSG_LEN_V01 8
 #define QMI_IPA_INDICATION_REGISTER_RESP_MAX_MSG_LEN_V01 7
