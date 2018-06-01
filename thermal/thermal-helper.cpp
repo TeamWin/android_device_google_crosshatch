@@ -133,8 +133,6 @@ float getThresholdFromType(const TemperatureType type,
         case TemperatureType::SKIN:
           return threshold.ss;
         default:
-          LOG(WARNING) << "Attempting to read unknown sensor type: "
-                       << android::hardware::thermal::V1_0::toString(type);
           return NAN;
     }
 }
