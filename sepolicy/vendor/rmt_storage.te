@@ -5,6 +5,8 @@ init_daemon_domain(rmt_storage)
 
 wakelock_use(rmt_storage)
 
+r_dir_file(rmt_storage, sysfs_msm_subsys)
+
 allow rmt_storage self:capability { net_bind_service setgid setpcap setuid };
 
 allow rmt_storage modem_block_device:blk_file rw_file_perms;
