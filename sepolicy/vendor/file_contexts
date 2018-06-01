@@ -29,8 +29,6 @@
 /dev/avtimer                                    u:object_r:avtimer_device:s0
 /dev/subsys_.*                                  u:object_r:ssr_device:s0
 /dev/ramdump_.*                                 u:object_r:ramdump_device:s0
-/dev/hbtp_input                                 u:object_r:hbtp_device:s0
-/dev/hbtp_vm                                    u:object_r:hbtp_device:s0
 /dev/sg[0-9]+                                   u:object_r:sg_device:s0
 /dev/sensors                                    u:object_r:sensors_device:s0
 /dev/mnh_sm                                     u:object_r:easel_device:s0
