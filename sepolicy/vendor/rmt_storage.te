@@ -5,6 +5,8 @@ init_daemon_domain(rmt_storage)
 
 wakelock_use(rmt_storage)
 
+r_dir_file(rmt_storage, sysfs_msm_subsys)
+
 allow rmt_storage self:capability { net_bind_service setgid setpcap setuid };
 
 allow rmt_storage modem_block_device:blk_file rw_file_perms;
@@ -17,9 +19,6 @@ allow rmt_storage sysfs_uio:lnk_file r_file_perms;
 allow rmt_storage sysfs_rmtfs:dir search;
 allow rmt_storage sysfs_rmtfs:file r_file_perms;
 allow rmt_storage sysfs_rmtfs:dir search;
-
-allow rmt_storage debugfs_rmt_storage:dir search;
-allow rmt_storage debugfs_rmt_storage:file w_file_perms;
 
 allow rmt_storage self:socket create_socket_perms;
 allowxperm rmt_storage self:socket ioctl IPC_ROUTER_IOCTL_BIND_CONTROL_PORT;

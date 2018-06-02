@@ -88,6 +88,7 @@
 #define IPA_IOCTL_DEL_IPV6CT_TABLE 55
 #define IPA_IOCTL_CLEANUP 56
 #define IPA_IOCTL_QUERY_WLAN_CLIENT 57
+#define IPA_IOCTL_GET_VLAN_MODE 58
 #define IPA_HDR_MAX_SIZE 64
 #define IPA_RESOURCE_NAME_MAX 32
 #define IPA_NUM_PROPS_MAX 35
@@ -835,6 +836,17 @@ struct ipa_tether_device_info {
   uint32_t num_clients;
   struct ipa_lan_client lan_client[IPA_MAX_NUM_HW_PATH_CLIENTS];
 };
+enum ipa_vlan_ifaces {
+  IPA_VLAN_IF_ETH,
+  IPA_VLAN_IF_RNDIS,
+  IPA_VLAN_IF_ECM
+};
+#define IPA_VLAN_IF_EMAC IPA_VLAN_IF_ETH
+#define IPA_VLAN_IF_MAX (IPA_VLAN_IF_ECM + 1)
+struct ipa_ioc_get_vlan_mode {
+  enum ipa_vlan_ifaces iface;
+  uint32_t is_vlan_mode;
+};
 #define IPA_IOC_ADD_HDR _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_ADD_HDR, struct ipa_ioc_add_hdr *)
 #define IPA_IOC_DEL_HDR _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_DEL_HDR, struct ipa_ioc_del_hdr *)
 #define IPA_IOC_ADD_RT_RULE _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_ADD_RT_RULE, struct ipa_ioc_add_rt_rule *)
@@ -894,6 +906,7 @@ struct ipa_tether_device_info {
 #define IPA_IOC_DEL_L2TP_VLAN_MAPPING _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_DEL_L2TP_VLAN_MAPPING, struct ipa_ioc_l2tp_vlan_mapping_info *)
 #define IPA_IOC_CLEANUP _IO(IPA_IOC_MAGIC, IPA_IOCTL_CLEANUP)
 #define IPA_IOC_QUERY_WLAN_CLIENT _IO(IPA_IOC_MAGIC, IPA_IOCTL_QUERY_WLAN_CLIENT)
+#define IPA_IOC_GET_VLAN_MODE _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_GET_VLAN_MODE, struct ipa_ioc_get_vlan_mode *)
 #define TETH_BRIDGE_IOC_MAGIC 0xCE
 #define TETH_BRIDGE_IOCTL_SET_BRIDGE_MODE 0
 #define TETH_BRIDGE_IOCTL_SET_AGGR_PARAMS 1
