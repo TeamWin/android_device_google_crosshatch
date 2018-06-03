@@ -54,3 +54,14 @@ on early-boot
 
 on boot
     setprop sys.usb.configfs 2
+
+on property:sys.usb.config=none && property:sys.usb.configfs=1
+    rm /config/usb_gadget/g1/configs/b.1/f1
+    rm /config/usb_gadget/g1/configs/b.1/f2
+    rm /config/usb_gadget/g1/configs/b.1/f3
+    rm /config/usb_gadget/g1/configs/b.1/f4
+    rm /config/usb_gadget/g1/configs/b.1/f5
+    rm /config/usb_gadget/g1/configs/b.1/f6
+    rm /config/usb_gadget/g1/configs/b.1/f7
+    rm /config/usb_gadget/g1/configs/b.1/f8
+    rm /config/usb_gadget/g1/configs/b.1/f9

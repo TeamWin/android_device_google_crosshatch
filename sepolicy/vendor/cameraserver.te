@@ -8,5 +8,4 @@ allow cameraserver sysfs_camera:dir search;
 
 allow cameraserver system_server:unix_stream_socket { read write };
 
-# TODO (b/37688918) Verify that this is actually needed and not a violation of treble
 binder_call(cameraserver, mediacodec)

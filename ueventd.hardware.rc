@@ -87,10 +87,6 @@
 # Ramdump devices
 /dev/ramdump_*            0640   system     system
 
-#ImproveTouch device
-/dev/hbtp_input           0660   system     system
-/dev/hbtp_vm              0660   system     system
-
 # BT
 /dev/ttyHS0               0660   bluetooth  net_bt
 /dev/btpower              0660   bluetooth  net_bt

@@ -1,0 +1,3 @@
+userdebug_or_eng(`
+allow hal_wifi_hostapd wifi_vendor_log_data_file:dir search;
+')

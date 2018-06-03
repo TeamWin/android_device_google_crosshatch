@@ -291,6 +291,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.videopause.mode=1 \
     persist.vendor.radio.sib16_support=1 \
     persist.vendor.radio.data_con_rprt=true \
+    persist.vendor.radio.relay_oprt_change=1\
     persist.rcs.supported=1 \
     vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so\
     ro.hardware.keystore_desede=true \
@@ -607,7 +608,8 @@ PRODUCT_PACKAGES += \
     citadel_updater \
     android.hardware.authsecret@1.0-service.citadel \
     android.hardware.oemlock@1.0-service.citadel \
-    android.hardware.weaver@1.0-service.citadel
+    android.hardware.weaver@1.0-service.citadel \
+    android.hardware.keymaster@4.0-service.citadel
 
 # Citadel debug stuff
 PRODUCT_PACKAGES_DEBUG += \
@@ -647,6 +649,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Easel device feature
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/permissions/com.google.hardware.camera.easel_2018.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.google.hardware.camera.easel_2018.xml
+
+# ConfirmationUI HAL
+PRODUCT_PACKAGES += \
+    android.hardware.confirmationui@1.0-service-crosshatch
 
 # Fingerprint
 PRODUCT_PACKAGES += \
