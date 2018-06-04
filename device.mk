@@ -608,7 +608,8 @@ PRODUCT_PACKAGES += \
     citadel_updater \
     android.hardware.authsecret@1.0-service.citadel \
     android.hardware.oemlock@1.0-service.citadel \
-    android.hardware.weaver@1.0-service.citadel
+    android.hardware.weaver@1.0-service.citadel \
+    android.hardware.keymaster@4.0-service.citadel
 
 # Citadel debug stuff
 PRODUCT_PACKAGES_DEBUG += \
