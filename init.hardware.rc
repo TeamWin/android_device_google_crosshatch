@@ -280,9 +280,6 @@ on post-fs
     # turn off vblank irq immediately after turning off
     write /sys/module/drm/parameters/vblankoffdelay -1
 
-on property:vendor.all.modules.ready=1
-    setprop wlan.driver.status "ok"
-
 on post-fs-data
     # We can start netd here before in is launched in common init.rc on zygote-start
     start netd
