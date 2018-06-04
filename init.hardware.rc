@@ -767,7 +767,8 @@ service bugreport /system/bin/dumpstate -d -p -B -z \
 service vendor.chre /vendor/bin/chre
     class late_start
     user system
-    group system
+    group system wakelock
+    capabilities BLOCK_SUSPEND
     socket chre seqpacket 0660 root system
     shutdown critical
 
