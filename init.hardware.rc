@@ -55,6 +55,8 @@ on early-fs
     start vold
 
 on init
+    start logd
+
     # QSEE rpmb listener need symlink for bootdevice
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
