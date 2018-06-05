@@ -280,9 +280,6 @@ on post-fs
     # turn off vblank irq immediately after turning off
     write /sys/module/drm/parameters/vblankoffdelay -1
 
-on property:vendor.all.modules.ready=1
-    setprop wlan.driver.status "ok"
-
 on post-fs-data
     # We can start netd here before in is launched in common init.rc on zygote-start
     start netd
@@ -767,7 +764,8 @@ service bugreport /system/bin/dumpstate -d -p -B -z \
 service vendor.chre /vendor/bin/chre
     class late_start
     user system
-    group system
+    group system wakelock
+    capabilities BLOCK_SUSPEND
     socket chre seqpacket 0660 root system
     shutdown critical
 
