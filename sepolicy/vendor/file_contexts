@@ -146,7 +146,6 @@
 /vendor/bin/qti                 u:object_r:qti_exec:s0
 /vendor/bin/ramdump             u:object_r:ramdump_exec:s0
 /vendor/bin/smlog_dump          u:object_r:smlog_dump_exec:s0
-/vendor/bin/wcnss_filter        u:object_r:wcnss_filter_exec:s0
 /vendor/bin/loc_launcher        u:object_r:location_exec:s0
 /vendor/bin/lowi-server         u:object_r:location_exec:s0
 /vendor/bin/xtra-daemon         u:object_r:location_exec:s0
