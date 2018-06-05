@@ -102,6 +102,7 @@ type mediadrm_vendor_data_file, file_type, data_file_type;
 type data_qsee_file, file_type, data_file_type;
 type vendor_tui_data_file, file_type, data_file_type;
 type wifi_vendor_log_data_file, file_type, data_file_type;
+type hal_neuralnetworks_data_file, file_type, data_file_type;
 
 #data sysfs files
 type sysfs_data, fs_type, sysfs_type;
