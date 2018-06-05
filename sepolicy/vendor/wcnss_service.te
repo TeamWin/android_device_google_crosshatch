@@ -41,4 +41,7 @@ dontaudit wcnss_service firmware_file:dir search;
 
 r_dir_file(wcnss_service, sysfs_net)
 
+# used for collecting the sku for radio for BDF file selection
+get_prop(wcnss_service, vendor_radio_sku_prop)
+
 dontaudit wcnss_service kernel:system module_request;
