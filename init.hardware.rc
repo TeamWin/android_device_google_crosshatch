@@ -59,6 +59,8 @@ on early-fs
     start vold
 
 on init
+    start logd
+
     # QSEE rpmb listener need symlink for bootdevice
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -205,6 +207,9 @@ on init
 
     # Allow PAI targeting per hardware SKU
     setprop ro.oem.key1 ${ro.boot.hardware.sku}
+
+    # Property used by vintf for sku specific manifests
+    setprop ro.boot.product.hardware.sku ${ro.boot.hardware.sku}
 
 on late-init
    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
@@ -572,8 +577,6 @@ on property:sys.boot_completed=1
     write /sys/block/dm-1/queue/read_ahead_kb 512
     write /sys/block/dm-2/queue/read_ahead_kb 512
     write /sys/block/dm-3/queue/read_ahead_kb 512
-    write /sys/block/sda/queue/scheduler deadline
-    write /sys/block/sdf/queue/scheduler deadline
 
     # QCOM FG SRAM dump for dumpstate
     chown system system /d/fg/sram/data
