@@ -1,0 +1,11 @@
+<manifest version="1.0" type="device">
+    <hal format="hidl">
+        <name>android.hardware.secure_element</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ISecureElement</name>
+            <instance>SIM1</instance>
+        </interface>
+    </hal>
+</manifest>
