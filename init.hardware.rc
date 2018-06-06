@@ -208,6 +208,9 @@ on init
     # Allow PAI targeting per hardware SKU
     setprop ro.oem.key1 ${ro.boot.hardware.sku}
 
+    # Property used by vintf for sku specific manifests
+    setprop ro.boot.product.hardware.sku ${ro.boot.hardware.sku}
+
 on late-init
    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
 
