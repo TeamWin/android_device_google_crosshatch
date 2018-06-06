@@ -672,12 +672,12 @@
          Note that a physical cutout should be configured in pixels for the best results.
          -->
     <string translatable="false" name="config_mainBuiltInDisplayCutout">
-      M -338,0
-      q 86,-4 80,71.5 v 8 q 4,90 95,91.5
-      h 163 v -171.5 z
-      M 338,0
-      q -86,-4 -80,71.5 v 8 q -4,90 -95,91.5
-      h -163 v -171.5 z
+        M -338,0
+        q 77 -4 77 67 v 38 q 0 67 67 67
+        h 194 v -172 z
+        M 338,0
+        q -77 -4 -77 67 v 38 q 0 67 -67 67
+        h -194 v -172 z
     </string>
 
     <!-- Whether the display cutout region of the main built-in display should be forced to
