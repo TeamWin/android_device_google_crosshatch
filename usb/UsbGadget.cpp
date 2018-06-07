@@ -433,8 +433,7 @@ V1_0::Status UsbGadget::setupFunctions(
   int i = 0;
   std::string bootMode = GetProperty(PERSISTENT_BOOT_MODE, "");
 
-  if (((functions & GadgetFunction::PTP) != 0) ||
-      ((functions & GadgetFunction::MTP) != 0)) {
+  if (((functions & GadgetFunction::MTP) != 0)) {
     ffsEnabled = true;
     ALOGI("setCurrentUsbFunctions mtp");
     if (!WriteStringToFile("1", DESC_USE_PATH)) return Status::ERROR;
@@ -448,6 +447,21 @@ V1_0::Status UsbGadget::setupFunctions(
     mEndpointList.push_back("/dev/usb-ffs/mtp/ep1");
     mEndpointList.push_back("/dev/usb-ffs/mtp/ep2");
     mEndpointList.push_back("/dev/usb-ffs/mtp/ep3");
+  } else if (((functions & GadgetFunction::PTP) != 0)) {
+    ffsEnabled = true;
+    ALOGI("setCurrentUsbFunctions ptp");
+    if (!WriteStringToFile("1", DESC_USE_PATH)) return Status::ERROR;
+
+    if (inotify_add_watch(inotifyFd, "/dev/usb-ffs/ptp/", IN_ALL_EVENTS) == -1)
+      return Status::ERROR;
+
+
+    if (linkFunction("ffs.ptp", i++)) return Status::ERROR;
+
+    // Add endpoints to be monitored.
+    mEndpointList.push_back("/dev/usb-ffs/ptp/ep1");
+    mEndpointList.push_back("/dev/usb-ffs/ptp/ep2");
+    mEndpointList.push_back("/dev/usb-ffs/ptp/ep3");
   }
 
   if ((functions & GadgetFunction::MIDI) != 0) {

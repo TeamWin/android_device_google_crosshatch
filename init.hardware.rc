@@ -202,14 +202,15 @@ on init
     # Some user code relies on ro.boot.hardware.revision
     setprop ro.boot.hardware.revision ${ro.revision}
 
-    # Thermal config file per product
-    setprop vendor.sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
-
     # Allow PAI targeting per hardware SKU
     setprop ro.oem.key1 ${ro.boot.hardware.sku}
 
     # Property used by vintf for sku specific manifests
     setprop ro.boot.product.hardware.sku ${ro.boot.hardware.sku}
+
+    # Property used by pointing to thermal-engine config file
+    setprop vendor.thermal.vr_mode -novr
+    setprop vendor.thermal.hw_mode -prod
 
 on late-init
    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
@@ -503,7 +504,7 @@ service init-radio-sh /vendor/bin/init.radio.sh
     group root radio
     oneshot
 
-service vendor.thermal-engine /vendor/bin/thermal-engine -c ${vendor.sys.qcom.thermalcfg}
+service vendor.thermal-engine /vendor/bin/thermal-engine -c /vendor/etc/thermal-engine-${ro.hardware}${vendor.thermal.vr_mode}${vendor.thermal.hw_mode}.conf
    class main
    user root
    group root system
