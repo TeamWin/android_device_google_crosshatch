@@ -18,3 +18,6 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.rc
 
 on init
     setprop ro.sf.lcd_density 560
+
+on late-init && property:ro.boot.hardware.revision=EVT1.0
+    setprop vendor.thermal.hw_mode "-evt"
