@@ -19,3 +19,4 @@ on property:persist.vendor.disable.thermal.control=1
     stop vendor.thermal-engine
     write /sys/class/power_supply/maxfg/temp 200
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode disabled
+    write /sys/module/overheat_mitigation/parameters/fake_port_temp 250
