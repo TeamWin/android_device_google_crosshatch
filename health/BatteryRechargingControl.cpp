@@ -60,8 +60,12 @@ int BatteryRechargingControl::getBatteryStatus(const char *status) {
     return ret;
 }
 
+int64_t BatteryRechargingControl::getTime(void) {
+    return nanoseconds_to_seconds(systemTime(SYSTEM_TIME_BOOTTIME));
+}
+
 int BatteryRechargingControl::RemapSOC(int soc) {
-    double diff_sec = difftime(time(NULL), start_time_);
+    double diff_sec = getTime() - start_time_;
     double ret_soc =
         round(soc * (diff_sec / kTransitionTime) + kFullSoc * (1 - (diff_sec / kTransitionTime)));
     LOG(INFO) << "RemapSOC: " << ret_soc;
@@ -95,7 +99,7 @@ void BatteryRechargingControl::updateBatteryProperties(struct android::BatteryPr
                 props->batteryLevel = kFullSoc;
             } else if (charger_status != kStatusIsCharging) {
                 // charging stopped, assume no more power source
-                start_time_ = time(NULL);
+                start_time_ = getTime();
                 state_ = NO_POWER_SOURCE;
                 props->batteryLevel = RemapSOC(props->batteryLevel);
             }
@@ -113,7 +117,7 @@ void BatteryRechargingControl::updateBatteryProperties(struct android::BatteryPr
                 } else {
                     if (props->batteryLevel < recharge_soc_) {
                         // overload condition
-                        start_time_ = time(NULL);
+                        start_time_ = getTime();
                         state_ = OVER_LOADING;
                         props->batteryLevel = RemapSOC(props->batteryLevel);
                     } else {
@@ -122,14 +126,14 @@ void BatteryRechargingControl::updateBatteryProperties(struct android::BatteryPr
                 }
             } else {
                 // charging stopped, assume no more power source
-                start_time_ = time(NULL);
+                start_time_ = getTime();
                 state_ = NO_POWER_SOURCE;
                 props->batteryLevel = RemapSOC(props->batteryLevel);
             }
             break;
         case OVER_LOADING:
         case NO_POWER_SOURCE:
-            elapsed_time = difftime(time(NULL), start_time_);
+            elapsed_time = getTime() - start_time_;
             if (elapsed_time > kTransitionTime) {
                 LOG(INFO) << "Time is up, leave remap";
                 state_ = INACTIVE;

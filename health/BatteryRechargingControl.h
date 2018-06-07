@@ -23,6 +23,7 @@
 #include <batteryservice/BatteryService.h>
 #include <math.h>
 #include <time.h>
+#include <utils/Timers.h>
 #include <string>
 
 namespace device {
@@ -62,13 +63,14 @@ class BatteryRechargingControl {
 
   private:
     enum RechargeState state_;
-    time_t start_time_;
+    int64_t start_time_;
     /* Keeps track of the target level to detect OVER_LOADING or 0 when no target is set */
     int recharge_soc_;
 
     int mapSysfsString(const char *str, struct sysfsStringEnumMap map[]);
     int getBatteryStatus(const char *status);
     int RemapSOC(int);
+    int64_t getTime();
 };
 
 }  // namespace health
