@@ -165,8 +165,9 @@ ThermalHelper::ThermalHelper() :
     }
 
     std::string hw = android::base::GetProperty("ro.hardware", "");
-    std::string thermal_config(kThermalConfigPrefix + hw + ".conf");
-    std::string vr_thermal_config(kThermalConfigPrefix + hw + "-vr.conf");
+    std::string rev = android::base::GetProperty("vendor.thermal.hw_mode", "");
+    std::string thermal_config(kThermalConfigPrefix + hw + "-novr" + rev + ".conf");
+    std::string vr_thermal_config(kThermalConfigPrefix + hw + "-vr" + rev + ".conf");
     InitializeThresholdsFromThermalConfig(thermal_config,
                                           vr_thermal_config,
                                           kValidThermalSensorTypeMap,
