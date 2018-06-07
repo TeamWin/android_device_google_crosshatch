@@ -313,6 +313,8 @@ on post-fs-data
     # This must be started when vendor.sys.listeners.registered is true
     start ipastart_sh
 
+    mkdir /data/vendor/nnhal 0700 system system
+
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
     # zygote is started in common init.rc
@@ -656,6 +658,11 @@ service adsprpcd /vendor/bin/adsprpcd
    class main
    user media
    group media
+
+service cdsprpcd /vendor/bin/cdsprpcd
+   class main
+   user system
+   group system
 
 service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
