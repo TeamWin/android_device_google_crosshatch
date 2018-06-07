@@ -97,6 +97,7 @@ genfscon sysfs /devices/platform/soc/a800000.ssusb/a800000.dwc3/xhci-hcd.0.auto/
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec     u:object_r:sysfs_usb_c:s0
 
 genfscon sysfs /module/diagchar                                         u:object_r:sysfs_diag:s0
+genfscon sysfs /module/msm_poweroff                                     u:object_r:sysfs_poweroff:s0
 
 genfscon sysfs /class/gpio/export                     u:object_r:sysfs_gpio_export:s0
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-00/c440000.qcom,spmi:qcom,pm8998@0:pinctrl@c000 u:object_r:sysfs_pinctrl:s0

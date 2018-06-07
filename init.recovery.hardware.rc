@@ -14,6 +14,8 @@ on init
     mkdir /config/usb_gadget/g1/functions/ffs.adb
     write /config/usb_gadget/g1/os_desc/use 1
     setprop sys.usb.configfs 1
+    # Don't lose recovery logs- keep warm reset for coming out of recovery.
+    write /sys/module/msm_poweroff/parameters/warm_reset 1
 
 on property:sys.usb.ffs.ready=1
     mkdir /config/usb_gadget/g1/configs/b.1 0777 shell shell
