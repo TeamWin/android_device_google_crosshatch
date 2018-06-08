@@ -7,3 +7,5 @@ allow adsprpcd ion_device:chr_file r_file_perms;
 allow adsprpcd qdsp_device:chr_file r_file_perms;
 
 allow adsprpcd system_file:dir r_dir_perms;
+
+r_dir_file(adsprpcd, adsprpcd_file)

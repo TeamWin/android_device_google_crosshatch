@@ -59,6 +59,8 @@ on early-fs
     start vold
 
 on init
+    start logd
+
     # QSEE rpmb listener need symlink for bootdevice
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -200,11 +202,15 @@ on init
     # Some user code relies on ro.boot.hardware.revision
     setprop ro.boot.hardware.revision ${ro.revision}
 
-    # Thermal config file per product
-    setprop vendor.sys.qcom.thermalcfg /vendor/etc/thermal-engine-${ro.hardware}.conf
-
     # Allow PAI targeting per hardware SKU
     setprop ro.oem.key1 ${ro.boot.hardware.sku}
+
+    # Property used by vintf for sku specific manifests
+    setprop ro.boot.product.hardware.sku ${ro.boot.hardware.sku}
+
+    # Property used by pointing to thermal-engine config file
+    setprop vendor.thermal.vr_mode -novr
+    setprop vendor.thermal.hw_mode -prod
 
 on late-init
    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
@@ -306,6 +312,8 @@ on post-fs-data
     # load IPA FWs
     # This must be started when vendor.sys.listeners.registered is true
     start ipastart_sh
+
+    mkdir /data/vendor/nnhal 0700 system system
 
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
@@ -498,7 +506,7 @@ service init-radio-sh /vendor/bin/init.radio.sh
     group root radio
     oneshot
 
-service vendor.thermal-engine /vendor/bin/thermal-engine -c ${vendor.sys.qcom.thermalcfg}
+service vendor.thermal-engine /vendor/bin/thermal-engine -c /vendor/etc/thermal-engine-${ro.hardware}${vendor.thermal.vr_mode}${vendor.thermal.hw_mode}.conf
    class main
    user root
    group root system
@@ -572,8 +580,6 @@ on property:sys.boot_completed=1
     write /sys/block/dm-1/queue/read_ahead_kb 512
     write /sys/block/dm-2/queue/read_ahead_kb 512
     write /sys/block/dm-3/queue/read_ahead_kb 512
-    write /sys/block/sda/queue/scheduler deadline
-    write /sys/block/sdf/queue/scheduler deadline
 
     # QCOM FG SRAM dump for dumpstate
     chown system system /d/fg/sram/data
@@ -652,6 +658,11 @@ service adsprpcd /vendor/bin/adsprpcd
    class main
    user media
    group media
+
+service cdsprpcd /vendor/bin/cdsprpcd
+   class main
+   user system
+   group system
 
 service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core

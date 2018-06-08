@@ -86,10 +86,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.qcom.wlan.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.wlan.sh \
     $(LOCAL_PATH)/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
     $(LOCAL_PATH)/init.insmod.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.cfg \
-    $(LOCAL_PATH)/thermal-engine-blueline.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline.conf \
-    $(LOCAL_PATH)/thermal-engine-blueline-vr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-vr.conf \
-    $(LOCAL_PATH)/thermal-engine-crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch.conf \
-    $(LOCAL_PATH)/thermal-engine-crosshatch-vr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-vr.conf
+    $(LOCAL_PATH)/thermal-engine-blueline-novr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-novr-evt.conf \
+    $(LOCAL_PATH)/thermal-engine-blueline-vr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-vr-evt.conf \
+    $(LOCAL_PATH)/thermal-engine-crosshatch-novr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-novr-evt.conf \
+    $(LOCAL_PATH)/thermal-engine-crosshatch-vr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-vr-evt.conf \
+    $(LOCAL_PATH)/thermal-engine-blueline-novr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-novr-prod.conf \
+    $(LOCAL_PATH)/thermal-engine-blueline-vr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-vr-prod.conf \
+    $(LOCAL_PATH)/thermal-engine-crosshatch-novr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-novr-prod.conf \
+    $(LOCAL_PATH)/thermal-engine-crosshatch-vr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-vr-prod.conf
 
 # Edge Sense initialization script.
 # TODO: b/67205273
@@ -212,6 +216,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.telephony.carrierlock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.carrierlock.xml \
+    frameworks/native/data/etc/android.hardware.strongbox_keystore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.strongbox_keystore.xml \
 
 # power HAL
 PRODUCT_PACKAGES += \
@@ -247,9 +252,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.display.sensortype=2 \
     vendor.display.foss.config=1 \
     vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.display.disable_fbid_cache=1
 
 # b/73168288
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -379,6 +381,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
     device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf
+
+# TODO(b/72443662)
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/nfc/manifest_se_SIM1.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_G013A.xml \
+    device/google/crosshatch/nfc/manifest_se_eSE1.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_G013B.xml \
+    device/google/crosshatch/nfc/manifest_se_SIM1.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_G013C.xml \
+    device/google/crosshatch/nfc/manifest_se_eSE1.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_G013D.xml
 
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.1-service.crosshatch
@@ -524,10 +533,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio_policy_configuration_a2dp_offload_disabled.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_a2dp_offload_disabled.xml \
     $(LOCAL_PATH)/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+    $(LOCAL_PATH)/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/hearing_aid_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/hearing_aid_audio_policy_configuration.xml \
 
 # audio hal tables
@@ -748,3 +757,7 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_PROPERTY_OVERRIDES += \
       persist.vendor.usb.usbradio.config=diag
 endif
+
+# Early phase offset for SurfaceFlinger (b/75985430)
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.early_phase_offset_ns=5000000

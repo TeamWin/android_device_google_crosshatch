@@ -12,6 +12,8 @@ allow chre ion_device:chr_file r_file_perms;
 allow chre qdsp_device:chr_file r_file_perms;
 allow chre dsp_device:chr_file r_file_perms;
 
+r_dir_file(chre, adsprpcd_file)
+
 # Allow CHRE to obtain wakelock
 wakelock_use(chre)
 
