@@ -135,6 +135,7 @@
 /vendor/bin/qseecomd            u:object_r:tee_exec:s0
 /vendor/bin/subsystem_ramdump   u:object_r:subsystem_ramdump_exec:s0
 /vendor/bin/adsprpcd            u:object_r:adsprpcd_exec:s0
+/vendor/bin/cdsprpcd            u:object_r:cdsprpcd_exec:s0
 /vendor/bin/irsc_util           u:object_r:irsc_util_exec:s0
 /vendor/bin/rmt_storage         u:object_r:rmt_storage_exec:s0
 /vendor/bin/tftp_server         u:object_r:rfs_access_exec:s0
@@ -278,10 +279,11 @@
 /data/vendor/misc/qsee(/.*)?           u:object_r:data_qsee_file:s0
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
 /data/vendor/tui(/.*)?                 u:object_r:vendor_tui_data_file:s0
+/data/vendor/nnhal(/.*)?               u:object_r:hal_neuralnetworks_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0
-/dsp                    u:object_r:rootfs:s0
+/dsp(/.*)?              u:object_r:adsprpcd_file:s0
 
 # files in firmware
 /firmware(/.*)?         u:object_r:firmware_file:s0

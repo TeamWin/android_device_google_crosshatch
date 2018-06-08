@@ -47,7 +47,7 @@
 #define VEN_MSG_OUTPUT_BUFFER_DONE 2
 #define VEN_MSG_NEED_OUTPUT_BUFFER 3
 #define VEN_MSG_FLUSH_INPUT_DONE 4
-#define VEN_MSG_FLUSH_OUPUT_DONE 5
+#define VEN_MSG_FLUSH_OUTPUT_DONE 5
 #define VEN_MSG_START 6
 #define VEN_MSG_STOP 7
 #define VEN_MSG_PAUSE 8
@@ -311,7 +311,7 @@ struct venc_capability {
   unsigned char dvs;
 };
 struct venc_entropycfg {
-  unsigned longentropysel;
+  unsigned int longentropysel;
   unsigned long cabacmodel;
 };
 struct venc_dbcfg {
