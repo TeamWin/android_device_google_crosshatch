@@ -50,7 +50,6 @@
         <param DEVICE_HANDSET_MIC_ECPP_CPE="128" />
         <param DEVICE_HANDSET_MIC_PP_APE="135" />
         <param DEVICE_HEADSET_MIC_CPE="139" />
-        <param DEVICE_HANDSET_DMIC_CPE="153" />
         <param DEVICE_HANDSET_DMIC_APE="149" />
     </acdb_ids>
     <!-- Multiple sound_model_config tags can be listed, each with unique
@@ -106,8 +105,7 @@
 
     <sound_model_config> <!-- Music Detection -->
         <param vendor_uuid="9f6ad62a-1f0b-11e7-87c5-40a8f03d3f15" />
-        <param execution_type="ADSP" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
-        <param app_type="4" /> <!-- app type used in ACDB -->
+        <param execution_type="DYNAMIC" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
         <param library="none" />
         <param sample_rate="16000" />
         <param bit_width="16" />
@@ -123,7 +121,7 @@
         <param wdsp_fluence_type="NONE" />
         <gcs_usecase>
             <param uid="0x5" />
-            <param acdb_devices="DEVICE_HANDSET_MIC_CPE" />
+            <param acdb_devices="DEVICE_HANDSET_DMIC_CPE" />
             <param load_sound_model_ids="0x18000001, 0x4, 0x18000102" />
             <param start_engine_ids="0x18000001, 0x4, 0x18000103" />
             <param confidence_levels_ids="0x18000001, 0x4, 0x00012C28" />
