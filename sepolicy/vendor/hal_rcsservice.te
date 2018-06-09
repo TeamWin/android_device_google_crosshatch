@@ -20,6 +20,7 @@ get_prop(hal_rcsservice, hwservicemanager_prop)
 # allow hal to read sysfs file
 r_dir_file(hal_rcsservice, sysfs_msm_subsys)
 r_dir_file(hal_rcsservice, sysfs_diag)
+r_dir_file(hal_rcsservice, sysfs_soc)
 
 allow hal_rcsservice sysfs_timestamp_switch:file r_file_perms;
 
