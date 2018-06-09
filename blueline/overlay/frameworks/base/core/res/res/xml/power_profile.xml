@@ -169,11 +169,11 @@
     <item name="modem.controller.idle">105</item>
     <item name="modem.controller.rx">110</item>
     <array name="modem.controller.tx"> <!-- Strength 0 to 4 -->
-      <value>1</value>
-      <value>5</value>
-      <value>26</value>
-      <value>100</value>
-      <value>249</value>
+      <value>116</value>
+      <value>161</value>
+      <value>222</value>
+      <value>273</value>
+      <value>358</value>
     </array>
     <item name="modem.controller.voltage">3700</item>
 

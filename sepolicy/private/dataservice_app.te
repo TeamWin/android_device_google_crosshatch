@@ -10,9 +10,6 @@ allow dataservice_app {
   radio_service
 }:service_manager find;
 
-allow dataservice_app hal_imsrcsd_hwservice:hwservice_manager find;
-allow dataservice_app hal_cne_hwservice:hwservice_manager find;
-
 allow dataservice_app radio_data_file:dir create_dir_perms;
 allow dataservice_app radio_data_file:{ file lnk_file } create_file_perms;
 
