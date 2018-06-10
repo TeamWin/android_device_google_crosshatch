@@ -22,3 +22,5 @@ dontaudit hal_sensors_default kernel:system module_request;
 
 # Allow to read /sys/class/power_supply/usb/input_current_now
 r_dir_file(hal_sensors_default, sysfs_batteryinfo)
+
+r_dir_file(hal_sensors_default, adsprpcd_file)

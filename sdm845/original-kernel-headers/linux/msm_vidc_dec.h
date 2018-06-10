@@ -39,8 +39,10 @@
 
 #define VDEC_INTF_VER	1
 #define VDEC_MSG_BASE	0x0000000
-/* Codes to identify asynchronous message responses and events that driver
-  wants to communicate to the app.*/
+/*
+ *Codes to identify asynchronous message responses and events that driver
+ *wants to communicate to the app.
+ */
 #define VDEC_MSG_INVALID	(VDEC_MSG_BASE + 0)
 #define VDEC_MSG_RESP_INPUT_BUFFER_DONE	(VDEC_MSG_BASE + 1)
 #define VDEC_MSG_RESP_OUTPUT_BUFFER_DONE	(VDEC_MSG_BASE + 2)
@@ -93,37 +95,49 @@ struct vdec_ioctl_msg {
 	void *out;
 };
 
-/* CMD params: InputParam:enum vdec_codec
-   OutputParam: struct vdec_profile_level*/
+/*
+ * CMD params: InputParam:enum vdec_codec
+ * OutputParam: struct vdec_profile_level
+ */
 #define VDEC_IOCTL_GET_PROFILE_LEVEL_SUPPORTED \
 	_IOWR(VDEC_IOCTL_MAGIC, 0, struct vdec_ioctl_msg)
 
-/*CMD params:InputParam: NULL
-  OutputParam: uint32_t(bitmask)*/
+/*
+ * CMD params:InputParam: NULL
+ * OutputParam: uint32_t(bitmask)
+ */
 #define VDEC_IOCTL_GET_INTERLACE_FORMAT \
 	_IOR(VDEC_IOCTL_MAGIC, 1, struct vdec_ioctl_msg)
 
-/* CMD params: InputParam:  enum vdec_codec
-   OutputParam: struct vdec_profile_level*/
+/*
+ * CMD params: InputParam:  enum vdec_codec
+ * OutputParam: struct vdec_profile_level
+ */
 #define VDEC_IOCTL_GET_CURRENT_PROFILE_LEVEL \
 	_IOWR(VDEC_IOCTL_MAGIC, 2, struct vdec_ioctl_msg)
 
-/*CMD params: SET: InputParam: enum vdec_output_fromat  OutputParam: NULL
-  GET:  InputParam: NULL OutputParam: enum vdec_output_fromat*/
+/*
+ * CMD params: SET: InputParam: enum vdec_output_fromat  OutputParam: NULL
+ * GET:  InputParam: NULL OutputParam: enum vdec_output_fromat
+ */
 #define VDEC_IOCTL_SET_OUTPUT_FORMAT \
 	_IOWR(VDEC_IOCTL_MAGIC, 3, struct vdec_ioctl_msg)
 #define VDEC_IOCTL_GET_OUTPUT_FORMAT \
 	_IOWR(VDEC_IOCTL_MAGIC, 4, struct vdec_ioctl_msg)
 
-/*CMD params: SET: InputParam: enum vdec_codec OutputParam: NULL
-  GET: InputParam: NULL OutputParam: enum vdec_codec*/
+/*
+ * CMD params: SET: InputParam: enum vdec_codec OutputParam: NULL
+ * GET: InputParam: NULL OutputParam: enum vdec_codec
+ */
 #define VDEC_IOCTL_SET_CODEC \
 	_IOW(VDEC_IOCTL_MAGIC, 5, struct vdec_ioctl_msg)
 #define VDEC_IOCTL_GET_CODEC \
 	_IOR(VDEC_IOCTL_MAGIC, 6, struct vdec_ioctl_msg)
 
-/*CMD params: SET: InputParam: struct vdec_picsize outputparam: NULL
- GET: InputParam: NULL outputparam: struct vdec_picsize*/
+/*
+ * CMD params: SET: InputParam: struct vdec_picsize outputparam: NULL
+ * GET: InputParam: NULL outputparam: struct vdec_picsize
+ */
 #define VDEC_IOCTL_SET_PICRES \
 	_IOW(VDEC_IOCTL_MAGIC, 7, struct vdec_ioctl_msg)
 #define VDEC_IOCTL_GET_PICRES \
@@ -137,8 +151,10 @@ struct vdec_ioctl_msg {
 #define VDEC_IOCTL_SET_SEQUENCE_HEADER \
 	_IOW(VDEC_IOCTL_MAGIC, 11, struct vdec_ioctl_msg)
 
-/* CMD params: SET: InputParam - vdec_allocatorproperty, OutputParam - NULL
-   GET: InputParam - NULL, OutputParam - vdec_allocatorproperty*/
+/*
+ * CMD params: SET: InputParam - vdec_allocatorproperty, OutputParam - NULL
+ * GET: InputParam - NULL, OutputParam - vdec_allocatorproperty
+ */
 #define VDEC_IOCTL_SET_BUFFER_REQ \
 	_IOW(VDEC_IOCTL_MAGIC, 12, struct vdec_ioctl_msg)
 #define VDEC_IOCTL_GET_BUFFER_REQ \
@@ -173,7 +189,8 @@ struct vdec_ioctl_msg {
 
 /* ========================================================
  * IOCTL for getting asynchronous notification from driver
- * ========================================================*/
+ * ========================================================
+ */
 
 /*IOCTL params: InputParam - NULL, OutputParam - struct vdec_msginfo*/
 #define VDEC_IOCTL_GET_NEXT_MSG \
@@ -587,14 +604,14 @@ struct vdec_framerate {
 	unsigned long fps_numerator;
 };
 
-struct vdec_h264_mv{
+struct vdec_h264_mv {
 	size_t size;
 	int count;
 	int pmem_fd;
 	int offset;
 };
 
-struct vdec_mv_buff_size{
+struct vdec_mv_buff_size {
 	int width;
 	int height;
 	int size;

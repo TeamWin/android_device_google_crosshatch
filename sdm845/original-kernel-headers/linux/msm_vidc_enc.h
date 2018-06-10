@@ -38,7 +38,7 @@
 #define VEN_MSG_OUTPUT_BUFFER_DONE	2
 #define VEN_MSG_NEED_OUTPUT_BUFFER	3
 #define VEN_MSG_FLUSH_INPUT_DONE	4
-#define VEN_MSG_FLUSH_OUPUT_DONE	5
+#define VEN_MSG_FLUSH_OUTPUT_DONE	5
 #define VEN_MSG_START	6
 #define VEN_MSG_STOP	7
 #define VEN_MSG_PAUSE	8
@@ -171,7 +171,7 @@
 /* Base value for encoder configuration ioctls*/
 #define VEN_IOCTLBASE_ENC	0x850
 
-struct venc_ioctl_msg{
+struct venc_ioctl_msg {
 	void *in;
 	void *out;
 };
@@ -189,8 +189,10 @@ struct venc_ioctl_msg{
 /*IOCTL params:CMD: InputData - NULL, OutputData - NULL*/
 #define VEN_IOCTL_CMD_STOP_READ_MSG	_IO(VEN_IOCTLBASE_NENC, 2)
 
-/*IOCTL params:SET: InputData - venc_allocatorproperty, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_allocatorproperty*/
+/*
+ * IOCTL params:SET: InputData - venc_allocatorproperty, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_allocatorproperty
+ */
 #define VEN_IOCTL_SET_INPUT_BUFFER_REQ \
 	_IOW(VEN_IOCTLBASE_NENC, 3, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_INPUT_BUFFER_REQ \
@@ -208,8 +210,10 @@ struct venc_ioctl_msg{
 #define VEN_IOCTL_CMD_FREE_INPUT_BUFFER \
 	_IOW(VEN_IOCTLBASE_NENC, 7, struct venc_ioctl_msg)
 
-/*IOCTL params:SET: InputData - venc_allocatorproperty, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_allocatorproperty*/
+/*
+ * IOCTL params:SET: InputData - venc_allocatorproperty, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_allocatorproperty
+ */
 #define VEN_IOCTL_SET_OUTPUT_BUFFER_REQ \
 	_IOW(VEN_IOCTLBASE_NENC, 8, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_OUTPUT_BUFFER_REQ \
@@ -233,19 +237,25 @@ struct venc_ioctl_msg{
 #define VEN_IOCTL_CMD_START	_IO(VEN_IOCTLBASE_NENC, 13)
 
 
-/*IOCTL params:CMD: InputData - venc_buffer, OutputData - NULL
- Asynchronous respone message code:VEN_MSG_INPUT_BUFFER_DONE*/
+/*
+ * IOCTL params:CMD: InputData - venc_buffer, OutputData - NULL
+ * Asynchronous respone message code:VEN_MSG_INPUT_BUFFER_DONE
+ */
 #define VEN_IOCTL_CMD_ENCODE_FRAME \
 	_IOW(VEN_IOCTLBASE_NENC, 14, struct venc_ioctl_msg)
 
 
-/*IOCTL params:CMD: InputData - venc_buffer, OutputData - NULL
- Asynchronous response message code:VEN_MSG_OUTPUT_BUFFER_DONE*/
+/*
+ *IOCTL params:CMD: InputData - venc_buffer, OutputData - NULL
+ *Asynchronous response message code:VEN_MSG_OUTPUT_BUFFER_DONE
+ */
 #define VEN_IOCTL_CMD_FILL_OUTPUT_BUFFER \
 	_IOW(VEN_IOCTLBASE_NENC, 15, struct venc_ioctl_msg)
 
-/*IOCTL params:CMD: InputData - venc_bufferflush, OutputData - NULL
- * Asynchronous response message code:VEN_MSG_INPUT_BUFFER_DONE*/
+/*
+ * IOCTL params:CMD: InputData - venc_bufferflush, OutputData - NULL
+ * Asynchronous response message code:VEN_MSG_INPUT_BUFFER_DONE
+ */
 #define VEN_IOCTL_CMD_FLUSH \
 	_IOW(VEN_IOCTLBASE_NENC, 16, struct venc_ioctl_msg)
 
@@ -272,55 +282,69 @@ struct venc_ioctl_msg{
 
 /*ENCODER PROPERTY CONFIGURATION & CAPABILITY IOCTLs*/
 
-/*IOCTL params:SET: InputData - venc_basecfg, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_basecfg*/
+/*
+ * IOCTL params:SET: InputData - venc_basecfg, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_basecfg
+ */
 #define VEN_IOCTL_SET_BASE_CFG \
 	_IOW(VEN_IOCTLBASE_ENC, 1, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_BASE_CFG \
 	_IOR(VEN_IOCTLBASE_ENC, 2, struct venc_ioctl_msg)
 
-/*IOCTL params:SET: InputData - venc_switch, OutputData - NULL
-  GET: InputData - NULL, OutputData - venc_switch*/
+/*
+ * IOCTL params:SET: InputData - venc_switch, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_switch
+ */
 #define VEN_IOCTL_SET_LIVE_MODE \
 	_IOW(VEN_IOCTLBASE_ENC, 3, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_LIVE_MODE \
 	_IOR(VEN_IOCTLBASE_ENC, 4, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_profile, OutputData - NULL
-  GET: InputData - NULL, OutputData - venc_profile*/
+/*
+ * IOCTL params:SET: InputData - venc_profile, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_profile
+ */
 #define VEN_IOCTL_SET_CODEC_PROFILE \
 	_IOW(VEN_IOCTLBASE_ENC, 5, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_CODEC_PROFILE \
 	_IOR(VEN_IOCTLBASE_ENC, 6, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - ven_profilelevel, OutputData - NULL
-  GET: InputData - NULL, OutputData - ven_profilelevel*/
+/*
+ * IOCTL params:SET: InputData - ven_profilelevel, OutputData - NULL
+ * GET: InputData - NULL, OutputData - ven_profilelevel
+ */
 #define VEN_IOCTL_SET_PROFILE_LEVEL \
 	_IOW(VEN_IOCTLBASE_ENC, 7, struct venc_ioctl_msg)
 
 #define VEN_IOCTL_GET_PROFILE_LEVEL \
 	_IOR(VEN_IOCTLBASE_ENC, 8, struct venc_ioctl_msg)
 
-/*IOCTL params:SET: InputData - venc_switch, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_switch*/
+/*
+ * IOCTL params:SET: InputData - venc_switch, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_switch
+ */
 #define VEN_IOCTL_SET_SHORT_HDR \
 	_IOW(VEN_IOCTLBASE_ENC, 9, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_SHORT_HDR \
 	_IOR(VEN_IOCTLBASE_ENC, 10, struct venc_ioctl_msg)
 
 
-/*IOCTL params: SET: InputData - venc_sessionqp, OutputData - NULL
-  GET: InputData - NULL, OutputData - venc_sessionqp*/
+/*
+ * IOCTL params: SET: InputData - venc_sessionqp, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_sessionqp
+ */
 #define VEN_IOCTL_SET_SESSION_QP \
 	_IOW(VEN_IOCTLBASE_ENC, 11, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_SESSION_QP \
 	_IOR(VEN_IOCTLBASE_ENC, 12, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_intraperiod, OutputData - NULL
-  GET: InputData - NULL, OutputData - venc_intraperiod*/
+/*
+ * IOCTL params:SET: InputData - venc_intraperiod, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_intraperiod
+ */
 #define VEN_IOCTL_SET_INTRA_PERIOD \
 	_IOW(VEN_IOCTLBASE_ENC, 13, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_INTRA_PERIOD \
@@ -339,108 +363,136 @@ struct venc_ioctl_msg{
 #define VEN_IOCTL_GET_SEQUENCE_HDR \
 	_IOR(VEN_IOCTLBASE_ENC, 17, struct venc_ioctl_msg)
 
-/*IOCTL params:SET: InputData - venc_entropycfg, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_entropycfg*/
+/*
+ * IOCTL params:SET: InputData - venc_entropycfg, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_entropycfg
+ */
 #define VEN_IOCTL_SET_ENTROPY_CFG \
 	_IOW(VEN_IOCTLBASE_ENC, 18, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_ENTROPY_CFG \
 	_IOR(VEN_IOCTLBASE_ENC, 19, struct venc_ioctl_msg)
 
-/*IOCTL params:SET: InputData - venc_dbcfg, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_dbcfg*/
+/*
+ * IOCTL params:SET: InputData - venc_dbcfg, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_dbcfg
+ */
 #define VEN_IOCTL_SET_DEBLOCKING_CFG \
 	_IOW(VEN_IOCTLBASE_ENC, 20, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_DEBLOCKING_CFG \
 	_IOR(VEN_IOCTLBASE_ENC, 21, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_intrarefresh, OutputData - NULL
-  GET: InputData - NULL, OutputData - venc_intrarefresh*/
+/*
+ * IOCTL params:SET: InputData - venc_intrarefresh, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_intrarefresh
+ */
 #define VEN_IOCTL_SET_INTRA_REFRESH \
 	_IOW(VEN_IOCTLBASE_ENC, 22, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_INTRA_REFRESH \
 	_IOR(VEN_IOCTLBASE_ENC, 23, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_multiclicecfg, OutputData - NULL
-  GET: InputData - NULL, OutputData - venc_multiclicecfg*/
+/*
+ * IOCTL params:SET: InputData - venc_multiclicecfg, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_multiclicecfg
+ */
 #define VEN_IOCTL_SET_MULTI_SLICE_CFG \
 	_IOW(VEN_IOCTLBASE_ENC, 24, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_MULTI_SLICE_CFG \
 	_IOR(VEN_IOCTLBASE_ENC, 25, struct venc_ioctl_msg)
 
-/*IOCTL params:SET: InputData - venc_ratectrlcfg, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_ratectrlcfg*/
+/*
+ * IOCTL params:SET: InputData - venc_ratectrlcfg, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_ratectrlcfg
+ */
 #define VEN_IOCTL_SET_RATE_CTRL_CFG \
 	_IOW(VEN_IOCTLBASE_ENC, 26, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_RATE_CTRL_CFG \
 	_IOR(VEN_IOCTLBASE_ENC, 27, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_voptimingcfg, OutputData - NULL
-  GET: InputData - NULL, OutputData - venc_voptimingcfg*/
+/*
+ * IOCTL params:SET: InputData - venc_voptimingcfg, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_voptimingcfg
+ */
 #define VEN_IOCTL_SET_VOP_TIMING_CFG \
 	_IOW(VEN_IOCTLBASE_ENC, 28, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_VOP_TIMING_CFG \
 	_IOR(VEN_IOCTLBASE_ENC, 29, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_framerate, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_framerate*/
+/*
+ * IOCTL params:SET: InputData - venc_framerate, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_framerate
+ */
 #define VEN_IOCTL_SET_FRAME_RATE \
 	_IOW(VEN_IOCTLBASE_ENC, 30, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_FRAME_RATE \
 	_IOR(VEN_IOCTLBASE_ENC, 31, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_targetbitrate, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_targetbitrate*/
+/*
+ * IOCTL params:SET: InputData - venc_targetbitrate, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_targetbitrate
+ */
 #define VEN_IOCTL_SET_TARGET_BITRATE \
 	_IOW(VEN_IOCTLBASE_ENC, 32, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_TARGET_BITRATE \
 	_IOR(VEN_IOCTLBASE_ENC, 33, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_rotation, OutputData - NULL
-  GET: InputData - NULL, OutputData - venc_rotation*/
+/*
+ * IOCTL params:SET: InputData - venc_rotation, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_rotation
+ */
 #define VEN_IOCTL_SET_ROTATION \
 	_IOW(VEN_IOCTLBASE_ENC, 34, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_ROTATION \
 	_IOR(VEN_IOCTLBASE_ENC, 35, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_headerextension, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_headerextension*/
+/*
+ * IOCTL params:SET: InputData - venc_headerextension, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_headerextension
+ */
 #define VEN_IOCTL_SET_HEC \
 	_IOW(VEN_IOCTLBASE_ENC, 36, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_HEC \
 	_IOR(VEN_IOCTLBASE_ENC, 37, struct venc_ioctl_msg)
 
-/*IOCTL params:SET: InputData - venc_switch, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_switch*/
+/*
+ * IOCTL params:SET: InputData - venc_switch, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_switch
+ */
 #define VEN_IOCTL_SET_DATA_PARTITION \
 	_IOW(VEN_IOCTLBASE_ENC, 38, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_DATA_PARTITION \
 	_IOR(VEN_IOCTLBASE_ENC, 39, struct venc_ioctl_msg)
 
-/*IOCTL params:SET: InputData - venc_switch, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_switch*/
+/*
+ * IOCTL params:SET: InputData - venc_switch, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_switch
+ */
 #define VEN_IOCTL_SET_RVLC \
 	_IOW(VEN_IOCTLBASE_ENC, 40, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_RVLC \
 	_IOR(VEN_IOCTLBASE_ENC, 41, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_switch, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_switch*/
+/*
+ * IOCTL params:SET: InputData - venc_switch, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_switch
+ */
 #define VEN_IOCTL_SET_AC_PREDICTION \
 	_IOW(VEN_IOCTLBASE_ENC, 42, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_AC_PREDICTION \
 	_IOR(VEN_IOCTLBASE_ENC, 43, struct venc_ioctl_msg)
 
 
-/*IOCTL params:SET: InputData - venc_qprange, OutputData - NULL
- GET: InputData - NULL, OutputData - venc_qprange*/
+/*
+ * IOCTL params:SET: InputData - venc_qprange, OutputData - NULL
+ * GET: InputData - NULL, OutputData - venc_qprange
+ */
 #define VEN_IOCTL_SET_QP_RANGE \
 	_IOW(VEN_IOCTLBASE_ENC, 44, struct venc_ioctl_msg)
 #define VEN_IOCTL_GET_QP_RANGE \
@@ -519,11 +571,11 @@ struct venc_range {
 	unsigned long	step_size;
 };
 
-struct venc_switch{
+struct venc_switch {
 	unsigned char	status;
 };
 
-struct venc_allocatorproperty{
+struct venc_allocatorproperty {
 	unsigned long	 mincount;
 	unsigned long	 maxcount;
 	unsigned long	 actualcount;
@@ -533,7 +585,7 @@ struct venc_allocatorproperty{
 	unsigned long	 bufpoolid;
 };
 
-struct venc_bufferpayload{
+struct venc_bufferpayload {
 	unsigned char *pbuffer;
 	size_t	sz;
 	int	fd;
@@ -542,17 +594,17 @@ struct venc_bufferpayload{
 	unsigned long	filled_len;
 };
 
-struct venc_buffer{
- unsigned char *ptrbuffer;
- unsigned long	sz;
- unsigned long	len;
- unsigned long	offset;
- long long	timestamp;
- unsigned long	flags;
- void	*clientdata;
+struct venc_buffer {
+	unsigned char *ptrbuffer;
+	unsigned long	sz;
+	unsigned long	len;
+	unsigned long	offset;
+	long long	timestamp;
+	unsigned long	flags;
+	void	*clientdata;
 };
 
-struct venc_basecfg{
+struct venc_basecfg {
 	unsigned long	input_width;
 	unsigned long	input_height;
 	unsigned long	dvs_width;
@@ -564,19 +616,19 @@ struct venc_basecfg{
 	unsigned long	inputformat;
 };
 
-struct venc_profile{
+struct venc_profile {
 	unsigned long	profile;
 };
-struct ven_profilelevel{
+struct ven_profilelevel {
 	unsigned long	level;
 };
 
-struct venc_sessionqp{
+struct venc_sessionqp {
 	unsigned long	iframeqp;
 	unsigned long	pframqp;
 };
 
-struct venc_qprange{
+struct venc_qprange {
 	unsigned long	maxqp;
 	unsigned long	minqp;
 };
@@ -585,17 +637,17 @@ struct venc_plusptype {
 	unsigned long	plusptype_enable;
 };
 
-struct venc_intraperiod{
+struct venc_intraperiod {
 	unsigned long	num_pframes;
 	unsigned long	num_bframes;
 };
-struct venc_seqheader{
+struct venc_seqheader {
 	unsigned char *hdrbufptr;
 	unsigned long	bufsize;
 	unsigned long	hdrlen;
 };
 
-struct venc_capability{
+struct venc_capability {
 	unsigned long	codec_types;
 	unsigned long	maxframe_width;
 	unsigned long	maxframe_height;
@@ -605,75 +657,75 @@ struct venc_capability{
 	unsigned char	dvs;
 };
 
-struct venc_entropycfg{
-	unsigned longentropysel;
+struct venc_entropycfg {
+	unsigned int longentropysel;
 	unsigned long	cabacmodel;
 };
 
-struct venc_dbcfg{
+struct venc_dbcfg {
 	unsigned long	db_mode;
 	unsigned long	slicealpha_offset;
 	unsigned long	slicebeta_offset;
 };
 
-struct venc_intrarefresh{
+struct venc_intrarefresh {
 	unsigned long	irmode;
 	unsigned long	mbcount;
 };
 
-struct venc_multiclicecfg{
+struct venc_multiclicecfg {
 	unsigned long	mslice_mode;
 	unsigned long	mslice_size;
 };
 
-struct venc_bufferflush{
+struct venc_bufferflush {
 	unsigned long	flush_mode;
 };
 
-struct venc_ratectrlcfg{
+struct venc_ratectrlcfg {
 	unsigned long	rcmode;
 };
 
-struct	venc_voptimingcfg{
+struct	venc_voptimingcfg {
 	unsigned long	voptime_resolution;
 };
-struct venc_framerate{
+struct venc_framerate {
 	unsigned long	fps_denominator;
 	unsigned long	fps_numerator;
 };
 
-struct venc_targetbitrate{
+struct venc_targetbitrate {
 	unsigned long	target_bitrate;
 };
 
 
-struct venc_rotation{
+struct venc_rotation {
 	unsigned long	rotation;
 };
 
-struct venc_timeout{
+struct venc_timeout {
 	 unsigned long	millisec;
 };
 
-struct venc_headerextension{
+struct venc_headerextension {
 	 unsigned long	header_extension;
 };
 
-struct venc_msg{
+struct venc_msg {
 	unsigned long	statuscode;
 	unsigned long	msgcode;
 	struct venc_buffer	buf;
 	unsigned long	msgdata_size;
 };
 
-struct venc_recon_addr{
+struct venc_recon_addr {
 	unsigned char *pbuffer;
 	unsigned long buffer_size;
 	unsigned long pmem_fd;
 	unsigned long offset;
 };
 
-struct venc_recon_buff_size{
+struct venc_recon_buff_size {
 	int width;
 	int height;
 	int size;
