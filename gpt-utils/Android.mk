@@ -25,6 +25,7 @@ endif
 LOCAL_SHARED_LIBRARIES := liblog libz
 LOCAL_MODULE := libgptutils
 LOCAL_MODULE_OWNER := qti
+LOCAL_CFLAGS := -Wall -Werror
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -38,6 +39,7 @@ LOCAL_EXPORT_HEADER_LIBRARY_HEADERS := libgptutils_headers
 LOCAL_MODULE := libgptutils
 LOCAL_MODULE_OWNER := qti
 LOCAL_PROPRIETARY_MODULE := true
+LOCAL_CFLAGS := -Wall -Werror
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
