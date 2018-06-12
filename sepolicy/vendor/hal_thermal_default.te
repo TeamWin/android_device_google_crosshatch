@@ -1,6 +1,14 @@
 allow hal_thermal_default sysfs_thermal:dir { open read search };
 allow hal_thermal_default sysfs_thermal:file { getattr open read };
 allow hal_thermal_default sysfs_thermal:lnk_file read;
+
+allow hal_thermal_default sysfs_batteryinfo:dir search;
+allow hal_thermal_default sysfs_batteryinfo:file r_file_perms;
+allow hal_thermal_default sysfs_batteryinfo:lnk_file read;
+allow hal_thermal_default sysfs_msm_subsys:dir search;
+allow hal_thermal_default sysfs_msm_subsys:file r_file_perms;
+allow hal_thermal_default sysfs_msm_subsys:lnk_file read;
+
 allow hal_thermal_default proc_stat:file { getattr open read };
 # read thermal_config
 get_prop(hal_thermal_default, vendor_thermal_prop)

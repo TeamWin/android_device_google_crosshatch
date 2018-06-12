@@ -132,6 +132,11 @@ Return<bool> Vibrator::supportsAmplitudeControl()  {
 }
 
 Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
+
+    if (!amplitude) {
+        return Status::BAD_VALUE;
+    }
+
     int32_t scale = MAX_SCALE_INPUT - std::round((amplitude - 1) / 254.0 * MAX_SCALE_INPUT);
 
     mScale << scale << std::endl;
