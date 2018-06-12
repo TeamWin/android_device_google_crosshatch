@@ -218,6 +218,11 @@ bool ThermalHelper::readTemperature(
     out->currentValue = std::stoi(temp) * kMultiplier;
     out->throttlingThreshold = getThresholdFromType(
         kValidThermalSensorTypeMap.at(sensor_name), thresholds_);
+    if (kValidThermalSensorTypeMap.at(sensor_name) == TemperatureType::SKIN) {
+        out->throttlingThreshold = mLowTempThresholdAdjuster.adjustThreshold(
+              out->throttlingThreshold, out->currentValue);
+    }
+
     out->shutdownThreshold = getThresholdFromType(
         kValidThermalSensorTypeMap.at(sensor_name),
         shutdown_thresholds_);
@@ -380,6 +385,11 @@ bool ThermalHelper::checkThrottlingData(
     }
 
     return false;
+}
+
+bool ThermalHelper::fillBatteryThresholdDebugInfo(std::ostringstream& dump_buf)
+{
+    return mLowTempThresholdAdjuster.fillBatteryThresholdDebugInfo(dump_buf);
 }
 
 }  // namespace implementation

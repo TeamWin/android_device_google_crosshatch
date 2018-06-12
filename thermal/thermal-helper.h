@@ -39,6 +39,7 @@
 #include <fnmatch.h>
 
 #include <android/hardware/thermal/1.0/IThermal.h>
+#include "utils/battery_threshold.h"
 #include "utils/cooling_devices.h"
 #include "utils/sensors.h"
 
@@ -71,6 +72,7 @@ class ThermalHelper {
 
     bool fillTemperatures(hidl_vec<Temperature>* temperatures);
     bool fillCpuUsages(hidl_vec<CpuUsage>* cpu_usages);
+    bool fillBatteryThresholdDebugInfo(std::ostringstream& dump_buf);
 
     // Dissallow copy and assign.
     ThermalHelper(const ThermalHelper&) = delete;
@@ -119,6 +121,7 @@ class ThermalHelper {
     ThrottlingThresholds vr_thresholds_;
     ThrottlingThresholds shutdown_thresholds_;
     const bool is_initialized_;
+    const BatteryThresholdLUT mLowTempThresholdAdjuster;
 };
 
 }  // namespace implementation
