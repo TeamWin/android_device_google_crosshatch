@@ -108,43 +108,44 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
         return;
     }
 
+    std::string filePrefix = android::base::GetProperty(MODEM_LOG_PREFIX_PROPERTY, "");
+
+    if (filePrefix.empty()) {
+        ALOGD("Modem log prefix is not set\n");
+        return;
+    }
+
+    const std::string modemLogCombined = modemLogDir + "/" + filePrefix + "all.tar";
+    const std::string modemLogAllDir = modemLogDir + "/modem_log";
+
+    RunCommandToFd(fd, "MKDIR MODEM LOG", {"/vendor/bin/mkdir", "-p", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
+
     if (!PropertiesHelper::IsUserBuild()) {
-        CommandOptions options = CommandOptions::WithTimeout(120).Build();
+        RunCommandToFd(fd, "MODEM RFS INFO", {"/vendor/bin/find /data/vendor/rfs/mpss/OEMFI/"}, CommandOptions::WithTimeout(2).Build());
+        RunCommandToFd(fd, "MODEM DIAG SYSTEM PROPERTIES", {"/vendor/bin/getprop | grep vendor.sys.modem.diag"}, CommandOptions::WithTimeout(2).Build());
 
-        RunCommandToFd(fd, "MODEM RFS INFO",
-                       { "/vendor/bin/sh", "-c", "find /data/vendor/rfs/mpss/OEMFI/" }, options);
-
-        RunCommandToFd(fd, "MODEM DIAG SYSTEM PROPERTIES",
-                       { "/vendor/bin/sh", "-c", "getprop | grep vendor.sys.modem.diag" }, options);
-
-        std::string modemLogAllDir = modemLogDir + "/modem_log";
-        std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
-        std::vector<std::string> rilAndNetmgrLogs
+        const std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
+        const std::vector <std::string> rilAndNetmgrLogs
             {
-              "/data/vendor/radio/ril_log",
-              "/data/vendor/radio/ril_log_old",
-              "/data/vendor/netmgr/netmgr_log",
-              "/data/vendor/netmgr/netmgr_log_old",
-              "/data/vendor/radio/power_anomaly_data.txt",
-              "/data/vendor/radio/diag_logs/diag_trace.txt",
-              "/data/vendor/radio/diag_logs/diag_trace_old.txt",
-              "/data/vendor/radio/metrics_data",
-              "/data/vendor/ssrlog/ssr_log.txt",
-              "/data/vendor/ssrlog/ssr_log_old.txt",
+                "/data/vendor/radio/ril_log",
+                "/data/vendor/radio/ril_log_old",
+                "/data/vendor/netmgr/netmgr_log",
+                "/data/vendor/netmgr/netmgr_log_old",
+                "/data/vendor/radio/power_anomaly_data.txt",
+                "/data/vendor/radio/diag_logs/diag_trace.txt",
+                "/data/vendor/radio/diag_logs/diag_trace_old.txt",
+                "/data/vendor/radio/metrics_data",
+                "/data/vendor/ssrlog/ssr_log.txt",
+                "/data/vendor/ssrlog/ssr_log_old.txt",
             };
 
-        std::string modemLogMkDirCmd= "/vendor/bin/mkdir -p " + modemLogAllDir;
-        RunCommandToFd(fd, "MKDIR MODEM LOG", { "/vendor/bin/sh", "-c", modemLogMkDirCmd.c_str()}, options);
-
-        bool smlogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_SWITCH, false) &&
-            !access("/vendor/bin/smlog_dump", X_OK);
-
+        bool smlogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_SWITCH, false) && !access("/vendor/bin/smlog_dump", X_OK);
         bool diagLogEnabled = android::base::GetBoolProperty(DIAG_MDLOG_PERSIST_PROPERTY, false);
 
         if (smlogEnabled) {
-            RunCommandToFd(fd, "SMLOG DUMP", { "smlog_dump", "-d", "-o", modemLogAllDir.c_str() }, options);
+            RunCommandToFd(fd, "SMLOG DUMP", {"smlog_dump", "-d", "-o", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(10).Build());
         } else if (diagLogEnabled) {
-            bool diagLogStarted = android::base::GetBoolProperty(DIAG_MDLOG_STATUS_PROPERTY, false);
+            bool diagLogStarted = android::base::GetBoolProperty( DIAG_MDLOG_STATUS_PROPERTY, false);
 
             if (diagLogStarted) {
                 android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
@@ -171,50 +172,39 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
             }
         }
 
-        for (const auto& logFile : rilAndNetmgrLogs)
-        {
-            std::string copyCmd= "/vendor/bin/cp " + logFile + " " + modemLogAllDir;
-            RunCommandToFd(fd, "CP MODEM LOG", { "/vendor/bin/sh", "-c", copyCmd.c_str() }, options);
-        }
-
-        std::string filePrefix = android::base::GetProperty(MODEM_LOG_PREFIX_PROPERTY, "");
-
-        if (!filePrefix.empty()) {
-            std::string modemLogCombined = modemLogDir + "/" + filePrefix + "all.tar";
-            std::string modemLogTarCmd= "/vendor/bin/tar cvf " + modemLogCombined + " -C " + modemLogAllDir + " .";
-            RunCommandToFd(fd, "TAR LOG", { "/vendor/bin/sh", "-c", modemLogTarCmd.c_str()}, options);
-
-            std::string modemLogPermCmd= "/vendor/bin/chmod a+rw " + modemLogCombined;
-            RunCommandToFd(fd, "CHG PERM", { "/vendor/bin/sh", "-c", modemLogPermCmd.c_str()}, options);
-
-            std::vector<uint8_t> buffer(65536);
-            android::base::unique_fd fdLog(TEMP_FAILURE_RETRY(open(modemLogCombined.c_str(), O_RDONLY | O_CLOEXEC | O_NONBLOCK)));
-
-            if (fdLog >= 0) {
-                while (1) {
-                    ssize_t bytes_read = TEMP_FAILURE_RETRY(read(fdLog, buffer.data(), buffer.size()));
-
-                    if (bytes_read == 0) {
-                        break;
-                    } else if (bytes_read < 0) {
-                        ALOGD("read(%s): %s\n", modemLogCombined.c_str(), strerror(errno));
-                        break;
-                    }
-
-                    ssize_t result = TEMP_FAILURE_RETRY(write(fdModem, buffer.data(), bytes_read));
-
-                    if (result != bytes_read) {
-                        ALOGD("Failed to write %ld bytes, actually written: %ld", bytes_read, result);
-                        break;
-                    }
-                }
-            }
-
-            std::string modemLogClearCmd = "/vendor/bin/rm -r " + modemLogAllDir;
-            RunCommandToFd(fd, "RM MODEM DIR", { "/vendor/bin/sh", "-c", modemLogClearCmd.c_str()}, options);
-            RunCommandToFd(fd, "RM LOG", { "/vendor/bin/rm", modemLogCombined.c_str()}, options);
+        for (const auto& logFile : rilAndNetmgrLogs) {
+            RunCommandToFd(fd, "CP MODEM LOG", {"/vendor/bin/cp", logFile.c_str(), modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
         }
     }
+
+    RunCommandToFd(fd, "TAR LOG", {"/vendor/bin/tar", "cvf", modemLogCombined.c_str(), "-C", modemLogAllDir.c_str(), "."}, CommandOptions::WithTimeout(120).Build());
+    RunCommandToFd(fd, "CHG PERM", {"/vendor/bin/chmod", "a+w", modemLogCombined.c_str()}, CommandOptions::WithTimeout(2).Build());
+
+    std::vector<uint8_t> buffer(65536);
+    android::base::unique_fd fdLog(TEMP_FAILURE_RETRY(open(modemLogCombined.c_str(), O_RDONLY | O_CLOEXEC | O_NONBLOCK)));
+
+    if (fdLog >= 0) {
+        while (1) {
+            ssize_t bytes_read = TEMP_FAILURE_RETRY(read(fdLog, buffer.data(), buffer.size()));
+
+            if (bytes_read == 0) {
+                break;
+            } else if (bytes_read < 0) {
+                ALOGD("read(%s): %s\n", modemLogCombined.c_str(), strerror(errno));
+                break;
+            }
+
+            ssize_t result = TEMP_FAILURE_RETRY(write(fdModem, buffer.data(), bytes_read));
+
+            if (result != bytes_read) {
+                ALOGD("Failed to write %ld bytes, actually written: %ld", bytes_read, result);
+                break;
+            }
+        }
+    }
+
+    RunCommandToFd(fd, "RM MODEM DIR", { "/vendor/bin/rm", "-r", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
+    RunCommandToFd(fd, "RM LOG", { "/vendor/bin/rm", modemLogCombined.c_str()}, CommandOptions::WithTimeout(2).Build());
 }
 
 static void DumpTouch(int fd) {
@@ -273,6 +263,9 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
         int fdModem = handle->data[1];
         dumpModem(fd, fdModem);
     }
+
+    DumpFileToFd(fd, "Modem Stat", "/data/vendor/modem_stat/debug.txt");
+
     RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
     DumpFileToFd(fd, "SoC serial number", "/sys/devices/soc0/serial_number");
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
