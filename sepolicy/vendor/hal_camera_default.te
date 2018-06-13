@@ -27,3 +27,5 @@ allow hal_camera_default hal_paintbox_hwservice:hwservice_manager find;
 binder_call(hal_camera_default, easel)
 
 dontaudit hal_camera_default kernel:system module_request;
+
+dontaudit hal_camera_default vendor_display_prop:file r_file_perms;
