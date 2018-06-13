@@ -9,3 +9,5 @@ allow cameraserver sysfs_camera:dir search;
 allow cameraserver system_server:unix_stream_socket { read write };
 
 binder_call(cameraserver, mediacodec)
+
+dontaudit cameraserver vendor_display_prop:file r_file_perms;
