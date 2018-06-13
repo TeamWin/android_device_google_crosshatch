@@ -14,8 +14,8 @@ userdebug_or_eng(`
   allow hal_dumpstate_impl modem_dump_file:dir create_dir_perms;
   allow hal_dumpstate_impl modem_dump_file:file create_file_perms;
   allow hal_dumpstate_impl radio_vendor_data_file:dir r_dir_perms;
-  allow hal_dumpstate_impl netmgr_data_file:dir r_dir_perms;
   allow hal_dumpstate_impl radio_vendor_data_file:file r_file_perms;
+  allow hal_dumpstate_impl netmgr_data_file:dir r_dir_perms;
   allow hal_dumpstate_impl netmgr_data_file:file r_file_perms;
   allow hal_dumpstate_impl debugfs_ipc:dir r_dir_perms;
   allow hal_dumpstate_impl debugfs_ipc:file r_file_perms;
@@ -29,6 +29,8 @@ userdebug_or_eng(`
 
   set_prop(hal_dumpstate_impl, vendor_modem_diag_prop)
 ')
+
+allow hal_dumpstate_impl modem_stat_data_file:file r_file_perms;
 
 allow hal_dumpstate_impl uio_device:chr_file rw_file_perms;
 r_dir_file(hal_dumpstate_impl, sysfs_uio)
