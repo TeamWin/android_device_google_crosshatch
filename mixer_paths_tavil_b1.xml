@@ -1435,6 +1435,10 @@
         <ctl name="SLIMBUS_6_RX Audio Mixer MultiMedia10" value="1"/>
     </path>
 
+    <path name="audio-playback-voip bt-a2dp">
+        <ctl name="SLIMBUS_7_RX Audio Mixer MultiMedia10" value="1"/>
+    </path>
+
     <path name="audio-playback-voip bt-sco">
         <ctl name="SLIMBUS_7_RX Audio Mixer MultiMedia10" value="1"/>
     </path>
@@ -2000,24 +2004,13 @@
         <ctl name="DEC7 Volume" value="106"/>
     </path>
 
-    <!-- Ch1: mic2 DEC6/TX6, Ch2: mic3 DEC7/TX7, Ch3: mic1 DEC8/TX8-->
+    <!-- Ch1: 3rd mic DEC8/TX8, Ch2: 2nd mic DEC6/TX6, Ch3: 1st mic DEC5/TX5-->
     <path name="camcorder-mic">
-        <ctl name="AIF1_CAP Mixer SLIM TX6" value="1"/>
-        <ctl name="AIF1_CAP Mixer SLIM TX7" value="1"/>
-        <ctl name="AIF1_CAP Mixer SLIM TX8" value="1"/>
-        <ctl name="SLIM_0_TX Channels" value="Three"/>
-        <ctl name="CDC_IF TX6 MUX" value="DEC6"/>
-        <ctl name="ADC MUX6" value="DMIC"/>
-        <ctl name="DMIC MUX6" value="DMIC3"/>
-        <ctl name="CDC_IF TX7 MUX" value="DEC7"/>
-        <ctl name="ADC MUX7" value="DMIC"/>
-        <ctl name="DMIC MUX7" value="DMIC0"/>
-        <ctl name="CDC_IF TX8 MUX" value="DEC8"/>
-        <ctl name="ADC MUX8" value="DMIC"/>
-        <ctl name="DMIC MUX8" value="DMIC4"/>
-        <ctl name="DEC6 Volume" value="84" />
-        <ctl name="DEC7 Volume" value="84" />
-        <ctl name="DEC8 Volume" value="84" />
+        <path name="triple-mic"/>
+        <ctl name="SLIM_0_TX Format" value="S24_LE"/>
+        <ctl name="DEC8 Volume" value="84"/>
+        <ctl name="DEC6 Volume" value="84"/>
+        <ctl name="DEC5 Volume" value="84"/>
     </path>
 
     <path name="bt-sco-headset">
