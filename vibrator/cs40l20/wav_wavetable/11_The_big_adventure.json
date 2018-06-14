@@ -1,6 +1,6 @@
 [
 	{
-	"Version": "1.4.0", "Repeat": "12", "WaitTime": "0",
+	"Version": "1.4.0", "Repeat": "11", "WaitTime": "0",
 	"Time0" : "0" , "Level0" : "0" , "Frequency0" : "0" ,
 	"Time1" : "4" , "Level1" : "0.46" , "Frequency1" : "0",
 	"Time2" : "8" , "Level2" : "0.46" , "Frequency2" : "0",
