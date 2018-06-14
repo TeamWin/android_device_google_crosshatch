@@ -860,10 +860,12 @@ on property:ro.boot.hardware.sku=G013A
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013B
     setprop persist.nfc.uicc_enabled false
+    interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 on property:ro.boot.hardware.sku=G013C
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013D
     setprop persist.nfc.uicc_enabled false
+    interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 
 # charger driver exposes now finer grain control, map demo mode to those properties
 # demo mode can only be exit wipping data which will also reset the persist properties
