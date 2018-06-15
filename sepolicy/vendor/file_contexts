@@ -252,7 +252,6 @@
 /vendor/lib(64)?/libeaselmanager_client\.so          u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/vendor\.google_paintbox@1\.0\.so    u:object_r:same_process_hal_file:s0
 
-
 # data files
 /data/vendor/netmgr(/.*)?              u:object_r:netmgr_data_file:s0
 /data/vendor/location(/.*)?            u:object_r:location_data_file:s0
@@ -280,6 +279,7 @@
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
 /data/vendor/tui(/.*)?                 u:object_r:vendor_tui_data_file:s0
 /data/vendor/nnhal(/.*)?               u:object_r:hal_neuralnetworks_data_file:s0
+/data/vendor/modem_stat/debug\.txt     u:object_r:modem_stat_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0
