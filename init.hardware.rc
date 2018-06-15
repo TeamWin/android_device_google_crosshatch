@@ -875,3 +875,9 @@ on property:persist.vendor.charge.stop.level=*
 
 on property:persist.vendor.charge.start.level=*
     write /sys/devices/platform/soc/soc:google,charger/charge_start_level ${persist.vendor.charge.start.level}
+
+# For Japan radio builds, always enforce camera shutter sound
+# Since this property is read by the audio server in system service,
+# it should be written by the system init.
+on property:ro.boot.hardware.radio.subtype=1
+    setprop audio.camerasound.force true
