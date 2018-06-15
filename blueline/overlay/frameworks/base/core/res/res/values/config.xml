@@ -138,10 +138,11 @@
          Must be in the range specified by minimum and maximum. -->
     <integer name="config_screenBrightnessSettingDefault">98</integer>
 
-    <!-- Default screen brightness for VR setting. Default value: 0x1A0 => 104. -->
-    <integer name="config_screenBrightnessForVrSettingDefault">104</integer>
-
-    <integer name="config_screenBrightnessForVrSettingMinimum">104</integer>
+    <!-- Default screen brightness for VR setting. Default value: 0x1A0 for EVT2. -->
+    <!-- 8 bit brightness level of 111 corresponds to the 10 bit brightness level of 0x1A0 on EVT2. -->
+    <integer name="config_screenBrightnessForVrSettingDefault">111</integer>
+    <integer name="config_screenBrightnessForVrSettingMinimum">111</integer>
+    <integer name="config_screenBrightnessForVrSettingMaximum">111</integer>
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
