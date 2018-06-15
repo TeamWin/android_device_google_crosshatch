@@ -19,3 +19,5 @@ dontaudit init kernel:system module_request;
 allow init sysfs_vdso:file w_file_perms;
 
 allow init sysfs_poweroff:file w_file_perms;
+# b/72993533 Thermal mitigation in recovery mode
+allow init sysfs_thermal:file w_file_perms;

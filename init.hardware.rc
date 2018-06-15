@@ -43,6 +43,8 @@ on charger
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     # Disable sched_boost
     write /proc/sys/kernel/sched_boost 0
+    # Enable thermal mitigation
+    write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
 
 service charger /charger
     class charger
