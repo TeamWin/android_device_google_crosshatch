@@ -101,3 +101,7 @@ PRODUCT_COPY_FILES += \
 # Dumpstate HAL
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.0-service.crosshatch
+
+# whitelisted app
+PRODUCT_COPY_FILES += \
+    device/google/marlin/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml

@@ -111,4 +111,9 @@
         <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="true"/>
     </exception>
 
+    <exception package="com.google.android.wfcactivation">
+        <!-- SMS -->
+        <permission name="android.permission.RECEIVE_WAP_PUSH" fixed="true"/>
+    </exception>
+
 </exceptions>
