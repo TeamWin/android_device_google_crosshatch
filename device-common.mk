@@ -104,4 +104,4 @@ PRODUCT_PACKAGES += \
 
 # whitelisted app
 PRODUCT_COPY_FILES += \
-    device/google/marlin/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
+    device/google/crosshatch/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
