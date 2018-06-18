@@ -397,7 +397,6 @@
     <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_5GHz">-80</integer>
     <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_24GHz">-83</integer>
 
-
     <!-- The default intensity level for haptic feedback. See
          Settings.System.HAPTIC_FEEDBACK_INTENSITY more details on the constant values and
          meanings. -->
@@ -406,4 +405,14 @@
          Settings.System.NOTIFICATION_VIBRATION_INTENSITY more details on the constant values and
          meanings. -->
     <integer name="config_defaultNotificationVibrationIntensity">3</integer>
+
+    <!-- Boolean indicating whether framework needs to set the tx power limit for meeting SAR
+         requirements -->
+    <bool translatable="false" name="config_wifi_framework_enable_sar_tx_power_limit">false</bool>
+
+    <!-- Boolean indicating whether framework SAR supports body proximity requirements -->
+    <bool translatable="false" name="config_wifi_framework_enable_body_proximity_sar_tx_power_limit">false</bool>
+
+    <!-- String for the sensor type for body/head proximity for SAR -->
+    <string translatable="false" name="config_wifi_sar_sensor_type">com.google.sensor.sar</string>
 </resources>
