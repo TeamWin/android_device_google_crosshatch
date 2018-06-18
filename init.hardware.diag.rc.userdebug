@@ -84,7 +84,7 @@ on property:ro.vendor.bluetooth.ftm_enabled=true
 service ftmd /vendor/bin/ftmdaemon
     class late_start
     user root
-    group bluetooth net_bt_admin misc net_bt_stack diag net_bt
+    group bluetooth net_bt_admin misc diag net_bt
     disabled
     oneshot
 
