@@ -14,6 +14,7 @@ radio.                     u:object_r:radio_prop:s0
 rcs.publish.status         u:object_r:radio_prop:s0
 vendor.debug.ramdump.      u:object_r:vendor_ramdump_prop:s0
 persist.vendor.sys.crash_rcu  u:object_r:vendor_ramdump_prop:s0
+ro.boot.ramdump            u:object_r:vendor_ramdump_prop:s0
 vendor.debug.ssrdump       u:object_r:vendor_ssr_prop:s0
 persist.vendor.sys.cnss.   u:object_r:vendor_cnss_diag_prop:s0
 vendor.sys.listeners.registered   u:object_r:vendor_tee_listener_prop:s0
