@@ -25,4 +25,14 @@
     <!-- How much we expand the touchable region of the status bar below the notch to catch touches
          that just start below the notch. -->
     <dimen name="display_cutout_touchable_region_size">50px</dimen>
+
+    <!-- Height of the status bar header bar when on Keyguard (match status_bar_portrait) -->
+    <dimen name="status_bar_header_height_keyguard">49dp</dimen>
+
+    <!-- Margin end of the system icons super container when the avatar is missing. -->
+    <dimen name="system_icons_super_container_avatarless_margin_end">10dp</dimen>
+
+    <!-- end margin for multi user switch in collapsed quick settings -->
+    <dimen name="multi_user_switch_keyguard_margin">7dp</dimen>
+
 </resources>
