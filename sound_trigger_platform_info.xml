@@ -56,7 +56,7 @@
          vendor_uuid. -->
     <sound_model_config>
         <param vendor_uuid="7038ddc8-30f2-11e6-b0ac-40a8f03d3f15" />
-        <param execution_type="WDSP" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
+        <param execution_type="DYNAMIC" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
         <param app_type="3" /> <!-- app type used in ACDB -->
         <param library="none" />
         <param max_cpe_phrases="1" />
@@ -105,7 +105,7 @@
 
     <sound_model_config> <!-- Music Detection -->
         <param vendor_uuid="9f6ad62a-1f0b-11e7-87c5-40a8f03d3f15" />
-        <param execution_type="WDSP" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
+        <param execution_type="DYNAMIC" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
         <param library="none" />
         <param sample_rate="16000" />
         <param bit_width="16" />
