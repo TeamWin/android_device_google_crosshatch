@@ -24,7 +24,7 @@
 using android::hardware::keymaster::V4_0::SecurityLevel;
 using android::hardware::keymaster::V4_0::support::Keymaster;
 
-useconds_t kWaitTimeMicroseconds = 10 * 1000;  // 10 milliseconds
+useconds_t kWaitTimeMicroseconds = 1 * 1000;  // 1 milliseconds
 
 int main() {
     for (unsigned cycleCount = 0; /* Forever */; ++cycleCount) {
