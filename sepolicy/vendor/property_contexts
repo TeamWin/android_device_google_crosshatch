@@ -45,6 +45,7 @@ ctl.vendor.imsrcsservice   u:object_r:ctl_vendor_imsrcsservice_prop:s0
 persist.vendor.usb.config  u:object_r:vendor_usb_config_prop:s0
 vendor.usb.config          u:object_r:vendor_usb_config_prop:s0
 ro.boot.hardware.radio.subtype u:object_r:vendor_radio_sku_prop:s0
+ctl.vendor.rmt_storage     u:object_r:ctl_vendor_rmt_storage_prop:s0
 
 # vendor_default_prop
 audio_hal.in_period_size   u:object_r:vendor_default_prop:s0
