@@ -128,6 +128,7 @@
 /vendor/bin/thermal-engine      u:object_r:thermal-engine_exec:s0
 /vendor/bin/sensors\.qti        u:object_r:sensors_exec:s0
 /vendor/bin/sscrpcd             u:object_r:sensors_exec:s0
+/vendor/bin/hdcp_srm            u:object_r:hdcp_srm_exec:s0
 /vendor/bin/ssr_setup           u:object_r:ssr_setup_exec:s0
 /vendor/bin/ssr_diag            u:object_r:ssr_diag_exec:s0
 /vendor/bin/pm-service          u:object_r:per_mgr_exec:s0
