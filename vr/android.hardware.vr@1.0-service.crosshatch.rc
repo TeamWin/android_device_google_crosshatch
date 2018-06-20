@@ -1,9 +1,0 @@
-service vendor.vr-crosshatch-1-0 /vendor/bin/hw/android.hardware.vr@1.0-service.crosshatch
-    class hal
-    user system
-    group system
-
-# reset thermal-engine when framework died and thermal-engine is in VR mode
-on property:init.svc.zygote=restarting && property:vendor.thermal.vr_mode=-vr
-   setprop vendor.thermal.vr_mode -novr
-   restart vendor.thermal-engine

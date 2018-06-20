@@ -476,10 +476,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.google.wireless_charger@1.0
 
-# VR HAL
-PRODUCT_PACKAGES += \
-    android.hardware.vr@1.0-service.crosshatch \
-
 ENABLE_VENDOR_RIL_SERVICE := true
 
 PRODUCT_COPY_FILES += \
