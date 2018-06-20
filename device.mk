@@ -292,6 +292,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.sib16_support=1 \
     persist.vendor.radio.data_con_rprt=true \
     persist.vendor.radio.relay_oprt_change=1\
+    persist.vendor.radio.no_wait_for_card=1\
     persist.rcs.supported=1 \
     vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so\
     ro.hardware.keystore_desede=true \
