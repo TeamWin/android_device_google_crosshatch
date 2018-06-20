@@ -64,6 +64,8 @@
 -->
 
 <Included>
+    <Include href="media_codecs_google_c2_audio.xml" />
+    <Include href="media_codecs_google_c2_telephony.xml" />
     <Decoders>
         <MediaCodec name="c2.qti.avc.decoder" type="video/avc">
             <Limit name="size" min="96x96" max="4096x2304" />
@@ -74,6 +76,17 @@
             <Limit name="frame-rate" range="1-480" />
             <Limit name="concurrent-instances" max="16" />
             <Feature name="adaptive-playback" />
+        </MediaCodec>
+        <MediaCodec name="c2.qti.avc.decoder.secure" type="video/avc" >
+            <Limit name="size" min="64x64" max="4096x2160" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" min="1" max="1958400" />
+            <Limit name="bitrate" range="1-100000000" />
+            <Limit name="frame-rate" range="1-240" />
+            <Feature name="adaptive-playback" />
+            <Feature name="secure-playback" required="true" />
+            <Limit name="concurrent-instances" max="6" />
         </MediaCodec>
         <MediaCodec name="c2.qti.hevc.decoder" type="video/hevc" >
             <Limit name="size" min="96x96" max="4096x2304" />
@@ -128,7 +141,7 @@
             <Limit name="quality" range="0-100"  default="80" />
             <Feature name="bitrate-modes" value="VBR,CQ" />
         </MediaCodec>
-        <MediaCodec name="c2.qti.vp8.encoder" type="video/vp8">
+        <MediaCodec name="c2.qti.vp8.encoder" type="video/x-vnd.on2.vp8">
             <Limit name="size" min="96x96" max="4096x2304" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
@@ -137,7 +150,14 @@
             <Limit name="frame-rate" range="1-480" />
             <Limit name="concurrent-instances" max="16" />
         </MediaCodec>
+        <MediaCodec name="c2.qti.heic.encoder" type="image/vnd.android.heic">
+            <Limit name="size" min="512x512" max="8192x8192" />
+            <Limit name="bitrate" range="1-120000000" />
+            <Limit name="frame-rate" range="1-2" />
+            <Limit name="quality" range="0-100" default="80" />
+            <Feature name="bitrate-modes" value="CQ" />
+            <Limit name="concurrent-instances" max="16" />
+        </MediaCodec>
     </Encoders>
-    <Include href="media_codecs_google_c2_audio.xml" />
     <Include href="media_codecs_google_c2_video.xml" />
 </Included>
