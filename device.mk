@@ -254,10 +254,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.foss.config=1 \
     vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
-# b/73168288
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.display.disable_rotator_downscale=1
-
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.dataspace_saturation_matrix=1.16868,-0.03155,-0.01473,-0.16868,1.03155,-0.05899,0.00000,0.00000,1.07372
 
