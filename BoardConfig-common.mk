@@ -128,6 +128,7 @@ TARGET_FS_CONFIG_GEN := device/google/crosshatch/config.fs
 
 QCOM_BOARD_PLATFORMS += sdm845
 BOARD_HAVE_BLUETOOTH_QCOM := true
+BOARD_HAVE_QCOM_FM := false
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/google/crosshatch/bluetooth
 
 # Enable dex pre-opt to speed up initial boot
