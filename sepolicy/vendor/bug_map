@@ -7,6 +7,7 @@ hal_keymaster_citadel exported3_system_prop file 110231496
 hal_rcsservice sysfs_soc dir 78460200
 hardware_info_app sysfs_msm_subsys dir 78460200
 ims default_prop file 78119118
+init proc file 110466938
 per_proxy exported3_system_prop file 80153956
 platform_app vendor_default_prop file 78460200
 priv_app vendor_default_prop file 78460200
