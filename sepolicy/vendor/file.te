@@ -29,6 +29,7 @@ type sysfs_pinctrl, fs_type, sysfs_type;
 type sysfs_rpm, sysfs_type, fs_type;
 type sysfs_wlc, sysfs_type, fs_type;
 type sysfs_esim, sysfs_type, fs_type;
+type sysfs_pstore, sysfs_type, fs_type;
 
 type debugfs_clk, debugfs_type, fs_type;
 type debugfs_ion, debugfs_type, fs_type;
@@ -105,6 +106,7 @@ type vendor_tui_data_file, file_type, data_file_type;
 type wifi_vendor_log_data_file, file_type, data_file_type;
 type hal_neuralnetworks_data_file, file_type, data_file_type;
 type modem_stat_data_file, file_type, data_file_type;
+type ramoops_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 
 #data sysfs files
 type sysfs_data, fs_type, sysfs_type;
