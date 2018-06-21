@@ -143,21 +143,21 @@
     </array>
 
     <!-- Additional power used when screen is ambient mode -->
-    <item name="ambient.on">24</item>
+    <item name="ambient.on">25</item>
 
     <!-- Additional power used when screen is turned on at minimum brightness -->
-    <item name="screen.on">117</item>
+    <item name="screen.on">95</item>
     <!-- Additional power used when screen is at maximum brightness, compared to
          screen at minimum brightness -->
-    <item name="screen.full">231</item>
+    <item name="screen.full">306</item>
 
     <!-- Average power used by the camera flash module when on -->
-    <item name="camera.flashlight">242.85</item>
+    <item name="camera.flashlight">240.47</item>
     <!-- Average power use by the camera subsystem for a typical camera
          application. Intended as a rough estimate for an application running a
          preview and capturing approximately 10 full-resolution pictures per
          minute. -->
-    <item name="camera.avg">329.5</item>
+    <item name="camera.avg">855</item>
 
     <!-- Additional power used when video is playing -->
     <item name="video">25</item>
@@ -192,6 +192,15 @@
     <item name="wifi.controller.tx">350</item>
     <!-- Operating volatage for wifi radio in mV.-->
     <item name="wifi.controller.voltage">3700</item>
+
+    <!-- Idle current for bluetooth in mA.-->
+    <item name="bluetooth.controller.idle">0.01</item>
+    <!-- Rx current for bluetooth in mA.-->
+    <item name="bluetooth.controller.rx">9</item>
+    <!-- Tx current for bluetooth in mA-->
+    <item name="bluetooth.controller.tx">7</item>
+    <!-- Operating voltage for bluetooth in mV.-->
+    <item name="bluetooth.controller.voltage">3300</item>
 
 </device>
 
