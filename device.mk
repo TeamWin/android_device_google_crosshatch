@@ -374,7 +374,7 @@ PRODUCT_PACKAGES += \
     Tag \
     SecureElement \
     android.hardware.nfc@1.1-service \
-    android.hardware.secure_element@1.0-service
+    android.hardware.secure_element@1.0-service-disabled
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \

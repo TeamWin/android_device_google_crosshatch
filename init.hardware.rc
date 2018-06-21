@@ -254,8 +254,8 @@ on late-fs
     # cause services for bootanim not running.
     wait_for_prop hwservicemanager.ready true
 
-    # Wait for keymaster HALs (TEE and StrongBox)
-    exec_start wait_for_strongbox
+    # Wait for keymaster
+    exec_start wait_for_keymaster
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --late
@@ -822,12 +822,6 @@ service ppd /vendor/bin/mm-pp-dpps
     socket pps stream 0660 system system
     disabled
 
-service wait_for_strongbox /vendor/bin/hw/wait_for_strongbox
-    user root
-    group root system
-    priority -20
-    ioprio rt 0
-
 on property:init.svc.vendor.hwcomposer-2-2=stopped
     stop ppd
 
@@ -860,10 +854,12 @@ on property:ro.boot.hardware.sku=G013A
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013B
     setprop persist.nfc.uicc_enabled false
+    interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 on property:ro.boot.hardware.sku=G013C
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013D
     setprop persist.nfc.uicc_enabled false
+    interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 
 # charger driver exposes now finer grain control, map demo mode to those properties
 # demo mode can only be exit wipping data which will also reset the persist properties
