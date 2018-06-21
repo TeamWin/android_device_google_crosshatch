@@ -692,10 +692,10 @@
          -->
     <string translatable="false" name="config_mainBuiltInDisplayCutout">
         M -338,0
-        q 86,-4 80,71.5 v 8 q 4,90 95,91.5
+        q 86,-4 80,72 v 8 q 4,90 95,91.5
         h 163 v -171.5 z
         M 338,0
-        q -86,-4 -80,71.5 v 8 q -4,90 -95,91.5
+        q -86,-4 -80,72 v 8 q -4,90 -95,91.5
         h -163 v -171.5 z
     </string>
 
