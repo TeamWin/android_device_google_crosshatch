@@ -13,3 +13,5 @@ allow hal_fingerprint tee_device:file rw_file_perms;
 allow hal_fingerprint tee_device:chr_file rw_file_perms;
 allow hal_fingerprint uhid_device:chr_file rw_file_perms;
 
+allow hal_fingerprint_default hal_pixelstats_hwservice:hwservice_manager find;
+allow hal_fingerprint_default pixelstats_system:binder call;
