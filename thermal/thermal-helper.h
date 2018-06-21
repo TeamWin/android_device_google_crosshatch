@@ -55,7 +55,6 @@ using ::android::hardware::thermal::V1_0::Temperature;
 using ::android::hardware::thermal::V1_0::TemperatureType;
 
 constexpr char kSkinSensorType[] = "quiet-therm-adc";
-constexpr float kMultiplier = .001;
 
 struct ThrottlingThresholds {
     ThrottlingThresholds() : cpu(NAN), gpu(NAN), ss(NAN), battery(NAN) {}
@@ -63,6 +62,14 @@ struct ThrottlingThresholds {
     float gpu;
     float ss;
     float battery;
+};
+
+struct SensorDetails {
+    SensorDetails() : type(TemperatureType::UNKNOWN), multiplier(NAN) {}
+    SensorDetails(const TemperatureType type, const float mult) :
+        type(type), multiplier(mult) {}
+    TemperatureType type;
+    float multiplier;
 };
 
 class ThermalHelper {
