@@ -45,6 +45,7 @@ ctl.vendor.imsrcsservice   u:object_r:ctl_vendor_imsrcsservice_prop:s0
 persist.vendor.usb.config  u:object_r:vendor_usb_config_prop:s0
 vendor.usb.config          u:object_r:vendor_usb_config_prop:s0
 ro.boot.hardware.radio.subtype u:object_r:vendor_radio_sku_prop:s0
+ctl.vendor.rmt_storage     u:object_r:ctl_vendor_rmt_storage_prop:s0
 
 # vendor_default_prop
 audio_hal.in_period_size   u:object_r:vendor_default_prop:s0
@@ -188,10 +189,12 @@ vendor.gralloc.map_fb_memory       u:object_r:vendor_display_prop:s0
 vendor.gralloc.disable_ubwc        u:object_r:vendor_display_prop:s0
 vendor.debug.prerotation.disable   u:object_r:vendor_display_prop:s0
 vendor.debug.egl.changepixelformat u:object_r:vendor_display_prop:s0
-vendor.display.disable_inline_rotator  u:object_r:vendor_display_prop:s0
 
 # persist_nfc_prop
 persist.nfc. u:object_r:persist_nfc_prop:s0
 
 # Pixel Logger (Bluetooth)
 vendor.sys.logger.bluetooth        u:object_r:vendor_bluetooth_log_prop:s0
+
+# ramoops
+vendor.ramoops.                    u:object_r:vendor_ramoops_prop:s0

@@ -35,6 +35,8 @@
 /dev/easelcomm-client                           u:object_r:easel_device:s0
 /dev/citadel0                                   u:object_r:citadel_device:s0
 /dev/pn81a                                      u:object_r:secure_element_device:s0
+/dev/access-metadata                            u:object_r:ramoops_device:s0
+/dev/access-ramoops                             u:object_r:ramoops_device:s0
 # camera rainbow sensor
 /dev/vd6281                                     u:object_r:camera_device:s0
 # pcm device receiving rainbow sensor data
@@ -128,6 +130,7 @@
 /vendor/bin/thermal-engine      u:object_r:thermal-engine_exec:s0
 /vendor/bin/sensors\.qti        u:object_r:sensors_exec:s0
 /vendor/bin/sscrpcd             u:object_r:sensors_exec:s0
+/vendor/bin/hdcp_srm            u:object_r:hdcp_srm_exec:s0
 /vendor/bin/ssr_setup           u:object_r:ssr_setup_exec:s0
 /vendor/bin/ssr_diag            u:object_r:ssr_diag_exec:s0
 /vendor/bin/pm-service          u:object_r:per_mgr_exec:s0
@@ -176,6 +179,8 @@
 /vendor/bin/ftmdaemon           u:object_r:ftmd_exec:s0
 /vendor/bin/hw/qcrild           u:object_r:rild_exec:s0
 /vendor/bin/mm-pp-dpps          u:object_r:mm-pp-daemon_exec:s0
+/vendor/bin/ramoops             u:object_r:ramoops_exec:s0
+/vendor/bin/init\.ramoops\.sh   u:object_r:ramoops_exec:s0
 
 /vendor/bin/hw/android\.hardware\.confirmationui@1\.0-service-crosshatch u:object_r:hal_confirmationui_default_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service\.widevine         u:object_r:hal_drm_widevine_exec:s0
@@ -200,6 +205,7 @@
 /vendor/bin/hw/vendor\.qti\.hardware\.display\.allocator@1\.0-service   u:object_r:hal_graphics_allocator_default_exec:s0
 /vendor/bin/hw/vendor\.google\.wireless_charger@1\.0-service-vendor       u:object_r:hal_wlc_exec:s0
 /vendor/bin/hw/android\.hardware\.neuralnetworks@1\.1-service-qti u:object_r:hal_neuralnetworks_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.secure_element@1\.0-service-disabled   u:object_r:hal_secure_element_default_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
@@ -280,6 +286,7 @@
 /data/vendor/tui(/.*)?                 u:object_r:vendor_tui_data_file:s0
 /data/vendor/nnhal(/.*)?               u:object_r:hal_neuralnetworks_data_file:s0
 /data/vendor/modem_stat/debug\.txt     u:object_r:modem_stat_data_file:s0
+/data/vendor_ce/[0-9]+/ramoops(/.*)?   u:object_r:ramoops_vendor_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0

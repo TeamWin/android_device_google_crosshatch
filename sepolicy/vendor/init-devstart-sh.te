@@ -33,3 +33,6 @@ dontaudit init-qcom-devstart-sh sysfs:file { create getattr };
 dontaudit init-qcom-devstart-sh sysfs_type:dir { read write };
 dontaudit init-qcom-devstart-sh sysfs_graphics:file getattr;
 dontaudit init-qcom-devstart-sh sysfs_devices_block:file getattr;
+
+# ramoops
+dontaudit init-qcom-devstart-sh sysfs_pstore:file { getattr };

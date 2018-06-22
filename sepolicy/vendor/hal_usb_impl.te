@@ -15,3 +15,8 @@ allow hal_usb_impl configfs:file create_file_perms;
 
 set_prop(hal_usb_impl, vendor_usb_config_prop)
 get_prop(hal_usb_impl, vendor_usb_prop)
+
+get_prop(hal_usb_impl, hwservicemanager_prop)
+hwbinder_use(hal_usb_impl)
+allow hal_usb_impl hal_pixelstats_hwservice:hwservice_manager find;
+binder_call(hal_usb_impl, pixelstats_system)

@@ -50,6 +50,7 @@ on early-boot
     setprop sys.usb.mtp.device_type 3
     setprop sys.usb.controller "a600000.dwc3"
     symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
+    write /sys/module/libcomposite/parameters/disable_l1_for_hs "y"
     write /config/usb_gadget/g1/functions/gsi.rndis/rndis_class_id 1
 
 on boot
