@@ -231,11 +231,8 @@
     <hal format="hidl">
         <name>android.hardware.neuralnetworks</name>
         <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IDevice</name>
-            <instance>paintbox</instance>
-        </interface>
+        <fqname>@1.0::IDevice/paintbox</fqname>
+        <fqname>@1.1::IDevice/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.nfc</name>

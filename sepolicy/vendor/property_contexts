@@ -144,9 +144,11 @@ sys.disable_ext_animation  u:object_r:vendor_default_prop:s0
 sys.hwc_disable_hdr        u:object_r:vendor_default_prop:s0
 
 # public_vendor_default_prop
+fastrpc.debug.trace        u:object_r:public_vendor_default_prop:s0
 fastrpc.perf.kernel        u:object_r:public_vendor_default_prop:s0
 fastrpc.perf.adsp          u:object_r:public_vendor_default_prop:s0
 fastrpc.perf.freq          u:object_r:public_vendor_default_prop:s0
+fastrpc.process.attrs      u:object_r:public_vendor_default_prop:s0
 persist.vendor.cne.feature u:object_r:public_vendor_default_prop:s0
 persist.cne.logging.qxdm   u:object_r:public_vendor_default_prop:s0
 persist.vendor.cnd.wqe     u:object_r:public_vendor_default_prop:s0
