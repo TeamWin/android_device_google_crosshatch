@@ -8,6 +8,8 @@ allow hal_neuralnetworks_default fwk_sensor_hwservice:hwservice_manager find;
 allow hal_neuralnetworks_default qdsp_device:chr_file r_file_perms;
 allow hal_neuralnetworks_default ion_device:chr_file r_file_perms;
 
+r_dir_file(hal_neuralnetworks_default, adsprpcd_file)
+
 allow hal_neuralnetworks_default app_data_file:file { read getattr };
 allow hal_neuralnetworks_default shell_data_file:file { read getattr };
 allow hal_neuralnetworks_default hal_neuralnetworks_data_file:dir create_dir_perms;
