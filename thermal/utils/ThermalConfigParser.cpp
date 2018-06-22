@@ -72,7 +72,7 @@ static void assignThresholdsFromConfig(
             case TemperatureType::SKIN:
                 // For the skin throttling threshold take the min value from
                 // the skin-monitor rule.
-                if (config.rule_name == "[SKIN-MONITOR]") {
+                if (config.rule_name == "SKIN-MONITOR") {
                     checkAndAssignThreshold(config.threshold, &threshold->ss);
                 }
                 break;
@@ -94,7 +94,7 @@ static void parseThermalEngineConfig(
 
     // Parse out sensor name and thresholds for ss configs.
     static const std::regex ss_block_regex(
-        R"([.\n]*(\[.*\])\nalgo_type\s+ss\n(?:.*\n)?sensor\s+)"
+        R"([.\n]*\[(.+)\]\nalgo_type\s+ss\n(?:.*\n)?sensor\s+)"
         R"(([\w\d-]+)\n(?:.*\n)?set_point\s+(\d+))");
     auto block_begin = std::sregex_iterator(
         data.begin(), data.end(), ss_block_regex);
@@ -108,7 +108,7 @@ static void parseThermalEngineConfig(
 
     // Parse out sensor name, thresholds, and action for monitor configs.
     static const std::regex monitor_block_regex(
-        R"([.\n]*(\[.*\])\nalgo_type\s+monitor\n(?:.*\n)?sensor\s+)"
+        R"([.\n]*\[(.+)\]\nalgo_type\s+monitor\n(?:.*\n)?sensor\s+)"
         R"(([\w\d-]+)\n(?:.*\n)?thresholds\s+([^\n]+)\n(?:.*\n)?actions\s+([^\n]+))");
     block_begin = std::sregex_iterator(
         data.begin(), data.end(), monitor_block_regex);
