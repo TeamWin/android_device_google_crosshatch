@@ -27,6 +27,7 @@ DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/blueline/overlay
 # Audio XMLs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mixer_paths_tavil_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil_b1.xml \
+    $(LOCAL_PATH)/audio_policy_volumes_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio_platform_info_tavil_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil_b1.xml
 
 PRODUCT_COPY_FILES += \
