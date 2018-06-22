@@ -30,6 +30,7 @@ type sysfs_rpm, sysfs_type, fs_type;
 type sysfs_wlc, sysfs_type, fs_type;
 type sysfs_esim, sysfs_type, fs_type;
 type sysfs_pstore, sysfs_type, fs_type;
+type sysfs_display, sysfs_type, fs_type;
 
 type debugfs_clk, debugfs_type, fs_type;
 type debugfs_ion, debugfs_type, fs_type;
