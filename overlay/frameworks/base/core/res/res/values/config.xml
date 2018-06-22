@@ -61,11 +61,9 @@
     <bool name="config_nightDisplayAvailable">true</bool>
 
     <!-- List supported color modes. -->
-    <!-- TODO(b/73825738): remove BOOSTED and SATURATED -->
     <integer-array name="config_availableColorModes">
         <item>0</item> <!-- COLOR_MODE_NATURAL -->
         <item>1</item> <!-- COLOR_MODE_BOOSTED -->
-        <item>2</item> <!-- COLOR_MODE_SATURATED -->
         <item>3</item> <!-- COLOR_MODE_AUTOMATIC -->
     </integer-array>
 
