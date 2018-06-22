@@ -17,6 +17,7 @@
 PRODUCT_SOONG_NAMESPACES += \
     device/google/crosshatch/pixelstats \
     device/google/crosshatch/usb \
+    device/google/crosshatch/health \
     hardware/google/av \
     hardware/google/interfaces \
     hardware/qcom/sdm845/display
