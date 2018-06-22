@@ -55,7 +55,6 @@ type proc_wifi_dbg, proc_type, fs_type;
 type proc_f2fs, proc_type, fs_type;
 type proc_sysctl_autogroup, proc_type, fs_type;
 type proc_sysctl_schedboost, proc_type, fs_type;
-type proc_slabinfo, fs_type, proc_type;
 
 type netmgrd_socket, file_type;
 type thermal_socket, file_type;

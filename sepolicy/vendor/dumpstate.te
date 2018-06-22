@@ -14,5 +14,4 @@ userdebug_or_eng(`
 allow dumpstate sysfs_scsi_devices_0000:file r_file_perms;
 allow dumpstate sysfs_scsi_devices_other:file r_file_perms;
 allow dumpstate sysfs_devices_block:file r_file_perms;
-allow dumpstate proc_slabinfo:file r_file_perms;
 dontaudit dumpstate kernel:system module_request;
