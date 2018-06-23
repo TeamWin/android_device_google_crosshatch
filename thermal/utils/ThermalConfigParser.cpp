@@ -32,16 +32,19 @@ namespace implementation {
 
 // For now this just defines the sensor name and thresholds.
 struct SensorConfig {
-    SensorConfig() : sensor_name(""), threshold(0.0), action("") {}
+    SensorConfig() : sensor_name(""), threshold(0.0), action(""),
+        rule_name("") {}
     SensorConfig(
         const std::string& sensor_name, float threshold,
-        const std::string& action)
+        const std::string& action, const std::string& rule_name)
             : sensor_name(sensor_name),
               threshold(threshold),
-              action(action) {}
+              action(action),
+              rule_name(rule_name) {}
     std::string sensor_name;
     float threshold;
     std::string action;
+    std::string rule_name;
 };
 
 // Assign out if out == NAN or config_threshold < out.
@@ -67,7 +70,11 @@ static void assignThresholdsFromConfig(
                 checkAndAssignThreshold(config.threshold, &threshold->battery);
                 break;
             case TemperatureType::SKIN:
-                checkAndAssignThreshold(config.threshold, &threshold->ss);
+                // For the skin throttling threshold take the min value from
+                // the skin-monitor rule.
+                if (config.rule_name == "SKIN-MONITOR") {
+                    checkAndAssignThreshold(config.threshold, &threshold->ss);
+                }
                 break;
             default:
                 LOG(ERROR) << "Unknown sensor: " << config.sensor_name;
@@ -87,7 +94,7 @@ static void parseThermalEngineConfig(
 
     // Parse out sensor name and thresholds for ss configs.
     static const std::regex ss_block_regex(
-        R"([.\n]*\[.*\]\nalgo_type\s+ss\n(?:.*\n)?sensor\s+)"
+        R"([.\n]*\[(.+)\]\nalgo_type\s+ss\n(?:.*\n)?sensor\s+)"
         R"(([\w\d-]+)\n(?:.*\n)?set_point\s+(\d+))");
     auto block_begin = std::sregex_iterator(
         data.begin(), data.end(), ss_block_regex);
@@ -95,19 +102,20 @@ static void parseThermalEngineConfig(
     for (std::sregex_iterator itr = block_begin; itr != block_end; ++itr) {
         configs->emplace_back(
             SensorConfig(
-                itr->str(1), std::stoi(itr->str(2)) * kMultiplier, ""));
+                itr->str(2), std::stoi(itr->str(3)) * kMultiplier, "",
+                itr->str(1)));
     }
 
     // Parse out sensor name, thresholds, and action for monitor configs.
     static const std::regex monitor_block_regex(
-        R"([.\n]*(\[.*\])\nalgo_type\s+monitor\n(?:.*\n)?sensor\s+)"
+        R"([.\n]*\[(.+)\]\nalgo_type\s+monitor\n(?:.*\n)?sensor\s+)"
         R"(([\w\d-]+)\n(?:.*\n)?thresholds\s+([^\n]+)\n(?:.*\n)?actions\s+([^\n]+))");
     block_begin = std::sregex_iterator(
         data.begin(), data.end(), monitor_block_regex);
     for (std::sregex_iterator itr = block_begin; itr != block_end; ++itr) {
         SensorConfig sensor_config;
 
-        std::string rule_name = itr->str(1);
+        sensor_config.rule_name = itr->str(1);
         sensor_config.sensor_name = itr->str(2);
         std::string thresholds_str = itr->str(3);
         std::string actions_str = itr->str(4);
@@ -128,7 +136,7 @@ static void parseThermalEngineConfig(
                        << ") and actions ("
                        << actions.size() << ") in monitor algo for sensor ("
                        << sensor_config.sensor_name
-                       << ") of rule (" << rule_name << ")";
+                       << ") of rule (" << sensor_config.rule_name << ")";
             return;
         }
 
@@ -154,8 +162,9 @@ static void dumpSensorConfigs(
                   << " type: " << android::hardware::thermal::V1_0::toString(
                       typeMap.at(sensor_config.sensor_name))
                   << " with threshold: " << sensor_config.threshold
+                  << " from rule: " << sensor_config.rule_name
                   << sensor_config.action.empty() ? ""
-                : " sensor config action" + sensor_config.action;
+                : " sensor config action " + sensor_config.action;
     }
 }
 
