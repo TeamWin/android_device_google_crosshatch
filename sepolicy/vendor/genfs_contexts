@@ -5,6 +5,7 @@ genfscon proc /irq                                    u:object_r:proc_irq:s0
 genfscon proc /fs/f2fs                                u:object_r:proc_f2fs:s0
 genfscon proc /sys/kernel/sched_autogroup_enabled     u:object_r:proc_sysctl_autogroup:s0
 genfscon proc /sys/kernel/sched_boost                 u:object_r:proc_sysctl_schedboost:s0
+genfscon proc /slabinfo                               u:object_r:proc_slabinfo:s0
 
 genfscon sysfs /devices/platform/soc/soc:qcom,cpubw            u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,llccbw           u:object_r:sysfs_msm_subsys:s0
@@ -131,3 +132,9 @@ genfscon debugfs /regmap/4-0036                       u:object_r:debugfs_maxfg:s
 genfscon debugfs /regmap/4-000b                       u:object_r:debugfs_maxfg:s0
 genfscon debugfs /dma_buf/bufinfo                     u:object_r:debugfs_dma_bufinfo:s0
 genfscon debugfs /sched_features                      u:object_r:debugfs_sched_features:s0
+
+genfscon sysfs /devices/virtual/ramoops/pstore/aes_key                  u:object_r:sysfs_pstore:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/aes_key_iv               u:object_r:sysfs_pstore:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/aes_key_tag              u:object_r:sysfs_pstore:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/use_alt                  u:object_r:sysfs_pstore:s0
+
