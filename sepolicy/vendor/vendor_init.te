@@ -29,3 +29,7 @@ allow vendor_init unlabeled:dir { getattr relabelfrom };
 allow vendor_init vendor_tui_data_file:dir create_dir_perms;
 
 set_prop(vendor_init, vendor_usb_prop)
+
+# To allow setting audio.camerasound.force based on
+# ro.boot.hardware.radio.subtype at boot
+get_prop(vendor_init, vendor_radio_sku_prop)
