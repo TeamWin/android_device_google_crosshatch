@@ -30,7 +30,8 @@ constexpr int BUFFER_SIZE = 512;
 constexpr int MAX_FILE_PATH_LENGTH = 256;
 constexpr int EPOLL_EVENTS = 10;
 constexpr bool DEBUG = false;
-constexpr int DISCONNECT_WAIT_US = 10000;
+constexpr int DISCONNECT_WAIT_US = 100000;
+constexpr int PULL_UP_DELAY = 500000;
 
 #define BUILD_TYPE "ro.build.type"
 #define GADGET_PATH "/config/usb_gadget/g1/"
@@ -113,6 +114,7 @@ static void *monitorFfs(void *param) {
 
   while (!stopMonitor) {
     int nrEvents = epoll_wait(usbGadget->mEpollFd, events, EPOLL_EVENTS, -1);
+
     if (nrEvents <= 0) {
       ALOGE("epoll wait did not return descriptor number");
       continue;
@@ -144,15 +146,17 @@ static void *monitorFfs(void *param) {
           if (!descriptorPresent && !writeUdc) {
             if (DEBUG) ALOGI("endpoints not up");
             writeUdc = true;
-          } else if (descriptorPresent && writeUdc &&
-                     !!WriteStringToFile(GADGET_NAME, PULLUP_PATH)) {
-            lock_guard<mutex> lock(usbGadget->mLock);
-            usbGadget->mCurrentUsbFunctionsApplied = true;
-            ALOGI("GADGET pulled up");
-            writeUdc = false;
-            gadgetPullup = true;
-            // notify the main thread to signal userspace.
-            usbGadget->mCv.notify_all();
+          } else if (descriptorPresent && writeUdc) {
+            usleep(PULL_UP_DELAY);
+            if(!!WriteStringToFile(GADGET_NAME, PULLUP_PATH)) {
+              lock_guard<mutex> lock(usbGadget->mLock);
+              usbGadget->mCurrentUsbFunctionsApplied = true;
+              ALOGI("GADGET pulled up");
+              writeUdc = false;
+              gadgetPullup = true;
+              // notify the main thread to signal userspace.
+              usbGadget->mCv.notify_all();
+            }
           }
         }
       } else {
