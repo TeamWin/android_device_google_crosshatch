@@ -588,9 +588,11 @@ on property:sys.boot_completed=1
 
     # Dump QCOM FG cycle counts for dumpstate
     chown system system /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    chown system system /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
 
     # HardwareInfo needs to be able to read CC bins
     chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    chmod 644 /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
 
     # UFS health
     chmod 755 /sys/kernel/debug/ufshcd0
