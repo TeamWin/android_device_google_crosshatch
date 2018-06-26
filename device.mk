@@ -304,10 +304,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
   persist.vendor.camera.multicam=1
 
-# Enable Perfetto traced
-PRODUCT_PROPERTY_OVERRIDES += \
-  persist.traced.enable=1
-
 # WLAN driver configuration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
