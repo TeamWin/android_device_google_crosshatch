@@ -22,3 +22,6 @@ on init
 on late-init && property:ro.boot.hardware.revision=EVT1.0
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on property:vendor.all.modules.ready=1
+    chown system system /sys/devices/virtual/sec/tsp/cmd

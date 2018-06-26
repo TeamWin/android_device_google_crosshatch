@@ -34,3 +34,6 @@ on late-init && property:ro.boot.hardware.revision=EVT1.1
 on late-init && property:ro.boot.hardware.revision=EVT2.0
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on property:vendor.all.modules.ready=1
+    chown system system /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd
