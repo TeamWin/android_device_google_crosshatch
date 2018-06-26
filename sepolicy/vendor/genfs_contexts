@@ -53,7 +53,8 @@ genfscon sysfs /devices/platform/soc/894000.i2c/i2c-3/3-005a/leds               
 genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display@4/backlight            u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display@51/backlight           u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display@52/backlight           u:object_r:sysfs_leds:s0
-genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display@52/backlight/vr_mode           u:object_r:sysfs_lights:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display@52/backlight/vr_mode   u:object_r:sysfs_lights:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display@52/panel_info          u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/soc/5000000.qcom,kgsl-3d0                       u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,kgsl-hyp                           u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,ipa_fws                            u:object_r:sysfs_msm_subsys:s0
