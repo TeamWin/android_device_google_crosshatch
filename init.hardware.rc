@@ -207,7 +207,7 @@ on init
     setprop vendor.thermal.hw_mode -prod
 
 on late-init
-   write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    write /sys/devices/virtual/thermal/tz-by-name/fps-therm-adc/mode enabled
 
 on fs
     # Start HW service manager early
