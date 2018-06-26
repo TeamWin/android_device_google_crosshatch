@@ -22,3 +22,5 @@ allow hardware_info_app sysfs_scsi_devices_0000:dir search;
 allow hardware_info_app sysfs_scsi_devices_0000:file { getattr open read };
 allow hardware_info_app sysfs_soc:dir search;
 allow hardware_info_app sysfs_soc:file { getattr open read };
+allow hardware_info_app sysfs_display:dir search;
+allow hardware_info_app sysfs_display:file { getattr open read };
