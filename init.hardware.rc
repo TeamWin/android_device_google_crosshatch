@@ -21,17 +21,13 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.logging.rc
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.mpssrfs.rc
 
 
-on charger
+on property:init.svc.vendor.charger=running
     stop vendor.qseecomd
     stop keymaster-4-0
-    # Lock to lowest freqency on charger mode
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor powersave
-    # Offline all cores expect cpu0
+    # keep one LITTLE and one big
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/devices/system/cpu/cpu4/online 0
     write /sys/devices/system/cpu/cpu5/online 0
     write /sys/devices/system/cpu/cpu6/online 0
     write /sys/devices/system/cpu/cpu7/online 0
@@ -46,7 +42,7 @@ on charger
     # Enable thermal mitigation
     write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
 
-service charger /charger
+service vendor.charger /charger
     class charger
     seclabel u:r:charger:s0
 
@@ -592,9 +588,15 @@ on property:sys.boot_completed=1
 
     # Dump QCOM FG cycle counts for dumpstate
     chown system system /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    chown system system /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
 
     # HardwareInfo needs to be able to read CC bins
     chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    chmod 644 /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
+
+    # HardwareInfo needs to be able to read display info
+    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@52/panel_info/panel0/serial_number
+    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@52/panel_info/panel0/panel_vendor_name
 
     # UFS health
     chmod 755 /sys/kernel/debug/ufshcd0
@@ -872,3 +874,9 @@ on property:persist.vendor.charge.stop.level=*
 
 on property:persist.vendor.charge.start.level=*
     write /sys/devices/platform/soc/soc:google,charger/charge_start_level ${persist.vendor.charge.start.level}
+
+# For Japan radio builds, always enforce camera shutter sound
+# Since this property is read by the audio server in system service,
+# it should be written by the system init.
+on property:ro.boot.hardware.radio.subtype=1
+    setprop audio.camerasound.force true
