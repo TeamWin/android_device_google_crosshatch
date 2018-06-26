@@ -601,7 +601,7 @@ static void reportUsbAudioUevents(struct data *payload, const char* driver, cons
     client->reportUsbAudioConnected(vid, pid);
     payload->attachedProduct = strdup(product);
   } else if (!strcmp(action, "ACTION=remove")) {
-    if (strcmp(payload->attachedProduct, product)) {
+    if (!payload->attachedProduct || strcmp(payload->attachedProduct, product)) {
         return;
     }
     free(payload->attachedProduct);
