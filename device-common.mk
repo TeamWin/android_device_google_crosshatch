@@ -38,6 +38,9 @@ PRODUCT_PROPERTY_OVERRIDES += vendor.audio.adm.buffering.ms=3
 PRODUCT_PROPERTY_OVERRIDES += audio_hal.period_multiplier=2
 PRODUCT_PROPERTY_OVERRIDES += af.fast_track_multiplier=1
 
+# Pixelstats broken mic detection
+PRODUCT_PROPERTY_OVERRIDES += vendor.audio.mic_break=true
+
 # Setting vendor SPL
 VENDOR_SECURITY_PATCH = "2018-09-05"
 
