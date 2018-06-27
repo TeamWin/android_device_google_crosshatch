@@ -1,7 +1,0 @@
-# To read /persist/sensors/elmyra.
-allow platform_app persist_file:dir search;
-allow platform_app persist_sensors_file:dir search;
-allow platform_app persist_sensors_file:file r_file_perms;
-# To find and bind hal_wlc
-allow platform_app hal_wlc_hwservice:hwservice_manager find;
-allow platform_app hal_wlc:binder call;
