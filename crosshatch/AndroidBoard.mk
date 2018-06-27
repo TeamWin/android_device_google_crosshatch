@@ -3,7 +3,7 @@ LOCAL_PATH := $(call my-dir)
 #----------------------------------------------------------------------
 # Generate persist image (persist.img)
 #----------------------------------------------------------------------
-TARGET_OUT_PERSIST := $(PRODUCT_OUT)/persist
+TARGET_OUT_PERSIST_IMG_PATH := $(PRODUCT_OUT)/persist
 
 INTERNAL_PERSISTIMAGE_FILES := \
     $(foreach pair,$(PRODUCT_COPY_FILES),\
@@ -15,8 +15,8 @@ INSTALLED_PERSISTIMAGE_TARGET := $(PRODUCT_OUT)/persist.img
 
 $(INSTALLED_PERSISTIMAGE_TARGET): $(MKEXTUSERIMG) $(MAKE_EXT4FS) $(INSTALLED_PERSISTIMAGE_FILES)
 	$(call pretty,"Target persist fs image: $(INSTALLED_PERSISTIMAGE_TARGET)")
-	@mkdir -p $(TARGET_OUT_PERSIST)
-	$(hide) PATH=$(HOST_OUT_EXECUTABLES):$${PATH} $(MKEXTUSERIMG) -s $(TARGET_OUT_PERSIST) $@ ext4 persist $(BOARD_PERSISTIMAGE_PARTITION_SIZE)
+	@mkdir -p $(TARGET_OUT_PERSIST_IMG_PATH)
+	$(hide) PATH=$(HOST_OUT_EXECUTABLES):$${PATH} $(MKEXTUSERIMG) -s $(TARGET_OUT_PERSIST_IMG_PATH) $@ ext4 persist $(BOARD_PERSISTIMAGE_PARTITION_SIZE)
 	$(hide) chmod a+r $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_PERSISTIMAGE_PARTITION_SIZE))
 
