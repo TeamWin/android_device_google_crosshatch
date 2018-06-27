@@ -39,6 +39,8 @@ using ::android::hardware::thermal::V1_1::IThermalCallback;
 using ::android::hardware::Return;
 using ::android::sp;
 
+// The thermalHAL implementation for B1C1. For more information on the high
+// level design check out: go/pixel-2018-thermalhal-doc.
 class Thermal : public IThermal, public hidl_death_recipient {
    public:
     Thermal();

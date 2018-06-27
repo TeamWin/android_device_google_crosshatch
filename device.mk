@@ -15,7 +15,9 @@
 #
 
 PRODUCT_SOONG_NAMESPACES += \
+    device/google/crosshatch/pixelstats \
     device/google/crosshatch/usb \
+    device/google/crosshatch/health \
     hardware/google/av \
     hardware/google/interfaces \
     hardware/qcom/sdm845/display
@@ -223,7 +225,7 @@ PRODUCT_COPY_FILES += \
 
 # power HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.2-service.crosshatch-libperfmgr
+    android.hardware.power@1.3-service.crosshatch-libperfmgr
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
@@ -302,10 +304,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # logical camera for dual front sensors
 PRODUCT_PROPERTY_OVERRIDES += \
   persist.vendor.camera.multicam=1
-
-# Enable Perfetto traced
-PRODUCT_PROPERTY_OVERRIDES += \
-  persist.traced.enable=1
 
 # WLAN driver configuration files
 PRODUCT_COPY_FILES += \
@@ -672,7 +670,8 @@ PRODUCT_PACKAGES += \
 
 # Reliability reporting
 PRODUCT_PACKAGES += \
-    hardware.google.pixelstats@1.0-service
+    hardware.google.pixelstats@1.0-service \
+    pixelstats-vendor
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
