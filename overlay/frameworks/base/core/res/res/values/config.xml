@@ -347,10 +347,6 @@
     <!-- True if Unprocessed audio source supports the required frequency range and level -->
     <bool name="config_supportAudioSourceUnprocessed">true</bool>
 
-    <!-- Enables or disables haptic effect when the text insertion/selection handle is moved
-         manually by the user. -->
-    <bool name="config_enableHapticTextHandle">true</bool>
-
     <bool name="config_dual_LTE_capability">false</bool>
 
     <!-- Values for USB port setting. in format of bootmode:current function:new function -->
