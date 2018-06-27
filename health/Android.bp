@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+soong_namespace {
+  imports: ["hardware/google/interfaces",],
+}
+
 cc_binary {
     name: "android.hardware.health@2.0-service.crosshatch",
     init_rc: ["android.hardware.health@2.0-service.crosshatch.rc"],
@@ -21,6 +25,7 @@ cc_binary {
     srcs: [
         "HealthService.cpp",
         "BatteryRechargingControl.cpp",
+        "BatteryMetricsLogger.cpp",
     ],
 
     cflags: [
@@ -36,6 +41,7 @@ cc_binary {
     ],
 
     shared_libs: [
+        "hardware.google.pixelstats@1.0",
         "libbase",
         "libcutils",
         "libhidlbase",
