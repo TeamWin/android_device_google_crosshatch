@@ -213,10 +213,38 @@ static void DumpTouch(int fd) {
     if (!access("/sys/devices/virtual/sec/tsp", R_OK)) {
         DumpFileToFd(fd, "LSI touch firmware version",
                      "/sys/devices/virtual/sec/tsp/fw_version");
+        RunCommandToFd(fd, "Mutual Raw",
+                       {"/vendor/bin/sh", "-c",
+                        "echo run_rawcap_read_all > /sys/devices/virtual/sec/tsp/cmd"
+                        " && cat /sys/devices/virtual/sec/tsp/cmd_result"});
+        RunCommandToFd(fd, "Mutual Strength",
+                       {"/vendor/bin/sh", "-c",
+                        "echo run_delta_read_all > /sys/devices/virtual/sec/tsp/cmd"
+                        " && cat /sys/devices/virtual/sec/tsp/cmd_result"});
+        RunCommandToFd(fd, "Self Raw",
+                       {"/vendor/bin/sh", "-c",
+                        "echo run_self_rawcap_read_all > /sys/devices/virtual/sec/tsp/cmd"
+                        " && cat /sys/devices/virtual/sec/tsp/cmd_result"});
+        RunCommandToFd(fd, "Self Strength",
+                       {"/vendor/bin/sh", "-c",
+                        "echo run_self_delta_read_all > /sys/devices/virtual/sec/tsp/cmd"
+                        " && cat /sys/devices/virtual/sec/tsp/cmd_result"});
     }
     if (!access("/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049", R_OK)) {
         DumpFileToFd(fd, "STM touch firmware version",
                      "/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/appid");
+        RunCommandToFd(fd, "Mutual Raw",
+                       {"/vendor/bin/sh", "-c",
+                        "echo 13 00 > /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd"
+                        " && cat /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd"});
+        RunCommandToFd(fd, "Mutual Strength",
+                       {"/vendor/bin/sh", "-c",
+                        "echo 17 > /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd"
+                        " && cat /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd"});
+        RunCommandToFd(fd, "Self Raw",
+                       {"/vendor/bin/sh", "-c",
+                        "echo 15 00 > /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd"
+                        " && cat /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd"});
     }
 }
 
@@ -277,6 +305,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "SoC serial number", "/sys/devices/soc0/serial_number");
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
+    DumpTouch(fd);
 
     DumpF2FS(fd);
     DumpUFS(fd);
@@ -299,7 +328,6 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
-    DumpTouch(fd);
     RunCommandToFd(fd, "USB Device Descriptors", {"/vendor/bin/sh", "-c", "cd /sys/bus/usb/devices/1-1 && cat product && cat bcdDevice; cat descriptors | od -t x1 -w16 -N96"});
     // Timeout after 3s
     RunCommandToFd(fd, "QSEE logs", {"/vendor/bin/sh", "-c", "/vendor/bin/timeout 3 cat /d/tzdbg/qsee_log"});
