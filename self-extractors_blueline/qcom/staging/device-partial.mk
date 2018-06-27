@@ -59,16 +59,11 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/lib64/lib-imsvtutils.so:system/lib64/lib-imsvtutils.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/liblistenjni.so:system/lib64/liblistenjni.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/liblistensoundmodel2.so:system/lib64/liblistensoundmodel2.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libqcbor.so:system/lib64/libqcbor.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/librcc.so:system/lib64/librcc.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libsdm-disp-apis.so:system/lib64/libsdm-disp-apis.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libseccam.so:system/lib64/libseccam.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libsecureuisvc_jni.so:system/lib64/libsecureuisvc_jni.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libSeemplog.so:system/lib64/libSeemplog.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libsensorslog.so:system/lib64/libsensorslog.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libsmcinvokecred.so:system/lib64/libsmcinvokecred.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libsns_low_lat_stream_stub.so:system/lib64/libsns_low_lat_stream_stub.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libtzcom.so:system/lib64/libtzcom.so:qcom \
     vendor/qcom/blueline/proprietary/libimscamera_jni.so:system/lib/libimscamera_jni.so:qcom \
     vendor/qcom/blueline/proprietary/libimsmedia_jni.so:system/lib/libimsmedia_jni.so:qcom \
     vendor/qcom/blueline/proprietary/lib-imsvideocodec.so:system/lib/lib-imsvideocodec.so:qcom \
@@ -77,15 +72,10 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/lib-imsvtutils.so:system/lib/lib-imsvtutils.so:qcom \
     vendor/qcom/blueline/proprietary/liblistenjni.so:system/lib/liblistenjni.so:qcom \
     vendor/qcom/blueline/proprietary/liblistensoundmodel2.so:system/lib/liblistensoundmodel2.so:qcom \
-    vendor/qcom/blueline/proprietary/libqcbor.so:system/lib/libqcbor.so:qcom \
     vendor/qcom/blueline/proprietary/libqct_resampler.so:system/lib/libqct_resampler.so:qcom \
     vendor/qcom/blueline/proprietary/librcc.so:system/lib/librcc.so:qcom \
     vendor/qcom/blueline/proprietary/libsdm-disp-apis.so:system/lib/libsdm-disp-apis.so:qcom \
-    vendor/qcom/blueline/proprietary/libseccam.so:system/lib/libseccam.so:qcom \
     vendor/qcom/blueline/proprietary/libsecureuisvc_jni.so:system/lib/libsecureuisvc_jni.so:qcom \
-    vendor/qcom/blueline/proprietary/libSeemplog.so:system/lib/libSeemplog.so:qcom \
     vendor/qcom/blueline/proprietary/libsensorslog.so:system/lib/libsensorslog.so:qcom \
-    vendor/qcom/blueline/proprietary/libsmcinvokecred.so:system/lib/libsmcinvokecred.so:qcom \
     vendor/qcom/blueline/proprietary/libsns_low_lat_stream_stub.so:system/lib/libsns_low_lat_stream_stub.so:qcom \
-    vendor/qcom/blueline/proprietary/libtzcom.so:system/lib/libtzcom.so:qcom \
     vendor/qcom/blueline/proprietary/libsns_low_lat_stream_skel.so:system/lib/rfsa/adsp/libsns_low_lat_stream_skel.so:qcom \

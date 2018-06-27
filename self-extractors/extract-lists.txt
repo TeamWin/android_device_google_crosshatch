@@ -45,16 +45,11 @@
             system/lib64/lib-imsvtutils.so \
             system/lib64/liblistenjni.so \
             system/lib64/liblistensoundmodel2.so \
-            system/lib64/libqcbor.so \
             system/lib64/librcc.so \
             system/lib64/libsdm-disp-apis.so \
-            system/lib64/libseccam.so \
             system/lib64/libsecureuisvc_jni.so \
-            system/lib64/libSeemplog.so \
             system/lib64/libsensorslog.so \
-            system/lib64/libsmcinvokecred.so \
             system/lib64/libsns_low_lat_stream_stub.so \
-            system/lib64/libtzcom.so \
             system/lib/libimscamera_jni.so \
             system/lib/libimsmedia_jni.so \
             system/lib/lib-imsvideocodec.so \
@@ -63,17 +58,12 @@
             system/lib/lib-imsvtutils.so \
             system/lib/liblistenjni.so \
             system/lib/liblistensoundmodel2.so \
-            system/lib/libqcbor.so \
             system/lib/libqct_resampler.so \
             system/lib/librcc.so \
             system/lib/libsdm-disp-apis.so \
-            system/lib/libseccam.so \
             system/lib/libsecureuisvc_jni.so \
-            system/lib/libSeemplog.so \
             system/lib/libsensorslog.so \
-            system/lib/libsmcinvokecred.so \
             system/lib/libsns_low_lat_stream_stub.so \
-            system/lib/libtzcom.so \
             system/lib/rfsa/adsp/libsns_low_lat_stream_skel.so \
             "
     ;;
