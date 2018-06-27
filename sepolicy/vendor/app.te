@@ -1,4 +1,0 @@
-# For the camera app
-get_prop(appdomain, camera_prop)
-
-dontaudit appdomain vendor_display_prop:file r_file_perms;

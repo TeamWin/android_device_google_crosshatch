@@ -19,7 +19,19 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.rc
 on init
     setprop ro.sf.lcd_density 440
 
+on late-init && property:ro.boot.hardware.revision=DEV1.0
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
 on late-init && property:ro.boot.hardware.revision=DEV2.0
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on late-init && property:ro.boot.hardware.revision=PROTO1.0
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on late-init && property:ro.boot.hardware.revision=PROTO1.1
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
 
