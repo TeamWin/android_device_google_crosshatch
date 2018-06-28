@@ -331,6 +331,8 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "Maxim FG registers", "/d/regmap/4-0036/registers");
     DumpFileToFd(fd, "Maxim FG NV RAM", "/d/regmap/4-000b/registers");
     RunCommandToFd(fd, "QCOM FG SRAM", {"/vendor/bin/sh", "-c", "echo 0 > /d/fg/sram/address ; echo 500 > /d/fg/sram/count ; cat /d/fg/sram/data"});
+    DumpFileToFd(fd, "WLC VER", "/sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/version");
+    DumpFileToFd(fd, "WLC STATUS", "/sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/status");
 
     RunCommandToFd(fd, "eSIM Status", {"/vendor/bin/sh", "-c", "od -t x1 /sys/firmware/devicetree/base/chosen/cdt/cdb2/esim"});
 
