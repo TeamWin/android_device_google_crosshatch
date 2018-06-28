@@ -20,6 +20,7 @@
 #include <utils/StrongPointer.h>
 
 #include "DropDetect.h"
+#include "SysfsCollector.h"
 
 using android::sp;
 using namespace device::google::crosshatch;
@@ -32,9 +33,8 @@ int main() {
         return 1;
     }
 
-    // until SysfsCollector is added here
-    while (1) {
-        sleep(UINT_MAX - 1);
-    }
+    SysfsCollector collector;
+    collector.collect();  // This blocks forever.
+
     return 0;
 }
