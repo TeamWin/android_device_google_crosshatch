@@ -21,6 +21,7 @@
 
 #include "DropDetect.h"
 #include "SysfsCollector.h"
+#include "UeventListener.h"
 
 using android::sp;
 using namespace device::google::crosshatch;
@@ -32,6 +33,8 @@ int main() {
         LOG(ERROR) << "Unable to launch drop detection";
         return 1;
     }
+
+    UeventListener::ListenForeverInNewThread();
 
     SysfsCollector collector;
     collector.collect();  // This blocks forever.

@@ -21,7 +21,12 @@ soong_namespace {
 cc_binary {
   name: "pixelstats-vendor",
   init_rc: ["pixelstats-vendor.crosshatch.rc"],
-  srcs: ["service.cpp", "DropDetect.cpp", "SysfsCollector.cpp",],
+  srcs: [
+    "service.cpp",
+    "DropDetect.cpp",
+    "SysfsCollector.cpp",
+    "UeventListener.cpp",
+  ],
   shared_libs: [
     "hardware.google.pixelstats@1.0",
     "libbase",
