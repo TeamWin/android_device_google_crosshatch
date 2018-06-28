@@ -31,6 +31,7 @@
 
 #include "BatteryRechargingControl.h"
 #include "BatteryMetricsLogger.h"
+#include "LowBatteryShutdownMetrics.h"
 
 namespace {
 
@@ -39,9 +40,11 @@ using android::hardware::health::V2_0::StorageAttribute;
 using android::hardware::health::V2_0::StorageInfo;
 using ::device::google::crosshatch::health::BatteryRechargingControl;
 using ::device::google::crosshatch::health::BatteryMetricsLogger;
+using ::device::google::crosshatch::health::LowBatteryShutdownMetrics;
 
 static BatteryRechargingControl battRechargingControl;
 static BatteryMetricsLogger battMetricsLogger;
+static LowBatteryShutdownMetrics shutdownMetrics;
 
 #define UFS_DIR "/sys/devices/platform/soc/1d84000.ufshc"
 const std::string kUfsHealthEol{UFS_DIR "/health/eol"};
@@ -87,6 +90,7 @@ void healthd_board_init(struct healthd_config *) {}
 int healthd_board_battery_update(struct android::BatteryProperties *props) {
     battRechargingControl.updateBatteryProperties(props);
     battMetricsLogger.logBatteryProperties(props);
+    shutdownMetrics.logShutdownVoltage(props);
     if (!android::base::WriteStringToFile(std::to_string(props->batteryLevel),
                                           "/sys/class/power_supply/wireless/capacity"))
         LOG(INFO) << "Unable to write battery level to wireless capacity";
