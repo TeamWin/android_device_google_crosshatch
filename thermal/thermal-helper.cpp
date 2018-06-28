@@ -15,6 +15,7 @@
  */
 
 #include <sstream>
+#include <set>
 #include <vector>
 
 #include <android-base/file.h>
@@ -259,24 +260,17 @@ bool ThermalHelper::initializeSensorMap() {
             if (kValidThermalSensorTypeMap.find(sensor_name) !=
                 kValidThermalSensorTypeMap.end()) {
 
-                  // Since we have two skin sensors. Make sure we only take the
-                  // valid one.
-                  if (kValidThermalSensorTypeMap.at(sensor_name) ==
-                          TemperatureType::SKIN && sensor_name !=
-                          getSkinSensorType()) {
-                      continue;
-                  }
-                  if (!thermal_sensors_.addSensor(
-                      sensor_name, sensor_temp_path)) {
-                        LOG(ERROR) << "Could not add " << sensor_name
-                                   << "to sensors map";
-                  }
+                if (!thermal_sensors_.addSensor(
+                    sensor_name, sensor_temp_path)) {
+                      LOG(ERROR) << "Could not add " << sensor_name
+                                 << "to sensors map";
+                }
             }
         }
-
-        if (kAvailableSensors == thermal_sensors_.getNumSensors()) {
+    }
+    if (kAvailableSensors == thermal_sensors_.getNumSensors() ||
+        kValidThermalSensorTypeMap.size() == thermal_sensors_.getNumSensors()) {
             return true;
-        }
     }
     return false;
 }
@@ -414,7 +408,8 @@ bool ThermalHelper::fillBatteryThresholdDebugInfo(std::ostringstream& dump_buf)
 std::string ThermalHelper::getSkinSensorType() {
     // The skin sensor is checked dynamically, since -evt uses quiet-therm-adc
     // and -prod uses fps-therm-adc.
-    std::string rev = android::base::GetProperty("vendor.thermal.hw_mode", "");
+    static std::string rev = android::base::GetProperty(
+        "vendor.thermal.hw_mode", "");
     if (rev == "-evt") {
         return "quiet-therm-adc";
     } else {
