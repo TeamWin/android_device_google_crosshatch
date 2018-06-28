@@ -24,6 +24,9 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.mpssrfs.rc
 on property:init.svc.vendor.charger=running
     stop vendor.qseecomd
     stop keymaster-4-0
+    stop vndservicemanager
+    stop citadeld
+    stop vendor.keymaster-4-0-citadel
     # keep one LITTLE and one big
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
@@ -69,6 +72,11 @@ on init
     # vold needs keymaster that needs qseecomd
     start vendor.qseecomd
     start keymaster-4-0
+
+    # start Citadel keymaster (StrongBox) early
+    start vndservicemanager
+    start citadeld
+    start vendor.keymaster-4-0-citadel
 
     # Boot time fs tune
     write /sys/block/sda/queue/iostats 0
@@ -252,8 +260,8 @@ on late-fs
     # cause services for bootanim not running.
     wait_for_prop hwservicemanager.ready true
 
-    # Wait for keymaster
-    exec_start wait_for_keymaster
+    # Wait for keymaster HALs (TEE and StrongBox)
+    exec_start wait_for_strongbox
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --late
@@ -830,6 +838,12 @@ service ppd /vendor/bin/mm-pp-dpps
     group graphics
     socket pps stream 0660 system system
     disabled
+
+service wait_for_strongbox /vendor/bin/hw/wait_for_strongbox
+    user root
+    group root system
+    priority -20
+    ioprio rt 0
 
 on property:init.svc.vendor.hwcomposer-2-2=stopped
     stop ppd
