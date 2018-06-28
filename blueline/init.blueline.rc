@@ -49,3 +49,8 @@ on late-init && property:ro.boot.hardware.revision=EVT2.0
 
 on property:vendor.all.modules.ready=1
     chown system system /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd
+
+on property:sys.boot_completed=1
+    # HardwareInfo needs to be able to read display info
+    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@51/panel_info/panel0/serial_number
+    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@51/panel_info/panel0/panel_vendor_name
