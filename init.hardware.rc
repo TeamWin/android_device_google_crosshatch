@@ -453,6 +453,14 @@ on early-boot
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/status
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/version
 
+    # Permission for Pixelstats
+    chown system system /sys/class/power_supply/maxfg/cycle_counts_bins
+    chown system system /sys/class/misc/msm_cirrus_playback/resistance_left_right
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_read_cnt
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_write_cnt
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_unmap_cnt
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_sync_cnt
+
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
