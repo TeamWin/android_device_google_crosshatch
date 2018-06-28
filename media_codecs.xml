@@ -199,7 +199,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-120000000" />
             <Limit name="frame-rate" range="1-480" />
             <Feature name="adaptive-playback" />
-            <Limit name="concurrent-instances" max="16" />
+            <Limit name="concurrent-instances" max="6" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.vp9.secure" type="video/x-vnd.on2.vp9" >
             <Quirk name="requires-allocate-on-input-ports" />
