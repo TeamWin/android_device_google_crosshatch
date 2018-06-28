@@ -51,7 +51,7 @@ const std::string kUfsVersion{UFS_DIR "/version"};
 const std::string kDiskStatsFile{"/sys/block/sda/stat"};
 const std::string kUFSName{"UFS0"};
 
-std::ifstream assert_open(const std::string& path) {
+std::ifstream assert_open(const std::string &path) {
     std::ifstream stream(path);
     if (!stream.is_open()) {
         LOG(FATAL) << "Cannot read " << path;
@@ -60,13 +60,13 @@ std::ifstream assert_open(const std::string& path) {
 }
 
 template <typename T>
-void read_value_from_file(const std::string& path, T* field) {
+void read_value_from_file(const std::string &path, T *field) {
     auto stream = assert_open(path);
     stream.unsetf(std::ios_base::basefield);
     stream >> *field;
 }
 
-void read_ufs_version(StorageInfo* info) {
+void read_ufs_version(StorageInfo *info) {
     uint64_t value;
     read_value_from_file(kUfsVersion, &value);
     std::stringstream ss;
@@ -74,7 +74,7 @@ void read_ufs_version(StorageInfo* info) {
     info->version = ss.str();
 }
 
-void fill_ufs_storage_attribute(StorageAttribute* attr) {
+void fill_ufs_storage_attribute(StorageAttribute *attr) {
     attr->isInternal = true;
     attr->isBootDevice = true;
     attr->name = kUFSName;
@@ -82,18 +82,20 @@ void fill_ufs_storage_attribute(StorageAttribute* attr) {
 
 }  // anonymous namespace
 
-void healthd_board_init(struct healthd_config*) {
-}
+void healthd_board_init(struct healthd_config *) {}
 
 int healthd_board_battery_update(struct android::BatteryProperties *props) {
     battRechargingControl.updateBatteryProperties(props);
     battMetricsLogger.logBatteryProperties(props);
+    if (!android::base::WriteStringToFile(std::to_string(props->batteryLevel),
+                                          "/sys/class/power_supply/wireless/capacity"))
+        LOG(INFO) << "Unable to write battery level to wireless capacity";
     return 0;
 }
 
-void get_storage_info(std::vector<StorageInfo>& vec_storage_info) {
+void get_storage_info(std::vector<StorageInfo> &vec_storage_info) {
     vec_storage_info.resize(1);
-    StorageInfo* storage_info = &vec_storage_info[0];
+    StorageInfo *storage_info = &vec_storage_info[0];
     fill_ufs_storage_attribute(&storage_info->attr);
 
     read_ufs_version(storage_info);
@@ -103,24 +105,16 @@ void get_storage_info(std::vector<StorageInfo>& vec_storage_info) {
     return;
 }
 
-void get_disk_stats(std::vector<DiskStats>& vec_stats) {
+void get_disk_stats(std::vector<DiskStats> &vec_stats) {
     vec_stats.resize(1);
-    DiskStats* stats = &vec_stats[0];
+    DiskStats *stats = &vec_stats[0];
     fill_ufs_storage_attribute(&stats->attr);
 
     auto stream = assert_open(kDiskStatsFile);
     // Regular diskstats entries
-    stream >> stats->reads
-           >> stats->readMerges
-           >> stats->readSectors
-           >> stats->readTicks
-           >> stats->writes
-           >> stats->writeMerges
-           >> stats->writeSectors
-           >> stats->writeTicks
-           >> stats->ioInFlight
-           >> stats->ioTicks
-           >> stats->ioInQueue;
+    stream >> stats->reads >> stats->readMerges >> stats->readSectors >> stats->readTicks >>
+        stats->writes >> stats->writeMerges >> stats->writeSectors >> stats->writeTicks >>
+        stats->ioInFlight >> stats->ioTicks >> stats->ioInQueue;
     return;
 }
 
