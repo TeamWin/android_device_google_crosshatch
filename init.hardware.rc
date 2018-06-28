@@ -450,6 +450,8 @@ on early-boot
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/txdata
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/txlen
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/ccreset
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/status
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/version
 
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
