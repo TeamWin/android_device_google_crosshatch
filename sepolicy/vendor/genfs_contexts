@@ -35,8 +35,6 @@ genfscon sysfs /devices/platform/soc/1d84000.ufshc/slowio_write_cnt          u:o
 genfscon sysfs /devices/platform/soc/1d84000.ufshc/slowio_unmap_cnt          u:object_r:sysfs_scsi_devices_0000:s0
 genfscon sysfs /devices/platform/soc/1d84000.ufshc/slowio_sync_cnt           u:object_r:sysfs_scsi_devices_0000:s0
 
-genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth_writable:s0
-
 genfscon sysfs /class/thermal                                           u:object_r:sysfs_thermal:s0
 genfscon sysfs /class/uio                                               u:object_r:sysfs_uio:s0
 genfscon sysfs /devices/platform/soc/894000.i2c                                  u:object_r:sysfs_msm_subsys:s0
