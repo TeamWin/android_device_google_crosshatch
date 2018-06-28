@@ -165,4 +165,13 @@
             <instance>imsrtpservice</instance>
         </interface>
     </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.ims.callinfo</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
 </compatibility-matrix>
