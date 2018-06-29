@@ -16,7 +16,6 @@
 
 #define LOG_TAG "android.hardware.usb@1.1-service.crosshatch"
 
-#include <android-base/chrono_utils.h>
 #include <android-base/logging.h>
 #include <android-base/parseint.h>
 #include <android-base/strings.h>
@@ -32,7 +31,6 @@
 #include <unordered_map>
 
 #include <cutils/uevent.h>
-#include <hardware/google/pixelstats/1.0/IPixelStats.h>
 #include <sys/epoll.h>
 #include <utils/Errors.h>
 #include <utils/StrongPointer.h>
@@ -510,110 +508,12 @@ Return<void> Usb::queryPortStatus() {
 struct data {
   int uevent_fd;
   android::hardware::usb::V1_1::implementation::Usb *usb;
-  bool isUsbAttached;  // Tracks USB port connectivity state.
-  base::Timer usbConnectTime;  // Time of last USB port connection.
-  base::Timer usbAudioConnectTime;  // Time of last USB audio connection.
-  char* attachedProduct;  // PRODUCT= string of currently attached USB audio device.
 };
 
 // Report connection & disconnection of devices into the USB-C connector.
-static void reportUsbConnectorUevents(struct data *payload, const char *power_supply_typec_mode) {
-  using ::hardware::google::pixelstats::V1_0::IPixelStats;
-  if (!power_supply_typec_mode) {
-    // No mode reported -> No reporting.
-    return;
-  }
-
-  // It's attached if the string *doesn't* match.
-  int attached = !!strcmp(power_supply_typec_mode, "POWER_SUPPLY_TYPEC_MODE=Nothing attached");
-  if (attached == payload->isUsbAttached) {
-    return;
-  }
-  payload->isUsbAttached = attached;
-
-  sp<IPixelStats> client = IPixelStats::tryGetService();
-  if (!client) {
-    ALOGE("Unable to connect to PixelStats service");
-    return;
-  }
-
-  if (attached) {
-    client->reportUsbConnectorConnected();
-    payload->usbConnectTime = base::Timer();
-  } else {
-    client->reportUsbConnectorDisconnected(payload->usbConnectTime.duration().count());
-  }
-}
-
-// Report connection & disconnection of USB audio devices.
-static void reportUsbAudioUevents(struct data *payload, const char* driver, const char* product,
-                                  const char* action) {
-  using ::hardware::google::pixelstats::V1_0::IPixelStats;
-  // driver is not provided on remove, so it can be NULL.  Check in remove branch.
-  if (!product || !action) {
-    return;
-  }
-
-  // The PRODUCT of a USB audio device is PRODUCT=VID/PID/VERSION
-  std::vector<std::string> halves = android::base::Split(product, "=");
-  if (halves.size() != 2) {
-    return;
-  }
-  std::vector<std::string> vidPidVer = android::base::Split(halves[1], "/");
-  if (vidPidVer.size() != 3) {
-    return;
-  }
-
-  sp<IPixelStats> client = IPixelStats::tryGetService();
-  if (!client) {
-    ALOGE("Couldn't connect to PixelStats service");
-    return;
-  }
-
-  // Parse the VID/PID as hex values.
-  const int kBaseHex = 16;
-  int32_t vid, pid;
-  char *vidEnd = NULL, *pidEnd = NULL;
-
-  const char* vidC = vidPidVer[0].c_str();
-  vid = strtol(vidC, &vidEnd, kBaseHex);
-  if ((vidC == vidEnd) || !vidEnd || (*vidEnd != '\0')) {
-    return;
-  }
-
-  const char* pidC = vidPidVer[1].c_str();
-  pid = strtol(pidC, &pidEnd, kBaseHex);
-  if ((pidC == pidEnd) || !pidEnd || (*pidEnd != '\0')) {
-    return;
-  }
-
-  /* A uevent is generated for each audio interface - only report the first connected one
-   * for each device by storing its PRODUCT= string in payload->attachedProduct, and clearing
-   * it on disconnect.  This also means we will only report the first USB audio device attached to
-   * the system.
-   */
-  if (payload->attachedProduct == NULL && !strcmp(action, "ACTION=add")) {
-    if (!driver || strcmp(driver, "DRIVER=snd-usb-audio")) {
-      return;
-    }
-    // Reset connect time counter.
-    payload->usbAudioConnectTime = base::Timer();
-    client->reportUsbAudioConnected(vid, pid);
-    payload->attachedProduct = strdup(product);
-  } else if (!strcmp(action, "ACTION=remove")) {
-    if (strcmp(payload->attachedProduct, product)) {
-        return;
-    }
-    free(payload->attachedProduct);
-    payload->attachedProduct = NULL;
-    client->reportUsbAudioDisconnected(vid, pid, payload->usbAudioConnectTime.duration().count());
-  }
-}
-
 static void uevent_event(uint32_t /*epevents*/, struct data *payload) {
   char msg[UEVENT_MSG_LEN + 2];
   char *cp;
-  const char *action, *power_supply_typec_mode, *driver, *product;
   int n;
 
   n = uevent_kernel_multicast_recv(payload->uevent_fd, msg, UEVENT_MSG_LEN);
@@ -625,19 +525,7 @@ static void uevent_event(uint32_t /*epevents*/, struct data *payload) {
   msg[n + 1] = '\0';
   cp = msg;
 
-  action = power_supply_typec_mode = driver = product = NULL;
-
   while (*cp) {
-    if (!strncmp(cp, "ACTION=", strlen("ACTION="))) {
-        action = cp;
-    } else if (!strncmp(cp, "POWER_SUPPLY_TYPEC_MODE=", strlen("POWER_SUPPLY_TYPEC_MODE="))) {
-        power_supply_typec_mode = cp;
-    } else if (!strncmp(cp, "DRIVER=", strlen("DRIVER="))) {
-        driver = cp;
-    } else if (!strncmp(cp, "PRODUCT=", strlen("PRODUCT="))) {
-        product = cp;
-    }
-
     if (std::regex_match(cp, std::regex("(add)(.*)(-partner)"))) {
        ALOGI("partner added");
        pthread_mutex_lock(&payload->usb->mPartnerLock);
@@ -699,8 +587,6 @@ static void uevent_event(uint32_t /*epevents*/, struct data *payload) {
     /* advance to after the next \0 */
     while (*cp++) {}
   }
-  reportUsbConnectorUevents(payload, power_supply_typec_mode);
-  reportUsbAudioUevents(payload, driver, product, action);
 }
 
 void *work(void *param) {
@@ -720,10 +606,6 @@ void *work(void *param) {
 
   payload.uevent_fd = uevent_fd;
   payload.usb = (android::hardware::usb::V1_1::implementation::Usb *)param;
-  payload.isUsbAttached = false;
-  payload.attachedProduct = NULL;
-  payload.usbConnectTime = base::Timer();
-  payload.usbAudioConnectTime = base::Timer();
 
   fcntl(uevent_fd, F_SETFL, O_NONBLOCK);
 

@@ -30,8 +30,6 @@ namespace thermal {
 namespace V1_1 {
 namespace implementation {
 
-constexpr float kMultiplier = .001;
-
 // For now this just defines the sensor name and thresholds.
 struct SensorConfig {
     SensorConfig() : sensor_name(""), threshold(0.0), action(""),
@@ -58,12 +56,10 @@ static void checkAndAssignThreshold(float config_threshold, float* out) {
 
 static void assignThresholdsFromConfig(
     const std::vector<SensorConfig>& configs,
-    const std::map<std::string, SensorDetails>& sensor_name_type_map,
+    const std::map<std::string, TemperatureType>& sensor_name_type_map,
     ThrottlingThresholds* threshold) {
     for (const SensorConfig& config : configs) {
-        SensorDetails sensor_details = sensor_name_type_map.at(
-            config.sensor_name);
-        switch (sensor_details.type) {
+        switch (sensor_name_type_map.at(config.sensor_name)) {
             case TemperatureType::CPU:
                 checkAndAssignThreshold(config.threshold, &threshold->cpu);
                 break;
@@ -160,13 +156,11 @@ static void parseThermalEngineConfig(
 
 static void dumpSensorConfigs(
     const std::vector<SensorConfig>& sensor_config_vec,
-    const std::map<std::string, SensorDetails>& typeMap) {
+    const std::map<std::string, TemperatureType>& typeMap) {
     for (const auto& sensor_config : sensor_config_vec) {
-        SensorDetails sensor_details = typeMap.at(sensor_config.sensor_name);
         LOG(INFO) << "Sensor name: " << sensor_config.sensor_name
                   << " type: " << android::hardware::thermal::V1_0::toString(
-                      sensor_details.type)
-                  << " with multiplier: " << sensor_details.multiplier
+                      typeMap.at(sensor_config.sensor_name))
                   << " with threshold: " << sensor_config.threshold
                   << " from rule: " << sensor_config.rule_name
                   << sensor_config.action.empty() ? ""
@@ -177,7 +171,7 @@ static void dumpSensorConfigs(
 void InitializeThresholdsFromThermalConfig(
     const std::string& thermal_config,
     const std::string& vr_thermal_config,
-    const std::map<std::string, SensorDetails>& typeMap,
+    const std::map<std::string, TemperatureType>& typeMap,
     ThrottlingThresholds *thresholds,
     ThrottlingThresholds *shutdown_thresholds,
     ThrottlingThresholds *vr_thresholds) {

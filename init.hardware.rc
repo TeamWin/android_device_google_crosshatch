@@ -41,6 +41,8 @@ on property:init.svc.vendor.charger=running
     write /proc/sys/kernel/sched_boost 0
     # Enable thermal mitigation
     write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
+    # Ensure 100% reporting is sticky
+    write /sys/class/power_supply/maxfg/offmode_charger 1
 
 service vendor.charger /charger
     class charger
@@ -205,7 +207,7 @@ on init
     setprop vendor.thermal.hw_mode -prod
 
 on late-init
-   write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    write /sys/devices/virtual/thermal/tz-by-name/fps-therm-adc/mode enabled
 
 on fs
     # Start HW service manager early
@@ -448,6 +450,16 @@ on early-boot
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/txdata
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/txlen
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/ccreset
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/status
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/version
+
+    # Permission for Pixelstats
+    chown system system /sys/class/power_supply/maxfg/cycle_counts_bins
+    chown system system /sys/class/misc/msm_cirrus_playback/resistance_left_right
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_read_cnt
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_write_cnt
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_unmap_cnt
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_sync_cnt
 
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -593,10 +605,6 @@ on property:sys.boot_completed=1
     # HardwareInfo needs to be able to read CC bins
     chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
     chmod 644 /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
-
-    # HardwareInfo needs to be able to read display info
-    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@52/panel_info/panel0/serial_number
-    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@52/panel_info/panel0/panel_vendor_name
 
     # UFS health
     chmod 755 /sys/kernel/debug/ufshcd0
@@ -851,11 +859,13 @@ on property:ro.boot.hardware.sku=G013A
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013B
     setprop persist.nfc.uicc_enabled false
+    setprop persist.vendor.radio.uicc_se_enabled false
     interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 on property:ro.boot.hardware.sku=G013C
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013D
     setprop persist.nfc.uicc_enabled false
+    setprop persist.vendor.radio.uicc_se_enabled false
     interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 
 # charger driver exposes now finer grain control, map demo mode to those properties

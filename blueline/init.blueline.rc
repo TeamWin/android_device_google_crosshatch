@@ -19,11 +19,38 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.rc
 on init
     setprop ro.sf.lcd_density 440
 
+on late-init && property:ro.boot.hardware.revision=DEV1.0
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on late-init && property:ro.boot.hardware.revision=DEV2.0
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on late-init && property:ro.boot.hardware.revision=PROTO1.0
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on late-init && property:ro.boot.hardware.revision=PROTO1.1
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
 on late-init && property:ro.boot.hardware.revision=EVT1.0
     setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
 
 on late-init && property:ro.boot.hardware.revision=EVT1.1
     setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
 
 on late-init && property:ro.boot.hardware.revision=EVT2.0
     setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on property:vendor.all.modules.ready=1
+    chown system system /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd
+
+on property:sys.boot_completed=1
+    # HardwareInfo needs to be able to read display info
+    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@51/panel_info/panel0/serial_number
+    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@51/panel_info/panel0/panel_vendor_name

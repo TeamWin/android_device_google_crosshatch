@@ -54,7 +54,7 @@ using ::android::hardware::thermal::V1_0::CpuUsage;
 using ::android::hardware::thermal::V1_0::Temperature;
 using ::android::hardware::thermal::V1_0::TemperatureType;
 
-constexpr char kSkinSensorType[] = "quiet-therm-adc";
+constexpr float kMultiplier = .001;
 
 struct ThrottlingThresholds {
     ThrottlingThresholds() : cpu(NAN), gpu(NAN), ss(NAN), battery(NAN) {}
@@ -62,14 +62,6 @@ struct ThrottlingThresholds {
     float gpu;
     float ss;
     float battery;
-};
-
-struct SensorDetails {
-    SensorDetails() : type(TemperatureType::UNKNOWN), multiplier(NAN) {}
-    SensorDetails(const TemperatureType type, const float mult) :
-        type(type), multiplier(mult) {}
-    TemperatureType type;
-    float multiplier;
 };
 
 class ThermalHelper {
@@ -119,16 +111,19 @@ class ThermalHelper {
     // of throttling.
     int getMaxThrottlingLevelFromMap() const;
 
+    // We don't use a variable here because notifyIfThrottlingSeen() uses it and
+    // we might end up calling it before having it initialized.
+    static std::string getSkinSensorType();
+
     Sensors thermal_sensors_;
     CoolingDevices cooling_devices_;
-
     std::unordered_map<std::string, int>
         cooling_device_path_to_throttling_level_map_;
     ThrottlingThresholds thresholds_;
     ThrottlingThresholds vr_thresholds_;
     ThrottlingThresholds shutdown_thresholds_;
     const bool is_initialized_;
-    const BatteryThresholdLUT mLowTempThresholdAdjuster;
+    const BatteryThresholdLUT low_temp_threshold_adjuster_;
 };
 
 }  // namespace implementation
@@ -138,4 +133,3 @@ class ThermalHelper {
 }  // namespace android
 
 #endif  // __THERMAL_HELPER_H__
-

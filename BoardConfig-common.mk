@@ -43,6 +43,7 @@ BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
 # STOPSHIP Bringup hack- no low power
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
+BOARD_KERNEL_CMDLINE += usbcore.autosuspend=7
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
@@ -121,10 +122,7 @@ BOARD_USES_SYSTEM_OTHER_ODEX := true
 
 BOARD_ROOT_EXTRA_FOLDERS := persist firmware
 
-BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy/vendor
-BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/crosshatch/sepolicy/public
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR := device/google/crosshatch/sepolicy/private
-BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy/verizon
+include device/google/crosshatch-sepolicy/crosshatch-sepolicy.mk
 
 TARGET_FS_CONFIG_GEN := device/google/crosshatch/config.fs
 

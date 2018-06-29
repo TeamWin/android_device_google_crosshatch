@@ -19,5 +19,30 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.rc
 on init
     setprop ro.sf.lcd_density 560
 
+on late-init && property:ro.boot.hardware.revision=DEV1.0
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on late-init && property:ro.boot.hardware.revision=PROTO1.0
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on late-init && property:ro.boot.hardware.revision=PROTO1.1
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on late-init && property:ro.boot.hardware.revision=PROTO1.2
+    setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
 on late-init && property:ro.boot.hardware.revision=EVT1.0
     setprop vendor.thermal.hw_mode "-evt"
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+
+on property:vendor.all.modules.ready=1
+    chown system system /sys/devices/virtual/sec/tsp/cmd
+
+on property:sys.boot_completed=1
+    # HardwareInfo needs to be able to read display info
+    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@52/panel_info/panel0/serial_number
+    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@52/panel_info/panel0/panel_vendor_name
