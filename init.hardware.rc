@@ -614,10 +614,6 @@ on property:sys.boot_completed=1
     chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
     chmod 644 /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
 
-    # HardwareInfo needs to be able to read display info
-    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@52/panel_info/panel0/serial_number
-    chmod 644 /sys/devices/platform/soc/soc:qcom,dsi-display@52/panel_info/panel0/panel_vendor_name
-
     # UFS health
     chmod 755 /sys/kernel/debug/ufshcd0
     chmod 644 /sys/kernel/debug/ufshcd0/show_hba
@@ -877,11 +873,13 @@ on property:ro.boot.hardware.sku=G013A
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013B
     setprop persist.nfc.uicc_enabled false
+    setprop persist.vendor.radio.uicc_se_enabled false
     interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 on property:ro.boot.hardware.sku=G013C
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013D
     setprop persist.nfc.uicc_enabled false
+    setprop persist.vendor.radio.uicc_se_enabled false
     interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 
 # charger driver exposes now finer grain control, map demo mode to those properties
