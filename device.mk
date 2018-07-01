@@ -27,7 +27,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # enable cal by default on accel sensor
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    persist.debug.sensors.accel_cal=1
+    persist.vendor.debug.sensors.accel_cal=1
 
 # The default value of this variable is false and should only be set to true when
 # the device allows users to retain eSIM profiles after factory reset of user data.
