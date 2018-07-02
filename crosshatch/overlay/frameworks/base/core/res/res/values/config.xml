@@ -690,13 +690,21 @@
          appended after the path string to interpret coordinates in dp instead of px units.
          Note that a physical cutout should be configured in pixels for the best results.
          -->
+    <string translatable="false" name="config_mainBuiltInDisplayCutoutRectApproximation">
+        M -258,0
+        v 171
+        h 516
+        v -171
+        q
+    </string>
+
     <string translatable="false" name="config_mainBuiltInDisplayCutout">
         M -338,0
-        q 86,-4 80,72 v 8 q 4,90 95,91.5
-        h 163 v -171.5 z
+        q 86,-4 80,71.5 v 8 q 4,90 95,91.5
+        h 163 v -171 z
         M 338,0
-        q -86,-4 -80,72 v 8 q -4,90 -95,91.5
-        h -163 v -171.5 z
+        q -86,-4 -80,71.5 v 8 q -4,90 -95,91.5
+        h -163 v -171 z
     </string>
 
     <!-- Whether the display cutout region of the main built-in display should be forced to
@@ -705,7 +713,7 @@
     <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
 
     <!-- Height of the status bar -->
-    <dimen name="status_bar_height_portrait">49dp</dimen>
+    <dimen name="status_bar_height_portrait">171px</dimen>
     <dimen name="status_bar_height_landscape">28dp</dimen>
     <!-- Height of area above QQS where battery/time go (equal to status bar height if > 48dp) -->
     <dimen name="quick_qs_offset_height">49dp</dimen>
