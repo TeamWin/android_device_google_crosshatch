@@ -414,4 +414,14 @@
 
     <!-- String for the sensor type for body/head proximity for SAR -->
     <string translatable="false" name="config_wifi_sar_sensor_type">com.google.sensor.sar</string>
+
+    <!-- Applications which are disabled unless matching a particular sku -->
+    <string-array name="config_disableApksUnlessMatchedSku_apk_list" translatable="false">
+        <item>com.felicanetworks.mfs</item>
+        <item>com.felicanetworks.mfw.a.boot</item>
+        <item>com.felicanetworks.mfw.a.main</item>
+        <item>com.felicanetworks.mfm.main</item>
+        <item>com.felicanetworks.mfc</item>
+        <item>com.felicanetworks.mfm</item>
+    </string-array>
 </resources>
