@@ -22,11 +22,6 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.mpssrfs.rc
 
 
 on property:init.svc.vendor.charger=running
-    stop vendor.qseecomd
-    stop keymaster-4-0
-    stop vndservicemanager
-    stop citadeld
-    stop vendor.keymaster-4-0-citadel
     # keep one LITTLE and one big
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
@@ -57,11 +52,15 @@ on early-init
     # Enable sched_boost
     write /proc/sys/kernel/sched_boost 1
 
+# Skip init trigger for charger mode
+on early-init && property:ro.boot.mode=charger
+    setprop vendor.skip.init 1
+
 # We need vold early for metadata encryption
 on early-fs
     start vold
 
-on init
+on init && property:vendor.skip.init=0
     start logd
 
     # QSEE rpmb listener need symlink for bootdevice
