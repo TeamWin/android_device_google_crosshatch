@@ -24,6 +24,9 @@ include device/google/crosshatch/device-common.mk
 
 DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/blueline/overlay
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.insmod.blueline.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.cfg
+
 # Audio XMLs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mixer_paths_tavil_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil_b1.xml \
