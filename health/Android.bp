@@ -27,6 +27,7 @@ cc_binary {
         "BatteryRechargingControl.cpp",
         "BatteryMetricsLogger.cpp",
         "LowBatteryShutdownMetrics.cpp",
+        "CycleCountBackupRestore.cpp",
     ],
 
     cflags: [

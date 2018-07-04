@@ -32,6 +32,7 @@
 #include "BatteryRechargingControl.h"
 #include "BatteryMetricsLogger.h"
 #include "LowBatteryShutdownMetrics.h"
+#include "CycleCountBackupRestore.h"
 
 namespace {
 
@@ -41,10 +42,18 @@ using android::hardware::health::V2_0::StorageInfo;
 using ::device::google::crosshatch::health::BatteryRechargingControl;
 using ::device::google::crosshatch::health::BatteryMetricsLogger;
 using ::device::google::crosshatch::health::LowBatteryShutdownMetrics;
+using ::device::google::crosshatch::health::CycleCountBackupRestore;
 
 static BatteryRechargingControl battRechargingControl;
 static BatteryMetricsLogger battMetricsLogger;
 static LowBatteryShutdownMetrics shutdownMetrics;
+static CycleCountBackupRestore ccBackupRestoreBMS(8,
+                                                  "/sys/class/power_supply/bms/device/cycle_counts_bins",
+                                                  "/persist/battery/qcom_cycle_counts_bins");
+static CycleCountBackupRestore ccBackupRestoreMAX(10,
+                                                  "/sys/class/power_supply/maxfg/cycle_counts_bins",
+                                                  "/persist/battery/max_cycle_counts_bins",
+                                                  "/sys/class/power_supply/maxfg/serial_number");
 
 #define UFS_DIR "/sys/devices/platform/soc/1d84000.ufshc"
 const std::string kUfsHealthEol{UFS_DIR "/health/eol"};
@@ -85,12 +94,17 @@ void fill_ufs_storage_attribute(StorageAttribute *attr) {
 
 }  // anonymous namespace
 
-void healthd_board_init(struct healthd_config *) {}
+void healthd_board_init(struct healthd_config *) {
+    ccBackupRestoreBMS.Restore();
+    ccBackupRestoreMAX.Restore();
+}
 
 int healthd_board_battery_update(struct android::BatteryProperties *props) {
     battRechargingControl.updateBatteryProperties(props);
     battMetricsLogger.logBatteryProperties(props);
     shutdownMetrics.logShutdownVoltage(props);
+    ccBackupRestoreBMS.Backup(props->batteryLevel);
+    ccBackupRestoreMAX.Backup(props->batteryLevel);
     if (!android::base::WriteStringToFile(std::to_string(props->batteryLevel),
                                           "/sys/class/power_supply/wireless/capacity"))
         LOG(INFO) << "Unable to write battery level to wireless capacity";
