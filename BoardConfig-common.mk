@@ -118,7 +118,9 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # Install odex files into the other system image
 BOARD_USES_SYSTEM_OTHER_ODEX := true
 
-BOARD_ROOT_EXTRA_FOLDERS := persist firmware
+BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
+BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
 
 include device/google/crosshatch-sepolicy/crosshatch-sepolicy.mk
 
@@ -178,7 +180,6 @@ USE_XML_AUDIO_POLICY_CONF := 1
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_SND_MONITOR := true
 AUDIO_FEATURE_ENABLED_USB_TUNNEL := true
-BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 AUDIO_FEATURE_ENABLED_CIRRUS_SPKR_PROTECTION := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 AUDIO_FEATURE_FLICKER_SENSOR_INPUT := true
