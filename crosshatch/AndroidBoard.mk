@@ -1,9 +1,18 @@
 LOCAL_PATH := $(call my-dir)
 
+#A/B builds require us to create the mount points at compile time.
+#Just creating it for all cases since it does not hurt.
+FIRMWARE_MOUNT_POINT := $(TARGET_OUT_VENDOR)/firmware_mnt
+ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNT_POINT)
+
+$(FIRMWARE_MOUNT_POINT):
+	@echo "Creating $(FIRMWARE_MOUNT_POINT)"
+	@mkdir -p $(TARGET_OUT_VENDOR)/firmware_mnt
+
 #----------------------------------------------------------------------
 # Generate persist image (persist.img)
 #----------------------------------------------------------------------
-TARGET_OUT_PERSIST := $(PRODUCT_OUT)/persist
+TARGET_OUT_PERSIST_IMG_PATH := $(PRODUCT_OUT)/persist
 
 INTERNAL_PERSISTIMAGE_FILES := \
     $(foreach pair,$(PRODUCT_COPY_FILES),\
@@ -15,8 +24,8 @@ INSTALLED_PERSISTIMAGE_TARGET := $(PRODUCT_OUT)/persist.img
 
 $(INSTALLED_PERSISTIMAGE_TARGET): $(MKEXTUSERIMG) $(MAKE_EXT4FS) $(INSTALLED_PERSISTIMAGE_FILES)
 	$(call pretty,"Target persist fs image: $(INSTALLED_PERSISTIMAGE_TARGET)")
-	@mkdir -p $(TARGET_OUT_PERSIST)
-	$(hide) PATH=$(HOST_OUT_EXECUTABLES):$${PATH} $(MKEXTUSERIMG) -s $(TARGET_OUT_PERSIST) $@ ext4 persist $(BOARD_PERSISTIMAGE_PARTITION_SIZE)
+	@mkdir -p $(TARGET_OUT_PERSIST_IMG_PATH)
+	$(hide) PATH=$(HOST_OUT_EXECUTABLES):$${PATH} $(MKEXTUSERIMG) -s $(TARGET_OUT_PERSIST_IMG_PATH) $@ ext4 persist $(BOARD_PERSISTIMAGE_PARTITION_SIZE)
 	$(hide) chmod a+r $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_PERSISTIMAGE_PARTITION_SIZE))
 
