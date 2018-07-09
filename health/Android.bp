@@ -26,6 +26,7 @@ cc_binary {
         "HealthService.cpp",
         "BatteryRechargingControl.cpp",
         "BatteryMetricsLogger.cpp",
+        "LowBatteryShutdownMetrics.cpp",
     ],
 
     cflags: [
