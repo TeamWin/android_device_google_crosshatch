@@ -27,6 +27,9 @@ DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/crosshatch/overlay
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.insmod.crosshatch.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.cfg
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/powerhint_c1.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+
 # Audio XMLs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mixer_paths_tavil_c1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil_c1.xml \
