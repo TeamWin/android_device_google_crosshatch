@@ -33,10 +33,6 @@ mm.enable.smoothstreaming=true
 mm.enable.qcom_parser=13631487
 persist.mm.enable.prefetch=true
 
-# codec2
-debug.stagefright.ccodec=4
-debug.stagefright.omx_default_rank=1000
-
 # Additional buffers shared between Camera and Video
 vidc.enc.dcvs.extra-buff-count=2
 vidc.enc.disable.pq=1
