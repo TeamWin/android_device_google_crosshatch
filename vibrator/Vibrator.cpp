@@ -93,7 +93,7 @@ static constexpr char WAVEFORM_RINGTONE12_EFFECT_QUEUE[] = "140, 22.100, 972, 1!
 
 static constexpr int8_t MAX_SCALE_INPUT = 112;
 
-static constexpr int8_t MAX_TRIGGER_LATENCY_MS = 5;
+static constexpr int8_t MAX_TRIGGER_LATENCY_MS = 6;
 
 Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofstream&& effect,
         std::ofstream&& queue, std::ofstream&& scale) :
@@ -106,7 +106,7 @@ Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofst
 
 Return<Status> Vibrator::on(uint32_t timeoutMs, uint32_t effectIndex) {
     mEffectIndex << effectIndex << std::endl;
-    mDuration << timeoutMs << std::endl;
+    mDuration << (timeoutMs + MAX_TRIGGER_LATENCY_MS) << std::endl;
     mActivate << 1 << std::endl;
 
     return Status::OK;
