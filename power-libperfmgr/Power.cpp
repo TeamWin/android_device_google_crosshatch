@@ -497,6 +497,8 @@ Return<void> Power::powerHintAsync_1_2(PowerHint_1_2 hint, int32_t data) {
             } else if (data == 0) {
                 ATRACE_INT("camera_streaming_lock", 0);
                 mHintManager->EndHint("CAMERA_STREAMING");
+                // Boost 1s for tear down
+                mHintManager->DoHint("CAMERA_LAUNCH", std::chrono::seconds(1));
                 ALOGD("CAMERA STREAMING OFF");
                 if (!android::base::SetProperty(kPowerHalStateProp, "")) {
                     ALOGE("%s: could not clear powerHAL state property", __func__);
