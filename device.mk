@@ -227,9 +227,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.power@1.3-service.crosshatch-libperfmgr
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
 # Audio fluence, ns, aec property, voice and media volume steps
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.fluencetype=fluencepro \
@@ -260,6 +257,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.dataspace_saturation_matrix=1.16868,-0.03155,-0.01473,-0.16868,1.03155,-0.05899,0.00000,0.00000,1.07372
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.disable_decimation=1
 
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
