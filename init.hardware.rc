@@ -451,6 +451,7 @@ on early-boot
     chown system system /sys/class/leds/blue/rgb_start
     chown system system /sys/class/backlight/panel0-backlight/brightness
     chown system system /sys/class/backlight/panel0-backlight/vr_mode
+    chown system system /sys/class/backlight/panel0-backlight/hbm_mode
 
     # Permission for Wireless charger
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/rxdata
