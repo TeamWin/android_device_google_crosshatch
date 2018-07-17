@@ -143,7 +143,7 @@ void BatteryRechargingControl::updateBatteryProperties(struct android::BatteryPr
             } else {
                 LOG(INFO) << "Diff time: " << elapsed_time;
                 int battery_level = RemapSOC(props->batteryLevel);
-                if (battery_level == props->batteryLevel) {
+                if ((battery_level == props->batteryLevel) && (battery_level != kFullSoc)) {
                     state_ = INACTIVE;
                     break;
                 }
