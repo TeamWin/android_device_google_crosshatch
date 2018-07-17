@@ -682,4 +682,8 @@
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
     <integer name="config_shutdownBatteryTemperature">600</integer>
 
+    <string-array name="config_disableApkUnlessMatchedSku_skus_list" translatable="false">
+        <item>G013B</item>
+    </string-array>
+
 </resources>
