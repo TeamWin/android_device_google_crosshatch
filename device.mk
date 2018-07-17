@@ -335,8 +335,7 @@ PRODUCT_PACKAGES += \
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.$(PRODUCT_PLATFORM) \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service
+    hardware.google.light@1.0-service
 
 # Memtrack HAL
 PRODUCT_PACKAGES += \
