@@ -29,7 +29,7 @@ class DropDetect : public android::chre::SocketClient::ICallbacks,
                    public android::chre::IChreMessageHandlers,
                    public android::chre::SocketClient {
   public:
-    static bool start();
+    static android::sp<DropDetect> start();
 
     void onConnected() override;
     void onMessageReceived(const void *data, size_t length) override;
