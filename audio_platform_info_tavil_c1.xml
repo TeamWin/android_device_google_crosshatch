@@ -32,7 +32,7 @@
         <device name="SND_DEVICE_OUT_VOICE_HANDSET" acdb_id="7"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="14"/>
         <device name="SND_DEVICE_OUT_VOICE_HAC_HANDSET" acdb_id="201"/>
-        <device name="SND_DEVICE_OUT_VOICE_HANDSET_TMUS" acdb_id="7"/>
+        <device name="SND_DEVICE_OUT_VOICE_HANDSET_TMUS" acdb_id="98"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_HCO_HANDSET" acdb_id="14"/>
         <device name="SND_DEVICE_OUT_VOICE_USB_HEADSET" acdb_id="10"/>
         <device name="SND_DEVICE_OUT_VOICE_USB_HEADPHONES" acdb_id="10"/>
@@ -50,7 +50,7 @@
         <device name="SND_DEVICE_IN_SPEAKER_DMIC_STEREO" acdb_id="19"/>
         <device name="SND_DEVICE_IN_BT_SCO_MIC_NREC" acdb_id="122"/>
         <device name="SND_DEVICE_IN_BT_SCO_MIC_WB_NREC" acdb_id="123"/>
-        <device name="SND_DEVICE_IN_VOICE_DMIC_TMUS" acdb_id="41"/>
+        <device name="SND_DEVICE_IN_VOICE_DMIC_TMUS" acdb_id="99"/>
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_DMIC" acdb_id="19"/>
         <device name="SND_DEVICE_IN_VOICE_TTY_VCO_HANDSET_MIC" acdb_id="19"/>
         <device name="SND_DEVICE_IN_VOICE_REC_MIC" acdb_id="4"/>
