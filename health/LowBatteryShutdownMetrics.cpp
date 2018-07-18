@@ -80,9 +80,9 @@ bool LowBatteryShutdownMetrics::saveVoltageAvg(void) {
         prop_contents += ",";
     prop_contents += voltage_avg;
 
-    LOG(INFO) << "Saving \"" << voltage_avg << "\" to " << kPersistProp;
+    LOG(INFO) << "Saving \"" << prop_contents << "\" to " << kPersistProp;
 
-    return SetProperty(kPersistProp, voltage_avg);
+    return SetProperty(kPersistProp, prop_contents);
 }
 
 void LowBatteryShutdownMetrics::logShutdownVoltage(struct android::BatteryProperties *props) {
