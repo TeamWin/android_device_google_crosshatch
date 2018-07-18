@@ -64,6 +64,11 @@
             system/lib64/libsecureui_svcsock_system.so \
             system/lib64/libsensorslog.so \
             system/lib64/libsns_low_lat_stream_stub.so \
+            system/lib64/libOpenCL_system.so \
+            system/lib64/libprotobuf-cpp-full-rtti.so \
+            system/lib64/libqcbor.so \
+            system/lib64/libsmcinvokecred.so \
+            system/lib64/libtzcom.so \
             system/lib/libadsprpc_system.so \
             system/lib/libcdsprpc_system.so \
             system/lib/libdiag_system.so \
@@ -91,6 +96,11 @@
             system/lib/libsecureui_svcsock_system.so \
             system/lib/libsensorslog.so \
             system/lib/libsns_low_lat_stream_stub.so \
+            system/lib/libOpenCL_system.so \
+            system/lib/libprotobuf-cpp-full-rtti.so \
+            system/lib/libqcbor.so \
+            system/lib/libsmcinvokecred.so \
+            system/lib/libtzcom.so \
             system/lib/rfsa/adsp/libsns_low_lat_stream_skel.so \
             "
     ;;
