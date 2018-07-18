@@ -29,12 +29,12 @@ using BatteryHealthSnapshotArgs =
 using android::sp;
 
 BatteryMetricsLogger::BatteryMetricsLogger() {
-    last_sample = 0;
-    last_upload = 0;
-    num_samples = 0;
-    memset(min, 0, sizeof(min));
-    memset(max, 0, sizeof(max));
-    accum_resistance = 0;
+    last_sample_ = 0;
+    last_upload_ = 0;
+    num_res_samples_ = 0;
+    memset(min_, 0, sizeof(min_));
+    memset(max_, 0, sizeof(max_));
+    accum_resistance_ = 0;
 }
 
 int64_t BatteryMetricsLogger::getTime(void) {
@@ -43,19 +43,19 @@ int64_t BatteryMetricsLogger::getTime(void) {
 
 bool BatteryMetricsLogger::uploadOutlierMetric(sp<IPixelStats> client, sampleType type) {
     BatteryHealthSnapshotArgs min_ss = {static_cast<BatterySnapshotType>(0),
-                                        min[type][TEMP],
-                                        min[type][VOLT],
-                                        min[type][CURR],
-                                        min[type][OCV],
-                                        min[type][RES],
-                                        min[type][SOC]};
+                                        min_[type][TEMP],
+                                        min_[type][VOLT],
+                                        min_[type][CURR],
+                                        min_[type][OCV],
+                                        min_[type][RES],
+                                        min_[type][SOC]};
     BatteryHealthSnapshotArgs max_ss = {static_cast<BatterySnapshotType>(0),
-                                        max[type][TEMP],
-                                        max[type][VOLT],
-                                        max[type][CURR],
-                                        max[type][OCV],
-                                        max[type][RES],
-                                        max[type][SOC]};
+                                        max_[type][TEMP],
+                                        max_[type][VOLT],
+                                        max_[type][CURR],
+                                        max_[type][OCV],
+                                        max_[type][RES],
+                                        max_[type][SOC]};
     switch (type) {
         case TEMP:
             min_ss.type = BatterySnapshotType::MIN_TEMP;
@@ -92,15 +92,16 @@ bool BatteryMetricsLogger::uploadOutlierMetric(sp<IPixelStats> client, sampleTyp
 
 bool BatteryMetricsLogger::uploadMetrics(void) {
     int64_t time = getTime();
-    int32_t avg_resistance;
+    int32_t avg_resistance = 0;
 
-    if (num_samples == 0)
+    if (last_sample_ == 0)
         return false;
 
     LOG(INFO) << "Uploading metrics at time " << std::to_string(time) << " w/ "
-              << std::to_string(num_samples) << " samples";
+              << std::to_string(num_res_samples_) << " samples";
 
-    avg_resistance = accum_resistance / num_samples;
+    if (num_res_samples_)
+        avg_resistance = accum_resistance_ / num_res_samples_;
 
     LOG(INFO) << "Logging metrics to tron";
 
@@ -112,11 +113,13 @@ bool BatteryMetricsLogger::uploadMetrics(void) {
 
     // Only log and upload the min and max for metric types we want to upload
     for (int metric = kMetricMin; metric <= kMetricMax; metric++) {
+        if (metric == RES && num_res_samples_ == 0)
+            continue;
         std::string log_min = "min-" + std::to_string(metric) + " ";
         std::string log_max = "max-" + std::to_string(metric) + " ";
         for (int j = 0; j < NUM_FIELDS; j++) {
-            log_min += std::to_string(min[metric][j]) + " ";
-            log_max += std::to_string(max[metric][j]) + " ";
+            log_min += std::to_string(min_[metric][j]) + " ";
+            log_max += std::to_string(max_[metric][j]) + " ";
         }
         LOG(INFO) << log_min;
         LOG(INFO) << log_max;
@@ -127,14 +130,15 @@ bool BatteryMetricsLogger::uploadMetrics(void) {
     // Upload average metric
     BatteryHealthSnapshotArgs avg_res_ss = {
         BatterySnapshotType::AVG_RESISTANCE, 0, 0, 0, 0, avg_resistance, 0};
-    client->reportBatteryHealthSnapshot(avg_res_ss);
+    if (num_res_samples_)
+        client->reportBatteryHealthSnapshot(avg_res_ss);
 
     // Clear existing data
-    memset(min, 0, sizeof(min));
-    memset(max, 0, sizeof(max));
-    num_samples = 0;
-    last_upload = time;
-    accum_resistance = 0;
+    memset(min_, 0, sizeof(min_));
+    memset(max_, 0, sizeof(max_));
+    num_res_samples_ = 0;
+    last_upload_ = time;
+    accum_resistance_ = 0;
     LOG(INFO) << "Finished uploading to tron";
     return true;
 }
@@ -167,32 +171,39 @@ bool BatteryMetricsLogger::recordSample(struct android::BatteryProperties *props
                                   props->batteryTemperature,
                                   props->batteryLevel,
                                   ocv};
-    accum_resistance += resistance;
+    if (props->batteryStatus != android::BATTERY_STATUS_CHARGING) {
+        accum_resistance_ += resistance;
+        num_res_samples_++;
+    }
 
     // Only calculate the min and max for metric types we want to upload
     for (int metric = kMetricMin; metric <= kMetricMax; metric++) {
-        if (num_samples == 0 || sample[metric] < min[metric][metric]) {
+        // Discard resistance min/max when charging
+        if (metric == RES && props->batteryStatus == android::BATTERY_STATUS_CHARGING)
+            continue;
+        if (last_sample_ == 0 || (metric == RES && num_res_samples_ == 0) ||
+            sample[metric] < min_[metric][metric]) {
             for (int i = 0; i < NUM_FIELDS; i++) {  // update new min with current sample
-                min[metric][i] = sample[i];
+                min_[metric][i] = sample[i];
             }
         }
-        if (num_samples == 0 || sample[metric] > max[metric][metric]) {
+        if (last_sample_ == 0 || (metric == RES && num_res_samples_ == 0) ||
+            sample[metric] > max_[metric][metric]) {
             for (int i = 0; i < NUM_FIELDS; i++) {  // update new max with current sample
-                max[metric][i] = sample[i];
+                max_[metric][i] = sample[i];
             }
         }
     }
 
-    last_sample = time;
-    num_samples++;
+    last_sample_ = time;
     return true;
 }
 
 void BatteryMetricsLogger::logBatteryProperties(struct android::BatteryProperties *props) {
     int32_t time = getTime();
-    if (num_samples == 0 || time - last_sample >= kSampleRate)
+    if (last_sample_ == 0 || time - last_sample_ >= kSamplePeriod)
         recordSample(props);
-    if (last_sample - last_upload > kUploadRate || num_samples >= kMaxSamples)
+    if (last_sample_ - last_upload_ > kUploadPeriod || num_res_samples_ >= kMaxSamples)
         uploadMetrics();
 
     return;
