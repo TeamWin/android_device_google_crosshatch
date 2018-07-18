@@ -239,6 +239,8 @@ on fs
     chmod 0770 /persist/rfs/apq
     chmod 0770 /persist/rfs/apq/gnss
     chmod 0770 /persist/hlos_rfs
+    # for cycle count backup
+    mkdir /persist/battery 0700 system system
     restorecon_recursive /persist
 
 on late-fs
@@ -460,9 +462,17 @@ on early-boot
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/ccreset
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/status
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/version
+    chown system system /sys/class/power_supply/wireless/capacity
+
+    # FG cycle counts read from dumpstate + backup restore from health HAL
+    chown system system /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    chown system system /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
+
+    # HardwareInfo needs to be able to read CC bins
+    chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    chmod 644 /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
 
     # Permission for Pixelstats
-    chown system system /sys/class/power_supply/maxfg/cycle_counts_bins
     chown system system /sys/class/misc/msm_cirrus_playback/resistance_left_right
     chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_read_cnt
     chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_write_cnt
@@ -605,14 +615,6 @@ on property:sys.boot_completed=1
     # Maxim FG dump for dumpstate
     chown system system /d/regmap/4-0036/registers
     chown system system /d/regmap/4-000b/registers
-
-    # Dump QCOM FG cycle counts for dumpstate
-    chown system system /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
-    chown system system /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
-
-    # HardwareInfo needs to be able to read CC bins
-    chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
-    chmod 644 /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
 
     # UFS health
     chmod 755 /sys/kernel/debug/ufshcd0
