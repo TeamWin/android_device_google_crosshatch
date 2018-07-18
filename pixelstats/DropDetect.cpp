@@ -133,14 +133,14 @@ void DropDetect::handleNanoappMessage(const fbs::NanoappMessageT &message) {
                                        free_fall_duration_ms);
 }
 
-bool DropDetect::start() {
+sp<DropDetect> DropDetect::start() {
     sp<DropDetect> dropDetect = new DropDetect();
 
     if (!dropDetect->connectInBackground(kChreSocketName, dropDetect)) {
         ALOGE("Couldn't connect to CHRE socket");
-        return false;
+        return nullptr;
     }
-    return true;
+    return dropDetect;
 }
 
 }  // namespace crosshatch

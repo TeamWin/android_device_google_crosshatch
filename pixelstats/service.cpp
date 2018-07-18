@@ -29,7 +29,8 @@ using namespace device::google::crosshatch;
 int main() {
     LOG(INFO) << "starting PixelStats";
 
-    if (!DropDetect::start()) {
+    sp<DropDetect> dropDetector = DropDetect::start();
+    if (!dropDetector) {
         LOG(ERROR) << "Unable to launch drop detection";
         return 1;
     }
