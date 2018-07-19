@@ -227,6 +227,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.power@1.3-service.crosshatch-libperfmgr
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+
 # Audio fluence, ns, aec property, voice and media volume steps
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.fluencetype=fluencepro \
@@ -376,9 +379,14 @@ PRODUCT_PACKAGES += \
     android.hardware.nfc@1.1-service \
     android.hardware.secure_element@1.0-service-disabled
 
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    vendor.ese.loader_script_path=/sys/firmware/devicetree/base/soc/i2c@88c000/nq@28/ese/loader_scripts_path
+
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
-    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf
+    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf \
+    device/google/crosshatch/felica/loaderservice_updater_1.lss:$(TARGET_COPY_OUT_VENDOR)/etc/loaderservice_updater_1.lss \
+    device/google/crosshatch/felica/loaderservice_updater_2.lss:$(TARGET_COPY_OUT_VENDOR)/etc/loaderservice_updater_2.lss
 
 # TODO(b/72443662)
 PRODUCT_COPY_FILES += \
