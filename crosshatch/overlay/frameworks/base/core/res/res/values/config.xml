@@ -723,11 +723,7 @@
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
     <integer name="config_shutdownBatteryTemperature">600</integer>
 
-    <!-- Whether or not we should show the option to show battery percentage -->
-    <bool name="config_battery_percentage_setting_available">false</bool>
-
     <string-array name="config_disableApkUnlessMatchedSku_skus_list" translatable="false">
         <item>G013D</item>
     </string-array>
-
 </resources>
