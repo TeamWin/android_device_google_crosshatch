@@ -52,20 +52,20 @@ class BatteryMetricsLogger {
 
     const char *kBatteryResistance = "/sys/class/power_supply/maxfg/resistance";
     const char *kBatteryOCV = "/sys/class/power_supply/maxfg/voltage_ocv";
-    const int kSampleRate = 10 * 60;       // 10 minutes
-    const int kUploadRate = 24 * 60 * 60;  // 1 day
+    const int kSamplePeriod = 10 * 60;       // 10 minutes
+    const int kUploadPeriod = 24 * 60 * 60;  // 1 day
     const int kMaxSamples = 144;           // 24h * 60min / 10 min sample rate
     const sampleType kMetricMin = RES, kMetricMax = SOC;
 
     // min and max are referenced by type in both the X and Y axes
     // i.e. min[TYPE] is the event where the minimum of that type occurred, and
     // min[TYPE][TYPE] is the reading of that type at that minimum event
-    int32_t min[NUM_FIELDS][NUM_FIELDS];
-    int32_t max[NUM_FIELDS][NUM_FIELDS];
-    int32_t num_samples;       // number of samples since last upload
-    int64_t accum_resistance;  // accumulative resistance
-    int64_t last_sample;       // time in seconds since boot of last sample
-    int64_t last_upload;       // time in seconds since boot of last upload
+    int32_t min_[NUM_FIELDS][NUM_FIELDS];
+    int32_t max_[NUM_FIELDS][NUM_FIELDS];
+    int32_t num_res_samples_;   // number of res samples since last upload
+    int64_t accum_resistance_;  // accumulative resistance
+    int64_t last_sample_;       // time in seconds since boot of last sample
+    int64_t last_upload_;       // time in seconds since boot of last upload
 
     int64_t getTime();
     bool recordSample(struct android::BatteryProperties *props);
