@@ -320,13 +320,6 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "MDP xlogs", "/data/vendor/display/mdp_xlog");
     DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
-    DumpFileToFd(fd, "TUNE1", "/d/88e2000.qusb/tune1");
-    DumpFileToFd(fd, "TUNE2", "/d/88e2000.qusb/tune2");
-    DumpFileToFd(fd, "TUNE3", "/d/88e2000.qusb/tune3");
-    DumpFileToFd(fd, "TUNE4", "/d/88e2000.qusb/tune4");
-    DumpFileToFd(fd, "TUNE5", "/d/88e2000.qusb/tune5");
-    DumpFileToFd(fd, "BIAS_CTRL_1", "/d/88e2000.qusb/bias_ctrl_1");
-    DumpFileToFd(fd, "BIAS_CTRL_2", "/d/88e2000.qusb/bias_ctrl_2");
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
     RunCommandToFd(fd, "USB Device Descriptors", {"/vendor/bin/sh", "-c", "cd /sys/bus/usb/devices/1-1 && cat product && cat bcdDevice; cat descriptors | od -t x1 -w16 -N96"});
     // Timeout after 3s
