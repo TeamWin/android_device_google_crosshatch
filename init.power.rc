@@ -62,6 +62,10 @@ on property:sys.boot_completed=1
     write /sys/class/drm/card0/device/idle_encoder_mask 1
     write /sys/class/drm/card0/device/idle_timeout_ms 100
 
+    # Change l3-cdsp to userspace governor
+    write /sys/class/devfreq/soc:qcom,l3-cdsp/governor userspace
+    chown system system /sys/class/devfreq/soc:qcom,l3-cdsp/userspace/set_freq
+
 # Disable console_suspend to get better logging for kernel crashes
 on boot
     write /sys/module/printk/parameters/console_suspend N
