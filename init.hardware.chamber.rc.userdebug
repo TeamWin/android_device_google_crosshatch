@@ -17,10 +17,10 @@
 on property:persist.vendor.disable.thermal.control=1
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode disabled
     write /sys/devices/virtual/thermal/tz-by-name/fps-therm-adc/mode disabled
-    write /sys/module/overheat_mitigation/parameters/fake_port_temp 250
+    write /sys/module/overheat_mitigation/parameters/enable 0
 
 on property:init.svc.vendor.thermal-engine=running && property:persist.vendor.disable.thermal.control=1
     stop vendor.thermal-engine
 
 on property:persist.vendor.disable.usb.overheat.mitigation=1
-    write /sys/module/overheat_mitigation/parameters/fake_port_temp 250
+    write /sys/module/overheat_mitigation/parameters/enable 0
