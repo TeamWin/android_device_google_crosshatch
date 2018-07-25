@@ -25,9 +25,9 @@
     <integer-array name="config_doze_brightness_sensor_to_brightness">
         <item>-1</item> <!-- 0: OFF -->
         <item>1</item> <!-- 1: NIGHT -->
-        <item>1</item> <!-- 2: LOW -->
-        <item>87</item> <!-- 3: HIGH -->
-        <item>87</item> <!-- 4: SUN -->
+        <item>7</item> <!-- 2: LOW -->
+        <item>34</item> <!-- 3: HIGH -->
+        <item>34</item> <!-- 4: SUN -->
     </integer-array>
 
     <!-- Doze: Table that translates sensor values from the doze_brightness_sensor_type sensor
@@ -36,7 +36,7 @@
                -1 means keeping the current opacity. -->
     <integer-array name="config_doze_brightness_sensor_to_scrim_opacity">
         <item>-1</item> <!-- 0: OFF -->
-        <item>0</item> <!-- 1: NIGHT -->
+        <item>150</item> <!-- 1: NIGHT -->
         <item>0</item> <!-- 2: LOW -->
         <item>0</item> <!-- 3: HIGH -->
         <item>0</item> <!-- 4: SUN -->
