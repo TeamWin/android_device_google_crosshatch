@@ -213,7 +213,13 @@ static void DumpTouch(int fd) {
     if (!access("/sys/devices/virtual/sec/tsp", R_OK)) {
         DumpFileToFd(fd, "LSI touch firmware version",
                      "/sys/devices/virtual/sec/tsp/fw_version");
-        RunCommandToFd(fd, "Mutual Raw",
+        DumpFileToFd(fd, "LSI touch status",
+                     "/sys/devices/virtual/sec/tsp/status");
+        RunCommandToFd(fd, "Mutual Raw Data",
+                       {"/vendor/bin/sh", "-c",
+                        "echo run_rawdata_read_all > /sys/devices/virtual/sec/tsp/cmd"
+                        " && cat /sys/devices/virtual/sec/tsp/cmd_result"});
+        RunCommandToFd(fd, "Mutual Raw Cap",
                        {"/vendor/bin/sh", "-c",
                         "echo run_rawcap_read_all > /sys/devices/virtual/sec/tsp/cmd"
                         " && cat /sys/devices/virtual/sec/tsp/cmd_result"});
@@ -233,6 +239,8 @@ static void DumpTouch(int fd) {
     if (!access("/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049", R_OK)) {
         DumpFileToFd(fd, "STM touch firmware version",
                      "/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/appid");
+        DumpFileToFd(fd, "STM touch status",
+                     "/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/status");
         RunCommandToFd(fd, "Mutual Raw",
                        {"/vendor/bin/sh", "-c",
                         "echo 13 00 > /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd"
