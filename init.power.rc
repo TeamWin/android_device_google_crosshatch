@@ -29,7 +29,7 @@ on property:sys.boot_completed=1
 
     write /sys/class/devfreq/soc:qcom,llccbw/governor "bw_hwmon"
     write /sys/class/devfreq/soc:qcom,llccbw/polling_interval 50
-    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/mbps_zones "1720 2929 4943 5931 6881"
+    write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/mbps_zones "1720 2929 3879 5931 6881"
     write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/sample_ms 4
     write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/io_percent 80
     write /sys/class/devfreq/soc:qcom,llccbw/bw_hwmon/hist_memory 20
@@ -61,6 +61,10 @@ on property:sys.boot_completed=1
     # Enable idle state listener
     write /sys/class/drm/card0/device/idle_encoder_mask 1
     write /sys/class/drm/card0/device/idle_timeout_ms 100
+
+    # Change l3-cdsp to userspace governor
+    write /sys/class/devfreq/soc:qcom,l3-cdsp/governor userspace
+    chown system system /sys/class/devfreq/soc:qcom,l3-cdsp/userspace/set_freq
 
 # Disable console_suspend to get better logging for kernel crashes
 on boot

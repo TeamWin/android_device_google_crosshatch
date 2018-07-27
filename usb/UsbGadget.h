@@ -50,6 +50,7 @@ using ::android::hardware::hidl_string;
 using ::android::hardware::hidl_vec;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
+using ::std::chrono::steady_clock;
 using ::std::lock_guard;
 using ::std::move;
 using ::std::mutex;
@@ -57,6 +58,7 @@ using ::std::string;
 using ::std::thread;
 using ::std::unique_ptr;
 using ::std::vector;
+using namespace std::chrono;
 using namespace std::chrono_literals;
 
 struct UsbGadget : public IUsbGadget {

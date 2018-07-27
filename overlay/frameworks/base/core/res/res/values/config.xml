@@ -239,9 +239,6 @@
          ComponentName of a dream to show whenever the system would otherwise have gone to sleep. -->
     <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
 
-    <!-- Disable AOD by default -->
-    <bool name="config_dozeAlwaysOnEnabled">false</bool>
-
     <!-- If true, the doze component is not started until after the screen has been turned off
          and the screen off animation has been performed. -->
     <bool name="config_dozeAfterScreenOffByDefault">true</bool>
@@ -407,13 +404,11 @@
 
     <!-- Boolean indicating whether framework needs to set the tx power limit for meeting SAR
          requirements -->
-    <bool translatable="false" name="config_wifi_framework_enable_sar_tx_power_limit">false</bool>
+    <bool translatable="false" name="config_wifi_framework_enable_sar_tx_power_limit">true</bool>
 
-    <!-- Boolean indicating whether framework SAR supports body proximity requirements -->
-    <bool translatable="false" name="config_wifi_framework_enable_body_proximity_sar_tx_power_limit">false</bool>
-
-    <!-- String for the sensor type for body/head proximity for SAR -->
-    <string translatable="false" name="config_wifi_sar_sensor_type">com.google.sensor.sar</string>
+    <!-- Boolean indicating whether framework should use detection of softAP mode to set the tx
+         power limit for meeting SAR requirements -->
+    <bool translatable="false" name="config_wifi_framework_enable_soft_ap_sar_tx_power_limit">true</bool>
 
     <!-- Applications which are disabled unless matching a particular sku -->
     <string-array name="config_disableApksUnlessMatchedSku_apk_list" translatable="false">

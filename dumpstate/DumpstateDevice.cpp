@@ -211,7 +211,13 @@ static void DumpTouch(int fd) {
     if (!access("/sys/devices/virtual/sec/tsp", R_OK)) {
         DumpFileToFd(fd, "LSI touch firmware version",
                      "/sys/devices/virtual/sec/tsp/fw_version");
-        RunCommandToFd(fd, "Mutual Raw",
+        DumpFileToFd(fd, "LSI touch status",
+                     "/sys/devices/virtual/sec/tsp/status");
+        RunCommandToFd(fd, "Mutual Raw Data",
+                       {"/vendor/bin/sh", "-c",
+                        "echo run_rawdata_read_all > /sys/devices/virtual/sec/tsp/cmd"
+                        " && cat /sys/devices/virtual/sec/tsp/cmd_result"});
+        RunCommandToFd(fd, "Mutual Raw Cap",
                        {"/vendor/bin/sh", "-c",
                         "echo run_rawcap_read_all > /sys/devices/virtual/sec/tsp/cmd"
                         " && cat /sys/devices/virtual/sec/tsp/cmd_result"});
@@ -231,6 +237,8 @@ static void DumpTouch(int fd) {
     if (!access("/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049", R_OK)) {
         DumpFileToFd(fd, "STM touch firmware version",
                      "/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/appid");
+        DumpFileToFd(fd, "STM touch status",
+                     "/sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/status");
         RunCommandToFd(fd, "Mutual Raw",
                        {"/vendor/bin/sh", "-c",
                         "echo 13 00 > /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd"
@@ -320,13 +328,6 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "MDP xlogs", "/data/vendor/display/mdp_xlog");
     DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
-    DumpFileToFd(fd, "TUNE1", "/d/88e2000.qusb/tune1");
-    DumpFileToFd(fd, "TUNE2", "/d/88e2000.qusb/tune2");
-    DumpFileToFd(fd, "TUNE3", "/d/88e2000.qusb/tune3");
-    DumpFileToFd(fd, "TUNE4", "/d/88e2000.qusb/tune4");
-    DumpFileToFd(fd, "TUNE5", "/d/88e2000.qusb/tune5");
-    DumpFileToFd(fd, "BIAS_CTRL_1", "/d/88e2000.qusb/bias_ctrl_1");
-    DumpFileToFd(fd, "BIAS_CTRL_2", "/d/88e2000.qusb/bias_ctrl_2");
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
     RunCommandToFd(fd, "USB Device Descriptors", {"/vendor/bin/sh", "-c", "cd /sys/bus/usb/devices/1-1 && cat product && cat bcdDevice; cat descriptors | od -t x1 -w16 -N96"});
     // Timeout after 3s
