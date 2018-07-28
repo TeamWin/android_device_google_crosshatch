@@ -907,3 +907,11 @@ on property:persist.vendor.charge.start.level=*
 # it should be written by the system init.
 on property:ro.boot.hardware.radio.subtype=1
     setprop audio.camerasound.force true
+
+on property:sys.boot_completed=1 && property:ro.boot.mode=firstboot
+    start init-firstboot-sh
+
+service init-firstboot-sh /vendor/bin/init.firstboot.sh
+    user nobody
+    disabled
+    oneshot
