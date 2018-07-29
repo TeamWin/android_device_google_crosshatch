@@ -51,6 +51,7 @@ on early-init
     chmod 0755 /sys/kernel/debug
     # Enable sched_boost
     write /proc/sys/kernel/sched_boost 1
+    mount_all /vendor/etc/fstab.persist --early
 
 # Skip init trigger for charger mode
 on early-init && property:ro.boot.mode=charger
@@ -906,3 +907,11 @@ on property:persist.vendor.charge.start.level=*
 # it should be written by the system init.
 on property:ro.boot.hardware.radio.subtype=1
     setprop audio.camerasound.force true
+
+on property:sys.boot_completed=1 && property:ro.boot.mode=firstboot
+    start init-firstboot-sh
+
+service init-firstboot-sh /vendor/bin/init.firstboot.sh
+    user nobody
+    disabled
+    oneshot
