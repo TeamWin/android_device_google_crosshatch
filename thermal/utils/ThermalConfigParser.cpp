@@ -30,6 +30,8 @@ namespace thermal {
 namespace V1_1 {
 namespace implementation {
 
+constexpr float kConfigMultiplier = .001;
+
 // For now this just defines the sensor name and thresholds.
 struct SensorConfig {
     SensorConfig() : sensor_name(""), threshold(0.0), action(""),
@@ -56,10 +58,10 @@ static void checkAndAssignThreshold(float config_threshold, float* out) {
 
 static void assignThresholdsFromConfig(
     const std::vector<SensorConfig>& configs,
-    const std::map<std::string, TemperatureType>& sensor_name_type_map,
+    const std::map<std::string, SensorInfo>& sensor_name_type_map,
     ThrottlingThresholds* threshold) {
     for (const SensorConfig& config : configs) {
-        switch (sensor_name_type_map.at(config.sensor_name)) {
+        switch (sensor_name_type_map.at(config.sensor_name).type) {
             case TemperatureType::CPU:
                 checkAndAssignThreshold(config.threshold, &threshold->cpu);
                 break;
@@ -102,7 +104,7 @@ static void parseThermalEngineConfig(
     for (std::sregex_iterator itr = block_begin; itr != block_end; ++itr) {
         configs->emplace_back(
             SensorConfig(
-                itr->str(2), std::stoi(itr->str(3)) * kMultiplier, "",
+                itr->str(2), std::stoi(itr->str(3)) * kConfigMultiplier, "",
                 itr->str(1)));
     }
 
@@ -141,7 +143,7 @@ static void parseThermalEngineConfig(
         }
 
         for (std::size_t i = 0; i < thresholds.size(); ++i) {
-            sensor_config.threshold = std::stoi(thresholds[i]) * kMultiplier;
+            sensor_config.threshold = std::stoi(thresholds[i]) * kConfigMultiplier;
             sensor_config.action = actions[i];
 
             // Filter out the shutdown thresholds.
@@ -156,11 +158,11 @@ static void parseThermalEngineConfig(
 
 static void dumpSensorConfigs(
     const std::vector<SensorConfig>& sensor_config_vec,
-    const std::map<std::string, TemperatureType>& typeMap) {
+    const std::map<std::string, SensorInfo>& typeMap) {
     for (const auto& sensor_config : sensor_config_vec) {
         LOG(INFO) << "Sensor name: " << sensor_config.sensor_name
                   << " type: " << android::hardware::thermal::V1_0::toString(
-                      typeMap.at(sensor_config.sensor_name))
+                      typeMap.at(sensor_config.sensor_name).type)
                   << " with threshold: " << sensor_config.threshold
                   << " from rule: " << sensor_config.rule_name
                   << sensor_config.action.empty() ? ""
@@ -171,7 +173,7 @@ static void dumpSensorConfigs(
 void InitializeThresholdsFromThermalConfig(
     const std::string& thermal_config,
     const std::string& vr_thermal_config,
-    const std::map<std::string, TemperatureType>& typeMap,
+    const std::map<std::string, SensorInfo>& typeMap,
     ThrottlingThresholds *thresholds,
     ThrottlingThresholds *shutdown_thresholds,
     ThrottlingThresholds *vr_thresholds) {
