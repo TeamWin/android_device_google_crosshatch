@@ -54,7 +54,13 @@ using ::android::hardware::thermal::V1_0::CpuUsage;
 using ::android::hardware::thermal::V1_0::Temperature;
 using ::android::hardware::thermal::V1_0::TemperatureType;
 
-constexpr float kMultiplier = .001;
+struct SensorInfo {
+    TemperatureType type;
+    bool is_override;
+    float throttling;
+    float shutdown;
+    float multiplier;
+};
 
 struct ThrottlingThresholds {
     ThrottlingThresholds() : cpu(NAN), gpu(NAN), ss(NAN), battery(NAN) {}
@@ -114,6 +120,9 @@ class ThermalHelper {
     // We don't use a variable here because notifyIfThrottlingSeen() uses it and
     // we might end up calling it before having it initialized.
     static std::string getSkinSensorType();
+
+    // Update setting not in thermal config
+    void updateOverideThresholds();
 
     Sensors thermal_sensors_;
     CoolingDevices cooling_devices_;
