@@ -60,7 +60,12 @@ BOARD_BOOT_HEADER_VERSION := 1
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # DTBO partition definitions
+ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+# TODO(b/79758715): Do not use alternative dtbo image when fstab entries are moved out of device-tree.
+BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo_mainline.img
+else
 BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo.img
+endif
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
 TARGET_NO_BOOTLOADER ?= true
@@ -128,6 +133,8 @@ TARGET_COPY_OUT_PRODUCT_SERVICES := product-services
 
 BOARD_SUPER_PARTITION_SIZE := 10240000000
 BOARD_SUPER_PARTITION_PARTITION_LIST := \
+    vendor \
+    product \
     product_services \
 
 endif
