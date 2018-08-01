@@ -72,7 +72,11 @@ BOARD_USES_METADATA_PARTITION := true
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/crosshatch/recovery.wipe
+ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.mainline.hardware
+else
 TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
+endif
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_UI_LIB := \
   librecovery_ui_crosshatch \
@@ -115,6 +119,18 @@ BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # boot.img
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
+
+ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+# product-services.img
+BOARD_PRODUCT_SERVICESIMAGE_PARTITION_RESERVED_SIZE := 524288
+BOARD_PRODUCT_SERVICESIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_PRODUCT_SERVICES := product-services
+
+BOARD_SUPER_PARTITION_SIZE := 10240000000
+BOARD_SUPER_PARTITION_PARTITION_LIST := \
+    product_services \
+
+endif
 
 TARGET_COPY_OUT_VENDOR := vendor
 
