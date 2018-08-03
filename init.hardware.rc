@@ -358,7 +358,7 @@ on zygote-start
     mkdir /data/vendor/audio/acdbdata/delta 0770 media audio
 
     # Create directory for radio
-    mkdir /data/vendor/radio 0771 system radio
+    mkdir /data/vendor/radio 0773 system radio
     mkdir /data/vendor/modem_stat 0771 system radio
     write /data/vendor/modem_stat/debug.txt ""
     chown system radio /data/vendor/modem_stat/debug.txt
