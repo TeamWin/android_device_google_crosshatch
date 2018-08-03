@@ -20,7 +20,8 @@ PRODUCT_SOONG_NAMESPACES += \
     device/google/crosshatch/health \
     hardware/google/av \
     hardware/google/interfaces \
-    hardware/qcom/sdm845/display
+    hardware/qcom/sdm845 \
+    vendor/qcom/sdm845
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
