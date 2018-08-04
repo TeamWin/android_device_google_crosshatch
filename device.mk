@@ -278,6 +278,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.logical.default=1
 
+# Enable Treble camera shim to free buffers earlier than default
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.camera.free_buf_early=true
+
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
