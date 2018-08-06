@@ -20,7 +20,8 @@ PRODUCT_SOONG_NAMESPACES += \
     device/google/crosshatch/health \
     hardware/google/av \
     hardware/google/interfaces \
-    hardware/qcom/sdm845/display
+    hardware/qcom/sdm845 \
+    vendor/qcom/sdm845
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
@@ -277,6 +278,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable logical camera as default (camera id 1)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.logical.default=1
+
+# Enable Treble camera shim to free buffers earlier than default
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.camera.free_buf_early=true
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
