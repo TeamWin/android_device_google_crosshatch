@@ -60,7 +60,12 @@ BOARD_BOOT_HEADER_VERSION := 1
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # DTBO partition definitions
+ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+# TODO(b/79758715): Do not use alternative dtbo image when fstab entries are moved out of device-tree.
+BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo_mainline.img
+else
 BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo.img
+endif
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
 TARGET_NO_BOOTLOADER ?= true
@@ -72,7 +77,11 @@ BOARD_USES_METADATA_PARTITION := true
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/crosshatch/recovery.wipe
+ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.mainline.hardware
+else
 TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
+endif
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_UI_LIB := \
   librecovery_ui_crosshatch \
@@ -120,6 +129,20 @@ BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # boot.img
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
+
+ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+# product-services.img
+BOARD_PRODUCT_SERVICESIMAGE_PARTITION_RESERVED_SIZE := 52428800
+BOARD_PRODUCT_SERVICESIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_PRODUCT_SERVICES := product-services
+
+BOARD_SUPER_PARTITION_SIZE := 12884901888
+BOARD_SUPER_PARTITION_PARTITION_LIST := \
+    vendor \
+    product \
+    product_services \
+
+endif
 
 TARGET_COPY_OUT_VENDOR := vendor
 
