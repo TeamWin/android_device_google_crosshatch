@@ -79,6 +79,11 @@ TARGET_RECOVERY_UI_LIB := \
   libnos_citadel_for_recovery \
   libnos_for_recovery
 
+# TODO(b/112323291): remove this arg for blueline_mainline
+ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
+endif
+
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 
