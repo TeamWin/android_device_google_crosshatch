@@ -96,9 +96,13 @@ void fill_ufs_storage_attribute(StorageAttribute *attr) {
 
 }  // anonymous namespace
 
-void healthd_board_init(struct healthd_config *) {
+void healthd_board_init(struct healthd_config *config) {
+    using ::device::google::crosshatch::health::kChargerStatus;
+
     ccBackupRestoreBMS.Restore();
     ccBackupRestoreMAX.Restore();
+
+    config->batteryStatusPath = kChargerStatus.c_str();
 }
 
 int healthd_board_battery_update(struct android::BatteryProperties *props) {
