@@ -608,8 +608,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
+ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM) \
+    device/google/crosshatch/fstab.mainline.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM)
+else
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM)
+endif
+
+PRODUCT_COPY_FILES += \
     device/google/crosshatch/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist
 
 # Use the default charger mode images
@@ -792,3 +799,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Do not skip init trigger by default
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     vendor.skip.init=0
+
+# Increment the SVN for any official public releases
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.svn=1
