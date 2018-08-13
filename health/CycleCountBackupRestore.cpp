@@ -31,10 +31,8 @@ CycleCountBackupRestore::CycleCountBackupRestore(int nb_buckets, const char *sys
       sysfs_path_(sysfs_path),
       persist_path_(persist_path),
       serial_path_(serial_path) {
-    sw_bins_ = new int[nb_buckets];
-    memset(sw_bins_, 0, sizeof(sw_bins_));
-    hw_bins_ = new int[nb_buckets];
-    memset(hw_bins_, 0, sizeof(hw_bins_));
+    sw_bins_ = new int[nb_buckets]();
+    hw_bins_ = new int[nb_buckets]();
 }
 
 void CycleCountBackupRestore::Restore() {
