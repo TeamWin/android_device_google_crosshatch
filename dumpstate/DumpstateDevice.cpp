@@ -345,9 +345,11 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     }
 
     // Citadel info (only enabled on -eng and -userdebug builds)
-    RunCommandToFd(fd, "Citadel ID", {"/vendor/bin/hw/citadel_updater", "--id"});
-    RunCommandToFd(fd, "Citadel VER", {"/vendor/bin/hw/citadel_updater", "-lv"});
-    RunCommandToFd(fd, "Citadel SELFTEST", {"/vendor/bin/hw/citadel_updater", "--selftest"});
+    if (!PropertiesHelper::IsUserBuild()) {
+        RunCommandToFd(fd, "Citadel ID", {"/vendor/bin/hw/citadel_updater", "--id"});
+        RunCommandToFd(fd, "Citadel VER", {"/vendor/bin/hw/citadel_updater", "-lv"});
+        RunCommandToFd(fd, "Citadel SELFTEST", {"/vendor/bin/hw/citadel_updater", "--selftest"});
+    }
 
     // Keep this at the end as very long on not for humans
     DumpFileToFd(fd, "WLAN FW Log Symbol Table", "/vendor/firmware/Data.msc");
