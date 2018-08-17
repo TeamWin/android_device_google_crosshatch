@@ -8,4 +8,4 @@
 /dev/block/bootdevice/by-name/modem                 /vendor/firmware_mnt          vfat        ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0   wait,slotselect
 /devices/platform/soc/a600000.ssusb/a600000.dwc3*   auto               vfat        defaults                                              voldmanaged=usb:auto
 /dev/block/zram0                                    none               swap        defaults                                              zramsize=536870912,max_comp_streams=8
-product_services                                    /product-services  ext4        ro                                                    logical,slotselect
+product_services                                    /product_services  ext4        ro                                                    logical,slotselect
