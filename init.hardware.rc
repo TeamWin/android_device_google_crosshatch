@@ -891,11 +891,6 @@ on property:sys.retaildemo.enabled=1
     setprop persist.vendor.charge.stop.level 35
     setprop persist.vendor.charge.start.level 30
 
-# system will not set the sys.retaildemo.enabled to 0 but this is used to set back to default charging
-on property:sys.retaildemo.enabled=0
-    setprop persist.vendor.charge.stop.level 100
-    setprop persist.vendor.charge.start.level 0
-
 on property:persist.vendor.charge.stop.level=*
     write /sys/devices/platform/soc/soc:google,charger/charge_stop_level ${persist.vendor.charge.stop.level}
 
