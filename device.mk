@@ -168,7 +168,7 @@ AB_OTA_POSTINSTALL_CONFIG += \
 # boot_control HAL and its dependencies.
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.sdm845 \
-    libgptutils \
+    libgptutils.crosshatch.recovery \
     libz \
     libcutils
 
