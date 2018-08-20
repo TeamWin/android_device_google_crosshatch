@@ -720,6 +720,10 @@
     <!-- Total height of QQS (quick_qs_offset_height + 128dp) -->
     <dimen name="quick_qs_total_height">177dp</dimen>
 
+
+    <dimen name="rounded_corner_radius_top">133px</dimen>
+    <dimen name="rounded_corner_radius_bottom">70px</dimen>
+
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
     <integer name="config_shutdownBatteryTemperature">600</integer>
 
