@@ -15,4 +15,4 @@ while [ "x$type" != "xNothing attached" ]; do
 done;
 
 # Shutdown
-setprop sys.powerctl shutdown
+setprop sys.powerctl reboot,packout
