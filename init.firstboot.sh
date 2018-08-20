@@ -6,13 +6,19 @@
 # wait for system to settle down after sys.boot_complete
 sleep 5
 
-# Wait for USB to be removed.
-type=`cat /sys/class/power_supply/usb/typec_mode`
-while [ "x$type" != "xNothing attached" ]; do
-    echo Wait for \"$type\" == \"Nothing attached\"
-    sleep 1;
+# Wait for USB to be removed, debounce it three times in case it's enumerating still.
+disconnect_count=0
+while [ disconnect_count -le 3 ]; do
     type=`cat /sys/class/power_supply/usb/typec_mode`
-done;
+    if [ "x$type" == "xNothing attached" ]; then
+        (( disconnect_count++ ))
+        echo disconnect count is $disconnect_count
+    else
+        # Restart the debounce count
+        disconnect_count=0
+    fi
+    sleep 1
+done
 
 # Shutdown
-setprop sys.powerctl shutdown
+setprop sys.powerctl reboot,packout
