@@ -52,7 +52,7 @@ BOARD_BOOT_HEADER_VERSION := 1
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # DTBO partition definitions
-ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 # TODO(b/79758715): Do not use alternative dtbo image when fstab entries are moved out of device-tree.
 BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo_mainline.img
 else
@@ -64,14 +64,14 @@ TARGET_NO_BOOTLOADER ?= true
 TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
-ifeq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+ifeq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 endif
 BOARD_USES_METADATA_PARTITION := true
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/crosshatch/recovery.wipe
-ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.mainline.hardware
 else
 TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
@@ -85,7 +85,7 @@ TARGET_RECOVERY_UI_LIB := \
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 
-ifeq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+ifeq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 # Enable chain partition for system.
 BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
@@ -102,22 +102,18 @@ endif
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 # product.img
-ifeq (,$(filter-out blueline_mainline, $(TARGET_PRODUCT)))
-  BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 52428800
-else
+ifneq (,$(filter-out %_mainline, $(TARGET_PRODUCT)))
   BOARD_PRODUCTIMAGE_PARTITION_SIZE := 314572800
 endif
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_PRODUCT := product
 
 # system.img
-ifeq (,$(filter-out blueline_mainline, $(TARGET_PRODUCT)))
-  BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1771044864
-else
+ifneq (,$(filter-out %_mainline, $(TARGET_PRODUCT)))
   BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2952790016
+  BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
 endif
 BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
-BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
 
 # userdata.img
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -131,9 +127,8 @@ BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 # boot.img
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
 
-ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
-# product_services.img
-BOARD_PRODUCT_SERVICESIMAGE_PARTITION_RESERVED_SIZE := 52428800
+ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
+# product-services.img
 BOARD_PRODUCT_SERVICESIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_PRODUCT_SERVICES := product_services
 
