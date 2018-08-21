@@ -13,11 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Placing Pixelstats in its own soong namespace
-soong_namespace {
-  imports: ["hardware/google/interfaces",],
-}
-
 cc_binary {
   name: "pixelstats-vendor",
   init_rc: ["pixelstats-vendor.crosshatch.rc"],
