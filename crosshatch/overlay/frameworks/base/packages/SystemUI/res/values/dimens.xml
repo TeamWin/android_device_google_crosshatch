@@ -16,8 +16,6 @@
 */
 -->
 <resources>
-    <dimen name="rounded_corner_radius_top">133px</dimen>
-    <dimen name="rounded_corner_radius_bottom">70px</dimen>
     <dimen name="rounded_corner_content_padding">28px</dimen>
 
     <dimen name="display_cutout_margin_consumption">0px</dimen>
