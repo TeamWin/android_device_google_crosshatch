@@ -1,4 +1,5 @@
 soong_namespace {
     imports: ["hardware/google/interfaces",
-              "hardware/google/pixel"],
+              "hardware/google/pixel",
+              "hardware/qcom/bootctrl"],
 }
