@@ -3,6 +3,8 @@ This is an example validator to be used with oem commands that allow you to
 upload data afterwards that you wish to validate locally.
 '''
 import sys
+import os
+import hashlib
 
 def eprint(msg):
   '''
@@ -21,16 +23,25 @@ def main():
 
   Feel free to print to to STDOUT with print() as usual to print info to console
   '''
+  if len(sys.argv) != 3:
+    eprint("This script is intended to be called by fuzzy_fastboot")
+    return -1
+
   script, command, fname = sys.argv
-  eprint("Messages here will go to the parent testers logs")
-  eprint("Hello world")
-  print("This goes to stdout as expected")
+
   with open(fname, "rb") as fd:
-    # Do some validation on the buffer
-    pass
+    buf = fd.read()
+    sha = buf[0x10:0x30]
+    tlvs = buf[0x30:]
+    hash = hashlib.sha256(tlvs)
+    # Assert the hash matches
+    pretty = "".join("{:02x}".format(ord(c)) for c in sha)
+    if hash.digest() != sha:
+      eprint("'%s' does not match '%s'" % (hash.hexdigest(), pretty))
+    assert hash.digest() == sha
 
   # non-zero return code signals error
-  return -1
+  return 0
 
 
 if __name__ == "__main__":

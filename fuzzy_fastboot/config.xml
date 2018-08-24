@@ -103,7 +103,7 @@
 			<child>logfs</child>
 			<child>storsec</child>
 			<child>xbl_config</child>
-			<test packed="bootloader.img" unpacked="unpacked"/>
+			<test packed="bootloader.img" unpacked="bootloader_unpacked"/>
 			<test packed="bootloader_garbage.img" expect="fail"/>
 		</part>
 
