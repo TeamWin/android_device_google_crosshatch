@@ -41,9 +41,11 @@ INTERNAL_KERNEL_MODULES := \
 
 INSTALLED_KERNEL_MODULES := $(call copy-many-files,$(INTERNAL_KERNEL_MODULES))
 
+.PHONY: kernel-modules
 kernel-modules: $(INSTALLED_KERNEL_MODULES)
 	@echo Kernel modules installed
 
+.PHONY: persistimage
 persistimage: $(INSTALLED_PERSISTIMAGE_TARGET)
 
 droidcore: $(INSTALLED_PERSISTIMAGE_TARGET) $(INSTALLED_KERNEL_MODULES)
