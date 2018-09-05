@@ -106,14 +106,14 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
 {
     std::string modemLogDir = android::base::GetProperty(MODEM_LOG_LOC_PROPERTY, "");
     if (modemLogDir.empty()) {
-        ALOGD("No modem log place is set\n");
+        ALOGD("No modem log place is set");
         return;
     }
 
     std::string filePrefix = android::base::GetProperty(MODEM_LOG_PREFIX_PROPERTY, "");
 
     if (filePrefix.empty()) {
-        ALOGD("Modem log prefix is not set\n");
+        ALOGD("Modem log prefix is not set");
         return;
     }
 
@@ -152,24 +152,19 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
             if (diagLogStarted) {
                 android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
                 ALOGD("Stopping diag_mdlog...\n");
-            } else {
-                ALOGD("diag_mdlog is not running\n");
-            }
-
-            for (int i = 0; i < 30; i++) {
-                if (!android::base::GetBoolProperty(DIAG_MDLOG_STATUS_PROPERTY, false)) {
-                    ALOGD("diag_mdlog exited\n");
-                    sleep(1);
-                    break;
+                if (android::base::WaitForProperty(DIAG_MDLOG_STATUS_PROPERTY, "true", std::chrono::seconds(20))) {
+                    ALOGD("diag_mdlog exited");
+                } else {
+                    ALOGE("Waited mdlog timeout after 20 second");
                 }
-
-                sleep(1);
+            } else {
+                ALOGD("diag_mdlog is not running");
             }
 
             dumpDiagLogs(fd, diagLogDir, modemLogAllDir);
 
             if (diagLogStarted) {
-                ALOGD("Restarting diag_mdlog...\n");
+                ALOGD("Restarting diag_mdlog...");
                 android::base::SetProperty(DIAG_MDLOG_PROPERTY, "true");
             }
         }
