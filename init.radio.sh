@@ -9,6 +9,10 @@ if [ -f /vendor/radio/qcril_database/qcril.db -a ! -f /data/vendor/radio/qcril.d
 fi
 echo 1 > /data/vendor/radio/db_check_done
 
+cp /vendor/radio/qcril_database/qcril.db /data/vendor/radio/qcril_prebuilt.db
+chown radio.radio /data/vendor/radio/qcril_prebuilt.db
+chmod 0660 /data/vendor/radio/qcril_prebuilt.db
+
 #
 # Make modem config folder and copy firmware config to that folder for RIL
 #
