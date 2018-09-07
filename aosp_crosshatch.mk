@@ -26,8 +26,7 @@ PRODUCT_PACKAGES += \
     Launcher3QuickStep \
     WallpaperPicker
 
-# STOPSHIP deal with Qualcomm stuff later
-# PRODUCT_RESTRICT_VENDOR_FILES := all
+PRODUCT_RESTRICT_VENDOR_FILES := all
 
 PRODUCT_MANUFACTURER := Google
 PRODUCT_BRAND := Android
