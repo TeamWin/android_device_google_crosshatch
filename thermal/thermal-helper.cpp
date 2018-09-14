@@ -38,12 +38,7 @@ constexpr char kCpuOnlineRoot[] = "/sys/devices/system/cpu";
 constexpr char kCpuUsageFile[] = "/proc/stat";
 constexpr char kCpuOnlineFileSuffix[] = "online";
 constexpr char kThermalConfigPrefix[] = "/vendor/etc/thermal-engine-";
-constexpr char kTemperatureFileSuffix[] = "temp";
-constexpr char kSensorTypeFileSuffix[] = "type";
-constexpr char kThermalZoneDirSuffix[] = "thermal_zone";
-constexpr char kCoolingDeviceDirSuffix[] = "cooling_device";
 constexpr unsigned int kMaxCpus = 8;
-constexpr unsigned int kMaxSensorSearchNum = 100;
 // The number of available sensors in thermalHAL is:
 // 8 (for each cpu) + 2 (for each gpu) + battery + skin + usbc = 13.
 constexpr unsigned int kAvailableSensors = 13;
@@ -276,27 +271,12 @@ bool ThermalHelper::readTemperature(
 }
 
 bool ThermalHelper::initializeSensorMap() {
-    for (size_t sensor_zone_num = 0; sensor_zone_num < kMaxSensorSearchNum;
-            ++sensor_zone_num) {
-        std::string sensor_name_path = StringPrintf(
-            "%s/%s%zu/%s", kThermalSensorsRoot, kThermalZoneDirSuffix,
-            sensor_zone_num, kSensorTypeFileSuffix);
+    for (const auto& sensor_info : kValidThermalSensorInfoMap) {
+        std::string sensor_name = sensor_info.first;
         std::string sensor_temp_path = StringPrintf(
-            "%s/%s%zu/%s", kThermalSensorsRoot, kThermalZoneDirSuffix,
-            sensor_zone_num, kTemperatureFileSuffix);
-
-        std::string sensor_name;
-        if (android::base::ReadFileToString(sensor_name_path, &sensor_name)) {
-            sensor_name = android::base::Trim(sensor_name);
-            if (kValidThermalSensorInfoMap.find(sensor_name) !=
-                kValidThermalSensorInfoMap.end()) {
-
-                if (!thermal_sensors_.addSensor(
-                    sensor_name, sensor_temp_path)) {
-                      LOG(ERROR) << "Could not add " << sensor_name
-                                 << "to sensors map";
-                }
-            }
+            "%s/tz-by-name/%s/temp", kThermalSensorsRoot, sensor_name.c_str());
+        if (!thermal_sensors_.addSensor(sensor_name, sensor_temp_path)) {
+            LOG(ERROR) << "Could not add " << sensor_name << "to sensors map";
         }
     }
     if (kAvailableSensors == thermal_sensors_.getNumSensors() ||
@@ -307,46 +287,34 @@ bool ThermalHelper::initializeSensorMap() {
 }
 
 bool ThermalHelper::initializeCoolingDevices() {
-    std::string base_path(kThermalSensorsRoot);
-    for (size_t cooling_device_num = 0;
-            cooling_device_num < kMaxSensorSearchNum; ++cooling_device_num) {
-        std::string path = StringPrintf(
-            "%s/%s%zu", kThermalSensorsRoot, kCoolingDeviceDirSuffix,
-            cooling_device_num);
-        std::string cooling_device_name_path = StringPrintf(
-            "%s/%s", path.c_str(), kSensorTypeFileSuffix);
+    for (const auto& cooling_device_info : kValidCoolingDeviceTypeMap) {
+        std::string cooling_device_name = cooling_device_info.first;
+        std::string cooling_device_path = StringPrintf(
+            "%s/cdev-by-name/%s", kThermalSensorsRoot,
+            cooling_device_name.c_str());
 
-        std::string cooling_device_name;
-        if (android::base::ReadFileToString(
-                cooling_device_name_path, &cooling_device_name)) {
-
-            cooling_device_name = android::base::Trim(cooling_device_name);
-            if (kValidCoolingDeviceTypeMap.find(cooling_device_name) !=
-                kValidCoolingDeviceTypeMap.end()) {
-                  if (!cooling_devices_.addCoolingDevice(
-                          cooling_device_name, path)) {
-                      LOG(ERROR) << "Could not add " << cooling_device_name
-                                 << "to cooling device map";
-                      continue;
-                  }
-
-                  int data;
-                  if (cooling_devices_.getCoolingDeviceState(
-                          cooling_device_name, &data)) {
-                      cooling_device_path_to_throttling_level_map_.emplace(
-                          cooling_devices_.getCoolingDevicePath(
-                              cooling_device_name).append("/cur_state"),
-                          data);
-                  } else {
-                      LOG(ERROR) << "Could not read cooling device value.";
-                  }
-            }
+        if (!cooling_devices_.addCoolingDevice(
+                cooling_device_name, cooling_device_path)) {
+            LOG(ERROR) << "Could not add " << cooling_device_name
+                       << "to cooling device map";
+            continue;
         }
 
-        if (kValidCoolingDeviceTypeMap.size() ==
-                cooling_devices_.getNumCoolingDevices()) {
-            return true;
+        int data;
+        if (cooling_devices_.getCoolingDeviceState(
+                cooling_device_name, &data)) {
+            cooling_device_path_to_throttling_level_map_.emplace(
+                cooling_devices_.getCoolingDevicePath(
+                    cooling_device_name).append("/cur_state"),
+                data);
+        } else {
+            LOG(ERROR) << "Could not read cooling device value.";
         }
+    }
+
+    if (kValidCoolingDeviceTypeMap.size() ==
+            cooling_devices_.getNumCoolingDevices()) {
+        return true;
     }
     return false;
 }
