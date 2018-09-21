@@ -813,3 +813,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.adb.secure=1
+
+# default atrace HAL
+PRODUCT_PACKAGES += \
+    android.hardware.atrace@1.0-service
