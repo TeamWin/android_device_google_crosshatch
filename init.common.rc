@@ -4,3 +4,25 @@ on zygote-start
     # and now we can continue to initialize /data/
     # create the directory for preload content.
     mkdir /data/preloads 0775 system system
+
+on property:sys.boot_completed=1
+    # Create pixel-trace.
+    # At this moment, only mm_event is available. If others want to put more,
+    # it should get hard review from pixel-perf-team.
+
+    mkdir /sys/kernel/debug/tracing/instances/pixel-trace 600
+    write /sys/kernel/debug/tracing/instances/pixel-trace/buffer_size_kb 64
+    write /sys/kernel/debug/tracing/instances/pixel-trace/events/mm_event/enable 1
+
+# turns off tracing right before bugreporting to keep more traces
+on property:init.svc.dumpstatez=running
+    write /d/tracing/instances/pixel-trace/tracing_on 0
+
+on property:init.svc.dumpstatez=stopped
+    write /d/tracing/instances/pixel-trace/tracing_on 1
+
+on property:init.svc.bugreport=running
+    write /d/tracing/instances/pixel-trace/tracing_on 0
+
+on property:init.svc.bugreport=stopped
+    write /d/tracing/instances/pixel-trace/tracing_on 1
