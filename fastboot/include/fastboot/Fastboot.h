@@ -26,6 +26,8 @@ namespace fastboot {
 namespace V1_0 {
 namespace implementation {
 
+#define FB_OEM_SET_BRIGHTNESS "setbrightness"
+
 using ::android::hardware::hidl_vec;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
@@ -35,6 +37,9 @@ struct Fastboot : public IFastboot {
     // Methods from ::android::hardware::fastboot::V1_0::IFastboot follow.
     Return<void> getPartitionType(const ::android::hardware::hidl_string& partitionName,
                                   getPartitionType_cb _hidl_cb) override;
+
+    Return<void> doOemCommand(const ::android::hardware::hidl_string& oemCmd,
+                              doOemCommand_cb _hidl_cb) override;
 };
 
 extern "C" IFastboot* HIDL_FETCH_IFastboot(const char* name);

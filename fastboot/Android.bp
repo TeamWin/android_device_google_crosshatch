@@ -22,6 +22,7 @@ cc_library {
     relative_install_path: "hw",
     export_include_dirs: ["include"],
     shared_libs: [
+        "libbase",
         "libhidlbase",
         "libhidltransport",
         "libutils",
