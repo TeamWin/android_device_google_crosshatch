@@ -47,6 +47,11 @@ Return<void> Fastboot::getPartitionType(const ::android::hardware::hidl_string& 
     return Void();
 }
 
+Return<void> Fastboot::getVariant(getVariant_cb _hidl_cb) {
+    _hidl_cb("MSM USF", {Status::SUCCESS, "" });
+    return Void();
+}
+
 Result SetBrightnessLevel(const std::vector<std::string>& args) {
     if (!args.size()) {
         return { Status::INVALID_ARGUMENT, "Brightness level unspecified" };
