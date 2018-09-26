@@ -160,6 +160,7 @@ Return<void> Power::powerHint(PowerHint_1_0 hint, int32_t data) {
         case PowerHint_1_0::VR_MODE:
             if (data && !mVRModeOn) {
                 ALOGD("VR_MODE ON");
+                setVrModeThermalConfig(true);
                 if (!mSustainedPerfModeOn) { // VR mode only.
                     mHintManager->DoHint("VR_MODE");
                     if (!android::base::SetProperty(kPowerHalStateProp, "VR_MODE")) {
@@ -175,6 +176,7 @@ Return<void> Power::powerHint(PowerHint_1_0 hint, int32_t data) {
                 mVRModeOn = true;
             } else if (!data && mVRModeOn) {
                 ALOGD("VR_MODE OFF");
+                setVrModeThermalConfig(false);
                 mHintManager->EndHint("VR_SUSTAINED_PERFORMANCE");
                 mHintManager->EndHint("VR_MODE");
                 if (mSustainedPerfModeOn) { // Switch back to sustained Mode.
@@ -415,6 +417,20 @@ bool Power::isSupportedGovernor() {
         LOG(ERROR) << "Governor not supported by powerHAL, skipping";
         return false;
     }
+}
+
+bool Power::setVrModeThermalConfig(bool enabled) {
+    std::string vrMode = enabled ? "-vr" : "-novr";
+
+    if (!android::base::SetProperty("vendor.thermal.vr_mode", vrMode)) {
+        LOG(ERROR) << "Couldn't set vendor.thermal.vr_mode to \"" << vrMode << "\"";
+        return false;
+    }
+    if (!android::base::SetProperty("ctl.restart", "vendor.thermal-engine")) {
+        LOG(ERROR) << "Couldn't set thermal_engine restart property";
+        return false;
+    }
+    return true;
 }
 
 Return<void> Power::powerHintAsync(PowerHint_1_0 hint, int32_t data) {

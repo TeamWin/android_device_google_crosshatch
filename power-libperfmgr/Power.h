@@ -73,6 +73,7 @@ struct Power : public IPower {
 
  private:
     static bool isSupportedGovernor();
+    static bool setVrModeThermalConfig(bool enabled);
 
     std::shared_ptr<HintManager> mHintManager;
     std::unique_ptr<InteractionHandler> mInteractionHandler;
