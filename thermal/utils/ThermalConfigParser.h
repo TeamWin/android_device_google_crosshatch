@@ -28,7 +28,7 @@ namespace implementation {
 void InitializeThresholdsFromThermalConfig(
     const std::string& thermal_config,
     const std::string& vr_thermal_config,
-    const std::map<std::string, TemperatureType>& typeMap,
+    const std::map<std::string, SensorInfo>& typeMap,
     ThrottlingThresholds *thresholds,
     ThrottlingThresholds *shutdown_thresholds,
     ThrottlingThresholds *vr_thresholds);
