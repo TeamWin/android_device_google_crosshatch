@@ -23,6 +23,7 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/strings.h>
+#include <android-base/unique_fd.h>
 
 namespace android {
 namespace hardware {
@@ -49,6 +50,24 @@ Return<void> Fastboot::getPartitionType(const ::android::hardware::hidl_string& 
 
 Return<void> Fastboot::getVariant(getVariant_cb _hidl_cb) {
     _hidl_cb("MSM USF", {Status::SUCCESS, "" });
+    return Void();
+}
+
+Return<void> Fastboot::getOffModeChargeState(getOffModeChargeState_cb _hidl_cb) {
+    constexpr const char* kDevinfoPath = "/dev/block/by-name/devinfo";
+    constexpr int kDevInfoOffModeChargeOffset = 15;
+
+    uint8_t off_mode_charge_status = 0;
+    android::base::unique_fd fd(TEMP_FAILURE_RETRY(open(kDevinfoPath,
+                                                        O_RDONLY | O_BINARY)));
+    if (!android::base::ReadFullyAtOffset(fd, &off_mode_charge_status, 1 /* byte count */,
+                                          kDevInfoOffModeChargeOffset)) {
+        _hidl_cb(false,
+                 { Status::FAILURE_UNKNOWN, "Unable to read off-mode-charge state" });
+    } else {
+        _hidl_cb(off_mode_charge_status != 0, { Status::SUCCESS, "" });
+    }
+
     return Void();
 }
 
