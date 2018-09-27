@@ -28,3 +28,8 @@ on property:init.svc.vendor.camera-provider-2-4=restarting && property:vendor.po
 on property:init.svc.vendor.audio-hal-2-0=restarting && property:vendor.powerhal.audio=LOW_LATENCY
    setprop vendor.powerhal.audio ""
    restart vendor.power-hal-1-3
+
+# reset thermal-engine when framework died and thermal-engine is in VR mode
+on property:init.svc.zygote=restarting && property:vendor.thermal.vr_mode=-vr
+   setprop vendor.thermal.vr_mode -novr
+   restart vendor.thermal-engine
