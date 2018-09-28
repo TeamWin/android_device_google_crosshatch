@@ -33,29 +33,43 @@ namespace google {
 namespace crosshatch {
 namespace health {
 
+using BatterySnapshotType = ::hardware::google::pixelstats::V1_0::IPixelStats::BatterySnapshotType;
+
 class BatteryMetricsLogger {
   public:
-    BatteryMetricsLogger();
+    BatteryMetricsLogger(const char *const batt_res, const char *const batt_ocv,
+                         int sample_period = TEN_MINUTES_SEC, int upload_period = ONE_DAY_SEC);
     void logBatteryProperties(struct android::BatteryProperties *props);
 
   private:
     enum sampleType {
         TIME,        // time in seconds
-        RES,         // resistance in milli-ohms
         CURR,        // current in mA
         VOLT,        // voltage in mV
         TEMP,        // temp in deci-degC
         SOC,         // SoC in % battery level
+        RES,         // resistance in milli-ohms
         OCV,         // open-circuit voltage in mV
         NUM_FIELDS,  // do not reference
     };
 
-    const char *kBatteryResistance = "/sys/class/power_supply/maxfg/resistance";
-    const char *kBatteryOCV = "/sys/class/power_supply/maxfg/voltage_ocv";
-    const int kSamplePeriod = 10 * 60;       // 10 minutes
-    const int kUploadPeriod = 24 * 60 * 60;  // 1 day
-    const int kMaxSamples = 144;             // 24h * 60min / 10 min sample rate
-    const sampleType kMetricMin = RES, kMetricMax = SOC;
+    const int kSnapshotType[NUM_FIELDS] = {
+        -1,
+        (int)BatterySnapshotType::MIN_CURRENT,
+        (int)BatterySnapshotType::MIN_VOLTAGE,
+        (int)BatterySnapshotType::MIN_TEMP,
+        (int)BatterySnapshotType::MIN_BATT_LEVEL,
+        (int)BatterySnapshotType::MIN_RESISTANCE,
+        -1,
+    };
+
+    const char *const kBatteryResistance;
+    const char *const kBatteryOCV;
+    const int kSamplePeriod;
+    const int kUploadPeriod;
+    const int kMaxSamples;
+    static constexpr int TEN_MINUTES_SEC = 10 * 60;
+    static constexpr int ONE_DAY_SEC = 24 * 60 * 60;
 
     // min and max are referenced by type in both the X and Y axes
     // i.e. min[TYPE] is the event where the minimum of that type occurred, and

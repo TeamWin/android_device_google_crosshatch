@@ -23,12 +23,17 @@ namespace crosshatch {
 namespace health {
 
 using ::hardware::google::pixelstats::V1_0::IPixelStats;
-using BatterySnapshotType = ::hardware::google::pixelstats::V1_0::IPixelStats::BatterySnapshotType;
 using BatteryHealthSnapshotArgs =
     ::hardware::google::pixelstats::V1_0::IPixelStats::BatteryHealthSnapshotArgs;
 using android::sp;
 
-BatteryMetricsLogger::BatteryMetricsLogger() {
+BatteryMetricsLogger::BatteryMetricsLogger(const char *const batt_res, const char *const batt_ocv,
+                                           int sample_period, int upload_period)
+    : kBatteryResistance(batt_res),
+      kBatteryOCV(batt_ocv),
+      kSamplePeriod(sample_period),
+      kUploadPeriod(upload_period),
+      kMaxSamples(upload_period / sample_period) {
     last_sample_ = 0;
     last_upload_ = 0;
     num_res_samples_ = 0;
@@ -57,34 +62,12 @@ bool BatteryMetricsLogger::uploadOutlierMetric(sp<IPixelStats> client, sampleTyp
                                         max_[type][OCV],
                                         max_[type][RES],
                                         max_[type][SOC]};
-    switch (type) {
-        case TEMP:
-            min_ss.type = BatterySnapshotType::MIN_TEMP;
-            max_ss.type = BatterySnapshotType::MAX_TEMP;
-            break;
-        case RES:
-            min_ss.type = BatterySnapshotType::MIN_RESISTANCE;
-            max_ss.type = BatterySnapshotType::MAX_RESISTANCE;
-            break;
-        case VOLT:
-            min_ss.type = BatterySnapshotType::MIN_VOLTAGE;
-            max_ss.type = BatterySnapshotType::MAX_VOLTAGE;
-            break;
-        case CURR:
-            min_ss.type = BatterySnapshotType::MIN_CURRENT;
-            max_ss.type = BatterySnapshotType::MAX_CURRENT;
-            break;
-        case SOC:
-            min_ss.type = BatterySnapshotType::MIN_BATT_LEVEL;
-            max_ss.type = BatterySnapshotType::MAX_BATT_LEVEL;
-            break;
-        case OCV:
-        case TIME:
-        case NUM_FIELDS:
-        default:
-            LOG(ERROR) << "Can't upload metric of type " << std::to_string(type);
-            return false;
-    }
+
+    if (kSnapshotType[type] < 0)
+        return false;
+
+    min_ss.type = (BatterySnapshotType)kSnapshotType[type];
+    max_ss.type = (BatterySnapshotType)(kSnapshotType[type] + 1);
 
     client->reportBatteryHealthSnapshot(min_ss);
     client->reportBatteryHealthSnapshot(max_ss);
@@ -113,8 +96,8 @@ bool BatteryMetricsLogger::uploadMetrics(void) {
     }
 
     // Only log and upload the min and max for metric types we want to upload
-    for (int metric = kMetricMin; metric <= kMetricMax; metric++) {
-        if (metric == RES && num_res_samples_ == 0)
+    for (int metric = 0; metric < NUM_FIELDS; metric++) {
+        if ((metric == RES && num_res_samples_ == 0) || kSnapshotType[metric] < 0)
             continue;
         std::string log_min = "min-" + std::to_string(metric) + " ";
         std::string log_max = "max-" + std::to_string(metric) + " ";
@@ -179,9 +162,10 @@ bool BatteryMetricsLogger::recordSample(struct android::BatteryProperties *props
     }
 
     // Only calculate the min and max for metric types we want to upload
-    for (int metric = kMetricMin; metric <= kMetricMax; metric++) {
+    for (int metric = 0; metric < NUM_FIELDS; metric++) {
         // Discard resistance min/max when charging
-        if (metric == RES && props->batteryStatus == android::BATTERY_STATUS_CHARGING)
+        if ((metric == RES && props->batteryStatus == android::BATTERY_STATUS_CHARGING) ||
+            kSnapshotType[metric] < 0)
             continue;
         if (num_samples_ == 0 || (metric == RES && num_res_samples_ == 0) ||
             sample[metric] < min_[metric][metric]) {

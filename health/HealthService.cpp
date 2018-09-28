@@ -46,8 +46,11 @@ using ::device::google::crosshatch::health::CycleCountBackupRestore;
 using ::device::google::crosshatch::health::DeviceHealth;
 using ::device::google::crosshatch::health::LowBatteryShutdownMetrics;
 
+constexpr char kBatteryResistance[] = "/sys/class/power_supply/maxfg/resistance";
+constexpr char kBatteryOCV[] = "/sys/class/power_supply/maxfg/voltage_ocv";
+
 static BatteryRechargingControl battRechargingControl;
-static BatteryMetricsLogger battMetricsLogger;
+static BatteryMetricsLogger battMetricsLogger(kBatteryResistance, kBatteryOCV);
 static LowBatteryShutdownMetrics shutdownMetrics;
 static CycleCountBackupRestore ccBackupRestoreBMS(
     8, "/sys/class/power_supply/bms/device/cycle_counts_bins",
