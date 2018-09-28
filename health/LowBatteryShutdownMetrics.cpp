@@ -29,7 +29,9 @@ using android::base::ReadFileToString;
 using android::base::SetProperty;
 using ::hardware::google::pixelstats::V1_0::IPixelStats;
 
-LowBatteryShutdownMetrics::LowBatteryShutdownMetrics() {
+LowBatteryShutdownMetrics::LowBatteryShutdownMetrics(const char *const voltage_avg,
+                                                     const char *const persist_prop)
+    : kVoltageAvg(voltage_avg), kPersistProp(persist_prop) {
     prop_written_ = false;
     prop_empty_ = false;
 }
@@ -50,7 +52,7 @@ bool LowBatteryShutdownMetrics::uploadVoltageAvg(void) {
 
     // Process and upload comma-delimited last voltage values
     int32_t voltage_avg;
-    for (const auto& item : android::base::Split(prop_contents, ",")) {
+    for (const auto &item : android::base::Split(prop_contents, ",")) {
         if (!(voltage_avg = stoi(item))) {
             LOG(ERROR) << "Couldn't process voltage value " << item;
             continue;

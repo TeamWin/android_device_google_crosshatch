@@ -48,10 +48,11 @@ using ::device::google::crosshatch::health::LowBatteryShutdownMetrics;
 
 constexpr char kBatteryResistance[] = "/sys/class/power_supply/maxfg/resistance";
 constexpr char kBatteryOCV[] = "/sys/class/power_supply/maxfg/voltage_ocv";
+constexpr char kVoltageAvg[] = "/sys/class/power_supply/maxfg/voltage_avg";
 
 static BatteryRechargingControl battRechargingControl;
 static BatteryMetricsLogger battMetricsLogger(kBatteryResistance, kBatteryOCV);
-static LowBatteryShutdownMetrics shutdownMetrics;
+static LowBatteryShutdownMetrics shutdownMetrics(kVoltageAvg);
 static CycleCountBackupRestore ccBackupRestoreBMS(
     8, "/sys/class/power_supply/bms/device/cycle_counts_bins",
     "/persist/battery/qcom_cycle_counts_bins");

@@ -36,12 +36,14 @@ namespace health {
 
 class LowBatteryShutdownMetrics {
   public:
-    LowBatteryShutdownMetrics();
+    LowBatteryShutdownMetrics(
+        const char *const voltage_avg,
+        const char *const persist_prop = "persist.vendor.shutdown.voltage_avg");
     void logShutdownVoltage(struct android::BatteryProperties *props);
 
   private:
-    const char *kVoltageAvg = "/sys/class/power_supply/maxfg/voltage_avg";
-    const char *kPersistProp = "persist.vendor.shutdown.voltage_avg";
+    const char *const kVoltageAvg;
+    const char *const kPersistProp;
 
     // Helps enforce that we only record kVoltageAvg once per boot cycle
     bool prop_written_;
