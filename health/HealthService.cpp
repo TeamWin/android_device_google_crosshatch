@@ -23,28 +23,28 @@
 #include <health2/service.h>
 #include <healthd/healthd.h>
 #include <hidl/HidlTransportSupport.h>
+#include <pixelhealth/BatteryMetricsLogger.h>
+#include <pixelhealth/CycleCountBackupRestore.h>
+#include <pixelhealth/DeviceHealth.h>
+#include <pixelhealth/LowBatteryShutdownMetrics.h>
 
 #include <fstream>
 #include <iomanip>
 #include <string>
 #include <vector>
 
-#include "BatteryMetricsLogger.h"
 #include "BatteryRechargingControl.h"
-#include "CycleCountBackupRestore.h"
-#include "DeviceHealth.h"
-#include "LowBatteryShutdownMetrics.h"
 
 namespace {
 
 using android::hardware::health::V2_0::DiskStats;
 using android::hardware::health::V2_0::StorageAttribute;
 using android::hardware::health::V2_0::StorageInfo;
-using ::device::google::crosshatch::health::BatteryMetricsLogger;
+using hardware::google::pixel::health::BatteryMetricsLogger;
+using hardware::google::pixel::health::CycleCountBackupRestore;
+using hardware::google::pixel::health::DeviceHealth;
+using hardware::google::pixel::health::LowBatteryShutdownMetrics;
 using ::device::google::crosshatch::health::BatteryRechargingControl;
-using ::device::google::crosshatch::health::CycleCountBackupRestore;
-using ::device::google::crosshatch::health::DeviceHealth;
-using ::device::google::crosshatch::health::LowBatteryShutdownMetrics;
 
 constexpr char kBatteryResistance[] = "/sys/class/power_supply/maxfg/resistance";
 constexpr char kBatteryOCV[] = "/sys/class/power_supply/maxfg/voltage_ocv";
