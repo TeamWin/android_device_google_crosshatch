@@ -40,6 +40,8 @@ struct Fastboot : public IFastboot {
 
     Return<void> doOemCommand(const ::android::hardware::hidl_string& oemCmd,
                               doOemCommand_cb _hidl_cb) override;
+    Return<void> getVariant(getVariant_cb _hidl_cb) override;
+    Return<void> getOffModeChargeState(getOffModeChargeState_cb _hidl_cb) override;
 };
 
 extern "C" IFastboot* HIDL_FETCH_IFastboot(const char* name);
