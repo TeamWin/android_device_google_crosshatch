@@ -90,14 +90,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.qcom.wlan.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.wlan.sh \
     $(LOCAL_PATH)/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
     $(LOCAL_PATH)/init.firstboot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.firstboot.sh \
-    $(LOCAL_PATH)/thermal-engine-blueline-novr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-novr-evt.conf \
-    $(LOCAL_PATH)/thermal-engine-blueline-vr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-vr-evt.conf \
-    $(LOCAL_PATH)/thermal-engine-crosshatch-novr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-novr-evt.conf \
-    $(LOCAL_PATH)/thermal-engine-crosshatch-vr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-vr-evt.conf \
-    $(LOCAL_PATH)/thermal-engine-blueline-novr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-novr-prod.conf \
-    $(LOCAL_PATH)/thermal-engine-blueline-vr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-vr-prod.conf \
-    $(LOCAL_PATH)/thermal-engine-crosshatch-novr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-novr-prod.conf \
-    $(LOCAL_PATH)/thermal-engine-crosshatch-vr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-vr-prod.conf \
+    $(LOCAL_PATH)/thermal-engine-$(PRODUCT_HARDWARE)-novr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-$(PRODUCT_HARDWARE)-novr-evt.conf \
+    $(LOCAL_PATH)/thermal-engine-$(PRODUCT_HARDWARE)-vr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-$(PRODUCT_HARDWARE)-vr-evt.conf \
+    $(LOCAL_PATH)/thermal-engine-$(PRODUCT_HARDWARE)-novr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-$(PRODUCT_HARDWARE)-novr-prod.conf \
+    $(LOCAL_PATH)/thermal-engine-$(PRODUCT_HARDWARE)-vr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-$(PRODUCT_HARDWARE)-vr-prod.conf \
     $(LOCAL_PATH)/init.ramoops.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.ramoops.sh
 
 # Edge Sense initialization script.
