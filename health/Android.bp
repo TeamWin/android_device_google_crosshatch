@@ -22,10 +22,6 @@ cc_binary {
     srcs: [
         "HealthService.cpp",
         "BatteryRechargingControl.cpp",
-        "BatteryMetricsLogger.cpp",
-        "LowBatteryShutdownMetrics.cpp",
-        "CycleCountBackupRestore.cpp",
-        "DeviceHealth.cpp",
     ],
 
     cflags: [
@@ -38,6 +34,7 @@ cc_binary {
         "android.hardware.health@1.0-convert",
         "libhealthservice",
         "libbatterymonitor",
+        "libpixelhealth",
     ],
 
     shared_libs: [
