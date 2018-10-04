@@ -71,6 +71,13 @@ Return<void> Fastboot::getOffModeChargeState(getOffModeChargeState_cb _hidl_cb) 
     return Void();
 }
 
+Return<void> Fastboot::getBatteryVoltageFlashingThreshold(
+        getBatteryVoltageFlashingThreshold_cb _hidl_cb) {
+    constexpr int kMinVoltageForFlashing = 3500;
+    _hidl_cb(kMinVoltageForFlashing, { Status::SUCCESS, "" });
+    return Void();
+}
+
 Result SetBrightnessLevel(const std::vector<std::string>& args) {
     if (!args.size()) {
         return { Status::INVALID_ARGUMENT, "Brightness level unspecified" };
