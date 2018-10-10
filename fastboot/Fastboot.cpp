@@ -36,15 +36,10 @@ constexpr int DISPLAY_BRIGHTNESS_DIM_THRESHOLD = 20;
 
 using  OEMCommandHandler = std::function<Result(const std::vector<std::string>&)>;
 
-Return<void> Fastboot::getPartitionType(const ::android::hardware::hidl_string& partitionName,
+Return<void> Fastboot::getPartitionType(const ::android::hardware::hidl_string& /* partitionName */,
                                   getPartitionType_cb _hidl_cb) {
-    std::string path = "/dev/block/by-name/" + std::string(partitionName);
-    if (access(path.c_str(), F_OK) < 0) {
-        _hidl_cb(FileSystemType::RAW, { Status::INVALID_ARGUMENT, "Invalid physical partition" });
-    } else {
-        // For bluecross devices, all valid physical partitions need to return raw.
-        _hidl_cb(FileSystemType::RAW, { Status::SUCCESS, "" });
-    }
+    // For bluecross devices, all partitions need to return raw.
+    _hidl_cb(FileSystemType::RAW, { Status::SUCCESS, "" });
     return Void();
 }
 
