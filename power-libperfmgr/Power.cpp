@@ -23,6 +23,8 @@
 #include <android-base/strings.h>
 #include <android-base/stringprintf.h>
 
+#include <pixelpowerstats/Debugging.h>
+
 #include <mutex>
 
 #include <utils/Log.h>
@@ -51,6 +53,8 @@ using ::android::hardware::power::V1_1::PowerStateSubsystemSleepState;
 using ::android::hardware::hidl_vec;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
+using ::hardware::google::pixel::powerstats::DumpPowerHal1_0PlatStatsToFd;
+using ::hardware::google::pixel::powerstats::DumpPowerHal1_1SubsysStatsToFd;
 
 Power::Power() :
         mHintManager(nullptr),
@@ -600,6 +604,21 @@ Return<void> Power::debug(const hidl_handle& handle, const hidl_vec<hidl_string>
         if (!android::base::WriteStringToFd(buf, fd)) {
             PLOG(ERROR) << "Failed to dump state to fd";
         }
+
+        // Dump platform low power stats
+        getPlatformLowPowerStats([fd](const auto& platStats, const auto result) {
+            if (!DumpPowerHal1_0PlatStatsToFd(result, platStats, fd)) {
+                PLOG(ERROR) << "Failed to dump platform low power stats to fd";
+            }
+        });
+
+        // Dump subsystem low power stats
+        getSubsystemLowPowerStats([fd](const auto& subsysStats, const auto result) {
+            if (!DumpPowerHal1_1SubsysStatsToFd(result, subsysStats, fd)) {
+                PLOG(ERROR) << "Failed to dump subsystem low power stats to fd";
+            }
+        });
+
         fsync(fd);
     }
     return Void();
