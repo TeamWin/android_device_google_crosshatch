@@ -89,19 +89,22 @@ TARGET_RECOVERY_UI_LIB := \
   libnos_citadel_for_recovery \
   libnos_for_recovery
 
-# TODO(b/112323291): remove this arg for blueline_mainline
-ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
-endif
-
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 
+ifeq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
 # Enable chain partition for system.
 BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
+else
+BOARD_AVB_VBMETA_SYSTEM := system product_services
+BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
+endif
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
