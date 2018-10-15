@@ -480,6 +480,9 @@ on early-boot
     chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_unmap_cnt
     chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_sync_cnt
 
+    # Permission for Health Storage HAL
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/manual_gc
+
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
