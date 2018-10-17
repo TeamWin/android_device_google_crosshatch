@@ -461,10 +461,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.2-service.crosshatch \
 
-# Thermal HAL
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.1-service.crosshatch \
-
 #GNSS HAL
 PRODUCT_PACKAGES += \
     libgps.utils \
@@ -819,3 +815,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl.pixel \
     fastbootd
+
+# Thermal HAL
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@2.0-service.pixel \
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
+    $(LOCAL_PATH)/thermal_info_config_evt.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config_evt.json
