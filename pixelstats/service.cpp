@@ -25,7 +25,7 @@
 
 using android::sp;
 using namespace device::google::crosshatch;
-
+const char *const kAudioUevent = "/kernel/q6audio/q6voice_uevent";
 int main() {
     LOG(INFO) << "starting PixelStats";
 
@@ -35,7 +35,9 @@ int main() {
         return 1;
     }
 
-    UeventListener::ListenForeverInNewThread();
+    UeventListener ueventListener(kAudioUevent);
+    std::thread listenThread(&UeventListener::ListenForever, &ueventListener);
+    listenThread.detach();
 
     SysfsCollector collector;
     collector.collect();  // This blocks forever.
