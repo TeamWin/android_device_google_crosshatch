@@ -564,12 +564,10 @@
         <interface>
             <name>IComponentStore</name>
             <instance>default</instance>
-            <instance>software</instance>
         </interface>
         <interface>
             <name>IConfigurable</name>
             <instance>default</instance>
-            <instance>software</instance>
         </interface>
     </hal>
     <hal format="hidl">
