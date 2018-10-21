@@ -8,5 +8,18 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal format="hidl">
+        <name>hardware.google.media.c2</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IComponentStore</name>
+            <instance>software</instance>
+        </interface>
+        <interface>
+            <name>IConfigurable</name>
+            <instance>software</instance>
+        </interface>
+    </hal>
 </manifest>
 

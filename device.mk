@@ -814,3 +814,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # default atrace HAL
 PRODUCT_PACKAGES += \
     android.hardware.atrace@1.0-service
+
+# fastbootd
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl.pixel \
+    fastbootd
