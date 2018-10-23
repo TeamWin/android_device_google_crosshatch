@@ -39,7 +39,6 @@ BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200n8 androidboot.console=ttyMSM0 pri
 BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
 BOARD_KERNEL_CMDLINE += ehci-hcd.park=3
 BOARD_KERNEL_CMDLINE += service_locator.enable=1
-BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
 # STOPSHIP Bringup hack- no low power
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
