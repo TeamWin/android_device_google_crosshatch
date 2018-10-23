@@ -22,6 +22,9 @@ cc_binary {
         "-Wall",
         "-Werror",
     ],
+    static_libs: [
+        "libpixelpowerstats",
+    ],
     shared_libs: [
         "libbase",
         "libhidlbase",
