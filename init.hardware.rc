@@ -74,7 +74,6 @@ on init && property:vendor.skip.init=0
     start keymaster-4-0
 
     # start Citadel keymaster (StrongBox) early
-    start vndservicemanager
     start vendor.citadeld
     start vendor.keymaster-4-0-citadel
 
@@ -219,8 +218,6 @@ on late-init
     write /sys/devices/virtual/thermal/tz-by-name/fps-therm-adc/mode enabled
 
 on fs
-    # Start HW service manager early
-    start hwservicemanager
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --early
 
     mkdir /persist/data 0700 system system
