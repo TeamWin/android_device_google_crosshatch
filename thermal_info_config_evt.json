@@ -12,15 +12,6 @@
                 "NAN",
                 125.0
             ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
-            ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
         },
@@ -35,15 +26,6 @@
                 "NAN",
                 "NAN",
                 125.0
-            ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
             ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
@@ -60,15 +42,6 @@
                 "NAN",
                 125.0
             ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
-            ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
         },
@@ -83,15 +56,6 @@
                 "NAN",
                 "NAN",
                 125.0
-            ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
             ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
@@ -108,15 +72,6 @@
                 "NAN",
                 125.0
             ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
-            ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
         },
@@ -131,15 +86,6 @@
                 "NAN",
                 "NAN",
                 125.0
-            ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
             ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
@@ -156,15 +102,6 @@
                 "NAN",
                 125.0
             ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
-            ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
         },
@@ -179,15 +116,6 @@
                 "NAN",
                 "NAN",
                 125.0
-            ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
             ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
@@ -204,15 +132,6 @@
                 "NAN",
                 125.0
             ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
-            ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
         },
@@ -227,15 +146,6 @@
                 "NAN",
                 "NAN",
                 125.0
-            ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
             ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
@@ -252,15 +162,6 @@
                 "NAN",
                 60.0
             ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
-            ],
             "VrThreshold":"NAN",
             "Multiplier":0.001
         },
@@ -268,15 +169,6 @@
             "Name":"usbc-therm-adc",
             "Type":"USB_PORT",
             "HotThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
-            ],
-            "ColdThreshold":[
                 "NAN",
                 "NAN",
                 "NAN",
@@ -300,17 +192,18 @@
                 55.0,
                 60.0
             ],
-            "ColdThreshold":[
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN",
-                "NAN"
+            "HotHysteresis":[
+                0.0,
+                1.9,
+                1.9,
+                1.9,
+                1.9,
+                1.9,
+                1.9
             ],
             "VrThreshold":52.0,
-            "Multiplier":0.001
+            "Multiplier":0.001,
+            "Monitor": true
         }
     ],
     "CoolingDevices":[
