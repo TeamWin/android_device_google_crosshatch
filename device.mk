@@ -390,7 +390,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     vendor.ese.loader_script_path=/sys/firmware/devicetree/base/soc/i2c@88c000/nq@28/ese/loader_scripts_path
 
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
+    device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf \
     device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf \
     device/google/crosshatch/felica/loaderservice_updater_1.lss:$(TARGET_COPY_OUT_VENDOR)/etc/loaderservice_updater_1.lss \
     device/google/crosshatch/felica/loaderservice_updater_2.lss:$(TARGET_COPY_OUT_VENDOR)/etc/loaderservice_updater_2.lss
@@ -460,10 +460,6 @@ PRODUCT_PACKAGES += \
 # Vibrator HAL
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.2-service.crosshatch \
-
-# Thermal HAL
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.1-service.crosshatch \
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
@@ -819,3 +815,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl.pixel \
     fastbootd
+
+# Thermal HAL
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@2.0-service.pixel \
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
+    $(LOCAL_PATH)/thermal_info_config_evt.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config_evt.json
