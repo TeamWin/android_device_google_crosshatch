@@ -160,7 +160,10 @@ AB_OTA_PARTITIONS += \
     product
 
 ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
-AB_OTA_PARTITIONS += product_services
+AB_OTA_PARTITIONS += \
+    product_services \
+    vbmeta_system \
+
 endif
 
 AB_OTA_POSTINSTALL_CONFIG += \
