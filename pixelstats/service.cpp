@@ -19,14 +19,14 @@
 #include <android-base/logging.h>
 #include <utils/StrongPointer.h>
 
-#include "DropDetect.h"
-#include "SysfsCollector.h"
-#include "UeventListener.h"
+#include <pixelstats/DropDetect.h>
+#include <pixelstats/SysfsCollector.h>
+#include <pixelstats/UeventListener.h>
 
 using android::sp;
-using device::google::crosshatch::DropDetect;
-using device::google::crosshatch::SysfsCollector;
-using device::google::crosshatch::UeventListener;
+using android::hardware::google::pixel::DropDetect;
+using android::hardware::google::pixel::SysfsCollector;
+using android::hardware::google::pixel::UeventListener;
 
 #define UFSHC_PATH(filename) "/sys/devices/platform/soc/1d84000.ufshc/" #filename
 const struct SysfsCollector::SysfsPaths sysfs_paths = {
