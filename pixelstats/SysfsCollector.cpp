@@ -37,16 +37,14 @@ using android::sp;
 using android::base::ReadFileToString;
 using ::hardware::google::pixelstats::V1_0::IPixelStats;
 
-const char kSlowioReadCntPath[] = "/sys/devices/platform/soc/1d84000.ufshc/slowio_read_cnt";
-const char kSlowioWriteCntPath[] = "/sys/devices/platform/soc/1d84000.ufshc/slowio_write_cnt";
-const char kSlowioUnmapCntPath[] = "/sys/devices/platform/soc/1d84000.ufshc/slowio_unmap_cnt";
-const char kSlowioSyncCntPath[] = "/sys/devices/platform/soc/1d84000.ufshc/slowio_sync_cnt";
-
-const char kCycleCountBinsPath[] = "/sys/class/power_supply/maxfg/cycle_counts_bins";
-
-const char kImpedancePath[] = "/sys/class/misc/msm_cirrus_playback/resistance_left_right";
-const char kCodecPath[] =
-    "/sys/devices/platform/soc/171c0000.slim/tavil-slim-pgd/tavil_codec/codec_state";
+SysfsCollector::SysfsCollector(const struct SysfsPaths &sysfs_paths)
+    : kSlowioReadCntPath(sysfs_paths.SlowioReadCntPath),
+      kSlowioWriteCntPath(sysfs_paths.SlowioWriteCntPath),
+      kSlowioUnmapCntPath(sysfs_paths.SlowioUnmapCntPath),
+      kSlowioSyncCntPath(sysfs_paths.SlowioSyncCntPath),
+      kCycleCountBinsPath(sysfs_paths.CycleCountBinsPath),
+      kImpedancePath(sysfs_paths.ImpedancePath),
+      kCodecPath(sysfs_paths.CodecPath) {}
 
 /**
  * Read the contents of kCycleCountBinsPath and report them via IPixelStats HAL.
@@ -55,8 +53,12 @@ const char kCodecPath[] =
  */
 void SysfsCollector::logBatteryChargeCycles() {
     std::string file_contents;
+    if (strlen(kCycleCountBinsPath) == 0) {
+        ALOGV("Battery charge cycle path not specified");
+        return;
+    }
     if (!ReadFileToString(kCycleCountBinsPath, &file_contents)) {
-        ALOGE("Unable to read battery charge cycles - %s", strerror(errno));
+        ALOGE("Unable to read battery charge cycles %s - %s", kCycleCountBinsPath, strerror(errno));
         return;
     }
 
@@ -69,8 +71,12 @@ void SysfsCollector::logBatteryChargeCycles() {
  */
 void SysfsCollector::logCodecFailed() {
     std::string file_contents;
+    if (strlen(kCodecPath) == 0) {
+        ALOGV("Audio codec path not specified");
+        return;
+    }
     if (!ReadFileToString(kCodecPath, &file_contents)) {
-        ALOGE("Unable to read codec state - %s", strerror(errno));
+        ALOGE("Unable to read codec state %s - %s", kCodecPath, strerror(errno));
         return;
     }
     if (file_contents == "0") {
@@ -84,8 +90,12 @@ void SysfsCollector::logCodecFailed() {
 void SysfsCollector::reportSlowIoFromFile(const char *path,
                                           const IPixelStats::IoOperation &operation) {
     std::string file_contents;
+    if (strlen(path) == 0) {
+        ALOGV("slow_io path not specified");
+        return;
+    }
     if (!ReadFileToString(path, &file_contents)) {
-        ALOGE("Unable to read %s - %s", path, strerror(errno));
+        ALOGE("Unable to read slowio %s - %s", path, strerror(errno));
         return;
     } else {
         int32_t slow_io_count = 0;
@@ -96,7 +106,7 @@ void SysfsCollector::reportSlowIoFromFile(const char *path,
         }
         // Clear the stats
         if (!android::base::WriteStringToFile("0", path, true)) {
-            ALOGE("Unable to clear SlowIO entry - %s", strerror(errno));
+            ALOGE("Unable to clear SlowIO entry %s - %s", path, strerror(errno));
         }
     }
 }
@@ -116,6 +126,10 @@ void SysfsCollector::logSlowIO() {
  */
 void SysfsCollector::logSpeakerImpedance() {
     std::string file_contents;
+    if (strlen(kImpedancePath) == 0) {
+        ALOGV("Audio impedance path not specified");
+        return;
+    }
     if (!ReadFileToString(kImpedancePath, &file_contents)) {
         ALOGE("Unable to read impedance path %s", kImpedancePath);
         return;

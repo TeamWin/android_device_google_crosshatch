@@ -26,6 +26,17 @@ namespace crosshatch {
 
 class SysfsCollector {
   public:
+    struct SysfsPaths {
+        const char *const SlowioReadCntPath;
+        const char *const SlowioWriteCntPath;
+        const char *const SlowioUnmapCntPath;
+        const char *const SlowioSyncCntPath;
+        const char *const CycleCountBinsPath;
+        const char *const ImpedancePath;
+        const char *const CodecPath;
+    };
+
+    SysfsCollector(const struct SysfsPaths &paths);
     void collect();
 
   private:
@@ -40,6 +51,13 @@ class SysfsCollector {
         const char *path,
         const ::hardware::google::pixelstats::V1_0::IPixelStats::IoOperation &operation);
 
+    const char *const kSlowioReadCntPath;
+    const char *const kSlowioWriteCntPath;
+    const char *const kSlowioUnmapCntPath;
+    const char *const kSlowioSyncCntPath;
+    const char *const kCycleCountBinsPath;
+    const char *const kImpedancePath;
+    const char *const kCodecPath;
     android::sp<::hardware::google::pixelstats::V1_0::IPixelStats> pixelstats_;
 };
 

@@ -138,7 +138,7 @@ void UeventListener::ReportUsbAudioUevents(const char *driver, const char *produ
 void UeventListener::ReportMicBroken(const char *devpath, const char *mic_break_status) {
     if (!devpath || !mic_break_status)
         return;
-    if (!strcmp(devpath, "DEVPATH=/kernel/q6audio/q6voice_uevent") &&
+    if (!strcmp(devpath, ("DEVPATH=" + kAudioUevent).c_str()) &&
         !strcmp(mic_break_status, "MIC_BREAK_STATUS=true")) {
         using ::hardware::google::pixelstats::V1_0::IPixelStats;
         android::sp<IPixelStats> client = IPixelStats::tryGetService();
@@ -212,17 +212,19 @@ bool UeventListener::ProcessUevent() {
     return true;
 }
 
-UeventListener::UeventListener()
-    : uevent_fd_(-1), is_usb_attached_(false), attached_product_(nullptr) {}
+UeventListener::UeventListener(const std::string audio_uevent)
+    : kAudioUevent(audio_uevent),
+      uevent_fd_(-1),
+      is_usb_attached_(false),
+      attached_product_(nullptr) {}
 
-/* Thread function for ListenForeverInNewThread.
+/* Thread function to continuously monitor uevents.
  * Exit after kMaxConsecutiveErrors to prevent spinning. */
-static void createAndListenForever() {
-    UeventListener listener;
+void UeventListener::ListenForever() {
     constexpr int kMaxConsecutiveErrors = 10;
     int consecutive_errors = 0;
     while (1) {
-        if (listener.ProcessUevent()) {
+        if (ProcessUevent()) {
             consecutive_errors = 0;
         } else {
             if (++consecutive_errors >= kMaxConsecutiveErrors) {
@@ -231,12 +233,6 @@ static void createAndListenForever() {
             }
         }
     }
-}
-
-/* Create a UeventListener in a new thread and process uevents forever. */
-void UeventListener::ListenForeverInNewThread() {
-    std::thread listenThread(createAndListenForever);
-    listenThread.detach();
 }
 
 }  // namespace crosshatch
