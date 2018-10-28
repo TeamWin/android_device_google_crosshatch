@@ -29,13 +29,18 @@ class DropDetect : public android::chre::SocketClient::ICallbacks,
                    public android::chre::IChreMessageHandlers,
                    public android::chre::SocketClient {
   public:
-    static android::sp<DropDetect> start();
-
+    static android::sp<DropDetect> start(const uint64_t drop_detect_app_id = 0x476f6f676c001010ULL,
+                                         const char *const chre_socket = "chre");
     void onConnected() override;
     void onMessageReceived(const void *data, size_t length) override;
 
     void handleNanoappMessage(const ::chre::fbs::NanoappMessageT &message) override;
     void handleNanoappListResponse(const ::chre::fbs::NanoappListResponseT &response) override;
+
+  private:
+    DropDetect(const uint64_t drop_detect_app_id);
+
+    const int64_t kDropDetectAppId;
 };
 
 }  // namespace crosshatch

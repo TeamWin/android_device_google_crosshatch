@@ -15,9 +15,9 @@
  */
 #include "DropDetect.h"
 
-#include "chre/util/nanoapp/app_id.h"
-#include "chre_host/host_protocol_host.h"
-#include "chre_host/socket_client.h"
+#include <chre/util/nanoapp/app_id.h>
+#include <chre_host/host_protocol_host.h>
+#include <chre_host/socket_client.h>
 
 #include <hardware/google/pixelstats/1.0/IPixelStats.h>
 #define LOG_TAG "pixelstats-vendor"
@@ -25,9 +25,10 @@
 
 #include <inttypes.h>
 
-using namespace android::chre;
 using android::sp;
+using android::chre::HostProtocolHost;
 using android::chre::IChreMessageHandlers;
+using android::chre::SocketClient;
 
 // following convention of CHRE code.
 namespace fbs = ::chre::fbs;
@@ -37,8 +38,6 @@ namespace google {
 namespace crosshatch {
 
 namespace {  // anonymous namespace for file-local definitions
-constexpr int64_t kDropDetectAppId = 0x476f6f676c001010ULL;
-constexpr char kChreSocketName[] = "chre";
 
 // This struct is defined in nanoapps/drop/messaging.h
 // by the DropDetect nanoapp.
@@ -68,6 +67,17 @@ void requestNanoappList(SocketClient &client) {
 }
 
 }  // namespace
+
+DropDetect::DropDetect(const uint64_t drop_detect_app_id) : kDropDetectAppId(drop_detect_app_id) {}
+
+sp<DropDetect> DropDetect::start(const uint64_t drop_detect_app_id, const char *const chre_socket) {
+    sp<DropDetect> dropDetect = new DropDetect(drop_detect_app_id);
+    if (!dropDetect->connectInBackground(chre_socket, dropDetect)) {
+        ALOGE("Couldn't connect to CHRE socket");
+        return nullptr;
+    }
+    return dropDetect;
+}
 
 void DropDetect::onConnected() {
     requestNanoappList(*this);
@@ -131,16 +141,6 @@ void DropDetect::handleNanoappMessage(const fbs::NanoappMessageT &message) {
     }
     client->reportPhysicalDropDetected(confidence, accel_magnitude_peak_1000ths_g,
                                        free_fall_duration_ms);
-}
-
-sp<DropDetect> DropDetect::start() {
-    sp<DropDetect> dropDetect = new DropDetect();
-
-    if (!dropDetect->connectInBackground(kChreSocketName, dropDetect)) {
-        ALOGE("Couldn't connect to CHRE socket");
-        return nullptr;
-    }
-    return dropDetect;
 }
 
 }  // namespace crosshatch
