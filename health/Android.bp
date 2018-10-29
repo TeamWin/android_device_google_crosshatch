@@ -31,6 +31,7 @@ cc_binary {
     cflags: [
         "-Wall",
         "-Werror",
+        "-Wno-implicit-fallthrough", // warning in BatteryRechargingControl.cpp
     ],
 
     static_libs: [
