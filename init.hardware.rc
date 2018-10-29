@@ -251,7 +251,7 @@ on late-fs
     # Start services for bootanim
     start surfaceflinger
     start bootanim
-    start vendor.hwcomposer-2-2
+    start vendor.hwcomposer-2-3
     start vendor.configstore-hal
     start vendor.qti.hardware.display.allocator
 
@@ -846,10 +846,10 @@ service wait_for_strongbox /vendor/bin/hw/wait_for_strongbox
     priority -20
     ioprio rt 0
 
-on property:init.svc.vendor.hwcomposer-2-2=stopped
+on property:init.svc.vendor.hwcomposer-2-3=stopped
     stop ppd
 
-on property:init.svc.vendor.hwcomposer-2-2=running
+on property:init.svc.vendor.hwcomposer-2-3=running
     start ppd
 
 # b/70518189 vDSO experiments
