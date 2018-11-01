@@ -159,7 +159,7 @@ AB_OTA_PARTITIONS += \
     dtbo \
     product
 
-ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 AB_OTA_PARTITIONS += \
     product_services \
     vbmeta_system \
@@ -602,7 +602,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
-ifneq ($(filter blueline_mainline,$(TARGET_PRODUCT)),)
+ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/fstab.mainline.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM)
 else
