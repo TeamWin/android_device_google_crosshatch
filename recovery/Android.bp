@@ -35,3 +35,25 @@ cc_library_static {
         "libnos_citadel_for_recovery",
     ],
 }
+
+cc_library_static {
+    name: "librecovery_twrp_crosshatch",
+    owner: "google",
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+    ],
+    srcs: [
+        "recovery_twrp.cpp",
+    ],
+    include_dirs: [
+        "bootable/recovery"
+    ],
+    static_libs: [
+        "libbase",
+        "libnos_for_recovery",
+        "libnos_citadel_for_recovery",
+    ],
+}

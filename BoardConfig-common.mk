@@ -42,6 +42,8 @@ BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
 # STOPSHIP Bringup hack- no low power
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
 BOARD_KERNEL_CMDLINE += usbcore.autosuspend=7
+# For the love of all that is holy, please do not include this in your ROM unless you really want TWRP to not work correctly!
+BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
@@ -77,6 +79,11 @@ TARGET_RECOVERY_UI_LIB := \
   librecovery_ui_crosshatch \
   libnos_citadel_for_recovery \
   libnos_for_recovery
+
+TARGET_RECOVERY_TWRP_LIB := \
+  librecovery_twrp_crosshatch \
+  libnos_citadel_for_recovery \
+  libnos_for_recovery liblog
 
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
@@ -253,3 +260,27 @@ endif
 BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/b1c1-setup.sh
 
 -include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk
+
+# TWRP
+TW_THEME := portrait_hdpi
+BOARD_SUPPRESS_SECURE_ERASE := true
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_DEFAULT_BRIGHTNESS := "80"
+TW_INCLUDE_CRYPTO := true
+AB_OTA_UPDATER := true
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+#TW_RECOVERY_ADDITIONAL_RELINK_FILES := $(OUT)/system/lib64/libhardware_legacy.so
+TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
+TARGET_RECOVERY_DEVICE_MODULES += android.hardware.confirmationui@1.0.so
+TW_RECOVERY_ADDITIONAL_RELINK_FILES := out/target/product/$(PRODUCT_HARDWARE)/system/lib64/android.hardware.boot@1.0.so
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += out/target/product/$(PRODUCT_HARDWARE)/system/lib64/vndk-28/android.hardware.confirmationui@1.0.so
+TARGET_RECOVERY_DEVICE_MODULES += libxml2 libicuuc libprotobuf-cpp-full
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += out/target/product/$(PRODUCT_HARDWARE)/system/lib64/libxml2.so out/target/product/$(PRODUCT_HARDWARE)/system/lib64/libicuuc.so out/target/product/$(PRODUCT_HARDWARE)/system/lib64/libprotobuf-cpp-full.so
+#TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
+# MTP will not work until we update it to support ffs
+TW_EXCLUDE_MTP := true
+PLATFORM_SECURITY_PATCH := 2025-12-31
+TW_USE_TOOLBOX := true
+#TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888

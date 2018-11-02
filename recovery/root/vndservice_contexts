@@ -1,0 +1,4 @@
+*                       u:object_r:default_android_vndservice:s0
+display.qservice                        u:object_r:qdisplay_service:s0
+vendor.qcom.PeripheralManager           u:object_r:per_mgr_service:s0
+android.hardware.citadel.ICitadeld      u:object_r:citadeld_service:s0
