@@ -55,6 +55,7 @@ BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
 BOARD_KERNEL_CMDLINE += usbcore.autosuspend=7
 BOARD_KERNEL_CMDLINE += loop.max_part=7
+BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc/1d84000.ufshc
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
@@ -63,12 +64,7 @@ BOARD_BOOT_HEADER_VERSION := 1
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # DTBO partition definitions
-ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
-# TODO(b/79758715): Do not use alternative dtbo image when fstab entries are moved out of device-tree.
-BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo_mainline.img
-else
 BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo.img
-endif
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
 TARGET_NO_BOOTLOADER ?= true
