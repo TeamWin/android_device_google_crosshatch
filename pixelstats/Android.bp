@@ -28,9 +28,10 @@ cc_binary {
     "libhidltransport",
     "liblog",
     "libutils",
+    "libpixelstats",
   ],
   proprietary: true,
-  static_libs: ["chre_client", "libpixelstats"],
+  static_libs: ["chre_client"],
   header_libs: ["chre_api"],
 }
 

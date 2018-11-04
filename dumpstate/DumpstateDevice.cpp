@@ -144,6 +144,7 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
                 "/data/vendor/radio/metrics_data",
                 "/data/vendor/ssrlog/ssr_log.txt",
                 "/data/vendor/ssrlog/ssr_log_old.txt",
+                "/data/vendor/rfs/mpss/modem_efs",
             };
 
         bool smlogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_SWITCH, false) && !access("/vendor/bin/smlog_dump", X_OK);
