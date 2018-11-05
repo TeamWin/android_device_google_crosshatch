@@ -826,3 +826,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
     $(LOCAL_PATH)/thermal_info_config_evt.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config_evt.json
+
+# powerstats HAL
+PRODUCT_PACKAGES += \
+    android.hardware.power.stats@1.0-service.pixel
