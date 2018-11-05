@@ -932,3 +932,20 @@ service init-firstboot-sh /vendor/bin/init.firstboot.sh
     user nobody
     disabled
     oneshot
+
+# init-fingerprint-sh is for stopping fps_hal after init retry fail serval times
+# It keeps running until max init retry or fps_hal running successfully
+# vendor.fps_hal restarts until max init retry times
+#
+# /vendor/bin/init.fingerprint.sh [max_init_retry_times]
+service init-fingerprint-sh /vendor/bin/init.fingerprint.sh 10
+    group root
+    user root
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1
+    start init-fingerprint-sh
+
+on property:vendor.fps.init.succeed=true && property:init.svc.vendor.fps_hal=stopped
+    start init-fingerprint-sh
