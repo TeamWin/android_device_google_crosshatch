@@ -38,10 +38,16 @@ constexpr char kCpuOnlineRoot[] = "/sys/devices/system/cpu";
 constexpr char kCpuUsageFile[] = "/proc/stat";
 constexpr char kCpuOnlineFileSuffix[] = "online";
 constexpr char kThermalConfigPrefix[] = "/vendor/etc/thermal-engine-";
+constexpr char kLittleCoreCpuFreq[] = "thermal-cpufreq-0";
+constexpr char kBigCoreCpuFreq[] = "thermal-cpufreq-4";
 constexpr unsigned int kMaxCpus = 8;
 // The number of available sensors in thermalHAL is:
 // 8 (for each cpu) + 2 (for each gpu) + battery + skin + usbc = 13.
 constexpr unsigned int kAvailableSensors = 13;
+// The following constants are used for limiting the number of throttling
+// notifications. See b/117438310 for details.
+constexpr int kDesiredLittleCoreCoolingStateCliff = 9;
+constexpr int kDesiredBigCoreCoolingStateCliff = 20;
 
 // This is a golden set of thermal sensor name and releveant information about
 // the sensor. Used when we read in sensor values.
@@ -141,16 +147,9 @@ float getThresholdFromType(const TemperatureType type,
 
 // This is a golden set of cooling device types and their corresponding sensor
 // thernal zone name.
-static const std::map<std::string, std::string>
-kValidCoolingDeviceTypeMap = {
-    {"thermal-cpufreq-0", "cpu0-silver-usr"},  // CPU0
-    {"thermal-cpufreq-1", "cpu1-silver-usr"},  // CPU1
-    {"thermal-cpufreq-2", "cpu2-silver-usr"},  // CPU2
-    {"thermal-cpufreq-3", "cpu3-silver-usr"},  // CPU3
-    {"thermal-cpufreq-4", "cpu0-gold-usr"},  // CPU4
-    {"thermal-cpufreq-5", "cpu1-gold-usr"},  // CPU5
-    {"thermal-cpufreq-6", "cpu2-gold-usr"},  // CPU6
-    {"thermal-cpufreq-7", "cpu3-gold-usr"},  // CPU7
+static const std::map<std::string, std::string> kValidCoolingDeviceTypeMap = {
+    {kLittleCoreCpuFreq, "cpu0-silver-usr"},  // CPU0
+    {kBigCoreCpuFreq, "cpu0-gold-usr"},       // CPU4
 };
 
 void ThermalHelper::updateOverideThresholds() {
@@ -377,6 +376,24 @@ bool ThermalHelper::checkThrottlingData(
             cooling_device_path_to_throttling_level_map_.end()) {
         int throttling_level = std::stoi(throttling_data.second);
         int max_throttling_level = getMaxThrottlingLevelFromMap();
+
+        // The following if-else blocks aim to reduce the number of notifications
+        // triggered by low-level throttling states. See b/117438310 for details.
+        if (throttling_level) {
+            std::string little_cd_path =
+                cooling_devices_.getCoolingDevicePath(kLittleCoreCpuFreq) + "/cur_state";
+            std::string big_cd_path =
+                cooling_devices_.getCoolingDevicePath(kBigCoreCpuFreq) + "/cur_state";
+            if ((cooling_device == little_cd_path &&
+                 throttling_level < kDesiredLittleCoreCoolingStateCliff) ||
+                (cooling_device == big_cd_path &&
+                 throttling_level < kDesiredBigCoreCoolingStateCliff)) {
+                LOG(INFO) << "Masking throttling level " << throttling_level << " for CD "
+                          << cooling_device;
+                throttling_level = 0;
+            }
+        }
+
         cooling_device_path_to_throttling_level_map_[throttling_data.first] =
             throttling_level;
 
