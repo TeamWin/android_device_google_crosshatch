@@ -35,14 +35,14 @@
 #define MSINSEC 1000L
 #define USINMS 1000000L
 
-InteractionHandler::InteractionHandler(std::shared_ptr<HintManager> const & hint_manager)
+InteractionHandler::InteractionHandler(std::shared_ptr<HintManager> const &hint_manager)
     : mState(INTERACTION_STATE_UNINITIALIZED),
       mWaitMs(100),
       mMinDurationMs(1400),
       mMaxDurationMs(5650),
       mDurationMs(0),
-      mHintManager(hint_manager) {
-}
+      mLastTimespec{0, 0},
+      mHintManager(hint_manager) {}
 
 InteractionHandler::~InteractionHandler() {
     Exit();
@@ -108,10 +108,10 @@ void InteractionHandler::PerfRel() {
 
 long long InteractionHandler::CalcTimespecDiffMs(struct timespec start,
                                                struct timespec end) {
-    long long diff_in_us = 0;
-    diff_in_us += (end.tv_sec - start.tv_sec) * MSINSEC;
-    diff_in_us += (end.tv_nsec - start.tv_nsec) / USINMS;
-    return diff_in_us;
+    long long diff_in_ms = 0;
+    diff_in_ms += (end.tv_sec - start.tv_sec) * MSINSEC;
+    diff_in_ms += (end.tv_nsec - start.tv_nsec) / USINMS;
+    return diff_in_ms;
 }
 
 void InteractionHandler::Acquire(int32_t duration) {
