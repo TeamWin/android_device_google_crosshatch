@@ -75,9 +75,6 @@ TARGET_NO_BOOTLOADER ?= true
 TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
-ifeq ($(filter %_mainline,$(TARGET_PRODUCT)),)
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-endif
 BOARD_USES_METADATA_PARTITION := true
 
 # Partitions (listed in the file) to be wiped under recovery.
