@@ -31,5 +31,5 @@ cc_binary {
         "libutils",
         "android.hardware.power.stats@1.0",
     ],
-    proprietary: true,
+    vendor: true,
 }
