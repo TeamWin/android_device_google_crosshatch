@@ -125,7 +125,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.secu
 
 # ThermalHAL 1.1
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.thermal@1.1-service.crosshatch.rc)
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.thermal@2.0-service.crosshatch)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.thermal@1.1-service.crosshatch)
 
 # Verified boot xml moved to /product
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.software.verified_boot.xml)
