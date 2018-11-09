@@ -250,11 +250,6 @@ bool ThermalHelper::readTemperature(
     out->name = sensor_name;
     out->currentValue = std::stoi(temp) * sensor_info.multiplier;
     out->throttlingThreshold = getThresholdFromType(sensor_info.type, thresholds_);
-    if (sensor_info.type == TemperatureType::SKIN) {
-        out->throttlingThreshold = low_temp_threshold_adjuster_.adjustThreshold(
-              out->throttlingThreshold, out->currentValue);
-    }
-
     out->shutdownThreshold = getThresholdFromType(
         sensor_info.type, shutdown_thresholds_);
     out->vrThrottlingThreshold = getThresholdFromType(
@@ -414,11 +409,6 @@ bool ThermalHelper::checkThrottlingData(
     }
 
     return false;
-}
-
-bool ThermalHelper::fillBatteryThresholdDebugInfo(std::ostringstream& dump_buf)
-{
-    return low_temp_threshold_adjuster_.fillBatteryThresholdDebugInfo(dump_buf);
 }
 
 std::string ThermalHelper::getSkinSensorType() {
