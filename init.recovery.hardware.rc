@@ -19,11 +19,19 @@ on init
     write /sys/module/msm_poweroff/parameters/warm_reset 1
     # Enable thermal mitigation
     write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
+    start touchdriver
     start prepdecrypt
     start servicemanager
     start vendor.boot-hal-1-0
 
 service prepdecrypt /sbin/prepdecrypt.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service touchdriver /sbin/touchdriver.sh
     oneshot
     disabled
     user root
