@@ -14,9 +14,11 @@
 # limitations under the License.
 #
 
+ifeq (,$(filter %_mainline,$(TARGET_PRODUCT)))
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := 560dpi
 PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
+endif
 
 PRODUCT_HARDWARE := crosshatch
 
