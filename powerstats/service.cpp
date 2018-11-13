@@ -32,6 +32,7 @@ using android::hardware::joinRpcThreadpool;
 // Generated HIDL files
 using android::hardware::power::stats::V1_0::IPowerStats;
 using android::hardware::power::stats::V1_0::PowerEntityInfo;
+using android::hardware::power::stats::V1_0::PowerEntityStateSpace;
 using android::hardware::power::stats::V1_0::PowerEntityType;
 using android::hardware::power::stats::V1_0::implementation::PowerStats;
 
@@ -42,11 +43,15 @@ int main(int /* argc */, char ** /* argv */) {
     ALOGI("power.stats service 1.0 is starting.");
 
     PowerStats *service = new PowerStats();
-    service->setPowerEntityConfig(std::make_unique<PowerEntityConfig>(std::vector<PowerEntityInfo>{
-        {.powerEntityId = 0, .powerEntityName = "APSS", .type = PowerEntityType::SUBSYSTEM},
-        {.powerEntityId = 1, .powerEntityName = "MPSS", .type = PowerEntityType::SUBSYSTEM},
-        {.powerEntityId = 2, .powerEntityName = "SoC", .type = PowerEntityType::POWER_DOMAIN},
-    }));
+    service->setPowerEntityConfig(std::vector<PowerEntityConfig>{
+        /*
+         * TODO(117887759): These need to reflect the power entities that
+         * we want to track on crosshatch.
+         */
+        {.name = "APSS", .type = PowerEntityType::SUBSYSTEM, .states = {"Sleep"}},
+        {.name = "MPSS", .type = PowerEntityType::SUBSYSTEM, .states = {"Sleep"}},
+        {.name = "SoC", .type = PowerEntityType::POWER_DOMAIN, .states = {"AOSD", "CXSD"}},
+        {.name = "Stateless", .type = PowerEntityType::PERIPHERAL, .states = {}}});
 
     configureRpcThreadpool(1, true /*callerWillJoin*/);
 
