@@ -16,10 +16,13 @@ cc_binary {
     name: "android.hardware.power.stats@1.0-service.pixel",
     relative_install_path: "hw",
     init_rc: ["android.hardware.power.stats@1.0-service.pixel.rc"],
-    srcs: ["service.cpp", "PowerStats.cpp"],
+    srcs: ["service.cpp"],
     cflags: [
         "-Wall",
         "-Werror",
+    ],
+    static_libs: [
+        "libpixelpowerstats",
     ],
     shared_libs: [
         "libbase",

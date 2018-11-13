@@ -19,7 +19,7 @@
 #include <android/log.h>
 #include <hidl/HidlTransportSupport.h>
 
-#include "PowerStats.h"
+#include <pixelpowerstats/PowerStats.h>
 
 using android::OK;
 using android::sp;
@@ -31,16 +31,22 @@ using android::hardware::joinRpcThreadpool;
 
 // Generated HIDL files
 using android::hardware::power::stats::V1_0::IPowerStats;
+using android::hardware::power::stats::V1_0::PowerEntityInfo;
+using android::hardware::power::stats::V1_0::PowerEntityType;
 using android::hardware::power::stats::V1_0::implementation::PowerStats;
+
+// Pixel specific
+using android::hardware::google::pixel::powerstats::PowerEntityConfig;
 
 int main(int /* argc */, char ** /* argv */) {
     ALOGI("power.stats service 1.0 is starting.");
 
-    android::sp<IPowerStats> service = new PowerStats();
-    if (service == nullptr) {
-        ALOGE("Can not create an instance of power.stats HAL Iface, exiting.");
-        return 1;
-    }
+    PowerStats *service = new PowerStats();
+    service->setPowerEntityConfig(std::make_unique<PowerEntityConfig>(std::vector<PowerEntityInfo>{
+        {.powerEntityId = 0, .powerEntityName = "APSS", .type = PowerEntityType::SUBSYSTEM},
+        {.powerEntityId = 1, .powerEntityName = "MPSS", .type = PowerEntityType::SUBSYSTEM},
+        {.powerEntityId = 2, .powerEntityName = "SoC", .type = PowerEntityType::POWER_DOMAIN},
+    }));
 
     configureRpcThreadpool(1, true /*callerWillJoin*/);
 
