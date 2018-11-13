@@ -35,6 +35,7 @@ cc_binary {
         "android.hardware.health@1.0-convert",
         "libhealthservice",
         "libbatterymonitor",
+        "libpixelhealth",
     ],
 
     shared_libs: [
@@ -44,7 +45,6 @@ cc_binary {
         "libhidlbase",
         "libhidltransport",
         "libhwbinder",
-        "libpixelhealth",
         "libutils",
         "android.hardware.health@2.0",
     ],
