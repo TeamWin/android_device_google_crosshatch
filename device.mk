@@ -146,10 +146,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cp_system_other_odex=1
 
-# Script that copies preloads directory from system_other to data partition
-PRODUCT_COPY_FILES += \
-    system/extras/cppreopts/preloads_copy.sh:system/bin/preloads_copy.sh
-
 AB_OTA_UPDATER := true
 
 AB_OTA_PARTITIONS += \
