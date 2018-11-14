@@ -949,3 +949,6 @@ on property:sys.boot_completed=1
 
 on property:vendor.fps.init.succeed=true && property:init.svc.vendor.fps_hal=stopped
     start init-fingerprint-sh
+
+on property:persist.radio.multisim.config=dsds
+    start vendor.qcrild2
