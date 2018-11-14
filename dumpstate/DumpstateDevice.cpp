@@ -159,7 +159,7 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
             if (diagLogStarted) {
                 android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
                 ALOGD("Stopping diag_mdlog...\n");
-                if (android::base::WaitForProperty(DIAG_MDLOG_STATUS_PROPERTY, "true", std::chrono::seconds(20))) {
+                if (android::base::WaitForProperty(DIAG_MDLOG_STATUS_PROPERTY, "false", std::chrono::seconds(20))) {
                     ALOGD("diag_mdlog exited");
                 } else {
                     ALOGE("Waited mdlog timeout after 20 second");
