@@ -121,7 +121,6 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/crosshatch/init.crosshatch.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.crosshatch.rc \
     $(LOCAL_PATH)/blueline/init.blueline.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.blueline.rc \
-    $(LOCAL_PATH)/init.common.rc:root/init.$(PRODUCT_HARDWARE).rc \
     $(LOCAL_PATH)/init.recovery.hardware.device.rc:root/init.recovery.crosshatch.rc \
     $(LOCAL_PATH)/init.recovery.hardware.device.rc:root/init.recovery.blueline.rc \
 
@@ -145,10 +144,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cp_system_other_odex=1
-
-# Script that copies preloads directory from system_other to data partition
-PRODUCT_COPY_FILES += \
-    system/extras/cppreopts/preloads_copy.sh:system/bin/preloads_copy.sh
 
 AB_OTA_UPDATER := true
 
