@@ -41,6 +41,7 @@
         <device name="SND_DEVICE_OUT_SPEAKER_SAFE_AND_USB_HEADSET" acdb_id="514"/>
         <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="513"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED" acdb_id="14"/>
+        <device name="SND_DEVICE_OUT_VOICE_HEARING_AID" acdb_id="10"/>
         <device name="SND_DEVICE_IN_HANDSET_MIC_AEC" acdb_id="4"/>
         <device name="SND_DEVICE_IN_HANDSET_MIC_NS" acdb_id="4"/>
         <device name="SND_DEVICE_IN_HANDSET_MIC_AEC_NS" acdb_id="4"/>
@@ -78,6 +79,7 @@
         <device name="SND_DEVICE_IN_CAMCORDER_SELFIE_LANDSCAPE" acdb_id="66"/>
         <device name="SND_DEVICE_IN_CAMCORDER_SELFIE_INVERT_LANDSCAPE" acdb_id="66"/>
         <device name="SND_DEVICE_IN_CAMCORDER_SELFIE_PORTRAIT" acdb_id="66"/>
+        <device name="SND_DEVICE_IN_VOICE_HEARING_AID" acdb_id="19"/>
     </acdb_ids>
     <bit_width_configs>
         <device name="SND_DEVICE_OUT_SPEAKER" bit_width="24"/>
