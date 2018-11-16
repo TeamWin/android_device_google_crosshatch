@@ -388,9 +388,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
-    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf \
-    device/google/crosshatch/felica/loaderservice_updater_1.lss:$(TARGET_COPY_OUT_VENDOR)/etc/loaderservice_updater_1.lss \
-    device/google/crosshatch/felica/loaderservice_updater_2.lss:$(TARGET_COPY_OUT_VENDOR)/etc/loaderservice_updater_2.lss
+    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf
 
 # TODO(b/72443662)
 PRODUCT_COPY_FILES += \
