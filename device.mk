@@ -253,7 +253,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.display.dataspace_saturation_matrix=1.16868,-0.03155,-0.01473,-0.16868,1.03155,-0.05899,0.00000,0.00000,1.07372
+    vendor.display.dataspace_saturation_matrix=1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_decimation=1
@@ -370,7 +370,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
-    android.hardware.drm@1.1-service.clearkey \
+    android.hardware.drm@1.2-service.clearkey \
     android.hardware.drm@1.1-service.widevine
 
 # NFC and Secure Element packages
