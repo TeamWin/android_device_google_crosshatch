@@ -19,6 +19,7 @@
 #include <android/log.h>
 #include <hidl/HidlTransportSupport.h>
 
+#include <pixelpowerstats/GenericStateResidencyDataProvider.h>
 #include <pixelpowerstats/PowerStats.h>
 
 using android::OK;
@@ -37,21 +38,68 @@ using android::hardware::power::stats::V1_0::PowerEntityType;
 using android::hardware::power::stats::V1_0::implementation::PowerStats;
 
 // Pixel specific
+using android::hardware::google::pixel::powerstats::GenericStateResidencyDataProvider;
 using android::hardware::google::pixel::powerstats::PowerEntityConfig;
+using android::hardware::google::pixel::powerstats::StateResidencyConfig;
+
+// RPM runs at 19.2Mhz. Divide by 19200 for msec
+const uint64_t RPM_CLK = 19200;
 
 int main(int /* argc */, char ** /* argv */) {
     ALOGI("power.stats service 1.0 is starting.");
 
     PowerStats *service = new PowerStats();
-    service->setPowerEntityConfig(std::vector<PowerEntityConfig>{
-        /*
-         * TODO(117887759): These need to reflect the power entities that
-         * we want to track on crosshatch.
-         */
-        {.name = "APSS", .type = PowerEntityType::SUBSYSTEM, .states = {"Sleep"}},
-        {.name = "MPSS", .type = PowerEntityType::SUBSYSTEM, .states = {"Sleep"}},
-        {.name = "SoC", .type = PowerEntityType::POWER_DOMAIN, .states = {"AOSD", "CXSD"}},
-        {.name = "Stateless", .type = PowerEntityType::PERIPHERAL, .states = {}}});
+
+    // Add power entities related to rpmh
+    uint32_t apssId = service->addPowerEntity("APSS", PowerEntityType::SUBSYSTEM);
+    uint32_t mpssId = service->addPowerEntity("MPSS", PowerEntityType::SUBSYSTEM);
+    uint32_t adspId = service->addPowerEntity("ADSP", PowerEntityType::SUBSYSTEM);
+    uint32_t cdspId = service->addPowerEntity("CDSP", PowerEntityType::SUBSYSTEM);
+    uint32_t slpiId = service->addPowerEntity("SLPI", PowerEntityType::SUBSYSTEM);
+
+    auto rpmSdp =
+        std::make_shared<GenericStateResidencyDataProvider>("/sys/power/rpmh_stats/master_stats");
+    std::function<uint64_t(uint64_t)> rpmConvertToMs = [](uint64_t a) { return a / RPM_CLK; };
+    std::vector<StateResidencyConfig> rpmStateResidencyConfigs = {
+        {.name = "Sleep",
+         .entryCountSupported = true,
+         .entryCountPrefix = "Sleep Count:",
+         .totalTimeSupported = true,
+         .totalTimePrefix = "Sleep Accumulated Duration:",
+         .totalTimeTransform = rpmConvertToMs,
+         .lastEntrySupported = true,
+         .lastEntryPrefix = "Sleep Last Entered At:",
+         .lastEntryTransform = rpmConvertToMs}};
+    rpmSdp->addEntity(apssId, PowerEntityConfig("APSS", rpmStateResidencyConfigs));
+    rpmSdp->addEntity(mpssId, PowerEntityConfig("MPSS", rpmStateResidencyConfigs));
+    rpmSdp->addEntity(adspId, PowerEntityConfig("ADSP", rpmStateResidencyConfigs));
+    rpmSdp->addEntity(cdspId, PowerEntityConfig("CDSP", rpmStateResidencyConfigs));
+    rpmSdp->addEntity(slpiId, PowerEntityConfig("SLPI", rpmStateResidencyConfigs));
+    service->addStateResidencyDataProvider(std::move(rpmSdp));
+
+    // Add SoC power entity
+    uint32_t socId = service->addPowerEntity("SoC", PowerEntityType::POWER_DOMAIN);
+    auto socSdp =
+        std::make_shared<GenericStateResidencyDataProvider>("/sys/power/system_sleep/stats");
+    std::vector<StateResidencyConfig> socStateResidencyConfigs = {
+        {.name = "AOSD",
+         .header = "RPM Mode:aosd",
+         .entryCountSupported = true,
+         .entryCountPrefix = "count:",
+         .totalTimeSupported = true,
+         .totalTimePrefix = "actual last sleep(msec):",
+         .lastEntrySupported = false},
+        {.name = "CXSD",
+         .header = "RPM Mode:cxsd",
+         .entryCountSupported = true,
+         .entryCountPrefix = "count:",
+         .totalTimeSupported = true,
+         .totalTimePrefix = "actual last sleep(msec):",
+         .lastEntrySupported = false}};
+    socSdp->addEntity(socId, PowerEntityConfig(socStateResidencyConfigs));
+    service->addStateResidencyDataProvider(std::move(socSdp));
+
+    // TODO(117887759): Add WLAN power entity
 
     configureRpcThreadpool(1, true /*callerWillJoin*/);
 
