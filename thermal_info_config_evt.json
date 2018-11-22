@@ -166,6 +166,21 @@
             "Multiplier":0.001
         },
         {
+            "Name":"s2mpb04_tz",
+            "Type":"UNKNOWN",
+            "HotThreshold":[
+                "NAN",
+                "NAN",
+                "NAN",
+                "NAN",
+                "NAN",
+                "NAN",
+                "NAN"
+            ],
+            "VrThreshold":"NAN",
+            "Multiplier":0.001
+        },
+        {
             "Name":"usbc-therm-adc",
             "Type":"USB_PORT",
             "HotThreshold":[
