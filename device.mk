@@ -56,7 +56,7 @@ LOCAL_PATH := device/google/crosshatch
 SRC_MEDIA_HAL_DIR := hardware/qcom/media/sdm845
 SRC_DISPLAY_HAL_DIR := hardware/qcom/display/sdm845
 
-TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+TARGET_PRODUCT_PROP := $(LOCAL_PATH)/product.prop
 
 $(call inherit-product, $(LOCAL_PATH)/utils.mk)
 
