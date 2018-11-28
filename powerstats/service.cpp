@@ -21,6 +21,7 @@
 
 #include <pixelpowerstats/GenericStateResidencyDataProvider.h>
 #include <pixelpowerstats/PowerStats.h>
+#include <pixelpowerstats/WlanStateResidencyDataProvider.h>
 
 using android::OK;
 using android::sp;
@@ -41,9 +42,7 @@ using android::hardware::power::stats::V1_0::implementation::PowerStats;
 using android::hardware::google::pixel::powerstats::GenericStateResidencyDataProvider;
 using android::hardware::google::pixel::powerstats::PowerEntityConfig;
 using android::hardware::google::pixel::powerstats::StateResidencyConfig;
-
-// RPM runs at 19.2Mhz. Divide by 19200 for msec
-const uint64_t RPM_CLK = 19200;
+using android::hardware::google::pixel::powerstats::WlanStateResidencyDataProvider;
 
 int main(int /* argc */, char ** /* argv */) {
     ALOGI("power.stats service 1.0 is starting.");
@@ -51,14 +50,7 @@ int main(int /* argc */, char ** /* argv */) {
     PowerStats *service = new PowerStats();
 
     // Add power entities related to rpmh
-    uint32_t apssId = service->addPowerEntity("APSS", PowerEntityType::SUBSYSTEM);
-    uint32_t mpssId = service->addPowerEntity("MPSS", PowerEntityType::SUBSYSTEM);
-    uint32_t adspId = service->addPowerEntity("ADSP", PowerEntityType::SUBSYSTEM);
-    uint32_t cdspId = service->addPowerEntity("CDSP", PowerEntityType::SUBSYSTEM);
-    uint32_t slpiId = service->addPowerEntity("SLPI", PowerEntityType::SUBSYSTEM);
-
-    auto rpmSdp =
-        std::make_shared<GenericStateResidencyDataProvider>("/sys/power/rpmh_stats/master_stats");
+    const uint64_t RPM_CLK = 19200;  // RPM runs at 19.2Mhz. Divide by 19200 for msec
     std::function<uint64_t(uint64_t)> rpmConvertToMs = [](uint64_t a) { return a / RPM_CLK; };
     std::vector<StateResidencyConfig> rpmStateResidencyConfigs = {
         {.name = "Sleep",
@@ -70,17 +62,28 @@ int main(int /* argc */, char ** /* argv */) {
          .lastEntrySupported = true,
          .lastEntryPrefix = "Sleep Last Entered At:",
          .lastEntryTransform = rpmConvertToMs}};
+
+    auto rpmSdp =
+        std::make_shared<GenericStateResidencyDataProvider>("/sys/power/rpmh_stats/master_stats");
+
+    uint32_t apssId = service->addPowerEntity("APSS", PowerEntityType::SUBSYSTEM);
     rpmSdp->addEntity(apssId, PowerEntityConfig("APSS", rpmStateResidencyConfigs));
+
+    uint32_t mpssId = service->addPowerEntity("MPSS", PowerEntityType::SUBSYSTEM);
     rpmSdp->addEntity(mpssId, PowerEntityConfig("MPSS", rpmStateResidencyConfigs));
+
+    uint32_t adspId = service->addPowerEntity("ADSP", PowerEntityType::SUBSYSTEM);
     rpmSdp->addEntity(adspId, PowerEntityConfig("ADSP", rpmStateResidencyConfigs));
+
+    uint32_t cdspId = service->addPowerEntity("CDSP", PowerEntityType::SUBSYSTEM);
     rpmSdp->addEntity(cdspId, PowerEntityConfig("CDSP", rpmStateResidencyConfigs));
+
+    uint32_t slpiId = service->addPowerEntity("SLPI", PowerEntityType::SUBSYSTEM);
     rpmSdp->addEntity(slpiId, PowerEntityConfig("SLPI", rpmStateResidencyConfigs));
+
     service->addStateResidencyDataProvider(std::move(rpmSdp));
 
     // Add SoC power entity
-    uint32_t socId = service->addPowerEntity("SoC", PowerEntityType::POWER_DOMAIN);
-    auto socSdp =
-        std::make_shared<GenericStateResidencyDataProvider>("/sys/power/system_sleep/stats");
     std::vector<StateResidencyConfig> socStateResidencyConfigs = {
         {.name = "AOSD",
          .header = "RPM Mode:aosd",
@@ -96,11 +99,58 @@ int main(int /* argc */, char ** /* argv */) {
          .totalTimeSupported = true,
          .totalTimePrefix = "actual last sleep(msec):",
          .lastEntrySupported = false}};
+
+    auto socSdp =
+        std::make_shared<GenericStateResidencyDataProvider>("/sys/power/system_sleep/stats");
+
+    uint32_t socId = service->addPowerEntity("SoC", PowerEntityType::POWER_DOMAIN);
     socSdp->addEntity(socId, PowerEntityConfig(socStateResidencyConfigs));
+
     service->addStateResidencyDataProvider(std::move(socSdp));
 
-    // TODO(117887759): Add WLAN power entity
+    // Add WLAN power entity
+    uint32_t wlanId = service->addPowerEntity("WLAN", PowerEntityType::SUBSYSTEM);
+    auto wlanSdp = std::make_shared<WlanStateResidencyDataProvider>(wlanId);
+    service->addStateResidencyDataProvider(std::move(wlanSdp));
 
+    // Add Easel power entity
+    const std::string easelEntryCountPrefix = "Cumulative count:";
+    const std::string easelTotalTimePrefix = "Cumulative duration msec:";
+    const std::string easelLastEntryPrefix = "Last entry timestamp msec:";
+    std::vector<StateResidencyConfig> easelStateResidencyConfigs = {
+        {.name = "Off",
+         .header = "OFF",
+         .entryCountSupported = true,
+         .entryCountPrefix = easelEntryCountPrefix,
+         .totalTimeSupported = true,
+         .totalTimePrefix = easelTotalTimePrefix,
+         .lastEntrySupported = true,
+         .lastEntryPrefix = easelLastEntryPrefix},
+        {.name = "Active",
+         .header = "ACTIVE",
+         .entryCountSupported = true,
+         .entryCountPrefix = easelEntryCountPrefix,
+         .totalTimeSupported = true,
+         .totalTimePrefix = easelTotalTimePrefix,
+         .lastEntrySupported = true,
+         .lastEntryPrefix = easelLastEntryPrefix},
+        {.name = "Suspend",
+         .header = "SUSPEND",
+         .entryCountSupported = true,
+         .entryCountPrefix = easelEntryCountPrefix,
+         .totalTimeSupported = true,
+         .totalTimePrefix = easelTotalTimePrefix,
+         .lastEntrySupported = true,
+         .lastEntryPrefix = easelLastEntryPrefix}};
+    auto easelSdp = std::make_shared<GenericStateResidencyDataProvider>("/d/mnh_sm/power_stats");
+
+    uint32_t easelId = service->addPowerEntity("Easel", PowerEntityType::SUBSYSTEM);
+    easelSdp->addEntity(
+        easelId, PowerEntityConfig("Easel Subsystem Power Stats", easelStateResidencyConfigs));
+
+    service->addStateResidencyDataProvider(std::move(easelSdp));
+
+    // Configure the threadpool
     configureRpcThreadpool(1, true /*callerWillJoin*/);
 
     status_t status = service->registerAsService();
