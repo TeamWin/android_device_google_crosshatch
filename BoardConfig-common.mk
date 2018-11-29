@@ -118,7 +118,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # Install odex files into the other system image
 BOARD_USES_SYSTEM_OTHER_ODEX := true
 
-BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
+BOARD_ROOT_EXTRA_SYMLINKS := /vendor/dsp:/dsp
 BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
 
 include device/google/crosshatch-sepolicy/crosshatch-sepolicy.mk
