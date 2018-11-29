@@ -75,6 +75,7 @@ int BatteryRechargingControl::RemapSOC(int soc) {
 void BatteryRechargingControl::updateBatteryProperties(struct android::BatteryProperties *props) {
     std::string charger_status;
     double elapsed_time;
+    int cur_soc;
 
     if (!android::base::ReadFileToString(kChargerStatus, &charger_status)) {
         LOG(ERROR) << "Cannot read the charger status";
@@ -133,6 +134,7 @@ void BatteryRechargingControl::updateBatteryProperties(struct android::BatteryPr
             break;
         case OVER_LOADING:
         case NO_POWER_SOURCE:
+            cur_soc = props->batteryLevel;
             elapsed_time = getTime() - start_time_;
             if (elapsed_time > kTransitionTime) {
                 LOG(INFO) << "Time is up, leave remap";
@@ -141,14 +143,14 @@ void BatteryRechargingControl::updateBatteryProperties(struct android::BatteryPr
             } else {
                 LOG(INFO) << "Diff time: " << elapsed_time;
                 int battery_level = RemapSOC(props->batteryLevel);
-                if (battery_level == props->batteryLevel) {
+                if ((battery_level == props->batteryLevel) && (battery_level != kFullSoc)) {
                     state_ = INACTIVE;
                     break;
                 }
                 props->batteryLevel = battery_level;
             }
             if (charger_status == kStatusIsCharging) {
-                if ((props->batteryLevel == kFullSoc) && (props->batteryLevel >= recharge_soc_)) {
+                if ((props->batteryLevel == kFullSoc) && (cur_soc >= recharge_soc_)) {
                     // When user plug in charger and the ret_soc is still 100%
                     // Change condition to Recharging cycle to avoid the SOC
                     // show lower than 100%. (Keep 100%)

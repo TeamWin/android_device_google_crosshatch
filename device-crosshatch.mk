@@ -24,10 +24,17 @@ include device/google/crosshatch/device-common.mk
 
 DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/crosshatch/overlay
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.insmod.crosshatch.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.cfg
+
 # Audio XMLs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mixer_paths_tavil_c1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil_c1.xml \
+    $(LOCAL_PATH)/audio_policy_volumes_c1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio_platform_info_tavil_c1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil_c1.xml
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nxp.crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
+
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay

@@ -56,19 +56,19 @@ static constexpr uint32_t WAVEFORM_RINGTONE_EFFECT_INDEX = 65534;
 static constexpr uint32_t WAVEFORM_RINGTONE_EFFECT_MS = 30000;
 
 // The_big_adventure - RINGTONE_1
-static constexpr char WAVEFORM_RINGTONE1_EFFECT_QUEUE[] = "160, 11.100, 2744, 1!";
+static constexpr char WAVEFORM_RINGTONE1_EFFECT_QUEUE[] = "160, 11.100, 1600, 1!";
 
 // Copycat - RINGTONE_2
-static constexpr char WAVEFORM_RINGTONE2_EFFECT_QUEUE[] = "260, 12.100, 716, 2!";
+static constexpr char WAVEFORM_RINGTONE2_EFFECT_QUEUE[] = "260, 12.100, 660, 2!";
 
 // Crackle - RINGTONE_3
-static constexpr char WAVEFORM_RINGTONE3_EFFECT_QUEUE[] = "404, 13.100, 1490, 5!";
+static constexpr char WAVEFORM_RINGTONE3_EFFECT_QUEUE[] = "404, 13.100, 1440, 5!";
 
 // Flutterby - RINGTONE_4
-static constexpr char WAVEFORM_RINGTONE4_EFFECT_QUEUE[] = "14.100, 6!";
+static constexpr char WAVEFORM_RINGTONE4_EFFECT_QUEUE[] = "140, 14.100, 6!";
 
 // Hotline - RINGTONE_5
-static constexpr char WAVEFORM_RINGTONE5_EFFECT_QUEUE[] = "15.100, 4!";
+static constexpr char WAVEFORM_RINGTONE5_EFFECT_QUEUE[] = "140, 15.100, 4!";
 
 // Leaps_and_bounds - RINGTONE_6
 static constexpr char WAVEFORM_RINGTONE6_EFFECT_QUEUE[] = "140, 16.100, 1!";
@@ -93,7 +93,7 @@ static constexpr char WAVEFORM_RINGTONE12_EFFECT_QUEUE[] = "140, 22.100, 972, 1!
 
 static constexpr int8_t MAX_SCALE_INPUT = 112;
 
-static constexpr int8_t MAX_TRIGGER_LATENCY_MS = 5;
+static constexpr int8_t MAX_TRIGGER_LATENCY_MS = 6;
 
 Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofstream&& effect,
         std::ofstream&& queue, std::ofstream&& scale) :
@@ -106,7 +106,7 @@ Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofst
 
 Return<Status> Vibrator::on(uint32_t timeoutMs, uint32_t effectIndex) {
     mEffectIndex << effectIndex << std::endl;
-    mDuration << timeoutMs << std::endl;
+    mDuration << (timeoutMs + MAX_TRIGGER_LATENCY_MS) << std::endl;
     mActivate << 1 << std::endl;
 
     return Status::OK;
@@ -132,6 +132,11 @@ Return<bool> Vibrator::supportsAmplitudeControl()  {
 }
 
 Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
+
+    if (!amplitude) {
+        return Status::BAD_VALUE;
+    }
+
     int32_t scale = MAX_SCALE_INPUT - std::round((amplitude - 1) / 254.0 * MAX_SCALE_INPUT);
 
     mScale << scale << std::endl;

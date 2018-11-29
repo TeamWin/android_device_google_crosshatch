@@ -218,6 +218,9 @@ Return<void> Thermal::debug(
                          << std::endl;
             }
 
+            if (!thermal_helper_.fillBatteryThresholdDebugInfo(dump_buf)) {
+                dump_buf << "error while filling BatteryThresholdDebugInfo." << std::endl;
+            }
         }
         std::string buf = dump_buf.str();
         if (!android::base::WriteStringToFd(buf, fd)) {

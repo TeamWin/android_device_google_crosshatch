@@ -103,6 +103,7 @@
 # fpc fingerprint
 /sys/devices/platform/soc/soc:fp_fpc*        irq               0600  system system
 /sys/devices/platform/soc/soc:fp_fpc*        wakeup_enable     0200  system system
+/sys/devices/platform/soc/soc:fp_fpc*        hw_reset          0600  system system
 
 # Easel
 /dev/easelcomm-client     0666   cameraserver camera
@@ -110,3 +111,6 @@
 
 # Storage: for factory reset protection feature
 /dev/block/platform/soc/1d84000.ufshc/by-name/frp       0660   system     system
+
+# fuel gauge history
+/dev/maxfg_history        0644   system system

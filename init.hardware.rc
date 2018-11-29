@@ -21,17 +21,11 @@ import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.logging.rc
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.mpssrfs.rc
 
 
-on charger
-    stop vendor.qseecomd
-    stop keymaster-4-0
-    # Lock to lowest freqency on charger mode
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor powersave
-    # Offline all cores expect cpu0
+on property:init.svc.vendor.charger=running
+    # keep one LITTLE and one big
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/devices/system/cpu/cpu4/online 0
     write /sys/devices/system/cpu/cpu5/online 0
     write /sys/devices/system/cpu/cpu6/online 0
     write /sys/devices/system/cpu/cpu7/online 0
@@ -43,8 +37,12 @@ on charger
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     # Disable sched_boost
     write /proc/sys/kernel/sched_boost 0
+    # Enable thermal mitigation
+    write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
+    # Ensure 100% reporting is sticky
+    write /sys/class/power_supply/maxfg/offmode_charger 1
 
-service charger /charger
+service vendor.charger /charger
     class charger
     seclabel u:r:charger:s0
 
@@ -53,12 +51,17 @@ on early-init
     chmod 0755 /sys/kernel/debug
     # Enable sched_boost
     write /proc/sys/kernel/sched_boost 1
+    mount_all /vendor/etc/fstab.persist --early
+
+# Skip init trigger for charger mode
+on early-init && property:ro.boot.mode=charger
+    setprop vendor.skip.init 1
 
 # We need vold early for metadata encryption
 on early-fs
     start vold
 
-on init
+on init && property:vendor.skip.init=0
     start logd
 
     # QSEE rpmb listener need symlink for bootdevice
@@ -69,6 +72,11 @@ on init
     # vold needs keymaster that needs qseecomd
     start vendor.qseecomd
     start keymaster-4-0
+
+    # start Citadel keymaster (StrongBox) early
+    start vndservicemanager
+    start citadeld
+    start vendor.keymaster-4-0-citadel
 
     # Boot time fs tune
     write /sys/block/sda/queue/iostats 0
@@ -113,17 +121,11 @@ on init
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor schedutil
     write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
     write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 20000
-    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/hispeed_freq 1209600
-    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/pl 1
 
     # configure governor settings for big cluster
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor schedutil
     write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/up_rate_limit_us 500
     write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/down_rate_limit_us 20000
-    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/hispeed_freq 1574400
-    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/pl 1
 
     # set default schedTune value for foreground/top-app
     write /dev/stune/foreground/schedtune.prefer_idle 1
@@ -213,7 +215,7 @@ on init
     setprop vendor.thermal.hw_mode -prod
 
 on late-init
-   write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    write /sys/devices/virtual/thermal/tz-by-name/fps-therm-adc/mode enabled
 
 on fs
     # Start HW service manager early
@@ -238,6 +240,8 @@ on fs
     chmod 0770 /persist/rfs/apq
     chmod 0770 /persist/rfs/apq/gnss
     chmod 0770 /persist/hlos_rfs
+    # for cycle count backup
+    mkdir /persist/battery 0700 system system
     restorecon_recursive /persist
 
 on late-fs
@@ -251,15 +255,15 @@ on late-fs
     start bootanim
     start vendor.hwcomposer-2-2
     start vendor.configstore-hal
-    start vendor.gralloc-2-0
+    start vendor.qti.hardware.display.allocator
 
     # Wait for hwservicemanager ready since fsck might be triggered in mount_all --late
     # In such case, init won't responce the property_set from hwservicemanager and then
     # cause services for bootanim not running.
     wait_for_prop hwservicemanager.ready true
 
-    # Wait for keymaster
-    exec_start wait_for_keymaster
+    # Wait for keymaster HALs (TEE and StrongBox)
+    exec_start wait_for_strongbox
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --late
@@ -355,6 +359,10 @@ on zygote-start
 
     # Create directory for radio
     mkdir /data/vendor/radio 0771 system radio
+    mkdir /data/vendor/modem_stat 0771 system radio
+    write /data/vendor/modem_stat/debug.txt ""
+    chown system radio /data/vendor/modem_stat/debug.txt
+    chmod 0664 /data/vendor/modem_stat/debug.txt
 
     # Set up sensors-related directories and permissions
     chmod 775 /persist/sensors
@@ -446,12 +454,31 @@ on early-boot
     chown system system /sys/class/leds/blue/rgb_start
     chown system system /sys/class/backlight/panel0-backlight/brightness
     chown system system /sys/class/backlight/panel0-backlight/vr_mode
+    chown system system /sys/class/backlight/panel0-backlight/hbm_mode
 
     # Permission for Wireless charger
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/rxdata
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/txdata
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/txlen
     chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/ccreset
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/status
+    chown system system /sys/devices/platform/soc/a88000.i2c/i2c-0/0-0061/version
+    chown system system /sys/class/power_supply/wireless/capacity
+
+    # FG cycle counts read from dumpstate + backup restore from health HAL
+    chown system system /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    chown system system /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
+
+    # HardwareInfo needs to be able to read CC bins
+    chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    chmod 644 /sys/devices/platform/soc/a90000.i2c/i2c-4/4-0036/power_supply/maxfg/cycle_counts_bins
+
+    # Permission for Pixelstats
+    chown system system /sys/class/misc/msm_cirrus_playback/resistance_left_right
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_read_cnt
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_write_cnt
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_unmap_cnt
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_sync_cnt
 
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -570,16 +597,16 @@ on property:sys.boot_completed=1
     # Runtime fs tuning: as we have init boottime setting and kernel patch setting
     # default readahead to 2048KB. We should adjust the setting upon boot_complete
     # for runtime performance
-    write /sys/block/sda/queue/read_ahead_kb 1024
+    write /sys/block/sda/queue/read_ahead_kb 128
     write /sys/block/sda/queue/nr_requests 128
     write /sys/block/sda/queue/iostats 1
-    write /sys/block/sdf/queue/read_ahead_kb 1024
+    write /sys/block/sdf/queue/read_ahead_kb 128
     write /sys/block/sdf/queue/nr_requests 128
     write /sys/block/sdf/queue/iostats 1
-    write /sys/block/dm-0/queue/read_ahead_kb 512
-    write /sys/block/dm-1/queue/read_ahead_kb 512
-    write /sys/block/dm-2/queue/read_ahead_kb 512
-    write /sys/block/dm-3/queue/read_ahead_kb 512
+    write /sys/block/dm-0/queue/read_ahead_kb 128
+    write /sys/block/dm-1/queue/read_ahead_kb 128
+    write /sys/block/dm-2/queue/read_ahead_kb 128
+    write /sys/block/dm-3/queue/read_ahead_kb 128
 
     # QCOM FG SRAM dump for dumpstate
     chown system system /d/fg/sram/data
@@ -589,12 +616,6 @@ on property:sys.boot_completed=1
     # Maxim FG dump for dumpstate
     chown system system /d/regmap/4-0036/registers
     chown system system /d/regmap/4-000b/registers
-
-    # Dump QCOM FG cycle counts for dumpstate
-    chown system system /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
-
-    # HardwareInfo needs to be able to read CC bins
-    chmod 644 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
 
     # UFS health
     chmod 755 /sys/kernel/debug/ufshcd0
@@ -752,11 +773,6 @@ service ipacm /vendor/bin/ipacm
     user radio
     group radio inet
 
-service vendor.dataqti /vendor/bin/qti
-    class main
-    user radio
-    group radio net_raw diag usb net_admin
-
 service loc_launcher /vendor/bin/loc_launcher
     class late_start
     group gps inet diag wifi
@@ -822,6 +838,12 @@ service ppd /vendor/bin/mm-pp-dpps
     socket pps stream 0660 system system
     disabled
 
+service wait_for_strongbox /vendor/bin/hw/wait_for_strongbox
+    user root
+    group root system
+    priority -20
+    ioprio rt 0
+
 on property:init.svc.vendor.hwcomposer-2-2=stopped
     stop ppd
 
@@ -854,10 +876,14 @@ on property:ro.boot.hardware.sku=G013A
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013B
     setprop persist.nfc.uicc_enabled false
+    setprop persist.vendor.radio.uicc_se_enabled false
+    interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 on property:ro.boot.hardware.sku=G013C
     setprop persist.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013D
     setprop persist.nfc.uicc_enabled false
+    setprop persist.vendor.radio.uicc_se_enabled false
+    interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 
 # charger driver exposes now finer grain control, map demo mode to those properties
 # demo mode can only be exit wipping data which will also reset the persist properties
@@ -865,13 +891,22 @@ on property:sys.retaildemo.enabled=1
     setprop persist.vendor.charge.stop.level 35
     setprop persist.vendor.charge.start.level 30
 
-# system will not set the sys.retaildemo.enabled to 0 but this is used to set back to default charging
-on property:sys.retaildemo.enabled=0
-    setprop persist.vendor.charge.stop.level 100
-    setprop persist.vendor.charge.start.level 0
-
 on property:persist.vendor.charge.stop.level=*
     write /sys/devices/platform/soc/soc:google,charger/charge_stop_level ${persist.vendor.charge.stop.level}
 
 on property:persist.vendor.charge.start.level=*
     write /sys/devices/platform/soc/soc:google,charger/charge_start_level ${persist.vendor.charge.start.level}
+
+# For Japan radio builds, always enforce camera shutter sound
+# Since this property is read by the audio server in system service,
+# it should be written by the system init.
+on property:ro.boot.hardware.radio.subtype=1
+    setprop audio.camerasound.force true
+
+on property:sys.boot_completed=1 && property:ro.boot.mode=firstboot
+    start init-firstboot-sh
+
+service init-firstboot-sh /vendor/bin/init.firstboot.sh
+    user nobody
+    disabled
+    oneshot

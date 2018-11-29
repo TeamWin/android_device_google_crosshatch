@@ -15,8 +15,8 @@
 #
 
 PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := 560dpi
-PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi
 
 PRODUCT_HARDWARE := blueline
 
@@ -24,9 +24,13 @@ include device/google/crosshatch/device-common.mk
 
 DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/blueline/overlay
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.insmod.blueline.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.cfg
+
 # Audio XMLs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mixer_paths_tavil_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tavil_b1.xml \
+    $(LOCAL_PATH)/audio_policy_volumes_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio_platform_info_tavil_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil_b1.xml
 
 PRODUCT_COPY_FILES += \

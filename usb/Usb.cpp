@@ -17,6 +17,8 @@
 #define LOG_TAG "android.hardware.usb@1.1-service.crosshatch"
 
 #include <android-base/logging.h>
+#include <android-base/parseint.h>
+#include <android-base/strings.h>
 #include <assert.h>
 #include <chrono>
 #include <dirent.h>
@@ -502,11 +504,13 @@ Return<void> Usb::queryPortStatus() {
   return Void();
 }
 
+/* uevent_event() data that is persistent across uevents. */
 struct data {
   int uevent_fd;
   android::hardware::usb::V1_1::implementation::Usb *usb;
 };
 
+// Report connection & disconnection of devices into the USB-C connector.
 static void uevent_event(uint32_t /*epevents*/, struct data *payload) {
   char msg[UEVENT_MSG_LEN + 2];
   char *cp;

@@ -1,5 +1,0 @@
-allow hal_wifi_supplicant_default self:socket create_socket_perms;
-# ioctlcmd=c304, c302
-allowxperm hal_wifi_supplicant_default self:socket ioctl msm_sock_ipc_ioctls;
-
-allow hal_wifi_supplicant_default cnd:unix_dgram_socket sendto;

@@ -20,16 +20,16 @@ USES_DEVICE_GOOGLE_B1C1 := true
 TARGET_NO_BOOTLOADER := true
 
 TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a
+TARGET_ARCH_VARIANT := armv8-2a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := cortex-a73
+TARGET_CPU_VARIANT := cortex-a75
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a73
+TARGET_2ND_CPU_VARIANT := cortex-a75
 
 TARGET_BOARD_COMMON_PATH := device/google/crosshatch/sdm845
 
@@ -39,8 +39,8 @@ BOARD_KERNEL_CMDLINE += ehci-hcd.park=3
 BOARD_KERNEL_CMDLINE += service_locator.enable=1
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
-# STOPSHIP Bringup hack- no low power
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
+BOARD_KERNEL_CMDLINE += usbcore.autosuspend=7
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
@@ -94,7 +94,7 @@ BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_PRODUCT := product
 
 # system.img
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2579496960
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2952790016
 BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
 BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
 
@@ -117,17 +117,17 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # Install odex files into the other system image
 BOARD_USES_SYSTEM_OTHER_ODEX := true
 
-BOARD_ROOT_EXTRA_FOLDERS := persist firmware
+BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
+BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
 
-BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy/vendor
-BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/crosshatch/sepolicy/public
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR := device/google/crosshatch/sepolicy/private
-BOARD_SEPOLICY_DIRS += device/google/crosshatch/sepolicy/verizon
+include device/google/crosshatch-sepolicy/crosshatch-sepolicy.mk
 
 TARGET_FS_CONFIG_GEN := device/google/crosshatch/config.fs
 
 QCOM_BOARD_PLATFORMS += sdm845
 BOARD_HAVE_BLUETOOTH_QCOM := true
+BOARD_HAVE_QCOM_FM := false
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/google/crosshatch/bluetooth
 
 # Enable dex pre-opt to speed up initial boot
@@ -179,7 +179,6 @@ USE_XML_AUDIO_POLICY_CONF := 1
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_SND_MONITOR := true
 AUDIO_FEATURE_ENABLED_USB_TUNNEL := true
-BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 AUDIO_FEATURE_ENABLED_CIRRUS_SPKR_PROTECTION := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 AUDIO_FEATURE_FLICKER_SENSOR_INPUT := true
@@ -208,6 +207,11 @@ DEVICE_MANIFEST_FILE := device/google/crosshatch/manifest.xml
 DEVICE_MATRIX_FILE := device/google/crosshatch/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/google/crosshatch/device_framework_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/google/crosshatch/framework_manifest.xml
+
+# Userdebug only Vendor Interface Manifest
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+DEVICE_MANIFEST_FILE += device/google/crosshatch/manifest_userdebug.xml
+endif
 
 # Remove health /backup instance
 DEVICE_FRAMEWORK_MANIFEST_FILE += system/libhidl/vintfdata/manifest_healthd_exclude.xml

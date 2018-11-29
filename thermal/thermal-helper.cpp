@@ -15,6 +15,7 @@
  */
 
 #include <sstream>
+#include <set>
 #include <vector>
 
 #include <android-base/file.h>
@@ -43,6 +44,9 @@ constexpr char kThermalZoneDirSuffix[] = "thermal_zone";
 constexpr char kCoolingDeviceDirSuffix[] = "cooling_device";
 constexpr unsigned int kMaxCpus = 8;
 constexpr unsigned int kMaxSensorSearchNum = 100;
+// The number of available sensors in thermalHAL is:
+// 8 (for each cpu) + 2 (for each gpu) + battery + skin + usbc = 13.
+constexpr unsigned int kAvailableSensors = 13;
 
 // This is a golden set of thermal sensor type and their temperature types.
 // Used when we read in sensor values.
@@ -61,10 +65,11 @@ kValidThermalSensorTypeMap = {
     {"gpu1-usr", TemperatureType::GPU},
     // Battery thermal sensor.
     {"battery", TemperatureType::BATTERY},
-    // Skin thermal sensor.
-    {kSkinSensorType, TemperatureType::SKIN},
     // USBC thermal sensor.
     {"usbc-therm-adc", TemperatureType::UNKNOWN},
+    // Skin sensors.
+    {"quiet-therm-adc", TemperatureType::SKIN},  // Used by EVT devices
+    {"fps-therm-adc", TemperatureType::SKIN},    // Used by prod devices
 };
 
 namespace {
@@ -103,7 +108,7 @@ void parseCpuUsagesFileAndAssignUsages(hidl_vec<CpuUsage>* cpu_usages) {
                 if (!android::base::ReadFileToString(
                     cpu_online_path, &is_online)) {
                     LOG(ERROR) << "Could not open Cpu online file: "
-                                 << cpu_online_path;
+                               << cpu_online_path;
                     return;
                 }
                 is_online = android::base::Trim(is_online);
@@ -218,6 +223,11 @@ bool ThermalHelper::readTemperature(
     out->currentValue = std::stoi(temp) * kMultiplier;
     out->throttlingThreshold = getThresholdFromType(
         kValidThermalSensorTypeMap.at(sensor_name), thresholds_);
+    if (kValidThermalSensorTypeMap.at(sensor_name) == TemperatureType::SKIN) {
+        out->throttlingThreshold = low_temp_threshold_adjuster_.adjustThreshold(
+              out->throttlingThreshold, out->currentValue);
+    }
+
     out->shutdownThreshold = getThresholdFromType(
         kValidThermalSensorTypeMap.at(sensor_name),
         shutdown_thresholds_);
@@ -249,18 +259,18 @@ bool ThermalHelper::initializeSensorMap() {
             sensor_name = android::base::Trim(sensor_name);
             if (kValidThermalSensorTypeMap.find(sensor_name) !=
                 kValidThermalSensorTypeMap.end()) {
-                  if (!thermal_sensors_.addSensor(
-                      sensor_name, sensor_temp_path)) {
-                        LOG(ERROR) << "Could not add " << sensor_name
-                                   << "to sensors map";
-                  }
+
+                if (!thermal_sensors_.addSensor(
+                    sensor_name, sensor_temp_path)) {
+                      LOG(ERROR) << "Could not add " << sensor_name
+                                 << "to sensors map";
+                }
             }
         }
-
-        if (kValidThermalSensorTypeMap.size()
-                == thermal_sensors_.getNumSensors()) {
+    }
+    if (kAvailableSensors == thermal_sensors_.getNumSensors() ||
+        kValidThermalSensorTypeMap.size() == thermal_sensors_.getNumSensors()) {
             return true;
-        }
     }
     return false;
 }
@@ -311,10 +321,18 @@ bool ThermalHelper::initializeCoolingDevices() {
 }
 
 bool ThermalHelper::fillTemperatures(hidl_vec<Temperature>* temperatures) {
-    temperatures->resize(kValidThermalSensorTypeMap.size());
+    temperatures->resize(kAvailableSensors);
     int current_index = 0;
     for (const auto& name_type_pair : kValidThermalSensorTypeMap) {
         Temperature temp;
+
+        // Since evt and prod use different skin sensors. Skip the one we don't
+        // care about.
+        if (name_type_pair.second == TemperatureType::SKIN &&
+                getSkinSensorType() != name_type_pair.first) {
+            continue;
+        }
+
         if (readTemperature(name_type_pair.first, &temp)) {
             (*temperatures)[current_index] = temp;
         } else {
@@ -347,7 +365,7 @@ bool ThermalHelper::checkThrottlingData(
         const std::pair<std::string, std::string>& throttling_data,
         std::pair<bool, Temperature>* notify_params) {
     Temperature temp;
-    if (!readTemperature(kSkinSensorType, &temp)) {
+    if (!readTemperature(getSkinSensorType(), &temp)) {
         LOG(ERROR) << "Could not read skin sensor temperature.";
     }
 
@@ -380,6 +398,23 @@ bool ThermalHelper::checkThrottlingData(
     }
 
     return false;
+}
+
+bool ThermalHelper::fillBatteryThresholdDebugInfo(std::ostringstream& dump_buf)
+{
+    return low_temp_threshold_adjuster_.fillBatteryThresholdDebugInfo(dump_buf);
+}
+
+std::string ThermalHelper::getSkinSensorType() {
+    // The skin sensor is checked dynamically, since -evt uses quiet-therm-adc
+    // and -prod uses fps-therm-adc.
+    static std::string rev = android::base::GetProperty(
+        "vendor.thermal.hw_mode", "");
+    if (rev == "-evt") {
+        return "quiet-therm-adc";
+    } else {
+        return "fps-therm-adc";
+    }
 }
 
 }  // namespace implementation

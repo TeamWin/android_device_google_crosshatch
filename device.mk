@@ -15,16 +15,20 @@
 #
 
 PRODUCT_SOONG_NAMESPACES += \
+    device/google/crosshatch/pixelstats \
+    device/google/crosshatch/usb \
+    device/google/crosshatch/health \
     hardware/google/av \
     hardware/google/interfaces \
-    hardware/qcom/sdm845/display
+    hardware/qcom/sdm845 \
+    vendor/qcom/sdm845
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
 # enable cal by default on accel sensor
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    persist.debug.sensors.accel_cal=1
+    persist.vendor.debug.sensors.accel_cal=1
 
 # The default value of this variable is false and should only be set to true when
 # the device allows users to retain eSIM profiles after factory reset of user data.
@@ -33,7 +37,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.software.verified_boot.xml:system/etc/permissions/android.software.verified_boot.xml
 
 # Enforce privapp-permissions whitelist
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -85,7 +90,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.qcom.ipastart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.ipastart.sh \
     $(LOCAL_PATH)/init.qcom.wlan.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.wlan.sh \
     $(LOCAL_PATH)/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
-    $(LOCAL_PATH)/init.insmod.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.cfg \
+    $(LOCAL_PATH)/init.firstboot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.firstboot.sh \
     $(LOCAL_PATH)/thermal-engine-blueline-novr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-novr-evt.conf \
     $(LOCAL_PATH)/thermal-engine-blueline-vr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-vr-evt.conf \
     $(LOCAL_PATH)/thermal-engine-crosshatch-novr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-novr-evt.conf \
@@ -93,7 +98,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/thermal-engine-blueline-novr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-novr-prod.conf \
     $(LOCAL_PATH)/thermal-engine-blueline-vr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-vr-prod.conf \
     $(LOCAL_PATH)/thermal-engine-crosshatch-novr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-novr-prod.conf \
-    $(LOCAL_PATH)/thermal-engine-crosshatch-vr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-vr-prod.conf
+    $(LOCAL_PATH)/thermal-engine-crosshatch-vr-prod.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-vr-prod.conf \
+    $(LOCAL_PATH)/init.ramoops.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.ramoops.sh
 
 # Edge Sense initialization script.
 # TODO: b/67205273
@@ -214,13 +220,14 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vr.headtracking-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vr.headtracking.xml \
     frameworks/native/data/etc/android.hardware.vr.high_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vr.high_performance.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.telephony.carrierlock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.carrierlock.xml \
     frameworks/native/data/etc/android.hardware.strongbox_keystore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.strongbox_keystore.xml \
 
 # power HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.2-service.crosshatch-libperfmgr
+    android.hardware.power@1.3-service.crosshatch-libperfmgr
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
@@ -253,15 +260,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.foss.config=1 \
     vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
-# b/73168288
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.display.disable_rotator_downscale=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.display.disable_inline_rotator=1
-
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.dataspace_saturation_matrix=1.16868,-0.03155,-0.01473,-0.16868,1.03155,-0.05899,0.00000,0.00000,1.07372
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.disable_decimation=1
 
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -275,6 +278,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable logical camera as default (camera id 1)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.logical.default=1
+
+# Enable Treble camera shim to free buffers earlier than default
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.camera.free_buf_early=true
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -294,6 +301,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.sib16_support=1 \
     persist.vendor.radio.data_con_rprt=true \
     persist.vendor.radio.relay_oprt_change=1\
+    persist.vendor.radio.no_wait_for_card=1\
     persist.rcs.supported=1 \
     vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so\
     ro.hardware.keystore_desede=true \
@@ -336,8 +344,7 @@ PRODUCT_PACKAGES += \
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.$(PRODUCT_PLATFORM) \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service
+    hardware.google.light@1.0-service
 
 # Memtrack HAL
 PRODUCT_PACKAGES += \
@@ -376,11 +383,16 @@ PRODUCT_PACKAGES += \
     Tag \
     SecureElement \
     android.hardware.nfc@1.1-service \
-    android.hardware.secure_element@1.0-service
+    android.hardware.secure_element@1.0-service-disabled
+
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    vendor.ese.loader_script_path=/sys/firmware/devicetree/base/soc/i2c@88c000/nq@28/ese/loader_scripts_path
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
-    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf
+    device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf \
+    device/google/crosshatch/felica/loaderservice_updater_1.lss:$(TARGET_COPY_OUT_VENDOR)/etc/loaderservice_updater_1.lss \
+    device/google/crosshatch/felica/loaderservice_updater_2.lss:$(TARGET_COPY_OUT_VENDOR)/etc/loaderservice_updater_2.lss
 
 # TODO(b/72443662)
 PRODUCT_COPY_FILES += \
@@ -532,7 +544,6 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio_policy_configuration_a2dp_offload_disabled.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_a2dp_offload_disabled.xml \
-    $(LOCAL_PATH)/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
@@ -548,19 +559,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
     $(LOCAL_PATH)/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
     $(LOCAL_PATH)/media_codecs_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml \
+    $(LOCAL_PATH)/media_codecs_performance_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_c2.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_audio.xml \
+    $(LOCAL_PATH)/media_codecs_google_c2_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_video.xml \
 
-# configures both aac and xaac decoders
-PRODUCT_COPY_FILES += \
-    device/google/crosshatch/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
-# and ensure that the xaac decoder is built
-PRODUCT_PACKAGES += \
-    libstagefright_soft_xaacdec.vendor
+# no xaac codecs for now, so don't copy the media_codecs_google*audio.xml files at this time.
 
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.snd_card.open.retries=50
@@ -595,7 +604,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM)
+    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM) \
+    device/google/crosshatch/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist
 
 # Use the default charger mode images
 PRODUCT_PACKAGES += \
@@ -618,7 +628,8 @@ PRODUCT_PACKAGES += \
     android.hardware.authsecret@1.0-service.citadel \
     android.hardware.oemlock@1.0-service.citadel \
     android.hardware.weaver@1.0-service.citadel \
-    android.hardware.keymaster@4.0-service.citadel
+    android.hardware.keymaster@4.0-service.citadel \
+    wait_for_strongbox
 
 # Citadel debug stuff
 PRODUCT_PACKAGES_DEBUG += \
@@ -669,7 +680,8 @@ PRODUCT_PACKAGES += \
 
 # Reliability reporting
 PRODUCT_PACKAGES += \
-    hardware.google.pixelstats@1.0-service
+    hardware.google.pixelstats@1.0-service \
+    pixelstats-vendor
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
@@ -733,12 +745,16 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
 
 # Enable modem logging
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.radio.log_loc="/data/vendor/modem_dump" \
+    ro.radio.log_prefix="modem_log_"
+
+# Enable modem logging for debug
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.sys.modem.diag.mdlog=true \
-    persist.vendor.sys.modem.diag.mdlog_br_num=5 \
-    ro.radio.log_loc="/data/vendor/modem_dump" \
-    ro.radio.log_prefix="modem_log_"
+    persist.vendor.sys.modem.diag.mdlog_br_num=5
+else
 endif
 
 # Preopt SystemUI
@@ -758,6 +774,20 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
       persist.vendor.usb.usbradio.config=diag
 endif
 
-# Early phase offset for SurfaceFlinger (b/75985430)
+# Early phase offset configuration for SurfaceFlinger (b/75985430)
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.early_phase_offset_ns=5000000
+    debug.sf.early_phase_offset_ns=500000
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.early_app_phase_offset_ns=500000
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.early_gl_phase_offset_ns=3000000
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.early_gl_app_phase_offset_ns=15000000
+
+# Do not skip init trigger by default
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    vendor.skip.init=0
+
+# Increment the SVN for any official public releases
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.svn=2
