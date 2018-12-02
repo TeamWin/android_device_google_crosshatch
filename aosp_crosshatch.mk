@@ -38,4 +38,3 @@ PRODUCT_MODEL := AOSP on crosshatch
 # Audio XMLs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
-
