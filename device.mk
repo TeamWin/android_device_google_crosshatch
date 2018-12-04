@@ -56,7 +56,7 @@ LOCAL_PATH := device/google/crosshatch
 SRC_MEDIA_HAL_DIR := hardware/qcom/media/sdm845
 SRC_DISPLAY_HAL_DIR := hardware/qcom/display/sdm845
 
-TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+TARGET_PRODUCT_PROP := $(LOCAL_PATH)/product.prop
 
 $(call inherit-product, $(LOCAL_PATH)/utils.mk)
 
@@ -77,7 +77,7 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
-    $(LOCAL_PATH)/init.recovery.hardware.rc:root/init.recovery.$(PRODUCT_PLATFORM).rc \
+    $(LOCAL_PATH)/init.recovery.hardware.rc:recovery/root/init.recovery.$(PRODUCT_PLATFORM).rc \
     $(LOCAL_PATH)/init.hardware.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).rc \
     $(LOCAL_PATH)/init.hardware.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).usb.rc \
     $(LOCAL_PATH)/ueventd.hardware.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
@@ -121,8 +121,8 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/crosshatch/init.crosshatch.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.crosshatch.rc \
     $(LOCAL_PATH)/blueline/init.blueline.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.blueline.rc \
-    $(LOCAL_PATH)/init.recovery.hardware.device.rc:root/init.recovery.crosshatch.rc \
-    $(LOCAL_PATH)/init.recovery.hardware.device.rc:root/init.recovery.blueline.rc \
+    $(LOCAL_PATH)/init.recovery.hardware.device.rc:recovery/root/init.recovery.crosshatch.rc \
+    $(LOCAL_PATH)/init.recovery.hardware.device.rc:recovery/root/init.recovery.blueline.rc \
 
 MSM_VIDC_TARGET_LIST := sdm845 # Get the color format from kernel headers
 MASTER_SIDE_CP_TARGET_LIST := sdm845 # ION specific settings
@@ -372,7 +372,7 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.2-service.clearkey \
-    android.hardware.drm@1.1-service.widevine
+    android.hardware.drm@1.2-service.widevine
 
 # NFC and Secure Element packages
 PRODUCT_PACKAGES += \
