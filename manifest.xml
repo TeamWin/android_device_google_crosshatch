@@ -302,6 +302,8 @@
         <transport>hwbinder</transport>
         <fqname>@1.2::ISap/slot1</fqname>
         <fqname>@1.2::IRadio/slot1</fqname>
+        <fqname>@1.2::IRadio/slot2</fqname>
+
     </hal>
     <hal format="hidl">
       <name>android.hardware.radio.config</name>
@@ -427,6 +429,7 @@
         <interface>
             <name>IImsRadio</name>
             <instance>imsradio0</instance>
+            <instance>imsradio1</instance>
         </interface>
     </hal>
     <hal format="hidl">
