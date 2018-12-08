@@ -77,8 +77,6 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
-    $(LOCAL_PATH)/modules/ftm5.ko:root/sbin/ftm5.ko \
-    $(LOCAL_PATH)/modules/sec_touch.ko:root/sbin/sec_touch.ko \
     $(LOCAL_PATH)/recovery/root/sbin/touchdriver.sh:root/sbin/touchdriver.sh \
     $(LOCAL_PATH)/init.recovery.hardware.rc:root/init.recovery.$(PRODUCT_PLATFORM).rc \
     $(LOCAL_PATH)/usb/android.hardware.usb@1.1-service.crosshatch.rc:root/android.hardware.usb@1.1-service.crosshatch.rc \

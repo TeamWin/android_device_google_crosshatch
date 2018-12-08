@@ -2,6 +2,7 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     install_keyring
+    start touchdriver
 
 on init
     mount configfs none /config
@@ -19,7 +20,6 @@ on init
     write /sys/module/msm_poweroff/parameters/warm_reset 1
     # Enable thermal mitigation
     write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
-    start touchdriver
     start prepdecrypt
     start servicemanager
     start vendor.boot-hal-1-0
