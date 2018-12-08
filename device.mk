@@ -409,10 +409,11 @@ PRODUCT_PACKAGES += \
     libc2dcolorconvert
 
 # Enable Codec 2.0
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.media.codec2=2 \
+
 PRODUCT_PACKAGES += \
-    libmedia_codecserviceregistrant \
     libqcodec2 \
-    libstagefright_ccodec \
     vendor.qti.media.c2@1.0-service \
 
 PRODUCT_PACKAGES += \
