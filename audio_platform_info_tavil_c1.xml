@@ -31,6 +31,7 @@
         <device name="SND_DEVICE_OUT_SPEAKER_SAFE" acdb_id="514"/>
         <device name="SND_DEVICE_OUT_VOICE_HANDSET" acdb_id="7"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="14"/>
+        <device name="SND_DEVICE_OUT_VOICE_MUSIC_TX" acdb_id="3"/>
         <device name="SND_DEVICE_OUT_VOICE_HAC_HANDSET" acdb_id="201"/>
         <device name="SND_DEVICE_OUT_VOICE_HANDSET_TMUS" acdb_id="98"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_HCO_HANDSET" acdb_id="14"/>

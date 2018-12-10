@@ -20,7 +20,8 @@ PRODUCT_SOONG_NAMESPACES += \
     device/google/crosshatch/health \
     hardware/google/av \
     hardware/google/interfaces \
-    hardware/qcom/sdm845/display
+    hardware/qcom/sdm845 \
+    vendor/qcom/sdm845
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
@@ -89,6 +90,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.qcom.ipastart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.ipastart.sh \
     $(LOCAL_PATH)/init.qcom.wlan.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.wlan.sh \
     $(LOCAL_PATH)/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
+    $(LOCAL_PATH)/init.firstboot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.firstboot.sh \
     $(LOCAL_PATH)/thermal-engine-blueline-novr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-novr-evt.conf \
     $(LOCAL_PATH)/thermal-engine-blueline-vr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-blueline-vr-evt.conf \
     $(LOCAL_PATH)/thermal-engine-crosshatch-novr-evt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-crosshatch-novr-evt.conf \
@@ -271,6 +273,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable logical camera as default (camera id 1)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.logical.default=1
+
+# Enable Treble camera shim to free buffers earlier than default
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.camera.free_buf_early=true
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -548,22 +554,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
     $(LOCAL_PATH)/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
     $(LOCAL_PATH)/media_codecs_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml \
     $(LOCAL_PATH)/media_codecs_performance_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_c2.xml \
-    $(LOCAL_PATH)/media_codecs_google_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_audio.xml \
     $(LOCAL_PATH)/media_codecs_google_c2_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_video.xml \
 
-# configures both aac and xaac decoders
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
-
-# and ensure that the xaac decoder is built
-PRODUCT_PACKAGES += \
-    libstagefright_soft_xaacdec.vendor
+# no xaac codecs for now, so don't copy the media_codecs_google*audio.xml files at this time.
 
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.snd_card.open.retries=50
@@ -594,7 +595,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM)
+    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM) \
+    device/google/crosshatch/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist
 
 # Use the default charger mode images
 PRODUCT_PACKAGES += \
@@ -776,3 +778,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Do not skip init trigger by default
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     vendor.skip.init=0
+
+# Increment the SVN for any official public releases
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.svn=3

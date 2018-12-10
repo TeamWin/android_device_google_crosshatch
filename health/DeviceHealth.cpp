@@ -32,7 +32,8 @@ DeviceHealth::DeviceHealth() {
 
 void DeviceHealth::update(struct android::BatteryProperties *props) {
     if (!is_user_build_ &&
-        android::base::GetProperty("persist.vendor.disable.thermal.control", "") == "1") {
+        (android::base::GetProperty("persist.vendor.disable.thermal.control", "") == "1" ||
+         android::base::GetProperty("persist.vendor.fake.battery.temperature", "") == "1")) {
         props->batteryTemperature = 200;
     }
 }
