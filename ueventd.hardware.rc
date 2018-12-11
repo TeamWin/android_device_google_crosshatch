@@ -114,3 +114,6 @@ firmware_directories /vendor/firmware_mnt/image/
 
 # Storage: for factory reset protection feature
 /dev/block/platform/soc/1d84000.ufshc/by-name/frp       0660   system     system
+
+# fuel gauge history
+/dev/maxfg_history        0644   system system

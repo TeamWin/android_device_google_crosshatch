@@ -41,11 +41,9 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/lib64/lib-imsvtextutils.so:system/lib64/lib-imsvtextutils.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/lib-imsvt.so:system/lib64/lib-imsvt.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/lib-imsvtutils.so:system/lib64/lib-imsvtutils.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libiperf.so:system/lib64/libiperf.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/liblistenjni.so:system/lib64/liblistenjni.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/liblistensoundmodel2.so:system/lib64/liblistensoundmodel2.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libmdsprpc_system.so:system/lib64/libmdsprpc_system.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libminui.so:system/lib64/libminui.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libQTEEConnector_system.so:system/lib64/libQTEEConnector_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/librcc.so:system/lib64/librcc.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libsdm-disp-apis.so:system/lib64/libsdm-disp-apis.so:qcom \
@@ -70,12 +68,10 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/lib-imsvtextutils.so:system/lib/lib-imsvtextutils.so:qcom \
     vendor/qcom/blueline/proprietary/lib-imsvt.so:system/lib/lib-imsvt.so:qcom \
     vendor/qcom/blueline/proprietary/lib-imsvtutils.so:system/lib/lib-imsvtutils.so:qcom \
-    vendor/qcom/blueline/proprietary/libiperf.so:system/lib/libiperf.so:qcom \
     vendor/qcom/blueline/proprietary/liblistenjni.so:system/lib/liblistenjni.so:qcom \
     vendor/qcom/blueline/proprietary/liblistensoundmodel2.so:system/lib/liblistensoundmodel2.so:qcom \
     vendor/qcom/blueline/proprietary/liblogwrap.so:system/lib/liblogwrap.so:qcom \
     vendor/qcom/blueline/proprietary/libmdsprpc_system.so:system/lib/libmdsprpc_system.so:qcom \
-    vendor/qcom/blueline/proprietary/libminui.so:system/lib/libminui.so:qcom \
     vendor/qcom/blueline/proprietary/libprotobuf-cpp-full.so:system/lib/libprotobuf-cpp-full.so:qcom \
     vendor/qcom/blueline/proprietary/libqct_resampler.so:system/lib/libqct_resampler.so:qcom \
     vendor/qcom/blueline/proprietary/libQTEEConnector_system.so:system/lib/libQTEEConnector_system.so:qcom \
