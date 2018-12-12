@@ -686,4 +686,6 @@
         <item>G013B</item>
     </string-array>
 
+    <dimen name="rounded_corner_radius">70px</dimen>
+
 </resources>

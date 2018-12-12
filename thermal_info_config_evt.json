@@ -167,7 +167,7 @@
         },
         {
             "Name":"s2mpb04_tz",
-            "Type":"UNKNOWN",
+            "Type":"NPU",
             "HotThreshold":[
                 "NAN",
                 "NAN",
