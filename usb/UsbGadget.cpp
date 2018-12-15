@@ -551,7 +551,7 @@ V1_0::Status UsbGadget::setupFunctions(
     return Status::ERROR;
   }
 
-  unique_fd epollFd(epoll_create(2));
+  unique_fd epollFd(epoll_create1(EPOLL_CLOEXEC));
   if (epollFd == -1) {
     ALOGE("mEpollFd failed to create %d", errno);
     return Status::ERROR;
