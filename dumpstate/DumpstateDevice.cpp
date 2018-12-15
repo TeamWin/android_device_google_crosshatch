@@ -341,6 +341,11 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
+    DumpFileToFd(fd, "ipc-servers", "/d/msm_ipc_router/dump_servers");
+    RunCommandToFd(fd, "ipc-logs",
+                   {"/vendor/bin/sh", "-c",
+                    "for f in `ls /d/ipc_logging/*_IPCRTR/log` ; do echo \"------ $f\\n`cat "
+                    "$f`\\n\" ; done"});
     RunCommandToFd(fd, "USB Device Descriptors", {"/vendor/bin/sh", "-c", "cd /sys/bus/usb/devices/1-1 && cat product && cat bcdDevice; cat descriptors | od -t x1 -w16 -N96"});
     RunCommandToFd(fd, "Power supply properties", {"/vendor/bin/sh", "-c", "for f in `ls /sys/class/power_supply/*/uevent` ; do echo \"------ $f\\n`cat $f`\\n\" ; done"});
     RunCommandToFd(fd, "PMIC Votables", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/pmic-votable/*/status"});
