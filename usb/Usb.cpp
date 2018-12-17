@@ -612,9 +612,9 @@ void *work(void *param) {
   ev.events = EPOLLIN;
   ev.data.ptr = (void *)uevent_event;
 
-  epoll_fd = epoll_create(64);
+  epoll_fd = epoll_create1(EPOLL_CLOEXEC);
   if (epoll_fd == -1) {
-    ALOGE("epoll_create failed; errno=%d", errno);
+    ALOGE("epoll_create1 failed; errno=%d", errno);
     goto error;
   }
 
