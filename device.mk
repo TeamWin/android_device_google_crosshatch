@@ -591,10 +591,12 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/fstab.mainline.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM)
+    device/google/crosshatch/fstab.mainline.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM) \
+    device/google/crosshatch/fstab.mainline.hardware:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.$(PRODUCT_PLATFORM)
 else
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM)
+    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM) \
+    device/google/crosshatch/fstab.hardware:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.$(PRODUCT_PLATFORM)
 endif
 
 PRODUCT_COPY_FILES += \
@@ -684,7 +686,8 @@ PRODUCT_PACKAGES += \
     pixelstats-vendor
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
+    frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml \
+    frameworks/native/data/etc/android.hardware.biometrics.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.biometrics.fingerprint.xml
 
 # DRV2624 Haptics Waveform
 PRODUCT_COPY_FILES += \
