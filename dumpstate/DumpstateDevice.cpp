@@ -309,6 +309,9 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "Power Management Stats", "/sys/power/rpmh_stats/master_stats");
     DumpFileToFd(fd, "WLAN Power Stats", "/d/wlan0/power_stats");
     DumpFileToFd(fd, "LL-Stats", "/d/wlan0/ll_stats");
+    DumpFileToFd(fd, "WLAN Connect Info", "/d/wlan0/connect_info");
+    DumpFileToFd(fd, "WLAN Offload Info", "/d/wlan0/offload_info");
+    DumpFileToFd(fd, "WLAN Roaming Stats", "/d/wlan0/roam_stats");
     DumpFileToFd(fd, "ICNSS Stats", "/d/icnss/stats");
     DumpFileToFd(fd, "SMD Log", "/d/ipc_logging/smd/log");
     RunCommandToFd(fd, "ION HEAPS", {"/vendor/bin/sh", "-c", "for d in $(ls -d /d/ion/*); do for f in $(ls $d); do echo --- $d/$f; cat $d/$f; done; done"});
@@ -353,6 +356,9 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
         RunCommandToFd(fd, "Citadel VER", {"/vendor/bin/hw/citadel_updater", "-lv"});
         RunCommandToFd(fd, "Citadel SELFTEST", {"/vendor/bin/hw/citadel_updater", "--selftest"});
     }
+
+    // Dump various events in WiFi data path
+    DumpFileToFd(fd, "WLAN DP Trace", "/d/wlan/dpt_stats/dump_set_dpt_logs");
 
     // Keep this at the end as very long on not for humans
     DumpFileToFd(fd, "WLAN FW Log Symbol Table", "/vendor/firmware/Data.msc");
