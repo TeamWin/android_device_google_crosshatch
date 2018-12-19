@@ -148,6 +148,7 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
             "/data/vendor/radio/power_anomaly_data.txt",
             "/data/vendor/radio/diag_logs/diag_trace.txt",
             "/data/vendor/radio/diag_logs/diag_trace_old.txt",
+            "/data/vendor/radio/diag_logs/logs/diag_poweron_log.qmdl",
             "/data/vendor/radio/metrics_data",
             "/data/vendor/ssrlog/ssr_log.txt",
             "/data/vendor/ssrlog/ssr_log_old.txt",
