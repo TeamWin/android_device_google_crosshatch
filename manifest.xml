@@ -461,6 +461,7 @@
         <interface>
             <name>IQtiOemHook</name>
             <instance>oemhook0</instance>
+            <instance>oemhook1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -470,6 +471,7 @@
         <interface>
             <name>IUim</name>
             <instance>Uim0</instance>
+            <instance>Uim1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -533,6 +535,7 @@
         <interface>
             <name>IQcRilAudio</name>
             <instance>slot1</instance>
+            <instance>slot2</instance>
         </interface>
     </hal>
     <hal format="hidl">
