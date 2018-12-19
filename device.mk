@@ -26,12 +26,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
 # enable cal by default on accel sensor
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PRODUCT_PROPERTIES += \
     persist.vendor.debug.sensors.accel_cal=1
 
 # The default value of this variable is false and should only be set to true when
 # the device allows users to retain eSIM profiles after factory reset of user data.
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PRODUCT_PROPERTIES += \
     masterclear.allow_retain_esim_profiles_after_fdr=true
 
 PRODUCT_COPY_FILES += \
@@ -46,7 +46,7 @@ PRODUCT_COPY_FILES += \
     device/google/crosshatch/permissions/privapp-permissions-aosp.xml:system/etc/permissions/privapp-permissions-aosp.xml
 
 # Enable on-access verification of priv apps. This requires fs-verity support in kernel.
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PRODUCT_PROPERTIES += \
     ro.apk_verity.mode=1
 
 PRODUCT_PACKAGES += \
@@ -135,7 +135,7 @@ PRODUCT_PACKAGES += \
     update_verifier
 
 # Use Sdcardfs
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PRODUCT_PROPERTIES += \
     ro.sys.sdcardfs=1
 
 PRODUCT_PACKAGES += \
@@ -382,7 +382,7 @@ PRODUCT_PACKAGES += \
     android.hardware.nfc@1.1-service \
     android.hardware.secure_element@1.0-service-disabled
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PRODUCT_PROPERTIES += \
     vendor.ese.loader_script_path=/sys/firmware/devicetree/base/soc/i2c@88c000/nq@28/ese/loader_scripts_path
 
 PRODUCT_COPY_FILES += \
@@ -767,7 +767,7 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 
 # Enable stats logging in LMKD
 TARGET_LMKD_STATS_LOG := true
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PRODUCT_PROPERTIES += \
     ro.lmk.log_stats=true
 
 TARGET_ENABLE_MEDIADRM_64 := true
@@ -796,7 +796,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.svn=2
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PRODUCT_PROPERTIES += \
     ro.adb.secure=1
 
 # default atrace HAL
