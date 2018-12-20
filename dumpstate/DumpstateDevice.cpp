@@ -133,8 +133,10 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
         const std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
         const std::string tcpdumpLogDir = "/data/vendor/tcpdump_logger/logs";
         const std::vector<std::string> rilAndNetmgrLogs{
-            "/data/vendor/radio/ril_log",
-            "/data/vendor/radio/ril_log_old",
+            "/data/vendor/radio/ril_log0",
+            "/data/vendor/radio/ril_log0_old",
+            "/data/vendor/radio/ril_log1",
+            "/data/vendor/radio/ril_log1_old",
             "/data/vendor/radio/imsdatadaemon_log",
             "/data/vendor/radio/imsdatadaemon_log_old",
             "/data/vendor/radio/qmi_fw_log",
