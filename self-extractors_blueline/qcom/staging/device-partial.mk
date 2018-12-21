@@ -15,7 +15,6 @@
 #  blob(s) necessary for blueline hardware
 PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/cneapiclient.xml:system/etc/permissions/cneapiclient.xml:qcom \
-    vendor/qcom/blueline/proprietary/com.google.android.factoryota.xml:system/etc/permissions/com.google.android.factoryota.xml:qcom \
     vendor/qcom/blueline/proprietary/com.qualcomm.qti.imscmservice.xml:system/etc/permissions/com.qualcomm.qti.imscmservice.xml:qcom \
     vendor/qcom/blueline/proprietary/com.qualcomm.qti.uceservice-V2.0-java.jar:system/framework/com.qualcomm.qti.uceservice-V2.0-java.jar:qcom \
     vendor/qcom/blueline/proprietary/com.quicinc.cne.xml:system/etc/permissions/com.quicinc.cne.xml:qcom \
