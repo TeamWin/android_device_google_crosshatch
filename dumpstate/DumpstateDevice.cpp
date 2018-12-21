@@ -282,6 +282,29 @@ static void DumpUFS(int fd) {
     }
 }
 
+static void DumpVibrator(int fd) {
+    const std::string dir = "/sys/class/leds/vibrator/device/";
+    const std::vector<std::string> files {
+        "comp_enable",
+        "cp_dig_scale",
+        "cp_trigger_index",
+        "cp_trigger_queue",
+        "dig_scale",
+        "f0_stored",
+        "heartbeat",
+        "leds/vibrator/activate",
+        "leds/vibrator/duration",
+        "leds/vibrator/state",
+        "num_waves",
+        "redc_stored",
+        "standby_timeout",
+    };
+
+    for (const auto &file : files) {
+        DumpFileToFd(fd, "Vibrator", dir+file);
+    }
+}
+
 // Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
 Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     if (handle == nullptr || handle->numFds < 1) {
@@ -356,6 +379,8 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
         RunCommandToFd(fd, "Citadel VER", {"/vendor/bin/hw/citadel_updater", "-lv"});
         RunCommandToFd(fd, "Citadel SELFTEST", {"/vendor/bin/hw/citadel_updater", "--selftest"});
     }
+
+    DumpVibrator(fd);
 
     // Dump various events in WiFi data path
     DumpFileToFd(fd, "WLAN DP Trace", "/d/wlan/dpt_stats/dump_set_dpt_logs");
