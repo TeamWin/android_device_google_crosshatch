@@ -59,6 +59,7 @@ namespace implementation {
 
 #define DIAG_LOG_PREFIX "diag_log_"
 #define TCPDUMP_LOG_PREFIX "tcpdump"
+#define EXTENDED_LOG_PREFIX "extended_log_"
 
 void DumpstateDevice::dumpLogs(int fd, std::string srcDir, std::string destDir,
                                int maxFileNum, const char *logPrefix) {
@@ -132,6 +133,7 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
 
         const std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
         const std::string tcpdumpLogDir = "/data/vendor/tcpdump_logger/logs";
+        const std::string extendedLogDir = "/data/vendor/radio/extended_logs";
         const std::vector<std::string> rilAndNetmgrLogs{
             "/data/vendor/radio/ril_log0",
             "/data/vendor/radio/ril_log0_old",
@@ -188,6 +190,8 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
         for (const auto& logFile : rilAndNetmgrLogs) {
             RunCommandToFd(fd, "CP MODEM LOG", {"/vendor/bin/cp", logFile.c_str(), modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
         }
+
+        dumpLogs(fd, extendedLogDir, modemLogAllDir, 100, EXTENDED_LOG_PREFIX);
     }
 
     RunCommandToFd(fd, "TAR LOG", {"/vendor/bin/tar", "cvf", modemLogCombined.c_str(), "-C", modemLogAllDir.c_str(), "."}, CommandOptions::WithTimeout(120).Build());
