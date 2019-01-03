@@ -151,8 +151,13 @@ AB_OTA_PARTITIONS += \
     boot \
     system \
     vbmeta \
-    dtbo \
+    dtbo
+
+# Skip product partition for nodap build
+ifeq ($(filter %_nodap,$(TARGET_PRODUCT)),)
+AB_OTA_PARTITIONS += \
     product
+endif
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 AB_OTA_PARTITIONS += \

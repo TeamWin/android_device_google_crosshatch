@@ -16,5 +16,6 @@
 
 TARGET_BOOTLOADER_BOARD_NAME := blueline
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 20
+TARGET_USES_VULKAN := true
 
 include device/google/crosshatch/BoardConfig-common.mk
