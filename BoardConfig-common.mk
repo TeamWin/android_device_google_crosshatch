@@ -177,6 +177,12 @@ BOARD_USES_SYSTEM_OTHER_ODEX := true
 BOARD_ROOT_EXTRA_SYMLINKS := /vendor/dsp:/dsp
 BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
 
+# Add QC specific symlinks for backward compatibility
+# Move the symlinks here instead of removing them
+ifeq ($(PRODUCT_USE_QC_SPECIFIC_SYMLINKS), true)
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
+endif
+
 include device/google/crosshatch-sepolicy/crosshatch-sepolicy.mk
 
 TARGET_FS_CONFIG_GEN := device/google/crosshatch/config.fs
