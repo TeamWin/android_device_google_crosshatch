@@ -28,17 +28,17 @@ endif
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 ifeq (,$(filter %_mainline,$(TARGET_PRODUCT)))
-TARGET_CPU_VARIANT := cortex-a75
+TARGET_CPU_VARIANT := kryo385
 else
 TARGET_CPU_VARIANT := generic
 endif
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 ifeq (,$(filter %_mainline,$(TARGET_PRODUCT)))
-TARGET_2ND_CPU_VARIANT := cortex-a75
+TARGET_2ND_CPU_VARIANT := kryo385
 else
 TARGET_2ND_CPU_VARIANT := generic
 endif
