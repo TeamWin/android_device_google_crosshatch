@@ -408,6 +408,11 @@
          meanings. -->
     <integer name="config_defaultNotificationVibrationIntensity">3</integer>
 
+    <!-- Enables or disables haptic effect when the text insertion/selection handle is moved
+          manually by the user. Off by default, since the expected haptic feedback may not be
+          available on some devices. -->
+     <bool name="config_enableHapticTextHandle">true</bool>
+
     <!-- Boolean indicating whether framework needs to set the tx power limit for meeting SAR
          requirements -->
     <bool translatable="false" name="config_wifi_framework_enable_sar_tx_power_limit">true</bool>
