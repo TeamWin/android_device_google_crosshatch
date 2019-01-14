@@ -464,6 +464,8 @@ on early-boot
     chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_write_cnt
     chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_unmap_cnt
     chown system system /sys/devices/platform/soc/1d84000.ufshc/slowio_sync_cnt
+    chown system system /sys/devices/platform/soc/soc:qcom,wcd-dsp-mgr/wdsp_stat
+
 
     # Permission for Health Storage HAL
     chown system system /sys/devices/platform/soc/1d84000.ufshc/manual_gc
