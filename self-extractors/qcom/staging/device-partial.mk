@@ -15,7 +15,8 @@
 # AOSP packages required by the blobs
 PRODUCT_PACKAGES := \
     com.android.ims.rcsmanager.xml \
-    com.android.ims.rcsmanager
+    com.android.ims.rcsmanager \
+    libprotobuf-cpp-full
 
 #  blob(s) necessary for crosshatch hardware
 PRODUCT_COPY_FILES := \
@@ -52,7 +53,6 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/crosshatch/proprietary/lib64/libsensorslog.so:system/lib64/libsensorslog.so:qcom \
     vendor/qcom/crosshatch/proprietary/lib64/libsns_low_lat_stream_stub.so:system/lib64/libsns_low_lat_stream_stub.so:qcom \
     vendor/qcom/crosshatch/proprietary/lib64/libOpenCL_system.so:system/lib64/libOpenCL_system.so:qcom \
-    vendor/qcom/crosshatch/proprietary/lib64/libprotobuf-cpp-full-rtti.so:system/lib64/libprotobuf-cpp-full-rtti.so:qcom \
     vendor/qcom/crosshatch/proprietary/lib64/libqcbor.so:system/lib64/libqcbor.so:qcom \
     vendor/qcom/crosshatch/proprietary/lib64/libsmcinvokecred.so:system/lib64/libsmcinvokecred.so:qcom \
     vendor/qcom/crosshatch/proprietary/lib64/libtzcom.so:system/lib64/libtzcom.so:qcom \
@@ -69,9 +69,7 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/crosshatch/proprietary/lib-imsvtutils.so:system/lib/lib-imsvtutils.so:qcom \
     vendor/qcom/crosshatch/proprietary/liblistenjni.so:system/lib/liblistenjni.so:qcom \
     vendor/qcom/crosshatch/proprietary/liblistensoundmodel2.so:system/lib/liblistensoundmodel2.so:qcom \
-    vendor/qcom/crosshatch/proprietary/liblogwrap.so:system/lib/liblogwrap.so:qcom \
     vendor/qcom/crosshatch/proprietary/libmdsprpc_system.so:system/lib/libmdsprpc_system.so:qcom \
-    vendor/qcom/crosshatch/proprietary/libprotobuf-cpp-full.so:system/lib/libprotobuf-cpp-full.so:qcom \
     vendor/qcom/crosshatch/proprietary/libqct_resampler.so:system/lib/libqct_resampler.so:qcom \
     vendor/qcom/crosshatch/proprietary/libQTEEConnector_system.so:system/lib/libQTEEConnector_system.so:qcom \
     vendor/qcom/crosshatch/proprietary/librcc.so:system/lib/librcc.so:qcom \
@@ -83,7 +81,6 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/crosshatch/proprietary/libsns_low_lat_stream_skel.so:system/lib/rfsa/adsp/libsns_low_lat_stream_skel.so:qcom \
     vendor/qcom/crosshatch/proprietary/libsns_low_lat_stream_stub.so:system/lib/libsns_low_lat_stream_stub.so:qcom \
     vendor/qcom/crosshatch/proprietary/libOpenCL_system.so:system/lib/libOpenCL_system.so:qcom \
-    vendor/qcom/crosshatch/proprietary/libprotobuf-cpp-full-rtti.so:system/lib/libprotobuf-cpp-full-rtti.so:qcom \
     vendor/qcom/crosshatch/proprietary/libqcbor.so:system/lib/libqcbor.so:qcom \
     vendor/qcom/crosshatch/proprietary/libsmcinvokecred.so:system/lib/libsmcinvokecred.so:qcom \
     vendor/qcom/crosshatch/proprietary/libtzcom.so:system/lib/libtzcom.so:qcom \
