@@ -23,19 +23,13 @@
 #include <android-base/strings.h>
 #include <android-base/stringprintf.h>
 
-#include <pixelpowerstats/Debugging.h>
-
 #include <mutex>
 
 #include <utils/Log.h>
 #include <utils/Trace.h>
 
 #include "Power.h"
-#include "power-helper.h"
 #include "display-helper.h"
-
-/* RPM runs at 19.2Mhz. Divide by 19200 for msec */
-#define RPM_CLK 19200
 
 extern struct stats_section master_sections[];
 
@@ -46,15 +40,10 @@ namespace V1_3 {
 namespace implementation {
 
 using ::android::hardware::power::V1_0::Feature;
-using ::android::hardware::power::V1_0::PowerStatePlatformSleepState;
 using ::android::hardware::power::V1_0::Status;
-using ::android::hardware::power::V1_1::PowerStateSubsystem;
-using ::android::hardware::power::V1_1::PowerStateSubsystemSleepState;
 using ::android::hardware::hidl_vec;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
-using ::hardware::google::pixel::powerstats::DumpPowerHal1_0PlatStatsToFd;
-using ::hardware::google::pixel::powerstats::DumpPowerHal1_1SubsysStatsToFd;
 
 Power::Power() :
         mHintManager(nullptr),
@@ -216,171 +205,15 @@ Return<void> Power::setFeature(Feature /*feature*/, bool /*activate*/)  {
 }
 
 Return<void> Power::getPlatformLowPowerStats(getPlatformLowPowerStats_cb _hidl_cb) {
-
-    hidl_vec<PowerStatePlatformSleepState> states;
-    uint64_t stats[SYSTEM_SLEEP_STATE_COUNT * SYSTEM_STATE_STATS_COUNT] = {0};
-    uint64_t *state_stats;
-    struct PowerStatePlatformSleepState *state;
-
-    states.resize(SYSTEM_SLEEP_STATE_COUNT);
-
-    if (extract_system_stats(stats, ARRAY_SIZE(stats)) != 0) {
-        states.resize(0);
-        goto done;
-    }
-
-    /* Update statistics for AOSD */
-    state = &states[SYSTEM_STATE_AOSD];
-    state->name = "AOSD";
-    state_stats = &stats[SYSTEM_STATE_AOSD * SYSTEM_STATE_STATS_COUNT];
-
-    state->residencyInMsecSinceBoot = state_stats[ACCUMULATED_TIME_MS];
-    state->totalTransitions = state_stats[TOTAL_COUNT];
-    state->supportedOnlyInSuspend = false;
-    state->voters.resize(0);
-
-    /* Update statistics for CXSD */
-    state = &states[SYSTEM_STATE_CXSD];
-    state->name = "CXSD";
-    state_stats = &stats[SYSTEM_STATE_CXSD * SYSTEM_STATE_STATS_COUNT];
-
-    state->residencyInMsecSinceBoot = state_stats[ACCUMULATED_TIME_MS];
-    state->totalTransitions = state_stats[TOTAL_COUNT];
-    state->supportedOnlyInSuspend = false;
-    state->voters.resize(0);
-
-done:
-    _hidl_cb(states, Status::SUCCESS);
+    LOG(ERROR) << "getPlatformLowPowerStats not supported. Use IPowerStats HAL.";
+    _hidl_cb({}, Status::SUCCESS);
     return Void();
-}
-
-static int get_master_low_power_stats(hidl_vec<PowerStateSubsystem> *subsystems) {
-    uint64_t all_stats[MASTER_COUNT * MASTER_STATS_COUNT] = {0};
-    uint64_t *section_stats;
-    struct PowerStateSubsystem *subsystem;
-    struct PowerStateSubsystemSleepState *state;
-
-    if (extract_master_stats(all_stats, ARRAY_SIZE(all_stats)) != 0) {
-        for (size_t i = 0; i < MASTER_COUNT; i++) {
-            (*subsystems)[i].name = master_sections[i].label;
-            (*subsystems)[i].states.resize(0);
-        }
-        return -1;
-    }
-
-    for (size_t i = 0; i < MASTER_COUNT; i++) {
-        subsystem = &(*subsystems)[i];
-        subsystem->name = master_sections[i].label;
-        subsystem->states.resize(MASTER_SLEEP_STATE_COUNT);
-
-        state = &(subsystem->states[MASTER_SLEEP]);
-        section_stats = &all_stats[i * MASTER_STATS_COUNT];
-
-        state->name = "Sleep";
-        state->totalTransitions = section_stats[SLEEP_ENTER_COUNT];
-        state->residencyInMsecSinceBoot = section_stats[SLEEP_CUMULATIVE_DURATION_MS] / RPM_CLK;
-        state->lastEntryTimestampMs = section_stats[SLEEP_LAST_ENTER_TSTAMP_MS] / RPM_CLK;
-        state->supportedOnlyInSuspend = false;
-    }
-
-    return 0;
-}
-
-static int get_wlan_low_power_stats(struct PowerStateSubsystem *subsystem) {
-    uint64_t stats[WLAN_STATS_COUNT] = {0};
-    struct PowerStateSubsystemSleepState *state;
-
-    subsystem->name = "wlan";
-
-    if (extract_wlan_stats(stats, ARRAY_SIZE(stats)) != 0) {
-        subsystem->states.resize(0);
-        return -1;
-    }
-
-    subsystem->states.resize(WLAN_SLEEP_STATE_COUNT);
-
-    /* Update statistics for Active State */
-    state = &subsystem->states[WLAN_STATE_ACTIVE];
-    state->name = "Active";
-    state->residencyInMsecSinceBoot = stats[CUMULATIVE_TOTAL_ON_TIME_MS];
-    state->totalTransitions = stats[DEEP_SLEEP_ENTER_COUNTER];
-    state->lastEntryTimestampMs = 0; //FIXME need a new value from Qcom
-    state->supportedOnlyInSuspend = false;
-
-    /* Update statistics for Deep-Sleep state */
-    state = &subsystem->states[WLAN_STATE_DEEP_SLEEP];
-    state->name = "Deep-Sleep";
-    state->residencyInMsecSinceBoot = stats[CUMULATIVE_SLEEP_TIME_MS];
-    state->totalTransitions = stats[DEEP_SLEEP_ENTER_COUNTER];
-    state->lastEntryTimestampMs = stats[LAST_DEEP_SLEEP_ENTER_TSTAMP_MS];
-    state->supportedOnlyInSuspend = false;
-
-    return 0;
-}
-
-static const std::string get_easel_state_name(int state) {
-    if (state == EASEL_OFF) {
-        return "Off";
-    } else if (state == EASEL_ACTIVE) {
-        return "Active";
-    } else if (state == EASEL_SUSPEND) {
-        return "Suspend";
-    } else {
-        return "Unknown";
-    }
-}
-
-// Get low power stats for easel subsystem
-static int get_easel_low_power_stats(struct PowerStateSubsystem *subsystem) {
-    uint64_t stats[EASEL_SLEEP_STATE_COUNT * EASEL_STATS_COUNT] = {0};
-    uint64_t *state_stats;
-    struct PowerStateSubsystemSleepState *state;
-
-    subsystem->name = "Easel";
-
-    if (extract_easel_stats(stats, ARRAY_SIZE(stats)) != 0) {
-        subsystem->states.resize(0);
-        return -1;
-    }
-
-    subsystem->states.resize(EASEL_SLEEP_STATE_COUNT);
-
-    for (int easel_state = 0; easel_state < EASEL_SLEEP_STATE_COUNT; easel_state++) {
-        state = &subsystem->states[easel_state];
-        state_stats = &stats[easel_state * EASEL_STATS_COUNT];
-
-        state->name = get_easel_state_name(easel_state);
-        state->residencyInMsecSinceBoot = state_stats[CUMULATIVE_DURATION_MS];
-        state->totalTransitions = state_stats[CUMULATIVE_COUNT];
-        state->lastEntryTimestampMs = state_stats[LAST_ENTRY_TSTAMP_MS];
-        state->supportedOnlyInSuspend = false;
-    }
-
-    return 0;
 }
 
 // Methods from ::android::hardware::power::V1_1::IPower follow.
 Return<void> Power::getSubsystemLowPowerStats(getSubsystemLowPowerStats_cb _hidl_cb) {
-    hidl_vec<PowerStateSubsystem> subsystems;
-
-    subsystems.resize(STATS_SOURCE_COUNT);
-
-    // Get low power stats for all of the system masters.
-    if (get_master_low_power_stats(&subsystems) != 0) {
-        ALOGE("%s: failed to process master stats", __func__);
-    }
-
-    // Get WLAN subsystem low power stats.
-    if (get_wlan_low_power_stats(&subsystems[SUBSYSTEM_WLAN]) != 0) {
-        ALOGE("%s: failed to process wlan stats", __func__);
-    }
-
-    // Get Easel subsystem low power stats.
-    if (get_easel_low_power_stats(&subsystems[SUBSYSTEM_EASEL]) != 0) {
-        ALOGE("%s: failed to process Easel stats", __func__);
-    }
-
-    _hidl_cb(subsystems, Status::SUCCESS);
+    LOG(ERROR) << "getSubsystemLowPowerStats not supported. Use IPowerStats HAL.";
+    _hidl_cb({}, Status::SUCCESS);
     return Void();
 }
 
@@ -546,20 +379,6 @@ Return<void> Power::debug(const hidl_handle& handle, const hidl_vec<hidl_string>
         if (!android::base::WriteStringToFd(buf, fd)) {
             PLOG(ERROR) << "Failed to dump state to fd";
         }
-
-        // Dump platform low power stats
-        getPlatformLowPowerStats([fd](const auto& platStats, const auto result) {
-            if (!DumpPowerHal1_0PlatStatsToFd(result, platStats, fd)) {
-                PLOG(ERROR) << "Failed to dump platform low power stats to fd";
-            }
-        });
-
-        // Dump subsystem low power stats
-        getSubsystemLowPowerStats([fd](const auto& subsysStats, const auto result) {
-            if (!DumpPowerHal1_1SubsysStatsToFd(result, subsysStats, fd)) {
-                PLOG(ERROR) << "Failed to dump subsystem low power stats to fd";
-            }
-        });
 
         fsync(fd);
     }
