@@ -34,7 +34,11 @@ TARGET_CPU_VARIANT := generic
 endif
 
 TARGET_2ND_ARCH := arm
+ifeq (,$(filter %_mainline,$(TARGET_PRODUCT)))
 TARGET_2ND_ARCH_VARIANT := armv8-2a
+else
+TARGET_2ND_ARCH_VARIANT := armv8-a
+endif
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 ifeq (,$(filter %_mainline,$(TARGET_PRODUCT)))
