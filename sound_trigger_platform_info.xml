@@ -81,6 +81,7 @@
             <param acdb_devices="DEVICE_HANDSET_MIC_CPE" />
             <param load_sound_model_ids="0x18000001, 0x4, 0x18000100" />
             <param start_engine_ids="0x18000001, 0x4, 0x18000101" />
+            <param request_detection_ids="0x18000001, 0x4, 0x18000106" />
             <param confidence_levels_ids="0x18000001, 0x4, 0x00012C28" />
             <param detection_event_ids="0x18000001, 0x4, 0x00012C29" />
             <param custom_config_ids="0x18000001, 0x4, 0x00012C20" />
@@ -125,6 +126,7 @@
             <param acdb_devices="DEVICE_HANDSET_MIC_CPE" />
             <param load_sound_model_ids="0x18000001, 0x4, 0x18000102" />
             <param start_engine_ids="0x18000001, 0x4, 0x18000103" />
+            <param request_detection_ids="0x18000001, 0x4, 0x18000107" />
             <param confidence_levels_ids="0x18000001, 0x4, 0x00012C28" />
             <param detection_event_ids="0x18000001, 0x4, 0x00012C29" />
             <param custom_config_ids="0x18000001, 0x4, 0x00012C20" />
