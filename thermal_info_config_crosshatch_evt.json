@@ -151,7 +151,7 @@
             "Multiplier":0.001
         },
         {
-            "Name":"maxfg",
+            "Name":"battery",
             "Type":"BATTERY",
             "HotThreshold":[
                 "NAN",
@@ -166,7 +166,7 @@
             "Multiplier":0.001
         },
         {
-            "Name":"usbc-therm-adc",
+            "Name":"usbc-therm-monitor",
             "Type":"USB_PORT",
             "HotThreshold":[
                 "NAN",
@@ -174,23 +174,34 @@
                 "NAN",
                 "NAN",
                 "NAN",
-                "NAN",
+                "55.0",
                 "NAN"
             ],
+            "HotHysteresis":[
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                5.0,
+                0.0
+            ],
+
             "VrThreshold":"NAN",
-            "Multiplier":0.001
+            "Multiplier":0.001,
+            "Monitor": true
         },
         {
-            "Name":"fps-therm-adc",
+            "Name":"quiet-therm-monitor",
             "Type":"SKIN",
             "HotThreshold":[
                 "NAN",
-                39.0,
-                43.0,
-                45.0,
-                47.0,
-                51.0,
-                55.0
+                42.0,
+                46.0,
+                48.0,
+                50.0,
+                55.0,
+                60.0
             ],
             "HotHysteresis":[
                 0.0,
@@ -201,7 +212,7 @@
                 1.9,
                 1.9
             ],
-            "VrThreshold":49.0,
+            "VrThreshold":52.0,
             "Multiplier":0.001,
             "Monitor": true
         }
