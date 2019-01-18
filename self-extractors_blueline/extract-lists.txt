@@ -62,7 +62,6 @@
             system/lib64/libsensorslog.so \
             system/lib64/libsns_low_lat_stream_stub.so \
             system/lib64/libOpenCL_system.so \
-            system/lib64/libprotobuf-cpp-full-rtti.so \
             system/lib64/libqcbor.so \
             system/lib64/libsmcinvokecred.so \
             system/lib64/libtzcom.so \
@@ -79,9 +78,7 @@
             system/lib/lib-imsvtutils.so \
             system/lib/liblistenjni.so \
             system/lib/liblistensoundmodel2.so \
-            system/lib/liblogwrap.so \
             system/lib/libmdsprpc_system.so \
-            system/lib/libprotobuf-cpp-full.so \
             system/lib/libqct_resampler.so \
             system/lib/libQTEEConnector_system.so \
             system/lib/librcc.so \
@@ -92,7 +89,6 @@
             system/lib/libsensorslog.so \
             system/lib/libsns_low_lat_stream_stub.so \
             system/lib/libOpenCL_system.so \
-            system/lib/libprotobuf-cpp-full-rtti.so \
             system/lib/libqcbor.so \
             system/lib/libsmcinvokecred.so \
             system/lib/libtzcom.so \
