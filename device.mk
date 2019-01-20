@@ -304,6 +304,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rcs.supported=1 \
     vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so \
     ro.hardware.keystore_desede=true \
+    ro.zram.mark_idle_delay_mins=60 \
+    ro.zram.first_wb_delay_mins=180 \
+    ro.zram.periodic_wb_delay_hours=24 \
 
 # Disable snapshot timer
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -494,7 +497,6 @@ PRODUCT_PACKAGES += $(WPA)
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     wificond \
-    wifilogd \
     libwpa_client
 
 LIB_NL := libnl_2
@@ -520,7 +522,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@4.0-impl:32 \
     android.hardware.audio.effect@4.0-impl:32 \
     android.hardware.broadcastradio@1.0-impl \
-    android.hardware.soundtrigger@2.1-impl \
+    android.hardware.soundtrigger@2.2-impl \
     android.hardware.audio@2.0-service
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
