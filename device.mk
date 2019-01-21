@@ -519,8 +519,8 @@ PRODUCT_PACKAGES += \
     audio.hearing_aid.default
 
 PRODUCT_PACKAGES += \
-    android.hardware.audio@4.0-impl:32 \
-    android.hardware.audio.effect@4.0-impl:32 \
+    android.hardware.audio@5.0-impl:32 \
+    android.hardware.audio.effect@5.0-impl:32 \
     android.hardware.broadcastradio@1.0-impl \
     android.hardware.soundtrigger@2.2-impl \
     android.hardware.audio@2.0-service
