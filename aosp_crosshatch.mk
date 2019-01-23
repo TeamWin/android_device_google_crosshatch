@@ -30,6 +30,8 @@ PRODUCT_PACKAGES += \
     WallpaperPicker \
     WAPPushManager \
 
+PRODUCT_FORCE_PRODUCT_MODULES_TO_SYSTEM_PARTITION := webview
+
 # STOPSHIP deal with Qualcomm stuff later
 # PRODUCT_RESTRICT_VENDOR_FILES := all
 
