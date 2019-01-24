@@ -314,8 +314,8 @@
         <name>android.hardware.radio</name>
         <transport>hwbinder</transport>
         <fqname>@1.2::ISap/slot1</fqname>
-        <fqname>@1.2::IRadio/slot1</fqname>
-        <fqname>@1.2::IRadio/slot2</fqname>
+        <fqname>@1.3::IRadio/slot1</fqname>
+        <fqname>@1.3::IRadio/slot2</fqname>
 
     </hal>
     <hal format="hidl">
