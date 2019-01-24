@@ -37,6 +37,7 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
     .CycleCountBinsPath = "/sys/class/power_supply/maxfg/cycle_counts_bins",
     .ImpedancePath = "/sys/class/misc/msm_cirrus_playback/resistance_left_right",
     .CodecPath = "/sys/devices/platform/soc/171c0000.slim/tavil-slim-pgd/tavil_codec/codec_state",
+    .SpeechDspPath = "/sys/devices/platform/soc/soc:qcom,wcd-dsp-mgr/wdsp_stat",
 };
 
 const char *const kAudioUevent = "/kernel/q6audio/q6voice_uevent";
