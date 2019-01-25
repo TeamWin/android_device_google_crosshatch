@@ -642,7 +642,11 @@ PRODUCT_PACKAGES += \
     vndk-sp
 
 
+ifeq (,$(filter %_mainline,$(TARGET_PRODUCT)))
+PRODUCT_ENFORCE_RRO_TARGETS := framework-res
+else
 PRODUCT_ENFORCE_RRO_TARGETS := *
+endif
 
 # Override heap growth limit due to high display density on device
 PRODUCT_PROPERTY_OVERRIDES += \
