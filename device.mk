@@ -42,8 +42,6 @@ PRODUCT_COPY_FILES += \
 # Enforce privapp-permissions whitelist
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.control_privapp_permissions=enforce
-PRODUCT_COPY_FILES += \
-    device/google/crosshatch/permissions/privapp-permissions-aosp.xml:system/etc/permissions/privapp-permissions-aosp.xml
 
 # Enable on-access verification of priv apps. This requires fs-verity support in kernel.
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -108,8 +106,6 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
       $(LOCAL_PATH)/init.hardware.mpssrfs.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).mpssrfs.rc
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.chamber.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_PLATFORM).chamber.rc
-  PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/init.tcpdump.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_PLATFORM).tcpdump.rc
 else
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.diag.rc.user:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).diag.rc
@@ -646,7 +642,11 @@ PRODUCT_PACKAGES += \
     vndk-sp
 
 
+ifeq (,$(filter %_mainline,$(TARGET_PRODUCT)))
+PRODUCT_ENFORCE_RRO_TARGETS := framework-res
+else
 PRODUCT_ENFORCE_RRO_TARGETS := *
+endif
 
 # Override heap growth limit due to high display density on device
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -759,6 +759,7 @@ else
 endif
 
 # Enable tcpdump_logger on userdebug and eng
+PRODUCT_PACKAGES_DEBUG += tcpdump_logger
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
     PRODUCT_PROPERTY_OVERRIDES += \
         persist.vendor.tcpdump.log.alwayson=false \
@@ -823,3 +824,18 @@ PRODUCT_COPY_FILES += \
 # powerstats HAL
 PRODUCT_PACKAGES += \
     android.hardware.power.stats@1.0-service.pixel
+
+# SurfaceFlinger
+
+# Graphics
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.vsync_event_phase_offset_ns=2000000
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
+
+# Must align with HAL types Dataspace
+# The data space of wide color gamut composition preference is Dataspace::DISPLAY_P3
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.wcg_composition_dataspace=143261696
+
+# Display
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.has_wide_color_display=true
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.has_HDR_display=true
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.use_color_management=true
