@@ -286,7 +286,7 @@
     <hal format="hidl">
         <name>vendor.display.config</name>
         <transport>hwbinder</transport>
-        <version>1.0</version>
+        <version>1.3</version>
         <interface>
             <name>IDisplayConfig</name>
             <instance>default</instance>
