@@ -65,7 +65,8 @@ BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc/1d84000.ufshc
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
 
-BOARD_BOOT_HEADER_VERSION := 1
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_BOOT_HEADER_VERSION := 2
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # DTBO partition definitions
@@ -298,5 +299,5 @@ endif
 
 # Testing related defines
 BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/b1c1-setup.sh
-
+BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel
 -include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk

@@ -142,3 +142,6 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.gr
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/firmware)
 
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/webview)
+
+# Moved to /product
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/etc/sysconfig/qti_whitelist.xml)
