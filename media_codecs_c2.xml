@@ -337,7 +337,7 @@
             <Feature name="bitrate-modes" value="VBR,CBR" />
         </MediaCodec>
         <MediaCodec name="c2.qti.heic.encoder" type="image/vnd.android.heic">
-            <Limit name="size" min="512x512" max="8192x8192" />
+            <Limit name="size" min="2400x2400" max="8192x8192" />
             <Limit name="bitrate" range="1-120000000" />
             <Limit name="frame-rate" range="1-2" />
             <Limit name="quality" range="0-100" default="80" />
