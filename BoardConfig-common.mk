@@ -297,7 +297,21 @@ BOARD_VENDOR_KERNEL_MODULES += \
     $(wildcard device/google/crosshatch-kernel/*.ko)
 endif
 
+# DTB
+ifeq (,$(filter-out blueline_kasan crosshatch_kasan, $(TARGET_PRODUCT)))
+BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel/kasan
+else ifeq (,$(filter-out blueline_kernel_debug_memory crosshatch_kernel_debug_memory, $(TARGET_PRODUCT)))
+BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel/debug_memory
+else ifeq (,$(filter-out blueline_kernel_debug_locking crosshatch_kernel_debug_locking, $(TARGET_PRODUCT)))
+BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel/debug_locking
+else ifeq (,$(filter-out blueline_kernel_debug_hang crosshatch_kernel_debug_hang, $(TARGET_PRODUCT)))
+BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel/debug_hang
+else ifeq (,$(filter-out blueline_kernel_debug_api crosshatch_kernel_debug_api, $(TARGET_PRODUCT)))
+BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel/debug_api
+else
+BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel
+endif
+
 # Testing related defines
 BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/b1c1-setup.sh
-BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel
 -include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk
