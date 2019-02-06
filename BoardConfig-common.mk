@@ -281,15 +281,9 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 TARGET_USES_MKE2FS := true
 
 # Kernel modules
-ifeq (,$(filter-out blueline_gcc crosshatch_gcc, $(TARGET_PRODUCT)))
-BOARD_VENDOR_KERNEL_MODULES += \
-    $(wildcard device/google/crosshatch-kernel/gcc/*.ko)
-else ifeq (,$(filter-out blueline_kasan crosshatch_kasan, $(TARGET_PRODUCT)))
+ifeq (,$(filter-out blueline_kasan crosshatch_kasan, $(TARGET_PRODUCT)))
 BOARD_VENDOR_KERNEL_MODULES += \
     $(wildcard device/google/crosshatch-kernel/kasan/*.ko)
-else ifeq (,$(filter-out blueline_kcfi crosshatch_kcfi, $(TARGET_PRODUCT)))
-BOARD_VENDOR_KERNEL_MODULES += \
-    $(wildcard device/google/crosshatch-kernel/kcfi/*.ko)
 else ifeq (,$(filter-out blueline_kernel_debug_memory crosshatch_kernel_debug_memory, $(TARGET_PRODUCT)))
 BOARD_VENDOR_KERNEL_MODULES += \
     $(wildcard device/google/crosshatch-kernel/debug_memory/*.ko)
