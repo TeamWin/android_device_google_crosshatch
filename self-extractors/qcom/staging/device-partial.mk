@@ -14,7 +14,8 @@
 
 # AOSP packages required by the blobs
 PRODUCT_PACKAGES := \
-    libprotobuf-cpp-full
+    libprotobuf-cpp-full \
+    QtiTelephonyService
 
 #  blob(s) necessary for crosshatch hardware
 PRODUCT_COPY_FILES := \
