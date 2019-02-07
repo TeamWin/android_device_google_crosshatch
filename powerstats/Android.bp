@@ -33,6 +33,8 @@ cc_binary {
         "liblog",
         "libutils",
         "android.hardware.power.stats@1.0",
+        "pixelpowerstats_provider_aidl_interface-cpp",
+        "libbinder",
     ],
     vendor: true,
 }
