@@ -18,7 +18,6 @@ TARGET_BOARD_PLATFORM := sdm845
 TARGET_BOARD_INFO_FILE := device/google/crosshatch/board-info.txt
 USES_DEVICE_GOOGLE_B1C1 := true
 TARGET_NO_BOOTLOADER := true
-TARGET_USES_VULKAN := true
 
 TARGET_ARCH := arm64
 ifneq (,$(filter %_mainline blueline% %blueline,$(TARGET_PRODUCT)))
