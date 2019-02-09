@@ -54,7 +54,7 @@ class BatteryMetricsLogger {
     const char *kBatteryOCV = "/sys/class/power_supply/maxfg/voltage_ocv";
     const int kSamplePeriod = 10 * 60;       // 10 minutes
     const int kUploadPeriod = 24 * 60 * 60;  // 1 day
-    const int kMaxSamples = 144;           // 24h * 60min / 10 min sample rate
+    const int kMaxSamples = 144;             // 24h * 60min / 10 min sample rate
     const sampleType kMetricMin = RES, kMetricMax = SOC;
 
     // min and max are referenced by type in both the X and Y axes
@@ -63,6 +63,7 @@ class BatteryMetricsLogger {
     int32_t min_[NUM_FIELDS][NUM_FIELDS];
     int32_t max_[NUM_FIELDS][NUM_FIELDS];
     int32_t num_res_samples_;   // number of res samples since last upload
+    int32_t num_samples_;       // number of min/max samples since last upload
     int64_t accum_resistance_;  // accumulative resistance
     int64_t last_sample_;       // time in seconds since boot of last sample
     int64_t last_upload_;       // time in seconds since boot of last upload

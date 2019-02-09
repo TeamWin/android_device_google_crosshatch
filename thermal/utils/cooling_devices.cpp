@@ -28,7 +28,6 @@ namespace thermal {
 namespace V1_1 {
 namespace implementation {
 
-constexpr unsigned int kMaxCharsToRead = 5;
 constexpr char kCoolingDeviceCurStateSuffix[] = "cur_state";
 
 bool CoolingDevices::addCoolingDevice(
@@ -49,13 +48,8 @@ bool CoolingDevices::getCoolingDeviceState(
         "%s/%s", cooling_device_itr->second.c_str(),
         kCoolingDeviceCurStateSuffix);
 
-    // Bound the read to kMaxCharsToRead characters because we should only be 
-    // reading integer CPU throttling values and they should not be larger than,
-    // say, 5.
-    char file_contents[kMaxCharsToRead];
-    std::ifstream infile(path, std::ifstream::in);
-    infile.read(file_contents, kMaxCharsToRead);
-    std::string cooling_device_data(file_contents);
+    std::string cooling_device_data;
+    android::base::ReadFileToString(path, &cooling_device_data);
     cooling_device_data = android::base::Trim(cooling_device_data);
 
     if (cooling_device_data.empty()) {

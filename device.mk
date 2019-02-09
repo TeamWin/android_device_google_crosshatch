@@ -15,9 +15,7 @@
 #
 
 PRODUCT_SOONG_NAMESPACES += \
-    device/google/crosshatch/pixelstats \
-    device/google/crosshatch/usb \
-    device/google/crosshatch/health \
+    device/google/crosshatch \
     hardware/google/av \
     hardware/google/interfaces \
     hardware/qcom/sdm845 \
@@ -788,4 +786,4 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Increment the SVN for any official public releases
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.svn=4
+    ro.vendor.build.svn=5

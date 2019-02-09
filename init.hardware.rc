@@ -75,7 +75,7 @@ on init && property:vendor.skip.init=0
 
     # start Citadel keymaster (StrongBox) early
     start vndservicemanager
-    start citadeld
+    start vendor.citadeld
     start vendor.keymaster-4-0-citadel
 
     # Boot time fs tune
