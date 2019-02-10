@@ -18,7 +18,6 @@ TARGET_BOARD_PLATFORM := sdm845
 TARGET_BOARD_INFO_FILE := device/google/crosshatch/board-info.txt
 USES_DEVICE_GOOGLE_B1C1 := true
 TARGET_NO_BOOTLOADER := true
-TARGET_USES_VULKAN := true
 
 TARGET_ARCH := arm64
 ifneq (,$(filter %_mainline blueline% %blueline,$(TARGET_PRODUCT)))
@@ -197,7 +196,7 @@ TARGET_FS_CONFIG_GEN := device/google/crosshatch/config.fs
 QCOM_BOARD_PLATFORMS += sdm845
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_HAVE_QCOM_FM := false
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/google/crosshatch/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := build/make/target/board/mainline_arm64/bluetooth
 
 # Camera
 TARGET_USES_AOSP := true
