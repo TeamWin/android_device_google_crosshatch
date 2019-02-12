@@ -5,6 +5,7 @@
     ;;
   qcom)
     TO_EXTRACT="\
+            system/app/QtiTelephonyService/QtiTelephonyService.apk \
             system/etc/firmware/dnd.descriptor \
             system/etc/firmware/dnd.sound_model \
             system/etc/firmware/music_detector.descriptor \
