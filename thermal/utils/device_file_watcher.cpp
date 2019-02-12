@@ -20,6 +20,7 @@
 #include <sys/resource.h>
 #include <sys/types.h>
 
+#include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/strings.h>
 
@@ -110,12 +111,8 @@ void DeviceFileWatcher::watchFilesForModificationsAndCallback() {
             std::lock_guard<std::mutex> _lock(watcher_mutex_);
             std::string path = watch_to_file_path_map_.at(event->wd);
 
-            // Bound the read to 2 characters because we should only be reading
-            // integer CPU throttling values.
-            char file_contents[2];
-            std::ifstream infile(path, std::ifstream::in);
-            infile.read(file_contents, 2);
-            std::string data(file_contents);
+            std::string data;
+            android::base::ReadFileToString(path, &data);
             data = android::base::Trim(data);
 
             if (!data.empty()) {

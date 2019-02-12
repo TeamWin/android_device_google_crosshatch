@@ -12,7 +12,6 @@ cc_binary {
     "service.cpp",
     "Thermal.cpp",
     "thermal-helper.cpp",
-    "utils/battery_threshold.cpp",
     "utils/cooling_devices.cpp",
     "utils/device_file_watcher.cpp",
     "utils/sensors.cpp",
