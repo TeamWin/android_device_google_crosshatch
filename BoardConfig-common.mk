@@ -20,32 +20,16 @@ USES_DEVICE_GOOGLE_B1C1 := true
 TARGET_NO_BOOTLOADER := true
 
 TARGET_ARCH := arm64
-ifneq (,$(filter %_mainline blueline% %blueline,$(TARGET_PRODUCT)))
 TARGET_ARCH_VARIANT := armv8-a
-else
-TARGET_ARCH_VARIANT := armv8-2a
-endif
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-ifneq (,$(filter %_mainline blueline% %blueline,$(TARGET_PRODUCT)))
 TARGET_CPU_VARIANT := generic
-else
-TARGET_CPU_VARIANT := kryo385
-endif
 
 TARGET_2ND_ARCH := arm
-ifneq (,$(filter %_mainline blueline% %blueline,$(TARGET_PRODUCT)))
 TARGET_2ND_ARCH_VARIANT := armv8-a
-else
-TARGET_2ND_ARCH_VARIANT := armv8-2a
-endif
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-ifneq (,$(filter %_mainline blueline% %blueline,$(TARGET_PRODUCT)))
 TARGET_2ND_CPU_VARIANT := generic
-else
-TARGET_2ND_CPU_VARIANT := kryo385
-endif
 
 TARGET_BOARD_COMMON_PATH := device/google/crosshatch/sdm845
 
