@@ -54,10 +54,10 @@
         <device name="SND_DEVICE_IN_VOICE_DMIC_TMUS" acdb_id="99"/>
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_DMIC" acdb_id="19"/>
         <device name="SND_DEVICE_IN_VOICE_TTY_VCO_HANDSET_MIC" acdb_id="19"/>
-        <device name="SND_DEVICE_IN_VOICE_REC_MIC" acdb_id="4"/>
-        <device name="SND_DEVICE_IN_VOICE_REC_MIC_NS" acdb_id="4"/>
-        <device name="SND_DEVICE_IN_VOICE_REC_MIC_AEC" acdb_id="4"/>
-        <device name="SND_DEVICE_IN_VOICE_REC_MIC_AEC_NS" acdb_id="4"/>
+        <device name="SND_DEVICE_IN_VOICE_REC_MIC" acdb_id="143"/>
+        <device name="SND_DEVICE_IN_VOICE_REC_MIC_NS" acdb_id="143"/>
+        <device name="SND_DEVICE_IN_VOICE_REC_MIC_AEC" acdb_id="143"/>
+        <device name="SND_DEVICE_IN_VOICE_REC_MIC_AEC_NS" acdb_id="143"/>
         <device name="SND_DEVICE_IN_UNPROCESSED_MIC" acdb_id="143"/>
         <device name="SND_DEVICE_IN_UNPROCESSED_STEREO_MIC" acdb_id="144"/>
         <device name="SND_DEVICE_IN_UNPROCESSED_THREE_MIC" acdb_id="145"/>

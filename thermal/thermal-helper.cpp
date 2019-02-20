@@ -38,38 +38,39 @@ constexpr char kCpuOnlineRoot[] = "/sys/devices/system/cpu";
 constexpr char kCpuUsageFile[] = "/proc/stat";
 constexpr char kCpuOnlineFileSuffix[] = "online";
 constexpr char kThermalConfigPrefix[] = "/vendor/etc/thermal-engine-";
-constexpr char kTemperatureFileSuffix[] = "temp";
-constexpr char kSensorTypeFileSuffix[] = "type";
-constexpr char kThermalZoneDirSuffix[] = "thermal_zone";
-constexpr char kCoolingDeviceDirSuffix[] = "cooling_device";
+constexpr char kLittleCoreCpuFreq[] = "thermal-cpufreq-0";
+constexpr char kBigCoreCpuFreq[] = "thermal-cpufreq-4";
 constexpr unsigned int kMaxCpus = 8;
-constexpr unsigned int kMaxSensorSearchNum = 100;
 // The number of available sensors in thermalHAL is:
 // 8 (for each cpu) + 2 (for each gpu) + battery + skin + usbc = 13.
 constexpr unsigned int kAvailableSensors = 13;
+// The following constants are used for limiting the number of throttling
+// notifications. See b/117438310 for details.
+constexpr int kDesiredLittleCoreCoolingStateCliff = 9;
+constexpr int kDesiredBigCoreCoolingStateCliff = 20;
 
-// This is a golden set of thermal sensor type and their temperature types.
-// Used when we read in sensor values.
-const std::map<std::string, TemperatureType>
-kValidThermalSensorTypeMap = {
-    {"cpu0-silver-usr", TemperatureType::CPU},  // CPU0
-    {"cpu1-silver-usr", TemperatureType::CPU},  // CPU1
-    {"cpu2-silver-usr", TemperatureType::CPU},  // CPU2
-    {"cpu3-silver-usr", TemperatureType::CPU},  // CPU3
-    {"cpu0-gold-usr", TemperatureType::CPU},    // CPU4
-    {"cpu1-gold-usr", TemperatureType::CPU},    // CPU5
-    {"cpu2-gold-usr", TemperatureType::CPU},    // CPU6
-    {"cpu3-gold-usr", TemperatureType::CPU},    // CPU7
+// This is a golden set of thermal sensor name and releveant information about
+// the sensor. Used when we read in sensor values.
+const std::map<std::string, SensorInfo>
+kValidThermalSensorInfoMap = {
+    {"cpu0-silver-usr", {TemperatureType::CPU, true, 95.0, 125.0, .001}},  // CPU0
+    {"cpu1-silver-usr", {TemperatureType::CPU, true, 95.0, 125.0, .001}},  // CPU1
+    {"cpu2-silver-usr", {TemperatureType::CPU, true, 95.0, 125.0, .001}},  // CPU2
+    {"cpu3-silver-usr", {TemperatureType::CPU, true, 95.0, 125.0, .001}},  // CPU3
+    {"cpu0-gold-usr", {TemperatureType::CPU, true, 95.0, 125.0, .001}},    // CPU4
+    {"cpu1-gold-usr", {TemperatureType::CPU, true, 95.0, 125.0, .001}},    // CPU5
+    {"cpu2-gold-usr", {TemperatureType::CPU, true, 95.0, 125.0, .001}},    // CPU6
+    {"cpu3-gold-usr", {TemperatureType::CPU, true, 95.0, 125.0, .001}},    // CPU7
     // GPU thermal sensors.
-    {"gpu0-usr", TemperatureType::GPU},
-    {"gpu1-usr", TemperatureType::GPU},
+    {"gpu0-usr", {TemperatureType::GPU, true, 95.0, 125.0, .001}},
+    {"gpu1-usr", {TemperatureType::GPU, true, 95.0, 125.0, .001}},
     // Battery thermal sensor.
-    {"battery", TemperatureType::BATTERY},
+    {"battery", {TemperatureType::BATTERY, true, NAN, 60.0, .001}},
     // USBC thermal sensor.
-    {"usbc-therm-adc", TemperatureType::UNKNOWN},
+    {"usbc-therm-adc", {TemperatureType::UNKNOWN, false, NAN, NAN, .001}},
     // Skin sensors.
-    {"quiet-therm-adc", TemperatureType::SKIN},  // Used by EVT devices
-    {"fps-therm-adc", TemperatureType::SKIN},    // Used by prod devices
+    {"quiet-therm-adc", {TemperatureType::SKIN, false, NAN, NAN, .001}},  // Used by EVT devices
+    {"fps-therm-adc", {TemperatureType::SKIN, false, NAN, NAN, .001}},    // Used by prod devices
 };
 
 namespace {
@@ -146,17 +147,41 @@ float getThresholdFromType(const TemperatureType type,
 
 // This is a golden set of cooling device types and their corresponding sensor
 // thernal zone name.
-static const std::map<std::string, std::string>
-kValidCoolingDeviceTypeMap = {
-    {"thermal-cpufreq-0", "cpu0-silver-usr"},  // CPU0
-    {"thermal-cpufreq-1", "cpu1-silver-usr"},  // CPU1
-    {"thermal-cpufreq-2", "cpu2-silver-usr"},  // CPU2
-    {"thermal-cpufreq-3", "cpu3-silver-usr"},  // CPU3
-    {"thermal-cpufreq-4", "cpu0-gold-usr"},  // CPU4
-    {"thermal-cpufreq-5", "cpu1-gold-usr"},  // CPU5
-    {"thermal-cpufreq-6", "cpu2-gold-usr"},  // CPU6
-    {"thermal-cpufreq-7", "cpu3-gold-usr"},  // CPU7
+static const std::map<std::string, std::string> kValidCoolingDeviceTypeMap = {
+    {kLittleCoreCpuFreq, "cpu0-silver-usr"},  // CPU0
+    {kBigCoreCpuFreq, "cpu0-gold-usr"},       // CPU4
 };
+
+void ThermalHelper::updateOverideThresholds() {
+    for (const auto& sensorMap : kValidThermalSensorInfoMap) {
+        if (sensorMap.second.is_override) {
+            switch (sensorMap.second.type) {
+                case TemperatureType::CPU:
+                    thresholds_.cpu = sensorMap.second.throttling;
+                    vr_thresholds_.cpu = sensorMap.second.throttling;
+                    shutdown_thresholds_.cpu = sensorMap.second.shutdown;
+                    break;
+                case TemperatureType::GPU:
+                    thresholds_.gpu = sensorMap.second.throttling;
+                    vr_thresholds_.gpu = sensorMap.second.throttling;
+                    shutdown_thresholds_.gpu = sensorMap.second.shutdown;
+                    break;
+                case TemperatureType::BATTERY:
+                    thresholds_.battery = sensorMap.second.throttling;
+                    vr_thresholds_.battery = sensorMap.second.throttling;
+                    shutdown_thresholds_.battery = sensorMap.second.shutdown;
+                    break;
+                case TemperatureType::SKIN:
+                    thresholds_.ss = sensorMap.second.throttling;
+                    vr_thresholds_.ss = sensorMap.second.throttling;
+                    shutdown_thresholds_.ss = sensorMap.second.shutdown;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
 
 /*
  * Populate the sensor_name_to_file_map_ map by walking through the file tree,
@@ -175,10 +200,11 @@ ThermalHelper::ThermalHelper() :
     std::string vr_thermal_config(kThermalConfigPrefix + hw + "-vr" + rev + ".conf");
     InitializeThresholdsFromThermalConfig(thermal_config,
                                           vr_thermal_config,
-                                          kValidThermalSensorTypeMap,
+                                          kValidThermalSensorInfoMap,
                                           &thresholds_,
                                           &shutdown_thresholds_,
                                           &vr_thresholds_);
+    updateOverideThresholds();
 }
 
 std::vector<std::string> ThermalHelper::getCoolingDevicePaths() {
@@ -218,22 +244,16 @@ bool ThermalHelper::readTemperature(
         return false;
     }
 
-    out->type = kValidThermalSensorTypeMap.at(sensor_name);
-    out->name = sensor_name;
-    out->currentValue = std::stoi(temp) * kMultiplier;
-    out->throttlingThreshold = getThresholdFromType(
-        kValidThermalSensorTypeMap.at(sensor_name), thresholds_);
-    if (kValidThermalSensorTypeMap.at(sensor_name) == TemperatureType::SKIN) {
-        out->throttlingThreshold = low_temp_threshold_adjuster_.adjustThreshold(
-              out->throttlingThreshold, out->currentValue);
-    }
+    SensorInfo sensor_info = kValidThermalSensorInfoMap.at(sensor_name);
 
+    out->type = sensor_info.type;
+    out->name = sensor_name;
+    out->currentValue = std::stoi(temp) * sensor_info.multiplier;
+    out->throttlingThreshold = getThresholdFromType(sensor_info.type, thresholds_);
     out->shutdownThreshold = getThresholdFromType(
-        kValidThermalSensorTypeMap.at(sensor_name),
-        shutdown_thresholds_);
+        sensor_info.type, shutdown_thresholds_);
     out->vrThrottlingThreshold = getThresholdFromType(
-        kValidThermalSensorTypeMap.at(sensor_name),
-        vr_thresholds_);
+        sensor_info.type, vr_thresholds_);
 
     LOG(DEBUG) << StringPrintf(
         "readTemperature: %d, %s, %g, %g, %g, %g",
@@ -245,77 +265,50 @@ bool ThermalHelper::readTemperature(
 }
 
 bool ThermalHelper::initializeSensorMap() {
-    for (size_t sensor_zone_num = 0; sensor_zone_num < kMaxSensorSearchNum;
-            ++sensor_zone_num) {
-        std::string sensor_name_path = StringPrintf(
-            "%s/%s%zu/%s", kThermalSensorsRoot, kThermalZoneDirSuffix,
-            sensor_zone_num, kSensorTypeFileSuffix);
+    for (const auto& sensor_info : kValidThermalSensorInfoMap) {
+        std::string sensor_name = sensor_info.first;
         std::string sensor_temp_path = StringPrintf(
-            "%s/%s%zu/%s", kThermalSensorsRoot, kThermalZoneDirSuffix,
-            sensor_zone_num, kTemperatureFileSuffix);
-
-        std::string sensor_name;
-        if (android::base::ReadFileToString(sensor_name_path, &sensor_name)) {
-            sensor_name = android::base::Trim(sensor_name);
-            if (kValidThermalSensorTypeMap.find(sensor_name) !=
-                kValidThermalSensorTypeMap.end()) {
-
-                if (!thermal_sensors_.addSensor(
-                    sensor_name, sensor_temp_path)) {
-                      LOG(ERROR) << "Could not add " << sensor_name
-                                 << "to sensors map";
-                }
-            }
+            "%s/tz-by-name/%s/temp", kThermalSensorsRoot, sensor_name.c_str());
+        if (!thermal_sensors_.addSensor(sensor_name, sensor_temp_path)) {
+            LOG(ERROR) << "Could not add " << sensor_name << "to sensors map";
         }
     }
     if (kAvailableSensors == thermal_sensors_.getNumSensors() ||
-        kValidThermalSensorTypeMap.size() == thermal_sensors_.getNumSensors()) {
+        kValidThermalSensorInfoMap.size() == thermal_sensors_.getNumSensors()) {
             return true;
     }
     return false;
 }
 
 bool ThermalHelper::initializeCoolingDevices() {
-    std::string base_path(kThermalSensorsRoot);
-    for (size_t cooling_device_num = 0;
-            cooling_device_num < kMaxSensorSearchNum; ++cooling_device_num) {
-        std::string path = StringPrintf(
-            "%s/%s%zu", kThermalSensorsRoot, kCoolingDeviceDirSuffix,
-            cooling_device_num);
-        std::string cooling_device_name_path = StringPrintf(
-            "%s/%s", path.c_str(), kSensorTypeFileSuffix);
+    for (const auto& cooling_device_info : kValidCoolingDeviceTypeMap) {
+        std::string cooling_device_name = cooling_device_info.first;
+        std::string cooling_device_path = StringPrintf(
+            "%s/cdev-by-name/%s", kThermalSensorsRoot,
+            cooling_device_name.c_str());
 
-        std::string cooling_device_name;
-        if (android::base::ReadFileToString(
-                cooling_device_name_path, &cooling_device_name)) {
-
-            cooling_device_name = android::base::Trim(cooling_device_name);
-            if (kValidCoolingDeviceTypeMap.find(cooling_device_name) !=
-                kValidCoolingDeviceTypeMap.end()) {
-                  if (!cooling_devices_.addCoolingDevice(
-                          cooling_device_name, path)) {
-                      LOG(ERROR) << "Could not add " << cooling_device_name
-                                 << "to cooling device map";
-                      continue;
-                  }
-
-                  int data;
-                  if (cooling_devices_.getCoolingDeviceState(
-                          cooling_device_name, &data)) {
-                      cooling_device_path_to_throttling_level_map_.emplace(
-                          cooling_devices_.getCoolingDevicePath(
-                              cooling_device_name).append("/cur_state"),
-                          data);
-                  } else {
-                      LOG(ERROR) << "Could not read cooling device value.";
-                  }
-            }
+        if (!cooling_devices_.addCoolingDevice(
+                cooling_device_name, cooling_device_path)) {
+            LOG(ERROR) << "Could not add " << cooling_device_name
+                       << "to cooling device map";
+            continue;
         }
 
-        if (kValidCoolingDeviceTypeMap.size() ==
-                cooling_devices_.getNumCoolingDevices()) {
-            return true;
+        int data;
+        if (cooling_devices_.getCoolingDeviceState(
+                cooling_device_name, &data)) {
+            cooling_device_path_to_throttling_level_map_.emplace(
+                cooling_devices_.getCoolingDevicePath(
+                    cooling_device_name).append("/cur_state"),
+                data);
+        } else {
+            LOG(ERROR) << "Could not read cooling device value.";
         }
+    }
+
+    if (kValidCoolingDeviceTypeMap.size() ==
+            cooling_devices_.getNumCoolingDevices()) {
+        return true;
     }
     return false;
 }
@@ -323,12 +316,12 @@ bool ThermalHelper::initializeCoolingDevices() {
 bool ThermalHelper::fillTemperatures(hidl_vec<Temperature>* temperatures) {
     temperatures->resize(kAvailableSensors);
     int current_index = 0;
-    for (const auto& name_type_pair : kValidThermalSensorTypeMap) {
+    for (const auto& name_type_pair : kValidThermalSensorInfoMap) {
         Temperature temp;
 
         // Since evt and prod use different skin sensors. Skip the one we don't
         // care about.
-        if (name_type_pair.second == TemperatureType::SKIN &&
+        if (name_type_pair.second.type == TemperatureType::SKIN &&
                 getSkinSensorType() != name_type_pair.first) {
             continue;
         }
@@ -378,6 +371,24 @@ bool ThermalHelper::checkThrottlingData(
             cooling_device_path_to_throttling_level_map_.end()) {
         int throttling_level = std::stoi(throttling_data.second);
         int max_throttling_level = getMaxThrottlingLevelFromMap();
+
+        // The following if-else blocks aim to reduce the number of notifications
+        // triggered by low-level throttling states. See b/117438310 for details.
+        if (throttling_level) {
+            std::string little_cd_path =
+                cooling_devices_.getCoolingDevicePath(kLittleCoreCpuFreq) + "/cur_state";
+            std::string big_cd_path =
+                cooling_devices_.getCoolingDevicePath(kBigCoreCpuFreq) + "/cur_state";
+            if ((cooling_device == little_cd_path &&
+                 throttling_level < kDesiredLittleCoreCoolingStateCliff) ||
+                (cooling_device == big_cd_path &&
+                 throttling_level < kDesiredBigCoreCoolingStateCliff)) {
+                LOG(INFO) << "Masking throttling level " << throttling_level << " for CD "
+                          << cooling_device;
+                throttling_level = 0;
+            }
+        }
+
         cooling_device_path_to_throttling_level_map_[throttling_data.first] =
             throttling_level;
 
@@ -398,11 +409,6 @@ bool ThermalHelper::checkThrottlingData(
     }
 
     return false;
-}
-
-bool ThermalHelper::fillBatteryThresholdDebugInfo(std::ostringstream& dump_buf)
-{
-    return low_temp_threshold_adjuster_.fillBatteryThresholdDebugInfo(dump_buf);
 }
 
 std::string ThermalHelper::getSkinSensorType() {

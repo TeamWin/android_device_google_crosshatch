@@ -13,11 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Placing Crosshatch USB in it's own soong namespace
-soong_namespace {
-  imports: ["hardware/google/interfaces",],
-}
-
 cc_binary {
     name: "android.hardware.usb@1.1-service.crosshatch",
     relative_install_path: "hw",

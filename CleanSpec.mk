@@ -123,5 +123,8 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/include)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.secure_element@1.0-service.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.secure_element@1.0-service)
 
+# Move libnfc-nci.conf to /vendor
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/libnfc-nci.conf)
+
 # Remove /firmware which used to be a symlink to /vendor/firmware_mnt
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/firmware)
