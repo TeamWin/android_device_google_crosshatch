@@ -20,6 +20,7 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/interfaces \
     hardware/google/pixel \
     hardware/qcom/sdm845 \
+    vendor/google/camera \
     vendor/qcom/sdm845
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -428,6 +429,8 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service_64 \
     camera.device@3.2-impl \
     camera.sdm845 \
+    libgooglecamerahal \
+    libgoogle_camera_hal_tests \
     libqomx_core \
     libmmjpeg_interface \
     libmmcamera_interface \
