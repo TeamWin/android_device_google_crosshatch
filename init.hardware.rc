@@ -685,6 +685,12 @@ service tftp_server /vendor/bin/tftp_server
    user root
    group root system
 
+service modem_svc /vendor/bin/modem_svc
+   class core
+   user root
+   group system
+   capabilities NET_BIND_SERVICE
+
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -O/data/vendor/wifi/wpa/sockets -puse_p2p_group_interface=1 -dd \
     -g@android:wpa_wlan0
