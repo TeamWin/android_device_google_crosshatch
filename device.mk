@@ -498,10 +498,6 @@ PRODUCT_PACKAGES += \
 LIB_NL := libnl_2
 PRODUCT_PACKAGES += $(LIB_NL)
 
-# Factory OTA
-PRODUCT_PACKAGES += \
-    FactoryOta
-
 # Audio effects
 PRODUCT_PACKAGES += \
     libvolumelistener \
@@ -784,4 +780,4 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Increment the SVN for any official public releases
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.svn=5
+    ro.vendor.build.svn=6
