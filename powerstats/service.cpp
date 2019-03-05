@@ -159,11 +159,8 @@ int main(int /* argc */, char ** /* argv */) {
 
     // Add Power Entities that require the Aidl data provider
     sp<AidlStateResidencyDataProvider> aidlSdp = new AidlStateResidencyDataProvider();
-    // TODO(117585786): Add real power entities here
-    // uint32_t mock1Id = service->addPowerEntity("Mock1", PowerEntityType::SUBSYSTEM);
-    // aidlSdp->addEntity(mock1Id, "Mock1", {"state_a", "state_b"});
-    // uint32_t mock2Id = service->addPowerEntity("Mock2", PowerEntityType::SUBSYSTEM);
-    // aidlSdp->addEntity(mock2Id, "Mock2", {"state_c", "state_d"});
+    uint32_t citadelId = service->addPowerEntity("Citadel", PowerEntityType::SUBSYSTEM);
+    aidlSdp->addEntity(citadelId, "Citadel", {"Reset", "Active", "Deep-Sleep"});
 
     auto serviceStatus = android::defaultServiceManager()->addService(
         android::String16("power.stats-vendor"), aidlSdp);
