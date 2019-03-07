@@ -18,6 +18,7 @@ TARGET_BOARD_PLATFORM := sdm845
 TARGET_BOARD_INFO_FILE := device/google/crosshatch/board-info.txt
 USES_DEVICE_GOOGLE_B1C1 := true
 TARGET_NO_BOOTLOADER := true
+TARGET_USES_VULKAN := true
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -258,6 +259,17 @@ DEVICE_FRAMEWORK_MANIFEST_FILE := device/google/crosshatch/framework_manifest.xm
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 DEVICE_MANIFEST_FILE += device/google/crosshatch/manifest_userdebug.xml
 endif
+
+ODM_MANIFEST_SKUS += \
+    G013A \
+    G013B \
+    G013C \
+    G013D \
+
+ODM_MANIFEST_G013A_FILES := device/google/crosshatch/nfc/manifest_se_SIM1.xml
+ODM_MANIFEST_G013B_FILES := device/google/crosshatch/nfc/manifest_se_eSE1.xml
+ODM_MANIFEST_G013C_FILES := device/google/crosshatch/nfc/manifest_se_SIM1.xml
+ODM_MANIFEST_G013D_FILES := device/google/crosshatch/nfc/manifest_se_eSE1.xml
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
