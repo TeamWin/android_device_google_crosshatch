@@ -768,7 +768,6 @@ else
 endif
 
 # Enable tcpdump_logger on userdebug and eng
-PRODUCT_PACKAGES_DEBUG += tcpdump_logger
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
     PRODUCT_PROPERTY_OVERRIDES += \
         persist.vendor.tcpdump.log.alwayson=false \
