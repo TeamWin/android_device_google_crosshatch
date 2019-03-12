@@ -50,7 +50,7 @@
             <Limit name="measured-frame-rate-176x144" range="431-614" /> <!-- N=146 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.h264.encoder" type="video/avc" update="true">
-            <Limit name="measured-frame-rate-320x240" range="356-357" /> <!-- N=222 v98%=1.6 (PPR1.180426.002-) -->
+            <Limit name="measured-frame-rate-320x240" range="451-462"/><!-- N=196 v98%=1.1 --><!-- measured 90%:123-149 med:130 N=4 -->
             <Limit name="measured-frame-rate-720x480" range="131-131" /> <!-- N=190 v98%=1.4 (PPR1.180430.001-) -->
             <Limit name="measured-frame-rate-1280x720" range="74-74" /> <!-- N=178 v98%=1.2 -->
             <Limit name="measured-frame-rate-1920x1080" range="44-45" /> <!-- N=204 v98%=1.3 -->
