@@ -223,10 +223,6 @@
             <name>IComponentStore</name>
             <instance>default</instance>
         </interface>
-        <interface>
-            <name>IConfigurable</name>
-            <instance>default</instance>
-        </interface>
     </hal>
     <hal format="hidl">
         <name>android.hardware.media.omx</name>
