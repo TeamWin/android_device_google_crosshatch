@@ -160,7 +160,7 @@ int main(int /* argc */, char ** /* argv */) {
     // Add Power Entities that require the Aidl data provider
     sp<AidlStateResidencyDataProvider> aidlSdp = new AidlStateResidencyDataProvider();
     uint32_t citadelId = service->addPowerEntity("Citadel", PowerEntityType::SUBSYSTEM);
-    aidlSdp->addEntity(citadelId, "Citadel", {"Reset", "Active", "Deep-Sleep"});
+    aidlSdp->addEntity(citadelId, "Citadel", {"Last-Reset", "Active", "Deep-Sleep"});
 
     auto serviceStatus = android::defaultServiceManager()->addService(
         android::String16("power.stats-vendor"), aidlSdp);
