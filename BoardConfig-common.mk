@@ -292,6 +292,17 @@ BOARD_VENDOR_KERNEL_MODULES += \
 else ifeq (,$(filter-out blueline_kernel_debug_api crosshatch_kernel_debug_api, $(TARGET_PRODUCT)))
 BOARD_VENDOR_KERNEL_MODULES += \
     $(wildcard device/google/crosshatch-kernel/debug_api/*.ko)
+else ifneq (,$(TARGET_PREBUILT_KERNEL))
+    # If TARGET_PREBUILT_KERNEL is set, check whether there are modules packaged with that kernel
+    # image. If so, use them, otherwise fall back to the default directory.
+    TARGET_PREBUILT_KERNEL_PREBUILT_VENDOR_KERNEL_MODULES := \
+        $(wildcard $(dir $(TARGET_PREBUILT_KERNEL))/*.ko)
+    ifneq (,$(TARGET_PREBUILT_KERNEL_PREBUILT_VENDOR_KERNEL_MODULES))
+        BOARD_VENDOR_KERNEL_MODULES += $(TARGET_PREBUILT_KERNEL_PREBUILT_VENDOR_KERNEL_MODULES)
+    else
+        BOARD_VENDOR_KERNEL_MODULES += $(wildcard device/google/crosshatch-kernel/*.ko)
+    endif
+    # Do NOT delete TARGET_PREBUILT..., it will lead to empty BOARD_VENDOR_KERNEL_MODULES.
 else
 BOARD_VENDOR_KERNEL_MODULES += \
     $(wildcard device/google/crosshatch-kernel/*.ko)
@@ -308,6 +319,16 @@ else ifeq (,$(filter-out blueline_kernel_debug_hang crosshatch_kernel_debug_hang
 BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel/debug_hang
 else ifeq (,$(filter-out blueline_kernel_debug_api crosshatch_kernel_debug_api, $(TARGET_PRODUCT)))
 BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel/debug_api
+else ifneq (,$(TARGET_PREBUILT_KERNEL))
+    # If TARGET_PREBUILT_KERNEL is set, check whether there are dtb files packaged with that kernel
+    # image. If so, use them, otherwise fall back to the default directory.
+    PREBUILT_PREBUILT_DTBIMAGE_DIR := $(wildcard $(dir $(TARGET_PREBUILT_KERNEL))/*.dtb)
+    ifneq (,$(PREBUILT_PREBUILT_DTBIMAGE_DIR)
+        BOARD_PREBUILT_DTBIMAGE_DIR := $(dir $(TARGET_PREBUILT_KERNEL))
+    else
+        BOARD_PREBUILT_DTBIMAGE_DIR += device/google/crosshatch-kernel
+    endif
+    PREBUILT_VENDOR_KERNEL_MODULES :=
 else
 BOARD_PREBUILT_DTBIMAGE_DIR := device/google/crosshatch-kernel
 endif
