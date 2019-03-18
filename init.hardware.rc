@@ -876,15 +876,15 @@ on property:ro.boot.mode=sota
     setprop ro.boot.sota enabled
 
 on property:ro.boot.hardware.sku=G013A
-    setprop persist.nfc.uicc_enabled true
+    setprop persist.vendor.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013B
-    setprop persist.nfc.uicc_enabled false
+    setprop persist.vendor.nfc.uicc_enabled false
     setprop persist.vendor.radio.uicc_se_enabled false
     interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 on property:ro.boot.hardware.sku=G013C
-    setprop persist.nfc.uicc_enabled true
+    setprop persist.vendor.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013D
-    setprop persist.nfc.uicc_enabled false
+    setprop persist.vendor.nfc.uicc_enabled false
     setprop persist.vendor.radio.uicc_se_enabled false
     interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
 
