@@ -21,7 +21,8 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/pixel \
     hardware/qcom/sdm845 \
     vendor/google/camera \
-    vendor/qcom/sdm845
+    vendor/qcom/sdm845 \
+    vendor/google/interfaces
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
@@ -507,12 +508,6 @@ endif
 PRODUCT_PACKAGES += \
     wificond \
     libwpa_client
-
-# Only add default wifi service for aosp targets
-ifneq ($(filter aosp_%,$(TARGET_PRODUCT)),)
-PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
-endif
 
 LIB_NL := libnl_2
 PRODUCT_PACKAGES += $(LIB_NL)
