@@ -21,8 +21,8 @@
 #include <nos/debug.h>
 #include <nos/NuggetClient.h>
 
-#include <device.h>
-#include <screen_ui.h>
+#include <recovery_ui/device.h>
+#include <recovery_ui/screen_ui.h>
 
 namespace android {
 namespace device {
