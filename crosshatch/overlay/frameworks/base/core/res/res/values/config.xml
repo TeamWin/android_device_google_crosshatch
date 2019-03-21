@@ -724,6 +724,10 @@
     <dimen name="rounded_corner_radius_top">133px</dimen>
     <dimen name="rounded_corner_radius_bottom">70px</dimen>
 
+    <!-- How much we expand the touchable region of the status bar below the notch to catch touches
+        that just start below the notch. -->
+    <dimen name="display_cutout_touchable_region_size">60px</dimen>
+
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
     <integer name="config_shutdownBatteryTemperature">600</integer>
 
