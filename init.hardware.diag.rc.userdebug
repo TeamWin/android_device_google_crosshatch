@@ -30,6 +30,7 @@ service diag_mdlog_start /vendor/bin/diag_mdlog
     class late_start
     user shell
     group system diag media_rw
+    socket diag_router stream 0666 system system
     disabled
     oneshot
 
