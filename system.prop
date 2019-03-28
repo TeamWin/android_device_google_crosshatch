@@ -89,3 +89,9 @@ persist.data.df.dev_name=rmnet_usb0
 #ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
 persist.data.mode=concurrent
+
+# System props to enable Bluetooth Quality Report (BQR) feature
+# BQR event mask configuration
+persist.bluetooth.bqr.event_mask=14
+# BQR minimum report interval configuration
+persist.bluetooth.bqr.min_interval_ms=500
