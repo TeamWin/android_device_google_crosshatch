@@ -606,6 +606,13 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.sys.ssr.restart_level=modem,slpi,adsp
 
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+# Sensor debug flag
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.debug.ash.logger=0 \
+    persist.vendor.debug.ash.logger.time=0
+endif
+
 # setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
