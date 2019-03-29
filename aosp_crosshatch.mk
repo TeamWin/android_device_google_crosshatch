@@ -28,12 +28,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     PhotoTable \
     WallpaperPicker \
-    WAPPushManager \
-
-PRODUCT_FORCE_PRODUCT_MODULES_TO_SYSTEM_PARTITION := webview
 
 # STOPSHIP deal with Qualcomm stuff later
 # PRODUCT_RESTRICT_VENDOR_FILES := all
+
+PRODUCT_FORCE_PRODUCT_MODULES_TO_SYSTEM_PARTITION := webview
 
 PRODUCT_MANUFACTURER := Google
 PRODUCT_BRAND := Android
@@ -44,4 +43,3 @@ PRODUCT_MODEL := AOSP on crosshatch
 PRODUCT_COPY_FILES += \
     device/sample/etc/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml \
     $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
-
