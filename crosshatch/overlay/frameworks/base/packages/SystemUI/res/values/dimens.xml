@@ -20,10 +20,6 @@
 
     <dimen name="display_cutout_margin_consumption">0px</dimen>
 
-    <!-- How much we expand the touchable region of the status bar below the notch to catch touches
-         that just start below the notch. -->
-    <dimen name="display_cutout_touchable_region_size">60px</dimen>
-
     <!-- Height of the status bar header bar when on Keyguard (match status_bar_portrait) -->
     <dimen name="status_bar_header_height_keyguard">49dp</dimen>
 
