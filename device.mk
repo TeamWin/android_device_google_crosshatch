@@ -185,7 +185,8 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_PACKAGES += \
     update_engine_sideload \
     sg_write_buffer \
-    f2fs_io
+    f2fs_io \
+    check_f2fs
 
 # The following modules are included in debuggable builds only.
 PRODUCT_PACKAGES_DEBUG += \
@@ -834,6 +835,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/thermal_info_config_$(PRODUCT_HARDWARE).json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
     $(LOCAL_PATH)/thermal_info_config_$(PRODUCT_HARDWARE)_evt.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config_evt.json
+
+# Use /product/etc/fstab.postinstall to mount system_other
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.postinstall.fstab.prefix=/product
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/fstab.postinstall:$(TARGET_COPY_OUT_PRODUCT)/etc/fstab.postinstall
 
 # powerstats HAL
 PRODUCT_PACKAGES += \
