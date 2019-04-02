@@ -185,7 +185,8 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_PACKAGES += \
     update_engine_sideload \
     sg_write_buffer \
-    f2fs_io
+    f2fs_io \
+    check_f2fs
 
 # The following modules are included in debuggable builds only.
 PRODUCT_PACKAGES_DEBUG += \
