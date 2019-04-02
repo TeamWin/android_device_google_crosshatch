@@ -430,14 +430,6 @@
           available on some devices. -->
      <bool name="config_enableHapticTextHandle">true</bool>
 
-    <!-- Boolean indicating whether framework needs to set the tx power limit for meeting SAR
-         requirements -->
-    <bool translatable="false" name="config_wifi_framework_enable_sar_tx_power_limit">true</bool>
-
-    <!-- Boolean indicating whether framework should use detection of softAP mode to set the tx
-         power limit for meeting SAR requirements -->
-    <bool translatable="false" name="config_wifi_framework_enable_soft_ap_sar_tx_power_limit">true</bool>
-
     <!-- Applications which are disabled unless matching a particular sku -->
     <string-array name="config_disableApksUnlessMatchedSku_apk_list" translatable="false">
         <item>com.felicanetworks.mfs</item>
