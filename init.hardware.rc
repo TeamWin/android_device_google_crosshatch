@@ -218,6 +218,10 @@ on init && property:vendor.skip.init=0
 
 on late-init
     write /sys/devices/virtual/thermal/tz-by-name/fps-therm-adc/mode enabled
+    chown system system /sys/devices/virtual/thermal/tz-by-name/fps-therm-monitor/trip_point_0_temp
+    chown system system /sys/devices/virtual/thermal/tz-by-name/fps-therm-monitor/trip_point_0_hyst
+    chown system system /sys/devices/virtual/thermal/tz-by-name/usbc-therm-monitor/trip_point_0_temp
+    chown system system /sys/devices/virtual/thermal/tz-by-name/usbc-therm-monitor/trip_point_0_hyst
 
 on fs
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --early
@@ -920,13 +924,13 @@ on property:ro.boot.hardware.sku=G013A
 on property:ro.boot.hardware.sku=G013B
     setprop persist.vendor.nfc.uicc_enabled false
     setprop persist.vendor.radio.uicc_se_enabled false
-    interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
+    interface_start android.hardware.secure_element@1.1::ISecureElement/eSE1
 on property:ro.boot.hardware.sku=G013C
     setprop persist.vendor.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013D
     setprop persist.vendor.nfc.uicc_enabled false
     setprop persist.vendor.radio.uicc_se_enabled false
-    interface_start android.hardware.secure_element@1.0::ISecureElement/eSE1
+    interface_start android.hardware.secure_element@1.1::ISecureElement/eSE1
 
 # charger driver exposes now finer grain control, map demo mode to those properties
 # demo mode can only be exit wipping data which will also reset the persist properties

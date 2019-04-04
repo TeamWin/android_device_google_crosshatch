@@ -145,3 +145,6 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/webview)
 
 # Moved to /product
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/system/etc/sysconfig/qti_whitelist.xml)
+
+# Rename power HAL
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.power@1.3-service.crosshatch-libperfmgr.rc)
