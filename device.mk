@@ -389,6 +389,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.bluetooth.emb_wp_mode=false \
     ro.vendor.bluetooth.wipower=false
 
+# HEH filename encryption is being dropped
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.crypto.volume.filenames_mode=aes-256-cts
+
 # DRM HAL
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
@@ -402,10 +406,16 @@ PRODUCT_PACKAGES += \
     Tag \
     SecureElement \
     android.hardware.nfc@1.1-service \
-    android.hardware.secure_element@1.0-service-disabled
+    android.hardware.secure_element@1.1-service-disabled
 
 PRODUCT_PRODUCT_PROPERTIES += \
     vendor.ese.loader_script_path=/sys/firmware/devicetree/base/soc/i2c@88c000/nq@28/ese/loader_scripts_path
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/permissions/sku_G013A/android.hardware.nfc.uicc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/permissions/sku_G013B/android.hardware.nfc.ese.xml \
+    frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/permissions/sku_G013C/android.hardware.nfc.uicc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/permissions/sku_G013D/android.hardware.nfc.ese.xml
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf \

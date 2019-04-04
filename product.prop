@@ -46,7 +46,6 @@ persist.timed.enable=true
 
 # system props for perfetto
 persist.traced.enable=1
-persist.heapprofd.enable=1
 
 # System prop to turn on CdmaLTEPhone always
 telephony.lteOnCdmaDevice=1
