@@ -14,10 +14,11 @@
 # limitations under the License.
 #
 
+include build/make/target/board/BoardConfigMainlineCommon.mk
+
 TARGET_BOARD_PLATFORM := sdm845
 TARGET_BOARD_INFO_FILE := device/google/crosshatch/board-info.txt
 USES_DEVICE_GOOGLE_B1C1 := true
-TARGET_NO_BOOTLOADER := true
 TARGET_USES_VULKAN := true
 
 TARGET_ARCH := arm64
@@ -59,9 +60,7 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo.img
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
-TARGET_NO_BOOTLOADER ?= true
 TARGET_NO_KERNEL := false
-TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_USES_METADATA_PARTITION := true
 
@@ -78,9 +77,6 @@ TARGET_RECOVERY_UI_LIB := \
   libnos_citadel_for_recovery \
   libnos_for_recovery
 
-BOARD_AVB_ENABLE := true
-BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 BOARD_AVB_VBMETA_SYSTEM := system product_services
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
@@ -89,15 +85,14 @@ BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 endif
 
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-
 # product.img
 ifneq ($(PRODUCT_NO_PRODUCT_PARTITION), true)
 ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
   BOARD_PRODUCTIMAGE_PARTITION_SIZE := 314572800
 endif
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_COPY_OUT_PRODUCT := product
+else
+TARGET_COPY_OUT_PRODUCT := system/product
 endif
 
 # system.img
@@ -115,7 +110,6 @@ endif
 BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
 
 # userdata.img
-TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 
@@ -159,12 +153,7 @@ BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST += \
 endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
 endif # PRODUCT_USE_DYNAMIC_PARTITIONS
 
-TARGET_COPY_OUT_VENDOR := vendor
-
 BOARD_FLASH_BLOCK_SIZE := 131072
-
-# Install odex files into the other system image
-BOARD_USES_SYSTEM_OTHER_ODEX := true
 
 # Generate an APEX image for experiment b/119800099.
 DEXPREOPT_GENERATE_APEX_IMAGE := true
@@ -185,7 +174,6 @@ TARGET_FS_CONFIG_GEN := device/google/crosshatch/config.fs
 QCOM_BOARD_PLATFORMS += sdm845
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_HAVE_QCOM_FM := false
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := build/make/target/board/mainline_arm64/bluetooth
 BOARD_USES_COMMON_BLUETOOTH_HAL := true
 
 # Camera
@@ -221,7 +209,6 @@ WIFI_HIDL_FEATURE_DUAL_INTERFACE:= true
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
-USE_XML_AUDIO_POLICY_CONF := 1
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_SND_MONITOR := true
 AUDIO_FEATURE_ENABLED_USB_TUNNEL := true
@@ -246,9 +233,6 @@ TARGET_USES_DISPLAY_RENDER_INTENTS := true
 TARGET_USES_COLOR_METADATA := true
 TARGET_USES_DRM_PP := true
 
-# Charger Mode
-BOARD_CHARGER_ENABLE_SUSPEND := true
-
 # Vendor Interface Manifest
 DEVICE_MANIFEST_FILE := device/google/crosshatch/manifest.xml
 DEVICE_MATRIX_FILE := device/google/crosshatch/compatibility_matrix.xml
@@ -270,8 +254,6 @@ ODM_MANIFEST_G013A_FILES := device/google/crosshatch/nfc/manifest_se_SIM1.xml
 ODM_MANIFEST_G013B_FILES := device/google/crosshatch/nfc/manifest_se_eSE1.xml
 ODM_MANIFEST_G013C_FILES := device/google/crosshatch/nfc/manifest_se_SIM1.xml
 ODM_MANIFEST_G013D_FILES := device/google/crosshatch/nfc/manifest_se_eSE1.xml
-
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
