@@ -64,6 +64,7 @@ ifeq ($(wildcard vendor/google_devices/crosshatch/proprietary/device-vendor-cros
     BUILD_WITHOUT_VENDOR := true
 endif
 
+BOARD_KERNEL_IMAGE_NAME := Image.lz4-dtb
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/google/crosshatch-kernel/Image.lz4-dtb
 else

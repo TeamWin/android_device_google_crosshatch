@@ -2,19 +2,47 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     install_keyring
-    start touchdriver
 
-on init
+on boot
     mount configfs none /config
-    mkdir /config/usb_gadget/g1 0770 shell shell
-    write /config/usb_gadget/g1/idVendor 0x18d1
-    write /config/usb_gadget/g1/idProduct 0xd001
+    mkdir /config/usb_gadget/g1 0770
     mkdir /config/usb_gadget/g1/strings/0x409 0770
+    write /config/usb_gadget/g1/bcdUSB 0x0200
+    write /config/usb_gadget/g1/idVendor 0x18d1
+    write /config/usb_gadget/g1/bcdDevice 0x0440
     write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno}
     write /config/usb_gadget/g1/strings/0x409/manufacturer ${ro.product.manufacturer}
     write /config/usb_gadget/g1/strings/0x409/product ${ro.product.model}
+    mkdir /config/usb_gadget/g1/functions/accessory.gs2
+    mkdir /config/usb_gadget/g1/functions/audio_source.gs3
+    mkdir /config/usb_gadget/g1/functions/midi.gs5
     mkdir /config/usb_gadget/g1/functions/ffs.adb
-    write /config/usb_gadget/g1/os_desc/use 1
+    mkdir /config/usb_gadget/g1/functions/ffs.mtp
+    mkdir /config/usb_gadget/g1/functions/ffs.ptp
+    mkdir /config/usb_gadget/g1/functions/diag.diag
+    mkdir /config/usb_gadget/g1/functions/cser.dun.0
+    mkdir /config/usb_gadget/g1/functions/cser.nmea.1
+    mkdir /config/usb_gadget/g1/functions/gsi.rmnet
+    mkdir /config/usb_gadget/g1/functions/gsi.rndis
+    mkdir /config/usb_gadget/g1/functions/qdss.qdss
+    mkdir /config/usb_gadget/g1/configs/b.1 0770
+    mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409 0770
+    write /config/usb_gadget/g1/os_desc/b_vendor_code 0x1
+    write /config/usb_gadget/g1/os_desc/qw_sign "MSFT100"
+    mkdir /dev/usb-ffs 0775 shell shell
+    mkdir /dev/usb-ffs/adb 0770 shell shell
+    mount functionfs adb /dev/usb-ffs/adb rmode=0770,fmode=0660,uid=2000,gid=2000,no_disconnect=1
+    mkdir /dev/usb-ffs/mtp 0770 mtp mtp
+    mkdir /dev/usb-ffs/ptp 0770 mtp mtp
+    mount functionfs mtp /dev/usb-ffs/mtp rmode=0770,fmode=0660,uid=1024,gid=1024,no_disconnect=1
+    mount functionfs ptp /dev/usb-ffs/ptp rmode=0770,fmode=0660,uid=1024,gid=1024,no_disconnect=1
+    setprop sys.usb.mtp.device_type 3
+    setprop sys.usb.controller "a600000.dwc3"
+    symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
+    write /sys/module/libcomposite/parameters/disable_l1_for_hs "y"
+    write /config/usb_gadget/g1/functions/gsi.rndis/rndis_class_id 1
+
+on init
     setprop sys.usb.configfs 1
     # Don't lose recovery logs- keep warm reset for coming out of recovery.
     write /sys/module/msm_poweroff/parameters/warm_reset 1
@@ -25,13 +53,6 @@ on init
     start vendor.boot-hal-1-0
 
 service prepdecrypt /sbin/prepdecrypt.sh
-    oneshot
-    disabled
-    user root
-    group root
-    seclabel u:r:recovery:s0
-
-service touchdriver /sbin/touchdriver.sh
     oneshot
     disabled
     user root
@@ -114,13 +135,13 @@ on property:prep.decrypt=1
     start keymaster-4-0
     setprop weaver.startup 1
 
-on property:sys.usb.ffs.ready=1
-    mkdir /config/usb_gadget/g1/configs/b.1 0777 shell shell
-    symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
-    mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409 0770 shell shell
-    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "adb"
-    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
-    write /config/usb_gadget/g1/UDC "a600000.dwc3"
+#on property:sys.usb.ffs.ready=1
+#    mkdir /config/usb_gadget/g1/configs/b.1 0777 shell shell
+#    symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
+#    mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409 0770 shell shell
+#    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "adb"
+#    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
+#    write /config/usb_gadget/g1/UDC "a600000.dwc3"
 
 on property:sys.usb.config=none && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/UDC "none"
@@ -132,33 +153,46 @@ on property:sys.usb.config=none && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
     rm /config/usb_gadget/g1/configs/b.1/f3
+    rm /config/usb_gadget/g1/configs/b.1/function0
+    rm /config/usb_gadget/g1/configs/b.1/function1
     rmdir /config/usb_gadget/g1/functions/rndis.gs4
     setprop sys.usb.state ${sys.usb.config}
 
-on property:init.svc.adbd=stopped
-    setprop sys.usb.ffs.ready 0
+#on property:init.svc.adbd=stopped
+#    setprop sys.usb.ffs.ready 0
 
 on property:sys.usb.config=adb && property:sys.usb.configfs=1
     start adbd
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/idProduct 0xd001
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "adb"
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=mtp && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/idProduct 0xd003
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "mtp"
-    symlink /config/usb_gadget/g1/functions/mtp.gs0 /config/usb_gadget/g1/configs/b.1/f1
+    symlink /config/usb_gadget/g1/functions/ffs.mtp /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
     start adbd
 
-on property:sys.usb.ffs.ready=1 && property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "mtp_adb"
-    symlink /config/usb_gadget/g1/functions/mtp.gs0 /config/usb_gadget/g1/configs/b.1/f1
+on property:sys.usb.ffs.ready=1 && property:sys.usb.ffs.mtp.ready=1 && property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/idProduct 0x4ee2
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "mtp"
+    symlink /config/usb_gadget/g1/functions/ffs.mtp /config/usb_gadget/g1/configs/b.1/f1
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
+    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=mtp2 && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/idProduct 0xd003
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "mtp"
+    symlink /config/usb_gadget/g1/functions/ffs.mtp /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}

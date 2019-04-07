@@ -129,7 +129,7 @@ BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
 BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
 
-include device/google/crosshatch-sepolicy/crosshatch-sepolicy.mk
+#include device/google/crosshatch-sepolicy/crosshatch-sepolicy.mk
 
 TARGET_FS_CONFIG_GEN := device/google/crosshatch/config.fs
 
@@ -271,16 +271,17 @@ TW_INCLUDE_CRYPTO := true
 AB_OTA_UPDATER := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 #TW_RECOVERY_ADDITIONAL_RELINK_FILES := $(OUT)/system/lib64/libhardware_legacy.so
-TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
-TARGET_RECOVERY_DEVICE_MODULES += android.hardware.confirmationui@1.0.so
-TW_RECOVERY_ADDITIONAL_RELINK_FILES := out/target/product/$(PRODUCT_HARDWARE)/system/lib64/android.hardware.boot@1.0.so
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += out/target/product/$(PRODUCT_HARDWARE)/system/lib64/vndk-28/android.hardware.confirmationui@1.0.so
-TARGET_RECOVERY_DEVICE_MODULES += libxml2 libicuuc libprotobuf-cpp-full
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += out/target/product/$(PRODUCT_HARDWARE)/system/lib64/libxml2.so out/target/product/$(PRODUCT_HARDWARE)/system/lib64/libicuuc.so out/target/product/$(PRODUCT_HARDWARE)/system/lib64/libprotobuf-cpp-full.so
+#TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
+#TARGET_RECOVERY_DEVICE_MODULES += android.hardware.confirmationui@1.0.so
+#TW_RECOVERY_ADDITIONAL_RELINK_FILES := out/target/product/$(PRODUCT_HARDWARE)/system/lib64/android.hardware.boot@1.0.so
+#TW_RECOVERY_ADDITIONAL_RELINK_FILES += out/target/product/$(PRODUCT_HARDWARE)/system/lib64/vndk-28/android.hardware.confirmationui@1.0.so
+#TARGET_RECOVERY_DEVICE_MODULES += libxml2 libicuuc libprotobuf-cpp-full
+#TW_RECOVERY_ADDITIONAL_RELINK_FILES += out/target/product/$(PRODUCT_HARDWARE)/system/lib64/libxml2.so out/target/product/$(PRODUCT_HARDWARE)/system/lib64/libicuuc.so out/target/product/$(PRODUCT_HARDWARE)/system/lib64/libprotobuf-cpp-full.so
 #TWRP_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
+#TARGET_USES_LOGD := true
+TW_NO_HAPTICS := true
 # MTP will not work until we update it to support ffs
-TW_EXCLUDE_MTP := true
+#TW_EXCLUDE_MTP := true
 PLATFORM_SECURITY_PATCH := 2025-12-31
 TW_USE_TOOLBOX := true
 #TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
