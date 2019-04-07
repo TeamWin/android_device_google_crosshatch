@@ -2,6 +2,7 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     install_keyring
+    start touchdriver
 
 on boot
     mount configfs none /config
@@ -51,6 +52,13 @@ on init
     start prepdecrypt
     start servicemanager
     start vendor.boot-hal-1-0
+
+service touchdriver /sbin/touchdriver.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
 
 service prepdecrypt /sbin/prepdecrypt.sh
     oneshot
