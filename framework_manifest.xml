@@ -1,18 +1,5 @@
 <manifest version="1.0" type="framework">
     <hal format="hidl">
-        <name>android.hardware.media.c2</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IComponentStore</name>
-            <instance>software</instance>
-        </interface>
-        <interface>
-            <name>IConfigurable</name>
-            <instance>software</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>hardware.google.pixelstats</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
