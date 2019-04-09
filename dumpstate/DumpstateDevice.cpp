@@ -339,6 +339,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
         return Void();
     }
 
+    RunCommandToFd(fd, "Notify modem", {"/vendor/bin/modem_svc", "-s"}, CommandOptions::WithTimeout(1).Build());
     RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
     DumpFileToFd(fd, "SoC serial number", "/sys/devices/soc0/serial_number");
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
