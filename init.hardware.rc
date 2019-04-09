@@ -728,7 +728,7 @@ service tftp_server /vendor/bin/tftp_server
    user root
    group root system
 
-service modem_svc /vendor/bin/modem_svc
+service modem_svc /vendor/bin/modem_svc -q
    class core
    user root
    group system
