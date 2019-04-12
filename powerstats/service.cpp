@@ -16,6 +16,7 @@
 
 #define LOG_TAG "android.hardware.power.stats@1.0-service.pixel"
 
+#include <android-base/properties.h>
 #include <android/log.h>
 #include <binder/IPCThreadState.h>
 #include <binder/IServiceManager.h>
@@ -51,6 +52,8 @@ using android::hardware::google::pixel::powerstats::WlanStateResidencyDataProvid
 
 int main(int /* argc */, char ** /* argv */) {
     ALOGI("power.stats service 1.0 is starting.");
+
+    bool isDebuggable = android::base::GetBoolProperty("ro.debuggable", false);
 
     PowerStats *service = new PowerStats();
 
@@ -113,49 +116,51 @@ int main(int /* argc */, char ** /* argv */) {
 
     service->addStateResidencyDataProvider(socSdp);
 
-    // Add WLAN power entity
-    uint32_t wlanId = service->addPowerEntity("WLAN", PowerEntityType::SUBSYSTEM);
-    sp<WlanStateResidencyDataProvider> wlanSdp =
-        new WlanStateResidencyDataProvider(wlanId, "/d/wlan0/power_stats");
-    service->addStateResidencyDataProvider(wlanSdp);
+    if (isDebuggable) {
+        // Add WLAN power entity
+        uint32_t wlanId = service->addPowerEntity("WLAN", PowerEntityType::SUBSYSTEM);
+        sp<WlanStateResidencyDataProvider> wlanSdp =
+            new WlanStateResidencyDataProvider(wlanId, "/d/wlan0/power_stats");
+        service->addStateResidencyDataProvider(wlanSdp);
 
-    // Add Easel power entity
-    const std::string easelEntryCountPrefix = "Cumulative count:";
-    const std::string easelTotalTimePrefix = "Cumulative duration msec:";
-    const std::string easelLastEntryPrefix = "Last entry timestamp msec:";
-    std::vector<StateResidencyConfig> easelStateResidencyConfigs = {
-        {.name = "Off",
-         .header = "OFF",
-         .entryCountSupported = true,
-         .entryCountPrefix = easelEntryCountPrefix,
-         .totalTimeSupported = true,
-         .totalTimePrefix = easelTotalTimePrefix,
-         .lastEntrySupported = true,
-         .lastEntryPrefix = easelLastEntryPrefix},
-        {.name = "Active",
-         .header = "ACTIVE",
-         .entryCountSupported = true,
-         .entryCountPrefix = easelEntryCountPrefix,
-         .totalTimeSupported = true,
-         .totalTimePrefix = easelTotalTimePrefix,
-         .lastEntrySupported = true,
-         .lastEntryPrefix = easelLastEntryPrefix},
-        {.name = "Suspend",
-         .header = "SUSPEND",
-         .entryCountSupported = true,
-         .entryCountPrefix = easelEntryCountPrefix,
-         .totalTimeSupported = true,
-         .totalTimePrefix = easelTotalTimePrefix,
-         .lastEntrySupported = true,
-         .lastEntryPrefix = easelLastEntryPrefix}};
-    sp<GenericStateResidencyDataProvider> easelSdp =
-        new GenericStateResidencyDataProvider("/d/mnh_sm/power_stats");
+        // Add Easel power entity
+        const std::string easelEntryCountPrefix = "Cumulative count:";
+        const std::string easelTotalTimePrefix = "Cumulative duration msec:";
+        const std::string easelLastEntryPrefix = "Last entry timestamp msec:";
+        std::vector<StateResidencyConfig> easelStateResidencyConfigs = {
+            {.name = "Off",
+             .header = "OFF",
+             .entryCountSupported = true,
+             .entryCountPrefix = easelEntryCountPrefix,
+             .totalTimeSupported = true,
+             .totalTimePrefix = easelTotalTimePrefix,
+             .lastEntrySupported = true,
+             .lastEntryPrefix = easelLastEntryPrefix},
+            {.name = "Active",
+             .header = "ACTIVE",
+             .entryCountSupported = true,
+             .entryCountPrefix = easelEntryCountPrefix,
+             .totalTimeSupported = true,
+             .totalTimePrefix = easelTotalTimePrefix,
+             .lastEntrySupported = true,
+             .lastEntryPrefix = easelLastEntryPrefix},
+            {.name = "Suspend",
+             .header = "SUSPEND",
+             .entryCountSupported = true,
+             .entryCountPrefix = easelEntryCountPrefix,
+             .totalTimeSupported = true,
+             .totalTimePrefix = easelTotalTimePrefix,
+             .lastEntrySupported = true,
+             .lastEntryPrefix = easelLastEntryPrefix}};
+        sp<GenericStateResidencyDataProvider> easelSdp =
+            new GenericStateResidencyDataProvider("/d/mnh_sm/power_stats");
 
-    uint32_t easelId = service->addPowerEntity("Easel", PowerEntityType::SUBSYSTEM);
-    easelSdp->addEntity(
-        easelId, PowerEntityConfig("Easel Subsystem Power Stats", easelStateResidencyConfigs));
+        uint32_t easelId = service->addPowerEntity("Easel", PowerEntityType::SUBSYSTEM);
+        easelSdp->addEntity(
+            easelId, PowerEntityConfig("Easel Subsystem Power Stats", easelStateResidencyConfigs));
 
-    service->addStateResidencyDataProvider(easelSdp);
+        service->addStateResidencyDataProvider(easelSdp);
+    }
 
     // Add Power Entities that require the Aidl data provider
     sp<AidlStateResidencyDataProvider> aidlSdp = new AidlStateResidencyDataProvider();
