@@ -1,0 +1,14 @@
+allow hal_confirmationui_server tee_device:chr_file rw_file_perms;
+allow hal_confirmationui_server ion_device:chr_file r_file_perms;
+
+allow hal_confirmationui_server hal_tui_comm_hwservice:hwservice_manager find;
+binder_call(hal_confirmationui_server, hal_tui_comm)
+
+vndbinder_use(hal_confirmationui_server)
+allow hal_confirmationui_server citadeld_service:service_manager find;
+binder_call(hal_confirmationui_server, citadeld)
+
+binder_call(hal_confirmationui_server, keystore)
+
+allow hal_confirmationui_server input_device:chr_file rw_file_perms;
+allow hal_confirmationui_server input_device:dir r_dir_perms;

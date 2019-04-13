@@ -1,0 +1,36 @@
+type init-qcom-devstart-sh, domain;
+type init-qcom-devstart-sh_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(init-qcom-devstart-sh)
+
+allow init-qcom-devstart-sh vendor_shell_exec:file rx_file_perms;
+allow init-qcom-devstart-sh vendor_toolbox_exec:file rx_file_perms;
+
+# execute grep
+allow init-qcom-devstart-sh vendor_file:file rx_file_perms;
+
+# Set the vendor.qcom.devup property
+set_prop(init-qcom-devstart-sh, vendor_device_prop)
+# Set the sys.slpi.firmware.version property.
+set_prop(init-qcom-devstart-sh, public_vendor_system_prop)
+
+# Set boot_adsp and boot_slpi to 1
+allow init-qcom-devstart-sh sysfs_msm_subsys:file w_file_perms;
+
+# Initialize Edge Sense.
+# See b/67205273.
+allow init-qcom-devstart-sh sysfs:dir r_dir_perms;
+allow init-qcom-devstart-sh sysfs_pinctrl:dir r_dir_perms;
+allow init-qcom-devstart-sh sysfs_pinctrl:file rw_file_perms;
+allow init-qcom-devstart-sh sysfs_gpio_export:file w_file_perms;
+allow init-qcom-devstart-sh sysfs_soc:dir r_dir_perms;
+allow init-qcom-devstart-sh sysfs_soc:file r_file_perms;
+allow init-qcom-devstart-sh sysfs_msm_subsys:dir r_dir_perms;
+allow init-qcom-devstart-sh sysfs_msm_subsys:file r_file_perms;
+allow init-qcom-devstart-sh sysfs_scsi_devices_0000:file r_file_perms;
+allow init-qcom-devstart-sh sysfs_pixelstats:file r_file_perms;
+# Ignore permissions used but not needed.
+dontaudit init-qcom-devstart-sh sysfs:file { create getattr };
+dontaudit init-qcom-devstart-sh sysfs_type:dir { read write };
+dontaudit init-qcom-devstart-sh sysfs_graphics:file getattr;
+dontaudit init-qcom-devstart-sh sysfs_devices_block:file getattr;

@@ -1,0 +1,4 @@
+binder_call(audioserver, bootanim)
+
+allow audioserver sysfs_soc:file r_file_perms;
+allow audioserver sysfs_soc:dir search;

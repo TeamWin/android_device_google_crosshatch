@@ -1,0 +1,17 @@
+type hal_usb_impl, domain;
+hal_server_domain(hal_usb_impl, hal_usb)
+hal_server_domain(hal_usb_impl, hal_usb_gadget)
+
+type hal_usb_impl_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_usb_impl)
+
+allow hal_usb_impl sysfs_msm_subsys:dir search;
+allow hal_usb_impl sysfs_msm_subsys:file r_file_perms;
+r_dir_file(hal_usb_impl, sysfs_usb_c)
+allow hal_usb_impl sysfs_usb_c:file w_file_perms;
+allow hal_usb_impl sysfs_usb_device:dir r_dir_perms;
+allow hal_usb_impl sysfs_usb_device:file rw_file_perms;
+allow hal_usb_impl configfs:file create_file_perms;
+
+set_prop(hal_usb_impl, vendor_usb_config_prop)
+get_prop(hal_usb_impl, vendor_usb_prop)

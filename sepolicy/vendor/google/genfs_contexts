@@ -1,0 +1,7 @@
+genfscon sysfs /devices/platform/soc/171c0000.slim/tavil-slim-pgd/tavil_codec     u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/virtual/misc/msm_cirrus_playback/resistance_left_right    u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/aes_key                  u:object_r:sysfs_pstore:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/aes_key_iv               u:object_r:sysfs_pstore:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/aes_key_tag              u:object_r:sysfs_pstore:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/use_alt                  u:object_r:sysfs_pstore:s0
+genfscon proc  /fts/driver_test                                         u:object_r:proc_touch:s0

@@ -1,0 +1,60 @@
+allow hal_camera self:capability sys_nice;
+
+# communicate with camera
+#allow hal_camera camera:unix_dgram_socket sendto;
+#allow hal_camera camera_data_file:sock_file write;
+#allow hal_camera camera_device:chr_file rw_file_perms;
+
+allow hal_camera gpu_device:chr_file rw_file_perms;
+
+# access to /dev/input/event{5,10}
+allow hal_camera input_device:dir r_dir_perms;
+allow hal_camera input_device:chr_file r_file_perms;
+
+set_prop(hal_camera, vendor_camera_prop)
+
+#allow hal_camera sysfs_enable_ps_sensor:file w_file_perms;
+r_dir_file(hal_camera, sysfs_type)
+# find libraries
+allow hal_camera system_file:dir r_dir_perms;
+
+allow hal_camera qdisplay_service:service_manager find;
+
+allow hal_camera_default mnt_vendor_file:lnk_file r_file_perms;
+allow hal_camera_default mnt_vendor_file:dir r_dir_perms;
+
+# access vd6281 rainbow sensor files
+allow hal_camera sysfs_camera:dir search;
+allow hal_camera sysfs_camera:file rw_file_perms;
+allow hal_camera audio_device:dir search;
+
+# talk to system_server
+
+allow hal_camera system_server:unix_stream_socket { read write };
+
+allow hal_camera self:socket { create ioctl read write };
+
+# allow hal_camera to call some socket ioctls
+allowxperm hal_camera self:socket ioctl { IPC_ROUTER_IOCTL_LOOKUP_SERVER IPC_ROUTER_IOCTL_BIND_CONTROL_PORT };
+
+# ignore spurious denial
+dontaudit hal_camera graphics_device:dir search;
+
+allow hal_camera camera_vendor_data_file:dir rw_dir_perms;
+allow hal_camera camera_vendor_data_file:file create_file_perms;
+
+userdebug_or_eng(`
+  allow hal_camera diag_device:chr_file rw_file_perms;
+')
+
+# access easel dev nodes
+allow hal_camera easel_device:chr_file rw_file_perms;
+allow hal_camera sysfs_easel:file rw_file_perms;
+
+# access hexagon
+allow hal_camera qdsp_device:chr_file r_file_perms;
+
+#dual front lens calibration file
+allow hal_camera persist_file:dir search;
+allow hal_camera persist_camera_file:dir search;
+allow hal_camera persist_camera_file:file { getattr open read };

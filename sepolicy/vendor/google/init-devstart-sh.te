@@ -1,0 +1,2 @@
+# ramoops
+dontaudit init-qcom-devstart-sh sysfs_pstore:file { getattr };

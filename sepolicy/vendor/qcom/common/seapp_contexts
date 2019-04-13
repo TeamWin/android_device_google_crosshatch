@@ -1,0 +1,42 @@
+user=system seinfo=platform name=com.google.SSRestartDetector domain=ssr_detector_app type=system_app_data_file
+user=_app seinfo=platform name=com.android.pixellogger domain=logger_app type=app_data_file levelFrom=all
+user=_app seinfo=platform name=com.android.ramdump domain=ramdump_app type=app_data_file levelFrom=all
+
+user=_app seinfo=platform name=com.qualcomm.telephony domain=qtelephony type=app_data_file levelFrom=all
+
+#Add new domain for DataServices
+# Domain for CNEService , uceShimService and other connectivity services
+user=radio seinfo=platform name=.dataservices domain=dataservice_app type=radio_data_file
+
+# The default domain for tango_core process
+user=_app seinfo=tango name=com.google.tango domain=tango_core type=app_data_file levelFrom=user
+user=_app seinfo=tango name=com.google.tango.* domain=tango_core type=app_data_file levelFrom=user
+
+# A fallback in case tango_core is missing something critical that untrusted_app provides
+user=_app seinfo=tango name=com.google.tango:app domain=untrusted_app type=app_data_file levelFrom=user
+
+# Factory OTA
+user=_app seinfo=platform name=com.google.android.factoryota domain=factory_ota_app levelFrom=all
+
+# Hardware Info Collection
+user=_app seinfo=platform name=com.google.android.hardwareinfo domain=hardware_info_app type=app_data_file levelFrom=user
+
+# Use a custom domain for GoogleCamera, to allow for Hexagon DSP access
+user=_app seinfo=google name=com.google.android.GoogleCamera domain=google_camera_app type=app_data_file levelFrom=all
+
+# Also allow GoogleCameraNext, the dogfood beta version, the same access as GoogleCamera
+user=_app seinfo=googlepulse name=com.google.android.apps.googlecamera.fishfood domain=google_camera_app type=app_data_file levelFrom=all
+
+#Needed for time service apk
+user=_app seinfo=platform name=com.qualcomm.timeservice domain=timeservice_app type=app_data_file
+
+# Domain for easelservice app
+user=_app seinfo=easel name=com.google.android.imaging.easel.service domain=easelservice_app type=app_data_file levelFrom=user
+
+#Domain for connectivity monitor
+user=radio seinfo=platform name=com.google.android.connectivitymonitor domain=con_monitor_app type=app_data_file levelFrom=all
+
+# Domain for modem diagnostic system
+user=_app seinfo=platform name=com.google.mds domain=modem_diagnostic_app type=app_data_file levelFrom=user
+
+user=_app seinfo=platform name=com.qualcomm.qti.services.secureui* domain=secure_ui_service_app levelFrom=all

@@ -1,0 +1,43 @@
+# Policy for sensor daemon
+type sensors, domain;
+type sensors_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(sensors)
+
+allow sensors self:capability {
+    setuid
+    setgid
+    net_bind_service
+};
+
+allow sensors self:socket create_socket_perms;
+allowxperm sensors self:socket ioctl msm_sock_ipc_ioctls;
+
+allow sensors persist_sensors_file:dir rw_dir_perms;
+allow sensors persist_sensors_file:file create_file_perms;
+allow sensors mnt_vendor_file:dir { getattr search };
+allow sensors persist_file:dir search;
+
+allow sensors system_file:dir r_dir_perms;
+allow sensors sensors_device:chr_file rw_file_perms;
+
+# sensor direct mode
+allow sensors qdsp_device:chr_file ioctl;
+
+allow sensors sysfs_soc:dir search;
+allow sensors sysfs_soc:file r_file_perms;
+r_dir_file(sensors, sysfs_msm_subsys)
+
+allow sensors ion_device:chr_file r_file_perms;
+allow sensors qdsp_device:chr_file r_file_perms;
+
+# Allow to getprop persist.vendor.sys.modem.diag.mdlog
+get_prop(sensors, vendor_modem_diag_prop)
+
+# Allow to read /sys/class/power_supply/usb/input_current_now
+r_dir_file(sensors, sysfs_batteryinfo)
+
+# For reading dir/files on /dsp
+r_dir_file(sensors, adsprpcd_file)
+
+dontaudit sensors kernel:system module_request;

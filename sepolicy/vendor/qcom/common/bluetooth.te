@@ -1,0 +1,5 @@
+typeattribute bluetooth system_writes_vendor_properties_violators;
+set_prop(bluetooth, vendor_bluetooth_prop)
+
+# Allow access to net_admin ioctls
+allowxperm bluetooth self:udp_socket ioctl priv_sock_ioctls;

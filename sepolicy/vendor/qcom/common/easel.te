@@ -1,0 +1,32 @@
+# easel service
+type easel, domain;
+type easel_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(easel)
+
+hwbinder_use(easel)
+add_hwservice(easel, hal_paintbox_hwservice)
+get_prop(easel, hwservicemanager_prop)
+
+# access easel dev nodes
+allow easel easel_device:chr_file rw_file_perms;
+allow easel sysfs_easel:file rw_file_perms;
+allow easel sysfs_easel:dir r_dir_perms;
+
+# access easel thermal sysfs
+allow easel sysfs_thermal:dir r_dir_perms;
+allow easel sysfs_thermal:file r_file_perms;
+allow easel sysfs_thermal:lnk_file r_file_perms;
+
+# access "/proc/stat"
+allow easel proc_stat:file r_file_perms;
+
+allow easel google_camera_app:binder call;
+allow easel hal_camera_default:binder call;
+allow easel hal_neuralnetworks_paintbox:binder call;
+
+allow easel hal_graphics_allocator_default:fd use;
+allow easel ion_device:chr_file r_file_perms;
+
+# access to keychain for kernel based authentication
+allow easel kernel:key search;

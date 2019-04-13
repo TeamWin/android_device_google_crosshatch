@@ -1,0 +1,19 @@
+allow hal_bluetooth_default bt_device:chr_file rw_file_perms;
+
+# talk to system_server to set priority
+allow hal_bluetooth fwk_scheduler_hwservice:hwservice_manager find;
+allow hal_bluetooth system_server:binder call;
+
+set_prop(hal_bluetooth_default, vendor_bluetooth_prop)
+
+userdebug_or_eng(`
+  allow hal_bluetooth_default diag_device:chr_file rw_file_perms;
+  allow hal_bluetooth_default ramdump_vendor_data_file:dir w_dir_perms;
+  allow hal_bluetooth_default ramdump_vendor_data_file:file { create w_file_perms };
+  allow hal_bluetooth_default sysfs_timestamp_switch:file r_file_perms;
+  r_dir_file(hal_bluetooth_default, debugfs_ipc)
+  r_dir_file(hal_bluetooth_default, sysfs_diag)
+  set_prop(hal_bluetooth_default, vendor_ssr_prop)
+')
+
+dontaudit hal_bluetooth_default diag_device:chr_file rw_file_perms;

@@ -1,0 +1,1 @@
+allow dumpstate proc_slabinfo:file r_file_perms;

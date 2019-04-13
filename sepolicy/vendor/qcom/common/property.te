@@ -1,0 +1,31 @@
+type vendor_camera_prop, property_type;
+type cnd_prop, property_type;
+type factory_ota_prop, property_type;
+type ims_prop, property_type;
+type vendor_ramdump_prop, property_type;
+type public_vendor_default_prop, property_type;
+type public_vendor_system_prop, property_type;
+type vendor_ssr_prop, property_type;
+type vendor_cnss_diag_prop, property_type;
+type vendor_tee_listener_prop, property_type;
+type vendor_thermal_prop, property_type;
+type vendor_modem_diag_prop, property_type;
+type vendor_usb_prop, property_type;
+type vendor_time_prop, property_type;
+type power_prop, property_type;
+type vendor_wifi_version, property_type;
+type per_mgr_state_prop, property_type;
+type vendor_bluetooth_prop, property_type;
+type vendor_net_radio_prop, property_type;
+type vendor_secure_element_prop, property_type;
+type vendor_device_prop, property_type;
+type vendor_radio_prop, property_type;
+type vendor_display_prop, property_type;
+type persist_nfc_prop, property_type;
+type vendor_bluetooth_log_prop, property_type;
+type vendor_usb_config_prop, property_type;
+type vendor_radio_sku_prop, property_type;
+type ctl_vendor_rmt_storage_prop, property_type;
+
+#imsrcsservice
+type ctl_vendor_imsrcsservice_prop, property_type;

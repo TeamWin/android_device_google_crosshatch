@@ -1,0 +1,10 @@
+#hdcp_srm service
+type hdcp_srm, domain;
+
+type hdcp_srm_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hdcp_srm)
+
+# TEE access
+allow hdcp_srm tee_device:chr_file rw_file_perms;
+allow hdcp_srm ion_device:chr_file r_file_perms;

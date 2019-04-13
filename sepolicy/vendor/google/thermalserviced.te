@@ -1,0 +1,1 @@
+binder_call(thermalserviced, system_server)

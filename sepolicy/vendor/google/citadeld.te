@@ -1,0 +1,11 @@
+type citadeld, domain;
+type citadeld_exec, exec_type, vendor_file_type, file_type;
+
+vndbinder_use(citadeld)
+add_service(citadeld, citadeld_service)
+
+allow citadeld citadel_device:chr_file rw_file_perms;
+
+init_daemon_domain(citadeld)
+
+allow citadeld debugfs_ipc:dir search;

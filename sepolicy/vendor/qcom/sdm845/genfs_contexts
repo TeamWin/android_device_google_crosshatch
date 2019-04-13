@@ -1,0 +1,2 @@
+genfscon sysfs /devices/platform/soc/soc:qcom,l3-cdsp/devfreq  u:object_r:sysfs_devfreq:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,l3-cdsp/devfreq/soc:qcom,l3-cdsp/userspace u:object_r:sysfs_devfreq_l3cdsp:s0

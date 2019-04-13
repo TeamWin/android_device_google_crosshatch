@@ -1,0 +1,21 @@
+r_dir_file(hal_health_default, sysfs_msm_subsys)
+
+# storage
+r_dir_file(hal_health_default, sysfs_scsi_devices_0000)
+
+# wireless charger
+allow hal_health_default sysfs_wlc:dir r_dir_perms;
+
+allow hal_health_default hal_pixelstats_hwservice:hwservice_manager find;
+allow hal_health_default pixelstats_system:binder call;
+allow hal_health_default persist_file:dir search;
+allow hal_health_default persist_battery_file:file create_file_perms;
+allow hal_health_default persist_battery_file:dir rw_dir_perms;
+allow hal_health_default sysfs_batteryinfo:dir search;
+allow hal_health_default sysfs_batteryinfo:file rw_file_perms;
+
+get_prop(hal_health_default, vendor_shutdown_prop)
+set_prop(hal_health_default, vendor_shutdown_prop)
+
+allow hal_health_default self:capability2 wake_alarm;
+allow hal_health_default mnt_vendor_file:dir search;

@@ -1,0 +1,38 @@
+type hal_gnss_qti, domain;
+hal_server_domain(hal_gnss_qti, hal_gnss)
+
+type hal_gnss_qti_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_gnss_qti)
+
+r_dir_file(hal_gnss_qti, sysfs_msm_subsys)
+
+vndbinder_use(hal_gnss_qti)
+
+allow hal_gnss_qti sysfs_soc:dir r_dir_perms;
+allow hal_gnss_qti sysfs_soc:file r_file_perms;
+
+binder_call(hal_gnss_qti, per_mgr)
+allow hal_gnss_qti per_mgr_service:service_manager find;
+
+# /data/vendor/location
+allow hal_gnss_qti location_data_file:dir create_dir_perms;
+allow hal_gnss_qti location_data_file:sock_file { create unlink write};
+allow hal_gnss_qti location_data_file:file create_file_perms;
+
+# /dev/socket/location
+allow hal_gnss_qti location_socket:sock_file create_file_perms;
+allow hal_gnss_qti location_socket:dir rw_dir_perms;
+
+# xtra/socket_xtra
+allow hal_gnss_qti location:unix_dgram_socket sendto;
+
+allow hal_gnss_qti self:socket create_socket_perms;
+allowxperm hal_gnss_qti self:socket ioctl msm_sock_ipc_ioctls;
+
+unix_socket_connect(hal_gnss_qti, netmgrd, netmgrd)
+allow hal_gnss_qti netmgrd_socket:dir search;
+
+allow hal_gnss_qti self:netlink_generic_socket { bind create read };
+allow hal_gnss_qti self:netlink_route_socket { bind create nlmsg_read read write };
+
+dontaudit hal_gnss_qti kernel:system module_request;

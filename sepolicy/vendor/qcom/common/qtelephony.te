@@ -1,0 +1,9 @@
+# Qualcomm telephony apps, such as AtFwd and FastDormancy
+type qtelephony, domain;
+
+app_domain(qtelephony)
+
+hwbinder_use(qtelephony)
+add_hwservice(qtelephony, vnd_atcmdfwd_hwservice)
+
+allow qtelephony app_api_service:service_manager find;

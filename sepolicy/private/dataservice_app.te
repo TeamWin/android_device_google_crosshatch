@@ -1,0 +1,16 @@
+typeattribute dataservice_app coredomain;
+app_domain(dataservice_app)
+net_domain(dataservice_app)
+
+add_service(dataservice_app, cne_service)
+add_service(dataservice_app, uce_service)
+allow dataservice_app {
+  app_api_service
+  audioserver_service
+  radio_service
+}:service_manager find;
+
+allow dataservice_app radio_data_file:dir create_dir_perms;
+allow dataservice_app radio_data_file:{ file lnk_file } create_file_perms;
+
+hwbinder_use(dataservice_app)

@@ -1,0 +1,9 @@
+# wait_for_strongbox service
+type wait_for_strongbox, domain;
+type wait_for_strongbox_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(wait_for_strongbox)
+
+hal_client_domain(wait_for_strongbox, hal_keymaster)
+
+allow wait_for_strongbox kmsg_device:chr_file w_file_perms;

@@ -1,0 +1,15 @@
+type init-firstboot, domain;
+type init-firstboot_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(init-firstboot)
+
+allow init-firstboot vendor_shell_exec:file rx_file_perms;
+allow init-firstboot vendor_toolbox_exec:file rx_file_perms;
+
+# Read USB connection state
+allow init-firstboot sysfs_msm_subsys:dir search;
+r_dir_file(init-firstboot, sysfs_batteryinfo)
+
+# Set property to trigger a shutdown
+set_prop(init-firstboot, powerctl_prop)
+

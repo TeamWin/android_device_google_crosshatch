@@ -1,0 +1,124 @@
+type hal_dumpstate_impl, domain;
+hal_server_domain(hal_dumpstate_impl, hal_dumpstate)
+
+type hal_dumpstate_impl_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_dumpstate_impl)
+
+# Execute dump scripts from vendor partition
+allow hal_dumpstate_impl vendor_shell_exec:file rx_file_perms;
+allow hal_dumpstate_impl vendor_toolbox_exec:file rx_file_perms;
+
+userdebug_or_eng(`
+  # smlog_dump
+  domain_auto_trans(hal_dumpstate_impl, smlog_dump_exec, smlog_dump)
+  allow hal_dumpstate_impl modem_dump_file:dir create_dir_perms;
+  allow hal_dumpstate_impl modem_dump_file:file create_file_perms;
+  allow hal_dumpstate_impl radio_vendor_data_file:dir r_dir_perms;
+  allow hal_dumpstate_impl radio_vendor_data_file:file r_file_perms;
+  allow hal_dumpstate_impl netmgr_data_file:dir r_dir_perms;
+  allow hal_dumpstate_impl netmgr_data_file:file r_file_perms;
+  allow hal_dumpstate_impl debugfs_ipc:dir r_dir_perms;
+  allow hal_dumpstate_impl debugfs_ipc:file r_file_perms;
+  allow hal_dumpstate_impl debugfs_tzdbg:dir search;
+  allow hal_dumpstate_impl debugfs_tzdbg:file r_file_perms;
+  allow hal_dumpstate_impl sysfs_usb_device:dir r_dir_perms;
+  allow hal_dumpstate_impl sysfs_usb_device:file r_file_perms;
+  allow hal_dumpstate_impl ssr_log_file:dir search;
+  allow hal_dumpstate_impl ssr_log_file:file r_file_perms;
+  allow hal_dumpstate_impl sysfs_esim:file r_file_perms;
+
+  set_prop(hal_dumpstate_impl, vendor_modem_diag_prop)
+')
+
+allow hal_dumpstate_impl modem_stat_data_file:file r_file_perms;
+
+allow hal_dumpstate_impl uio_device:chr_file rw_file_perms;
+r_dir_file(hal_dumpstate_impl, sysfs_uio)
+r_dir_file(hal_dumpstate_impl, sysfs_rmtfs)
+r_dir_file(hal_dumpstate_impl, sysfs_msm_subsys)
+r_dir_file(hal_dumpstate_impl, sysfs_soc)
+r_dir_file(hal_dumpstate_impl, sysfs_thermal)
+r_dir_file(hal_dumpstate_impl, sysfs_easel)
+
+allow hal_dumpstate_impl sysfs_thermal:dir search;
+allow hal_dumpstate_impl sysfs_thermal:file r_file_perms;
+allow hal_dumpstate_impl sysfs_rpm:file r_file_perms;
+allow hal_dumpstate_impl sysfs_system_sleep_stats:file r_file_perms;
+
+allow hal_dumpstate_impl debugfs_ion:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_ion:file r_file_perms;
+allow hal_dumpstate_impl debugfs_wlan:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_wlan:file r_file_perms;
+allow hal_dumpstate_impl debugfs_icnss:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_icnss:file r_file_perms;
+allow hal_dumpstate_impl debugfs_ipc:file r_file_perms;
+allow hal_dumpstate_impl debugfs_f2fs:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_f2fs:file r_file_perms;
+allow hal_dumpstate_impl debugfs_ufs:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_ufs:file r_file_perms;
+allow hal_dumpstate_impl proc_stat:file r_file_perms;
+allow hal_dumpstate_impl proc_f2fs:dir r_dir_perms;
+allow hal_dumpstate_impl proc_f2fs:file r_file_perms;
+
+# Access to files for dumping
+allow hal_dumpstate_impl  sysfs:dir r_dir_perms;
+# usb logs
+allow hal_dumpstate_impl debugfs_usb:file r_file_perms;
+
+#Access display debug data
+allow hal_dumpstate_impl display_vendor_data_file:dir r_dir_perms;
+allow hal_dumpstate_impl display_vendor_data_file:file r_file_perms;
+
+# Access to touch firmware info
+allow hal_dumpstate_impl sysfs_touch:dir r_dir_perms;
+allow hal_dumpstate_impl sysfs_touch:file rw_file_perms;
+
+# Access to touch proc node
+allow hal_dumpstate_impl proc_touch:file rw_file_perms;
+
+# Access to WLC firmware info
+allow hal_dumpstate_impl sysfs_wlc:dir r_dir_perms;
+allow hal_dumpstate_impl sysfs_wlc:file r_file_perms;
+
+# Access to UFS info
+allow hal_dumpstate_impl sysfs_scsi_devices_0000:dir r_dir_perms;
+allow hal_dumpstate_impl sysfs_scsi_devices_0000:file r_file_perms;
+
+# Access to MPSS RFS info
+userdebug_or_eng(`
+allow hal_dumpstate_impl mpss_rfs_data_file:dir r_dir_perms;
+allow hal_dumpstate_impl mpss_rfs_data_file:file r_file_perms;
+')
+
+# For collecting bugreports.
+allow hal_dumpstate_impl shell_data_file:file getattr;
+allow hal_dumpstate_impl sysfs_system_sleep_stats:file r_file_perms;
+# For '/vendor/bin/sh -c getprop | grep vendor.sys.modem.diag'
+allow hal_dumpstate_impl vendor_file:file execute_no_trans;
+userdebug_or_eng(`allow hal_dumpstate_impl debugfs_dma_bufinfo:file r_file_perms;')
+dontaudit hal_dumpstate_impl debugfs_dma_bufinfo:file r_file_perms;
+
+# Query and dump power supply nodes
+allow hal_dumpstate_impl sysfs_batteryinfo:dir search;
+allow hal_dumpstate_impl sysfs_batteryinfo:file r_file_perms;
+
+# Dump QCOM FG content
+allow hal_dumpstate_impl debugfs_fg_sram:dir search;
+allow hal_dumpstate_impl debugfs_fg_sram:file rw_file_perms;
+
+# Dump Maxim FG content
+allow hal_dumpstate_impl debugfs_maxfg:dir search;
+allow hal_dumpstate_impl debugfs_maxfg:file r_file_perms;
+allow hal_dumpstate_impl tmpfs:dir search;
+allow hal_dumpstate_impl maxfg_device:chr_file r_file_perms;
+
+# Dump PMIC votables
+allow hal_dumpstate_impl debugfs_pmic_votable:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_pmic_votable:file r_file_perms;
+
+userdebug_or_eng(`
+  # Citadel communication must be via citadeld
+  vndbinder_use(hal_dumpstate_impl)
+  binder_call(hal_dumpstate_impl, citadeld)
+  allow hal_dumpstate_impl citadeld_service:service_manager find;
+')

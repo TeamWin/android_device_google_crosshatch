@@ -1,0 +1,2 @@
+type vendor_ramoops_prop, property_type;
+type vendor_shutdown_prop, property_type;

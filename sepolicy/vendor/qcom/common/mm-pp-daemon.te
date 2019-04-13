@@ -1,0 +1,29 @@
+type mm-pp-daemon, domain;
+type mm-pp-daemon_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(mm-pp-daemon)
+
+#Need to use fb/drm ioctls to communicate with kernel
+allow mm-pp-daemon graphics_device:chr_file rw_file_perms;
+allow mm-pp-daemon graphics_device:dir r_dir_perms;
+
+# Allow reading/writing data config files
+allow mm-pp-daemon display_vendor_data_file:dir create_dir_perms;
+allow mm-pp-daemon display_vendor_data_file:file create_file_perms;
+
+# Rule for IPC communication
+allow mm-pp-daemon qdisplay_service:service_manager find;
+vndbinder_use(mm-pp-daemon)
+hwbinder_use(mm-pp-daemon)
+hal_client_domain(mm-pp-daemon, hal_graphics_composer)
+allow mm-pp-daemon fwk_sensor_hwservice:hwservice_manager find;
+binder_call(mm-pp-daemon, system_server)
+
+# Allow mm-pp-daemon to change the brightness
+allow mm-pp-daemon sysfs_leds:dir r_dir_perms;
+allow mm-pp-daemon sysfs_leds:file rw_file_perms;
+allow mm-pp-daemon sysfs_leds:lnk_file read;
+r_dir_file(mm-pp-daemon, sysfs_leds)
+allow mm-pp-daemon sysfs_graphics:dir r_dir_perms;
+allow mm-pp-daemon sysfs_graphics:file rw_file_perms;
+allow mm-pp-daemon sysfs_data:file r_file_perms;

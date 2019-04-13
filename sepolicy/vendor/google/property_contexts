@@ -1,0 +1,6 @@
+# ramoops
+vendor.ramoops.                    u:object_r:vendor_ramoops_prop:s0
+
+persist.vendor.radio.no_wait_for_card u:object_r:vendor_radio_prop:s0
+vendor.powerhal.rendering          u:object_r:power_prop:s0
+persist.vendor.shutdown.           u:object_r:vendor_shutdown_prop:s0

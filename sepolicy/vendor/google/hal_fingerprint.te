@@ -1,0 +1,5 @@
+allow hal_fingerprint_default hal_pixelstats_hwservice:hwservice_manager find;
+allow hal_fingerprint_default pixelstats_system:binder call;
+
+allow hal_fingerprint input_device:dir r_dir_perms;
+allow hal_fingerprint input_device:chr_file r_file_perms;

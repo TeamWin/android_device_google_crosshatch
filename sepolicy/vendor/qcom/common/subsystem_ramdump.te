@@ -1,0 +1,29 @@
+type subsystem_ramdump_exec, exec_type, vendor_file_type, file_type;
+
+userdebug_or_eng(`
+  type subsystem_ramdump, domain;
+
+  init_daemon_domain(subsystem_ramdump);
+
+  allow subsystem_ramdump device:dir r_dir_perms;
+  allow subsystem_ramdump ramdump_device:chr_file r_file_perms;
+
+  r_dir_file(subsystem_ramdump, sysfs_type);
+
+  allow subsystem_ramdump ramdump_vendor_data_file:dir rw_dir_perms;
+  allow subsystem_ramdump ramdump_vendor_data_file:file create_file_perms;
+
+  allow subsystem_ramdump wifidump_vendor_data_file:dir { r_dir_perms remove_name write };
+  allow subsystem_ramdump wifidump_vendor_data_file:file { r_file_perms rename setattr unlink };
+  allow subsystem_ramdump diag_device:chr_file rw_file_perms;
+  allow subsystem_ramdump self:socket create_socket_perms;
+  allowxperm subsystem_ramdump self:socket ioctl msm_sock_ipc_ioctls;
+  allow subsystem_ramdump self:capability { fowner };
+
+  allow subsystem_ramdump ssr_log_file:dir rw_dir_perms;
+  allow subsystem_ramdump ssr_log_file:file create_file_perms;
+
+  set_prop(subsystem_ramdump, vendor_ssr_prop);
+
+  dontaudit subsystem_ramdump kernel:system module_request;
+')

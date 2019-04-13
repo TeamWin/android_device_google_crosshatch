@@ -1,0 +1,13 @@
+# for diag over socket
+userdebug_or_eng(`
+  allow kernel self:socket create;
+  allow kernel debugfs_wlan:dir search;
+')
+
+dontaudit kernel kernel:system module_request;
+
+# Read FDs from /vendor/firmware
+allow kernel vendor_file:file r_file_perms;
+
+allow kernel debugfs_ipc:dir search;
+allow kernel persist_file:dir search;

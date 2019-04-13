@@ -1,0 +1,1 @@
+type hal_pixelstats_hwservice, hwservice_manager_type;

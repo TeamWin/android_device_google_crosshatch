@@ -1,0 +1,16 @@
+# ModemDiagnosticSystem app
+type modem_diagnostic_app, domain;
+
+app_domain(modem_diagnostic_app)
+net_domain(modem_diagnostic_app)
+
+allow modem_diagnostic_app app_api_service:service_manager find;
+allow modem_diagnostic_app surfaceflinger_service:service_manager find;
+
+userdebug_or_eng(`
+  allow modem_diagnostic_app diag_device:chr_file rw_file_perms;
+
+  allow modem_diagnostic_app sysfs_esim:file r_file_perms;
+
+  set_prop(modem_diagnostic_app, vendor_modem_diag_prop)
+')

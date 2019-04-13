@@ -1,0 +1,31 @@
+allow tee self:capability { chown setgid setuid sys_admin sys_rawio };
+
+allow tee device:dir r_dir_perms;
+
+set_prop(tee, vendor_tee_listener_prop)
+get_prop(tee, hwservicemanager_prop)
+
+hwbinder_use(tee)
+vndbinder_use(tee)
+
+binder_call(tee, hal_tui_comm)
+binder_call(tee, hal_graphics_composer_default)
+allow tee hal_tui_comm_hwservice:hwservice_manager find;
+allow tee qdisplay_service:service_manager find;
+allow tee vendor_tui_data_file:file rw_file_perms;
+allow tee vendor_tui_data_file:dir search;
+
+allow tee block_device:dir { getattr search };
+allow tee ssd_block_device:blk_file rw_file_perms;
+allow tee sg_device:chr_file { rw_file_perms setattr };
+
+allow tee mnt_vendor_file:dir r_dir_perms;
+allow tee persist_file:dir r_dir_perms;
+allow tee persist_drm_file:dir create_dir_perms;
+allow tee persist_drm_file:file create_file_perms;
+allow tee persist_data_file:dir create_dir_perms;
+allow tee persist_data_file:file create_file_perms;
+
+allow tee time_daemon:unix_stream_socket connectto;
+
+allow tee hal_graphics_allocator_default:fd use;

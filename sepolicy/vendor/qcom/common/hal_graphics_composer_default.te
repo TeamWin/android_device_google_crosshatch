@@ -1,0 +1,57 @@
+# Binder access (for display.qservice)
+vndbinder_use(hal_graphics_composer_default)
+allow hal_graphics_composer_default qdisplay_service:service_manager { add find };
+
+allow hal_graphics_composer_default sysfs_camera:dir search;
+allow hal_graphics_composer_default sysfs_camera:file r_file_perms;
+allow hal_graphics_composer_default sysfs_msm_subsys:dir search;
+allow hal_graphics_composer_default sysfs_msm_subsys:file r_file_perms;
+allow hal_graphics_composer_default sysfs_mdss_mdp_caps:file r_file_perms;
+allow hal_graphics_composer_default persist_file:dir search;
+
+# Allow dir search in '/mnt/vendor'
+allow hal_graphics_composer_default mnt_vendor_file:dir search;
+allow hal_graphics_composer_default mnt_vendor_file:file r_file_perms;
+
+# Allow dir search in '/mnt/vendor/persist/display(/.*)?'
+allow hal_graphics_composer_default persist_display_file:dir r_dir_perms;
+allow hal_graphics_composer_default persist_display_file:file r_file_perms;
+
+# Allow dir search in '/oem'
+allow hal_graphics_composer_default oemfs:dir r_dir_perms;
+
+allow hal_graphics_composer_default hal_graphics_mapper_hwservice:hwservice_manager find;
+
+hal_client_domain(hal_graphics_composer_default, hal_graphics_allocator)
+
+r_dir_file(hal_graphics_composer_default, sysfs_leds)
+
+allow hal_graphics_composer_default video_device:chr_file rw_file_perms;
+
+# HWC_UeventThread
+allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+
+# Access /sys/devices/virtual/graphics/fb0
+r_dir_file(hal_graphics_composer_default, sysfs_type)
+
+allow hal_graphics_composer_default display_vendor_data_file:dir create_dir_perms;
+allow hal_graphics_composer_default display_vendor_data_file:file create_file_perms;
+
+# Rule for pps socket usage
+unix_socket_connect(hal_graphics_composer_default, pps, mm-pp-daemon)
+
+# allow composer to register display config
+add_hwservice(hal_graphics_composer_default, hal_display_config_hwservice);
+
+userdebug_or_eng(`
+        allow hal_graphics_composer_default debugfs_mdp:dir r_dir_perms;
+        allow hal_graphics_composer_default debugfs_mdp:file r_file_perms;
+')
+
+dontaudit hal_graphics_composer_default kernel:system module_request;
+
+dontaudit hal_graphics_composer_default vendor_display_prop:file r_file_perms;
+
+#allow composer access hal_light
+hal_client_domain(hal_graphics_composer_default, hal_light);
+allow hal_graphics_composer_default hal_light_hwservice:hwservice_manager find;

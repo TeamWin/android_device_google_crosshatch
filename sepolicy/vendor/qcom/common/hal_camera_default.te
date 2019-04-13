@@ -1,0 +1,36 @@
+allow hal_camera_default input_device:dir r_dir_perms;
+
+allow hal_camera_default sysfs_laser:file w_file_perms;
+vndbinder_use(hal_camera_default);
+allow hal_camera_default qdisplay_service:service_manager { find };
+
+allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager find;
+allow hal_camera_default hal_graphics_allocator_hwservice:hwservice_manager find;
+
+binder_call(hal_camera_default, hal_graphics_composer)
+binder_call(hal_camera_default, system_server)
+binder_call(hal_camera_default, hal_graphics_allocator)
+
+# For camera team debugging
+userdebug_or_eng(`
+  allow hal_camera_default camera_vendor_data_file:dir create_dir_perms;
+  allow hal_camera_default camera_vendor_data_file:file create_file_perms;
+')
+
+# For interfacing with PowerHAL
+hal_client_domain(hal_camera_default, hal_power)
+
+# For interfacing with ThermalHAL
+hal_client_domain(hal_camera_default, hal_thermal)
+
+# For boot time GPU access (b/111370628)
+hal_client_domain(hal_camera_default, hal_configstore)
+
+allow hal_camera_default proc_stat:file r_file_perms;
+
+allow hal_camera_default hal_paintbox_hwservice:hwservice_manager find;
+binder_call(hal_camera_default, easel)
+
+dontaudit hal_camera_default kernel:system module_request;
+
+dontaudit hal_camera_default vendor_display_prop:file r_file_perms;

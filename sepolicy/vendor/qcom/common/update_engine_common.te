@@ -1,0 +1,4 @@
+# Allow update_engine and update_engine_sideload (recovery) read/write on the
+# device-specific partitions it should update.
+allow update_engine_common postinstall_mnt_dir:dir r_dir_perms;
+allow update_engine_common tmpfs:lnk_file r_file_perms;

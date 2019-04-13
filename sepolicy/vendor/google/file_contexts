@@ -1,0 +1,23 @@
+# dev nodes
+/dev/citadel0                                                               u:object_r:citadel_device:s0
+/dev/access-metadata                                                        u:object_r:ramoops_device:s0
+/dev/access-ramoops                                                         u:object_r:ramoops_device:s0
+/dev/maxfg_history                                                          u:object_r:maxfg_device:s0
+
+/vendor/bin/hw/android\.hardware\.authsecret@1\.0-service\.citadel          u:object_r:hal_authsecret_citadel_exec:s0
+/vendor/bin/hw/android\.hardware\.oemlock@1\.0-service\.citadel             u:object_r:hal_oemlock_citadel_exec:s0
+/vendor/bin/hw/android\.hardware\.weaver@1\.0-service\.citadel              u:object_r:hal_weaver_citadel_exec:s0
+/vendor/bin/hw/android\.hardware\.keymaster@4\.0-service.citadel            u:object_r:hal_keymaster_citadel_exec:s0
+/vendor/bin/hw/citadeld                                                     u:object_r:citadeld_exec:s0
+/vendor/bin/hw/init_citadel                                                 u:object_r:init_citadel_exec:s0
+/vendor/bin/hw/wait_for_strongbox                                           u:object_r:wait_for_strongbox_exec:s0
+/vendor/bin/hw/android\.hardware\.secure_element@1\.0-service-disabled      u:object_r:hal_secure_element_default_exec:s0
+/vendor/bin/hw/android\.hardware\.power@1\.3-service\.crosshatch-libperfmgr u:object_r:hal_power_default_exec:s0
+/vendor/bin/init\.firstboot\.sh                                             u:object_r:init-firstboot_exec:s0
+/vendor/bin/ramoops                                                         u:object_r:ramoops_exec:s0
+/vendor/bin/init\.ramoops\.sh                                               u:object_r:ramoops_exec:s0
+/vendor/bin/pixelstats-vendor                                               u:object_r:pixelstats_vendor_exec:s0
+
+/data/vendor_ce/[0-9]+/ramoops(/.*)?                                        u:object_r:ramoops_vendor_data_file:s0
+
+/persist/battery(/.*)?                                                      u:object_r:persist_battery_file:s0

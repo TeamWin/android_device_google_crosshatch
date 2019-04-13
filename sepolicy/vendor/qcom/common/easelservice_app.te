@@ -1,0 +1,11 @@
+type easelservice_app, domain;
+
+app_domain(easelservice_app)
+
+allow easelservice_app app_api_service:service_manager find;
+allow easelservice_app surfaceflinger_service:service_manager find;
+# Access to mnh_sm driver
+allow easelservice_app easel_device:chr_file { read write ioctl open };
+# Access to libeaselmanager_client.so
+allow easelservice_app hal_paintbox_hwservice:hwservice_manager find;
+binder_call(easelservice_app, easel)

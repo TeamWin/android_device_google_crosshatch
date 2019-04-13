@@ -1,0 +1,17 @@
+# policy for /vendor/bin/hw/android.hardware.drm@1.1-service.widevine
+type hal_drm_widevine, domain;
+type hal_drm_widevine_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_drm_widevine)
+
+hal_server_domain(hal_drm_widevine, hal_drm)
+
+vndbinder_use(hal_drm_widevine);
+
+allow hal_drm mediacodec:fd use;
+allow hal_drm { appdomain -isolated_app }:fd use;
+
+allow hal_drm_widevine hal_allocator_server:fd use;
+
+allow hal_drm_widevine mediadrm_vendor_data_file:dir create_dir_perms;
+allow hal_drm_widevine mediadrm_vendor_data_file:file create_file_perms;

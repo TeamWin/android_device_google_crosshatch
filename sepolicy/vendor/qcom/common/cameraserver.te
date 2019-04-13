@@ -1,0 +1,13 @@
+allow cameraserver gpu_device:chr_file rw_file_perms;
+
+typeattribute cameraserver system_writes_vendor_properties_violators;
+get_prop(cameraserver, vendor_camera_prop)
+
+allow cameraserver sysfs_camera:file r_file_perms;
+allow cameraserver sysfs_camera:dir search;
+
+allow cameraserver system_server:unix_stream_socket { read write };
+
+binder_call(cameraserver, mediacodec)
+
+dontaudit cameraserver vendor_display_prop:file r_file_perms;

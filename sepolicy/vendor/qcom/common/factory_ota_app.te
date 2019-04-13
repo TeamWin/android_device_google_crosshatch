@@ -1,0 +1,18 @@
+type factory_ota_app, domain, coredomain;
+
+app_domain(factory_ota_app)
+net_domain(factory_ota_app)
+
+# Write to /data/ota_package for OTA packages.
+allow factory_ota_app ota_package_file:dir rw_dir_perms;
+allow factory_ota_app ota_package_file:file create_file_perms;
+
+# Properties
+typeattribute factory_ota_app system_writes_vendor_properties_violators;
+set_prop(factory_ota_app, factory_ota_prop);
+
+# Services
+allow factory_ota_app app_api_service:service_manager find;
+binder_call(factory_ota_app, update_engine) # Allow Factory OTA to call Update Engine
+binder_call(update_engine, factory_ota_app) # Allow Update Engine to call the Factory OTA callback
+allow factory_ota_app update_engine_service:service_manager find;

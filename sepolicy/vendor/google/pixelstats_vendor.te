@@ -1,0 +1,19 @@
+# pixelstats vendor
+type pixelstats_vendor, domain;
+
+type pixelstats_vendor_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(pixelstats_vendor)
+
+get_prop(pixelstats_vendor, hwservicemanager_prop)
+hwbinder_use(pixelstats_vendor)
+allow pixelstats_vendor hal_pixelstats_hwservice:hwservice_manager find;
+binder_call(pixelstats_vendor, pixelstats_system)
+
+unix_socket_connect(pixelstats_vendor, chre, chre)
+
+allow pixelstats_vendor sysfs_scsi_devices_0000:file rw_file_perms;
+allow pixelstats_vendor sysfs_batteryinfo:dir search;
+allow pixelstats_vendor sysfs_batteryinfo:file r_file_perms;
+allow pixelstats_vendor sysfs_pixelstats:dir search;
+allow pixelstats_vendor sysfs_pixelstats:file rw_file_perms;
+allow pixelstats_vendor self:netlink_kobject_uevent_socket { create setopt bind read };

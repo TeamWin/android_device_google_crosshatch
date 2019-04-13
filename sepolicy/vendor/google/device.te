@@ -1,0 +1,3 @@
+type citadel_device, dev_type;
+type ramoops_device, dev_type;
+type maxfg_device, dev_type;

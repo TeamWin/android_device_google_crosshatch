@@ -1,0 +1,4 @@
+dontaudit netd kernel:system module_request;
+dontaudit netd self:capability sys_module;
+dontaudit netd proc_net:dir write;
+dontaudit netd sysfs_net:dir write;

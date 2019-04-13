@@ -1,0 +1,44 @@
+type hal_rcsservice, domain;
+type hal_rcsservice_exec, exec_type, vendor_file_type, file_type;
+
+# Started by init
+init_daemon_domain(hal_rcsservice)
+net_domain(hal_rcsservice)
+
+get_prop(hal_rcsservice, hwservicemanager_prop)
+
+# To register imsrcsd to hwBinder
+hwbinder_use(hal_rcsservice)
+# add IUceSerive and IService to Hidl interface
+add_hwservice(hal_rcsservice, hal_imsrcsd_hwservice)
+add_hwservice(hal_rcsservice, hal_imscallinfo_hwservice)
+
+get_prop(hal_rcsservice, ims_prop)
+
+get_prop(hal_rcsservice, hwservicemanager_prop)
+
+# allow hal to read sysfs file
+r_dir_file(hal_rcsservice, sysfs_msm_subsys)
+r_dir_file(hal_rcsservice, sysfs_diag)
+r_dir_file(hal_rcsservice, sysfs_soc)
+
+allow hal_rcsservice sysfs_timestamp_switch:file r_file_perms;
+
+#required for socket creation
+unix_socket_connect(hal_rcsservice, ims, ims)
+allow hal_rcsservice self:socket create_socket_perms;
+allowxperm hal_rcsservice self:socket ioctl msm_sock_ipc_ioctls;
+
+# imsrcsd to bind with UceShimService.apk
+binder_call(hal_rcsservice, dataservice_app)
+
+# imsrcsd needs read/write access to devpts
+allow hal_rcsservice devpts:chr_file rw_file_perms;
+
+# allow imsrcsd capabilities
+wakelock_use(hal_rcsservice)
+allow hal_rcsservice self:capability net_bind_service;
+
+set_prop(hal_rcsservice, ctl_vendor_imsrcsservice_prop)
+
+dontaudit hal_rcsservice kernel:system module_request;

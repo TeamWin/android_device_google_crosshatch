@@ -1,0 +1,14 @@
+allow system_server self:socket ioctl;
+allowxperm system_server self:socket ioctl msm_sock_ipc_ioctls;
+
+binder_call(system_server, hal_camera_default)
+binder_call(system_server, mm-pp-daemon)
+
+allow system_server persist_file:dir search;
+allow system_server persist_sensors_file:dir search;
+allow system_server persist_sensors_file:file r_file_perms;
+allow system_server wlan_device:chr_file rw_file_perms;
+
+dontaudit system_server self:capability sys_module;
+
+dontaudit system_server vendor_display_prop:file r_file_perms;
