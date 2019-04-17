@@ -38,7 +38,6 @@ cc_binary {
     ],
 
     shared_libs: [
-        "hardware.google.pixelstats@1.0",
         "libbase",
         "libcutils",
         "libhidlbase",

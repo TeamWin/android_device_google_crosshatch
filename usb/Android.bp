@@ -22,7 +22,6 @@ cc_binary {
         "android.hardware.usb@1.0",
         "android.hardware.usb@1.1",
         "android.hardware.usb.gadget@1.0",
-        "hardware.google.pixelstats@1.0",
         "libbase",
         "libcutils",
         "libhardware",
