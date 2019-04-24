@@ -152,6 +152,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cp_system_other_odex=1
 
+AB_OTA_UPDATER := true
+
 AB_OTA_PARTITIONS += \
     boot \
     system \
