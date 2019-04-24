@@ -1,0 +1,10 @@
+<compatibility-matrix version="1.0" type="device">
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.radio.atcmdfwd</name>
+        <version>1.0</version>
+        <interface>
+            <name>IAtCmdFwd</name>
+            <instance>AtCmdFwdService</instance>
+        </interface>
+    </hal>
+</compatibility-matrix>
