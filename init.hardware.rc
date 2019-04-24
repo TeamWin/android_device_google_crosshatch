@@ -907,5 +907,10 @@ on property:sys.boot_completed=1
 on property:vendor.fps.init.succeed=true && property:init.svc.vendor.fps_hal=stopped
     start init-fingerprint-sh
 
-on property:persist.radio.multisim.config=dsds
+on boot && property:persist.radio.multisim.config=dsds && property:persist.vendor.radio.multisim_switch_support=true
     start vendor.qcrild2
+
+# Disable DSDS if multisim_switch_support is not enabled
+on boot && property:persist.radio.multisim.config=dsds && property:persist.vendor.radio.multisim_switch_support=false
+    setprop persist.radio.multisim.config ""
+    stop vendor.qcrild2
