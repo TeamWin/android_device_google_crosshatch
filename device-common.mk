@@ -159,4 +159,5 @@ PRODUCT_COPY_FILES += \
     device/google/crosshatch/recovery/root/vendor/lib64/hw/android.hardware.boot@1.0-impl.so:recovery/root/vendor/lib64/hw/android.hardware.boot@1.0-impl.so \
     device/google/crosshatch/recovery/root/sbin/libprotobuf-cpp-full.so:recovery/root/sbin/libprotobuf-cpp-full.so \
     device/google/crosshatch/recovery/root/sbin/libicuuc.so:recovery/root/sbin/libicuuc.so \
-    device/google/crosshatch/recovery/root/sbin/libxml2.so:recovery/root/sbin/libxml2.so
+    device/google/crosshatch/recovery/root/sbin/libxml2.so:recovery/root/sbin/libxml2.so \
+    device/google/crosshatch/recovery/root/sbin/android.hardware.confirmationui@1.0.so:recovery/root/sbin/android.hardware.confirmationui@1.0.so
