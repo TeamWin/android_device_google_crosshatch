@@ -784,4 +784,4 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Increment the SVN for any official public releases
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.svn=7
+    ro.vendor.build.svn=10
