@@ -1533,6 +1533,7 @@ int gpt_disk_commit(struct gpt_disk *disk)
                                 __func__);
                 goto error;
         }
+        fsync(fd);
         close(fd);
         return 0;
 error:
