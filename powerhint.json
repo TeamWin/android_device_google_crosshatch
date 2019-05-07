@@ -264,7 +264,8 @@
         "-vr",
         "-novr"
       ],
-      "Type": "Property"
+      "Type": "Property",
+      "ResetOnInit": true
     }
   ],
   "Actions": [

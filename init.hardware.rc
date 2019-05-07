@@ -486,6 +486,10 @@ service init-radio-sh /vendor/bin/init.radio.sh
     group root radio
     oneshot
 
+# reset thermal-engine when changed profile
+on property:vendor.thermal.vr_mode=*
+    restart vendor.thermal-engine
+
 service vendor.thermal-engine /vendor/bin/thermal-engine -c /vendor/etc/thermal-engine-${ro.hardware}${vendor.thermal.vr_mode}${vendor.thermal.hw_mode}.conf
    class main
    user root
