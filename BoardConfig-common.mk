@@ -70,6 +70,16 @@ BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_USES_METADATA_PARTITION := true
 
+# Board uses A/B OTA.
+AB_OTA_UPDATER := true
+
+AB_OTA_PARTITIONS += \
+    boot \
+    system \
+    vbmeta \
+    dtbo \
+    product
+
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/crosshatch/recovery.wipe
 TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
