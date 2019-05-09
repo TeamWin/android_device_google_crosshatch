@@ -48,6 +48,8 @@ public:
 
 private:
     Return<Status> on(uint32_t timeoutMs, uint32_t effectIndex);
+    template <typename T>
+    Return<void> performWrapper(T effect, EffectStrength strength, perform_cb _hidl_cb);
     Return<void> performEffect(Effect effect, EffectStrength strength, perform_cb _hidl_cb);
     std::ofstream mActivate;
     std::ofstream mDuration;
