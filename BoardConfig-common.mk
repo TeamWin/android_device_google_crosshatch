@@ -63,6 +63,27 @@ TARGET_NO_KERNEL := false
 BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_USES_METADATA_PARTITION := true
 
+# Board uses A/B OTA.
+AB_OTA_UPDATER := true
+
+AB_OTA_PARTITIONS += \
+    boot \
+    system \
+    vbmeta \
+    dtbo
+
+# Skip product partition for nodap build
+ifeq ($(filter %_nodap,$(TARGET_PRODUCT)),)
+AB_OTA_PARTITIONS += \
+    product
+endif
+
+ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
+AB_OTA_PARTITIONS += \
+    product_services \
+    vbmeta_system
+endif
+
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/crosshatch/recovery.wipe
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
