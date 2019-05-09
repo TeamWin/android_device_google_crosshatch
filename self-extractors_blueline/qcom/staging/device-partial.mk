@@ -14,8 +14,6 @@
 
 # AOSP packages required by the blobs
 PRODUCT_PACKAGES := \
-    com.android.ims.rcsmanager.xml \
-    com.android.ims.rcsmanager \
     libprotobuf-cpp-full
 
 #  blob(s) necessary for blueline hardware

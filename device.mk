@@ -502,10 +502,6 @@ PRODUCT_PACKAGES += \
 LIB_NL := libnl_2
 PRODUCT_PACKAGES += $(LIB_NL)
 
-# Factory OTA
-PRODUCT_PACKAGES += \
-    FactoryOta
-
 # Audio effects
 PRODUCT_PACKAGES += \
     libvolumelistener \
