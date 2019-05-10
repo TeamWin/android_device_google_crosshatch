@@ -535,6 +535,13 @@ on property:sys.boot_completed=1
     swapon_all /vendor/etc/fstab.${ro.boot.hardware.platform}
     write /proc/sys/vm/swappiness 100
 
+    # Setup final blkio
+    # value for group_idle is us
+    write /dev/blkio/blkio.weight 1000
+    write /dev/blkio/background/blkio.weight 10
+    write /dev/blkio/blkio.group_idle 2000
+    write /dev/blkio/background/blkio.group_idle 0
+
     # Setup final cpuset
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/foreground/boost/cpus 0-3,6-7
