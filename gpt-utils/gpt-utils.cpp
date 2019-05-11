@@ -744,7 +744,7 @@ int prepare_partitions(enum boot_update_stage stage, const char *dev_path)
     int r = 0;
     int fd = -1;
     int is_ufs = gpt_utils_is_ufs_device();
-    enum gpt_state gpt_prim, gpt_second;
+    enum gpt_state gpt_prim, gpt_second = GPT_OK;
     enum boot_update_stage internal_stage;
     struct stat xbl_partition_stat;
 
