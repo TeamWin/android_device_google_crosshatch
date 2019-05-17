@@ -807,9 +807,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.adb.secure=1
 
-# default atrace HAL
+# pixel atrace HAL
 PRODUCT_PACKAGES += \
-    android.hardware.atrace@1.0-service
+    android.hardware.atrace@1.0-service.pixel
 
 # fastbootd
 PRODUCT_PACKAGES += \
