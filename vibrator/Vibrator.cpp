@@ -155,17 +155,27 @@ Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
 
 Return<void> Vibrator::perform(V1_0::Effect effect, EffectStrength strength,
         perform_cb _hidl_cb) {
-    return performEffect(static_cast<Effect>(effect), strength, _hidl_cb);
+    return performWrapper(effect, strength, _hidl_cb);
 }
 
 Return<void> Vibrator::perform_1_1(V1_1::Effect_1_1 effect, EffectStrength strength,
         perform_cb _hidl_cb) {
-    return performEffect(static_cast<Effect>(effect), strength, _hidl_cb);
+    return performWrapper(effect, strength, _hidl_cb);
 }
 
 Return<void> Vibrator::perform_1_2(Effect effect, EffectStrength strength,
         perform_cb _hidl_cb) {
-    return performEffect(effect, strength, _hidl_cb);
+    return performWrapper(effect, strength, _hidl_cb);
+}
+
+template <typename T>
+Return<void> Vibrator::performWrapper(T effect, EffectStrength strength, perform_cb _hidl_cb) {
+    auto validRange = hidl_enum_range<T>();
+    if (effect < *validRange.begin() || effect > *std::prev(validRange.end())) {
+        _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
+        return Void();
+    }
+    return performEffect(static_cast<Effect>(effect), strength, _hidl_cb);
 }
 
 Return<void> Vibrator::performEffect(Effect effect, EffectStrength strength,
