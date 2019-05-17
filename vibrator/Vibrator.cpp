@@ -91,9 +91,14 @@ static constexpr char WAVEFORM_RINGTONE11_EFFECT_QUEUE[] = "21.60, 21.80, 21.100
 // Zen_too - RINGTONE_12
 static constexpr char WAVEFORM_RINGTONE12_EFFECT_QUEUE[] = "140, 22.100, 972, 1!";
 
-static constexpr int8_t MAX_SCALE_INPUT = 112;
+static constexpr float AMP_ATTENUATE_STEP_SIZE = 0.125f;
 
 static constexpr int8_t MAX_TRIGGER_LATENCY_MS = 6;
+
+static uint8_t amplitudeToScale(uint8_t amplitude, uint8_t maximum) {
+    return std::round((-20 * std::log10(amplitude / static_cast<float>(maximum))) /
+                      (AMP_ATTENUATE_STEP_SIZE));
+}
 
 Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration, std::ofstream&& effect,
         std::ofstream&& queue, std::ofstream&& scale) :
@@ -137,7 +142,7 @@ Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
         return Status::BAD_VALUE;
     }
 
-    int32_t scale = MAX_SCALE_INPUT - std::round((amplitude - 1) / 254.0 * MAX_SCALE_INPUT);
+    int32_t scale = amplitudeToScale(amplitude, UINT8_MAX);
 
     mScale << scale << std::endl;
     if (!mScale) {
