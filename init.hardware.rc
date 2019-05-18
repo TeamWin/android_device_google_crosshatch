@@ -212,6 +212,7 @@ on late-fs
     start vendor.hwcomposer-2-3
     start vendor.configstore-hal
     start vendor.qti.hardware.display.allocator
+    start vendor.light-1-0
 
     # Wait for hwservicemanager ready since fsck might be triggered in mount_all --late
     # In such case, init won't responce the property_set from hwservicemanager and then
