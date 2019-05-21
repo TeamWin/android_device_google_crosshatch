@@ -336,18 +336,24 @@ static V1_0::Status validateAndSetVidPid(uint64_t functions) {
       if (vendorFunctions == "diag") {
         ret = setVidPid("0x05C6", "0x901B");
       } else {
-        if (!(vendorFunctions == "user" || vendorFunctions == ""))
-          ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-        ret = setVidPid("0x18d1", "0x4ee1");
+          if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+              ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+              ret = Status::CONFIGURATION_NOT_SUPPORTED;
+          } else {
+              ret = setVidPid("0x18d1", "0x4ee1");
+          }
       }
       break;
     case GadgetFunction::ADB | GadgetFunction::MTP:
       if (vendorFunctions == "diag") {
         ret = setVidPid("0x05C6", "0x903A");
       } else {
-        if (!(vendorFunctions == "user" || vendorFunctions == ""))
-          ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-        ret = setVidPid("0x18d1", "0x4ee2");
+          if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+              ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+              ret = Status::CONFIGURATION_NOT_SUPPORTED;
+          } else {
+              ret = setVidPid("0x18d1", "0x4ee2");
+          }
       }
       break;
     case static_cast<uint64_t>(GadgetFunction::RNDIS):
@@ -356,9 +362,12 @@ static V1_0::Status validateAndSetVidPid(uint64_t functions) {
       } else if (vendorFunctions == "serial_cdev,diag") {
         ret = setVidPid("0x05C6", "0x90B5");
       } else {
-        if (!(vendorFunctions == "user" || vendorFunctions == ""))
-          ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-        ret = setVidPid("0x18d1", "0x4ee3");
+          if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+              ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+              ret = Status::CONFIGURATION_NOT_SUPPORTED;
+          } else {
+              ret = setVidPid("0x18d1", "0x4ee3");
+          }
       }
       break;
     case GadgetFunction::ADB | GadgetFunction::RNDIS:
@@ -367,21 +376,30 @@ static V1_0::Status validateAndSetVidPid(uint64_t functions) {
       } else if (vendorFunctions == "serial_cdev,diag") {
         ret = setVidPid("0x05C6", "0x90B6");
       } else {
-        if (!(vendorFunctions == "user" || vendorFunctions == ""))
-          ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-        ret = setVidPid("0x18d1", "0x4ee4");
+          if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+              ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+              ret = Status::CONFIGURATION_NOT_SUPPORTED;
+          } else {
+              ret = setVidPid("0x18d1", "0x4ee4");
+          }
       }
       break;
     case static_cast<uint64_t>(GadgetFunction::PTP):
-      if (!(vendorFunctions == "user" || vendorFunctions == ""))
-        ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-      ret = setVidPid("0x18d1", "0x4ee5");
-      break;
+        if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+            ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+            ret = Status::CONFIGURATION_NOT_SUPPORTED;
+        } else {
+            ret = setVidPid("0x18d1", "0x4ee5");
+        }
+        break;
     case GadgetFunction::ADB | GadgetFunction::PTP:
-      if (!(vendorFunctions == "user" || vendorFunctions == ""))
-        ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-      ret = setVidPid("0x18d1", "0x4ee6");
-      break;
+        if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+            ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+            ret = Status::CONFIGURATION_NOT_SUPPORTED;
+        } else {
+            ret = setVidPid("0x18d1", "0x4ee6");
+        }
+        break;
     case static_cast<uint64_t>(GadgetFunction::ADB):
       if (vendorFunctions == "diag") {
         ret = setVidPid("0x05C6", "0x901D");
@@ -390,21 +408,30 @@ static V1_0::Status validateAndSetVidPid(uint64_t functions) {
       } else if (vendorFunctions == "diag,serial_cdev") {
         ret = setVidPid("0x05C6", "0x901F");
       } else {
-        if (!(vendorFunctions == "user" || vendorFunctions == ""))
-          ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-        ret = setVidPid("0x18d1", "0x4ee7");
+          if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+              ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+              ret = Status::CONFIGURATION_NOT_SUPPORTED;
+          } else {
+              ret = setVidPid("0x18d1", "0x4ee7");
+          }
       }
       break;
     case static_cast<uint64_t>(GadgetFunction::MIDI):
-      if (!(vendorFunctions == "user" || vendorFunctions == ""))
-        ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-      ret = setVidPid("0x18d1", "0x4ee8");
-      break;
+        if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+            ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+            ret = Status::CONFIGURATION_NOT_SUPPORTED;
+        } else {
+            ret = setVidPid("0x18d1", "0x4ee8");
+        }
+        break;
     case GadgetFunction::ADB | GadgetFunction::MIDI:
-      if (!(vendorFunctions == "user" || vendorFunctions == ""))
-        ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-      ret = setVidPid("0x18d1", "0x4ee9");
-      break;
+        if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+            ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+            ret = Status::CONFIGURATION_NOT_SUPPORTED;
+        } else {
+            ret = setVidPid("0x18d1", "0x4ee9");
+        }
+        break;
     case static_cast<uint64_t>(GadgetFunction::ACCESSORY):
       if (!(vendorFunctions == "user" || vendorFunctions == ""))
         ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
