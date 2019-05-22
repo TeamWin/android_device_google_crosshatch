@@ -198,7 +198,7 @@ on fs
     chmod 0770 /persist/hlos_rfs
     # for cycle count backup
     mkdir /persist/battery 0700 system system
-    restorecon_recursive /persist
+    restorecon_recursive /mnt/vendor/persist
 
 on late-fs
     # Start devices by sysfs trigger, including SLPI. SLPI waits for sscrpcd to
