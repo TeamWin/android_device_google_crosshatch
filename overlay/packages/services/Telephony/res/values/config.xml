@@ -28,4 +28,8 @@
          This is used to support carriers which generate a recording tone to the remote party
          when a call recording app is in use. -->
     <bool name="config_support_telephony_audio_device">true</bool>
+
+    <!-- This device requires that emergency calls are placed over the default data SIM when
+         possible because GNSS SUPL can only be received from the network on data subscription. -->
+    <bool name="config_gnss_supl_requires_default_data_for_emergency">true</bool>
 </resources>
