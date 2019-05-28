@@ -72,9 +72,11 @@ TARGET_RECOVERY_FSTAB := device/google/crosshatch/fstab.hardware
 endif
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_UI_LIB := \
-  librecovery_ui_crosshatch \
-  libnos_citadel_for_recovery \
-  libnos_for_recovery
+    librecovery_ui_crosshatch \
+    libnos_citadel_for_recovery \
+    libnos_for_recovery \
+    libbootloader_message \
+    libfstab
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 BOARD_AVB_VBMETA_SYSTEM := system product_services
