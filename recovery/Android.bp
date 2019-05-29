@@ -29,6 +29,7 @@ cc_library_static {
 
     static_libs: [
         "libbase",
+        "libbootloader_message",
         "libnos_for_recovery",
         "libnos_citadel_for_recovery",
     ],
