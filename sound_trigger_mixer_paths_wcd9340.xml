@@ -44,16 +44,26 @@
     <ctl name="LSM6 Mixer SLIMBUS_0_TX" value="0" />
     <ctl name="LSM7 Mixer SLIMBUS_0_TX" value="0" />
     <ctl name="LSM8 Mixer SLIMBUS_0_TX" value="0" />
-    <ctl name="LSM1 Port" value="None" />
-    <ctl name="LSM2 Port" value="None" />
-    <ctl name="LSM3 Port" value="None" />
-    <ctl name="LSM4 Port" value="None" />
-    <ctl name="LSM5 Port" value="None" />
-    <ctl name="LSM6 Port" value="None" />
-    <ctl name="LSM7 Port" value="None" />
-    <ctl name="LSM8 Port" value="None" />
+    <ctl name="LSM1 Mixer SLIMBUS_3_TX" value="0" />
+    <ctl name="LSM2 Mixer SLIMBUS_3_TX" value="0" />
+    <ctl name="LSM3 Mixer SLIMBUS_3_TX" value="0" />
+    <ctl name="LSM4 Mixer SLIMBUS_3_TX" value="0" />
+    <ctl name="LSM5 Mixer SLIMBUS_3_TX" value="0" />
+    <ctl name="LSM6 Mixer SLIMBUS_3_TX" value="0" />
+    <ctl name="LSM7 Mixer SLIMBUS_3_TX" value="0" />
+    <ctl name="LSM8 Mixer SLIMBUS_3_TX" value="0" />
+    <ctl name="LSM1 Port" value="ADM_LSM_TX" />
+    <ctl name="LSM2 Port" value="ADM_LSM_TX" />
+    <ctl name="LSM3 Port" value="ADM_LSM_TX" />
+    <ctl name="LSM4 Port" value="ADM_LSM_TX" />
+    <ctl name="LSM5 Port" value="ADM_LSM_TX" />
+    <ctl name="LSM6 Port" value="ADM_LSM_TX" />
+    <ctl name="LSM7 Port" value="ADM_LSM_TX" />
+    <ctl name="LSM8 Port" value="ADM_LSM_TX" />
     <ctl name="SLIMBUS_5_TX LSM Function" value="None" />
     <ctl name="SLIMBUS_0_TX LSM Function" value="None" />
+    <ctl name="SLIMBUS_1_TX LSM Function" value="None" />
+    <ctl name="SLIMBUS_3_TX LSM Function" value="None" />
     <ctl name="MADONOFF Switch" value="0" />
     <ctl name="MAD Input" value="DMIC1" />
     <ctl name="MAD_SEL MUX" value="SPE" />
@@ -87,6 +97,18 @@
     <ctl name="WDMA3 CH1 MUX" value="PORT_0" />
     <ctl name="WDMA3_ON_OFF Switch" value="0" />
     <ctl name="SLIM_0_TX Channels" value="One" />
+    <ctl name="SLIM_3_TX Channels" value="One" />
+    <ctl name="AIF2_CAP Mixer SLIM TX3" value="0" />
+    <ctl name="AIF2_CAP Mixer SLIM TX4" value="0" />
+    <ctl name="CDC_IF TX2 MUX" value="ZERO" />
+    <ctl name="ADC MUX2" value="AMIC" />
+    <ctl name="DMIC MUX2" value="ZERO" />
+    <ctl name="CDC_IF TX3 MUX" value="ZERO" />
+    <ctl name="ADC MUX3" value="AMIC" />
+    <ctl name="DMIC MUX3" value="ZERO" />
+    <ctl name="ADC MUX4" value="AMIC" />
+    <ctl name="DMIC MUX4" value="ZERO" />
+    <ctl name="EC Reference Channels" value="Zero"/>
 
     <path name="listen-voice-wakeup-1">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
@@ -137,51 +159,43 @@
     </path>
 
     <path name="listen-voice-wakeup-1 preproc">
-        <ctl name="SLIMBUS_0_TX LSM Function" value="SWAUDIO" />
-        <ctl name="LSM1 Port" value="ADM_LSM_TX" />
-        <ctl name="LSM1 Mixer SLIMBUS_0_TX" value="1" />
+        <ctl name="SLIMBUS_3_TX LSM Function" value="SWAUDIO" />
+        <ctl name="LSM1 Mixer SLIMBUS_3_TX" value="1" />
     </path>
 
     <path name="listen-voice-wakeup-2 preproc">
-        <ctl name="SLIMBUS_0_TX LSM Function" value="SWAUDIO" />
-        <ctl name="LSM2 Port" value="ADM_LSM_TX" />
-        <ctl name="LSM2 Mixer SLIMBUS_0_TX" value="1" />
+        <ctl name="SLIMBUS_3_TX LSM Function" value="SWAUDIO" />
+        <ctl name="LSM2 Mixer SLIMBUS_3_TX" value="1" />
     </path>
 
     <path name="listen-voice-wakeup-3 preproc">
-        <ctl name="SLIMBUS_0_TX LSM Function" value="SWAUDIO" />
-        <ctl name="LSM3 Port" value="ADM_LSM_TX" />
-        <ctl name="LSM3 Mixer SLIMBUS_0_TX" value="1" />
+        <ctl name="SLIMBUS_3_TX LSM Function" value="SWAUDIO" />
+        <ctl name="LSM3 Mixer SLIMBUS_3_TX" value="1" />
     </path>
 
     <path name="listen-voice-wakeup-4 preproc">
-        <ctl name="SLIMBUS_0_TX LSM Function" value="SWAUDIO" />
-        <ctl name="LSM4 Port" value="ADM_LSM_TX" />
-        <ctl name="LSM4 Mixer SLIMBUS_0_TX" value="1" />
+        <ctl name="SLIMBUS_3_TX LSM Function" value="SWAUDIO" />
+        <ctl name="LSM4 Mixer SLIMBUS_3_TX" value="1" />
     </path>
 
     <path name="listen-voice-wakeup-5 preproc">
-        <ctl name="SLIMBUS_0_TX LSM Function" value="SWAUDIO" />
-        <ctl name="LSM5 Port" value="ADM_LSM_TX" />
-        <ctl name="LSM5 Mixer SLIMBUS_0_TX" value="1" />
+        <ctl name="SLIMBUS_3_TX LSM Function" value="SWAUDIO" />
+        <ctl name="LSM5 Mixer SLIMBUS_3_TX" value="1" />
     </path>
 
     <path name="listen-voice-wakeup-6 preproc">
-        <ctl name="SLIMBUS_0_TX LSM Function" value="SWAUDIO" />
-        <ctl name="LSM6 Port" value="ADM_LSM_TX" />
-        <ctl name="LSM6 Mixer SLIMBUS_0_TX" value="1" />
+        <ctl name="SLIMBUS_3_TX LSM Function" value="SWAUDIO" />
+        <ctl name="LSM6 Mixer SLIMBUS_3_TX" value="1" />
     </path>
 
     <path name="listen-voice-wakeup-7 preproc">
-        <ctl name="SLIMBUS_0_TX LSM Function" value="SWAUDIO" />
-        <ctl name="LSM7 Port" value="ADM_LSM_TX" />
-        <ctl name="LSM7 Mixer SLIMBUS_0_TX" value="1" />
+        <ctl name="SLIMBUS_3_TX LSM Function" value="SWAUDIO" />
+        <ctl name="LSM7 Mixer SLIMBUS_3_TX" value="1" />
     </path>
 
     <path name="listen-voice-wakeup-8 preproc">
-        <ctl name="SLIMBUS_0_TX LSM Function" value="SWAUDIO" />
-        <ctl name="LSM8 Port" value="ADM_LSM_TX" />
-        <ctl name="LSM8 Mixer SLIMBUS_0_TX" value="1" />
+        <ctl name="SLIMBUS_3_TX LSM Function" value="SWAUDIO" />
+        <ctl name="LSM8 Mixer SLIMBUS_3_TX" value="1" />
     </path>
 
     <path name="listen-cpe-handset-mic">
@@ -223,15 +237,17 @@
     </path>
 
     <path name="listen-ape-handset-dmic">
-        <ctl name="AIF1_CAP Mixer SLIM TX7" value="1" />
-        <ctl name="AIF1_CAP Mixer SLIM TX8" value="1" />
-        <ctl name="CDC_IF TX7 MUX" value="DEC7" />
-        <ctl name="ADC MUX7" value="DMIC" />
-        <ctl name="DMIC MUX7" value="DMIC4" />
-        <ctl name="CDC_IF TX8 MUX" value="DEC8" />
-        <ctl name="ADC MUX8" value="DMIC" />
-        <ctl name="DMIC MUX8" value="DMIC3" /> <!-- DMIC3 is based off path dmic-endifre in audio-mixer paths -->
-        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="AIF2_CAP Mixer SLIM TX3" value="1" />
+        <ctl name="AIF2_CAP Mixer SLIM TX4" value="1" />
+        <ctl name="CDC_IF TX3 MUX" value="DEC3" />
+        <ctl name="ADC MUX3" value="DMIC" />
+        <ctl name="DMIC MUX3" value="DMIC4" />
+        <ctl name="CDC_IF TX4 MUX" value="DEC4" />
+        <ctl name="ADC MUX4" value="DMIC" />
+        <ctl name="DMIC MUX4" value="DMIC3" /> <!-- DMIC3 is based off path dmic-endifre in audio-mixer paths -->
+        <ctl name="SLIM_3_TX Channels" value="Two" />
+        <ctl name="DEC3 Volume" value="84" />
+        <ctl name="DEC4 Volume" value="84" />
     </path>
 
     <path name="echo-reference">
