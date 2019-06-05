@@ -1376,6 +1376,11 @@
         <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1"/>
     </path>
 
+    <path name="voicemmode2-call hearing-aid">
+        <ctl name="AFE_PCM_RX_Voice Mixer VoiceMMode2" value="1"/>
+        <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1"/>
+    </path>
+
     <path name="voicemmode2-call handset">
         <ctl name="VOC_EXT_EC MUX" value="QUAT_TDM_RX_0" />
         <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode2" value="1"/>
