@@ -332,6 +332,8 @@ on zygote-start
 
     mkdir /data/vendor/sensors 0770
     chown system system /data/vendor/sensors
+    mkdir /data/vendor/sensors/log 0770
+    chown system system /data/vendor/sensors/log
 
     chmod 770 /persist/audio
     chmod 660 /persist/audio/audio.cal
