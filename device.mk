@@ -52,6 +52,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     messaging
 
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PACKAGES += chre_test_client
+endif
+
 LOCAL_PATH := device/google/crosshatch
 SRC_MEDIA_HAL_DIR := hardware/qcom/media/sdm845
 SRC_DISPLAY_HAL_DIR := hardware/qcom/display/sdm845
