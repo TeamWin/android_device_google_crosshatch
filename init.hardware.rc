@@ -174,6 +174,7 @@ on late-init
     chown system system /sys/devices/virtual/thermal/tz-by-name/fps-therm-monitor/trip_point_0_hyst
     chown system system /sys/devices/virtual/thermal/tz-by-name/usbc-therm-monitor/trip_point_0_temp
     chown system system /sys/devices/virtual/thermal/tz-by-name/usbc-therm-monitor/trip_point_0_hyst
+    chown system system /sys/devices/virtual/thermal/tz-by-name/soc/mode
 
 on fs
     mount_all /vendor/etc/fstab.${ro.boot.hardware.platform} --early
