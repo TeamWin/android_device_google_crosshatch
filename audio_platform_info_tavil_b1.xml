@@ -109,6 +109,7 @@
         <usecase name="USECASE_AUDIO_RECORD_VOIP" type="in" id="16"/>
         <usecase name="USECASE_AUDIO_RECORD_VOIP" type="out" id="-1"/>
         <usecase name="USECASE_INCALL_MUSIC_UPLINK" type="out" id="27"/>
+        <usecase name="USECASE_INCALL_MUSIC_UPLINK2" type="out" id="27"/>
         <usecase name="USECASE_AUDIO_A2DP_ABR_FEEDBACK" type="in" id="42" />
     </pcm_ids>
     <config_params>
