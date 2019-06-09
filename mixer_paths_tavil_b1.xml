@@ -2575,6 +2575,74 @@
         <path name="incall-music-uplink" />
     </path>
 
+    <path name="incall-music-uplink2">
+        <ctl name="Incall_Music_2 Audio Mixer MultiMedia9" value="1" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 handset">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 handset-hac">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 display-port">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 bt-sco">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 bt-sco-wb">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker-and-display-port">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 afe-proxy">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 usb-headphones">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 usb-headset">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker-and-usb-headphones">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 headphones">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker-and-headphones">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker-and-bt-sco">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 voice-tty-hco-handset">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 voice-tty-vco-usb">
+        <path name="incall-music-uplink2" />
+    </path>
+
     <path name ="voice-music-tx">
     </path>
 
