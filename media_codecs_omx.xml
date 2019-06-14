@@ -79,6 +79,8 @@
             <Limit name="performance-point-4096x2304" value="56" />
             <Limit name="performance-point-3840x2160" value="60" />
             <Limit name="performance-point-1920x1080" value="240" />
+            <Limit name="performance-point-1280x720" value="480" />
+            <!-- <Limit name="performance-point-720x480" value="480" /> -->
             <Feature name="bitrate-modes" value="VBR,CBR" />
             <Feature name="intra-refresh" />
         </MediaCodec>
@@ -97,6 +99,8 @@
             <Limit name="performance-point-4096x2304" value="56" />
             <Limit name="performance-point-3840x2160" value="60" />
             <Limit name="performance-point-1920x1080" value="240" />
+            <Limit name="performance-point-1280x720" value="480" />
+            <!-- <Limit name="performance-point-720x480" value="480" /> -->
             <Feature name="bitrate-modes" value="VBR,CBR,CQ" />
             <Feature name="intra-refresh" />
         </MediaCodec>
@@ -115,6 +119,7 @@
             <Limit name="performance-point-3840x2160" value="30" />
             <Limit name="performance-point-1920x1080" value="120" />
             <Limit name="performance-point-1280x720" value="240" />
+            <!-- <Limit name="performance-point-720x480" value="240" /> -->
             <Feature name="bitrate-modes" value="VBR,CBR" />
             <Feature name="intra-refresh" />
         </MediaCodec>
@@ -135,6 +140,8 @@
             <Limit name="performance-point-4096x2304" value="56" />
             <Limit name="performance-point-3840x2160" value="60" />
             <Limit name="performance-point-1920x1080" value="240" />
+            <Limit name="performance-point-1280x720" value="480" />
+            <!-- <Limit name="performance-point-720x480" value="480" /> -->
             <Feature name="adaptive-playback" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.avc.secure" type="video/avc" >
@@ -150,6 +157,8 @@
             <Limit name="performance-point-4096x2304" value="56" />
             <Limit name="performance-point-3840x2160" value="60" />
             <Limit name="performance-point-1920x1080" value="240" />
+            <Limit name="performance-point-1280x720" value="480" />
+            <!-- <Limit name="performance-point-720x480" value="480" /> -->
             <Feature name="adaptive-playback" />
             <Feature name="secure-playback" required="true" />
         </MediaCodec>
@@ -166,6 +175,8 @@
             <Limit name="performance-point-4096x2304" value="56" />
             <Limit name="performance-point-3840x2160" value="60" />
             <Limit name="performance-point-1920x1080" value="240" />
+            <Limit name="performance-point-1280x720" value="480" />
+            <!-- <Limit name="performance-point-720x480" value="480" /> -->
             <Feature name="adaptive-playback" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.hevc.secure" type="video/hevc" >
@@ -181,6 +192,7 @@
             <Limit name="performance-point-4096x2304" value="56" />
             <Limit name="performance-point-3840x2160" value="60" />
             <Limit name="performance-point-1920x1080" value="240" />
+            <!-- <Limit name="performance-point-720x480" value="240" /> -->
             <Feature name="adaptive-playback" />
             <Feature name="secure-playback" required="true" />
         </MediaCodec>
@@ -198,6 +210,7 @@
             <Limit name="performance-point-3840x2160" value="30" />
             <Limit name="performance-point-1920x1080" value="120" />
             <Limit name="performance-point-1280x720" value="240" />
+            <!-- <Limit name="performance-point-720x480" value="240" /> -->
             <Feature name="adaptive-playback" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.vp9" type="video/x-vnd.on2.vp9" >
@@ -213,6 +226,8 @@
             <Limit name="performance-point-4096x2304" value="56" />
             <Limit name="performance-point-3840x2160" value="60" />
             <Limit name="performance-point-1920x1080" value="240" />
+            <Limit name="performance-point-1280x720" value="480" />
+            <!-- <Limit name="performance-point-720x480" value="480" /> -->
             <Feature name="adaptive-playback" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.vp9.secure" type="video/x-vnd.on2.vp9" >
@@ -228,6 +243,8 @@
             <Limit name="performance-point-4096x2304" value="56" />
             <Limit name="performance-point-3840x2160" value="60" />
             <Limit name="performance-point-1920x1080" value="240" />
+            <Limit name="performance-point-1280x720" value="480" />
+            <!-- <Limit name="performance-point-720x480" value="480" /> -->
             <Feature name="adaptive-playback" />
             <Feature name="secure-playback" required="true" />
         </MediaCodec>
