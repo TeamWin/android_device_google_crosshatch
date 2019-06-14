@@ -12,23 +12,29 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-cc_binary {
-    name: "android.hardware.vibrator@1.2-service.crosshatch",
+
+cc_library_shared {
+    name: "android.hardware.vibrator@1.2-impl.crosshatch",
     relative_install_path: "hw",
-    init_rc: ["android.hardware.vibrator@1.2-service.crosshatch.rc"],
-    srcs: ["service.cpp", "Vibrator.cpp"],
-    cflags: ["-Wall", "-Werror"],
+    srcs: [
+        "impl.cpp",
+        "Vibrator.cpp",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
     shared_libs: [
-        "libhidlbase",
-        "libcutils",
-        "libhidltransport",
-        "liblog",
-        "libhwbinder",
-        "libutils",
-        "libhardware",
         "android.hardware.vibrator@1.0",
         "android.hardware.vibrator@1.1",
-        "android.hardware.vibrator@1.2"
+        "android.hardware.vibrator@1.2",
+        "libcutils",
+        "libhardware",
+        "libhidlbase",
+        "libhidltransport",
+        "libhwbinder",
+        "liblog",
+        "libutils",
     ],
     proprietary: true,
 }
