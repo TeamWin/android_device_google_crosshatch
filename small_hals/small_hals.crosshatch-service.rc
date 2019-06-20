@@ -1,0 +1,5 @@
+service vendor.small_hals /vendor/bin/hw/small_hals.crosshatch-service
+    class hal
+    user system
+    group system
+    shutdown critical
