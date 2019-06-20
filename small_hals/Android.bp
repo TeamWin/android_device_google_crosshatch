@@ -1,0 +1,24 @@
+// A binary for small, single-threaded HALs
+cc_binary {
+    name: "small_hals.crosshatch-service",
+    defaults: ["hidl_defaults"],
+    relative_install_path: "hw",
+    proprietary: true,
+    init_rc: ["small_hals.crosshatch-service.rc"],
+    vintf_fragments: ["small_hals.crosshatch-service.xml"],
+    srcs: ["service.cpp"],
+
+    shared_libs: [
+        "android.hardware.light@2.0",
+        "android.hardware.memtrack@1.0",
+        "android.hardware.vibrator@1.0",
+        "android.hardware.vibrator@1.1",
+        "android.hardware.vibrator@1.2",
+        "hardware.google.light@1.0",
+        "libbase",
+        "libhidlbase",
+        "libhidltransport",
+        "liblog",
+        "libutils",
+    ],
+}
