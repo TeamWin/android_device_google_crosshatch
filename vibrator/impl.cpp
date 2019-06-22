@@ -27,7 +27,6 @@ using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 using android::hardware::vibrator::V1_2::IVibrator;
 using android::hardware::vibrator::V1_2::implementation::Vibrator;
-using namespace android;
 
 static constexpr char ACTIVATE_PATH[] = "/sys/class/leds/vibrator/activate";
 static constexpr char DURATION_PATH[] = "/sys/class/leds/vibrator/duration";
@@ -45,9 +44,7 @@ static constexpr char REDC_CONFIG[] = "redc_measured";
 static constexpr char F0_FILEPATH[] = "/sys/class/leds/vibrator/device/f0_stored";
 static constexpr char REDC_FILEPATH[] = "/sys/class/leds/vibrator/device/redc_stored";
 
-
-static std::string trim(const std::string& str,
-        const std::string& whitespace = " \t") {
+static std::string trim(const std::string &str, const std::string &whitespace = " \t") {
     const auto str_begin = str.find_first_not_of(whitespace);
     if (str_begin == std::string::npos) {
         return "";
@@ -64,20 +61,17 @@ static bool loadCalibrationData() {
 
     std::ofstream f0{F0_FILEPATH};
     if (!f0) {
-        ALOGE("Failed to open %s (%d): %s", F0_FILEPATH, errno,
-                strerror(errno));
+        ALOGE("Failed to open %s (%d): %s", F0_FILEPATH, errno, strerror(errno));
     }
 
     std::ofstream redc{REDC_FILEPATH};
     if (!redc) {
-        ALOGE("Failed to open %s (%d): %s", REDC_FILEPATH, errno,
-                strerror(errno));
+        ALOGE("Failed to open %s (%d): %s", REDC_FILEPATH, errno, strerror(errno));
     }
 
     std::ifstream cal_data{CALIBRATION_FILEPATH};
     if (!cal_data) {
-        ALOGE("Failed to open %s (%d): %s", CALIBRATION_FILEPATH, errno,
-                strerror(errno));
+        ALOGE("Failed to open %s (%d): %s", CALIBRATION_FILEPATH, errno, strerror(errno));
         return false;
     }
 
@@ -96,18 +90,19 @@ static bool loadCalibrationData() {
         }
     }
 
-    if(config_data.find(F0_CONFIG) != config_data.end()) {
+    if (config_data.find(F0_CONFIG) != config_data.end()) {
         f0 << config_data[F0_CONFIG] << std::endl;
     }
 
-    if(config_data.find(REDC_CONFIG) != config_data.end()) {
+    if (config_data.find(REDC_CONFIG) != config_data.end()) {
         redc << config_data[REDC_CONFIG] << std::endl;
     }
 
     return true;
 }
 
-status_t registerVibratorService() {
+// passing out ownership, can't make sp yet
+IVibrator *makeVibratorService() {
     // ostreams below are required
     std::ofstream activate{ACTIVATE_PATH};
     if (!activate) {
@@ -148,19 +143,10 @@ status_t registerVibratorService() {
         ALOGW("Failed to load calibration data");
     }
 
-    sp<IVibrator> vibrator = new Vibrator(std::move(activate), std::move(duration),
-        std::move(effect), std::move(queue), std::move(scale));
-
-    return vibrator->registerAsService();
+    return new Vibrator(std::move(activate), std::move(duration), std::move(effect),
+                        std::move(queue), std::move(scale));
 }
 
-int main() {
-    configureRpcThreadpool(1, true);
-    status_t status = registerVibratorService();
-
-    if (status != OK) {
-        return status;
-    }
-
-    joinRpcThreadpool();
+extern "C" IVibrator *HIDL_FETCH_IVibrator(const char * /*instnace*/) {
+    return makeVibratorService();
 }

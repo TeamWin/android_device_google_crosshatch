@@ -365,16 +365,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.health.storage@1.0-service
 
-# Light HAL
-PRODUCT_PACKAGES += \
-    lights.$(PRODUCT_PLATFORM) \
-    hardware.google.light@1.0-service
-
-# Memtrack HAL
+# Light/Memtrack/Vibrator HALs
 PRODUCT_PACKAGES += \
     memtrack.sdm845 \
     android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service
+    android.hardware.vibrator@1.2-impl.crosshatch \
+    lights.$(PRODUCT_PLATFORM) \
+    hardware.google.light@1.0-impl \
+    small_hals.crosshatch-service
 
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
@@ -484,10 +482,6 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-impl.recovery \
     android.hardware.boot@1.0-service \
-
-# Vibrator HAL
-PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.2-service.crosshatch \
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
