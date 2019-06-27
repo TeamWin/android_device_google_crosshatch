@@ -79,8 +79,9 @@ AB_OTA_PARTITIONS += \
 endif
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
+# TODO (b/136154856) product_services partition is removed from
+# AB_OTA_PARTITIONS. Instead, we will add system_ext once it is ready.
 AB_OTA_PARTITIONS += \
-    product_services \
     vbmeta_system
 endif
 
@@ -100,7 +101,9 @@ TARGET_RECOVERY_UI_LIB := \
     libfstab
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
-BOARD_AVB_VBMETA_SYSTEM := system product_services
+# TODO (b/136154856) product_services partition is removed from
+# BOARD_AVB_VBMETA_SYSTEM. Instead, we will add system_ext once it is ready.
+BOARD_AVB_VBMETA_SYSTEM := system
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
@@ -162,15 +165,21 @@ BOARD_SUPER_PARTITION_PRODUCT_DEVICE_SIZE := 314572800
 BOARD_GOOGLE_DYNAMIC_PARTITIONS_SIZE := 4069523456
 else
 # Mainline Pixel 3 has an actual super partition.
-BOARD_PRODUCT_SERVICESIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_COPY_OUT_PRODUCT_SERVICES := product_services
+
+# TODO (b/136154856) product_services partition is removed.
+# Instead, we will add system_ext once it is ready.
+# BOARD_PRODUCT_SERVICESIMAGE_FILE_SYSTEM_TYPE := ext4
+# TARGET_COPY_OUT_PRODUCT_SERVICES := product_services
 
 BOARD_SUPER_PARTITION_SIZE := 12884901888
 # Assume 1MB metadata size.
 # TODO(b/117997386): Use correct metadata size.
 BOARD_GOOGLE_DYNAMIC_PARTITIONS_SIZE := 6441402368
-BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST += \
-    product_services \
+
+# TODO (b/136154856) product_services partition removed.
+# Instead, we will add system_ext once it is ready.
+# BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST += \
+#    product_services \
 
 endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
 endif # PRODUCT_USE_DYNAMIC_PARTITIONS
