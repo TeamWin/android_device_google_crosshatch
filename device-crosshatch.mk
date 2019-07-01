@@ -14,10 +14,6 @@
 # limitations under the License.
 #
 
-PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := 560dpi
-PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
-
 PRODUCT_HARDWARE := crosshatch
 
 include device/google/crosshatch/device-common.mk

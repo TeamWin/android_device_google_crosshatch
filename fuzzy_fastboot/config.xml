@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!-- The fuzzy_fastboot config for b1/c1 -->
+<config>
+	<!-- All the device specific getvar variables should be listed here -->
+	<getvar>
+		<var key="product" assert="crosshatch|blueline"/>
+		<var key="variant" assert="(\w+ )*\w+"/>
+		<var key="slot-suffixes" assert="_a,_b"/>
+		<var key="version-bootloader" assert="[\w\-.]+"/>
+		<var key="max-download-size" assert="0x[[:digit:]]+"/>
+		<var key="version-baseband" assert="[\w\-.]+"/>
+		<var key="secure-boot" assert="NONE"/>
+		<var key="secure" assert="yes|no"/>
+		<var key="hw-revision" assert="[[:upper:]]+[[:digit:]]+.[[:digit:]]+"/>
+		<var key="slot-count" assert="[[:digit:]]"/>
+		<var key="current-slot" assert="[a-b]"/>
+		<var key="unlocked" assert="yes|no"/>
+		<var key="nos-production" assert="yes|no"/>
+		<var key="off-mode-charge" assert="1|0"/>
+		<var key="slot-retry-count:a" assert="[[:digit:]]+"/>
+		<var key="slot-unbootable:a" assert="yes|no"/>
+		<var key="slot-successful:a" assert="yes|no"/>
+		<var key="slot-retry-count:b" assert="[[:digit:]]+"/>
+		<var key="slot-unbootable:b" assert="yes|no"/>
+		<var key="slot-successful:b" assert="yes|no"/>
+		<var key="battery-voltage" assert="[34][[:digit:]]{3}"/>
+		<var key="battery-soc-ok" assert="yes|no"/>
+	</getvar>
+
+	<!-- All the device partitions should be listed here -->
+	<partitions>
+		<part value="boot" slots="yes" test="yes" hashable="yes" parsed="yes"/>
+
+		<part value="ssd" slots="no" test="yes" hashable="no" parsed="no"/>
+		<part value="misc" slots="no" test="yes" hashable="no" parsed="no"/>
+		<part value="keystore" slots="no" test="yes" hashable="no" parsed="no"/>
+		<part value="frp" slots="no" test="yes" hashable="no" parsed="no"/>
+
+		<part value="system" slots="yes" test="yes" hashable="yes"/>
+		<part value="product" slots="yes" test="yes" hashable="yes"/>
+		<part value="vendor" slots="yes" test="yes" hashable="yes"/>
+
+		<part value="modem" slots="yes" test="yes" hashable="yes"/>
+		<part value="apdp" slots="yes" test="yes" hashable="yes"/>
+		<part value="klog" slots="no" test="yes" hashable="no"/>
+		<part value="metadata" slots="no" test="yes" hashable="no"/>
+		<part value="userdata" slots="no" test="yes" hashable="no"/>
+		<part value="ddr" slots="no" test="yes" hashable="no"/>
+		<part value="modemcal" slots="no" test="yes" hashable="no"/>
+		<part value="uefivar" slots="no" test="yes" hashable="no"/>
+		<part value="sec" slots="no" test="yes" hashable="no"/>
+		<part value="vbmeta" slots="yes" test="yes" hashable="yes"/>
+		<part value="dtbo" slots="yes" test="yes" hashable="yes"/>
+		<part value="modemst1" slots="no" test="yes" hashable="no"/>
+		<part value="modemst2" slots="no" test="yes" hashable="no"/>
+		<part value="fsg" slots="no" test="yes" hashable="no"/>
+		<part value="fsc" slots="no" test="yes" hashable="no"/>
+		<part value="devinfo" slots="no" test="yes" hashable="no"/>
+		<part value="dip" slots="no" test="yes" hashable="no"/>
+		<part value="spunvm" slots="no" test="yes" hashable="no"/>
+		<part value="limits" slots="no" test="yes" hashable="no"/>
+		<part value="toolsfv" slots="no" test="yes" hashable="no"/>
+		<part value="sti" slots="no" test="yes" hashable="no"/>
+		<part value="ImageFv" slots="no" test="yes" hashable="no"/>
+		<part value="splash" slots="no" test="yes" hashable="no"/>
+
+
+		<!-- Special config partitions you don't want to mess with -->
+		<part value="cdt" slots="no" test="no" hashable="no"/>
+		<part value="persist" slots="no" test="no" hashable="no"/>
+
+		<!-- Bootloader partitions -->
+		<part value="abl" slots="yes" test="no" hashable="yes"/>
+		<part value="aop" slots="yes" test="no" hashable="yes"/>
+		<part value="cmnlib64" slots="yes" test="no" hashable="yes"/>
+		<part value="devcfg" slots="yes" test="no" hashable="yes"/>
+		<part value="keymaster" slots="yes" test="no" hashable="yes"/>
+		<part value="msadp" slots="yes" test="no" hashable="yes"/>
+		<part value="qupfw" slots="yes" test="no" hashable="yes"/>
+		<part value="tz" slots="yes" test="no" hashable="yes"/>
+		<part value="xbl" slots="yes" test="no" hashable="yes"/>
+		<part value="cmnlib" slots="yes" test="no" hashable="yes"/>
+		<part value="hyp" slots="yes" test="no" hashable="yes"/>
+		<part value="logfs" slots="no" test="no" hashable="no"/>
+		<part value="storsec" slots="yes" test="no" hashable="yes"/>
+		<part value="xbl_config" slots="yes" test="no" hashable="yes"/>
+	</partitions>
+
+	<!-- All the device packed partitions should be listed here -->
+	<packed>
+		<part value="bootloader" slots="yes">
+			<child>abl</child>
+			<child>aop</child>
+			<child>cmnlib64</child>
+			<child>devcfg</child>
+			<child>keymaster</child>
+			<child>msadp</child>
+			<child>qupfw</child>
+			<child>tz</child>
+			<child>xbl</child>
+			<child>cmnlib</child>
+			<child>hyp</child>
+			<child>logfs</child>
+			<child>storsec</child>
+			<child>xbl_config</child>
+			<test packed="bootloader.img" unpacked="bootloader_unpacked"/>
+			<test packed="bootloader_garbage.img" expect="fail"/>
+		</part>
+
+		<part value="radio" slots="yes">
+			<child>modem</child>
+			<test packed="radio.img" unpacked="radio_unpacked"/>
+			<test packed="radio_garbage.img" expect="fail"/>
+		</part>
+	</packed>
+
+	<!-- All the oem commands should be listed here -->
+	<oem>
+		<command value="rma" permissions="unlocked">
+			<test value="get_challenge" expect="okay" output="challenge.img" validate="python validator.py" />
+			<test value="send_response" expect="fail" input="radio.img"/>
+		</command>
+
+	</oem>
+	<!-- If there is a custom oem checksum command, add it here -->
+	<checksum value="oem sha1sum" parser="python checksum_parser.py"/>
+</config>

@@ -19,12 +19,28 @@
 #include <android-base/logging.h>
 #include <utils/StrongPointer.h>
 
-#include "DropDetect.h"
-#include "SysfsCollector.h"
-#include "UeventListener.h"
+#include <pixelstats/DropDetect.h>
+#include <pixelstats/SysfsCollector.h>
+#include <pixelstats/UeventListener.h>
 
 using android::sp;
-using namespace device::google::crosshatch;
+using android::hardware::google::pixel::DropDetect;
+using android::hardware::google::pixel::SysfsCollector;
+using android::hardware::google::pixel::UeventListener;
+
+#define UFSHC_PATH(filename) "/sys/devices/platform/soc/1d84000.ufshc/" #filename
+const struct SysfsCollector::SysfsPaths sysfs_paths = {
+    .SlowioReadCntPath = UFSHC_PATH(slowio_read_cnt),
+    .SlowioWriteCntPath = UFSHC_PATH(slowio_write_cnt),
+    .SlowioUnmapCntPath = UFSHC_PATH(slowio_unmap_cnt),
+    .SlowioSyncCntPath = UFSHC_PATH(slowio_sync_cnt),
+    .CycleCountBinsPath = "/sys/class/power_supply/maxfg/cycle_counts_bins",
+    .ImpedancePath = "/sys/class/misc/msm_cirrus_playback/resistance_left_right",
+    .CodecPath = "/sys/devices/platform/soc/171c0000.slim/tavil-slim-pgd/tavil_codec/codec_state",
+    .SpeechDspPath = "/sys/devices/platform/soc/soc:qcom,wcd-dsp-mgr/wdsp_stat",
+};
+
+const char *const kAudioUevent = "/kernel/q6audio/q6voice_uevent";
 
 int main() {
     LOG(INFO) << "starting PixelStats";
@@ -35,9 +51,11 @@ int main() {
         return 1;
     }
 
-    UeventListener::ListenForeverInNewThread();
+    UeventListener ueventListener(kAudioUevent);
+    std::thread listenThread(&UeventListener::ListenForever, &ueventListener);
+    listenThread.detach();
 
-    SysfsCollector collector;
+    SysfsCollector collector(sysfs_paths);
     collector.collect();  // This blocks forever.
 
     return 0;

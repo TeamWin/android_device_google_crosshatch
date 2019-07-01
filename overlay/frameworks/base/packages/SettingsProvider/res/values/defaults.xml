@@ -19,4 +19,6 @@
 <resources>
     <!-- Default for Settings.System.VIBRATE_WHEN_RINGING -->
     <bool name="def_vibrate_when_ringing">true</bool>
+    <!-- Default for Settings.Global.APPLY_RAMPING_RINGER -->
+    <bool name="def_apply_ramping_ringer">false</bool>
 </resources>

@@ -21,6 +21,7 @@ on post-fs-data
     # Modem logging collection
     mkdir /data/vendor/radio 0777 radio radio
     mkdir /data/vendor/radio/diag_logs 0777 system system
+    rm /data/vendor/radio/diag_logs/logs/diag_poweron_log.qmdl
     # WLAN logging collection
     mkdir /data/vendor/wifi 0777 system system
     mkdir /data/vendor/wifi/cnss_diag 0777 system system
@@ -29,6 +30,7 @@ service diag_mdlog_start /vendor/bin/diag_mdlog
     class late_start
     user shell
     group system diag media_rw
+    socket diag_router stream 0666 system system
     disabled
     oneshot
 

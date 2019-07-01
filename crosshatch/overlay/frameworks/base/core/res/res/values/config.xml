@@ -42,7 +42,7 @@
 
     <!-- Enable doze mode
          ComponentName of a dream to show whenever the system would otherwise have gone to sleep. -->
-    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    <string translatable="false" name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
 
     <!-- Type of the double tap sensor. Empty if double tap is not supported. -->
     <string name="config_dozeDoubleTapSensorType" translatable="false">com.google.sensor.double_touch</string>
@@ -723,6 +723,10 @@
 
     <dimen name="rounded_corner_radius_top">133px</dimen>
     <dimen name="rounded_corner_radius_bottom">70px</dimen>
+
+    <!-- How much we expand the touchable region of the status bar below the notch to catch touches
+        that just start below the notch. -->
+    <dimen name="display_cutout_touchable_region_size">60px</dimen>
 
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
     <integer name="config_shutdownBatteryTemperature">600</integer>

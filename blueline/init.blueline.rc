@@ -16,36 +16,40 @@
 
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.rc
 
-on init
-    setprop ro.sf.lcd_density 440
-
 on late-init && property:ro.boot.hardware.revision=DEV1.0
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    setprop vendor.thermal.config "thermal_info_config_evt.json"
 
 on late-init && property:ro.boot.hardware.revision=DEV2.0
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    setprop vendor.thermal.config "thermal_info_config_evt.json"
 
 on late-init && property:ro.boot.hardware.revision=PROTO1.0
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    setprop vendor.thermal.config "thermal_info_config_evt.json"
 
 on late-init && property:ro.boot.hardware.revision=PROTO1.1
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    setprop vendor.thermal.config "thermal_info_config_evt.json"
 
 on late-init && property:ro.boot.hardware.revision=EVT1.0
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    setprop vendor.thermal.config "thermal_info_config_evt.json"
 
 on late-init && property:ro.boot.hardware.revision=EVT1.1
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    setprop vendor.thermal.config "thermal_info_config_evt.json"
 
 on late-init && property:ro.boot.hardware.revision=EVT2.0
     setprop vendor.thermal.hw_mode "-evt"
     write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    setprop vendor.thermal.config "thermal_info_config_evt.json"
 
 on property:vendor.all.modules.ready=1
     chown system system /sys/devices/platform/soc/888000.i2c/i2c-2/2-0049/stm_fts_cmd

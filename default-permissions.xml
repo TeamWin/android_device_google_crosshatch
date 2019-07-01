@@ -60,6 +60,7 @@
     <exception
             package="com.google.android.projection.gearhead"
             sha256-cert-digest="FD:B0:0C:43:DB:DE:8B:51:CB:31:2A:A8:1D:3B:5F:A1:77:13:AD:B9:4B:28:F5:98:D7:7F:8E:B8:9D:AC:EE:DF">
+        <!-- Gearhead legacy -->
         <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
         <permission name="android.permission.CALL_PHONE" fixed="false"/>
         <permission name="android.permission.READ_CALL_LOG" fixed="false"/>
@@ -69,6 +70,12 @@
         <permission name="android.permission.SEND_SMS" fixed="false"/>
         <permission name="android.permission.RECORD_AUDIO" fixed="false"/>
         <permission name="android.permission.READ_CALENDAR" fixed="false"/>
+        <!-- For Top Gear -->
+        <permission name="android.permission.PROCESS_OUTGOING_CALLS" fixed="false"/>
+        <permission name="android.permission.READ_SMS" fixed="false"/>
+        <permission name="android.permission.RECEIVE_MMS" fixed="false"/>
+        <permission name="android.permission.WRITE_CALL_LOG" fixed="false"/>
+        <permission name="android.permission.ACCESS_COARSE_LOCATION" fixed="false"/>
     </exception>
 
     <exception
@@ -93,12 +100,6 @@
     </exception>
 
     <exception
-            package="com.google.intelligence.sense">
-        <!-- Record Audio -->
-        <permission name="android.permission.RECORD_AUDIO" fixed="false"/>
-    </exception>
-
-    <exception
             package="com.qualcomm.ltebc_vzw">
         <!-- Phone -->
         <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
@@ -109,11 +110,24 @@
         <permission name="android.permission.READ_CALENDAR" fixed="true"/>
         <!-- Location -->
         <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="true"/>
+        <permission name="android.permission.ACCESS_BACKGROUND_LOCATION" fixed="true"/>
     </exception>
 
     <exception package="com.google.android.wfcactivation">
         <!-- SMS -->
         <permission name="android.permission.RECEIVE_WAP_PUSH" fixed="false"/>
+    </exception>
+
+    <exception package="com.google.android.cbrsnetworkmonitor">
+        <!-- Location access to create CBRS geofences-->
+        <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="true"/>
+    </exception>
+
+    <exception package="com.google.android.apps.scone">
+        <!-- NLP Location access to determine proximity to country border -->
+        <permission name="android.permission.ACCESS_COARSE_LOCATION" fixed="false"/>
+        <!-- Used to call ActivityTransition API for Smart OOS & Smart PNO -->
+        <permission name="android.permission.ACTIVITY_RECOGNITION" fixed="false"/>
     </exception>
 
     <exception

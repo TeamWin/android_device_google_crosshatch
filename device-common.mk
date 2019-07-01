@@ -38,11 +38,20 @@ PRODUCT_PROPERTY_OVERRIDES += vendor.audio.adm.buffering.ms=3
 PRODUCT_PROPERTY_OVERRIDES += audio_hal.period_multiplier=2
 PRODUCT_PROPERTY_OVERRIDES += af.fast_track_multiplier=1
 
+# Enable HW Codec 2.0 as default service
+# Set all codec components are available with their normal ranks
+# Set OMX components's default rank large than Codec 2.0 HW components's default rank (0x100)
+PRODUCT_PROPERTY_OVERRIDES += debug.stagefright.ccodec=4
+PRODUCT_PROPERTY_OVERRIDES += debug.stagefright.omx_default_rank=512
+
 # Pixelstats broken mic detection
 PRODUCT_PROPERTY_OVERRIDES += vendor.audio.mic_break=true
 
 # Setting vendor SPL
-VENDOR_SECURITY_PATCH = "2018-09-05"
+VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
+
+# Set boot SPL
+BOOT_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
 
 # MIDI feature
 PRODUCT_COPY_FILES += \
@@ -74,7 +83,7 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_exclusive_policy=2
 PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 
 # Set lmkd options
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PRODUCT_PROPERTIES += \
     ro.lmk.low=1001 \
     ro.lmk.medium=800 \
     ro.lmk.critical=0 \
@@ -108,6 +117,32 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.0-service.crosshatch
 
+# Dmabuf dump tool for bug reports
+PRODUCT_PACKAGES += \
+    dmabuf_dump
+
 # whitelisted app
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
+    device/google/crosshatch/qti_whitelist.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/qti_whitelist.xml
+
+PRODUCT_PACKAGES += \
+    llkd
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.khungtask.enable=false
+#
+
+# Enable retrofit dynamic partitions for all blueline
+# and crosshatch targets
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.0-impl.recovery \
+    bootctrl.sdm845 \
+    bootctrl.sdm845.recovery \
+    check_dynamic_partitions \
+
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_product=true \
+    POSTINSTALL_PATH_product=bin/check_dynamic_partitions \
+    FILESYSTEM_TYPE_product=ext4 \
+    POSTINSTALL_OPTIONAL_product=false \
