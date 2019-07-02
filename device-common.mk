@@ -21,6 +21,9 @@ LOCAL_PATH := device/google/crosshatch
 # define hardware platform
 PRODUCT_PLATFORM := sdm845
 
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 include device/google/crosshatch/device.mk
 
 # Audio fluence, ns, aec property, voice volume steps
