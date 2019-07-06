@@ -13,3 +13,11 @@
 # limitations under the License.
 
 BOARD_PREBUILT_VENDORIMAGE := vendor/google_devices/blueline/proprietary/vendor.img
+
+-include vendor/google/tools/android-info.mk
+ifdef USE_ANDROID_INFO
+  TARGET_BOARD_INFO_FILE := vendor/google_devices/blueline/android-info.txt
+endif
+
+AB_OTA_PARTITIONS += \
+    vendor
