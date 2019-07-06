@@ -18,3 +18,6 @@ BOARD_PREBUILT_VENDORIMAGE := vendor/google_devices/crosshatch/proprietary/vendo
 ifdef USE_ANDROID_INFO
   TARGET_BOARD_INFO_FILE := vendor/google_devices/crosshatch/android-info.txt
 endif
+
+AB_OTA_PARTITIONS += \
+    vendor
