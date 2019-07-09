@@ -164,8 +164,9 @@ AB_OTA_PARTITIONS += \
 endif
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
+# TODO (b/136154856) product_services partition is removed from
+# AB_OTA_PARTITIONS. Instead, we will add system_ext once it is ready.
 AB_OTA_PARTITIONS += \
-    product_services \
     vbmeta_system \
 
 endif
