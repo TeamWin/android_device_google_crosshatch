@@ -272,6 +272,18 @@ static void DumpTouch(int fd) {
     }
 }
 
+static void DumpSensorLog(int fd) {
+    const std::string logPath = "/data/vendor/sensors/log/sensor_log.txt";
+    const std::string lastlogPath = "/data/vendor/sensors/log/sensor_lastlog.txt";
+
+    if (!access(logPath.c_str(), R_OK)) {
+        DumpFileToFd(fd, "sensor log", logPath);
+    }
+    if (!access(lastlogPath.c_str(), R_OK)) {
+        DumpFileToFd(fd, "sensor lastlog", lastlogPath);
+    }
+}
+
 static void DumpF2FS(int fd) {
     DumpFileToFd(fd, "F2FS", "/sys/kernel/debug/f2fs/status");
     DumpFileToFd(fd, "F2FS - fragmentation", "/proc/fs/f2fs/dm-6/segment_info");
@@ -348,6 +360,8 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
 
     DumpF2FS(fd);
     DumpUFS(fd);
+
+    DumpSensorLog(fd);
 
     DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
     DumpFileToFd(fd, "Sleep Stats", "/sys/power/system_sleep/stats");
