@@ -15,4 +15,5 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_crosshatch.mk
+    $(LOCAL_DIR)/lineage_crosshatch.mk \
+    $(LOCAL_DIR)/lineage_blueline.mk
