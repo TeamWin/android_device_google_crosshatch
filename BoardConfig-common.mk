@@ -72,15 +72,14 @@ AB_OTA_PARTITIONS += \
     vbmeta \
     dtbo
 
-# Skip product partition for nodap build
+# Skip product and system_ext partition for nodap build
 ifeq ($(filter %_nodap,$(TARGET_PRODUCT)),)
 AB_OTA_PARTITIONS += \
-    product
+    product \
+    system_ext
 endif
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
-# TODO (b/136154856) product_services partition is removed from
-# AB_OTA_PARTITIONS. Instead, we will add system_ext once it is ready.
 AB_OTA_PARTITIONS += \
     vbmeta_system
 endif
@@ -101,9 +100,7 @@ TARGET_RECOVERY_UI_LIB := \
     libfstab
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
-# TODO (b/136154856) product_services partition is removed from
-# BOARD_AVB_VBMETA_SYSTEM. Instead, we will add system_ext once it is ready.
-BOARD_AVB_VBMETA_SYSTEM := system
+BOARD_AVB_VBMETA_SYSTEM := system system_ext
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
@@ -145,12 +142,24 @@ BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 # boot.img
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
 
+# system_ext.img
+ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
+TARGET_COPY_OUT_SYSTEM_EXT := system/system_ext
+else
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
+endif
+ifeq ($(PRODUCT_NO_PRODUCT_PARTITION), true)
+# no system_ext partition as well
+TARGET_COPY_OUT_SYSTEM_EXT := system/system_ext
+endif
+
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
 BOARD_SUPER_PARTITION_GROUPS := google_dynamic_partitions
 BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST := \
     system \
     vendor \
-    product
+    product \
+    system_ext
 
 ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS), true)
 # Normal Pixel 3 must retrofit dynamic partitions.
@@ -166,20 +175,10 @@ BOARD_GOOGLE_DYNAMIC_PARTITIONS_SIZE := 4069523456
 else
 # Mainline Pixel 3 has an actual super partition.
 
-# TODO (b/136154856) product_services partition is removed.
-# Instead, we will add system_ext once it is ready.
-# BOARD_PRODUCT_SERVICESIMAGE_FILE_SYSTEM_TYPE := ext4
-# TARGET_COPY_OUT_PRODUCT_SERVICES := product_services
-
 BOARD_SUPER_PARTITION_SIZE := 12884901888
 # Assume 1MB metadata size.
 # TODO(b/117997386): Use correct metadata size.
 BOARD_GOOGLE_DYNAMIC_PARTITIONS_SIZE := 6441402368
-
-# TODO (b/136154856) product_services partition removed.
-# Instead, we will add system_ext once it is ready.
-# BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST += \
-#    product_services \
 
 endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
 endif # PRODUCT_USE_DYNAMIC_PARTITIONS
