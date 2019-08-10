@@ -776,8 +776,7 @@ on property:init.svc.bugreport=stopped
     write /d/tracing/instances/pixel-trace/tracing_on 1
 
 # bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/dumpstate -d -p -B -z \
-        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
+service bugreport /system/bin/dumpstate -d -p -z
     class main
     disabled
     oneshot
