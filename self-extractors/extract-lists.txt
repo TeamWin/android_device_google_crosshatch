@@ -5,6 +5,7 @@
     ;;
   qcom)
     TO_EXTRACT="\
+            system/app/ims/ims.apk \
             system/app/QtiTelephonyService/QtiTelephonyService.apk \
             system/etc/permissions/cneapiclient.xml \
             system/etc/permissions/com.qualcomm.qti.imscmservice.xml \
