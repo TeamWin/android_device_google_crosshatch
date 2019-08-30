@@ -174,15 +174,6 @@
             <instance>default</instance>
         </interface>
       </hal>
-    <hal format="hidl">
-        <name>android.hardware.wifi.supplicant</name>
-        <transport>hwbinder</transport>
-        <version>1.2</version>
-        <interface>
-            <name>ISupplicant</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <hal format="hidl" optional="true">
         <name>vendor.google.wifi_ext</name>
         <transport>hwbinder</transport>
