@@ -18,12 +18,8 @@ cc_binary {
   init_rc: ["pixelstats-vendor.crosshatch.rc"],
   srcs: [
     "service.cpp",
-    "DropDetect.cpp",
-    "SysfsCollector.cpp",
-    "UeventListener.cpp",
   ],
   shared_libs: [
-    "hardware.google.pixelstats@1.0",
     "libbase",
     "libbinder",
     "libcutils",
@@ -31,6 +27,7 @@ cc_binary {
     "libhidltransport",
     "liblog",
     "libutils",
+    "libpixelstats",
   ],
   proprietary: true,
   static_libs: ["chre_client"],

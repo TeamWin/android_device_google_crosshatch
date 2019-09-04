@@ -21,7 +21,8 @@ namespace google {
 namespace crosshatch {
 namespace health {
 
-static const std::string kChargerStatus = "sys/class/power_supply/battery/status";
+const std::string kChargerStatus = "sys/class/power_supply/battery/status";
+
 static const std::string kStatusIsFull = "Full";
 static const std::string kStatusIsCharging = "Charging";
 static constexpr int kTransitionTime = 15 * 60;  // Seconds

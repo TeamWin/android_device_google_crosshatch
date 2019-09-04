@@ -31,6 +31,8 @@ namespace google {
 namespace crosshatch {
 namespace health {
 
+extern const std::string kChargerStatus;
+
 enum RechargeState {
     WAIT_EOC,          // Wait for the charge done
     RECHARGING_CYCLE,  // During the recharging cycle state

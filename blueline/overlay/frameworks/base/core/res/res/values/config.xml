@@ -42,7 +42,7 @@
 
     <!-- Enable doze mode
          ComponentName of a dream to show whenever the system would otherwise have gone to sleep. -->
-    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    <string name="config_dozeComponent" translatable="false">com.android.systemui/com.android.systemui.doze.DozeService</string>
 
     <!-- Disable AOD by default -->
     <bool name="config_dozeAlwaysOnEnabled">false</bool>
@@ -685,5 +685,7 @@
     <string-array name="config_disableApkUnlessMatchedSku_skus_list" translatable="false">
         <item>G013B</item>
     </string-array>
+
+    <dimen name="rounded_corner_radius">70px</dimen>
 
 </resources>

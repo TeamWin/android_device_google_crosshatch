@@ -472,8 +472,9 @@ struct msm_adsp_event_data {
 	__u8 payload[0];
 };
 
+#if defined(CONFIG_CIRRUS_SPKR_PROTECTION)
 struct msm_pcm_drv_data {
 	const char *config_name;
 };
-
+#endif
 #endif

@@ -123,8 +123,40 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/include)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.secure_element@1.0-service.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.secure_element@1.0-service)
 
-# Move libnfc-nci.conf to /vendor
+# ThermalHAL 1.1
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.thermal@1.1-service.crosshatch.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.thermal@1.1-service.crosshatch)
+
+# Verified boot xml moved to /product
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.software.verified_boot.xml)
+
+# Move libnfc-nci.conf to /product
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/libnfc-nci.conf)
+
+# Remove default android.hardware.graphics.composer@2.3
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.graphics.composer@2.2-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.graphics.composer@2.2-service.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.graphics.composer@2.2-impl.so)
 
 # Remove /firmware which used to be a symlink to /vendor/firmware_mnt
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/firmware)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/webview)
+
+# Moved to /product
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/etc/sysconfig/qti_whitelist.xml)
+
+# Rename power HAL
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.power@1.3-service.crosshatch-libperfmgr.rc)
+
+# Remove generic atrace HAL
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.atrace@1.0-service.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.hardware.atrace@1.0-service.xml)
+
+# Combine light/memtrack/thermal/vibrator HALs into small_hals.crosshatch-service
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.vibrator@1.2-service.crosshatch.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibrator@1.2-service.crosshatch)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.memtrack@1.0-service.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.memtrack@1.0-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/hardware.google.light@1.0-service.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/hardware.google.light@1.0-service)

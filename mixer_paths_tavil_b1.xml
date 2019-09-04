@@ -1307,6 +1307,11 @@
         <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1"/>
     </path>
 
+    <path name="voicemmode1-call hearing-aid">
+        <ctl name="AFE_PCM_RX_Voice Mixer VoiceMMode1" value="1"/>
+        <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1"/>
+    </path>
+
     <path name="voicemmode1-call handset">
         <ctl name="VOC_EXT_EC MUX" value="QUAT_TDM_RX_0" />
         <ctl name="QUAT_TDM_RX_0_Voice Mixer VoiceMMode1" value="1"/>
@@ -2140,6 +2145,13 @@
         <ctl name="DEC5 Volume" value="100"/>
     </path>
 
+    <path name="hearing-aid-mic">
+        <path name="triple-mic"/>
+        <ctl name="DEC8 Volume" value="100"/>
+        <ctl name="DEC6 Volume" value="100"/>
+        <ctl name="DEC5 Volume" value="100"/>
+    </path>
+
     <!-- VR Dual-MIC 1st D:22 dB -->
     <path name="voice-rec-dmic-ef">
         <path name="handset-dmic-endfire"/>
@@ -2561,6 +2573,74 @@
 
     <path name="incall-music-uplink voice-tty-vco-usb">
         <path name="incall-music-uplink" />
+    </path>
+
+    <path name="incall-music-uplink2">
+        <ctl name="Incall_Music_2 Audio Mixer MultiMedia9" value="1" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 handset">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 handset-hac">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 display-port">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 bt-sco">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 bt-sco-wb">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker-and-display-port">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 afe-proxy">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 usb-headphones">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 usb-headset">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker-and-usb-headphones">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 headphones">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker-and-headphones">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 speaker-and-bt-sco">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 voice-tty-hco-handset">
+        <path name="incall-music-uplink2" />
+    </path>
+
+    <path name="incall-music-uplink2 voice-tty-vco-usb">
+        <path name="incall-music-uplink2" />
     </path>
 
     <path name ="voice-music-tx">
