@@ -554,6 +554,8 @@ V1_0::Status UsbGadget::setupFunctions(
   if ((functions & GadgetFunction::ADB) != 0) {
     ffsEnabled = true;
     ALOGI("setCurrentUsbFunctions Adb");
+    if (!WriteStringToFile("1", DESC_USE_PATH))
+      return Status::ERROR;
     if (inotify_add_watch(inotifyFd, "/dev/usb-ffs/adb/", IN_ALL_EVENTS) == -1)
       return Status::ERROR;
 
