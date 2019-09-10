@@ -277,8 +277,6 @@
         <transport>hwbinder</transport>
         <fqname>@1.2::ISap/slot1</fqname>
         <fqname>@1.3::IRadio/slot1</fqname>
-        <fqname>@1.3::IRadio/slot2</fqname>
-
     </hal>
     <hal format="hidl">
       <name>android.hardware.radio.config</name>
@@ -395,7 +393,6 @@
         <interface>
             <name>IImsRadio</name>
             <instance>imsradio0</instance>
-            <instance>imsradio1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -414,7 +411,6 @@
         <interface>
             <name>IQtiOemHook</name>
             <instance>oemhook0</instance>
-            <instance>oemhook1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -478,7 +474,6 @@
         <interface>
             <name>IQcRilAudio</name>
             <instance>slot1</instance>
-            <instance>slot2</instance>
         </interface>
     </hal>
     <hal format="hidl">
