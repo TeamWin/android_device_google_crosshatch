@@ -9,12 +9,10 @@ cc_binary {
     srcs: ["service.cpp"],
 
     shared_libs: [
-        "android.hardware.light@2.0",
         "android.hardware.memtrack@1.0",
         "android.hardware.vibrator@1.0",
         "android.hardware.vibrator@1.1",
         "android.hardware.vibrator@1.2",
-        "hardware.google.light@1.0",
         "libbase",
         "libhidlbase",
         "libhidltransport",
