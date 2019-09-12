@@ -18,7 +18,6 @@
 
 #include <android/hardware/memtrack/1.0/IMemtrack.h>
 #include <android/hardware/vibrator/1.2/IVibrator.h>
-#include <hardware/google/light/1.0/ILight.h>
 #include <hidl/LegacySupport.h>
 
 using android::OK;
@@ -27,11 +26,9 @@ using android::hardware::joinRpcThreadpool;
 using android::hardware::registerPassthroughServiceImplementation;
 using android::hardware::memtrack::V1_0::IMemtrack;
 using android::hardware::vibrator::V1_2::IVibrator;
-using hardware::google::light::V1_0::ILight;
 
 int main(int /*argc*/, char ** /*argv*/) {
     configureRpcThreadpool(1, true /* callerWillJoin */);
-    LOG_ALWAYS_FATAL_IF(OK != registerPassthroughServiceImplementation<ILight>());
     LOG_ALWAYS_FATAL_IF(OK != registerPassthroughServiceImplementation<IMemtrack>());
     LOG_ALWAYS_FATAL_IF(OK != registerPassthroughServiceImplementation<IVibrator>());
     joinRpcThreadpool();
