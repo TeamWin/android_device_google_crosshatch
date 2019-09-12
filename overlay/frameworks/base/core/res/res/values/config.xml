@@ -463,9 +463,6 @@
     <!-- True if the firmware supports Wi-Fi link probing -->
     <bool name="config_wifi_link_probing_supported">true</bool>
 
-    <!-- Enable Zram writeback feature to allow unused pages in zram be written to flash. -->
-    <bool name="config_zramWriteback">true</bool>
-
     <!-- Enable CBRS support -->
     <bool translatable="false" name="config_cbrs_supported">true</bool>
 </resources>
