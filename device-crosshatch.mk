@@ -34,3 +34,11 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     NoCutoutOverlay
+
+# Enable iorapd prefetching by default for crosshatch targets
+PRODUCT_PRODUCT_PROPERTIES += \
+    iorapd.readahead.enable=true
+
+# Disable Camera Pinning by default for crosshatch targets
+PRODUCT_PRODUCT_PROPERTIES += \
+    pinner.pin_camera=false
