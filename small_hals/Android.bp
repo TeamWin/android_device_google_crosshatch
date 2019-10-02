@@ -17,7 +17,6 @@ cc_binary {
         "hardware.google.light@1.0",
         "libbase",
         "libhidlbase",
-        "libhidltransport",
         "liblog",
         "libutils",
     ],

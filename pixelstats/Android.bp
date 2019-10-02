@@ -24,7 +24,6 @@ cc_binary {
     "libbinder",
     "libcutils",
     "libhidlbase",
-    "libhidltransport",
     "liblog",
     "libutils",
     "libpixelstats",
