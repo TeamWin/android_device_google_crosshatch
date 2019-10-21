@@ -41,7 +41,7 @@ on property:init.svc.vendor.charger=running
     # Ensure 100% reporting is sticky
     write /sys/class/power_supply/maxfg/offmode_charger 1
 
-service vendor.charger /charger
+service vendor.charger /system/bin/charger
     class charger
     seclabel u:r:charger:s0
     user system
