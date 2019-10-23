@@ -33,3 +33,7 @@ PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nxp.blueline.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
 
 PRODUCT_PRODUCT_PROPERTIES += ro.com.google.ime.height_ratio=1.2
+
+# Enable iorapd perfetto tracing for app starts
+PRODUCT_PRODUCT_PROPERTIES += \
+    iorapd.perfetto.enable=true
