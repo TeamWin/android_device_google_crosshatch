@@ -153,10 +153,8 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.po
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.atrace@1.0-service.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.hardware.atrace@1.0-service.xml)
 
-# Combine light/memtrack/thermal/vibrator HALs into small_hals.crosshatch-service
+# Combine memtrack/thermal/vibrator HALs into small_hals.crosshatch-service
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.vibrator@1.2-service.crosshatch.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibrator@1.2-service.crosshatch)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.memtrack@1.0-service.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.memtrack@1.0-service)
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/hardware.google.light@1.0-service.rc)
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/hardware.google.light@1.0-service)

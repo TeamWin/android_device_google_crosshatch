@@ -65,16 +65,23 @@
             <Limit name="measured-frame-rate-1920x1080" range="45-45" /> <!-- N=20 v90%=1.0 -->
         </MediaCodec>
         <MediaCodec name="c2.android.vp8.encoder" type="video/x-vnd.on2.vp8" update="true">
-            <Limit name="measured-frame-rate-320x180" range="579-580" /> <!-- N=24 v90%=1.0 -->
-            <Limit name="measured-frame-rate-640x360" range="184-184" /> <!-- N=24 v90%=1.0 -->
-            <Limit name="measured-frame-rate-1280x720" range="51-52" /> <!-- N=24 v90%=1.0 -->
-            <Limit name="measured-frame-rate-1920x1080" range="21-22" /> <!-- N=24 v90%=1.0 -->
+            <Limit name="measured-frame-rate-320x180" range="234-260" /> <!-- MANUALLY ADJUSTED -->
+            <Limit name="measured-frame-rate-640x360" range="80-117" /> <!-- MANUALLY ADJUSTED -->
+            <Limit name="measured-frame-rate-1280x720" range="23-25" /> <!-- MANUALLY ADJUSTED -->
+            <Limit name="measured-frame-rate-1920x1080" range="12-15" /> <!-- MANUALLY ADJUSTED -->
         </MediaCodec>
         <MediaCodec name="c2.qti.vp8.encoder" type="video/x-vnd.on2.vp8" update="true">
             <Limit name="measured-frame-rate-320x180" range="333-336" /> <!-- N=24 v90%=1.0 -->
             <Limit name="measured-frame-rate-640x360" range="187-187" /> <!-- N=24 v90%=1.0 -->
             <Limit name="measured-frame-rate-1280x720" range="51-51" /> <!-- N=24 v90%=1.0 -->
             <Limit name="measured-frame-rate-1920x1080" range="45-45" /> <!-- N=24 v90%=1.0 -->
+        </MediaCodec>
+        <MediaCodec name="c2.android.vp9.encoder" type="video/x-vnd.on2.vp9" update="true">
+            <Limit name="measured-frame-rate-320x180" range="140-195" /> <!-- MANUALLY ADJUSTED -->
+            <!-- measured 95%:54-67 med:61/61 N=36 -->
+            <Limit name="measured-frame-rate-640x360" range="61-61" /> <!-- v95%=1.1 -->
+            <!-- measured 95%:16-26 med:20/20 N=32 -->
+            <Limit name="measured-frame-rate-1280x720" range="20-20" /> <!-- v95%=1.3 -->
         </MediaCodec>
     </Encoders>
     <Decoders>
