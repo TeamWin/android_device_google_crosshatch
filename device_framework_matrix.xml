@@ -63,7 +63,7 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.google.wireless_charger</name>
-        <version>1.0</version>
+        <version>1.1</version>
         <interface>
             <name>IWirelessCharger</name>
             <instance>default</instance>
