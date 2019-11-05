@@ -1,6 +1,8 @@
   google_devices)
     TO_EXTRACT="\
             IMAGES/vendor.img \
+            RADIO/bootloader.img \
+            RADIO/radio.img \
             "
     ;;
   qcom)
