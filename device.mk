@@ -17,6 +17,7 @@
 PRODUCT_SOONG_NAMESPACES += \
     device/google/crosshatch \
     hardware/google/av \
+    hardware/google/camera \
     hardware/google/interfaces \
     hardware/google/pixel \
     hardware/qcom/sdm845 \
@@ -458,18 +459,15 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service_64 \
     camera.device@3.2-impl \
     camera.sdm845 \
-    libgooglecamerahal \
     libqomx_core \
     libmmjpeg_interface \
     libmmcamera_interface \
     libcameradepthcalibrator
 
 # Google Camera HAL test libraries in debug builds
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES_DEBUG += \
     libgoogle_camera_hal_proprietary_tests \
-    libgoogle_camera_hal_tests
-endif
+    libgoogle_camera_hal_tests.vendor
 
 PRODUCT_PACKAGES += \
     sensors.$(PRODUCT_HARDWARE) \
