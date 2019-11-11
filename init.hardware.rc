@@ -988,15 +988,13 @@ on boot && property:persist.radio.multisim.config=dsds && property:persist.vendo
     setprop persist.radio.multisim.config ""
     stop vendor.qcrild2
 
-# Write the dark theme magic (`theme-dark`, or 0x7468656d652d6461726b in hex string) to /misc
-# partition. Offset 0 in vendor space is effectively offset 2048 in /misc partition.
-service vendor.theme_set /vendor/bin/misc_writer --vendor-space-offset 0 --hex-string 0x7468656d652d6461726b
+# Write the dark theme magic to /misc partition.
+service vendor.theme_set /vendor/bin/misc_writer --set-dark-theme
     disabled
     oneshot
 
-# Clear the 10-byte dark theme magic in /misc partition. Offset 0 in vendor space is effectively
-# offset 2048 in /misc partition.
-service vendor.theme_clear /vendor/bin/misc_writer --vendor-space-offset 0 --hex-string 0x00000000000000000000
+# Clear the dark theme magic in /misc partition.
+service vendor.theme_clear /vendor/bin/misc_writer --clear-dark-theme
     disabled
     oneshot
 
