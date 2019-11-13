@@ -14,8 +14,6 @@
 
 BOARD_PREBUILT_VENDORIMAGE := vendor/google_devices/blueline/proprietary/vendor.img
 
-VENDOR_BLOBS_NOTICE := vendor/google_devices/blueline/NOTICE
-
 -include vendor/google/tools/android-info.mk
 ifdef USE_ANDROID_INFO
   TARGET_BOARD_INFO_FILE := vendor/google_devices/blueline/android-info.txt
