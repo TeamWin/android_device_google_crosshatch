@@ -764,14 +764,6 @@ service bugreport /system/bin/dumpstate -d -p -z
     oneshot
     keycodes 114 115 116
 
-service vendor.chre /vendor/bin/chre
-    class late_start
-    user system
-    group system wakelock
-    capabilities BLOCK_SUSPEND
-    socket chre seqpacket 0660 root system
-    shutdown critical
-
 service devstart_sh /vendor/bin/init.qcom.devstart.sh
     class main
     user root
