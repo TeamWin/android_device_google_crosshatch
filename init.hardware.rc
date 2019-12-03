@@ -914,3 +914,14 @@ on property:persist.sys.theme=1
 
 on property:persist.sys.theme=0
     start vendor.theme_clear
+
+on init && property:ro.boot.slot_successful=no
+    write /sys/module/msm_poweroff/parameters/warm_reset 1
+
+# Set or clear the warm reset flag upon the change of system property. The flag itself is set
+# by writing a sysfs file; and the file will be read by kernel.
+on property:ota.warm_reset=1
+    write /sys/module/msm_poweroff/parameters/warm_reset 1
+
+on property:ota.warm_reset=0
+    write /sys/module/msm_poweroff/parameters/warm_reset 0
