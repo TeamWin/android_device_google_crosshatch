@@ -304,9 +304,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rcs.supported=1 \
     vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so \
     ro.hardware.keystore_desede=true \
-    ro.zram.mark_idle_delay_mins=60 \
-    ro.zram.first_wb_delay_mins=180 \
-    ro.zram.periodic_wb_delay_hours=24 \
 
 # Disable snapshot timer
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -347,13 +344,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.health.storage@1.0-service
 
-# Light/Memtrack/Vibrator HALs
+# Light HAL
+PRODUCT_PACKAGES += \
+    lights.$(PRODUCT_PLATFORM) \
+    hardware.google.light@1.0-service
+
+# Memtrack/Vibrator HALs
 PRODUCT_PACKAGES += \
     memtrack.sdm845 \
     android.hardware.memtrack@1.0-impl \
     android.hardware.vibrator@1.2-impl.crosshatch \
-    lights.$(PRODUCT_PLATFORM) \
-    hardware.google.light@1.0-impl \
     small_hals.crosshatch-service
 
 # Bluetooth HAL
@@ -401,6 +401,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/permissions/sku_G013B/android.hardware.nfc.ese.xml \
     frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/permissions/sku_G013C/android.hardware.nfc.uicc.xml \
     frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/permissions/sku_G013D/android.hardware.nfc.ese.xml
+
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/nfc/com.google.hardware.pixel.japan.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_G013B/com.google.hardware.pixel.japan.xml \
+    device/google/crosshatch/nfc/com.google.hardware.pixel.japan.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_G013D/com.google.hardware.pixel.japan.xml
 
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf \
@@ -794,7 +798,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Increment the SVN for any official public releases
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.svn=17
+    ro.vendor.build.svn=22
 
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.adb.secure=1
@@ -815,13 +819,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/thermal_info_config_$(PRODUCT_HARDWARE).json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
     $(LOCAL_PATH)/thermal_info_config_$(PRODUCT_HARDWARE)_evt.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config_evt.json
-
-# Use /product/etc/fstab.postinstall to mount system_other
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.postinstall.fstab.prefix=/product
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab.postinstall:$(TARGET_COPY_OUT_PRODUCT)/etc/fstab.postinstall
 
 # powerstats HAL
 PRODUCT_PACKAGES += \
