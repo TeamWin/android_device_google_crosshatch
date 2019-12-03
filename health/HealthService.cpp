@@ -22,6 +22,7 @@
 #include <health2/service.h>
 #include <healthd/healthd.h>
 #include <hidl/HidlTransportSupport.h>
+#include <pixelhealth/BatteryDefender.h>
 #include <pixelhealth/BatteryMetricsLogger.h>
 #include <pixelhealth/BatteryThermalControl.h>
 #include <pixelhealth/CycleCountBackupRestore.h>
@@ -41,6 +42,7 @@ using android::hardware::health::V2_0::DiskStats;
 using android::hardware::health::V2_0::StorageAttribute;
 using android::hardware::health::V2_0::StorageInfo;
 using ::device::google::crosshatch::health::BatteryRechargingControl;
+using hardware::google::pixel::health::BatteryDefender;
 using hardware::google::pixel::health::BatteryMetricsLogger;
 using hardware::google::pixel::health::BatteryThermalControl;
 using hardware::google::pixel::health::CycleCountBackupRestore;
@@ -51,6 +53,7 @@ constexpr char kBatteryResistance[] = "/sys/class/power_supply/maxfg/resistance"
 constexpr char kBatteryOCV[] = "/sys/class/power_supply/maxfg/voltage_ocv";
 constexpr char kVoltageAvg[] = "/sys/class/power_supply/maxfg/voltage_avg";
 
+static BatteryDefender battDefender;
 static BatteryRechargingControl battRechargingControl;
 static BatteryThermalControl battThermalControl("sys/devices/virtual/thermal/tz-by-name/soc/mode");
 static BatteryMetricsLogger battMetricsLogger(kBatteryResistance, kBatteryOCV);
@@ -110,6 +113,8 @@ void healthd_board_init(struct healthd_config *config) {
     ccBackupRestoreMAX.Restore();
 
     config->batteryStatusPath = kChargerStatus.c_str();
+
+    battDefender.update();
 }
 
 int healthd_board_battery_update(struct android::BatteryProperties *props) {
@@ -120,6 +125,7 @@ int healthd_board_battery_update(struct android::BatteryProperties *props) {
     shutdownMetrics.logShutdownVoltage(props);
     ccBackupRestoreBMS.Backup(props->batteryLevel);
     ccBackupRestoreMAX.Backup(props->batteryLevel);
+    battDefender.update();
     if (!android::base::WriteStringToFile(std::to_string(props->batteryLevel),
                                           "/sys/class/power_supply/wireless/capacity"))
         LOG(INFO) << "Unable to write battery level to wireless capacity";
