@@ -48,7 +48,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.control_privapp_permissions=enforce
 
 # Enable on-access verification of priv apps. This requires fs-verity support in kernel.
-PRODUCT_PRODUCT_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.apk_verity.mode=1
 
 PRODUCT_PACKAGES += \
