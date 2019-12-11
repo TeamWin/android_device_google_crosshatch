@@ -569,6 +569,10 @@ on property:sys.boot_completed=1
     write /sys/block/dm-5/queue/read_ahead_kb 128
     write /sys/block/dm-6/queue/read_ahead_kb 128
 
+    # Block layer tuning: discard chunk size up to 128MB
+    # Otherwise, contiguous discards can be merged
+    write /sys/block/sda/queue/discard_max_bytes 134217728
+
     # QCOM FG SRAM dump for dumpstate
     chown system system /d/fg/sram/data
     chown system system /d/fg/sram/count
