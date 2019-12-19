@@ -2,6 +2,7 @@
 
 #<src>                                              <mnt_point>        <type>      <mnt_flags and options>                               <fs_mgr_flags>
 system                                              /system            ext4        ro,barrier=1                                          wait,slotselect,avb=vbmeta,logical,first_stage_mount
+system_ext                                          /system_ext        ext4        ro,barrier=1                                          wait,slotselect,avb,logical,first_stage_mount
 vendor                                              /vendor            ext4        ro,barrier=1                                          wait,slotselect,avb,logical,first_stage_mount
 product                                             /product           ext4        ro,barrier=1                                          wait,slotselect,avb,logical,first_stage_mount
 /dev/block/by-name/metadata                         /metadata          ext4        noatime,nosuid,nodev,discard,sync                     wait,formattable,first_stage_mount
