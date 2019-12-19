@@ -608,7 +608,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.sys.ssr.restart_level=modem,slpi,adsp
 
 # setup dalvik vm configs
-$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 PRODUCT_COPY_FILES += \
