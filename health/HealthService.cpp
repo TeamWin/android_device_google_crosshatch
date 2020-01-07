@@ -57,10 +57,11 @@ static BatteryMetricsLogger battMetricsLogger(kBatteryResistance, kBatteryOCV);
 static LowBatteryShutdownMetrics shutdownMetrics(kVoltageAvg);
 static CycleCountBackupRestore ccBackupRestoreBMS(
     8, "/sys/class/power_supply/bms/device/cycle_counts_bins",
-    "/persist/battery/qcom_cycle_counts_bins");
+    "/mnt/vendor/persist/battery/qcom_cycle_counts_bins");
 static CycleCountBackupRestore ccBackupRestoreMAX(
     10, "/sys/class/power_supply/maxfg/cycle_counts_bins",
-    "/persist/battery/max_cycle_counts_bins", "/sys/class/power_supply/maxfg/serial_number");
+    "/mnt/vendor/persist/battery/max_cycle_counts_bins",
+    "/sys/class/power_supply/maxfg/serial_number");
 static DeviceHealth deviceHealth;
 
 #define UFS_DIR "/sys/devices/platform/soc/1d84000.ufshc"
