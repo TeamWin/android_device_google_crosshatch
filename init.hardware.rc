@@ -833,9 +833,6 @@ on property:sys.vdso=64
 on property:sys.vdso=32
     write /sys/module/vdso/parameters/enable_64 0
 
-on property:ro.boot.mode=sota
-    setprop ro.boot.sota enabled
-
 on property:ro.boot.hardware.sku=G013A
     setprop persist.vendor.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013B
