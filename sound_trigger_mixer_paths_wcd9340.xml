@@ -100,9 +100,6 @@
     <ctl name="SLIM_3_TX Channels" value="One" />
     <ctl name="AIF2_CAP Mixer SLIM TX3" value="0" />
     <ctl name="AIF2_CAP Mixer SLIM TX4" value="0" />
-    <ctl name="CDC_IF TX2 MUX" value="ZERO" />
-    <ctl name="ADC MUX2" value="AMIC" />
-    <ctl name="DMIC MUX2" value="ZERO" />
     <ctl name="CDC_IF TX3 MUX" value="ZERO" />
     <ctl name="ADC MUX3" value="AMIC" />
     <ctl name="DMIC MUX3" value="ZERO" />
