@@ -37,3 +37,6 @@ PRODUCT_PRODUCT_PROPERTIES += ro.com.google.ime.height_ratio=1.2
 # Enable iorapd perfetto tracing for app starts
 PRODUCT_PRODUCT_PROPERTIES += \
     iorapd.perfetto.enable=true
+# Enable iorapd readahead for app starts
+PRODUCT_PRODUCT_PROPERTIES += \
+    iorapd.readahead.enable=true
