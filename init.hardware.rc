@@ -81,7 +81,7 @@ on init && property:vendor.skip.init=0
 
     # start Citadel keymaster (StrongBox) early
     start vendor.citadeld
-    start vendor.keymaster-4-0-citadel
+    start vendor.keymaster-4-1-citadel
 
     # Boot time fs tune
     write /sys/block/sda/queue/iostats 0
