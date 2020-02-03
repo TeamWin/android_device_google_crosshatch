@@ -1,0 +1,17 @@
+cc_test_host {
+    name: "system.teeui_localization_rendering_test.blueline",
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-O0",
+    ],
+    srcs: [
+        "test_main.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libteeui_localization_rendering_test",
+    ],
+}
+
