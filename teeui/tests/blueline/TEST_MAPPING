@@ -1,0 +1,35 @@
+{
+  "postsubmit": [
+    {
+      "name": "system.teeui_localization_rendering_test.blueline",
+      "host" : true,
+      "options": [
+          {
+            "native-test-flag": "--width=1080"
+          },
+          {
+            "native-test-flag": "--height=2160"
+          },
+          {
+            "native-test-flag": "--dp2px=2.62135"
+          },
+          {
+            "native-test-flag": "--mm2px=17.42075974"
+          },
+          {
+            "native-test-flag": "--powerButtonTop=20.26"
+          },
+          {
+            "native-test-flag": "--powerButtonBottom=30.26"
+          },
+          {
+            "native-test-flag": "--volUpButtonTop=40.26"
+          },
+          {
+            "native-test-flag": "--volUpButtonBottom=50.26"
+          }
+        ]
+    }
+  ]
+}
+
