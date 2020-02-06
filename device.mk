@@ -343,8 +343,10 @@ PRODUCT_PACKAGES += \
 
 # Light HAL
 PRODUCT_PACKAGES += \
-    lights.$(PRODUCT_PLATFORM) \
+    lights.qcom \
     hardware.google.light@1.0-service
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.lights=qcom
 
 # Memtrack/Vibrator HALs
 PRODUCT_PACKAGES += \
