@@ -182,9 +182,6 @@ endif # PRODUCT_USE_DYNAMIC_PARTITIONS
 
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# Generate an APEX image for experiment b/119800099.
-DEXPREOPT_GENERATE_APEX_IMAGE := true
-
 BOARD_ROOT_EXTRA_SYMLINKS := /vendor/dsp:/dsp
 BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
 
