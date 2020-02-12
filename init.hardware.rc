@@ -841,13 +841,13 @@ on property:ro.boot.hardware.sku=G013A
 on property:ro.boot.hardware.sku=G013B
     setprop persist.vendor.nfc.uicc_enabled false
     setprop persist.vendor.radio.uicc_se_enabled true
-    interface_start android.hardware.secure_element@1.1::ISecureElement/eSE1
+    start vendor.secure_element_hal_service_1_1
 on property:ro.boot.hardware.sku=G013C
     setprop persist.vendor.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013D
     setprop persist.vendor.nfc.uicc_enabled false
     setprop persist.vendor.radio.uicc_se_enabled true
-    interface_start android.hardware.secure_element@1.1::ISecureElement/eSE1
+    start vendor.secure_element_hal_service_1_1
 
 # charger driver exposes now finer grain control, map demo mode to those properties
 # demo mode can only be exit wipping data which will also reset the persist properties
