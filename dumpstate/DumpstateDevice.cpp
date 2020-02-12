@@ -416,12 +416,10 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
         dumpModem(fd, fdModem);
     }
 
-    // Citadel info (only enabled on -eng and -userdebug builds)
-    if (!PropertiesHelper::IsUserBuild()) {
-        RunCommandToFd(fd, "Citadel ID", {"/vendor/bin/hw/citadel_updater", "--id"});
-        RunCommandToFd(fd, "Citadel VER", {"/vendor/bin/hw/citadel_updater", "-lv"});
-        RunCommandToFd(fd, "Citadel SELFTEST", {"/vendor/bin/hw/citadel_updater", "--selftest"});
-    }
+    // Citadel info
+    RunCommandToFd(fd, "Citadel VERSION", {"/vendor/bin/hw/citadel_updater", "-lv"});
+    RunCommandToFd(fd, "Citadel STATS", {"/vendor/bin/hw/citadel_updater", "--stats"});
+    RunCommandToFd(fd, "Citadel BOARDID", {"/vendor/bin/hw/citadel_updater", "--board_id"});
 
     DumpVibrator(fd);
 
