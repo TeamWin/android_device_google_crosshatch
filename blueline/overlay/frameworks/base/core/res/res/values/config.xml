@@ -134,23 +134,26 @@
          backlight values -->
     <bool name="config_displayBrightnessBucketsInDoze">true</bool>
 
-    <!-- Default screen brightness setting.
-         Must be in the range specified by minimum and maximum. -->
-    <integer name="config_screenBrightnessSettingDefault">98</integer>
-
     <!-- Default screen brightness for VR setting. Default value: 0x1A0 for EVT2. -->
     <!-- 8 bit brightness level of 111 corresponds to the 10 bit brightness level of 0x1A0 on EVT2. -->
     <integer name="config_screenBrightnessForVrSettingDefault">111</integer>
     <integer name="config_screenBrightnessForVrSettingMinimum">111</integer>
     <integer name="config_screenBrightnessForVrSettingMaximum">111</integer>
 
-    <!-- Minimum screen brightness setting allowed by the power manager.
-         The user is forbidden from setting the brightness below this level. -->
-    <integer name="config_screenBrightnessSettingMinimum">1</integer>
+    <!-- Minimum screen brightness setting allowed by power manager.
+         The user is forbidden from setting the brightness below this level.
+         Equivalent to 1/255. -->
+    <item name="config_screenBrightnessSettingMinimumFloat" format="float" type="dimen">0.0</item>
 
-    <!-- Maximum screen brightness setting allowed by the power manager.
-         The user is forbidden from setting the brightness above this level. -->
-    <integer name="config_screenBrightnessSettingMaximum">255</integer>
+    <!-- Maximum screen brightness allowed by the power manager.
+    The user is forbidden from setting the brightness above this level. -->
+    <item name="config_screenBrightnessSettingMaximumFloat" format="float" type="dimen">1.0</item>
+
+    <!-- Default screen brightness setting.
+         Must be in the range specified by minimum and maximum.
+         Equivalent to 98/255 (default for this device)    -->
+    <item name="config_screenBrightnessSettingDefaultFloat" format="float" type="dimen">0.38188976378</item>
+
 
     <!-- An array describing the screen's backlight values corresponding to the brightness
          values in the config_screenBrightnessNits array.

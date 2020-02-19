@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "android.hardware.dumpstate@1.0-service.crosshatch"
+#define LOG_TAG "android.hardware.dumpstate@1.1-service.crosshatch"
 
 #include <hidl/HidlSupport.h>
 #include <hidl/HidlTransportSupport.h>
@@ -21,8 +21,8 @@
 #include "DumpstateDevice.h"
 
 using ::android::hardware::configureRpcThreadpool;
-using ::android::hardware::dumpstate::V1_0::IDumpstateDevice;
-using ::android::hardware::dumpstate::V1_0::implementation::DumpstateDevice;
+using ::android::hardware::dumpstate::V1_1::IDumpstateDevice;
+using ::android::hardware::dumpstate::V1_1::implementation::DumpstateDevice;
 using ::android::hardware::joinRpcThreadpool;
 using ::android::sp;
 

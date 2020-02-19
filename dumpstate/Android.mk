@@ -16,8 +16,8 @@
 
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
-LOCAL_MODULE := android.hardware.dumpstate@1.0-service.crosshatch
-LOCAL_INIT_RC := android.hardware.dumpstate@1.0-service.crosshatch.rc
+LOCAL_MODULE := android.hardware.dumpstate@1.1-service.crosshatch
+LOCAL_INIT_RC := android.hardware.dumpstate@1.1-service.crosshatch.rc
 LOCAL_MODULE_RELATIVE_PATH := hw
 
 LOCAL_SRC_FILES := \
@@ -26,6 +26,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_SHARED_LIBRARIES := \
     android.hardware.dumpstate@1.0 \
+    android.hardware.dumpstate@1.1 \
     libbase \
     libcutils \
     libdumpstateutil \
