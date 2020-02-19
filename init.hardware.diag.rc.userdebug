@@ -109,3 +109,6 @@ on property:vendor.usb.config=*
 
 on property:persist.vendor.usb.usbradio.config=*
    start usbd
+
+on property:persist.vendor.verbose_logging_enabled=*
+   setprop persist.vendor.sys.modem.diag.mdlog ${persist.vendor.verbose_logging_enabled}
