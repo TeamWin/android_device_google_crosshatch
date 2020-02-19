@@ -33,7 +33,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_platform_info_tavil_c1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil_c1.xml
 
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/nfc/libnfc-nxp.crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
+    device/google/crosshatch/nfc/libnfc-nxp.crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
+    device/google/crosshatch/nfc/libnfc-nxp.crosshatch.uicc.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp-G013C.conf \
+    device/google/crosshatch/nfc/libnfc-nxp.crosshatch.ese.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp-G013D.conf
 
 PRODUCT_PACKAGES += \
     NoCutoutOverlay

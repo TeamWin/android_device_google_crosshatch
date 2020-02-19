@@ -833,17 +833,12 @@ on property:sys.vdso=64
 on property:sys.vdso=32
     write /sys/module/vdso/parameters/enable_64 0
 
-on property:ro.boot.hardware.sku=G013A
-    setprop persist.vendor.nfc.uicc_enabled true
+on property:ro.boot.mode=sota
+    setprop ro.boot.sota enabled
+
 on property:ro.boot.hardware.sku=G013B
-    setprop persist.vendor.nfc.uicc_enabled false
-    setprop persist.vendor.radio.uicc_se_enabled true
     start vendor.secure_element_hal_service_1_1
-on property:ro.boot.hardware.sku=G013C
-    setprop persist.vendor.nfc.uicc_enabled true
 on property:ro.boot.hardware.sku=G013D
-    setprop persist.vendor.nfc.uicc_enabled false
-    setprop persist.vendor.radio.uicc_se_enabled true
     start vendor.secure_element_hal_service_1_1
 
 # charger driver exposes now finer grain control, map demo mode to those properties
