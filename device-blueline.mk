@@ -33,7 +33,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_platform_info_tavil_b1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_tavil_b1.xml
 
 PRODUCT_COPY_FILES += \
-    device/google/crosshatch/nfc/libnfc-nxp.blueline.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
+    device/google/crosshatch/nfc/libnfc-nxp.blueline.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
+    device/google/crosshatch/nfc/libnfc-nxp.blueline.uicc.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp-G013A.conf \
+    device/google/crosshatch/nfc/libnfc-nxp.blueline.ese.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp-G013B.conf
 
 PRODUCT_PRODUCT_PROPERTIES += ro.com.google.ime.height_ratio=1.2
 

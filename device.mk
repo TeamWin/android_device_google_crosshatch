@@ -498,8 +498,7 @@ PRODUCT_PACKAGES += \
 
 # Context hub HAL
 PRODUCT_PACKAGES += \
-    android.hardware.contexthub@1.0-impl.generic \
-    android.hardware.contexthub@1.0-service
+    android.hardware.contexthub@1.1-service.generic
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
@@ -796,10 +795,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable modem logging for debug
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.sys.modem.diag.mdlog=true \
-    persist.vendor.sys.modem.diag.mdlog_br_num=5
+    persist.vendor.sys.modem.diag.mdlog=true
 else
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.sys.modem.diag.mdlog=false
 endif
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.sys.modem.diag.mdlog_br_num=5
 
 # Enable tcpdump_logger on userdebug and eng
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
@@ -896,3 +898,12 @@ CALENDAR_TRACE := com.android.calendar.compiled_trace.pb
 PRODUCT_COPY_FILES += system/iorap/traces/$(CALENDAR_TRACE):product/iorap-trace/$(CALENDAR_TRACE)
 CLOCK_TRACE := com.android.deskclock.compiled_trace.pb
 PRODUCT_COPY_FILES += system/iorap/traces/$(CLOCK_TRACE):product/iorap-trace/$(CLOCK_TRACE)
+
+# Vendor verbose logging default property
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.verbose_logging_enabled=true
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.verbose_logging_enabled=false
+endif
