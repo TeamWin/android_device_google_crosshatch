@@ -175,6 +175,7 @@
     <ctl name="MultiMedia8 Mixer USB_AUDIO_TX" value="0"/>
     <ctl name="MultiMedia10 Mixer USB_AUDIO_TX" value="0"/>
     <ctl name="MultiMedia6 Mixer SLIM_0_TX" value="0"/>
+    <ctl name="MultiMedia2 Mixer SLIM_0_TX" value="0"/>
     <ctl name="SLIM_2_RX Format" value="UNPACKED"/>
     <ctl name="SLIM_2_RX SampleRate" value="KHZ_48"/>
     <ctl name="SLIM_5_RX SampleRate" value="KHZ_44P1"/>
@@ -1039,6 +1040,10 @@
 
     <path name="audio-record usb-headset-mic">
         <ctl name="MultiMedia1 Mixer USB_AUDIO_TX" value="1"/>
+    </path>
+
+    <path name="hifi-record">
+        <ctl name="MultiMedia2 Mixer SLIM_0_TX" value="1"/>
     </path>
 
     <path name="hifi-record usb-headset-mic">
