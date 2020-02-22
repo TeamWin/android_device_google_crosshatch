@@ -1,5 +1,4 @@
 /*
- *
  * Copyright 2020, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +14,11 @@
  * limitations under the License.
  */
 
-#include "teeui_locale_test.h"
+#include <gtest/gtest.h>
+#include <teeui/test/teeui_render_test.h>
 
 int main(int argc, char **argv) {
-    return ::teeui::test::runAllTests(argc, argv);
+    ::testing::InitGoogleTest(&argc, argv);
+    teeui::test::initRenderTest(argc, argv);
+    return RUN_ALL_TESTS();
 }
