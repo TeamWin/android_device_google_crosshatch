@@ -49,10 +49,6 @@ struct DumpstateDevice : public IDumpstateDevice {
                                              const uint64_t timeoutMillis) override;
   Return<void> setVerboseLoggingEnabled(const bool enable) override;
   Return<bool> getVerboseLoggingEnabled() override;
-
-  void dumpLogs(int fd, std::string srcDir, std::string destDir, int maxFileNum,
-                const char *logPrefix);
-  void dumpModem(int fd, int fdModem);
 };
 
 }  // namespace implementation
