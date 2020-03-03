@@ -36,7 +36,7 @@ service diag_mdlog_stop /vendor/bin/diag_mdlog -k
     disabled
     oneshot
 
-on boot && property:persist.vendor.sys.modem.diag.mdlog=*
+on property:persist.vendor.sys.modem.diag.mdlog=*
     rm /data/vendor/radio/diag_logs/diag_mdlog_pid
     setprop vendor.sys.modem.diag.mdlog ${persist.vendor.sys.modem.diag.mdlog}
 
