@@ -45,7 +45,7 @@ on boot && property:persist.vendor.sys.modem.diag.mdlog=*
     rm /data/vendor/radio/diag_logs/diag_mdlog_pid
     setprop vendor.sys.modem.diag.mdlog ${persist.vendor.sys.modem.diag.mdlog}
 
-on property:vendor.sys.modem.diag.mdlog=true
+on property:vendor.sys.modem.diag.mdlog=true && property:persist.vendor.verbose_logging_enabled=true
     start diag_mdlog_start
 
 on property:vendor.sys.modem.diag.mdlog=false
@@ -109,6 +109,3 @@ on property:vendor.usb.config=*
 
 on property:persist.vendor.usb.usbradio.config=*
    start usbd
-
-on property:persist.vendor.verbose_logging_enabled=*
-   setprop persist.vendor.sys.modem.diag.mdlog ${persist.vendor.verbose_logging_enabled}
