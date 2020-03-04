@@ -22,12 +22,7 @@ PRODUCT_PACKAGES := \
 PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/cneapiclient.xml:system/etc/permissions/cneapiclient.xml:qcom \
     vendor/qcom/blueline/proprietary/com.qualcomm.qti.imscmservice.xml:system/etc/permissions/com.qualcomm.qti.imscmservice.xml:qcom \
-    vendor/qcom/blueline/proprietary/com.qualcomm.qti.uceservice-V2.0-java.jar:system/framework/com.qualcomm.qti.uceservice-V2.0-java.jar:qcom \
     vendor/qcom/blueline/proprietary/com.quicinc.cne.xml:system/etc/permissions/com.quicinc.cne.xml:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libadsprpc_system.so:system/lib64/libadsprpc_system.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libcdsprpc_system.so:system/lib64/libcdsprpc_system.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libDiagService.so:system/lib64/libDiagService.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libdiag_system.so:system/lib64/libdiag_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libGPQTEEC_system.so:system/lib64/libGPQTEEC_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libGPTEE_system.so:system/lib64/libGPTEE_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libimscamera_jni.so:system/lib64/libimscamera_jni.so:qcom \
@@ -36,18 +31,12 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/lib64/lib-imsvtextutils.so:system/lib64/lib-imsvtextutils.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/lib-imsvt.so:system/lib64/lib-imsvt.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/lib-imsvtutils.so:system/lib64/lib-imsvtutils.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libmdsprpc_system.so:system/lib64/libmdsprpc_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libQTEEConnector_system.so:system/lib64/libQTEEConnector_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/librcc.so:system/lib64/librcc.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libsdm-disp-apis.so:system/lib64/libsdm-disp-apis.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libsdsprpc_system.so:system/lib64/libsdsprpc_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libsecureui_svcsock_system.so:system/lib64/libsecureui_svcsock_system.so:qcom \
-    vendor/qcom/blueline/proprietary/lib64/libOpenCL_system.so:system/lib64/libOpenCL_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libsmcinvokecred.so:system/lib64/libsmcinvokecred.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libtzcom.so:system/lib64/libtzcom.so:qcom \
-    vendor/qcom/blueline/proprietary/libadsprpc_system.so:system/lib/libadsprpc_system.so:qcom \
-    vendor/qcom/blueline/proprietary/libcdsprpc_system.so:system/lib/libcdsprpc_system.so:qcom \
-    vendor/qcom/blueline/proprietary/libdiag_system.so:system/lib/libdiag_system.so:qcom \
     vendor/qcom/blueline/proprietary/libGPQTEEC_system.so:system/lib/libGPQTEEC_system.so:qcom \
     vendor/qcom/blueline/proprietary/libGPTEE_system.so:system/lib/libGPTEE_system.so:qcom \
     vendor/qcom/blueline/proprietary/libimscamera_jni.so:system/lib/libimscamera_jni.so:qcom \
@@ -56,14 +45,11 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/lib-imsvtextutils.so:system/lib/lib-imsvtextutils.so:qcom \
     vendor/qcom/blueline/proprietary/lib-imsvt.so:system/lib/lib-imsvt.so:qcom \
     vendor/qcom/blueline/proprietary/lib-imsvtutils.so:system/lib/lib-imsvtutils.so:qcom \
-    vendor/qcom/blueline/proprietary/libmdsprpc_system.so:system/lib/libmdsprpc_system.so:qcom \
     vendor/qcom/blueline/proprietary/libQTEEConnector_system.so:system/lib/libQTEEConnector_system.so:qcom \
     vendor/qcom/blueline/proprietary/librcc.so:system/lib/librcc.so:qcom \
     vendor/qcom/blueline/proprietary/libsdm-disp-apis.so:system/lib/libsdm-disp-apis.so:qcom \
-    vendor/qcom/blueline/proprietary/libsdsprpc_system.so:system/lib/libsdsprpc_system.so:qcom \
     vendor/qcom/blueline/proprietary/libsecureui_svcsock_system.so:system/lib/libsecureui_svcsock_system.so:qcom \
     vendor/qcom/blueline/proprietary/libsns_low_lat_stream_skel.so:system/lib/rfsa/adsp/libsns_low_lat_stream_skel.so:qcom \
-    vendor/qcom/blueline/proprietary/libOpenCL_system.so:system/lib/libOpenCL_system.so:qcom \
     vendor/qcom/blueline/proprietary/libsmcinvokecred.so:system/lib/libsmcinvokecred.so:qcom \
     vendor/qcom/blueline/proprietary/libtzcom.so:system/lib/libtzcom.so:qcom \
     vendor/qcom/blueline/proprietary/LteDirectDiscoveryLibrary.jar:system/framework/LteDirectDiscoveryLibrary.jar:qcom \
@@ -81,7 +67,4 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/uimremoteserverlibrary.jar:system/framework/uimremoteserverlibrary.jar:qcom \
     vendor/qcom/blueline/proprietary/uimremoteserver.xml:system/etc/permissions/uimremoteserver.xml:qcom \
     vendor/qcom/blueline/proprietary/UimService.xml:system/etc/permissions/UimService.xml:qcom \
-    vendor/qcom/blueline/proprietary/vendor.qti.hardware.alarm-V1.0-java.jar:system/framework/vendor.qti.hardware.alarm-V1.0-java.jar:qcom \
-    vendor/qcom/blueline/proprietary/vendor.qti.hardware.data.latency-V1.0-java.jar:system/framework/vendor.qti.hardware.data.latency-V1.0-java.jar:qcom \
-    vendor/qcom/blueline/proprietary/vendor.qti.hardware.soter-V1.0-java.jar:system/framework/vendor.qti.hardware.soter-V1.0-java.jar:qcom \
 
