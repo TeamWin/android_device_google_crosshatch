@@ -889,13 +889,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.has_HDR_display=true
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.use_color_management=true
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.protected_contents=true
 
-# Add iorap trace file for clock and calendar. This is for temporary test purpose and should be
-# removed after the test is done (b/139831359).
-CALENDAR_TRACE := com.android.calendar.compiled_trace.pb
-PRODUCT_COPY_FILES += system/iorap/traces/$(CALENDAR_TRACE):product/iorap-trace/$(CALENDAR_TRACE)
-CLOCK_TRACE := com.android.deskclock.compiled_trace.pb
-PRODUCT_COPY_FILES += system/iorap/traces/$(CLOCK_TRACE):product/iorap-trace/$(CLOCK_TRACE)
-
 # Vendor verbose logging default property
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
