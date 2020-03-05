@@ -22,6 +22,7 @@
 #include <android-base/unique_fd.h>
 #include <cutils/properties.h>
 #include <hidl/HidlBinderSupport.h>
+#include <hidl/HidlSupport.h>
 
 #include <log/log.h>
 #include <pthread.h>
@@ -384,13 +385,20 @@ Return<DumpstateStatus> DumpstateDevice::dumpstateBoard_1_1(const hidl_handle& h
         return DumpstateStatus::ILLEGAL_ARGUMENT;
     }
 
-    if (mode == DumpstateMode::WEAR) {
+    bool isModeValid = false;
+    for (const auto dumpstateMode : hidl_enum_range<DumpstateMode>()) {
+        if (mode == dumpstateMode) {
+            isModeValid = true;
+            break;
+        }
+    }
+    if (!isModeValid) {
+        ALOGE("Invalid mode: %d\n", mode);
+        return DumpstateStatus::ILLEGAL_ARGUMENT;
+    } else if (mode == DumpstateMode::WEAR) {
         // We aren't a Wear device.
         ALOGE("Unsupported mode: %d\n", mode);
         return DumpstateStatus::UNSUPPORTED_MODE;
-    } else if (mode < DumpstateMode::FULL || mode > DumpstateMode::DEFAULT) {
-        ALOGE("Invalid mode: %d\n", mode);
-        return DumpstateStatus::ILLEGAL_ARGUMENT;
     }
 
     RunCommandToFd(fd, "Notify modem", {"/vendor/bin/modem_svc", "-s"}, CommandOptions::WithTimeout(1).Build());
