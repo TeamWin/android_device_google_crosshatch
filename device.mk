@@ -862,7 +862,8 @@ PRODUCT_PACKAGES += \
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
-    thermal_logd
+    thermal_logd \
+    mm_logd
 endif
 
 PRODUCT_COPY_FILES += \
