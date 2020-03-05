@@ -513,7 +513,7 @@ PRODUCT_PACKAGES += \
 
 # Wireless Charger HAL
 PRODUCT_PACKAGES += \
-    vendor.google.wireless_charger@1.1
+    vendor.google.wireless_charger@1.2
 
 ENABLE_VENDOR_RIL_SERVICE := true
 
