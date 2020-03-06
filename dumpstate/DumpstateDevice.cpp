@@ -450,6 +450,7 @@ Return<DumpstateStatus> DumpstateDevice::dumpstateBoard_1_1(const hidl_handle& h
     DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
     DumpFileToFd(fd, "PD Engine", "/d/logbuffer/usbpd");
     DumpFileToFd(fd, "smb-lib", "/d/logbuffer/smblib");
+    DumpFileToFd(fd, "WLC logs", "/d/logbuffer/wireless");
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
     DumpFileToFd(fd, "ipc-servers", "/d/msm_ipc_router/dump_servers");
     RunCommandToFd(fd, "ipc-logs",
