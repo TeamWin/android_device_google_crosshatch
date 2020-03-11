@@ -713,7 +713,7 @@ PRODUCT_COPY_FILES += \
 
 # ConfirmationUI HAL
 PRODUCT_PACKAGES += \
-    android.hardware.confirmationui@1.0-service-crosshatch
+    android.hardware.confirmationui@1.0-service-google
 
 # Fingerprint
 PRODUCT_PACKAGES += \
