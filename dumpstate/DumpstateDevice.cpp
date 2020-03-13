@@ -300,7 +300,10 @@ static void DumpSensorLog(int fd) {
 
 static void DumpF2FS(int fd) {
     DumpFileToFd(fd, "F2FS", "/sys/kernel/debug/f2fs/status");
-    DumpFileToFd(fd, "F2FS - fragmentation", "/proc/fs/f2fs/dm-6/segment_info");
+    RunCommandToFd(fd, "F2FS - fragmentation", {"/vendor/bin/sh", "-c",
+                       "for d in $(ls /proc/fs/f2fs/); do "
+                       "echo $d: /dev/block/mapper/`ls -l /dev/block/mapper | grep $d | awk '{print $8,$9,$10}'`; "
+                       "cat /proc/fs/f2fs/$d/segment_info; done"});
 }
 
 static void DumpUFS(int fd) {
