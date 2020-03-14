@@ -44,3 +44,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Disable Camera Pinning by default for crosshatch targets
 PRODUCT_PRODUCT_PROPERTIES += \
     pinner.pin_camera=false
+
+# Hint expensive blurs for device with larger display
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.sf.blurs_are_expensive=1
