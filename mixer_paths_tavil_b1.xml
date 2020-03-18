@@ -2436,7 +2436,11 @@
     </path>
 
     <path name="mmap-playback">
-        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia16" value="1"/>
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia16" value="1"/>
+    </path>
+
+    <path name="mmap-playback handset">
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia16" value="1"/>
     </path>
 
     <path name="mmap-playback speaker">
