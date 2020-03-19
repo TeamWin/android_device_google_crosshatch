@@ -12,7 +12,6 @@
             system/etc/permissions/cneapiclient.xml \
             system/etc/permissions/com.qualcomm.qti.imscmservice.xml \
             system/etc/permissions/com.quicinc.cne.xml \
-            system/etc/permissions/embms.xml \
             system/etc/permissions/LteDirectDiscovery.xml \
             system/etc/permissions/qcrilhook.xml \
             system/etc/permissions/radioconfiginterface.xml \
@@ -22,7 +21,6 @@
             system/etc/permissions/uimremoteserver.xml \
             system/etc/permissions/UimService.xml \
             system/framework/com.qualcomm.qti.uceservice-V2.0-java.jar \
-            system/framework/embmslibrary.jar \
             system/framework/LteDirectDiscoveryLibrary.jar \
             system/framework/qcrilhook.jar \
             system/framework/QtiTelephonyServicelibrary.jar \
