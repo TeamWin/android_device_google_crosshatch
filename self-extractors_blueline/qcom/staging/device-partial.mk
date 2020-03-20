@@ -24,8 +24,6 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/blueline/proprietary/com.qualcomm.qti.imscmservice.xml:system/etc/permissions/com.qualcomm.qti.imscmservice.xml:qcom \
     vendor/qcom/blueline/proprietary/com.qualcomm.qti.uceservice-V2.0-java.jar:system/framework/com.qualcomm.qti.uceservice-V2.0-java.jar:qcom \
     vendor/qcom/blueline/proprietary/com.quicinc.cne.xml:system/etc/permissions/com.quicinc.cne.xml:qcom \
-    vendor/qcom/blueline/proprietary/embmslibrary.jar:system/framework/embmslibrary.jar:qcom \
-    vendor/qcom/blueline/proprietary/embms.xml:system/etc/permissions/embms.xml:qcom \
     vendor/qcom/blueline/proprietary/lib64/libadsprpc_system.so:system/lib64/libadsprpc_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libcdsprpc_system.so:system/lib64/libcdsprpc_system.so:qcom \
     vendor/qcom/blueline/proprietary/lib64/libDiagService.so:system/lib64/libDiagService.so:qcom \
