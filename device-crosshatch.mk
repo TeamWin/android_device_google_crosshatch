@@ -48,3 +48,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Hint expensive blurs for device with larger display
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.sf.blurs_are_expensive=1
+
+#Put blur under dev-option until b/152059289 is resolved
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.sf.disable_blurs=1
