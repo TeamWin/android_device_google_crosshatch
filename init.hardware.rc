@@ -616,11 +616,6 @@ service vendor.qseecomd /vendor/bin/qseecomd
    user root
    group root
 
-service time_daemon /vendor/bin/time_daemon
-   class core
-   user root
-   group root
-
 service ss_ramdump /vendor/bin/subsystem_ramdump
     class main
     user root
