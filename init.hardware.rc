@@ -209,6 +209,7 @@ on late-fs
     start devstart_sh
 
     # Start services for bootanim
+    start vendor.power-hal-1-3
     start surfaceflinger
     start bootanim
     start vendor.hwcomposer-2-3
