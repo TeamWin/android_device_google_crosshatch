@@ -852,13 +852,8 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl.pixel \
     fastbootd
 
-# Thermal HAL
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-service.pixel \
-
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
-    thermal_logd \
     mm_logd
 endif
 
@@ -897,3 +892,4 @@ endif
 
 include hardware/google/pixel/pixelstats/device.mk
 include hardware/google/pixel/mm/device_legacy.mk
+include hardware/google/pixel/thermal/device.mk
