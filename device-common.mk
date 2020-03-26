@@ -141,9 +141,10 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_product=ext4 \
     POSTINSTALL_OPTIONAL_product=false \
 
-# Enable blurs
+# Enable blurs, hidden under dev option
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.surface_flinger.supports_background_blur=1 \
+    persist.sys.sf.disable_blurs=1
 
 # Set thermal warm reset
 PRODUCT_PRODUCT_PROPERTIES += \

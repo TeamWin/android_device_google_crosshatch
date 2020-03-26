@@ -19,7 +19,7 @@ cc_binary {
     srcs: [ "wait_for_strongbox.cpp" ],
     cflags: [ "-Werror", "-Wall" ],
     shared_libs: [
-        "android.hardware.keymaster@4.0",
+        "android.hardware.keymaster@4.1",
         "libbase",
         "libkeymaster4_1support",
         "libutils",
