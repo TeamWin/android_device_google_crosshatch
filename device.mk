@@ -896,3 +896,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 endif
 
 include hardware/google/pixel/pixelstats/device.mk
+include hardware/google/pixel/mm/device_legacy.mk
