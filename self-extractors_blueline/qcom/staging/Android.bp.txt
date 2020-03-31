@@ -46,6 +46,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
+    owner: "qcom",
     strip: {
         none: true,
     },
@@ -88,6 +89,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
+    owner: "qcom",
     strip: {
         none: true,
     },
@@ -134,6 +136,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
+    owner: "qcom",
     strip: {
         none: true,
     },
@@ -177,6 +180,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
+    owner: "qcom",
     strip: {
         none: true,
     },
@@ -230,6 +234,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
+    owner: "qcom",
     strip: {
         none: true,
     },
@@ -267,6 +272,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
+    owner: "qcom",
     strip: {
         none: true,
     },
@@ -304,6 +310,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
+    owner: "qcom",
     strip: {
         none: true,
     },
@@ -345,6 +352,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
+    owner: "qcom",
     strip: {
         none: true,
     },
@@ -388,6 +396,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
+    owner: "qcom",
     strip: {
         none: true,
     },
