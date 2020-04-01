@@ -598,17 +598,6 @@ on property:sys.boot_completed=1
 
     start per_proxy
 
-    # Create pixel-trace.
-    # At this moment, only mm_event is available. If others want to put more,
-    # it should get hard review from pixel-perf-team.
-    mkdir /sys/kernel/debug/tracing/instances/pixel-trace 0755 system system
-    chown system system /sys/kernel/debug/tracing/instances/pixel-trace/trace
-    chmod 0660 /sys/kernel/debug/tracing/instances/pixel-trace/trace
-    chown system system /sys/kernel/debug/tracing/instances/pixel-trace/tracing_on
-    chmod 0660 /sys/kernel/debug/tracing/instances/pixel-trace/tracing_on
-    write /sys/kernel/debug/tracing/instances/pixel-trace/buffer_size_kb 64
-    write /sys/kernel/debug/tracing/instances/pixel-trace/events/mm_event/enable 1
-
 on property:sys.shutdown.requested=*
     stop per_proxy
 
@@ -730,19 +719,6 @@ service loc_launcher /vendor/bin/loc_launcher
 
 service pd_mapper /vendor/bin/pd-mapper
      class core
-
-# turns off tracing right before bugreporting to keep more traces
-on property:init.svc.dumpstatez=running
-    write /d/tracing/instances/pixel-trace/tracing_on 0
-
-on property:init.svc.dumpstatez=stopped
-    write /d/tracing/instances/pixel-trace/tracing_on 1
-
-on property:init.svc.bugreport=running
-    write /d/tracing/instances/pixel-trace/tracing_on 0
-
-on property:init.svc.bugreport=stopped
-    write /d/tracing/instances/pixel-trace/tracing_on 1
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -z
