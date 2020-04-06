@@ -166,7 +166,6 @@ on init && property:vendor.skip.init=0
     # Property used by pointing to thermal-engine config file
     setprop vendor.thermal.vr_mode -novr
     setprop vendor.thermal.hw_mode -prod
-    setprop vendor.thermal.config "thermal_info_config.json"
 
 on late-init
     write /sys/devices/virtual/thermal/tz-by-name/fps-therm-adc/mode enabled
