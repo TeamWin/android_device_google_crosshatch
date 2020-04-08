@@ -713,6 +713,7 @@ PRODUCT_COPY_FILES += \
 # ConfirmationUI HAL
 PRODUCT_PACKAGES += \
     android.hardware.confirmationui@1.0-service-google
+BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/confirmationui_hal
 
 # Fingerprint
 PRODUCT_PACKAGES += \
