@@ -45,6 +45,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     pinner.pin_camera=false
 
-# Hint expensive blurs for device with larger display
+# Hide blur under dev setting
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.sf.blurs_are_expensive=1
+    persist.sys.sf.disable_blurs=1
