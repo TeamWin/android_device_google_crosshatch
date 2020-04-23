@@ -44,7 +44,3 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Disable Camera Pinning by default for crosshatch targets
 PRODUCT_PRODUCT_PROPERTIES += \
     pinner.pin_camera=false
-
-# Hide blur under dev setting
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.sys.sf.disable_blurs=1
