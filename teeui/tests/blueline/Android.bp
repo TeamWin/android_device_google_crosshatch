@@ -9,7 +9,7 @@ cc_test_host {
     srcs: [
         "test_main.cpp",
     ],
-    test_suites: ["general-tests"],
+    test_suites: ["device-tests"],
     shared_libs: [
         "libbase",
         "libteeui_localization_rendering_test",
