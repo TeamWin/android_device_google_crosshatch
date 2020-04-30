@@ -20,6 +20,11 @@ include device/google/crosshatch/device-common.mk
 
 DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/crosshatch/overlay
 
+# SKU specific RROs
+PRODUCT_PACKAGES += \
+    SettingsOverlayG013C \
+    SettingsOverlayG013D \
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.insmod.crosshatch.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.cfg
 
