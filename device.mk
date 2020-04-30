@@ -540,7 +540,8 @@ endif
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     wificond \
-    libwpa_client
+    libwpa_client \
+    WifiOverlay
 
 LIB_NL := libnl_2
 PRODUCT_PACKAGES += $(LIB_NL)
