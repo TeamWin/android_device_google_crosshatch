@@ -29,6 +29,7 @@ using android::hardware::google::pixel::SysfsCollector;
 using android::hardware::google::pixel::UeventListener;
 
 #define UFSHC_PATH(filename) "/sys/devices/platform/soc/1d84000.ufshc/" #filename
+#define UFSHC_HEALTH_PATH(filename) "/sys/devices/platform/soc/1d84000.ufshc/health/" #filename
 const struct SysfsCollector::SysfsPaths sysfs_paths = {
     .SlowioReadCntPath = UFSHC_PATH(slowio_read_cnt),
     .SlowioWriteCntPath = UFSHC_PATH(slowio_write_cnt),
@@ -38,6 +39,10 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
     .ImpedancePath = "/sys/class/misc/msm_cirrus_playback/resistance_left_right",
     .CodecPath = "/sys/devices/platform/soc/171c0000.slim/tavil-slim-pgd/tavil_codec/codec_state",
     .SpeechDspPath = "/sys/devices/platform/soc/soc:qcom,wcd-dsp-mgr/wdsp_stat",
+    .UFSLifetimeA = UFSHC_HEALTH_PATH(lifetimeA),
+    .UFSLifetimeB = UFSHC_HEALTH_PATH(lifetimeB),
+    .UFSLifetimeC = UFSHC_HEALTH_PATH(lifetimeC),
+    .F2fsStatsPath = "/sys/fs/f2fs/",
 };
 
 const char *const kAudioUevent = "/kernel/q6audio/q6voice_uevent";
