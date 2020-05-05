@@ -81,6 +81,15 @@
         <device name="SND_DEVICE_IN_CAMCORDER_SELFIE_PORTRAIT" acdb_id="66"/>
         <device name="SND_DEVICE_IN_VOICE_HEARING_AID" acdb_id="19"/>
     </acdb_ids>
+
+    <audio_input_source_delay>
+        <audio_source_delay name="AUDIO_SOURCE_CAMCORDER" delay="20"/>
+    </audio_input_source_delay>
+
+    <audio_output_usecase_delay>
+        <audio_usecase_delay name="USECASE_AUDIO_PLAYBACK_DEEP_BUFFER" delay="20"/>
+    </audio_output_usecase_delay>
+
     <bit_width_configs>
         <device name="SND_DEVICE_OUT_SPEAKER" bit_width="24"/>
     </bit_width_configs>
