@@ -48,6 +48,8 @@
 #define TCPDUMP_NUMBER_BUGREPORT "persist.vendor.tcpdump.log.br_num"
 #define TCPDUMP_PERSIST_PROPERTY "persist.vendor.tcpdump.log.alwayson"
 
+#define MODEM_EFS_DUMP_PROPERTY "vendor.sys.modem.diag.efsdump"
+
 #define VENDOR_VERBOSE_LOGGING_ENABLED_PROPERTY "persist.vendor.verbose_logging_enabled"
 
 using android::os::dumpstate::CommandOptions;
@@ -168,6 +170,8 @@ static void *dumpModemThread(void *data)
     RunCommandToFd(STDOUT_FILENO, "CP MODEM POWERON LOG", {"/vendor/bin/cp", diagPoweronLogPath.c_str(), modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
 
     if (!PropertiesHelper::IsUserBuild()) {
+        android::base::SetProperty(MODEM_EFS_DUMP_PROPERTY, "true");
+
         const std::string tcpdumpLogDir = "/data/vendor/tcpdump_logger/logs";
         const std::string extendedLogDir = "/data/vendor/radio/extended_logs";
         const std::vector<std::string> rilAndNetmgrLogs{
@@ -203,6 +207,7 @@ static void *dumpModemThread(void *data)
         }
 
         dumpLogs(STDOUT_FILENO, extendedLogDir, modemLogAllDir, 100, EXTENDED_LOG_PREFIX);
+        android::base::SetProperty(MODEM_EFS_DUMP_PROPERTY, "false");
     }
 
     RunCommandToFd(STDOUT_FILENO, "TAR LOG", {"/vendor/bin/tar", "cvf", modemLogCombined.c_str(), "-C", modemLogAllDir.c_str(), "."}, CommandOptions::WithTimeout(20).Build());
