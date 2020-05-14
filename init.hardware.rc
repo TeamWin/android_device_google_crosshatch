@@ -777,21 +777,6 @@ on property:init.svc.vendor.hwcomposer-2-3=stopped
 on property:init.svc.vendor.hwcomposer-2-3=running
     start ppd
 
-# b/70518189 vDSO experiments
-on property:sys.vdso=*
-    write /sys/module/vdso/parameters/enable_32 1
-    write /sys/module/vdso/parameters/enable_64 1
-
-on property:sys.vdso=false
-    write /sys/module/vdso/parameters/enable_32 0
-    write /sys/module/vdso/parameters/enable_64 0
-
-on property:sys.vdso=64
-    write /sys/module/vdso/parameters/enable_32 0
-
-on property:sys.vdso=32
-    write /sys/module/vdso/parameters/enable_64 0
-
 on property:ro.boot.mode=sota
     setprop ro.boot.sota enabled
 
