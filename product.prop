@@ -38,7 +38,6 @@ vidc.enc.dcvs.extra-buff-count=2
 vidc.enc.disable.pq=1
 
 # system props for the data netmgrd
-persist.data.netmgrd.qos.enable=true
 persist.vendor.data.mode=concurrent
 
 # system props for time-services
