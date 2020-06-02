@@ -182,6 +182,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_ROOT_EXTRA_SYMLINKS := /vendor/dsp:/dsp
 BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
+BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/ramdump:/ramdump
 
 # Add QC specific symlinks for backward compatibility
 # Move the symlinks here instead of removing them
