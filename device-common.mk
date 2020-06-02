@@ -24,9 +24,6 @@ PRODUCT_PLATFORM := sdm845
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
-# Enable userspace reboot
-$(call inherit-product, $(SRC_TARGET_DIR)/product/userspace_reboot.mk)
-
 include device/google/crosshatch/device.mk
 
 # Audio fluence, ns, aec property, voice volume steps
