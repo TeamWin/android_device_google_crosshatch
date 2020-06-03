@@ -19,10 +19,10 @@
 #define LOG_TAG "wait_for_strongbox"
 #include <android-base/logging.h>
 
-#include <keymasterV4_0/Keymaster.h>
+#include <keymasterV4_1/Keymaster.h>
 
-using android::hardware::keymaster::V4_0::SecurityLevel;
-using android::hardware::keymaster::V4_0::support::Keymaster;
+using android::hardware::keymaster::V4_1::SecurityLevel;
+using android::hardware::keymaster::V4_1::support::Keymaster;
 
 useconds_t kWaitTimeMicroseconds = 1 * 1000;  // 1 milliseconds
 

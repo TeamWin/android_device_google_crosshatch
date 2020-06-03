@@ -24,8 +24,6 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/crosshatch/proprietary/com.qualcomm.qti.imscmservice.xml:system/etc/permissions/com.qualcomm.qti.imscmservice.xml:qcom \
     vendor/qcom/crosshatch/proprietary/com.qualcomm.qti.uceservice-V2.0-java.jar:system/framework/com.qualcomm.qti.uceservice-V2.0-java.jar:qcom \
     vendor/qcom/crosshatch/proprietary/com.quicinc.cne.xml:system/etc/permissions/com.quicinc.cne.xml:qcom \
-    vendor/qcom/crosshatch/proprietary/embmslibrary.jar:system/framework/embmslibrary.jar:qcom \
-    vendor/qcom/crosshatch/proprietary/embms.xml:system/etc/permissions/embms.xml:qcom \
     vendor/qcom/crosshatch/proprietary/lib64/libadsprpc_system.so:system/lib64/libadsprpc_system.so:qcom \
     vendor/qcom/crosshatch/proprietary/lib64/libcdsprpc_system.so:system/lib64/libcdsprpc_system.so:qcom \
     vendor/qcom/crosshatch/proprietary/lib64/libDiagService.so:system/lib64/libDiagService.so:qcom \
