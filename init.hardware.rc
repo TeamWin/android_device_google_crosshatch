@@ -260,6 +260,10 @@ on post-fs-data
     # Setup folder for modem fdr
     mkdir /data/vendor/modem_fdr 0700 root system
 
+    # Resume-on-Reboot after we have the data dir and keymaster
+    mkdir /data/vendor/rebootescrow 0770 hsm hsm
+    start vendor.rebootescrow-citadel
+
     # keep that at the end of on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
