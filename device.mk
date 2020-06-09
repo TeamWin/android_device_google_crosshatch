@@ -155,7 +155,7 @@ PRODUCT_PACKAGES += \
 
 # Resume on Reboot support
 PRODUCT_PACKAGES += \
-    android.hardware.rebootescrow-service.default
+    android.hardware.rebootescrow-service.citadel
 
 # Use Sdcardfs
 PRODUCT_PRODUCT_PROPERTIES += \
