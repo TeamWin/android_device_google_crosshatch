@@ -485,6 +485,9 @@ on boot
     # WLAN debug access
     chown system system /d/icnss/stats
 
+    # Default enable uicc_se
+    setprop persist.vendor.radio.uicc_se_enabled true
+
 service init-radio-sh /vendor/bin/init.radio.sh
     class late_start
     user radio
