@@ -679,6 +679,7 @@ PRODUCT_PACKAGES += \
     android.hardware.oemlock@1.0-service.citadel \
     android.hardware.weaver@1.0-service.citadel \
     android.hardware.keymaster@4.1-service.citadel \
+    android.hardware.identity@1.0-service.citadel \
     wait_for_strongbox
 
 # Citadel debug stuff
