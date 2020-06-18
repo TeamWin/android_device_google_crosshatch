@@ -11,8 +11,6 @@
             system/app/QtiTelephonyService/QtiTelephonyService.apk \
             system/etc/permissions/com.qualcomm.qti.imscmservice.xml \
             system/etc/permissions/qcrilhook.xml \
-            system/etc/permissions/radioconfiginterface.xml \
-            system/etc/permissions/radioconfig.xml \
             system/etc/permissions/telephonyservice.xml \
             system/etc/permissions/uimremoteclient.xml \
             system/etc/permissions/uimremoteserver.xml \
