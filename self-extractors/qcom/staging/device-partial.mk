@@ -39,9 +39,7 @@ PRODUCT_COPY_FILES := \
     vendor/qcom/crosshatch/proprietary/qcrilhook.xml:system/etc/permissions/qcrilhook.xml:qcom \
     vendor/qcom/crosshatch/proprietary/QtiTelephonyServicelibrary.jar:system/framework/QtiTelephonyServicelibrary.jar:qcom \
     vendor/qcom/crosshatch/proprietary/radioconfiginterfacelibrary.jar:system/framework/radioconfiginterfacelibrary.jar:qcom \
-    vendor/qcom/crosshatch/proprietary/radioconfiginterface.xml:system/etc/permissions/radioconfiginterface.xml:qcom \
     vendor/qcom/crosshatch/proprietary/radioconfiglibrary.jar:system/framework/radioconfiglibrary.jar:qcom \
-    vendor/qcom/crosshatch/proprietary/radioconfig.xml:system/etc/permissions/radioconfig.xml:qcom \
     vendor/qcom/crosshatch/proprietary/telephonyservice.xml:system/etc/permissions/telephonyservice.xml:qcom \
     vendor/qcom/crosshatch/proprietary/uimremoteclientlibrary.jar:system/framework/uimremoteclientlibrary.jar:qcom \
     vendor/qcom/crosshatch/proprietary/uimremoteclient.xml:system/etc/permissions/uimremoteclient.xml:qcom \
