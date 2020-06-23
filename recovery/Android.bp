@@ -49,7 +49,8 @@ cc_library_static {
         "recovery_twrp.cpp",
     ],
     include_dirs: [
-        "bootable/recovery"
+        "bootable/recovery",
+	"bootable/recovery/crypto/ext4crypt",
     ],
     static_libs: [
         "libbase",
