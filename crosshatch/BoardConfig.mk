@@ -14,8 +14,12 @@
 # limitations under the License.
 #
 
-TARGET_BOOTLOADER_BOARD_NAME := crosshatch
-TARGET_SCREEN_DENSITY := 560
-TARGET_RECOVERY_UI_MARGIN_HEIGHT := 165
+ifdef PHONE_CAR_BOARD_CONFIG
+  include $(PHONE_CAR_BOARD_CONFIG)
+else
+  TARGET_BOOTLOADER_BOARD_NAME := crosshatch
+  TARGET_SCREEN_DENSITY := 560
+  TARGET_RECOVERY_UI_MARGIN_HEIGHT := 165
 
-include device/google/crosshatch/BoardConfig-common.mk
+  include device/google/crosshatch/BoardConfig-common.mk
+endif
