@@ -21,11 +21,6 @@
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.common.rc
 
 on init
-    # Temporarily stop booting into VR directly due to battery drain.
-    # TODO(b/131327495): Re-enable this once VrHeadsetPowerPolicyService or its
-    #                    equivalent lands in Android master.
-    setprop ro.boot.vr 0
-
     # Setup cpusets used by the VR services.
     mkdir /dev/cpuset/kernel 0750 root system
     write /dev/cpuset/kernel/cpus 0
