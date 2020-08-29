@@ -175,6 +175,7 @@
     <ctl name="MultiMedia8 Mixer USB_AUDIO_TX" value="0"/>
     <ctl name="MultiMedia10 Mixer USB_AUDIO_TX" value="0"/>
     <ctl name="MultiMedia6 Mixer SLIM_0_TX" value="0"/>
+    <ctl name="MultiMedia2 Mixer SLIM_0_TX" value="0"/>
     <ctl name="SLIM_2_RX Format" value="UNPACKED"/>
     <ctl name="SLIM_2_RX SampleRate" value="KHZ_48"/>
     <ctl name="SLIM_5_RX SampleRate" value="KHZ_44P1"/>
@@ -1041,6 +1042,10 @@
         <ctl name="MultiMedia1 Mixer USB_AUDIO_TX" value="1"/>
     </path>
 
+    <path name="hifi-record">
+        <ctl name="MultiMedia2 Mixer SLIM_0_TX" value="1"/>
+    </path>
+
     <path name="hifi-record usb-headset-mic">
         <ctl name="MultiMedia2 Mixer USB_AUDIO_TX" value="1"/>
     </path>
@@ -1373,6 +1378,11 @@
 
     <path name="voicemmode2-call">
         <ctl name="SLIM_0_RX_Voice Mixer VoiceMMode2" value="1"/>
+        <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1"/>
+    </path>
+
+    <path name="voicemmode2-call hearing-aid">
+        <ctl name="AFE_PCM_RX_Voice Mixer VoiceMMode2" value="1"/>
         <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1"/>
     </path>
 
@@ -2426,7 +2436,11 @@
     </path>
 
     <path name="mmap-playback">
-        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia16" value="1"/>
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia16" value="1"/>
+    </path>
+
+    <path name="mmap-playback handset">
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia16" value="1"/>
     </path>
 
     <path name="mmap-playback speaker">

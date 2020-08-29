@@ -100,7 +100,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.gr
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.graphics.composer@2.1-impl.so)
 
 # Remove StrongBox RC
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@4.0-service.citadel.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@4.1-service.citadel.rc)
 
 # Migrate to versioned VNDK directory
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp)
@@ -158,3 +158,12 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.vi
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibrator@1.2-service.crosshatch)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.memtrack@1.0-service.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.memtrack@1.0-service)
+
+# Removing GSI keys from the ramdisk.
+# Those keys will be embedded into VTS instead, to verify the GSI image in used.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/first_stage_ramdisk/avb/q-gsi.avbpubkey)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/first_stage_ramdisk/avb/r-gsi.avbpubkey)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/first_stage_ramdisk/avb/s-gsi.avbpubkey)
+
+# Use stable aidl power HAL
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.power@1.3-service.pixel-libperfmgr.rc)

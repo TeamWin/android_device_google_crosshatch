@@ -120,3 +120,6 @@ firmware_directories /vendor/firmware_mnt/image/
 
 # fuel gauge history
 /dev/maxfg_history        0644   system system
+
+# Resume-on-Reboot
+/dev/access-kregistry     0660   system system

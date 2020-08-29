@@ -1,0 +1,104 @@
+#
+# Copyright (C) 2019 The Android Open-Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+#
+# This file inherits from init.${ro.boot.hardware.platform}.rc plus additional
+# configs only used by XR targets.
+#
+import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.common.rc
+
+on init
+    # Temporarily stop booting into VR directly due to battery drain.
+    # TODO(b/131327495): Re-enable this once VrHeadsetPowerPolicyService or its
+    #                    equivalent lands in Android master.
+    setprop ro.boot.vr 0
+
+    # Setup cpusets used by the VR services.
+    mkdir /dev/cpuset/kernel 0750 root system
+    write /dev/cpuset/kernel/cpus 0
+    write /dev/cpuset/kernel/mems 0
+    chown system system /dev/cpuset/kernel/tasks
+    chown system system /dev/cpuset/kernel/cpus
+    chmod 0660 /dev/cpuset/kernel/tasks
+    chmod 0660 /dev/cpuset/kernel/cpus
+
+    mkdir /dev/cpuset/system 0750 root system
+    write /dev/cpuset/system/cpus 0
+    write /dev/cpuset/system/mems 0
+    chown system system /dev/cpuset/system/tasks
+    chmod 0660 /dev/cpuset/system/tasks
+
+    mkdir /dev/cpuset/system/performance 0750 root system
+    write /dev/cpuset/system/performance/cpus 0
+    write /dev/cpuset/system/performance/mems 0
+    chown system system /dev/cpuset/system/performance/tasks
+    chmod 0660 /dev/cpuset/system/performance/tasks
+
+    mkdir /dev/cpuset/system/background 0750 root system
+    write /dev/cpuset/system/background/cpus 0
+    write /dev/cpuset/system/background/mems 0
+    chown system system /dev/cpuset/system/background/tasks
+    chmod 0660 /dev/cpuset/system/background/tasks
+
+    mkdir /dev/cpuset/application 0750 root system
+    write /dev/cpuset/application/cpus 0
+    write /dev/cpuset/application/mems 0
+    chown system system /dev/cpuset/application/tasks
+    chmod 0660 /dev/cpuset/application/tasks
+
+    mkdir /dev/cpuset/application/performance 0750 root system
+    write /dev/cpuset/application/performance/cpus 0
+    write /dev/cpuset/application/performance/mems 0
+    chown system system /dev/cpuset/application/performance/tasks
+    chmod 0660 /dev/cpuset/application/performance/tasks
+
+    mkdir /dev/cpuset/application/background 0750 root system
+    write /dev/cpuset/application/background/cpus 0
+    write /dev/cpuset/application/background/mems 0
+    chown system system /dev/cpuset/application/background/tasks
+    chmod 0660 /dev/cpuset/application/background/tasks
+
+    # Create UDS structure for base VR services.
+    mkdir /dev/socket/pdx 0775 system system
+    mkdir /dev/socket/pdx/system 0775 system system
+    mkdir /dev/socket/pdx/system/buffer_hub 0775 system system
+    mkdir /dev/socket/pdx/system/performance 0775 system system
+    mkdir /dev/socket/pdx/system/vr 0775 system system
+    mkdir /dev/socket/pdx/system/vr/display 0775 system system
+    mkdir /dev/socket/pdx/system/vr/pose 0775 system system
+    mkdir /dev/socket/pdx/system/vr/sensors 0775 system system
+
+on boot
+    # Update DVR cpusets to boot-time values.
+    write /dev/cpuset/kernel/cpus 0-7
+    write /dev/cpuset/system/cpus 0-7
+    write /dev/cpuset/system/performance/cpus 0-7
+    write /dev/cpuset/system/background/cpus 0-7
+    write /dev/cpuset/system/cpus 0-7
+    write /dev/cpuset/application/cpus 0-7
+    write /dev/cpuset/application/performance/cpus 0-7
+    write /dev/cpuset/application/background/cpus 0-7
+    write /dev/cpuset/application/cpus 0-7
+
+on property:sys.boot_completed=1
+    # Update DVR cpusets to runtime values.
+    # Kernel cpuset will be apply on PowerHAL
+    write /dev/cpuset/system/performance/cpus 6-7
+    write /dev/cpuset/system/background/cpus 0-1
+    write /dev/cpuset/system/cpus 0-1,6-7
+    write /dev/cpuset/application/performance/cpus 4-5
+    write /dev/cpuset/application/background/cpus 0-1
+    write /dev/cpuset/application/cpus 0-1,4-5

@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-/**
- * Copyright (c) 2018, The Android Open Source Project
+/*
+ * Copyright 2020, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
--->
-<resources>
-    <!-- Default for Settings.System.VIBRATE_WHEN_RINGING -->
-    <bool name="def_vibrate_when_ringing">true</bool>
-    <!-- Default for Settings.Global.APPLY_RAMPING_RINGER -->
-    <bool name="def_apply_ramping_ringer">false</bool>
-</resources>
+
+#include <gtest/gtest.h>
+#include <teeui/test/teeui_render_test.h>
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    teeui::test::initRenderTest(argc, argv);
+    return RUN_ALL_TESTS();
+}

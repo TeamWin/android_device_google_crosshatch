@@ -1,0 +1,404 @@
+// Copyright (C) 2020 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+soong_namespace {
+}
+
+cc_prebuilt_library_shared {
+    name: "libimscamera_jni",
+    arch: {
+        arm: {
+            srcs: ["libimscamera_jni.so"],
+            shared_libs: [
+                "libnativehelper",
+                "libcutils",
+                "libutils",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        arm64: {
+            srcs: ["lib64/libimscamera_jni.so"],
+            shared_libs: [
+                "libnativehelper",
+                "libcutils",
+                "libutils",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    owner: "qcom",
+    strip: {
+        none: true,
+    },
+}
+
+cc_prebuilt_library_shared {
+    name: "libimsmedia_jni",
+    arch: {
+        arm: {
+            srcs: ["libimsmedia_jni.so"],
+            shared_libs: [
+                "libnativehelper",
+                "libcutils",
+                "libutils",
+                "libgui",
+                "libbinder",
+                "liblog",
+                "libandroid",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        arm64: {
+            srcs: ["lib64/libimsmedia_jni.so"],
+            shared_libs: [
+                "libnativehelper",
+                "libcutils",
+                "libutils",
+                "libgui",
+                "libbinder",
+                "liblog",
+                "libandroid",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    owner: "qcom",
+    strip: {
+        none: true,
+    },
+}
+
+cc_prebuilt_library_shared {
+    name: "lib-imsvideocodec",
+    arch: {
+        arm: {
+            srcs: ["lib-imsvideocodec.so"],
+            shared_libs: [
+                "lib-imsvtutils",
+                "lib-imsvtextutils",
+                "libcutils",
+                "libutils",
+                "liblog",
+                // "libdiag_system",
+                "libgui",
+                "libnativewindow",
+                "libmediandk",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        arm64: {
+            srcs: ["lib64/lib-imsvideocodec.so"],
+            shared_libs: [
+                "lib-imsvtutils",
+                "lib-imsvtextutils",
+                "libcutils",
+                "libutils",
+                "liblog",
+                // "libdiag_system",
+                "libgui",
+                "libnativewindow",
+                "libmediandk",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    owner: "qcom",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "lib-imsvtextutils",
+    arch: {
+        arm: {
+            srcs: ["lib-imsvtextutils.so"],
+            shared_libs: [
+                "libutils",
+                "libcutils",
+                "liblog",
+                // "libdiag_system",
+                "lib-imsvtutils",
+                "libGLESv2",
+                "libEGL",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        arm64: {
+            srcs: ["lib64/lib-imsvtextutils.so"],
+            shared_libs: [
+                "libutils",
+                "libcutils",
+                "liblog",
+                // "libdiag_system",
+                "lib-imsvtutils",
+                "libGLESv2",
+                "libEGL",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    owner: "qcom",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "lib-imsvt",
+    arch: {
+        arm: {
+            srcs: ["lib-imsvt.so"],
+            shared_libs: [
+                "librcc",
+                "lib-imsvideocodec",
+                "lib-imsvtutils",
+                "libandroid",
+                // "libhwbinder",
+                "libhidlbase",
+                // "libhidltransport",
+                // "vendor.qti.imsrtpservice@1.0",
+                // "libdiag_system",
+                "libcutils",
+                "libutils",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        arm64: {
+            srcs: ["lib64/lib-imsvt.so"],
+            shared_libs: [
+                "librcc",
+                "lib-imsvideocodec",
+                "lib-imsvtutils",
+                "libandroid",
+                // "libhwbinder",
+                "libhidlbase",
+                // "libhidltransport",
+                // "vendor.qti.imsrtpservice@1.0",
+                // "libdiag_system",
+                "libcutils",
+                "libutils",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    owner: "qcom",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "lib-imsvtutils",
+    arch: {
+        arm: {
+            srcs: ["lib-imsvtutils.so"],
+            shared_libs: [
+                "libutils",
+                "libcutils",
+                "liblog",
+                // "libdiag_system",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        arm64: {
+            srcs: ["lib64/lib-imsvtutils.so"],
+            shared_libs: [
+                "libutils",
+                "libcutils",
+                "liblog",
+                // "libdiag_system",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    owner: "qcom",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "librcc",
+    arch: {
+        arm: {
+            srcs: ["librcc.so"],
+            shared_libs: [
+                "libutils",
+                "libcutils",
+                "liblog",
+                // "libdiag_system",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        arm64: {
+            srcs: ["lib64/librcc.so"],
+            shared_libs: [
+                "libutils",
+                "libcutils",
+                "liblog",
+                // "libdiag_system",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    owner: "qcom",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libsdm-disp-apis",
+    arch: {
+        arm: {
+            srcs: ["libsdm-disp-apis.so"],
+            shared_libs: [
+                "libcutils",
+                "libutils",
+                "liblog",
+                "libhidlbase",
+                // "libhidltransport",
+                // "vendor.display.color@1.0",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        arm64: {
+            srcs: ["lib64/libsdm-disp-apis.so"],
+            shared_libs: [
+                "libcutils",
+                "libutils",
+                "liblog",
+                "libhidlbase",
+                // "libhidltransport",
+                // "vendor.display.color@1.0",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    owner: "qcom",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libsecureui_svcsock_system",
+    arch: {
+        arm: {
+            srcs: ["libsecureui_svcsock_system.so"],
+            shared_libs: [
+                "libutils",
+                "libcutils",
+                "liblog",
+                "libhidlbase",
+                // "libhidltransport",
+                // "libhwbinder",
+                // "vendor.qti.hardware.tui_comm@1.0",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        arm64: {
+            srcs: ["lib64/libsecureui_svcsock_system.so"],
+            shared_libs: [
+                "libutils",
+                "libcutils",
+                "liblog",
+                "libhidlbase",
+                // "libhidltransport",
+                // "libhwbinder",
+                // "vendor.qti.hardware.tui_comm@1.0",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    owner: "qcom",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+}

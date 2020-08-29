@@ -55,7 +55,7 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.google.radioext</name>
-        <version>1.1</version>
+        <version>1.2</version>
         <interface>
             <name>IRadioExt</name>
             <instance>default</instance>
@@ -63,7 +63,7 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.google.wireless_charger</name>
-        <version>1.1</version>
+        <version>1.2</version>
         <interface>
             <name>IWirelessCharger</name>
             <instance>default</instance>
@@ -174,19 +174,10 @@
             <instance>default</instance>
         </interface>
       </hal>
-    <hal format="hidl">
-        <name>android.hardware.wifi.supplicant</name>
-        <transport>hwbinder</transport>
-        <version>1.2</version>
-        <interface>
-            <name>ISupplicant</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <hal format="hidl" optional="true">
         <name>vendor.google.wifi_ext</name>
         <transport>hwbinder</transport>
-        <version>1.0</version>
+        <version>1.1</version>
         <interface>
             <name>IWifiExt</name>
             <instance>default</instance>

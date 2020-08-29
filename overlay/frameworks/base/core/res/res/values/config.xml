@@ -129,6 +129,13 @@
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         Wifi P2P interfaces.  If the device doesn't want to support tethering over Wifi P2p this
+         should be empty.  An example would be "p2p-p2p.*" -->
+    <string-array translatable="false" name="config_tether_wifi_p2p_regexs">
+        <item>"p2p-p2p\\d-.*"</item>
+    </string-array>
+
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
          bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
          should be empty. -->
     <string-array translatable="false" name="config_tether_bluetooth_regexs">
@@ -198,20 +205,6 @@
     <!-- Mask to use when checking skb mark defined in config_networkWakeupPacketMark above. -->
     <integer name="config_networkWakeupPacketMask">0x80000000</integer>
 
-    <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
-    <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
-
-    <!-- Boolean indicating whether the wifi chipset requires the softap band be -->
-    <!-- converted from 5GHz to ANY due to hardware restrictions -->
-    <bool translatable="false" name="config_wifi_convert_apband_5ghz_to_any">true</bool>
-
-    <!-- Boolean indicating whether 802.11r Fast BSS Transition is enabled on this platform -->
-    <bool translatable="false" name="config_wifi_fast_bss_transition_enabled">true</bool>
-
-    <!-- Boolean indicating whether the wifi chipset has background scan support -->
-    <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
-
-
     <!-- Vibrator pattern for feedback about a long screen/key press -->
     <!-- TODO(b/78128429): increase duration to account for the long latency -->
     <integer-array name="config_longPressVibePattern">
@@ -240,16 +233,6 @@
 
     <!-- Make things go fast -->
     <bool name="config_ui_enableFadingMarquee">false</bool>
-
-    <!-- Wifi driver supports batched scan -->
-    <bool translatable="false" name="config_wifi_batched_scan_supported">true</bool>
-
-    <!-- Boolean indicating whether or not to revert to default country code when cellular
-    radio is unable to find any MCC information to infer wifi country code from -->
-    <bool translatable="false" name="config_wifi_revert_country_code_on_cellular_loss">false</bool>
-
-    <!-- Boolean indicating whether or not wifi should turn off when emergency call is made -->
-    <bool translatable="false" name="config_wifi_turn_off_during_emergency_call">true</bool>
 
    <!-- Enable doze mode
          ComponentName of a dream to show whenever the system would otherwise have gone to sleep. -->
@@ -310,25 +293,6 @@
         <item>lte:524288,1048576,8388608,262144,524288,4194304</item>
     </string-array>
 
-    <!-- Configure wifi tcp buffersizes in the form:
-         rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max -->
-    <string name="config_wifi_tcp_buffers" translatable="false">524288,2097152,8388608,262144,524288,4194304</string>
-
-    <!-- Idle Receive current for wifi radio. 0 by default-->
-    <integer translatable="false" name="config_wifi_idle_receive_cur_ma">1</integer>
-
-    <!-- Rx current for wifi radio. 0 by default-->
-    <integer translatable="false" name="config_wifi_active_rx_cur_ma">100</integer>
-
-    <!-- Tx current for wifi radio. 0 by default-->
-    <integer translatable="false" name="config_wifi_tx_cur_ma">250</integer>
-
-    <!-- Operating volatage for wifi radio. 0 by default-->
-    <integer translatable="false" name="config_wifi_operating_voltage_mv">3800</integer>
-
-    <!-- Config SoftAP 2G channel list -->
-    <string  translatable="false" name="config_wifi_framework_sap_2G_channel_list">6</string>
-
     <!-- Config determines whether to update phone object when voice registration
          state changes. Voice radio tech change will always trigger an update of
          phone object irrespective of this config -->
@@ -350,13 +314,11 @@
         <item>"/system/framework/framework.jar"</item>
         <item>"/system/framework/oat/arm64/services.odex"</item>
         <item>"/system/framework/services.jar"</item>
-        <item>"/system/framework/arm64/boot.oat"</item>
-        <item>"/system/framework/arm64/boot-core-libart.oat"</item>
         <item>"/apex/com.android.art/javalib/core-oj.jar"</item>
         <item>"/apex/com.android.art/javalib/core-libart.jar"</item>
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
-        <item>"/product/priv-app/SystemUIGoogle/SystemUIGoogle.apk"</item>
-        <item>"/product/priv-app/SystemUIGoogle/oat/arm64/SystemUIGoogle.odex"</item>
+        <item>"/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk"</item>
+        <item>"/system_ext/priv-app/SystemUIGoogle/oat/arm64/SystemUIGoogle.odex"</item>
         <item>"/system/lib64/libsurfaceflinger.so"</item>
     </string-array>
 
@@ -366,16 +328,14 @@
     <!-- Should the pinner service pin the Home application? -->
     <bool name="config_pinnerHomeApp">true</bool>
 
-    <!-- List of files pinned by the Pinner Service with the apex boot image b/119800099 -->
-    <string-array translatable="false" name="config_apexBootImagePinnerServiceFiles">
+    <!-- List of files pinned by the Pinner Service with the JIT Zygote boot image b/119800099 -->
+    <string-array translatable="false" name="config_jitzygoteBootImagePinnerServiceFiles">
         <item>"/system/framework/framework.jar"</item>
         <item>"/system/framework/services.jar"</item>
-        <item>"/system/framework/arm64/apex.oat"</item>
-        <item>"/system/framework/arm64/apex-core-libart.oat"</item>
         <item>"/apex/com.android.art/javalib/core-oj.jar"</item>
         <item>"/apex/com.android.art/javalib/core-libart.jar"</item>
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
-        <item>"/system/priv-app/SystemUIGoogle/SystemUIGoogle.apk"</item>
+        <item>"/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk"</item>
         <item>"/system/lib64/libsurfaceflinger.so"</item>
     </string-array>
 
@@ -411,19 +371,6 @@
     <!-- Whether the new Auto Selection Network UI should be shown -->
     <bool name="config_enableNewAutoSelectNetworkUI">true</bool>
 
-    <!-- Enable ACS (auto channel selection) for Wifi hotspot (SAP) -->
-    <bool translatable="false" name="config_wifi_softap_acs_supported">true</bool>
-
-    <!-- Enable 802.11ac for Wifi hotspot (SAP) -->
-    <bool translatable="false" name="config_wifi_softap_ieee80211ac_supported">true</bool>
-
-    <!-- Integer thresholds, do not connect to APs with RSSI lower than these values  -->
-    <integer translatable="false" name="config_wifi_framework_wifi_score_entry_rssi_threshold_5GHz">-77</integer>
-    <integer translatable="false" name="config_wifi_framework_wifi_score_entry_rssi_threshold_24GHz">-80</integer>
-    <!-- Integer thresholds for low network score, should be somewhat less than the entry threshholds -->
-    <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_5GHz">-80</integer>
-    <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_24GHz">-83</integer>
-
     <!-- The default intensity level for haptic feedback. See
          Settings.System.HAPTIC_FEEDBACK_INTENSITY more details on the constant values and
          meanings. -->
@@ -447,15 +394,6 @@
         <item>com.felicanetworks.mfc</item>
         <item>com.felicanetworks.mfm</item>
     </string-array>
-
-    <!-- True if the firmware supports connected MAC randomization -->
-    <bool name="config_wifi_connected_mac_randomization_supported">true</bool>
-
-    <!-- True if the firmware supports p2p MAC randomization -->
-    <bool name="config_wifi_p2p_mac_randomization_supported">true</bool>
-
-    <!-- True if the firmware supports Wi-Fi link probing -->
-    <bool name="config_wifi_link_probing_supported">true</bool>
 
     <!-- Enable Zram writeback feature to allow unused pages in zram be written to flash. -->
     <bool name="config_zramWriteback">true</bool>
