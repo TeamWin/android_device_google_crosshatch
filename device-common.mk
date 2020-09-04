@@ -150,3 +150,51 @@ AB_OTA_POSTINSTALL_CONFIG += \
 # Set thermal warm reset
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.thermal_warmreset = true \
+
+#touch modules
+PRODUCT_COPY_FILES += \
+    device/google/crosshatch/modules/sec_touch.ko:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/sec_touch.ko \
+    device/google/crosshatch/modules/ftm5.ko:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/ftm5.ko \
+    device/google/crosshatch/modules/heatmap.ko:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/heatmap.ko \
+    device/google/crosshatch/modules/videobuf2-memops.ko:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/videobuf2-memops.ko \
+    device/google/crosshatch/modules/videobuf2-vmalloc.ko:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/videobuf2-vmalloc.ko \
+    device/google/crosshatch/touchdriver.sh:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/touchdriver.sh \
+    device/google/crosshatch/prebuilts/qseecomd:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/qseecomd \
+    device/google/crosshatch/prebuilts/libdrmfs.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libdrmfs.so \
+    device/google/crosshatch/prebuilts/libxml2.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libxml2.so \
+    device/google/crosshatch/prebuilts/libnetd_client.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libnetd_client.so \
+    device/google/crosshatch/prebuilts/libspcom.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libspcom.so \
+    device/google/crosshatch/prebuilts/libkeymasterdeviceutils.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libkeymasterdeviceutils.so \
+    device/google/crosshatch/prebuilts/libkeymasterutils.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libkeymasterutils.so \
+    device/google/crosshatch/prebuilts/libqtikeymaster4.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libqtikeymaster4.so \
+    device/google/crosshatch/prebuilts/libQSEEComAPI.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libQSEEComAPI.so \
+    device/google/crosshatch/prebuilts/libdiag.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libdiag.so \
+    device/google/crosshatch/prebuilts/libnos_client_citadel.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libnos_client_citadel.so \
+    device/google/crosshatch/prebuilts/libnos_transport.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libnos_transport.so \
+    device/google/crosshatch/prebuilts/citadeld:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/citadeld \
+    device/google/crosshatch/prebuilts/android.hardware.keymaster@4.0-service.citadel:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/android.hardware.keymaster@4.0-service.citadel \
+    device/google/crosshatch/prebuilts/prepdecrypt.sh:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/prepdecrypt.sh \
+    device/google/crosshatch/prebuilts/time_daemon:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/time_daemon \
+    device/google/crosshatch/prebuilts/libqmi_cci.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libqmi_cci.so \
+    device/google/crosshatch/prebuilts/libqmi_common_so.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libqmi_common_so.so \
+    device/google/crosshatch/prebuilts/manifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/vintf/manifest.xml \
+    device/google/crosshatch/prebuilts/compatibility_matrix.device.xml:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/vintf/compatibility_matrix.device.xml \
+    device/google/crosshatch/prebuilts/compatibility_matrix.legacy.xml:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/vintf/compatibility_matrix.legacy.xml \
+    device/google/crosshatch/prebuilts/android.hardware.gatekeeper@1.0-service-qti:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/android.hardware.gatekeeper@1.0-service-qti \
+    device/google/crosshatch/prebuilts/android.hardware.keymaster@4.0-service-qti:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/android.hardware.keymaster@4.0-service-qti \
+    device/google/crosshatch/prebuilts/android.hardware.boot@1.0-service:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/android.hardware.boot@1.0-service \
+    device/google/crosshatch/prebuilts/android.hardware.weaver@1.0-impl.nos.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/android.hardware.weaver@1.0-impl.nos.so \
+    device/google/crosshatch/prebuilts/android.hardware.weaver@1.0-service.citadel:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/android.hardware.weaver@1.0-service.citadel \
+    device/google/crosshatch/prebuilts/android.hardware.authsecret@1.0-service.citadel:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/android.hardware.authsecret@1.0-service.citadel \
+    device/google/crosshatch/prebuilts/android.hardware.authsecret@1.0-impl.nos.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/android.hardware.authsecret@1.0-impl.nos.so \
+    device/google/crosshatch/prebuilts/android.hardware.oemlock@1.0-service.citadel:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/android.hardware.oemlock@1.0-service.citadel \
+    device/google/crosshatch/prebuilts/nos_app_weaver.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/nos_app_weaver.so \
+    device/google/crosshatch/prebuilts/libnos_citadeld_proxy.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libnos_citadeld_proxy.so \
+    device/google/crosshatch/prebuilts/libnos_datagram_citadel.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libnos_datagram_citadel.so\
+    device/google/crosshatch/prebuilts/libprotobuf-cpp-full.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libprotobuf-cpp-full.so \
+    device/google/crosshatch/prebuilts/pixelpowerstats_provider_aidl_interface-cpp.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/pixelpowerstats_provider_aidl_interface-cpp.so \
+    device/google/crosshatch/prebuilts/twrp.flags:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/twrp.flags \
+    device/google/crosshatch/prebuilts/ueventd.rc:$(TARGET_COPY_OUT_RECOVERY)/root/ueventd.rc
+
+PRODUCT_PACKAGES += \
+    magiskboot_arm

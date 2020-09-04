@@ -1,6 +1,11 @@
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    chmod 0660 /dev/qseecom
+    chown system drmrpc /dev/qseecom
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+    install_keyring
 
 on init
     setprop sys.usb.configfs 1
@@ -8,3 +13,196 @@ on init
     write /sys/module/msm_poweroff/parameters/warm_reset 1
     # Enable thermal mitigation
     write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
+    start touchdriver
+    start fastbootd
+
+on property:crypto.ready=0
+    stop qseecomd
+    stop keymaster-4-0
+    stop gatekeeper-1-0
+    stop servicemanager
+
+on property:sys.usb.config=mtp,adb
+    restart time_daemon
+
+service touchdriver /system/bin/touchdriver.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+on property:twrp.apex.loaded=true
+   export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/apex/com.android.runtime.release.apex-mount/lib64:/apex/com.google.android.media.swcodec.apex-mount/lib64:/apex/com.android.media.swcodec.apex-mount/lib64
+   start servicemanager
+   start hwservicemanager
+   start prepdecrypt
+
+on property:prep.decrypt=1
+   start vndservicemanager
+   start qseecomd
+   start boot-1-0
+   start time_daemon
+   start vendor.citadeld
+   start vendor.weaver_hal
+   start vendor.authsecret
+   start vendor.oemlock
+   start gatekeeper-1-0
+   start vendor.keymaster-4-0-citadel
+   start keymaster-4-0
+   restart time_daemon
+   start vibrator-service
+
+# Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
+service qseecomd /system/bin/qseecomd
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service prepdecrypt /system/bin/prepdecrypt.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service hwservicemanager /system/bin/hwservicemanager
+    user root
+    group root
+    disabled
+    onrestart setprop hwservicemanager.ready false
+    seclabel u:r:recovery:s0
+
+service boot-1-0 /system/bin/android.hardware.boot@1.0-service
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service servicemanager /system/bin/servicemanager
+    user root
+    group root readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore_auth /system/bin/keystore_auth
+    oneshot
+    user system
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+# keystore is started and stopped on demand by TWRP
+service keystore /system/bin/keystore /tmp/misc/keystore
+    user root
+    group root drmrpc readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service-qti
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keymaster-4-0 /system/bin/android.hardware.keymaster@4.0-service-qti
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service time_daemon /system/bin/time_daemon
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service vendor.weaver_hal /system/bin/android.hardware.weaver@1.0-service.citadel
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service vendor.authsecret /system/bin/android.hardware.authsecret@1.0-service.citadel
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service vendor.oemlock /system/bin/android.hardware.oemlock@1.0-service.citadel
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service vendor.keymaster-4-0-citadel /system/bin/android.hardware.keymaster@4.0-service.citadel
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service vendor.citadeld /system/bin/citadeld
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service vndservicemanager /system/bin/vndservicemanager /dev/vndbinder
+    disabled
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
+    seclabel u:r:recovery:s0
+
+service fastbootd /system/bin/fastbootd
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service vibrator-service /system/bin/android.hardware.vibrator@1.3-service.coral
+    class hal
+    user root
+    group root
+
+    setenv CALIBRATION_FILEPATH /mnt/vendor/persist/haptics/cs40l25a.cal
+
+    setenv F0_FILEPATH /sys/class/leds/vibrator/device/f0_stored
+    setenv REDC_FILEPATH /sys/class/leds/vibrator/device/redc_stored
+    setenv Q_FILEPATH /sys/class/leds/vibrator/device/q_stored
+    setenv ACTIVATE_PATH /sys/class/leds/vibrator/activate
+    setenv DURATION_PATH /sys/class/leds/vibrator/duration
+    setenv STATE_PATH /sys/class/leds/vibrator/state
+    setenv EFFECT_DURATION_PATH /sys/class/leds/vibrator/device/cp_trigger_duration
+    setenv EFFECT_INDEX_PATH /sys/class/leds/vibrator/device/cp_trigger_index
+    setenv EFFECT_QUEUE_PATH /sys/class/leds/vibrator/device/cp_trigger_queue
+    setenv EFFECT_SCALE_PATH /sys/class/leds/vibrator/device/cp_dig_scale
+    setenv GLOBAL_SCALE_PATH /sys/class/leds/vibrator/device/dig_scale
+    setenv ASP_ENABLE_PATH /sys/class/leds/vibrator/device/asp_enable
+    setenv GPIO_FALL_INDEX /sys/class/leds/vibrator/device/gpio1_fall_index
+    setenv GPIO_FALL_SCALE /sys/class/leds/vibrator/device/gpio1_fall_dig_scale
+    setenv GPIO_RISE_INDEX /sys/class/leds/vibrator/device/gpio1_rise_index
+    setenv GPIO_RISE_SCALE /sys/class/leds/vibrator/device/gpio1_rise_dig_scale
+
+    setenv HWAPI_DEBUG_PATHS "
+        /sys/class/leds/vibrator/device/asp_enable
+        /sys/class/leds/vibrator/device/f0_stored
+        /sys/class/leds/vibrator/device/fw_rev
+        /sys/class/leds/vibrator/device/gpio1_fall_dig_scale
+        /sys/class/leds/vibrator/device/gpio1_fall_index
+        /sys/class/leds/vibrator/device/gpio1_rise_dig_scale
+        /sys/class/leds/vibrator/device/gpio1_rise_index
+        /sys/class/leds/vibrator/device/heartbeat
+        /sys/class/leds/vibrator/device/num_waves
+        /sys/class/leds/vibrator/device/q_stored
+        /sys/class/leds/vibrator/device/redc_stored
+        /sys/class/leds/vibrator/state
+        "
+    disabled
+    seclabel u:r:recovery:s0
+
+# Weaver services have to be stopped in order to wipe Titan M during a format data
+on property:weaver.stop=1
+    stop vendor.citadeld
+    stop vendor.weaver_hal
