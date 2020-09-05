@@ -22,8 +22,8 @@ on property:crypto.ready=0
     stop gatekeeper-1-0
     stop servicemanager
 
-on property:sys.usb.config=mtp,adb
-    restart time_daemon
+#on property:sys.usb.config=mtp,adb
+#    restart time_daemon
 
 service touchdriver /system/bin/touchdriver.sh
     oneshot
@@ -42,7 +42,7 @@ on property:prep.decrypt=1
    start vndservicemanager
    start qseecomd
    start boot-1-0
-   start time_daemon
+   #start time_daemon
    start vendor.citadeld
    start vendor.weaver_hal
    start vendor.authsecret
@@ -50,7 +50,7 @@ on property:prep.decrypt=1
    start gatekeeper-1-0
    start vendor.keymaster-4-0-citadel
    start keymaster-4-0
-   restart time_daemon
+   #restart time_daemon
    start vibrator-service
 
 # Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
