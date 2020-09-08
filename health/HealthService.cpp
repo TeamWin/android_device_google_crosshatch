@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 #define LOG_TAG "android.hardware.health@2.0-service.crosshatch"
-#include <android-base/logging.h>
-
 #include <android-base/file.h>
+#include <android-base/logging.h>
 #include <android-base/parseint.h>
 #include <android-base/strings.h>
 #include <health2/Health.h>
@@ -24,6 +23,7 @@
 #include <healthd/healthd.h>
 #include <hidl/HidlTransportSupport.h>
 #include <pixelhealth/BatteryMetricsLogger.h>
+#include <pixelhealth/BatteryThermalControl.h>
 #include <pixelhealth/CycleCountBackupRestore.h>
 #include <pixelhealth/DeviceHealth.h>
 #include <pixelhealth/LowBatteryShutdownMetrics.h>
@@ -40,25 +40,28 @@ namespace {
 using android::hardware::health::V2_0::DiskStats;
 using android::hardware::health::V2_0::StorageAttribute;
 using android::hardware::health::V2_0::StorageInfo;
+using ::device::google::crosshatch::health::BatteryRechargingControl;
 using hardware::google::pixel::health::BatteryMetricsLogger;
+using hardware::google::pixel::health::BatteryThermalControl;
 using hardware::google::pixel::health::CycleCountBackupRestore;
 using hardware::google::pixel::health::DeviceHealth;
 using hardware::google::pixel::health::LowBatteryShutdownMetrics;
-using ::device::google::crosshatch::health::BatteryRechargingControl;
 
 constexpr char kBatteryResistance[] = "/sys/class/power_supply/maxfg/resistance";
 constexpr char kBatteryOCV[] = "/sys/class/power_supply/maxfg/voltage_ocv";
 constexpr char kVoltageAvg[] = "/sys/class/power_supply/maxfg/voltage_avg";
 
 static BatteryRechargingControl battRechargingControl;
+static BatteryThermalControl battThermalControl("sys/devices/virtual/thermal/tz-by-name/soc/mode");
 static BatteryMetricsLogger battMetricsLogger(kBatteryResistance, kBatteryOCV);
 static LowBatteryShutdownMetrics shutdownMetrics(kVoltageAvg);
 static CycleCountBackupRestore ccBackupRestoreBMS(
     8, "/sys/class/power_supply/bms/device/cycle_counts_bins",
-    "/persist/battery/qcom_cycle_counts_bins");
+    "/mnt/vendor/persist/battery/qcom_cycle_counts_bins");
 static CycleCountBackupRestore ccBackupRestoreMAX(
     10, "/sys/class/power_supply/maxfg/cycle_counts_bins",
-    "/persist/battery/max_cycle_counts_bins", "/sys/class/power_supply/maxfg/serial_number");
+    "/mnt/vendor/persist/battery/max_cycle_counts_bins",
+    "/sys/class/power_supply/maxfg/serial_number");
 static DeviceHealth deviceHealth;
 
 #define UFS_DIR "/sys/devices/platform/soc/1d84000.ufshc"
@@ -112,6 +115,7 @@ void healthd_board_init(struct healthd_config *config) {
 int healthd_board_battery_update(struct android::BatteryProperties *props) {
     battRechargingControl.updateBatteryProperties(props);
     deviceHealth.update(props);
+    battThermalControl.updateThermalState(props);
     battMetricsLogger.logBatteryProperties(props);
     shutdownMetrics.logShutdownVoltage(props);
     ccBackupRestoreBMS.Backup(props->batteryLevel);

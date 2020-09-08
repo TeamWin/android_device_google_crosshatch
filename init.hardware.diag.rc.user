@@ -14,6 +14,37 @@
 # limitations under the License.
 #
 
-on property:ro.boot.mode=normal
-    rm /dev/diag
-    rm /dev/diagtest
+on init
+    chmod 666 /dev/diag
+
+on post-fs-data
+    mkdir /data/vendor/radio 0777 radio radio
+    mkdir /data/vendor/radio/diag_logs 0777 system system
+    rm /data/vendor/radio/diag_logs/logs/diag_poweron_log.qmdl
+
+service diag_mdlog_start /vendor/bin/diag_mdlog
+    class late_start
+    user shell
+    group system diag media_rw
+    disabled
+    oneshot
+
+service diag_mdlog_stop /vendor/bin/diag_mdlog -k
+    class late_start
+    user shell
+    group system diag media_rw
+    disabled
+    oneshot
+
+on property:persist.vendor.sys.modem.diag.mdlog=*
+    rm /data/vendor/radio/diag_logs/diag_mdlog_pid
+    setprop vendor.sys.modem.diag.mdlog ${persist.vendor.sys.modem.diag.mdlog}
+
+on property:vendor.sys.modem.diag.mdlog=true
+    start diag_mdlog_start
+
+on property:vendor.sys.modem.diag.mdlog=false
+    start diag_mdlog_stop
+
+on property:persist.vendor.verbose_logging_enabled=*
+    setprop persist.vendor.sys.modem.diag.mdlog ${persist.vendor.verbose_logging_enabled}

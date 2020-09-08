@@ -1,0 +1,11 @@
+service vendor.dumpstate-1-1 /vendor/bin/hw/android.hardware.dumpstate@1.1-service.crosshatch
+    class hal
+    user system
+    group system vendor_rfs
+    interface android.hardware.dumpstate@1.0::IDumpstateDevice default
+    interface android.hardware.dumpstate@1.1::IDumpstateDevice default
+    oneshot
+    disabled
+
+on boot
+    chmod 0444 /sys/kernel/debug/tzdbg/qsee_log

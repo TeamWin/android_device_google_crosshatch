@@ -1,0 +1,18 @@
+cc_test_host {
+    name: "system.teeui_localization_rendering_test.crosshatch",
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-O0",
+    ],
+    srcs: [
+        "test_main.cpp",
+    ],
+    test_suites: ["device-tests"],
+    shared_libs: [
+        "libbase",
+        "libteeui_localization_rendering_test",
+    ],
+}
+
