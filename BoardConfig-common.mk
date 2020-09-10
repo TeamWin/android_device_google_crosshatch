@@ -52,6 +52,8 @@ BOARD_KERNEL_CMDLINE += twrpfastboot=1
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
 
+BOARD_KERNEL_IMAGE_NAME := Image.lz4
+
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
@@ -328,6 +330,8 @@ endif
 # Testing related defines
 BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/b1c1-setup.sh
 -include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk
+
+LZMA_RAMDISK_TARGETS := recovery,boot
 
 # TWRP
 TW_THEME := portrait_hdpi
