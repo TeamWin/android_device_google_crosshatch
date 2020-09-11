@@ -80,6 +80,14 @@ TARGET_RECOVERY_UI_LIB := \
     libnos_for_recovery \
     libbootloader_message \
     libfstab
+TARGET_RECOVERY_TWRP_LIB := \
+    librecovery_twrp_crosshatch \
+    libnos_citadel_for_recovery \
+    libnos_for_recovery \
+    liblog \
+    libbootloader_message \
+    libfstab \
+    libext4_utils
 
 ifneq ($(filter %_mainline,$(TARGET_PRODUCT)),)
 # TODO (b/136154856) product_services partition is removed from
@@ -353,6 +361,5 @@ TW_EXCLUDE_MTP := true
 TW_USE_TOOLBOX := true
 #TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
 TW_NO_HAPTICS := true
-TW_NO_BIND_SYSTEM := true
 TW_INCLUDE_REPACKTOOLS := true
 #TW_EXTRA_LANGUAGES := true

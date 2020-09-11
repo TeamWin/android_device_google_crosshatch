@@ -26,15 +26,38 @@ cc_library_static {
     srcs: [
         "recovery_ui.cpp",
     ],
-
+    include_dirs: [
+        "bootable/recovery"
+    ],
     static_libs: [
         "libbase",
-        "libbootloader_message",
         "libnos_for_recovery",
         "libnos_citadel_for_recovery",
     ],
+}
 
-    shared_libs: [
-        "librecovery_ui",
+cc_library_static {
+    name: "librecovery_twrp_crosshatch",
+    owner: "google",
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+    ],
+    srcs: [
+        "recovery_twrp.cpp",
+    ],
+    include_dirs: [
+        "bootable/recovery/",
+        "bootable/recovery/install/include",
+        "bootable/recovery/crypto/fscrypt",
+        "bootable/recovery/bootloader_message/include",
+        "system/core/libziparchive/include/",
+    ],
+    static_libs: [
+        "libbase",
+        "libnos_for_recovery",
+        "libnos_citadel_for_recovery",
     ],
 }
