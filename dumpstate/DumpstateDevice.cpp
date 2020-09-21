@@ -367,7 +367,7 @@ static void DumpVibrator(int fd) {
 // Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
 Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     // Ignore return value, just return an empty status.
-    dumpstateBoard_1_1(handle, DumpstateMode::DEFAULT, 30 * 1000 /* timeoutMillis */);
+    dumpstateBoard_1_1(handle, DumpstateMode::DEFAULT, 60 * 1000 /* timeoutMillis */);
     return Void();
 }
 
@@ -501,6 +501,8 @@ Return<DumpstateStatus> DumpstateDevice::dumpstateBoard_1_1(const hidl_handle& h
     // Keep this at the end as very long on not for humans
     DumpFileToFd(fd, "WLAN FW Log Symbol Table", "/vendor/firmware/Data.msc");
 
+    // Dump page owner
+    DumpFileToFd(fd, "Page Owner", "/sys/kernel/debug/page_owner");
     if (modemThreadHandle) {
         pthread_join(modemThreadHandle, NULL);
     }
