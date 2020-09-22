@@ -367,7 +367,7 @@ static void DumpVibrator(int fd) {
 // Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
 Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     // Ignore return value, just return an empty status.
-    dumpstateBoard_1_1(handle, DumpstateMode::DEFAULT, 60 * 1000 /* timeoutMillis */);
+    dumpstateBoard_1_1(handle, DumpstateMode::DEFAULT, 30 * 1000 /* timeoutMillis */);
     return Void();
 }
 
