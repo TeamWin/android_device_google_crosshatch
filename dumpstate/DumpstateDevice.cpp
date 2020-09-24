@@ -500,6 +500,9 @@ Return<DumpstateStatus> DumpstateDevice::dumpstateBoard_1_1(const hidl_handle& h
     // Keep this at the end as very long on not for humans
     DumpFileToFd(fd, "WLAN FW Log Symbol Table", "/vendor/firmware/Data.msc");
 
+    // Dump fastrpc dma buffer size
+    DumpFileToFd(fd, "Fastrpc dma buffer", "/sys/kernel/fastrpc/total_dma_kb");
+
     if (modemThreadHandle) {
         pthread_join(modemThreadHandle, NULL);
     }
