@@ -185,7 +185,9 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_vendor=true
 
 PRODUCT_PACKAGES += \
-    update_engine_sideload \
+    update_engine_sideload
+
+PRODUCT_PACKAGES_DEBUG += \
     sg_write_buffer \
     f2fs_io \
     check_f2fs
