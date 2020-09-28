@@ -27,6 +27,7 @@
 #include <log/log.h>
 #include <pthread.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #define _SVID_SOURCE
 #include <dirent.h>
@@ -67,13 +68,146 @@ namespace implementation {
 #define TCPDUMP_LOG_PREFIX "tcpdump"
 #define EXTENDED_LOG_PREFIX "extended_log_"
 
+#define BUFSIZE 65536
+static void copyFile(std::string srcFile, std::string destFile) {
+    uint8_t buffer[BUFSIZE];
+    ssize_t size;
+
+    int fdSrc = open(srcFile.c_str(), O_RDONLY);
+    if (fdSrc < 0) {
+        ALOGD("Failed to open source file %s\n", srcFile.c_str());
+        return;
+    }
+
+    int fdDest = open(destFile.c_str(), O_WRONLY | O_CREAT, 0666);
+    if (fdDest < 0) {
+        ALOGD("Failed to open destination file %s\n", destFile.c_str());
+        close(fdSrc);
+        return;
+    }
+
+    ALOGD("Copying %s to %s\n", srcFile.c_str(), destFile.c_str());
+    while ((size = TEMP_FAILURE_RETRY(read(fdSrc, buffer, BUFSIZE))) > 0) {
+        TEMP_FAILURE_RETRY(write(fdDest, buffer, size));
+    }
+
+    close(fdDest);
+    close(fdSrc);
+}
+
+struct PosixTarHeader {
+    char name[100];               /*   0 */
+    char mode[8];                 /* 100 */
+    char uid[8];                  /* 108 */
+    char gid[8];                  /* 116 */
+    char size[12];                /* 124 */
+    char mtime[12];               /* 136 */
+    char chksum[8];               /* 148 */
+    char typeflag;                /* 156 */
+    char linkname[100];           /* 157 */
+    char magic[6];                /* 257 */
+    char version[2];              /* 259 */
+    char uname[32];               /* 265 */
+    char gname[32];               /* 297 */
+    char devmajor[8];             /* 329 */
+    char devminor[8];             /* 337 */
+    char prefix[155];             /* 345 */
+    char pad[12];                 /* 500 */
+};
+
+static unsigned int tarCheckSum(PosixTarHeader *header) {
+    unsigned int sum = 0;
+    char *p = (char *)header;
+    char *q = p + sizeof(PosixTarHeader);
+    for (int i = 0; i < 8; i++) {
+        header->chksum[i] = ' ';
+    }
+    while (p < q) {
+        sum += *p++ & 0xff;
+    }
+    return sum;
+}
+
+static PosixTarHeader *tarHeader(PosixTarHeader *header, char *fileName, ssize_t fileSize) {
+    memset(header, 0, sizeof(PosixTarHeader));
+    strcpy(header->name, fileName);
+    sprintf(header->mode, "%07o", 0600);
+    sprintf(header->size, "%011llo", (long long unsigned int)fileSize);
+    sprintf(header->mtime, "%011o", 0);
+    header->typeflag = '0';
+    strcpy(header->magic, "ustar");
+    strcpy(header->version, " ");
+    sprintf(header->chksum, "%06o", tarCheckSum(header));
+    return header;
+}
+
+static void createTarFile(std::string tarFile, std::string srcDir) {
+    uint8_t buffer[BUFSIZE];
+    struct dirent *dirent;
+    struct stat st;
+    PosixTarHeader header;
+    ssize_t size, tarLen = 0, blockSize = sizeof(PosixTarHeader);
+    char padding = '\0';
+
+    DIR *dirp = opendir(srcDir.c_str());
+    if (dirp == NULL) {
+        ALOGD("Unable to open folder %s\n", srcDir.c_str());
+        return;
+    }
+
+    int fdTar = open(tarFile.c_str(), O_WRONLY | O_CREAT, 0666);
+    if (fdTar < 0) {
+        ALOGD("Unable to open file %s\n", tarFile.c_str());
+        closedir(dirp);
+        return;
+    }
+
+    ALOGD("Creating tar file %s\n", tarFile.c_str());
+    while ((dirent = readdir(dirp)) != NULL) {
+        if (dirent->d_name[0] == '.') {
+            continue;
+        }
+
+        std::string path = srcDir + "/" + dirent->d_name;
+        int fd = open(path.c_str(), O_RDONLY);
+        if (fd < 0) {
+            ALOGD("Unable to open file %s\n", path.c_str());
+            continue;
+        }
+        fstat(fd, &st);
+
+        if (TEMP_FAILURE_RETRY(write(fdTar, tarHeader(
+            &header, dirent->d_name, st.st_size), blockSize)) <= 0) {
+            ALOGD("Error while writing file %s, errno=%d\n", tarFile.c_str(), errno);
+            close(fd);
+            continue;
+        }
+        tarLen += blockSize;
+
+        while ((size = TEMP_FAILURE_RETRY(read(fd, buffer, BUFSIZE))) > 0) {
+            write(fdTar, buffer, size);
+            tarLen += size;
+        }
+
+        while (tarLen % blockSize != 0) {
+            write(fdTar, &padding, 1);
+            tarLen++;
+        }
+        close(fd);
+    }
+    close(fdTar);
+    closedir(dirp);
+}
+
 static void dumpLogs(int fd, std::string srcDir, std::string destDir,
                      int maxFileNum, const char *logPrefix) {
+    (void) fd;
     struct dirent **dirent_list = NULL;
     int num_entries = scandir(srcDir.c_str(),
                               &dirent_list,
                               0,
                               (int (*)(const struct dirent **, const struct dirent **)) alphasort);
+
     if (!dirent_list) {
         return;
     } else if (num_entries <= 0) {
@@ -96,14 +230,9 @@ static void dumpLogs(int fd, std::string srcDir, std::string destDir,
 
         copiedFiles++;
 
-        CommandOptions options = CommandOptions::WithTimeout(120).Build();
         std::string srcLogFile = srcDir + "/" + dirent_list[i]->d_name;
         std::string destLogFile = destDir + "/" + dirent_list[i]->d_name;
-
-        std::string copyCmd = "/vendor/bin/cp " + srcLogFile + " " + destLogFile;
-
-        ALOGD("Copying %s to %s\n", srcLogFile.c_str(), destLogFile.c_str());
-        RunCommandToFd(fd, "CP DIAG LOGS", { "/vendor/bin/sh", "-c", copyCmd.c_str() }, options);
+        copyFile(srcLogFile, destLogFile);
     }
 
     while (num_entries--) {
@@ -167,7 +296,7 @@ static void *dumpModemThread(void *data)
             android::base::SetProperty(DIAG_MDLOG_PROPERTY, "true");
         }
     }
-    RunCommandToFd(STDOUT_FILENO, "CP MODEM POWERON LOG", {"/vendor/bin/cp", diagPoweronLogPath.c_str(), modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
+    copyFile(diagPoweronLogPath, modemLogAllDir + "/" + basename(diagPoweronLogPath.c_str()));
 
     if (!PropertiesHelper::IsUserBuild()) {
         android::base::SetProperty(MODEM_EFS_DUMP_PROPERTY, "true");
@@ -203,15 +332,14 @@ static void *dumpModemThread(void *data)
         }
 
         for (const auto& logFile : rilAndNetmgrLogs) {
-            RunCommandToFd(STDOUT_FILENO, "CP MODEM LOG", {"/vendor/bin/cp", logFile.c_str(), modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
+            copyFile(logFile, modemLogAllDir + "/" + basename(logFile.c_str()));
         }
 
         dumpLogs(STDOUT_FILENO, extendedLogDir, modemLogAllDir, 100, EXTENDED_LOG_PREFIX);
         android::base::SetProperty(MODEM_EFS_DUMP_PROPERTY, "false");
     }
 
-    RunCommandToFd(STDOUT_FILENO, "TAR LOG", {"/vendor/bin/tar", "cvf", modemLogCombined.c_str(), "-C", modemLogAllDir.c_str(), "."}, CommandOptions::WithTimeout(20).Build());
-    RunCommandToFd(STDOUT_FILENO, "CHG PERM", {"/vendor/bin/chmod", "a+w", modemLogCombined.c_str()}, CommandOptions::WithTimeout(2).Build());
+    createTarFile(modemLogCombined, modemLogAllDir);
 
     std::vector<uint8_t> buffer(65536);
     android::base::unique_fd fdLog(TEMP_FAILURE_RETRY(open(modemLogCombined.c_str(), O_RDONLY | O_CLOEXEC | O_NONBLOCK)));
