@@ -261,22 +261,10 @@ static void *dumpModemThread(void *data)
         return NULL;
     }
 
-    sleep(1);
-    ALOGD("Waited modem for 1 second to flush logs");
-
-    const std::string modemLogCombined = modemLogDir + "/" + filePrefix + "all.tar";
-    const std::string modemLogAllDir = modemLogDir + "/modem_log";
-
-    RunCommandToFd(STDOUT_FILENO, "MKDIR MODEM LOG", {"/vendor/bin/mkdir", "-p", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
-
-    const std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
-    const std::string diagPoweronLogPath = "/data/vendor/radio/diag_logs/logs/diag_poweron_log.qmdl";
-
     bool diagLogEnabled = android::base::GetBoolProperty(DIAG_MDLOG_PERSIST_PROPERTY, false);
+    bool diagLogStarted = android::base::GetBoolProperty(DIAG_MDLOG_STATUS_PROPERTY, false);
 
     if (diagLogEnabled) {
-        bool diagLogStarted = android::base::GetBoolProperty( DIAG_MDLOG_STATUS_PROPERTY, false);
-
         if (diagLogStarted) {
             android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
             ALOGD("Stopping diag_mdlog...\n");
@@ -288,7 +276,20 @@ static void *dumpModemThread(void *data)
         } else {
             ALOGD("diag_mdlog is not running");
         }
+    }
 
+    sleep(1);
+    ALOGD("Waited modem for 1 second to flush logs");
+
+    const std::string modemLogCombined = modemLogDir + "/" + filePrefix + "all.tar";
+    const std::string modemLogAllDir = modemLogDir + "/modem_log";
+
+    RunCommandToFd(STDOUT_FILENO, "MKDIR MODEM LOG", {"/vendor/bin/mkdir", "-p", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
+
+    const std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
+    const std::string diagPoweronLogPath = "/data/vendor/radio/diag_logs/logs/diag_poweron_log.qmdl";
+
+    if (diagLogEnabled) {
         dumpLogs(STDOUT_FILENO, diagLogDir, modemLogAllDir, android::base::GetIntProperty(DIAG_MDLOG_NUMBER_BUGREPORT, 100), DIAG_LOG_PREFIX);
 
         if (diagLogStarted) {

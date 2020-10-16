@@ -338,6 +338,10 @@ on zygote-start
     mkdir /data/vendor/sensors/log 0770
     chown system system /data/vendor/sensors/log
 
+    # Restore SeLinux Context for preventing temp.json with
+    # incorrect security context
+    restorecon /mnt/vendor/persist/sensors/registry/temp.json
+
     chmod 770 /persist/audio
     chmod 660 /persist/audio/audio.cal
     chown media audio /persist/audio
