@@ -628,7 +628,7 @@ on property:persist.vendor.sys.ssr.enable_ramdumps=1
     mkdir /data/vendor/wifidump 771 root system
     mkdir /data/vendor/ramdump 771 root system
     mkdir /data/vendor/ssrdump 771 root system
-    mkdir /data/vendor/ssrlog  771 root system
+    mkdir /data/vendor/ssrlog  775 root system
     start ss_ramdump
 
 on property:persist.vendor.sys.ssr.enable_ramdumps=0
