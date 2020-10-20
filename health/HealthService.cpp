@@ -124,7 +124,6 @@ void healthd_board_init(struct healthd_config *config) {
 
     config->batteryStatusPath = kChargerStatus.c_str();
 
-    battDefender.update();
     needs_wlc_updates = FileExists(kWlcCapacity);
 }
 
@@ -136,7 +135,7 @@ int healthd_board_battery_update(struct android::BatteryProperties *props) {
     shutdownMetrics.logShutdownVoltage(props);
     ccBackupRestoreBMS.Backup(props->batteryLevel);
     ccBackupRestoreMAX.Backup(props->batteryLevel);
-    battDefender.update();
+    battDefender.update(props);
 
     if (needs_wlc_updates &&
         !android::base::WriteStringToFile(std::to_string(props->batteryLevel), kWlcCapacity))
