@@ -153,7 +153,7 @@ int main(int /* argc */, char ** /* argv */) {
              .lastEntrySupported = true,
              .lastEntryPrefix = easelLastEntryPrefix}};
         sp<GenericStateResidencyDataProvider> easelSdp =
-            new GenericStateResidencyDataProvider("/d/mnh_sm/power_stats");
+            new GenericStateResidencyDataProvider("/sys/class/misc/mnh_sm/power_stats");
 
         uint32_t easelId = service->addPowerEntity("Easel", PowerEntityType::SUBSYSTEM);
         easelSdp->addEntity(
