@@ -153,10 +153,6 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_verifier
 
-# Resume on Reboot support
-PRODUCT_PACKAGES += \
-    android.hardware.rebootescrow-service.citadel
-
 # Use Sdcardfs
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.sys.sdcardfs=1
@@ -688,21 +684,6 @@ endif
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.1-service.crosshatch
 
-# Citadel
-PRODUCT_PACKAGES += \
-    citadeld \
-    citadel_updater \
-    android.hardware.authsecret@1.0-service.citadel \
-    android.hardware.oemlock@1.0-service.citadel \
-    android.hardware.weaver@1.0-service.citadel \
-    android.hardware.keymaster@4.1-service.citadel \
-    android.hardware.identity@1.0-service.citadel \
-    wait_for_strongbox
-
-# Citadel debug stuff
-PRODUCT_PACKAGES_DEBUG += \
-    test_citadel
-
 # Storage: for factory reset protection feature
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.frp.pst=/dev/block/bootdevice/by-name/frp
@@ -869,11 +850,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     android.hardware.atrace@1.0-service.pixel
 
-# fastbootd
-PRODUCT_PACKAGES += \
-    android.hardware.fastboot@1.0-impl.pixel \
-    fastbootd
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/thermal_info_config_$(PRODUCT_HARDWARE).json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
     $(LOCAL_PATH)/thermal_info_config_$(PRODUCT_HARDWARE)_evt.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config_evt.json
@@ -910,6 +886,9 @@ endif
 include hardware/google/pixel/pixelstats/device.mk
 include hardware/google/pixel/mm/device_legacy.mk
 include hardware/google/pixel/thermal/device.mk
+
+# Citadel
+include hardware/google/pixel/citadel/citadel.mk
 
 # power HAL
 -include hardware/google/pixel/power-libperfmgr/aidl/device.mk
