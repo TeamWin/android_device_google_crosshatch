@@ -240,6 +240,9 @@ struct snd_dec_aptx {
   __u32 uap;
   __u32 nap;
 };
+struct snd_dec_amrwb_plus {
+  __u32 bit_stream_fmt;
+};
 union snd_codec_options {
   struct snd_enc_wma wma;
   struct snd_enc_vorbis vorbis;
@@ -252,6 +255,7 @@ union snd_codec_options {
   struct snd_dec_alac alac;
   struct snd_dec_ape ape;
   struct snd_dec_aptx aptx_dec;
+  struct snd_dec_amrwb_plus amrwbplus;
 };
 struct snd_codec_desc {
   __u32 max_ch;
@@ -290,4 +294,3 @@ struct snd_codec_metadata {
   __u32 reserved[4];
 };
 #endif
-
