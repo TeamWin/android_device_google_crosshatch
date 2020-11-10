@@ -16,3 +16,7 @@ LOCAL_STEM := blueline/device-partial.mk
 
 $(call inherit-product-if-exists, vendor/google_devices/$(LOCAL_STEM))
 $(call inherit-product-if-exists, vendor/qcom/$(LOCAL_STEM))
+
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/google/camera \
+    vendor/google/interfaces
