@@ -21,7 +21,9 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/interfaces \
     hardware/google/pixel \
     hardware/qcom/sdm845 \
+    vendor/google/camera \
     vendor/qcom/sdm845 \
+    vendor/google/interfaces \
     vendor/google_devices/common/proprietary/confirmatioui_hal \
     vendor/google_nos/host/android
 
