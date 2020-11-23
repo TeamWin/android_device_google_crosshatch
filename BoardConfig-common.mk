@@ -67,10 +67,15 @@ BOARD_USES_METADATA_PARTITION := true
 AB_OTA_UPDATER := true
 
 AB_OTA_PARTITIONS += \
-    boot \
     system \
-    vbmeta \
     dtbo
+
+ifneq ($(PRODUCT_BUILD_BOOT_IMAGE),false)
+AB_OTA_PARTITIONS += boot
+endif
+ifneq ($(PRODUCT_BUILD_VBMETA_IMAGE),false)
+AB_OTA_PARTITIONS += vbmeta
+endif
 
 # Skip product and system_ext partition for nodap build
 ifeq ($(filter %_nodap,$(TARGET_PRODUCT)),)
