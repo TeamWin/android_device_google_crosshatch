@@ -129,12 +129,9 @@ on init && property:vendor.skip.init=0
     write /dev/stune/top-app/schedtune.boost 10
     write /dev/stune/top-app/schedtune.prefer_idle 1
 
-    mkdir /dev/cpuset/camera-daemon
-    write /dev/cpuset/camera-daemon/cpus 0-7
-    write /dev/cpuset/camera-daemon/mems 0
-    chown system system /dev/cpuset/camera-daemon
-    chown system system /dev/cpuset/camera-daemon/tasks
-    chmod 0664 /dev/cpuset/camera-daemon/tasks
+    # set default schedTune value for camera-daemon
+    write /dev/stune/camera-daemon/schedtune.prefer_idle 1
+    write /dev/stune/camera-daemon/schedtune.boost 0
 
     # b/37682684 Enable suspend clock reporting
     write /sys/kernel/debug/clk/debug_suspend 1
