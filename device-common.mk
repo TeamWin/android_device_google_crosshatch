@@ -47,9 +47,6 @@ PRODUCT_PROPERTY_OVERRIDES += af.fast_track_multiplier=1
 PRODUCT_PROPERTY_OVERRIDES += debug.stagefright.ccodec=4
 PRODUCT_PROPERTY_OVERRIDES += debug.stagefright.omx_default_rank=512
 
-# TODO(b/171462631): Remove this once it is the default
-PRODUCT_PROPERTY_OVERRIDES += ro.vold.level_from_user=1
-
 # Pixelstats broken mic detection
 PRODUCT_PROPERTY_OVERRIDES += vendor.audio.mic_break=true
 
