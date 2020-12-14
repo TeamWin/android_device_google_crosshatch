@@ -821,12 +821,6 @@ on property:sys.retaildemo.enabled=1
     setprop persist.vendor.charge.stop.level 35
     setprop persist.vendor.charge.start.level 30
 
-on property:persist.vendor.charge.stop.level=*
-    write /sys/devices/platform/soc/soc:google,charger/charge_stop_level ${persist.vendor.charge.stop.level}
-
-on property:persist.vendor.charge.start.level=*
-    write /sys/devices/platform/soc/soc:google,charger/charge_start_level ${persist.vendor.charge.start.level}
-
 # For Japan radio builds, always enforce camera shutter sound
 # Since this property is read by the audio server in system service,
 # it should be written by the system init.
