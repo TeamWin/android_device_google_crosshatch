@@ -535,7 +535,9 @@ PRODUCT_COPY_FILES += \
 
 
 HOSTAPD := hostapd
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 HOSTAPD += hostapd_cli
+endif
 PRODUCT_PACKAGES += $(HOSTAPD)
 
 WPA := wpa_supplicant.conf
