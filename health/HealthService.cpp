@@ -53,7 +53,9 @@ constexpr char kBatteryResistance[] = "/sys/class/power_supply/maxfg/resistance"
 constexpr char kBatteryOCV[] = "/sys/class/power_supply/maxfg/voltage_ocv";
 constexpr char kVoltageAvg[] = "/sys/class/power_supply/maxfg/voltage_avg";
 
-static BatteryDefender battDefender;
+#define WLC_DIR "/sys/class/power_supply/wireless"
+
+static BatteryDefender battDefender(WLC_DIR "/online");
 static BatteryRechargingControl battRechargingControl;
 static BatteryThermalControl battThermalControl("sys/devices/virtual/thermal/tz-by-name/soc/mode");
 static BatteryMetricsLogger battMetricsLogger(kBatteryResistance, kBatteryOCV);
@@ -75,7 +77,6 @@ const std::string kUfsVersion{UFS_DIR "/version"};
 const std::string kDiskStatsFile{"/sys/block/sda/stat"};
 const std::string kUFSName{"UFS0"};
 
-#define WLC_DIR "/sys/class/power_supply/wireless"
 static bool needs_wlc_updates = false;
 constexpr char kWlcCapacity[]{WLC_DIR "/capacity"};
 
