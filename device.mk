@@ -25,7 +25,8 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/sdm845 \
     vendor/google/interfaces \
     vendor/google_devices/common/proprietary/confirmatioui_hal \
-    vendor/google_nos/host/android
+    vendor/google_nos/host/android \
+    vendor/google_nos/test/system-test-harness
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
