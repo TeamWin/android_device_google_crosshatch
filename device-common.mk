@@ -108,10 +108,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.0-service.crosshatch
 
-# Dmabuf dump tool for bug reports
-PRODUCT_PACKAGES += \
-    dmabuf_dump
-
 # whitelisted app
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/qti_whitelist.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/qti_whitelist.xml
