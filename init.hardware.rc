@@ -169,6 +169,9 @@ on init && property:vendor.skip.init=0
     chown system system /sys/devices/platform/soc/soc:google,charger/bd_temp_enable
 
 on late-init
+    write /sys/devices/virtual/thermal/tz-by-name/quiet-therm-adc/mode enabled
+    chown system system /sys/devices/virtual/thermal/tz-by-name/quiet-therm-monitor/trip_point_0_temp
+    chown system system /sys/devices/virtual/thermal/tz-by-name/quiet-therm-monitor/trip_point_0_hyst
     write /sys/devices/virtual/thermal/tz-by-name/fps-therm-adc/mode enabled
     chown system system /sys/devices/virtual/thermal/tz-by-name/fps-therm-monitor/trip_point_0_temp
     chown system system /sys/devices/virtual/thermal/tz-by-name/fps-therm-monitor/trip_point_0_hyst
