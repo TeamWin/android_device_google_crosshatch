@@ -1,3 +1,4 @@
 third_party {
-  license_type: NOTICE
+  # would be NOTICE save for sdm845/original-kernel-headers/
+  license_type: RESTRICTED
 }
