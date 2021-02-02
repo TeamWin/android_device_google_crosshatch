@@ -49,11 +49,10 @@ cc_library_static {
         "recovery_twrp.cpp",
     ],
     include_dirs: [
-        "bootable/recovery/",
-        "bootable/recovery/install/include",
-        "bootable/recovery/crypto/fscrypt",
-        "bootable/recovery/bootloader_message/include",
-        "system/core/libziparchive/include/",
+        "bootable/recovery",
+        "bootable/recovery/crypto/ext4crypt",
+	"bootable/recovery/twrpinstall/include/",
+	"system/core/libziparchive/include/"
     ],
     static_libs: [
         "libbase",
