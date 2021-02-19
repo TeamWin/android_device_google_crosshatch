@@ -5,7 +5,7 @@
         <!-- Hearing AIDs Audio Ports -->
         <mixPort name="hearing aid output" role="source">
             <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                     samplingRates="24000,16000"
+                     samplingRates="24000 16000"
                      channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         </mixPort>
     </mixPorts>
