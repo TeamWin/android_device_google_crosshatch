@@ -483,6 +483,18 @@ Return<DumpstateStatus> DumpstateDevice::dumpstateBoard_1_1(const hidl_handle& h
     DumpFileToFd(fd, "Modem Stat", "/data/vendor/modem_stat/debug.txt");
     DumpFileToFd(fd, "Pixel trace", "/d/tracing/instances/pixel-trace/trace");
 
+    /* Battery Defend setting */
+    RunCommandToFd(
+        fd, "TEMP-DEFEND Config",
+        {"/vendor/bin/sh", "-c",
+         " cd /sys/devices/platform/soc/soc:google,charger; for f in `ls bd_*` ; do echo "
+         "\"$f: `cat $f`\" ; done"});
+    RunCommandToFd(
+        fd, "DWELL-DEFEND Config",
+        {"/vendor/bin/sh", "-c",
+         " cd /sys/devices/platform/soc/soc:google,charger; for f in `ls charge_s*` ; do echo "
+         "\"$f: `cat $f`\" ; done"});
+
     // Slower dump put later in case stuck the rest of dump
     // Timeout after 3s as TZ log missing EOF
     RunCommandToFd(fd, "QSEE logs", {"/vendor/bin/sh", "-c", "/vendor/bin/timeout 3 cat /d/tzdbg/qsee_log"});
