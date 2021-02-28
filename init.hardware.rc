@@ -833,22 +833,9 @@ service vendor.theme_set /vendor/bin/misc_writer --set-dark-theme
     disabled
     oneshot
 
-# Clear the dark theme magic in /misc partition.
-service vendor.theme_clear /vendor/bin/misc_writer --clear-dark-theme
-    disabled
-    oneshot
-
-# Set dark boot flag on dark mode (UiModeManager.MODE_NIGHT_YES == 2).
-on property:persist.sys.theme=2
+# Set dark boot flag when the device is provisioned.
+on property:persist.sys.device_provisioned=1
     start vendor.theme_set
-
-# Clear the dark boot flag on light mode (UiModeManager.MODE_NIGHT_NO == 1) or auto mode
-# (UiModeManager.MODE_NIGHT_AUTO == 0).
-on property:persist.sys.theme=1
-    start vendor.theme_clear
-
-on property:persist.sys.theme=0
-    start vendor.theme_clear
 
 on init && property:ro.boot.slot_successful=no
     write /sys/module/msm_poweroff/parameters/warm_reset 1
