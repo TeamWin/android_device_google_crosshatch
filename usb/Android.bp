@@ -23,7 +23,7 @@ cc_binary {
     init_rc: ["android.hardware.usb@1.2-service.crosshatch.rc"],
     vintf_fragments: [
         "android.hardware.usb@1.2-service.crosshatch.xml",
-        "android.hardware.usb.gadget@1.1-service.crosshatch.xml",
+        "android.hardware.usb.gadget@1.2-service.crosshatch.xml",
     ],
     srcs: ["service.cpp", "Usb.cpp", "UsbGadget.cpp"],
     shared_libs: [
@@ -32,6 +32,7 @@ cc_binary {
         "android.hardware.usb@1.2",
         "android.hardware.usb.gadget@1.0",
         "android.hardware.usb.gadget@1.1",
+        "android.hardware.usb.gadget@1.2",
         "libbase",
         "libcutils",
         "libhardware",
@@ -39,5 +40,6 @@ cc_binary {
         "liblog",
         "libutils",
     ],
+    static_libs: ["libpixelusb"],
     proprietary: true,
 }
