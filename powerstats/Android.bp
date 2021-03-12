@@ -12,6 +12,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
 cc_binary {
     name: "android.hardware.power.stats@1.0-service.pixel",
     relative_install_path: "hw",
