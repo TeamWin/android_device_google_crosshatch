@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.usb@1.1-service.crosshatch"
+#define LOG_TAG "android.hardware.usb@1.2-service.crosshatch"
 
 #include <hidl/HidlTransportSupport.h>
 #include "Usb.h"
@@ -29,8 +29,8 @@ using android::hardware::joinRpcThreadpool;
 // Generated HIDL files
 using android::hardware::usb::gadget::V1_1::IUsbGadget;
 using android::hardware::usb::gadget::V1_1::implementation::UsbGadget;
-using android::hardware::usb::V1_1::IUsb;
-using android::hardware::usb::V1_1::implementation::Usb;
+using android::hardware::usb::V1_2::IUsb;
+using android::hardware::usb::V1_2::implementation::Usb;
 
 using android::OK;
 using android::status_t;
