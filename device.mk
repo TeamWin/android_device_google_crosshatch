@@ -440,7 +440,7 @@ PRODUCT_COPY_FILES += \
     device/google/crosshatch/nfc/libese-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libese-nxp.conf
 
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.1-service.crosshatch
+    android.hardware.usb@1.2-service.crosshatch
 
 PRODUCT_PACKAGES += \
     libmm-omxcore \
