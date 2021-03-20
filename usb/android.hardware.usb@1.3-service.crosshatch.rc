@@ -1,0 +1,20 @@
+service vendor.usb-hal-1-3 /vendor/bin/hw/android.hardware.usb@1.3-service.crosshatch
+    class hal
+    user root
+    group root system shell mtp
+
+on boot
+    chown root system /sys/class/typec/port0/power_role
+    chown root system /sys/class/typec/port0/data_role
+    chown root system /sys/class/typec/port0/port_type
+    chmod 664 /sys/class/typec/port0/power_role
+    chmod 664 /sys/class/typec/port0/data_role
+    chmod 664 /sys/class/typec/port0/port_type
+
+on post-fs
+    chown root system /sys/devices/platform/soc/a600000.ssusb/b_sess
+    chown root system /sys/devices/platform/soc/a600000.ssusb/id
+    chown root system /sys/devices/platform/soc/a600000.ssusb/usb_data_enabled
+    chmod 664 /sys/devices/platform/soc/a600000.ssusb/b_sess
+    chmod 664 /sys/devices/platform/soc/a600000.ssusb/id
+    chmod 664 /sys/devices/platform/soc/a600000.ssusb/usb_data_enabled

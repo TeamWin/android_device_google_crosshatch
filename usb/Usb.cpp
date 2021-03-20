@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.usb@1.2-service.crosshatch"
+#define LOG_TAG "android.hardware.usb@1.3-service.crosshatch"
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
@@ -37,12 +37,53 @@
 #include <utils/StrongPointer.h>
 
 #include "Usb.h"
+#include "UsbGadget.h"
 
 namespace android {
 namespace hardware {
 namespace usb {
-namespace V1_2 {
+namespace V1_3 {
 namespace implementation {
+
+Return<bool> Usb::enableUsbDataSignal(bool enable) {
+    bool result = true;
+
+    ALOGI("Userspace turn %s USB data signaling", enable ? "on" : "off");
+
+    if (enable) {
+        if (!WriteStringToFile("1", USB_DATA_PATH)) {
+            ALOGE("Not able to turn on usb connection notification");
+            result = false;
+        }
+
+        if (!WriteStringToFile(gadget::V1_2::implementation::kGadgetName, PULLUP_PATH)) {
+            ALOGE("Gadget cannot be pulled up");
+            result = false;
+        }
+    } else {
+        if (!WriteStringToFile("1", ID_PATH)) {
+            ALOGE("Not able to turn off host mode");
+            result = false;
+        }
+
+        if (!WriteStringToFile("0", VBUS_PATH)) {
+            ALOGE("Not able to set Vbus state");
+            result = false;
+        }
+
+        if (!WriteStringToFile("0", USB_DATA_PATH)) {
+            ALOGE("Not able to turn on usb connection notification");
+            result = false;
+        }
+
+        if (!WriteStringToFile("none", PULLUP_PATH)) {
+            ALOGE("Gadget cannot be pulled down");
+            result = false;
+        }
+    }
+
+    return result;
+}
 
 // Set by the signal handler to destroy the thread
 volatile bool destroyThread;
@@ -84,12 +125,9 @@ Status queryMoistureDetectionStatus(hidl_vec<PortStatus> *currentPortStatus_1_2)
   (*currentPortStatus_1_2)[0].contaminantProtectionStatus =
       V1_2::ContaminantProtectionStatus::NONE;
   (*currentPortStatus_1_2)[0].contaminantDetectionStatus =
-      V1_2::ContaminantDetectionStatus::DISABLED;
+      V1_2::ContaminantDetectionStatus::NOT_DETECTED;
   (*currentPortStatus_1_2)[0].supportsEnableContaminantPresenceDetection = false;
   (*currentPortStatus_1_2)[0].supportsEnableContaminantPresenceProtection = false;
-
-  (*currentPortStatus_1_2)[0].contaminantDetectionStatus =
-      V1_2::ContaminantDetectionStatus::NOT_DETECTED;
 
   ALOGI("ContaminantDetectionStatus:%d ContaminantProtectionStatus:%d",
         (*currentPortStatus_1_2)[0].contaminantDetectionStatus,
@@ -503,7 +541,8 @@ done:
     return Status::ERROR;
 }
 
-void queryVersionHelper(Usb *usb, hidl_vec<PortStatus> *currentPortStatus_1_2) {
+void queryVersionHelper(android::hardware::usb::V1_3::implementation::Usb *usb,
+                        hidl_vec<PortStatus> *currentPortStatus_1_2) {
     hidl_vec<V1_1::PortStatus_1_1> currentPortStatus_1_1;
     hidl_vec<V1_0::PortStatus> currentPortStatus;
     Status status;
@@ -571,7 +610,7 @@ Return<void> Usb::enableContaminantPresenceProtection(const hidl_string & /*port
 /* uevent_event() data that is persistent across uevents. */
 struct data {
   int uevent_fd;
-  android::hardware::usb::V1_2::implementation::Usb *usb;
+  android::hardware::usb::V1_3::implementation::Usb *usb;
 };
 
 // Report connection & disconnection of devices into the USB-C connector.
@@ -643,7 +682,7 @@ void *work(void *param) {
   }
 
   payload.uevent_fd = uevent_fd;
-  payload.usb = (android::hardware::usb::V1_2::implementation::Usb *)param;
+  payload.usb = (android::hardware::usb::V1_3::implementation::Usb *)param;
 
   fcntl(uevent_fd, F_SETFL, O_NONBLOCK);
 
@@ -756,7 +795,7 @@ Return<void> Usb::setCallback(const sp<V1_0::IUsbCallback> &callback) {
 }
 
 }  // namespace implementation
-}  // namespace V1_2
+}  // namespace V1_3
 }  // namespace usb
 }  // namespace hardware
 }  // namespace android

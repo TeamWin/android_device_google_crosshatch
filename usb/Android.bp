@@ -18,20 +18,22 @@ package {
 }
 
 cc_binary {
-    name: "android.hardware.usb@1.2-service.crosshatch",
+    name: "android.hardware.usb@1.3-service.crosshatch",
     relative_install_path: "hw",
-    init_rc: ["android.hardware.usb@1.2-service.crosshatch.rc"],
+    init_rc: ["android.hardware.usb@1.3-service.crosshatch.rc"],
     vintf_fragments: [
-        "android.hardware.usb@1.2-service.crosshatch.xml",
-        "android.hardware.usb.gadget@1.1-service.crosshatch.xml",
+        "android.hardware.usb@1.3-service.crosshatch.xml",
+        "android.hardware.usb.gadget@1.2-service.crosshatch.xml",
     ],
     srcs: ["service.cpp", "Usb.cpp", "UsbGadget.cpp"],
     shared_libs: [
         "android.hardware.usb@1.0",
         "android.hardware.usb@1.1",
         "android.hardware.usb@1.2",
+        "android.hardware.usb@1.3",
         "android.hardware.usb.gadget@1.0",
         "android.hardware.usb.gadget@1.1",
+        "android.hardware.usb.gadget@1.2",
         "libbase",
         "libcutils",
         "libhardware",
@@ -39,5 +41,6 @@ cc_binary {
         "liblog",
         "libutils",
     ],
+    static_libs: ["libpixelusb"],
     proprietary: true,
 }
