@@ -233,6 +233,9 @@ on late-fs
     # Start time daemon early so that the system time can be set early
     start time_daemon
 
+    # Write build info to kdebuginfo.
+    write /sys/module/kdebuginfo/parameters/build_info "${ro.product.name}-${ro.build.type} ${ro.build.version.incremental}"
+
 on post-fs
     # Disable sched autogroup
     write /proc/sys/kernel/sched_autogroup_enabled 0
