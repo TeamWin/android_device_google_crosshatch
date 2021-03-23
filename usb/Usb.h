@@ -42,8 +42,8 @@ using ::android::hidl::base::V1_0::DebugInfo;
 using ::android::hidl::base::V1_0::IBase;
 
 #define SOC_PATH "/sys/devices/platform/soc/a600000.ssusb/"
-#define VBUS_PATH SOC_PATH "id"
-#define ID_PATH SOC_PATH "b_sess"
+#define ID_PATH SOC_PATH "id"
+#define VBUS_PATH SOC_PATH "b_sess"
 #define USB_DATA_PATH SOC_PATH "usb_data_enabled"
 
 enum class HALVersion { V1_0, V1_1, V1_2, V1_3 };
