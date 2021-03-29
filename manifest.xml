@@ -267,15 +267,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>vendor.google.wireless_charger</name>
-        <transport>hwbinder</transport>
-        <version>1.3</version>
-        <interface>
-            <name>IWirelessCharger</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.radio</name>
         <transport>hwbinder</transport>
         <fqname>@1.2::ISap/slot1</fqname>
