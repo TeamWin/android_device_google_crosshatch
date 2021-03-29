@@ -41,6 +41,8 @@ using ::android::hardware::usb::V1_3::IUsb;
 using ::android::hidl::base::V1_0::DebugInfo;
 using ::android::hidl::base::V1_0::IBase;
 
+#define PULLUP_PATH "/config/usb_gadget/g1/UDC"
+constexpr char kGadgetName[] = "a600000.dwc3";
 #define SOC_PATH "/sys/devices/platform/soc/a600000.ssusb/"
 #define ID_PATH SOC_PATH "id"
 #define VBUS_PATH SOC_PATH "b_sess"
