@@ -29,4 +29,16 @@
     <!-- end margin for multi user switch in collapsed quick settings -->
     <dimen name="multi_user_switch_keyguard_margin">7dp</dimen>
 
+    <!-- Location on the screen of the center of the physical power button. -->
+    <dimen name="physical_power_button_center_screen_location_y">780px</dimen>
+
+    <!-- Location on the screen of the center of the physical volume up/down buttons. -->
+    <dimen name="physical_volume_up_button_center_screen_location_y">1180px</dimen>
+    <dimen name="physical_volume_down_button_center_screen_location_y">1380px</dimen>
+
+    <!-- Location on the screen of the center of the fingerprint sensor. For devices with under
+     display fingerprint sensors, this directly corresponds to the fingerprint sensor's location.
+     For devices with sensors on the back of the device, this corresponds to the location on the
+     screen directly in front of the sensor. -->
+    <dimen name="physical_fingerprint_sensor_center_screen_location_y">780px</dimen>
 </resources>
