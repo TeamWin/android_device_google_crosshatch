@@ -37,7 +37,6 @@
 #include <utils/StrongPointer.h>
 
 #include "Usb.h"
-#include "UsbGadget.h"
 
 namespace android {
 namespace hardware {
@@ -56,7 +55,7 @@ Return<bool> Usb::enableUsbDataSignal(bool enable) {
             result = false;
         }
 
-        if (!WriteStringToFile(gadget::V1_2::implementation::kGadgetName, PULLUP_PATH)) {
+        if (!WriteStringToFile(kGadgetName, PULLUP_PATH)) {
             ALOGE("Gadget cannot be pulled up");
             result = false;
         }
