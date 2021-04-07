@@ -532,10 +532,6 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.1-impl-qti \
     android.hardware.gnss@1.1-service-qti
 
-# Wireless Charger HAL
-PRODUCT_PACKAGES += \
-    vendor.google.wireless_charger@1.3
-
 ENABLE_VENDOR_RIL_SERVICE := true
 
 PRODUCT_COPY_FILES += \
