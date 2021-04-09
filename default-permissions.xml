@@ -58,17 +58,6 @@
     </exception>
 
     <exception
-            package="com.google.android.projection.gearhead"
-            sha256-cert-digest="FD:B0:0C:43:DB:DE:8B:51:CB:31:2A:A8:1D:3B:5F:A1:77:13:AD:B9:4B:28:F5:98:D7:7F:8E:B8:9D:AC:EE:DF">
-        <!-- For Top Gear -->
-        <permission name="android.permission.PROCESS_OUTGOING_CALLS" fixed="false"/>
-        <permission name="android.permission.READ_SMS" fixed="false"/>
-        <permission name="android.permission.RECEIVE_MMS" fixed="false"/>
-        <permission name="android.permission.WRITE_CALL_LOG" fixed="false"/>
-        <permission name="android.permission.ACCESS_COARSE_LOCATION" fixed="false"/>
-    </exception>
-
-    <exception
             package="com.google.android.apps.restore"
             sha256-cert-digest="56:BE:13:2B:78:06:56:FE:24:44:CD:34:32:6E:B5:D7:AA:C9:1D:20:96:AB:F0:FE:67:3A:99:27:06:22:EC:87">
         <!-- External storage -->
