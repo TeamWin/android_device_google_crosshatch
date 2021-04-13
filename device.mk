@@ -848,7 +848,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Increment the SVN for any official public releases
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.svn=50
+    ro.vendor.build.svn=51
 
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.adb.secure=1
