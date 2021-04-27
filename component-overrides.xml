@@ -17,4 +17,7 @@
     <component-override package="com.android.bluetooth" >
         <component class=".sap.SapService" enabled="true" />
     </component-override>
+    <component-override package="com.google.android.apps.tips" >
+        <component class=".TipsMain" enabled="false" />
+    </component-override>
 </config>
