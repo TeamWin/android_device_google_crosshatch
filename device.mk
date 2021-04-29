@@ -534,6 +534,8 @@ PRODUCT_PACKAGES += \
 
 ENABLE_VENDOR_RIL_SERVICE := true
 
+USE_QCRIL_OEMHOOK := true
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
