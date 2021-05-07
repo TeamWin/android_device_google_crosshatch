@@ -190,7 +190,7 @@
     <item name="wifi.controller.rx">125</item>
     <!-- Tx current for wifi radio in mA-->
     <item name="wifi.controller.tx">350</item>
-    <!-- Operating volatage for wifi radio in mV.-->
+    <!-- Operating voltage for wifi radio in mV.-->
     <item name="wifi.controller.voltage">3700</item>
 
     <!-- Idle current for bluetooth in mA.-->
