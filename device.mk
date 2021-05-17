@@ -488,7 +488,7 @@ PRODUCT_PACKAGES += \
 # Google Camera HAL test libraries in debug builds
 PRODUCT_PACKAGES_DEBUG += \
     libgoogle_camera_hal_proprietary_tests \
-    libgoogle_camera_hal_tests.vendor
+    libgoogle_camera_hal_tests
 
 PRODUCT_PACKAGES += \
     sensors.$(PRODUCT_HARDWARE) \
