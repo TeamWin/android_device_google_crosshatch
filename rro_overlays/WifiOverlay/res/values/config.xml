@@ -88,11 +88,4 @@
 
     <!-- Disable WPA2 to WPA3 auto-upgrade -->
     <bool translatable="false" name="config_wifiSaeUpgradeEnabled">false</bool>
-
-    <!-- STOPSHIP(b/173044646): Enable STA + STA use-cases for teamfooding/testing.
-         HAL also needs to support STA + STA iface combination for the feature to be enabled.
-         So STA + STA will not get enabled on all devices because of this overlay alone.
-         Remove before Android 12 release! -->
-    <bool translatable="false" name="config_wifiMultiStaLocalOnlyConcurrencyEnabled">true</bool>
-    <bool translatable="false" name="config_wifiMultiStaNetworkSwitchingMakeBeforeBreakEnabled">true</bool>
 </resources>
