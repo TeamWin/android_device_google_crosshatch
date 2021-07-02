@@ -18,6 +18,9 @@
 <resources>
     <dimen name="rounded_corner_content_padding">28px</dimen>
 
+    <!-- the padding on the top of the statusbar (usually 0) -->
+    <dimen name="status_bar_padding_top">1px</dimen>
+
     <!-- Location on the screen of the center of the physical power button. -->
     <dimen name="physical_power_button_center_screen_location_y">450px</dimen>
 

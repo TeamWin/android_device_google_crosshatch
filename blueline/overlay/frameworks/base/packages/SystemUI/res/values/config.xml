@@ -41,4 +41,6 @@
         <item>0</item> <!-- 3: HIGH -->
         <item>0</item> <!-- 4: SUN -->
     </integer-array>
+
+    <bool name="config_roundedCornerMultipleRadius">false</bool>
 </resources>
