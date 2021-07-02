@@ -88,4 +88,7 @@
 
     <!-- Disable WPA2 to WPA3 auto-upgrade -->
     <bool translatable="false" name="config_wifiSaeUpgradeEnabled">false</bool>
+
+    <!-- Whether to use the explicit vendor HAL API: IWifiStaIface.setRoamingState for disabling fw roaming. -->
+    <bool translatable="false" name="config_wifiUseHalApiToDisableFwRoaming">true</bool>
 </resources>
