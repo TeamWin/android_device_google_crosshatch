@@ -700,8 +700,7 @@
     <dimen name="status_bar_height_portrait">28dp</dimen>
     <dimen name="status_bar_height_landscape">24dp</dimen>
 
-    <!-- Height of area above QQS where battery/time go (equal to status bar) -->
-    <dimen name="quick_qs_offset_height">28dp</dimen>
+    <dimen name="quick_qs_offset_height">48dp</dimen>
 
     <!-- Height of the status bar header bar when on Keyguard (match status_bar_portrait) -->
     <dimen name="status_bar_header_height_keyguard">@*android:dimen/status_bar_height_portrait</dimen>
