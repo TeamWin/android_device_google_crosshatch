@@ -6,6 +6,10 @@ on init
     # Enable thermal mitigation
     write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
 
+    # This allows the ledtrig-transient properties to be created here so
+    # that they can be chown'd to system:system later on boot
+    write /sys/class/leds/vibrator/trigger "transient"
+
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -14,6 +18,13 @@ on boot
     start health-hal-2-0
 
     # Permission for Vibrator
+    chown system system /sys/class/leds/vibrator/trigger
+    chown system system /sys/class/leds/vibrator/activate
+    chown system system /sys/class/leds/vibrator/brightness
+    chown system system /sys/class/leds/vibrator/duration
+    chown system system /sys/class/leds/vibrator/state
+    chown system system /sys/class/timed_output/vibrator/enable
+
     chown system system /sys/class/leds/vibrator/device/comp_enable
     chown system system /sys/class/leds/vibrator/device/cp_dig_scale
     chown system system /sys/class/leds/vibrator/device/cp_trigger_index
