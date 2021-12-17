@@ -1,0 +1,36 @@
+[
+  {
+    "remote": "aosp",
+    "repository": "platform/hardware/google/interfaces",
+    "target_path": "hardware/google/interfaces",
+    "branch": "refs/tags/android-11.0.0_r29"
+  },
+  {
+    "remote": "aosp",
+    "repository": "platform/hardware/google/pixel",
+    "target_path": "hardware/google/pixel",
+    "branch": "refs/tags/android-11.0.0_r29"
+  },
+  {
+    "remote": "aosp",
+    "repository": "platform/hardware/google/pixel-sepolicy",
+    "target_path": "hardware/google/pixel-sepolicy",
+    "branch": "refs/tags/android-11.0.0_r29"
+  },
+  {
+    "remote": "aosp",
+    "repository": "device/google/crosshatch-kernel",
+    "target_path": "device/google/crosshatch-kernel",
+    "branch": "refs/tags/android-11.0.0_r29"
+  },
+  {
+    "remote": "aosp",
+    "repository": "device/google/crosshatch-sepolicy",
+    "target_path": "device/google/crosshatch-sepolicy",
+    "branch": "refs/tags/android-11.0.0_r29"
+  },
+  {
+    "repository": "android_device_qcom_twrp-common",
+    "target_path": "device/qcom/twrp-common"
+  }
+]
