@@ -51,7 +51,7 @@ PLATFORM_VERSION := 127
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2127-12-31
 LZMA_RAMDISK_TARGETS := recovery,boot
-#TW_NO_HAPTICS := true
+TW_NO_HAPTICS := true
 TW_OVERRIDE_SYSTEM_PROPS := \
     "ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.name=ro.product.system.name"
 TW_LOAD_VENDOR_MODULES := "videobuf2-memops.ko videobuf2-vmalloc.ko heatmap.ko ftm5.ko sec_touch.ko"
