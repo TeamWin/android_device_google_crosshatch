@@ -20,7 +20,7 @@ DEVICE_PATH := device/$(BOARD_VENDOR)/$(COMMON_FOLDER)
 TARGET_RECOVERY_DEVICE_DIRS := $(DEVICE_PATH)
 
 # Kernel
-#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.lz4
 TARGET_PREBUILT_KERNEL := $(LOCAL_KERNEL)
 
@@ -54,6 +54,8 @@ LZMA_RAMDISK_TARGETS := recovery,boot
 TW_OVERRIDE_SYSTEM_PROPS := \
     "ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.name=ro.product.system.name"
 TW_LOAD_VENDOR_MODULES := "videobuf2-memops.ko videobuf2-vmalloc.ko heatmap.ko ftm5.ko sec_touch.ko"
+USE_RECOVERY_INSTALLER := true
+RECOVERY_INSTALLER_PATH := bootable/recovery/installer
 
 # TWRP Debug Flags
 #TWRP_EVENT_LOGGING := true

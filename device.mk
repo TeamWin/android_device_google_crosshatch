@@ -74,7 +74,7 @@ ifeq ($(wildcard vendor/google_devices/crosshatch/proprietary/device-vendor-cros
 endif
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/google/crosshatch-kernel/Image.lz4
+    LOCAL_KERNEL := device/google/crosshatch/recovery/kernel/Image.lz4
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
