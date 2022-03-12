@@ -118,6 +118,10 @@ PRODUCT_PACKAGES += \
 #    ro.khungtask.enable=false
 #
 
+#TWRP
+PRODUCT_COPY_FILES += \
+     device/google/crosshatch/init.recovery.usb.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.usb.rc 
+
 # Enable retrofit dynamic partitions for all blueline
 # and crosshatch targets
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -137,3 +141,5 @@ AB_OTA_POSTINSTALL_CONFIG += \
 # Set thermal warm reset
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.thermal_warmreset = true \
+
+include $(LOCAL_PATH)/device-twrp.mk

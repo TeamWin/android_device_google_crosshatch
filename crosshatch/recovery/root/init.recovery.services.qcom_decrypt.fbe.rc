@@ -1,0 +1,22 @@
+on property:crypto.ready=1
+   start vendor.citadeld
+   start vendor.weaver_hal
+
+service vendor.citadeld /system/bin/citadeld
+    disabled
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
+    seclabel u:r:recovery:s0
+
+service vendor.weaver_hal /system/bin/android.hardware.weaver@1.0-service.citadel
+    disabled
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
+    seclabel u:r:recovery:s0
+
+# Weaver services have to be stopped in order to wipe Titan M during a format data
+on property:weaver.stop=1
+    stop vendor.citadeld
+    stop vendor.weaver_hal

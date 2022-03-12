@@ -48,6 +48,7 @@ BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
 BOARD_KERNEL_CMDLINE += usbcore.autosuspend=7
 BOARD_KERNEL_CMDLINE += loop.max_part=7
 BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc/1d84000.ufshc
+BOARD_KERNEL_CMDLINE += twrpfastboot=1
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
@@ -55,6 +56,8 @@ BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+
+BOARD_KERNEL_IMAGE_NAME  := Image.lz4
 
 # DTBO partition definitions
 BOARD_PREBUILT_DTBOIMAGE := device/google/crosshatch-kernel/dtbo.img
@@ -361,4 +364,6 @@ endif
 
 # Testing related defines
 BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/b1c1-setup.sh
--include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.mk
+-include vendor/google_devices/crosshatch/proprietary/BoardConfigVendor.m
+
+-include device/google/crosshatch/crosshatch/recovery/BoardConfigTWRP.mk

@@ -732,10 +732,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
 
-# DRV2624 Haptics Waveform
-PRODUCT_COPY_FILES += \
-    device/google/crosshatch/vibrator/drv2624/drv2624.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/drv2624.bin
-
 # CS40L20 Haptics Waveform & Firmware
 PRODUCT_COPY_FILES += \
     device/google/crosshatch/vibrator/cs40l20/cs40l20.wmfw:$(TARGET_COPY_OUT_VENDOR)/firmware/cs40l20.wmfw \
@@ -850,9 +846,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Increment the SVN for any official public releases
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.svn=57
-
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.adb.secure=1
 
 # pixel atrace HAL
 PRODUCT_PACKAGES += \
