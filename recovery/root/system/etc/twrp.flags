@@ -1,0 +1,9 @@
+/system_ext     ext4   system_ext                               flags=display="System_EXT"
+/metadata       ext4   /dev/block/by-name/metadata              flags=display="Metadata"
+/boot           emmc   /dev/block/bootdevice/by-name/boot       flags=slotselect
+/persist        ext4   /dev/block/bootdevice/by-name/persist    flags=display="Persist";fsflags="ro,nosuid,nodev,noatime,barrier=1"
+/persist_image  emmc   /dev/block/bootdevice/by-name/persist    flags=display="Persist";backup=1
+/firmware       vfat   /dev/block/bootdevice/by-name/modem      flags=display="Firmware";slotselect;fsflags="ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:vendor_firmware_file:s0"
+
+# USB OTG
+/usb_otg        vfat   /dev/block/sdg1         /dev/block/sdg   flags=display="USB-OTG";storage;wipeingui;removable

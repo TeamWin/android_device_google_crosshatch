@@ -548,6 +548,9 @@ on property:sys.boot_completed=1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/clkgate_enable 1
     write /sys/devices/platform/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 1
 
+    # Limit 4KB discards to 2GB of space
+    write /dev/sys/fs/by-name/userdata/max_small_discards 5120
+
     # Enable ZRAM on boot_complete
     rm /data/unencrypted/zram_swap
     swapon_all /vendor/etc/fstab.${ro.boot.hardware.platform}

@@ -729,14 +729,10 @@
      -->
     <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
 
-    <!-- Height of the status bar -->
-    <dimen name="status_bar_height_portrait">171px</dimen>
-    <dimen name="status_bar_height_landscape">28dp</dimen>
-    <!-- Height of area above QQS where battery/time go (equal to status bar height if > 48dp) -->
-    <dimen name="quick_qs_offset_height">171px</dimen>
-    <!-- Total height of QQS (quick_qs_offset_height + 128dp) -->
-    <dimen name="quick_qs_total_height">177dp</dimen>
-
+    <!-- Height of the status bar.
+         Do not read this dimen directly. Use {@link SystemBarUtils#getStatusBarHeight} instead.
+         -->
+    <dimen name="status_bar_height">28dp</dimen>
 
     <dimen name="rounded_corner_radius_top">133px</dimen>
     <dimen name="rounded_corner_radius_bottom">70px</dimen>
@@ -751,4 +747,7 @@
     <string-array name="config_disableApkUnlessMatchedSku_skus_list" translatable="false">
         <item>G013D</item>
     </string-array>
+
+    <!-- the number of the max cached processes in the system. -->
+    <integer name="config_customizedMaxCachedProcesses">64</integer>
 </resources>
