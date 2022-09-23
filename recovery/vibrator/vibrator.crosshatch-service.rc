@@ -1,0 +1,34 @@
+on init
+    # This allows the ledtrig-transient properties to be created here so
+    # that they can be chown'd to system:system later on boot
+    write /sys/class/leds/vibrator/trigger "transient"
+
+on boot
+    # Permission for Vibrator
+    chown system system /sys/class/leds/vibrator/trigger
+    chown system system /sys/class/leds/vibrator/activate
+    chown system system /sys/class/leds/vibrator/brightness
+    chown system system /sys/class/leds/vibrator/duration
+    chown system system /sys/class/leds/vibrator/state
+    chown system system /sys/class/timed_output/vibrator/enable
+
+    chown system system /sys/class/leds/vibrator/device/comp_enable
+    chown system system /sys/class/leds/vibrator/device/cp_dig_scale
+    chown system system /sys/class/leds/vibrator/device/cp_trigger_index
+    chown system system /sys/class/leds/vibrator/device/cp_trigger_queue
+    chown system system /sys/class/leds/vibrator/device/dig_scale
+    chown system system /sys/class/leds/vibrator/device/f0_stored
+    chown system system /sys/class/leds/vibrator/device/heartbeat
+    chown system system /sys/class/leds/vibrator/device/num_waves
+    chown system system /sys/class/leds/vibrator/device/redc_stored
+    chown system system /sys/class/leds/vibrator/device/standby_timeout
+
+    start vendor.vibrator
+
+service vendor.vibrator /system/bin/vibrator.crosshatch-service
+    disabled
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
+    seclabel u:r:recovery:s0
+

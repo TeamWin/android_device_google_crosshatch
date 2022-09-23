@@ -81,15 +81,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.confirmationui</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IConfirmationUI</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.drm</name>
         <transport>hwbinder</transport>
         <version>1.0</version>

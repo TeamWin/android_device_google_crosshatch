@@ -1,47 +1,11 @@
-import /init.recovery.qcom_decrypt.rc
+import /init.recovery.twrp.rc
+
+on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
 on init
     # Don't lose recovery logs- keep warm reset for coming out of recovery.
     write /sys/module/msm_poweroff/parameters/warm_reset 1
     # Enable thermal mitigation
     write /sys/devices/virtual/thermal/tz-by-name/backup-charge/mode enabled
-
-    # This allows the ledtrig-transient properties to be created here so
-    # that they can be chown'd to system:system later on boot
-    write /sys/class/leds/vibrator/trigger "transient"
-
-on fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
-on boot
-    start health-hal-2-0
-
-    # Permission for Vibrator
-    chown system system /sys/class/leds/vibrator/trigger
-    chown system system /sys/class/leds/vibrator/activate
-    chown system system /sys/class/leds/vibrator/brightness
-    chown system system /sys/class/leds/vibrator/duration
-    chown system system /sys/class/leds/vibrator/state
-    chown system system /sys/class/timed_output/vibrator/enable
-
-    chown system system /sys/class/leds/vibrator/device/comp_enable
-    chown system system /sys/class/leds/vibrator/device/cp_dig_scale
-    chown system system /sys/class/leds/vibrator/device/cp_trigger_index
-    chown system system /sys/class/leds/vibrator/device/cp_trigger_queue
-    chown system system /sys/class/leds/vibrator/device/dig_scale
-    chown system system /sys/class/leds/vibrator/device/f0_stored
-    chown system system /sys/class/leds/vibrator/device/heartbeat
-    chown system system /sys/class/leds/vibrator/device/num_waves
-    chown system system /sys/class/leds/vibrator/device/redc_stored
-    chown system system /sys/class/leds/vibrator/device/standby_timeout
-
-on post-fs
-    start boot-hal-1-0
-
-on post-fs-data
-    # Set up sensors-related directories and permissions
-    chmod 770 /persist/haptics
-    chmod 440 /persist/haptics/cs40l20.cal
-    chown system system /persist/haptics
-    chown system system /persist/haptics/cs40l20.cal

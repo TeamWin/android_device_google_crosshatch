@@ -1,7 +1,0 @@
-/boot           emmc   /dev/block/bootdevice/by-name/boot       flags=slotselect
-/persist        ext4   /dev/block/bootdevice/by-name/persist    flags=display="Persist";fsflags="ro,nosuid,nodev,noatime,barrier=1"
-/persist_image  emmc   /dev/block/bootdevice/by-name/persist    flags=display="Persist";backup=1
-/firmware       vfat   /dev/block/bootdevice/by-name/modem      flags=slotselect;fsflags="ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:vendor_firmware_file:s0"
-
-# USB OTG
-/usb_otg        vfat   /dev/block/sda1         /dev/block/sda   flags=display="USB-OTG";storage;wipeingui;removable

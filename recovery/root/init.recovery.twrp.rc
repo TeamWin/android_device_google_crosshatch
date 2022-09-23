@@ -1,0 +1,11 @@
+import /init.recovery.qcom_decrypt.rc
+
+on boot
+    start health-hal-2-0
+
+on post-fs
+    start boot-hal-1-0
+
+on property:twrp.apex.loaded=true
+   export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/apex/com.android.runtime/lib64:/apex/com.google.android.media.swcodec/lib64:/apex/com.android.media.swcodec/lib64:/apex/com.android.media.swcodec/lib64/:/apex/com.android.runtime/lib64/:/apex/com.android.art.release/lib64:/apex/com.android.art/lib64/:/apex/com.android.os.statsd/lib64:/apex/com.android.art/lib64
+
