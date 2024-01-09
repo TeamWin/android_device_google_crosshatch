@@ -10,6 +10,9 @@ PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    keymaster_ver=4.x
+
 # CS40L20 Haptics Waveform & Firmware
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/vibrator/cs40l20/cs40l20.wmfw:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware/cs40l20.wmfw \
