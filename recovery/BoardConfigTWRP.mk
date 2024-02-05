@@ -87,16 +87,19 @@ endif
 
 # Custom TWRP Versioning
 # See https://github.com/minimal-manifest-twrp/android_device_common_version-info for details
-ifneq ($(wildcard device/common/version-info/.),)
-    # device version is optional - the default value is "0" if nothing is set in device tree
-    CUSTOM_TWRP_DEVICE_VERSION := 0
-    # version prefix is optional - the default value is "LOCAL" if nothing is set in device tree
-    CUSTOM_TWRP_VERSION_PREFIX := CPTB
+ifneq ($(USE_CUSTOM_VERSION),)
+    ifneq ($(wildcard device/common/version-info/.),)
+        # Repo must be synced for automatic custom versioning to work
+        include device/common/version-info/custom_twrp_version.mk
 
-    include device/common/version-info/custom_twrp_version.mk
+        # device version is optional - the default value is "0" if nothing is set in device tree
+        CUSTOM_TWRP_DEVICE_VERSION := 0
+        # version prefix is optional - the default value is "LOCAL" if nothing is set in device tree
+        CUSTOM_TWRP_VERSION_PREFIX := CPTB
 
-    ifeq ($(CUSTOM_TWRP_VERSION),)
-        CUSTOM_TWRP_VERSION := $(shell date +%Y%m%d)-01
+        ifeq ($(CUSTOM_TWRP_VERSION),)
+            CUSTOM_TWRP_VERSION := $(shell date +%Y%m%d)-01
+        endif
     endif
 endif
 #
